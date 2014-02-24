@@ -1,0 +1,48 @@
+# Copyright (c) 2014, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree. An additional grant
+# of patent rights can be found in the PATENTS file in the same directory.
+
+#!/bin/bash
+
+TESTFILE="$1"
+shift
+TESTNAME=`basename "$TESTFILE"`
+
+OUTFILE="$TESTFILE.out"
+EXPFILE="$TESTFILE.exp"
+DIFFFILE="$TESTFILE.diff"
+
+if [[ $VERBOSE > 0 ]]
+then
+    DEST=/dev/stdout
+else
+    DEST=/dev/null
+fi
+
+if $* 2>&1 | tee "$OUTFILE" > $DEST
+then
+    if diff "$EXPFILE" "$OUTFILE" > "$DIFFFILE"
+    then
+        echo "[+] $TESTNAME succeeded"
+        rm "$DIFFFILE"
+        exit 0
+    else
+        echo "[-] $TESTNAME failed (unexpected output)"
+        printf '\033[1;31m\n'
+        if [[ $LIMIT > 0 ]]
+        then
+            tail -n $LIMIT "$DIFFFILE"
+        else
+            cat "$DIFFFILE"
+        fi
+        printf '\033[0m\n'
+        rm "$DIFFFILE"
+        exit 1
+    fi
+else
+    echo "[-] $TESTNAME failed (error $?)"
+    exit 2
+fi

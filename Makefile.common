@@ -1,0 +1,51 @@
+# Copyright (c) 2014, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree. An additional grant
+# of patent rights can be found in the PATENTS file in the same directory.
+
+include $(LEVEL)/Makefile.config
+
+# Typical compilation flags for Objective C examples
+ifneq "$(SDKPATH)" ""
+IOSFLAGS=-x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -fpascal-strings -isysroot $(SDKPATH) -fexceptions -fasm-blocks -fstrict-aliasing -g -fobjc-abi-version=2 -mios-simulator-version-min=5.0 -Wno-objc-property-synthesis -Werror
+endif
+
+# we assume that the targeted clang was configured with --enable-libcpp --enable-cxx11
+CFLAGS=-stdlib=libc++ -std=c++11
+LDFLAGS=-stdlib=libc++
+
+CFLAGS+=$(CLANG_INCLUDES:%=-I%) -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -fno-common -Woverloaded-virtual -Wcast-qual -fno-strict-aliasing -pedantic -Wno-long-long -Wall -W -Wno-unused-parameter -Wwrite-strings  -Wcovered-switch-default -Wno-uninitialized  -Wno-missing-field-initializers
+LDFLAGS+=-Wl,-rpath -Wl,@executable_path/../lib -Wl,-undefined,dynamic_lookup -Wl,-flat_namespace -Wl,-undefined,suppress -dynamiclib
+
+ifdef DEBUG
+CFLAGS+=-DDEBUG -g
+export VERBOSE:=1
+SHELL=bash -O nullglob
+else
+CFLAGS+=-O3 -DNDEBUG
+LDFLAGS+=-O3
+# early exit when tests fail
+SHELL=bash -e -O nullglob
+endif
+
+# project headers (if any)
+HEADERS?=
+
+build/%.o: %.cpp $(HEADERS)
+	@mkdir -p build
+	$(CXX) $(CFLAGS) -c $< -o $@
+
+ifneq "$(EXTRA_DIR)" ""
+build/%.o: $(EXTRA_DIR)/%.cpp $(HEADERS) $(EXTRA_HEADERS:%=$(EXTRA_DIR)/%)
+	@mkdir -p build
+	$(CXX) $(CFLAGS) -I . -c $< -o $@
+endif
+
+# test runner
+RUNTEST=$(LEVEL)/scripts/run_test.sh
+
+# Local Variables:
+# mode: makefile
+# End:
