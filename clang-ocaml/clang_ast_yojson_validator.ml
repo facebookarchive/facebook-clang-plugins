@@ -8,25 +8,4 @@
  *
  *)
 
-module P = Printf
-
-let validate_decl_from_file fname =
-  let ast = Ag_util.Json.from_file Clang_ast_j.read_decl fname
-  in
-  Ag_util.Json.to_channel Clang_ast_j.write_decl stdout ast;
-  print_newline ()
-
-let main =
-  let v = Sys.argv
-  in
-  try
-    for i = 1 to Array.length v - 1 do
-      validate_decl_from_file v.(i)
-    done
-  with
-    Yojson.Json_error s
-  | Ag_oj_run.Error s -> begin
-    prerr_string s;
-    prerr_newline ();
-    exit 1
-  end
+let main = Yojson_utils.make_yojson_validation_tool Clang_ast_j.read_decl Clang_ast_j.write_decl Sys.argv
