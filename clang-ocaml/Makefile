@@ -13,10 +13,9 @@ include $(LEVEL)/Makefile.common
 LIBTOOLING=$(LEVEL)/libtooling
 ATDLIB=$(LEVEL)/libtooling/atdlib
 
-# Sadly, at the moment this project only compiles with this patched version of atdgen: https://github.com/matbd/atdgen
+# see README for the required versions
 ATDGEN=atdgen -rec
-# This patched version of atdcat is able to strip types starting with _: https://github.com/matbd/atd
-ATDCAT=$(shell if atdcat --help | grep -q exclude-names; then echo "atdcat -i -exclude-names '_.*'"; else echo "atdcat -i"; fi)
+ATDCAT=atdcat -i
 
 all: build/clang_ast_yojson_validator build/clang_ast_named_decl_printer
 
