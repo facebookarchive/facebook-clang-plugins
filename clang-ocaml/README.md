@@ -3,6 +3,7 @@ Ocaml frontend to the Clang AST
 
 Requirements:
 - ocaml
+- camlzip
 - yojson, biniou and dependencies
 - atd > 1.1.1 (currently the trunk of https://github.com/mjambon/atd)
 - atdgen > 1.3.1 (currently the trunk of https://github.com/mjambon/atdgen)

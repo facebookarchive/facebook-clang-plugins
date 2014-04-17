@@ -5,4 +5,6 @@ let main =
   in
   let zipunzip = compose gzip gunzip
   in
-  diff_on_same_input (fun ic oc -> copy ic oc; true) zipunzip ic stdout
+  ignore (diff_on_same_input (fun ic oc -> copy ic oc; flush_all (); true) zipunzip ic stderr);
+  close_in ic;
+  ignore (wait pid)

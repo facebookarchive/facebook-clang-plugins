@@ -13,6 +13,8 @@ val mktemp : string -> string
 
 val wait : int -> bool
 val exec : string array -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> bool
+val close_in : in_channel -> unit
+val close_out : out_channel -> unit
 
 val tee : in_channel -> out_channel list -> unit
 val copy : in_channel -> out_channel -> unit

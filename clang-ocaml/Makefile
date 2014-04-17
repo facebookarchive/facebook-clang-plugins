@@ -69,21 +69,26 @@ PRINTER_TEST_FILES=ObjCTest.m
 
 # simple library for composing unix processes
 build/process_test: build/process.mli build/process.ml build/process_test.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -linkpkg
+	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -linkpkg
 
 # AST parser and dumper
-build/clang_ast_yojson_validator: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/process.mli build/process.ml build/yojson_utils.ml build/clang_ast_yojson_validator.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package atdgen -linkpkg
+build/yojson_utils_test: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/process.mli build/process.ml build/yojson_utils.mli build/yojson_utils.ml build/yojson_utils_test.ml
+	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
+
+# AST parser and dumper
+build/clang_ast_yojson_validator: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/process.mli build/process.ml build/yojson_utils.mli build/yojson_utils.ml build/clang_ast_yojson_validator.ml
+	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
 
 # example of AST visitor
 build/clang_ast_named_decl_printer: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_proj.mli build/clang_ast_proj.ml build/clang_ast_named_decl_printer.ml
 	ocamlfind ocamlopt -I build -o $@ $^ -package atdgen -linkpkg
 
-test: build/process_test build/clang_ast_yojson_validator build/clang_ast_named_decl_printer
-	@make -C $(LIBTOOLING) $(TEST_FILES:%=build/ast_samples/%.yjson)
+test: build/process_test build/yojson_utils_test build/clang_ast_yojson_validator build/clang_ast_named_decl_printer
+	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
-	 $(RUNTEST) tests/clang_ast_yojson_validator build/clang_ast_yojson_validator $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 $(RUNTEST) tests/yojson_utils_test build/yojson_utils_test; \
+	 $(RUNTEST) tests/clang_ast_yojson_validator build/clang_ast_yojson_validator $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz); \
 	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson)
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi
 

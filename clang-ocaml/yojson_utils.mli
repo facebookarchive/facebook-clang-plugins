@@ -8,4 +8,10 @@
  *
  *)
 
-let main = Yojson_utils.make_yojson_validator Clang_ast_j.read_decl Clang_ast_j.write_decl Sys.argv
+val read_data_from_file : 'a Ag_util.Json.reader -> string -> 'a
+val write_data_to_file : ?pretty:bool -> 'a Ag_util.Json.writer -> string -> 'a -> unit
+
+val ydump : in_channel -> out_channel -> bool
+
+val make_yojson_validator :
+  'a Ag_util.Json.reader -> 'a Ag_util.Json.writer -> string array -> unit

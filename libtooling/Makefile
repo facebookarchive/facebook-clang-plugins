@@ -83,7 +83,7 @@ clean:
 
 REGULAR_SOURCES=$(wildcard tests/*.m) $(wildcard tests/*.c)
 AST_SAMPLE_FILES=ASTExporter.cpp $(REGULAR_SOURCES:tests/%=%)
-all_ast_samples: $(AST_SAMPLE_FILES:%=build/ast_samples/%.json) $(AST_SAMPLE_FILES:%=build/ast_samples/%.yjson)
+all_ast_samples: $(AST_SAMPLE_FILES:%=build/ast_samples/%.json.gz) $(AST_SAMPLE_FILES:%=build/ast_samples/%.yjson.gz)
 
 # dump samples files in Yojson using ASTExporter.cpp
 YJ_DUMPER_ARGS=-Xclang -plugin -Xclang YojsonASTExporter -Xclang -plugin-arg-YojsonASTExporter -Xclang
@@ -114,6 +114,9 @@ build/ast_samples/%.c.json: tests/%.c build/FacebookClangPlugin.dylib
 build/ast_samples/%.m.json: tests/%.m build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
 	@$(CLANG_FRONTEND) $(J_DUMPER_ARGS) $@ -c $<
+
+build/ast_samples/%.gz: build/ast_samples/%
+	@gzip -k $<
 
 # generate a preprocessed version of ASTExporter.cpp where ATD directives can be read
 # we do not include the C/C++ headers to avoid parsing issues with the 'traditional' cpp (needed for precisely expanding our /// comments)

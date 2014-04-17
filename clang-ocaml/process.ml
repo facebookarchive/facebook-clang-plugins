@@ -24,18 +24,57 @@ let mktemp base =
   in
   if file_exists base then aux 0 else base
 
+let buffer_size = 8192
+
 let tee ic ocs =
-  let buffer_size = 8192 in
   let buffer = String.create buffer_size in
-  let rec tee_loop () = match input ic buffer 0 buffer_size with
+  let rec loop () = match input ic buffer 0 buffer_size with
     | 0 -> ()
-    | r -> List.iter (fun oc -> output oc buffer 0 r) ocs; tee_loop ()
+    | r -> List.iter (fun oc -> output oc buffer 0 r) ocs; loop ()
   in
-  tee_loop ()
+  loop ()
+
+let gzip ic oc =
+  let ocz = Gzip.open_out_chan oc in
+  let buffer = String.create buffer_size in
+  let rec loop () = match input ic buffer 0 buffer_size with
+    | 0 -> ()
+    | r -> Gzip.output ocz buffer 0 r; loop ()
+  in
+  let success =
+    try
+      loop ();
+      true
+    with Gzip.Error _ -> false
+  in
+  Gzip.close_out ocz;
+  success
+
+let gunzip ic oc =
+  let icz = Gzip.open_in_chan ic in
+  let buffer = String.create buffer_size in
+  let rec loop () = match Gzip.input icz buffer 0 buffer_size with
+    | 0 -> ()
+    | r -> output oc buffer 0 r; loop ()
+  in
+  let success =
+    try
+      loop ();
+      true
+    with Gzip.Error _ -> false
+  in
+  Gzip.close_in icz;
+  success
 
 let copy ic oc = tee ic [oc]
 
-let wait pid = match snd (U.waitpid [U.WNOHANG] pid) with
+let rec restart_on_EINTR f x =
+  try f x with U.Unix_error (U.EINTR, _, _) -> restart_on_EINTR f x
+
+let close_in = close_in_noerr
+let close_out = close_out_noerr
+
+let wait pid = match snd (restart_on_EINTR (U.waitpid []) pid) with
   | U.WEXITED 0 -> true
   | _ -> false
 
@@ -45,22 +84,18 @@ let exec args stdin stdout stderr =
 let diff file1 file2 oc =
   exec [| "diff"; file1; file2 |] U.stdin (U.descr_of_out_channel oc) U.stderr
 
-let gzip ic oc =
-  exec [| "gzip"; "-c" |] (U.descr_of_in_channel ic) (U.descr_of_out_channel oc) U.stderr
-
-let gunzip ic oc =
-  exec [| "gunzip"; "-c" |] (U.descr_of_in_channel ic) (U.descr_of_out_channel oc) U.stderr
-
 let fork f =
   let (fd_in, fd_out) = U.pipe () in
   match U.fork () with
   | 0 -> begin
     U.close fd_in;
-    if f (U.out_channel_of_descr fd_out)
-    then exit 0
-    else exit 1
+    try
+      if f (U.out_channel_of_descr fd_out)
+      then exit 0
+      else exit 1
+    with _ -> exit 2
   end
-  | pid -> begin
+  | pid -> if pid < 0 then failwith "fork error" else begin
     U.close fd_out;
     (pid, U.in_channel_of_descr fd_in)
   end
@@ -68,7 +103,10 @@ let fork f =
 let compose f g ic oc =
   let (pid, ic1) = fork (f ic)
   in
-  if g ic1 oc then wait pid else false
+  let r1 = g ic1 oc in
+  let r2 = wait pid in
+  close_in ic1;
+  r1 && r2
 
 let diff_on_same_input f1 f2 ic oc =
   let file = mktemp "input"
@@ -77,21 +115,23 @@ let diff_on_same_input f1 f2 ic oc =
   in
   copy ic ofile;
   close_out ofile;
+  let ifile1 = open_in file
+  and ifile2 = open_in file
+  in
   let file1 = mktemp "output1"
   and file2 = mktemp "output2"
   in
   let ofile1 = open_out file1
   and ofile2 = open_out file2
   in
-  let success =
-    if f1 (open_in file) ofile1 then
-      if f2 (open_in file) ofile2
-      then begin
-        close_out ofile1;
-        close_out ofile2;
-        diff file1 file2 oc
-      end else false
-    else false
+  let r1 = f1 ifile1 ofile1
+  and r2 = f2 ifile2 ofile2
+  in
+  close_in ifile1;
+  close_in ifile2;
+  close_out ofile1;
+  close_out ofile2;
+  let success = if r1 && r2 then diff file1 file2 oc else false
   in
   U.unlink file;
   U.unlink file1;
