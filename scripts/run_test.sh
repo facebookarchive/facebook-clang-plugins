@@ -24,7 +24,7 @@ fi
 
 if $* 2>&1 | tee "$OUTFILE" > $DEST
 then
-    if diff "$EXPFILE" "$OUTFILE" > "$DIFFFILE"
+    if diff <(cat "$EXPFILE" 2> /dev/null || true) "$OUTFILE" > "$DIFFFILE"
     then
         echo "[+] $TESTNAME succeeded"
         rm "$DIFFFILE"
