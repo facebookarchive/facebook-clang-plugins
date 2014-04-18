@@ -17,8 +17,7 @@ let ends_with s1 s2 =
 let open_in name =
   if name = "-" then stdin else Pervasives.open_in name
 
-let ydump ic oc =
-  Process.exec [| "ydump" |] (Unix.descr_of_in_channel ic) (Unix.descr_of_out_channel oc) Unix.stderr
+let ydump ic oc = Process.exec [| "ydump" |] ic oc stderr
 
 let read_data_from_file reader fname =
   let ic = open_in fname in

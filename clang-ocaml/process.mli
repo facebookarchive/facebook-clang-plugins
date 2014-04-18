@@ -12,7 +12,7 @@ val file_exists : string -> bool
 val mktemp : string -> string
 
 val wait : int -> bool
-val exec : string array -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> bool
+val exec : string array -> in_channel -> out_channel -> out_channel -> bool
 val close_in : in_channel -> unit
 val close_out : out_channel -> unit
 

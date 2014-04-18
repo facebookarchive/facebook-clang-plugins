@@ -71,6 +71,7 @@ let copy ic oc = tee ic [oc]
 let rec restart_on_EINTR f x =
   try f x with U.Unix_error (U.EINTR, _, _) -> restart_on_EINTR f x
 
+let close fd = try U.close fd with U.Unix_error _ -> ()
 let close_in = close_in_noerr
 let close_out = close_out_noerr
 
@@ -79,10 +80,9 @@ let wait pid = match snd (restart_on_EINTR (U.waitpid []) pid) with
   | _ -> false
 
 let exec args stdin stdout stderr =
-  wait (U.create_process args.(0) args stdin stdout stderr)
+  wait (U.create_process args.(0) args (U.descr_of_in_channel stdin) (U.descr_of_out_channel stdout) (U.descr_of_out_channel stderr))
 
-let diff file1 file2 oc =
-  exec [| "diff"; file1; file2 |] U.stdin (U.descr_of_out_channel oc) U.stderr
+let diff file1 file2 oc = exec [| "diff"; file1; file2 |] stdin oc stderr
 
 let fork f =
   let (fd_in, fd_out) = U.pipe () in
@@ -92,8 +92,8 @@ let fork f =
     try
       if f (U.out_channel_of_descr fd_out)
       then exit 0
-      else exit 1
-    with _ -> exit 2
+      else (close fd_out; exit 1)
+    with _ -> close fd_out; exit 2
   end
   | pid -> if pid < 0 then failwith "fork error" else begin
     U.close fd_out;
