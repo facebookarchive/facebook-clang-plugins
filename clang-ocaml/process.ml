@@ -17,12 +17,19 @@ let file_exists name =
   with
     U.Unix_error _ -> false
 
+(* Forked processes will not start from 0 but this is inessential. *)
+let tmp_counter = ref 0
+
 let mktemp base =
-  let rec aux count =
-    let name = Printf.sprintf "%s.%03d" base count in
-    if file_exists name then aux (count + 1) else name
+  let pid = U.getpid () in
+  let rec aux () =
+    let name = Printf.sprintf "%s.%d.%08d.tmp" base pid (!tmp_counter) in
+    incr tmp_counter;
+    if file_exists name (* This should not happen unless the file is very old and the pid is reused. *)
+    then aux ()
+    else name
   in
-  if file_exists base then aux 0 else base
+  aux ()
 
 let buffer_size = 8192
 
