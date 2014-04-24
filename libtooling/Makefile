@@ -8,6 +8,7 @@
 .PHONY: clean all test all_ast_samples
 
 LEVEL=..
+include $(LEVEL)/Makefile.config
 
 HEADERS+=SimplePluginASTAction.h
 

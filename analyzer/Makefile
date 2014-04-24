@@ -8,6 +8,7 @@
 .PHONY: clean all test test-quiet record-test-outputs
 
 LEVEL=..
+include $(LEVEL)/Makefile.config
 
 # plugin framework and project libraries
 HEADERS=PluginMainRegistry.h
