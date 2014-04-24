@@ -2910,7 +2910,7 @@ namespace {
     raw_ostream &OS;
 
   public:
-    ExporterASTConsumer(raw_ostream &OS) : OS(OS) {}
+    ExporterASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile, raw_ostream &OS) : OS(OS) {}
 
     virtual void HandleTranslationUnit(ASTContext &Context) {
       TranslationUnitDecl *D = Context.getTranslationUnitDecl();

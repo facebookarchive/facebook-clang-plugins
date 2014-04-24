@@ -25,7 +25,7 @@ private:
   llvm::raw_ostream &OS;
 
 public:
-  PrintDeclarationsConsumer(raw_ostream &OS) : OS(OS) {}
+  PrintDeclarationsConsumer(CompilerInstance &CI, llvm::StringRef InputFile, raw_ostream &OS) : OS(OS) {}
 
   virtual bool HandleTopLevelDecl(DeclGroupRef DG) {
     for (DeclGroupRef::iterator i = DG.begin(), e = DG.end(); i != e; ++i) {

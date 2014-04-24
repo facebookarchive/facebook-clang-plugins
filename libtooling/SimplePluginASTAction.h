@@ -54,7 +54,7 @@ class SimplePluginASTAction : public PluginASTAction {
     if (!OS) {
       return NULL;
     }
-    return new T(*OS);
+    return new T(CI, InputFile, *OS);
   }
 
   bool ParseArgs(const CompilerInstance &CI,
