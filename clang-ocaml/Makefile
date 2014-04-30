@@ -14,7 +14,7 @@ LIBTOOLING=$(LEVEL)/libtooling
 ATDLIB=$(LEVEL)/libtooling/atdlib
 
 # see README for the required versions
-ATDGEN=atdgen -rec
+ATDGEN=atdgen
 ATDCAT=atdcat -i
 
 all: build/clang_ast_yojson_validator build/clang_ast_named_decl_printer
