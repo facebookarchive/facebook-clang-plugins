@@ -1,12 +1,16 @@
 Ocaml frontend to the Clang AST
 -------------------------------
 
-Requirements:
-- ocaml
+Additionaly requirements:
+- ocaml >= 4.01
 - camlzip
-- yojson, biniou and dependencies
-- atd > 1.1.1 (currently the trunk of https://github.com/mjambon/atd)
-- atdgen > 1.3.1 (currently the trunk of https://github.com/mjambon/atdgen)
+- yojson
+- atd >= 1.1.2
+- atdgen >= 1.3.1
+
+The simplest way to install these dependencies is
+1) to install ocaml and opam using your system package manager (e.g. homebrew on MAC OS).
+2) run 'opam install camlzip yojson atd atdgen'
 
 Assuming that the current dir is the root of the git repository and CLANG_PREFIX=/usr/local, you may compile and run tests with
 ```
@@ -21,7 +25,7 @@ How this works:
 
 - We use scripts in libtooling/atdlib to extract and process the ATD definitions, then we use atdgen to generate the ocaml type definitions and json stub.
 
-- The main program clang_ast_yojson_validator.ml is meant to parse and re-print yojson files emitted by ASTExporter.
+- The main program clang_ast_yojson_validator.ml is meant to parse, re-print, and compare yojson files emitted by ASTExporter.
   We use ydump (part of the yojson package) to normalize the original json and the re-emitted json before comparing them.
 
 http://mjambon.com/atdgen/atdgen-manual.html
