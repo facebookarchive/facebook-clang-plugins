@@ -17,7 +17,7 @@ let data = {
   sl_column = None
 }
 
-let test pretty name =
+let basic_test pretty name =
   write_data_to_file ~pretty write_source_location name data;
   let data3 = read_data_from_file read_source_location name in
   Unix.unlink name;
@@ -27,16 +27,15 @@ let test pretty name =
   end;
   ()
 
+let files = List.map ((^) "yojson_utils_test_tmpfile") [
+  ".gz";
+  ".value";
+  ".value.gz";
+  ".yjson"
+]
+
 let test1 =
-  List.iter (test false) [
-    "yojson_utils_test_tmpfile.gz";
-    "yojson_utils_test_tmpfile.value";
-    "yojson_utils_test_tmpfile.yjson"
-  ]
+  List.iter (basic_test false) files
 
 let test2 =
-  List.iter (test true) [
-    "yojson_utils_test_tmpfile.gz";
-    "yojson_utils_test_tmpfile.value";
-    "yojson_utils_test_tmpfile.yjson"
-  ]
+  List.iter (basic_test true) files

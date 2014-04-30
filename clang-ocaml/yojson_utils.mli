@@ -9,9 +9,12 @@
  *)
 
 val read_data_from_file : 'a Ag_util.Json.reader -> string -> 'a
-val write_data_to_file : ?pretty:bool -> 'a Ag_util.Json.writer -> string -> 'a -> unit
+val write_data_to_file :
+  ?pretty:bool -> ?compact_json:bool -> ?std_json:bool -> 'a Ag_util.Json.writer -> string -> 'a -> unit
 
 val ydump : ?compact_json:bool -> ?std_json:bool -> in_channel -> out_channel -> bool
 
 val make_yojson_validator :
   ?compact_json:bool -> ?std_json:bool -> 'a Ag_util.Json.reader -> 'a Ag_util.Json.writer -> string array -> unit
+
+val make_converter : 'a Ag_util.Json.reader -> 'a Ag_util.Json.writer -> string array -> unit

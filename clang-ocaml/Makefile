@@ -17,7 +17,7 @@ ATDLIB=$(LEVEL)/libtooling/atdlib
 ATDGEN=atdgen
 ATDCAT=atdcat -i
 
-all: build/clang_ast_yojson_validator build/clang_ast_named_decl_printer
+all: build/clang_ast_yojson_validator build/clang_ast_converter build/clang_ast_named_decl_printer
 
 # type definitions
 %_t.ml %_t.mli: %.atd
@@ -66,6 +66,7 @@ build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
 
 TEST_FILES=ASTExporter.cpp Hello.m ObjCTest.m
 PRINTER_TEST_FILES=ObjCTest.m
+CONVERTER_TEST_FILE=Hello.m
 
 # simple library for composing unix processes
 build/process_test: build/process.mli build/process.ml build/process_test.ml
@@ -79,17 +80,22 @@ build/yojson_utils_test: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_
 build/clang_ast_yojson_validator: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/process.mli build/process.ml build/yojson_utils.mli build/yojson_utils.ml build/clang_ast_yojson_validator.ml
 	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
 
+# AST format converter
+build/clang_ast_converter: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/process.mli build/process.ml build/yojson_utils.mli build/yojson_utils.ml build/clang_ast_converter.ml
+	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
+
 # example of AST visitor
 build/clang_ast_named_decl_printer: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_proj.mli build/clang_ast_proj.ml build/clang_ast_named_decl_printer.ml
 	ocamlfind ocamlopt -I build -o $@ $^ -package atdgen -linkpkg
 
-test: build/process_test build/yojson_utils_test build/clang_ast_yojson_validator build/clang_ast_named_decl_printer
-	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz)
+test: build/process_test build/yojson_utils_test build/clang_ast_yojson_validator build/clang_ast_converter build/clang_ast_named_decl_printer
+	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
 	 $(RUNTEST) tests/yojson_utils_test build/yojson_utils_test; \
-	 $(RUNTEST) tests/clang_ast_yojson_validator build/clang_ast_yojson_validator $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz); \
-	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson)
+	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 $(RUNTEST) tests/clang_ast_converter build/clang_ast_converter --pretty $(CONVERTER_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 $(RUNTEST) tests/clang_ast_yojson_validator build/clang_ast_yojson_validator $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz)
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi
 
 record-test-outputs:
