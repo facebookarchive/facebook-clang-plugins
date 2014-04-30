@@ -17,7 +17,10 @@ let ends_with s1 s2 =
 let open_in name =
   if name = "-" then stdin else Pervasives.open_in name
 
-let ydump ic oc = Process.exec [| "ydump" |] ic oc stderr
+let ydump ?(compact_json=false) ?(std_json=false) ic oc =
+  let cmd = "ydump" ^ (if compact_json then " -c" else "") ^ (if std_json then " -std" else "")
+  in
+  Process.exec [| cmd |] ic oc stderr
 
 let read_data_from_file reader fname =
   let ic = open_in fname in
@@ -66,7 +69,7 @@ let write_data_to_file ?(pretty=false) writer fname data =
   end;
   close_out oc
 
-let validate reader writer fname =
+let validate ?(compact_json=false) ?(std_json=false) reader writer fname =
   let read_write ic oc =
     try
       let data = Ag_util.Json.from_channel ~fname reader ic
@@ -82,6 +85,8 @@ let validate reader writer fname =
         false
       end
   in
+  let ydump ic oc = ydump ~compact_json ~std_json ic oc
+  in
   let read_write_ydump = Process.compose read_write ydump
   in
   if ends_with fname ".gz" then
@@ -93,8 +98,8 @@ let validate reader writer fname =
   else
     Process.diff_on_same_input ydump read_write_ydump (open_in fname) stdout
 
-let make_yojson_validator reader writer argv =
-  let process_file name = ignore (validate reader writer name)
+let make_yojson_validator ?(compact_json=false) ?(std_json=false) reader writer argv =
+  let process_file name = ignore (validate ~compact_json ~std_json reader writer name)
   in 
   if Array.length argv > 1 then
     for i = 1 to Array.length argv - 1 do
