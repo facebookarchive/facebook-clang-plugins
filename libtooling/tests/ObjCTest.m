@@ -16,17 +16,21 @@
 @property (nonatomic, assign) int y;
 @property (nonatomic, assign) NSObject *delegate;
 
-- (void)doStuff:(NSString *)s;
+@end
+
+@interface MyClass ()
+
+- (void)foo:(NSString *)s;
 
 @end
 
 @implementation MyClass
 
-- (void)doStuff:(NSString *)s {
+- (void)foo:(NSString *)s {
 
   NSLog(@"%s\n", @encode(int **));
 
-  NSLog(@"%d\n", [self respondsToSelector:@selector(doStuff:)]);
+  NSLog(@"%d\n", [self respondsToSelector:@selector(foo:)]);
 
   NSLog(@"%d\n", [[self class] conformsToProtocol:@protocol(MyProtocol)]);
 
@@ -58,9 +62,26 @@
 
 @end
 
+@interface MyClass (MyCategory)
+
+- (void)bar:(NSString *)s;
+
+@end
+
+@implementation MyClass (MyCategory)
+
+- (void)bar:(NSString *)s {
+  self.x = NULL;
+  self.y = 0;
+  self.delegate = nil;
+}
+
+@end
+
 int main(int argc, char** argv) {
   @autoreleasepool {
-    [[MyClass new] doStuff:@"hello"];
+    [[MyClass new] foo:@"hello"];
+    [[MyClass new] bar:@"hello"];
   }
   return 0;
 }

@@ -5,6 +5,8 @@ typedef unsigned int NSUInteger;
 
 #define YES 1
 #define NO 0
+#define NULL ((void *)0)
+#define nil ((id)0)
 
 @interface NSObject
 

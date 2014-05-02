@@ -31,8 +31,17 @@ public:
     for (DeclGroupRef::iterator i = DG.begin(), e = DG.end(); i != e; ++i) {
       const Decl *D = *i;
       OS << D->getDeclKindName();
-      if (const NamedDecl *ND = dyn_cast<NamedDecl>(D))
-        OS << " " << ND->getNameAsString() << "\n";
+      if (const ObjCCategoryDecl *CD = dyn_cast<ObjCCategoryDecl>(D)) {
+        OS << " " << CD->getClassInterface()->getName() << "(" << CD->getNameAsString() << ")";
+      } else if (const ObjCCategoryImplDecl *CD = dyn_cast<ObjCCategoryImplDecl>(D)) {
+        OS << " " << CD->getClassInterface()->getName() << "(" << CD->getNameAsString() << ")";
+      } else if (const NamedDecl *ND = dyn_cast<NamedDecl>(D)) {
+        std::string name = ND->getNameAsString();
+        if (name != "") {
+          OS << " " << name;
+        }
+      }
+      OS << "\n";
     }
 
     return true;

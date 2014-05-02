@@ -9,6 +9,10 @@ ObjCInterface NSException
 Function NSLog
 ObjCProtocol MyProtocol
 ObjCInterface MyClass
-ObjCMethod doStuff:
+ObjCCategory MyClass()
+ObjCMethod foo:
 ObjCImplementation MyClass
+ObjCCategory MyClass(MyCategory)
+ObjCMethod bar:
+ObjCCategoryImpl MyClass(MyCategory)
 Function main

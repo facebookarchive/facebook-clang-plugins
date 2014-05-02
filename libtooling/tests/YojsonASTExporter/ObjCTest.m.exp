@@ -1,17 +1,17 @@
    1 ArraySubscript
    1 ArrayToPointerDecay
-   5 Assign
-   2 BinaryOperator
-  17 BitCast
+   8 Assign
+   5 BinaryOperator
+  19 BitCast
    2 BlockDecl
    2 BlockExpr
-   1 CStyleCastExpr
+   8 CStyleCastExpr
    9 CallExpr
    1 CatchParam
-   1 Class
-   8 CompoundStmt
+   2 Class
+   9 CompoundStmt
    2 Copy
-  35 DeclRefExpr
+  44 DeclRefExpr
    3 DeclStmt
    1 DictionarySubscript
    2 ExprWithCleanups
@@ -20,51 +20,57 @@
    3 FunctionDecl
    9 FunctionToPointerDecay
    1 GotoStmt
-  49 ImplicitCastExpr
-  10 ImplicitParam
-   8 IntegerLiteral
+  60 ImplicitCastExpr
+  19 ImplicitParam
+  18 IntegerLiteral
    1 IntegralCast
-  56 LValue
-  22 LValueToRValue
+  69 LValue
+  31 LValueToRValue
    1 LabelStmt
    3 NoType
    5 Nonatomic
+   7 NullToPointer
    2 ObjCArrayLiteral
    1 ObjCAtCatchStmt
    1 ObjCAtFinallyStmt
    1 ObjCAtTryStmt
    1 ObjCAutoreleasePoolStmt
    4 ObjCBoxedExpr
+   1 ObjCCategory
+   2 ObjCCategoryDecl
+   1 ObjCCategoryImpl
+   1 ObjCCategoryImplDecl
    2 ObjCDictionaryLiteral
    1 ObjCEncodeExpr
    1 ObjCImplementation
    1 ObjCImplementationDecl
-   7 ObjCInterface
+  10 ObjCInterface
    8 ObjCInterfaceDecl
    4 ObjCIvar
    4 ObjCIvarDecl
-  11 ObjCMessageExpr
-  24 ObjCMethodDecl
-   8 ObjCProperty
+  16 ObjCMessageExpr
+  26 ObjCMethodDecl
+  14 ObjCProperty
    5 ObjCPropertyDecl
    4 ObjCPropertyImplDecl
-   2 ObjCPropertyRefExpr
+   5 ObjCPropertyRefExpr
    2 ObjCProtocol
    1 ObjCProtocolDecl
    1 ObjCProtocolExpr
    1 ObjCSelectorExpr
-  15 ObjCStringLiteral
+  16 ObjCStringLiteral
    2 ObjCSubscriptRefExpr
-  30 OpaqueValueExpr
+  51 OpaqueValueExpr
+   7 ParenExpr
   10 ParmVar
-  25 ParmVarDecl
+  27 ParmVarDecl
    1 Previous
    4 Private
-   2 PropertyRef
-   4 PseudoObjectExpr
+   5 PropertyRef
+   7 PseudoObjectExpr
    5 Readwrite
    4 ReturnStmt
-  15 StringLiteral
+  16 StringLiteral
    4 Synthesize
    1 TranslationUnitDecl
    5 Type
@@ -73,43 +79,44 @@
    8 Var
    4 VarDecl
    4 access_control
-  90 attributes
-   8 bitwidth
-   4 body
+  97 attributes
+  18 bitwidth
+   5 body
    2 captured_variables
-   1 class_interface
- 600 column
-  35 decl_ref
-  46 desugared
-  10 file
-   5 implementation
+   1 category_decl
+   4 class_interface
+ 778 column
+  44 decl_ref
+  59 desugared
+  30 file
+   6 implementation
    3 init_expr
    1 is_implicit
-  19 is_instance_method
-   2 is_messaging_setter
-   8 is_signed
+  21 is_instance_method
+   5 is_messaging_setter
+  18 is_signed
    4 is_synthesize
    4 ivar_decl
-  63 kind
+  86 kind
    1 label
- 119 line
-  61 name
-   2 object_kind
-  19 parameters
- 312 pointer
+ 152 line
+  78 name
+   5 object_kind
+  21 parameters
+ 401 pointer
    1 previous_decl
    5 property_attributes
    4 property_decl
    1 protocols
- 244 qual_type
- 306 raw
-   1 receiver_kind
-  24 result_type
-  11 selector
-  30 source_expr
- 311 source_range
+ 334 qual_type
+ 401 raw
+   2 receiver_kind
+  26 result_type
+  16 selector
+  51 source_expr
+ 400 source_range
    2 storage_class
    6 super
-   8 value
-  56 value_kind
+  18 value
+  69 value_kind
    2 variable
