@@ -27,3 +27,13 @@ let () =
   let lines = stream_to_list (stream_append (Stream.of_list ["foo"]) (Stream.of_list ["bar"]))
   in
   assert_equal "line_stream_of_channel::result" lines ["foo"; "bar"]
+
+let () =
+  let count = ref 0
+  in
+  let f x = incr count
+  in
+  let g = make_cached f
+  in
+  List.iter g [1; 2; 1; 3; 1];
+  assert_equal "make_cached" (!count) 3

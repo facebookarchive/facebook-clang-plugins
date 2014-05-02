@@ -9,7 +9,9 @@
  *
  *)
 
-(* misc I/O *)
+module H = Hashtbl
+
+(* misc *)
 
 (* maps '-' to the standard input *)
 let open_in name =
@@ -18,6 +20,16 @@ let open_in name =
 (* maps '-' to the standard output *)
 let open_out name =
   if name = "-" then stdout else Pervasives.open_out name
+
+let make_cached f =
+  let h = H.create 10 in
+  function x ->
+    try
+      H.find h x
+    with Not_found ->
+      let y = f x in
+      H.add h x y;
+      y
 
 (* missing string API *)
 

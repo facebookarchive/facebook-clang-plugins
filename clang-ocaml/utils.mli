@@ -14,6 +14,8 @@ val open_out : string -> out_channel
 
 val string_ends_with : string -> string -> bool
 
+val make_cached : ('a -> 'b) -> 'a -> 'b
+
 val line_stream_of_channel : in_channel -> string Stream.t
 val stream_concat : 'a Stream.t Stream.t -> 'a Stream.t
 val stream_append : 'a Stream.t -> 'a Stream.t -> 'a Stream.t
