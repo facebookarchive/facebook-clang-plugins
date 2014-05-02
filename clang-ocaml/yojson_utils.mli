@@ -8,6 +8,9 @@
  *
  *)
 
+val open_in : string -> in_channel
+val open_out : string -> out_channel
+
 val read_data_from_file : 'a Ag_util.Json.reader -> string -> 'a
 val write_data_to_file :
   ?pretty:bool -> ?compact_json:bool -> ?std_json:bool -> 'a Ag_util.Json.writer -> string -> 'a -> unit
