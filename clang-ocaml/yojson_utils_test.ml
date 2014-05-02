@@ -21,11 +21,7 @@ let basic_test pretty name =
   write_data_to_file ~pretty write_source_location name data;
   let data3 = read_data_from_file read_source_location name in
   Unix.unlink name;
-  if data <> data3 then begin
-    Printf.fprintf stderr "** failed test %s pretty=%b **\n" name pretty;
-    exit 1
-  end;
-  ()
+  Utils.assert_equal (Printf.sprintf "test %s pretty=%b" name pretty) data data3
 
 let files = List.map ((^) "yojson_utils_test_tmpfile") [
   ".gz";

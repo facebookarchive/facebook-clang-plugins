@@ -8,39 +8,30 @@
  *
  *)
 
-let ends_with s1 s2 =
-  try
-    let n = String.length s2 in
-    (String.sub s1 (String.length s1 - n) n) = s2
-  with Invalid_argument _ -> false
-
-let open_in name =
-  if name = "-" then stdin else Pervasives.open_in name
-
-let open_out name =
-  if name = "-" then stdout else Pervasives.open_out name
+module U = Utils
+module P = Process
 
 let ydump ?(compact_json=false) ?(std_json=false) ic oc =
   let cmd = "ydump" ^ (if compact_json then " -c" else "") ^ (if std_json then " -std" else "")
   in
-  Process.exec [| cmd |] ic oc stderr
+  P.exec [| cmd |] ic oc stderr
 
 let read_data_from_file reader fname =
   let input_gunzipped read_data ic =
-    let pid, icz = Process.fork (Process.gunzip ic) in
+    let pid, icz = P.fork (P.gunzip ic) in
     let data = read_data icz in
-    let r = Process.wait pid in
-    Process.close_in icz;
+    let r = P.wait pid in
+    P.close_in icz;
     if not r then failwith "read_data_from_file (gunzip)" else ();
     data
   in
   let ic = open_in fname in
   let data =
-    if ends_with fname ".value.gz" then
+    if U.string_ends_with fname ".value.gz" then
       input_gunzipped Marshal.from_channel ic
-    else if ends_with fname ".gz" then
+    else if U.string_ends_with fname ".gz" then
       input_gunzipped (Ag_util.Json.from_channel ~fname reader) ic
-    else if ends_with fname ".value" then
+    else if U.string_ends_with fname ".value" then
       Marshal.from_channel ic
     else
       Ag_util.Json.from_channel ~fname reader ic
@@ -50,19 +41,19 @@ let read_data_from_file reader fname =
 
 let write_data_to_file ?(pretty=false) ?(compact_json=false) ?(std_json=false) writer fname data =
   let output_gzipped write_data oc data =
-    let pid, icz = Process.fork (fun ocz -> write_data ocz data; true) in
-    let r1 = Process.gzip icz oc
-    and r2 = Process.wait pid
+    let pid, icz = P.fork (fun ocz -> write_data ocz data; true) in
+    let r1 = P.gzip icz oc
+    and r2 = P.wait pid
     in
-    Process.close_in icz;
+    P.close_in icz;
     if not (r1 && r2) then failwith "write_data_from_file (gzip)" else ()
   and output_pretty write_data oc data =
     (* TODO(mathieubaudet): find out how to write directly pretty json? *)
-    let pid, icp = Process.fork (fun ocp -> write_data ocp data; true) in
+    let pid, icp = P.fork (fun ocp -> write_data ocp data; true) in
     let r1 = ydump ~compact_json ~std_json icp oc
-    and r2 = Process.wait pid
+    and r2 = P.wait pid
     in
-    Process.close_in icp;
+    P.close_in icp;
     if not (r1 && r2) then failwith "write_data_from_file (pretty)" else ();
   in
   let write_json ocx data =
@@ -73,11 +64,11 @@ let write_data_to_file ?(pretty=false) ?(compact_json=false) ?(std_json=false) w
   in
   let oc = open_out fname
   in
-  if ends_with fname ".value.gz" then
+  if U.string_ends_with fname ".value.gz" then
     output_gzipped (fun oc data -> Marshal.to_channel oc data []) oc data
-  else if ends_with fname ".value" then
+  else if U.string_ends_with fname ".value" then
     Marshal.to_channel oc data []
-  else if ends_with fname ".gz" then
+  else if U.string_ends_with fname ".gz" then
     output_gzipped write_json oc data
   else
     write_json oc data;
@@ -101,20 +92,20 @@ let validate ?(compact_json=false) ?(std_json=false) reader writer fname =
   in
   let ydump ic oc = ydump ~compact_json ~std_json ic oc
   in
-  let read_write_ydump = Process.compose read_write ydump
+  let read_write_ydump = P.compose read_write ydump
   in
-  if ends_with fname ".gz" then
-    Process.diff_on_same_input
-      (Process.compose Process.gunzip ydump)
-      (Process.compose Process.gunzip read_write_ydump)
+  if U.string_ends_with fname ".gz" then
+    P.diff_on_same_input
+      (P.compose P.gunzip ydump)
+      (P.compose P.gunzip read_write_ydump)
       (open_in fname)
       stdout
   else
-    Process.diff_on_same_input ydump read_write_ydump (open_in fname) stdout
+    P.diff_on_same_input ydump read_write_ydump (open_in fname) stdout
 
 let make_yojson_validator ?(compact_json=false) ?(std_json=false) reader writer argv =
   let process_file name = ignore (validate ~compact_json ~std_json reader writer name)
-  in 
+  in
   if Array.length argv > 1 then
     for i = 1 to Array.length argv - 1 do
       process_file argv.(i)
