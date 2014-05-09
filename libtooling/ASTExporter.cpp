@@ -1056,10 +1056,13 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     }
   }
 
-  const Stmt *Body = D->getBody();
-  if (Body) {
-    OF.emitTag("body");
-    dumpBareStmt(Body);
+  bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
+  if (HasDeclarationBody) {
+    const Stmt *Body = D->getBody();
+    if (Body) {
+      OF.emitTag("body");
+      dumpBareStmt(Body);
+    }
   }
 }
 
