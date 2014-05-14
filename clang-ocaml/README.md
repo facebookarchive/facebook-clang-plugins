@@ -15,6 +15,7 @@ The simplest way to install these dependencies is
 Assuming that the current dir is the root of the git repository and CLANG_PREFIX=/usr/local, you may compile and run tests with
 ```
 export CLANG_PREFIX=/usr/local
+make -C clang-ocaml depend
 make -C clang-ocaml test
 ```
 

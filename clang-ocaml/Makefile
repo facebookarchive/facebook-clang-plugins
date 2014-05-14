@@ -5,7 +5,7 @@
 # LICENSE file in the root directory of this source tree. An additional grant
 # of patent rights can be found in the PATENTS file in the same directory.
 
-.PHONY: all clean test
+.PHONY: all clean test depend
 
 LEVEL=..
 include $(LEVEL)/Makefile.common
@@ -16,6 +16,8 @@ ATDLIB=$(LEVEL)/libtooling/atdlib
 # see README for the required versions
 ATDGEN=atdgen
 ATDCAT=atdcat -i
+
+OCAMLOPT=ocamlfind ocamlopt -package unix,atdgen,camlzip -I build
 
 all: build/clang_ast_yojson_validator build/clang_ast_converter build/clang_ast_named_decl_printer
 
@@ -35,10 +37,18 @@ all: build/clang_ast_yojson_validator build/clang_ast_converter build/clang_ast_
 %_v.ml %_v.mli: %.atd
 	$(ATDGEN) -v -o $* $<
 
-# link sources to build when needed (ocamlfind wants sources next to products)
-build/%:%
-	@mkdir -p build
-	cd build; ln -sf ../$* $*
+# standard ocaml rules
+build/%.cmx:%.ml
+	$(OCAMLOPT) -o $@ -c $<
+
+build/%.cmi:%.mli
+	$(OCAMLOPT) -o $@ -c $<
+
+build/%.cmx:build/%.ml
+	$(OCAMLOPT) -o $@ -c $<
+
+build/%.cmi:build/%.mli
+	$(OCAMLOPT) -o $@ -c $<
 
 # clang AST
 build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.cpp
@@ -69,31 +79,31 @@ PRINTER_TEST_FILES=ObjCTest.m
 CONVERTER_TEST_FILE=Hello.m
 
 # simple library for composing unix processes
-build/process_test: build/process.mli build/process.ml build/process_test.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -linkpkg
+build/process_test: build/process.cmx build/process_test.cmx
+	$(OCAMLOPT) -linkpkg -o $@ $^
 
 # Utilities
-build/utils_test: build/process.mli build/process.ml build/utils.mli build/utils.ml build/utils_test.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
+build/utils_test: build/process.cmx build/utils.cmx build/utils_test.cmx
+	$(OCAMLOPT) -linkpkg -o $@ $^
 
-CLANG_AST_LIBS=clang_ast_t.mli clang_ast_t.ml clang_ast_j.mli clang_ast_j.ml process.mli process.ml utils.mli utils.ml yojson_utils.mli yojson_utils.ml
+CLANG_AST_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j process utils yojson_utils)
 
-build/yojson_utils_test: $(CLANG_AST_LIBS:%=build/%) build/yojson_utils_test.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
+build/yojson_utils_test: $(CLANG_AST_LIBS) build/yojson_utils_test.cmx
+	$(OCAMLOPT) -linkpkg -o $@ $^
 
 # AST parser and dumper
-build/clang_ast_yojson_validator: $(CLANG_AST_LIBS:%=build/%) build/clang_ast_yojson_validator.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
+build/clang_ast_yojson_validator: $(CLANG_AST_LIBS) build/clang_ast_yojson_validator.cmx
+	$(OCAMLOPT) -linkpkg -o $@ $^
 
 # AST format converter
-build/clang_ast_converter: $(CLANG_AST_LIBS:%=build/%) build/clang_ast_converter.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package unix -package camlzip -package atdgen -linkpkg
+build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
+	$(OCAMLOPT) -linkpkg -o $@ $^
 
 # example of AST visitor
-build/clang_ast_named_decl_printer: build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_proj.mli build/clang_ast_proj.ml build/clang_ast_named_decl_printer.ml
-	ocamlfind ocamlopt -I build -o $@ $^ -package atdgen -linkpkg
+build/clang_ast_named_decl_printer: $(patsubst %,build/%.cmx,clang_ast_t clang_ast_j clang_ast_proj clang_ast_named_decl_printer)
+	$(OCAMLOPT) -linkpkg -o $@ $^
 
-test: build/process_test build/utils_test build/yojson_utils_test build/clang_ast_yojson_validator build/clang_ast_converter build/clang_ast_named_decl_printer
+test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_yojson_validator clang_ast_converter clang_ast_named_decl_printer)
 	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
@@ -112,3 +122,8 @@ record-test-outputs:
 
 clean:
 	@rm -f tests/*.out build/*
+
+depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml
+	ocamldep -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
+
+include .depend
