@@ -31,6 +31,8 @@ add_library(
   FacebookClangPlugin SHARED
 
   SimplePluginASTAction.h
+  DeduplicationService.h
+  DeduplicationService.cpp
   atdlib/ATDWriter.h
   ASTExporter.cpp
   ${EXTRA_SOURCES}

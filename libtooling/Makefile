@@ -10,7 +10,8 @@
 LEVEL=..
 include $(LEVEL)/Makefile.config
 
-HEADERS+=SimplePluginASTAction.h
+HEADERS+=SimplePluginASTAction.h DeduplicationService.h
+OBJS+=DeduplicationService.o
 
 # ASTExporter
 HEADERS+=atdlib/ATDWriter.h
@@ -64,10 +65,15 @@ endif
 test: build/FacebookClangPlugin.dylib
 	@for P in $(PLUGINS); do                                                        \
 	   echo "-- $$P --";                                                            \
+	   rm -rf build/tmp_$$P;                                                        \
+	   mkdir -p build/tmp_$$P;                                                      \
 	   for EXPFILE in $(EXPFILES_FORMULA); do                                       \
 	     TEST=$${EXPFILE%.exp};                                                     \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
-	       $(CLANG_FRONTEND) -Xclang -plugin -Xclang $$P -c $(SRCFILE_FORMULA);     \
+	       $(CLANG_FRONTEND) -Xclang -plugin -Xclang $$P                            \
+	       -Xclang -plugin-arg-$$P -Xclang -                                        \
+	       -Xclang -plugin-arg-$$P -Xclang build/tmp_$$P                            \
+	       -c $(SRCFILE_FORMULA);                                                   \
 	   done;                                                                        \
 	done
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f $(OUT_TEST_FILES); fi

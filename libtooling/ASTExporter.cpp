@@ -40,6 +40,7 @@
 
 #include "atdlib/ATDWriter.h"
 #include "SimplePluginASTAction.h"
+#include "DeduplicationService.h"
 
 using namespace clang;
 using namespace clang::comments;
@@ -65,6 +66,9 @@ namespace {
     typedef typename ATDWriter::VariantScope VariantScope;
     ATDWriter OF;
 
+    // Optional service to avoid repeating the content of a same file across a compilation.
+    DeduplicationService *DedupService;
+
     const CommandTraits &Traits;
     const SourceManager &SM;
 
@@ -86,12 +90,13 @@ namespace {
     const FullComment *FC;
 
   public:
-    ASTExporter(raw_ostream &OS, ASTContext &Context)
+    ASTExporter(raw_ostream &OS, ASTContext &Context, DeduplicationService *DedupService)
       : OF(OS),
+        DedupService(DedupService),
         Traits(Context.getCommentCommandTraits()),
         SM(Context.getSourceManager()),
         NullPtrStmt(new (Context) NullStmt(SourceLocation())),
-        NullPtrDecl(EmptyDecl::Create(Context, NULL, SourceLocation())),
+        NullPtrDecl(EmptyDecl::Create(Context, Context.getTranslationUnitDecl(), SourceLocation())),
         NullPtrComment(new (Context) Comment(Comment::NoCommentKind, SourceLocation(), SourceLocation())),
         LastLocFilename(""), LastLocLine(~0U), FC(0)
     {
@@ -102,6 +107,8 @@ namespace {
     void dumpFullComment(const FullComment *C);
 
     // Utilities
+    bool verifyDeclFileLocation(const Decl &Decl);
+
     void dumpBarePointer(const void *Ptr);
     void dumpSourceRange(SourceRange R);
     void dumpBareSourceLocation(SourceLocation Loc);
@@ -328,6 +335,19 @@ void ASTExporter<ATDWriter>::dumpBareSourceLocation(SourceLocation Loc) {
   // TODO: lastLocColumn
 }
 
+template <class ATDWriter>
+bool ASTExporter<ATDWriter>::verifyDeclFileLocation(const Decl &Decl) {
+  if (!DedupService) {
+    return true;
+  }
+  SourceLocation SpellingLoc = SM.getSpellingLoc(Decl.getLocation());
+  PresumedLoc PLoc = SM.getPresumedLoc(SpellingLoc);
+  if (PLoc.isInvalid()) {
+    return true;
+  }
+  return DedupService->verifyKey(PLoc.getFilename());
+}
+
 /// \atd
 /// type _source_range = {
 ///   ?source_range : source_range option
@@ -454,7 +474,11 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
     ArrayScope Scope(OF);
     for (DeclContext::decl_iterator I = DC->decls_begin(), E = DC->decls_end();
          I != E; ++I) {
-      dumpBareDecl(*I);
+      if (verifyDeclFileLocation(**I)) {
+        dumpBareDecl(*I);
+      } else {
+        dumpBareDecl(nullptr);
+      }
     }
   }
   {
@@ -2911,13 +2935,19 @@ namespace {
   class ExporterASTConsumer : public ASTConsumer {
   private:
     raw_ostream &OS;
+    llvm::StringRef DeduplicationServicePath;
 
   public:
-    ExporterASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile, raw_ostream &OS) : OS(OS) {}
+    ExporterASTConsumer(CompilerInstance &CI,
+                        llvm::StringRef InputFile,
+                        llvm::StringRef DeduplicationServicePath,
+                        raw_ostream &OS)
+    : OS(OS), DeduplicationServicePath(DeduplicationServicePath) {}
 
     virtual void HandleTranslationUnit(ASTContext &Context) {
       TranslationUnitDecl *D = Context.getTranslationUnitDecl();
-      ASTExporter<ATDWriter> P(OS, Context);
+      DeduplicationService Dedup(DeduplicationServicePath);
+      ASTExporter<ATDWriter> P(OS, Context, DeduplicationServicePath != "" ? &Dedup : nullptr);
       P.dumpBareDecl(D);
     }
   };

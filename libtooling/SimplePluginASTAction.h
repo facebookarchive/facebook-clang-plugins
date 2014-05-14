@@ -26,6 +26,7 @@ template <
 >
 class SimplePluginASTAction : public PluginASTAction {
   StringRef OutputPath;
+  StringRef DeduplicationServicePath;
 
  protected:
   ASTConsumer *CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
@@ -54,13 +55,16 @@ class SimplePluginASTAction : public PluginASTAction {
     if (!OS) {
       return NULL;
     }
-    return new T(CI, InputFile, *OS);
+    return new T(CI, InputFile, DeduplicationServicePath, *OS);
   }
 
   bool ParseArgs(const CompilerInstance &CI,
                  const std::vector<std::string>& args) {
     if (args.size() > 0) {
       OutputPath = args[0];
+      if (args.size() > 1) {
+        DeduplicationServicePath = args[1];
+      }
     }
     return true;
   }
