@@ -11,7 +11,7 @@ LEVEL=..
 include $(LEVEL)/Makefile.config
 
 HEADERS+=SimplePluginASTAction.h DeduplicationService.h
-OBJS+=FileUtils.o
+OBJS+=DeduplicationService.o
 
 # ASTExporter
 HEADERS+=atdlib/ATDWriter.h
