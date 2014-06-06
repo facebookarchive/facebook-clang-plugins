@@ -11,7 +11,7 @@ LEVEL=..
 include $(LEVEL)/Makefile.config
 
 HEADERS+=SimplePluginASTAction.h DeduplicationService.h
-OBJS+=DeduplicationService.o
+OBJS+=FileUtils.o
 
 # ASTExporter
 HEADERS+=atdlib/ATDWriter.h
@@ -129,4 +129,4 @@ build/ast_samples/%.gz: build/ast_samples/%
 # we do not include the C/C++ headers to avoid parsing issues with the 'traditional' cpp (needed for precisely expanding our /// comments)
 build/ASTExporter.cpp.p: ASTExporter.cpp
 	@mkdir -p build
-	@cat $< | grep -v '#include *["<][^.]*\(\.h\)\?[">]' | cpp -w -P -I$(CLANG_PREFIX)/include > build/ASTExporter.cpp.p
+	@cat $< | grep -v '#include *["<][^.]*\(\.h\)\?[">]' | $(ATD_CPP) -I$(CLANG_PREFIX)/include > build/ASTExporter.cpp.p

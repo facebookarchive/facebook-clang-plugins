@@ -12,7 +12,7 @@
 #   then EXTRA_DIR is set to "../bla/analyzer".
 
 ifneq "$(CLANG_PLUGINS_EXTRA_REPO)" ""
-CURRENT_DIR=$(shell pwd)
+CURRENT_DIR=$(shell cd .; pwd)
 ROOT_DIR=$(shell cd $(LEVEL); pwd)
 PATH_FROM_ROOT=$(subst $(ROOT_DIR)/,,$(CURRENT_DIR))
 EXTRA_DIR=$(LEVEL)/$(CLANG_PLUGINS_EXTRA_REPO)/$(PATH_FROM_ROOT)

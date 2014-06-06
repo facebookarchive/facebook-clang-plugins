@@ -5,7 +5,7 @@
 # LICENSE file in the root directory of this source tree. An additional grant
 # of patent rights can be found in the PATENTS file in the same directory.
 
-.PHONY: all clean test depend
+.PHONY: all clean test
 
 LEVEL=..
 include $(LEVEL)/Makefile.common
@@ -120,10 +120,10 @@ record-test-outputs:
 	@for F in tests/*.out; do cp $$F $${F%.out}.exp; done
 	@rm -f tests/*.out
 
-clean:
-	@rm -f tests/*.out build/*
+-include .depend
 
-depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml
+.depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml
 	ocamldep -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
 
-include .depend
+clean:
+	rm -rf .depend tests/*.out build
