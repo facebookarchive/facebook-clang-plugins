@@ -12,8 +12,29 @@ open Utils
 open Process
 
 let () =
-  assert_true "string_ends_with::1" (string_ends_with "foo" "o");
-  assert_false "string_ends_with::2" (string_ends_with "foo" "adw")
+  assert_true "string_ends_with" (string_ends_with "foo" "o");
+  assert_true "string_ends_with" (string_ends_with "foo" "");
+  assert_false "string_ends_with" (string_ends_with "foo" "f")
+
+let () =
+  assert_true "string_starts_with" (string_starts_with "foo" "f");
+  assert_true "string_starts_with" (string_starts_with "foo" "");
+  assert_false "string_starts_with" (string_starts_with "foo" "o")
+
+let () =
+  assert_equal "string_split" (string_split ' ' "foo bla") ["foo"; "bla"];
+  assert_equal "string_split" (string_split ' ' "foo") ["foo"];
+  assert_equal "string_split" (string_split ' ' "") [""];
+  assert_equal "string_split" (string_split ' ' " ") [""; ""];
+  assert_equal "string_split" (string_split ' ' " foo bla ") [""; "foo"; "bla"; ""]
+
+let () =
+  assert_true "list_ends_with" (list_ends_with [1;2;3] [3]);
+  assert_false "list_ends_with" (list_ends_with [1;2;3] [2])
+
+let () =
+  assert_true "list_starts_with" (list_starts_with [1;2;3] [1]);
+  assert_false "list_starts_with" (list_starts_with [1;2;3] [2])
 
 let () =
   let pid, ic = Process.fork (fun oc -> output_string oc "foo\nbar\n"; true)
@@ -37,3 +58,27 @@ let () =
   in
   List.iter g [1; 2; 1; 3; 1];
   assert_equal "make_cached" (!count) 3
+
+let () =
+  let s = DisjointSet.create ()
+  in
+  assert_equal "DisjointSet" (DisjointSet.find s 1) 1;
+  assert_equal "DisjointSet" (DisjointSet.find s 2) 2;
+  DisjointSet.union s 1 2;
+  DisjointSet.union s 1 3;
+  DisjointSet.union s 2 4;
+  DisjointSet.union s 5 6;
+  assert_equal "DisjointSet" (DisjointSet.find s 1) (DisjointSet.find s 2);
+  assert_equal "DisjointSet" (DisjointSet.find s 1) (DisjointSet.find s 3);
+  assert_equal "DisjointSet" (DisjointSet.find s 1) (DisjointSet.find s 4);
+  assert_equal "DisjointSet" (DisjointSet.find s 1) (DisjointSet.find s 4);
+  assert_equal "DisjointSet" (DisjointSet.find s 5) (DisjointSet.find s 6);
+  assert_true "DisjointSet" ((DisjointSet.find s 1) <> (DisjointSet.find s 6));
+  DisjointSet.union s 3 6;
+  assert_true "DisjointSet" ((DisjointSet.find s 1) = (DisjointSet.find s 6));
+  assert_equal "DisjointSet" (DisjointSet.find s 5) (DisjointSet.find s 6);
+
+  let l = ref []
+  in
+  DisjointSet.iter s (fun x y -> l := (y,x)::(!l));
+  assert_equal "DisjointSetFinal" (List.sort compare (!l) |> List.map snd) [1;2;3;4;5;6]

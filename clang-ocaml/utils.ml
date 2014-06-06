@@ -33,11 +33,43 @@ let make_cached f =
 
 (* missing string API *)
 
+let string_starts_with s1 s2 =
+  try
+    let n = String.length s2 in
+    (String.sub s1 0 n) = s2
+  with Invalid_argument _ -> false
+
 let string_ends_with s1 s2 =
   try
     let n = String.length s2 in
     (String.sub s1 (String.length s1 - n) n) = s2
   with Invalid_argument _ -> false
+
+let string_split c s =
+  let len = String.length s
+  in
+  let rec aux acc pos =
+    if pos >= len then ""::acc
+    else
+      try
+        let next = String.index_from s pos c
+        in
+        aux ((String.sub s pos (next - pos))::acc) (next + 1)
+      with Not_found -> (String.sub s pos (String.length s - pos))::acc
+  in
+  List.rev (aux [] 0)
+
+let string_join c l = String.concat (String.make 1 c) l
+
+(* lists *)
+
+let rec list_starts_with l1 l2 =
+  match l1, l2 with
+  | _, [] -> true
+  | x1::q1, x2::q2 when x1 = x2 -> list_starts_with q1 q2
+  | _ -> false
+
+let list_ends_with l1 l2 = list_starts_with (List.rev l1) (List.rev l2)
 
 (* missing stream API *)
 
@@ -90,11 +122,66 @@ let stream_to_list s =
 
 (* simplistic unit testing *)
 
+let string_counters = Hashtbl.create 10
+
 let assert_true s b =
+  begin
+    try
+      let i = Hashtbl.find string_counters s
+      in
+      Hashtbl.replace string_counters s (i+1)
+    with Not_found -> Hashtbl.add string_counters s 1
+  end;
   if not b then begin
-    prerr_endline s;
+    Printf.fprintf stderr "%s (%d)\n" s (Hashtbl.find string_counters s);
     exit 1
   end else ()
 
 let assert_false s b = assert_true s (not b)
 let assert_equal s x y = assert_true s (x = y)
+
+(* union-find data structure *)
+
+module DisjointSet = struct
+
+  type 'a bucket = { mutable parent : 'a ; mutable rank : int }
+
+  type 'a t = ('a, 'a bucket) Hashtbl.t
+
+  let create () = Hashtbl.create 10
+
+  let bucket t x =
+    try
+      Hashtbl.find t x
+    with Not_found ->
+      let b = { parent = x; rank = 0 }
+      in
+      Hashtbl.add t x b;
+      b
+
+  let rec find_bucket t x =
+    let b = bucket t x
+    in
+    if b.parent = x then b
+    else
+      let b0 = find_bucket t b.parent
+      in
+      b.parent <- b0.parent;
+      b0
+
+  let find t x = (find_bucket t x).parent
+
+  let union t x y =
+    let bx = find_bucket t x
+    and by = find_bucket t y
+    in
+    if bx.parent <> by.parent then
+      if bx.rank < by.rank then bx.parent <- by.parent
+      else begin
+        by.parent <- bx.parent;
+        if bx.rank = by.rank then bx.rank <- bx.rank + 1
+      end
+
+  let iter t f = Hashtbl.iter (fun x b -> f x (if x = b.parent then x else find t b.parent)) t
+
+end
