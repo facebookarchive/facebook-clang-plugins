@@ -12,7 +12,8 @@ typedef unsigned int NSUInteger;
 
 + (instancetype)alloc;
 + (instancetype)new;
-- (id)init;
+- (instancetype)autorelease;
+- (instancetype)init;
 - (Class)class;
 
 - (BOOL)respondsToSelector:(SEL)s;

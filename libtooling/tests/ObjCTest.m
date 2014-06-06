@@ -3,10 +3,10 @@
 #include "FoundationStub.h"
 
 @protocol MyProtocol
-
 @property (nonatomic, copy) NSString *str;
-
 @end
+
+@protocol SomeProtocol;
 
 @interface MyClass : NSObject <MyProtocol>
 
@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) void *x;
 @property (nonatomic, assign) int y;
-@property (nonatomic, assign) NSObject *delegate;
+@property (nonatomic, assign) NSObject<SomeProtocol> *delegate;
 
 @end
 
@@ -80,7 +80,7 @@
 
 int main(int argc, char** argv) {
   @autoreleasepool {
-    [[MyClass new] foo:@"hello"];
+    [[[[MyClass alloc] init] autorelease] foo:@"hello"];
     [[MyClass new] bar:@"hello"];
   }
   return 0;
