@@ -27,6 +27,7 @@ private:
 public:
   PrintDeclarationsConsumer(CompilerInstance &CI,
                             llvm::StringRef InputFile,
+                            llvm::StringRef BasePath,
                             llvm::StringRef DeduplicationServicePath,
                             raw_ostream &OS) : OS(OS) {}
 

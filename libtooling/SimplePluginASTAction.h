@@ -55,7 +55,20 @@ class SimplePluginASTAction : public PluginASTAction {
     if (!OS) {
       return NULL;
     }
-    return new T(CI, InputFile, DeduplicationServicePath, *OS);
+
+    SmallString<256> CurrentDir;
+    if (llvm::sys::fs::current_path(CurrentDir) != llvm::errc::success) {
+      llvm::errs() << "Failed to retrieve current working directory\n";
+      exit(1);
+    }
+    StringRef BasePath;
+    // Force absolute paths everywhere if InputFile was given absolute.
+    if (InputFile.startswith("/")) {
+      BasePath = CurrentDir;
+    }
+
+    // /!\ T must make a local copy of the strings passed by reference here.
+    return new T(CI, InputFile, BasePath, DeduplicationServicePath, *OS);
   }
 
   bool ParseArgs(const CompilerInstance &CI,

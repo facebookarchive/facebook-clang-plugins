@@ -40,7 +40,7 @@
 
 #include "atdlib/ATDWriter.h"
 #include "SimplePluginASTAction.h"
-#include "DeduplicationService.h"
+#include "FileUtils.h"
 
 using namespace clang;
 using namespace clang::comments;
@@ -66,11 +66,13 @@ namespace {
     typedef typename ATDWriter::VariantScope VariantScope;
     ATDWriter OF;
 
-    // Optional service to avoid repeating the content of a same file across a compilation.
-    DeduplicationService *DedupService;
-
     const CommandTraits &Traits;
     const SourceManager &SM;
+
+    // Optional currentWorkingDirectory to normalize relative paths.
+    StringRef BasePath;
+    // Optional service to avoid repeating the content of a same header file across a compilation.
+    FileUtils::DeduplicationService *DedupService;
 
     // Encoding of NULL pointers into suitable empty nodes
     // This is a hack but using option types in children lists would make the Json terribly verbose.
@@ -90,11 +92,12 @@ namespace {
     const FullComment *FC;
 
   public:
-    ASTExporter(raw_ostream &OS, ASTContext &Context, DeduplicationService *DedupService)
+    ASTExporter(raw_ostream &OS, ASTContext &Context, StringRef BasePath, FileUtils::DeduplicationService *DedupService)
       : OF(OS),
-        DedupService(DedupService),
         Traits(Context.getCommentCommandTraits()),
         SM(Context.getSourceManager()),
+        BasePath(BasePath),
+        DedupService(DedupService),
         NullPtrStmt(new (Context) NullStmt(SourceLocation())),
         NullPtrDecl(EmptyDecl::Create(Context, Context.getTranslationUnitDecl(), SourceLocation())),
         NullPtrComment(new (Context) Comment(Comment::NoCommentKind, SourceLocation(), SourceLocation())),
@@ -107,8 +110,6 @@ namespace {
     void dumpFullComment(const FullComment *C);
 
     // Utilities
-    bool verifyDeclFileLocation(const Decl &Decl);
-
     void dumpBarePointer(const void *Ptr);
     void dumpSourceRange(SourceRange R);
     void dumpBareSourceLocation(SourceLocation Loc);
@@ -316,7 +317,8 @@ void ASTExporter<ATDWriter>::dumpBareSourceLocation(SourceLocation Loc) {
 
   if (strcmp(PLoc.getFilename(), LastLocFilename) != 0) {
     OF.emitTag("file");
-    OF.emitString(PLoc.getFilename());
+    // Normalizing filenames matters because the current directory may change during the compilation of large projects.
+    OF.emitString(FileUtils::normalizePath(BasePath, PLoc.getFilename()));
     OF.emitTag("line");
     OF.emitInteger(PLoc.getLine());
     OF.emitTag("column");
@@ -333,19 +335,6 @@ void ASTExporter<ATDWriter>::dumpBareSourceLocation(SourceLocation Loc) {
   LastLocFilename = PLoc.getFilename();
   LastLocLine = PLoc.getLine();
   // TODO: lastLocColumn
-}
-
-template <class ATDWriter>
-bool ASTExporter<ATDWriter>::verifyDeclFileLocation(const Decl &Decl) {
-  if (!DedupService) {
-    return true;
-  }
-  SourceLocation SpellingLoc = SM.getSpellingLoc(Decl.getLocation());
-  PresumedLoc PLoc = SM.getPresumedLoc(SpellingLoc);
-  if (PLoc.isInvalid()) {
-    return true;
-  }
-  return DedupService->verifyKey(PLoc.getFilename());
 }
 
 /// \atd
@@ -474,10 +463,8 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
     ArrayScope Scope(OF);
     for (DeclContext::decl_iterator I = DC->decls_begin(), E = DC->decls_end();
          I != E; ++I) {
-      if (verifyDeclFileLocation(**I)) {
+      if (!DedupService || DedupService->verifyDeclFileLocation(**I)) {
         dumpBareDecl(*I);
-      } else {
-        dumpBareDecl(nullptr);
       }
     }
   }
@@ -2934,20 +2921,25 @@ namespace {
   template <class ATDWriter>
   class ExporterASTConsumer : public ASTConsumer {
   private:
+    std::string BasePath;
+    std::string DeduplicationServicePath;
     raw_ostream &OS;
-    llvm::StringRef DeduplicationServicePath;
 
   public:
     ExporterASTConsumer(CompilerInstance &CI,
-                        llvm::StringRef InputFile,
-                        llvm::StringRef DeduplicationServicePath,
+                        StringRef InputFile,
+                        StringRef BasePath,
+                        StringRef DeduplicationServicePath,
                         raw_ostream &OS)
-    : OS(OS), DeduplicationServicePath(DeduplicationServicePath) {}
+    : BasePath(BasePath),
+      DeduplicationServicePath(DeduplicationServicePath),
+      OS(OS)
+    {}
 
     virtual void HandleTranslationUnit(ASTContext &Context) {
       TranslationUnitDecl *D = Context.getTranslationUnitDecl();
-      DeduplicationService Dedup(DeduplicationServicePath);
-      ASTExporter<ATDWriter> P(OS, Context, DeduplicationServicePath != "" ? &Dedup : nullptr);
+      FileUtils::DeduplicationService Dedup(DeduplicationServicePath, BasePath, Context.getSourceManager());
+      ASTExporter<ATDWriter> P(OS, Context, BasePath, DeduplicationServicePath != "" ? &Dedup : nullptr);
       P.dumpBareDecl(D);
     }
   };
