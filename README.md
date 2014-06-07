@@ -1,7 +1,18 @@
 Facebook clang plugins
 ======================
 
-https://github.com/facebook/facebook-clang-plugins
+Creating tools for languages of the C family is notoriously hard and subject to the evolution of languages. Fortunately, the [clang compiler](http://clang.llvm.org/) makes available rich language APIs and a convenient plugin system to use them.
+
+The purpose of this [project](https://github.com/facebook/facebook-clang-plugins) is to share some useful clang plugins developped at Facebook.
+
+In general, clang plugins come in two "kinds":
+
+- analyzer plugins use the internal APIs of [clang analyzer](http://clang-analyzer.llvm.org/) to find bugs and report them; those can also be seen as "linting rules";
+
+- frontend plugins make it possible to process the syntax of source files exactly as clang sees it to accomplish various tasks.
+
+Most of the plugins here have been written to improve the experience of engineers working on iOS. However different platforms could be considered in the future.
+
 
 Directory tree
 --------------
