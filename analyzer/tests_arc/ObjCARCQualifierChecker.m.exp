@@ -1,0 +1,10 @@
+tests_arc/ObjCARCQualifierChecker.m:31:3: warning: In ARC mode, the first argument to '-[NSInvocation getArgument:atIndex:]' must be declared with __unsafe_unretained to avoid over-release
+  [invocation getArgument:&badString atIndex:3];
+  ^
+tests_arc/ObjCARCQualifierChecker.m:37:5: warning: In ARC mode, the first argument to '-[NSInvocation getArgument:atIndex:]' must be declared with __unsafe_unretained to avoid over-release
+    [invocation getArgument:&badString atIndex:3];
+    ^
+tests_arc/ObjCARCQualifierChecker.m:43:3: warning: In ARC mode, the first argument to '-[NSInvocation getReturnValue:]' must be declared with __unsafe_unretained to avoid over-release
+  [invocation getReturnValue:&badString];
+  ^
+3 warnings generated.

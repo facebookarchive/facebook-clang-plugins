@@ -32,6 +32,16 @@ add_library(
 
   PluginMain.cpp
   PluginMainRegistry.h
+  PropertySynthesizeChecker.cpp
+  ObjCARCQualifierChecker.cpp
+  SuspiciousRespondsToSelectorChecker.cpp
+  DanglingDelegateCommon.h
+  DanglingDelegateCommon.cpp
+  DanglingDelegateFactFinder.h
+  DanglingDelegateFactFinder.cpp
+  DanglingDelegateChecker.cpp
+  DoubleBooleanArgumentChecker.cpp
+  GlobalOrStaticVariableForDispatchOnceChecker.cpp
   ${EXTRA_SOURCES}
 )
 

@@ -1,0 +1,8 @@
+In file included from tests/PropertySynthesizeCheckerTest3.m:3:
+tests/PropertySynthesizeCheckerTest3.h:21:46: warning: The property value has been declared read-only in parent class Class1. The setter of the local read-write property will not be synthesized. Consider using a @protected ivar and/or an class extension in the original parent class instead
+@property (nonatomic, assign, readwrite) int value;
+                                             ^~~~~
+tests/PropertySynthesizeCheckerTest3.m:9:13: warning: The property value was originally declared in parent class Class1. The @synthesize statement here will create a new distinct ivar. This is usually not what you want. If this property was meant to be 'abstract' in the parent class, consider declaring it in a protocol or rewriting it as regular methods
+@synthesize value = _value;
+            ^~~~~
+2 warnings generated.

@@ -1,0 +1,25 @@
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:45:5: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    [receiver someSel:3 withSomeParamX:4];
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:55:5: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector fun:valueX: is used. The selector name might have been mispelled
+    [receiver fun:3 valueX:4];
+    ^~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:87:5: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    [receiver performSelector:@selector(someSel:withSomeParamX:) withObject:3 withObject:4];
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:99:10: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    b = ![receiver someSel:1 withSomeParamX:1];
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:113:14: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    b = b || [receiver someSel:2 withSomeParamX:2];
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:126:14: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    bool x = [receiver someSel:3 withSomeParamX:3];
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:139:12: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    return [receiver someSel:4 withSomeParamX:4];
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/SuspiciousRespondsToSelectorCheckerTest1.m:150:9: warning: Suspicious use of respondsToSelector. A condition checks if receiver responds to selector someSel:withSomeParam: and subsequently selector someSel:withSomeParamX: is used. The selector name might have been mispelled
+    foo([receiver someSel:4 withSomeParamX:4]);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+8 warnings generated.

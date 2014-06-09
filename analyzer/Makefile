@@ -14,12 +14,31 @@ include $(LEVEL)/Makefile.config
 HEADERS=PluginMainRegistry.h
 OBJS=PluginMain.o
 
-# -- plugins go here --
+# ObjCARCQualifierChecker
+CHECKERS+=facebook.ObjCARCQualifierChecker
+OBJS+=ObjCARCQualifierChecker.o
 
-# title
-#HEADERS+=
-#CHECKERS+=example.xxxxx
-#OBJS+=Xxxxx.o
+# DanglingDelegateChecker
+HEADERS+=DanglingDelegateCommon.h DanglingDelegateFactFinder.h
+CHECKERS+=facebook.DanglingDelegateChecker
+OBJS+=DanglingDelegateCommon.o DanglingDelegateFactFinder.o DanglingDelegateChecker.o
+
+# DoubleBooleanArgumentChecker
+CHECKERS+=facebook.DoubleBooleanArgumentChecker
+OBJS+=DoubleBooleanArgumentChecker.o
+
+# GlobalOrStaticVariableForDispatchOnceChecker
+CHECKERS+=facebook.GlobalOrStaticVariableForDispatchOnceChecker
+OBJS+=GlobalOrStaticVariableForDispatchOnceChecker.o
+
+# PropertySynthesizeChecker
+CHECKERS+=facebook.PropertySynthesizeChecker
+OBJS+=PropertySynthesizeChecker.o
+
+# SuspiciousRespondsToSelectorChecker
+CHECKERS+=facebook.SuspiciousRespondsToSelectorChecker
+OBJS+=SuspiciousRespondsToSelectorChecker.o
+
 
 all: build/FacebookAnalyzerPlugin.dylib
 

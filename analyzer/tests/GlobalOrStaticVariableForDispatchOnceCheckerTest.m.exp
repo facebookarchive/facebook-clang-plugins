@@ -1,0 +1,10 @@
+tests/GlobalOrStaticVariableForDispatchOnceCheckerTest.m:7:19: warning: Please consider using a global or static variable for dispatch_once_t to avoid unexpected behavior
+  dispatch_once_t onceToken_wrong1;
+                  ^~~~~~~~~~~~~~~~
+tests/GlobalOrStaticVariableForDispatchOnceCheckerTest.m:9:44: warning: Please consider using a global or static variable for dispatch_once_t to avoid unexpected behavior
+@property (atomic, assign) dispatch_once_t onceToken_wrong2;
+                                           ^~~~~~~~~~~~~~~~
+tests/GlobalOrStaticVariableForDispatchOnceCheckerTest.m:16:19: warning: Please consider using a global or static variable for dispatch_once_t to avoid unexpected behavior
+  dispatch_once_t onceToken_wrong3;
+                  ^~~~~~~~~~~~~~~~
+3 warnings generated.
