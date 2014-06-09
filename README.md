@@ -26,6 +26,15 @@ Directory tree
 - xcode -> Xcode project
 - */build -> build products
 
+Caveat
+------
+
+Getting clang plugins to work right can be touchy: plugins need to be loaded into a clang binary that precisely exports all the expected symbols.
+
+In particular, because of the nature of C++, this forces clang and the plugins to be compiled with the exact same C++ libraries.
+
+In practice this means that one needs to recompile clang from sources, then compiles the plugins against the same clang headers, using similar compilation options.
+
 Quickstart
 ----------
 
