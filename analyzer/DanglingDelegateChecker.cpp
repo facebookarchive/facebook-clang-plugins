@@ -8,6 +8,41 @@
  *
  */
 
+/**
+ * Highly complex and heuristic two-pass analyzer to detect memory unsafe patterns in Objective C, so far related to delegate properties.
+ *
+ * Here is an example (see non regression tests for more).
+<code>
+
+@class Foo;
+
+// external class
+@interface Bar
+@property (assign) Foo *delegate;
+@end
+
+// class being analyzed
+@interface Foo : NSObject
+@property (retain) Bar *bar;
+@end
+
+@implementation Foo
+
+-(instancetype) init {
+ if(self = [super init]) {
+   // ...
+   self.bar.delegate = self; // "Registering" self in an unmanaged (non-zeroing) pointer of an external object.
+ }
+ return self;
+}
+
+// Here, the ARC-generated dealloc will not clear self.bar.delegate : this is unsafe because Bar could outlive Foo.
+
+@end
+
+</code>
+ */
+
 #include <clang/StaticAnalyzer/Core/Checker.h>
 #include <clang/StaticAnalyzer/Core/BugReporter/BugType.h>
 #include <clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h>
