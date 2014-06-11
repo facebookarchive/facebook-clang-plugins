@@ -1,54 +1,44 @@
 Facebook clang plugins
 ======================
 
-Creating tools for languages of the C family is notoriously hard and subject to the evolution of languages. Fortunately, the [clang compiler](http://clang.llvm.org/) makes available rich language APIs and a convenient plugin system to use them.
+This [repository](https://github.com/facebook/facebook-clang-plugins) aims to share some useful clang plugins developed at Facebook.
 
-The purpose of this [project](https://github.com/facebook/facebook-clang-plugins) is to share some useful clang plugins developped at Facebook.
+It contains two kinds of plugins to the [clang compiler](http://clang.llvm.org/):
 
-In general, clang plugins come in two "kinds":
+- analyzer plugins use the internal APIs of [clang analyzer](http://clang-analyzer.llvm.org/) to find bugs and report them;
 
-- analyzer plugins use the internal APIs of [clang analyzer](http://clang-analyzer.llvm.org/) to find bugs and report them; those can also be seen as "linting rules";
+- frontend plugins process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyses easier.
 
-- frontend plugins make it possible to process the syntax of source files exactly as clang sees it to accomplish various tasks.
-
-Most of the plugins here have been written to improve the experience of engineers working on iOS. However different platforms could be considered in the future.
+Most of the plugins here have been written with iOS in mind. However different platforms could be considered in the future.
 
 
-Directory tree
---------------
+Structure of the repository
+---------------------------
 
-- analyzer -> plugins for clang analyzer
-- libtooling -> frontend plugins
-- clang-ocaml -> an Ocaml library to import the AST of clang as serialized by the frontend plugin Yojson.
-- extra-repo-example -> example of external repository where to add plugins
+- [`analyzer`](https://github.com/facebook/facebook-clang-plugins/tree/master/analyzer) : plugins for clang analyzer,
 
-(generated)
-- xcode -> Xcode project
-- */build -> build products
+- [`libtooling`](https://github.com/facebook/facebook-clang-plugins/tree/master/libtooling) : frontend plugins (currently a clang-to-json AST exporter),
 
-Caveat
-------
+- [`clang-ocaml`](https://github.com/facebook/facebook-clang-plugins/tree/master/clang-ocaml) : ocaml libraries to process the Json output of frontend plugins,
 
-Getting clang plugins to work right can be touchy: plugins need to be loaded into a clang binary that precisely exports all the expected symbols.
+- [`extra-repo-example`](https://github.com/facebook/facebook-clang-plugins/tree/master/extra-repo-example) : example of external repository where to add plugins and piggyback on the build system.
 
-In particular, because of the nature of C++, this forces clang and the plugins to be compiled with the exact same C++ libraries.
 
-In practice this means that one needs to recompile clang from sources, then compiles the plugins against the same clang headers, using similar compilation options.
-
-Quickstart
+Quick start
 ----------
 
-Edit Makefile.config (and possibly CMakeLists.txt) to set the different PATH variables to the target clang compiler.
+Clang plugins needs to be loaded in a target compiler that matches the API in use.
 
-The target clang compiler should be compiled from the following source directories:
--  llvm                      -> http://llvm.org/git/llvm.git 070b5745aef302b3d391840eb323ad6a3c5aa9e6
--  llvm/tools/clang          -> http://llvm.org/git/clang.git 182109a097267d9d2e90fa6235e4da4a09f86ad8
--  llvm/projects/compiler-rt -> http://llvm.org/git/compiler-rt.git 4819e32d7d9862dec08ed171765713b3cb40fdbf
--  llvm/projects/libcxx      -> http://llvm.org/git/libcxx.git a2df82b98e2e55019180b0c8de88211954de0646
+General instructions to compile clang can be found here: http://clang.llvm.org/get_started.html
 
-Caveat: Plugins heavily depend on clang internals: using sources with distant commit numbers is likely to break.
+The current version of the plugins requires a clang compiler to be compiled from the following sources:
 
-Typically, compilations are made from a directory next to llvm:
+- `llvm` http://llvm.org/git/llvm.git 070b5745aef302b3d391840eb323ad6a3c5aa9e6
+- `llvm/tools/clang` http://llvm.org/git/clang.git 182109a097267d9d2e90fa6235e4da4a09f86ad8
+- `llvm/projects/compiler-rt` http://llvm.org/git/compiler-rt.git 4819e32d7d9862dec08ed171765713b3cb40fdbf
+- `llvm/projects/libcxx` http://llvm.org/git/libcxx.git a2df82b98e2e55019180b0c8de88211954de0646
+
+Typically, compilation is made from a directory next to `llvm` along the following lines:
 ```
 # from $HOME/git or equivalent
 export CLANG_PREFIX=/usr/local
@@ -60,7 +50,11 @@ cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
 strip -x "$CLANG_PREFIX/bin/clang"
 ```
 
-Then, the following should run the unit tests:
+Caveat:
+- Because of the nature of C++, clang and the plugins need to be compiled with the exact same C++ libraries.
+- Also, the default stripping command of clang in release mode breaks plugins.
+
+Once the target compiler is installed, the following should run the unit tests:
 ```
 export CLANG_PREFIX=/usr/local #should be the same as above
 export CLANG_PLUGINS_EXTRA_REPO=extra-repo-example
@@ -72,8 +66,10 @@ Ocaml users may also run:
 make -C clang-ocaml test  #requires proper ocaml libraries, see included clang-ocaml/README
 ```
 
-Mac users may create an xcode project as follows:
+Mac users may create an Xcode project as follows:
 ```
 export CLANG_PREFIX=/usr/local #should be the same as above
 make xcode
 ```
+
+Additional configuration options are available in `Makefile.config` (and possibly `CMakeLists.txt`).
