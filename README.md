@@ -9,8 +9,14 @@ It contains two kinds of plugins to the [clang compiler](http://clang.llvm.org/)
 
 - frontend plugins process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyses easier.
 
-Most of the plugins here have been written with iOS in mind. However different platforms could be considered in the future.
+Most of the plugins here have been written with iOS in mind. However different platforms may be considered in the future.
 
+Pre-release notes
+-----------------
+
+This pre-release is meant mostly as a "RFC", in particular to gather early feedback from the clang community.
+
+Plugins are still subject to be deleted, moved, added, or heavily rewritten.
 
 Structure of the repository
 ---------------------------
@@ -25,7 +31,7 @@ Structure of the repository
 
 
 Quick start
-----------
+-----------
 
 Clang plugins needs to be loaded in a target compiler that matches the API in use.
 
