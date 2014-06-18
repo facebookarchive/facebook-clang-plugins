@@ -13,8 +13,9 @@
  * while conforming to the inlined ATD specifications.
  *
  * /!\
- * 'atd' block comments are meant to be extracted and processed to generate ATD specifications for the Json dumper.
- * Do not modify 'atd' comments without modifying the Json emission accordingly (and conversely).
+ * '\atd' block comments are meant to be extracted and processed to generate ATD specifications for the Json dumper.
+ * Do not modify ATD comments without modifying the Json emission accordingly (and conversely).
+ * See ATD_GUIDELINES.md for more guidelines on how to write and test ATD annotations.
  *
  * This file was obtained by modifying the file ASTdumper.cpp from the LLVM/clang project.
  * The general layout should be maintained to make future merging easier.
