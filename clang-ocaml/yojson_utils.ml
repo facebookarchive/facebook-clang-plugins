@@ -74,49 +74,6 @@ let write_data_to_file ?(pretty=false) ?(compact_json=false) ?(std_json=false) w
     write_json oc data;
   close_out oc
 
-let validate ?(compact_json=false) ?(std_json=false) reader writer fname =
-  let read_write ic oc =
-    try
-      let data = Ag_util.Json.from_channel ~fname reader ic
-      in
-      Ag_util.Json.to_channel writer oc data;
-      true
-    with
-    | Yojson.Json_error s
-    | Ag_oj_run.Error s ->
-      begin
-        prerr_string s;
-        prerr_newline ();
-        false
-      end
-  in
-  let ydump ic oc = ydump ~compact_json ~std_json ic oc
-  in
-  let read_write_ydump = P.compose read_write ydump
-  in
-  if U.string_ends_with fname ".gz" then
-    P.diff_on_same_input
-      (P.compose P.gunzip ydump)
-      (P.compose P.gunzip read_write_ydump)
-      (open_in fname)
-      stdout
-  else
-    P.diff_on_same_input ydump read_write_ydump (open_in fname) stdout
-
-let make_yojson_validator ?(compact_json=false) ?(std_json=false) reader writer argv =
-  let process_file name = ignore (validate ~compact_json ~std_json reader writer name)
-  in
-  if Array.length argv > 1 then
-    for i = 1 to Array.length argv - 1 do
-      process_file argv.(i)
-    done
-  else
-    try
-      while true do
-        process_file (read_line ())
-      done;
-    with End_of_file -> ()
-
 let convert ?(pretty=false) ?(compact_json=false) ?(std_json=false) reader writer fin fout =
   try
     read_data_from_file reader fin

@@ -19,7 +19,7 @@ ATDCAT=atdcat -i
 
 OCAMLOPT=ocamlfind ocamlopt -package unix,atdgen,camlzip -I build
 
-all: build/clang_ast_yojson_validator build/clang_ast_converter build/clang_ast_named_decl_printer
+all: build/clang_ast_converter build/clang_ast_named_decl_printer
 
 # type definitions
 %_t.ml %_t.mli: %.atd
@@ -91,10 +91,6 @@ CLANG_AST_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j process utils yo
 build/yojson_utils_test: $(CLANG_AST_LIBS) build/yojson_utils_test.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-# AST parser and dumper
-build/clang_ast_yojson_validator: $(CLANG_AST_LIBS) build/clang_ast_yojson_validator.cmx
-	$(OCAMLOPT) -linkpkg -o $@ $^
-
 # AST format converter
 build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
@@ -111,7 +107,7 @@ test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_y
 	 $(RUNTEST) tests/yojson_utils_test build/yojson_utils_test; \
 	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
 	 $(RUNTEST) tests/clang_ast_converter build/clang_ast_converter --pretty $(CONVERTER_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
-	 $(RUNTEST) tests/clang_ast_yojson_validator build/clang_ast_yojson_validator $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz)
+	 $(RUNTEST) tests/clang_ast_yojson_validation ./yojson_validator.sh build/clang_ast_converter $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz)
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi
 
 record-test-outputs:
