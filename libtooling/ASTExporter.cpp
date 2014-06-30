@@ -134,6 +134,7 @@ namespace {
 //    void dumpTemplateArgumentList(const TemplateArgumentList &TAL);
 //    void dumpTemplateArgument(const TemplateArgument &A,
 //                              SourceRange R = SourceRange());
+    void dumpBareCXXBaseSpecifier(const CXXBaseSpecifier &Base);
 
     // Decls
     void VisitDecl(const Decl *D);
@@ -231,7 +232,7 @@ namespace {
     void VisitOpaqueValueExpr(const OpaqueValueExpr *Node);
 
     // C++
-//    void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
+    void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
     void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
 //    void VisitCXXThisExpr(const CXXThisExpr *Node);
 //    void VisitCXXFunctionalCastExpr(const CXXFunctionalCastExpr *Node);
@@ -2008,31 +2009,20 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
     }
   }
 }
-//
-//static void dumpBasePath(raw_ostream &OS, const CastExpr *Node) {
-//  if (Node->path_empty())
-//    return;
-//
-//  OS << " (";
-//  bool First = true;
-//  for (CastExpr::path_const_iterator I = Node->path_begin(),
-//                                     E = Node->path_end();
-//       I != E; ++I) {
-//    const CXXBaseSpecifier *Base = *I;
-//    if (!First)
-//      OS << " -> ";
-//
-//    const CXXRecordDecl *RD =
-//    cast<CXXRecordDecl>(Base->getType()->getAs<RecordType>()->getDecl());
-//
-//    if (Base->isVirtual())
-//      OS << "virtual ";
-//    OS << RD->getName();
-//    First = false;
-//  }
-//
-//  OS << ')';
-//}
+
+/// \atd
+/// type cxx_base_specifier = {
+///   name : string;
+///   ~virtual : bool;
+/// } <ocaml field_prefix="xbs_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpBareCXXBaseSpecifier(const CXXBaseSpecifier &Base) {
+  ObjectScope Scope(OF);
+  OF.emitTag("name");
+  const CXXRecordDecl *RD = cast<CXXRecordDecl>(Base.getType()->getAs<RecordType>()->getDecl());
+  OF.emitString(RD->getName());
+  OF.emitFlag("virtual", Base.isVirtual());
+}
 
 /// \atd
 /// type cast_kind = [
@@ -2091,12 +2081,27 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
 /// | BuiltinFnToFnPtr
 /// | ZeroToOCLEvent
 /// ]
-/// #define cast_expr_tuple expr_tuple * cast_kind
+///
+/// #define cast_expr_tuple expr_tuple * cast_expr_info
+/// type cast_expr_info = {
+///   cast_kind : cast_kind;
+///   base_path : cxx_base_specifier list;
+/// } <ocaml field_prefix="cei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCastExpr(const CastExpr *Node) {
   VisitExpr(Node);
+  ObjectScope Scope(OF);
+  OF.emitTag("cast_kind");
   OF.emitSimpleVariant(Node->getCastKindName());
-//  dumpBasePath(OS, Node);
+  OF.emitTag("base_path");
+  {
+    ArrayScope Scope(OF);
+    for (CastExpr::path_const_iterator I = Node->path_begin(),
+                                       E = Node->path_end();
+         I != E; ++I) {
+      dumpBareCXXBaseSpecifier(**I);
+    }
+  }
 }
 
 /// \atd
@@ -2464,16 +2469,22 @@ void ASTExporter<ATDWriter>::VisitAddrLabelExpr(const AddrLabelExpr *Node) {
 ////===----------------------------------------------------------------------===//
 //// C++ Expressions
 ////===----------------------------------------------------------------------===//
-//
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node) {
-//  VisitExpr(Node);
-//  OS << " " << Node->getCastName()
-//     << "<" << Node->getTypeAsWritten().getAsString() << ">"
-//     << " <" << Node->getCastKindName();
-//  dumpBasePath(OS, Node);
-//  OS << ">";
-//}
+
+/// \atd
+/// #define cxx_named_cast_expr_tuple cast_expr_tuple * cxx_named_cast_expr_info
+/// type cxx_named_cast_expr_info = {
+///   cast_name : string;
+///   qual_type : qual_type;
+/// } <ocaml field_prefix="xncei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node) {
+  VisitCastExpr(Node);
+  ObjectScope Scope(OF);
+  OF.emitTag("cast_name");
+  OF.emitString(Node->getCastName());
+  OF.emitTag("qual_type");
+  dumpBareQualType(Node->getTypeAsWritten());
+}
 
 /// \atd
 /// #define cxx_bool_literal_expr_tuple expr_tuple * int
