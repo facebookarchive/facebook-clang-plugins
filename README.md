@@ -14,8 +14,7 @@ Most of the plugins here have been written with iOS in mind. However different p
 Pre-release notes
 -----------------
 
-This pre-release is meant mostly as a "RFC", in particular to gather early feedback from the clang community.
-
+This pre-release is meant to spark interest and gather early feedback.
 Plugins are still subject to be deleted, moved, added, or heavily rewritten.
 
 Structure of the repository
