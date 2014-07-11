@@ -99,7 +99,7 @@ build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
 build/clang_ast_named_decl_printer: $(patsubst %,build/%.cmx,clang_ast_t clang_ast_j clang_ast_proj clang_ast_named_decl_printer)
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_yojson_validator clang_ast_converter clang_ast_named_decl_printer)
+test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_converter clang_ast_named_decl_printer)
 	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
@@ -122,4 +122,4 @@ record-test-outputs:
 	ocamldep -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
 
 clean:
-	rm -rf .depend tests/*.out build
+	rm -rf tests/*.out build
