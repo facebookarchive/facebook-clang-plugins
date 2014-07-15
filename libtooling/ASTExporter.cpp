@@ -234,7 +234,6 @@ namespace {
     // C++
     void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
     void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
-//    void VisitCXXThisExpr(const CXXThisExpr *Node);
 //    void VisitCXXFunctionalCastExpr(const CXXFunctionalCastExpr *Node);
 //    void VisitCXXConstructExpr(const CXXConstructExpr *Node);
 //    void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
@@ -2494,12 +2493,6 @@ void ASTExporter<ATDWriter>::VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *N
   OF.emitInteger(Node->getValue());
 }
 
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitCXXThisExpr(const CXXThisExpr *Node) {
-//  VisitExpr(Node);
-//  OS << " this";
-//}
-//
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitCXXFunctionalCastExpr(const CXXFunctionalCastExpr *Node) {
 //  VisitExpr(Node);
