@@ -235,7 +235,7 @@ namespace {
     void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
     void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
 //    void VisitCXXFunctionalCastExpr(const CXXFunctionalCastExpr *Node);
-//    void VisitCXXConstructExpr(const CXXConstructExpr *Node);
+    void VisitCXXConstructExpr(const CXXConstructExpr *Node);
 //    void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
 //    void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
 //    void VisitExprWithCleanups(const ExprWithCleanups *Node);
@@ -2500,17 +2500,25 @@ void ASTExporter<ATDWriter>::VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *N
 //     << " <" << Node->getCastKindName() << ">";
 //}
 //
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node) {
-//  VisitExpr(Node);
-//  CXXConstructorDecl *Ctor = Node->getConstructor();
-//  dumpQualType(Ctor->getType());
-//  if (Node->isElidable())
-//    OS << " elidable";
-//  if (Node->requiresZeroInitialization())
-//    OS << " zeroing";
-//}
-//
+
+/// \atd
+/// #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
+/// type cxx_construct_expr_info = {
+///   qual_type : qual_type;
+///   ~is_elidable : bool;
+///   ~requires_zero_initialization : bool;
+/// } <ocaml field_prefix="xcei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
+  OF.emitTag("qual_type");
+  CXXConstructorDecl *Ctor = Node->getConstructor();
+  dumpBareQualType(Ctor->getType());
+  OF.emitFlag("is_elidable", Node->isElidable());
+  OF.emitFlag("requires_zero_initialization", Node->requiresZeroInitialization());
+}
+
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node) {
 //  VisitExpr(Node);
