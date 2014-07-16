@@ -1772,7 +1772,7 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyImplDecl(const ObjCPropertyImplDec
 /// type block_decl_info = {
 ///   ~parameters : decl list;
 ///   ~is_variadic : bool;
-///   ~does_capture_cxx_this : bool;
+///   ~captures_cxx_this : bool;
 ///   ~captured_variables : block_captured_variable list;
 ///   ?body : stmt option;
 /// } <ocaml field_prefix="bdi_">
@@ -1799,7 +1799,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
     }
   }
   OF.emitFlag("is_variadic", D->isVariadic());
-  OF.emitFlag("does_capture_cxx_this", D->capturesCXXThis());
+  OF.emitFlag("captures_cxx_this", D->capturesCXXThis());
   {
     BlockDecl::capture_iterator I = D->capture_begin(), E = D->capture_end();
     if (I != E) {
