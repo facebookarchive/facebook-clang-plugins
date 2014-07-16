@@ -215,6 +215,7 @@ namespace {
     // Exprs
     void VisitExpr(const Expr *Node);
     void VisitCastExpr(const CastExpr *Node);
+    void VisitExplicitCastExpr(const ExplicitCastExpr *Node);
     void VisitDeclRefExpr(const DeclRefExpr *Node);
     void VisitPredefinedExpr(const PredefinedExpr *Node);
     void VisitCharacterLiteral(const CharacterLiteral *Node);
@@ -234,7 +235,6 @@ namespace {
     // C++
     void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
     void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
-//    void VisitCXXFunctionalCastExpr(const CXXFunctionalCastExpr *Node);
     void VisitCXXConstructExpr(const CXXConstructExpr *Node);
 //    void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
 //    void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
@@ -2096,11 +2096,18 @@ void ASTExporter<ATDWriter>::VisitCastExpr(const CastExpr *Node) {
   {
     ArrayScope Scope(OF);
     for (CastExpr::path_const_iterator I = Node->path_begin(),
-                                       E = Node->path_end();
+         E = Node->path_end();
          I != E; ++I) {
       dumpBareCXXBaseSpecifier(**I);
     }
   }
+}
+/// \atd
+/// #define explicit_cast_expr_tuple cast_expr_tuple * qual_type
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitExplicitCastExpr(const ExplicitCastExpr *Node) {
+  VisitCastExpr(Node);
+  dumpBareQualType(Node->getTypeAsWritten());
 }
 
 /// \atd
@@ -2470,19 +2477,11 @@ void ASTExporter<ATDWriter>::VisitAddrLabelExpr(const AddrLabelExpr *Node) {
 ////===----------------------------------------------------------------------===//
 
 /// \atd
-/// #define cxx_named_cast_expr_tuple cast_expr_tuple * cxx_named_cast_expr_info
-/// type cxx_named_cast_expr_info = {
-///   cast_name : string;
-///   qual_type : qual_type;
-/// } <ocaml field_prefix="xncei_">
+/// #define cxx_named_cast_expr_tuple explicit_cast_expr_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node) {
-  VisitCastExpr(Node);
-  ObjectScope Scope(OF);
-  OF.emitTag("cast_name");
+  VisitExplicitCastExpr(Node);
   OF.emitString(Node->getCastName());
-  OF.emitTag("qual_type");
-  dumpBareQualType(Node->getTypeAsWritten());
 }
 
 /// \atd
@@ -2492,14 +2491,6 @@ void ASTExporter<ATDWriter>::VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *N
   VisitExpr(Node);
   OF.emitInteger(Node->getValue());
 }
-
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitCXXFunctionalCastExpr(const CXXFunctionalCastExpr *Node) {
-//  VisitExpr(Node);
-//  OS << " functional cast to " << Node->getTypeAsWritten().getAsString()
-//     << " <" << Node->getCastKindName() << ">";
-//}
-//
 
 /// \atd
 /// #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
