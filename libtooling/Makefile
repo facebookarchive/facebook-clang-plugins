@@ -35,7 +35,7 @@ endif
 
 include $(LEVEL)/Makefile.common
 
-CLANG_FRONTEND=$(CLANG) -fsyntax-only -Xclang -load -Xclang $(shell pwd)/build/FacebookClangPlugin.dylib
+CLANG_FRONTEND=$(CLANG) -fsyntax-only -Xpreprocessor -detailed-preprocessing-record -Xclang -load -Xclang $(shell pwd)/build/FacebookClangPlugin.dylib
 
 build/FacebookClangPlugin.dylib: $(OBJS:%=build/%) $(HEADERS)
 	@mkdir -p build
