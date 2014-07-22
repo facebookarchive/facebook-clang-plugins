@@ -11,6 +11,9 @@
 module U = Utils
 module P = Process
 
+(* Needed as a (pointer-stable) default value for atd specs. *)
+let empty_string = ""
+
 let ydump ?(compact_json=false) ?(std_json=false) ic oc =
   let cmd = ["ydump"] @ (if compact_json then ["-c"] else []) @ (if std_json then ["-std"] else [])
   in
@@ -46,7 +49,7 @@ let write_data_to_file ?(pretty=false) ?(compact_json=false) ?(std_json=false) w
     and r2 = P.wait pid
     in
     P.close_in icz;
-    if not (r1 && r2) then failwith "write_data_from_file (gzip)" else ()
+    if not (r1 && r2) then failwith "write_data_to_file (gzip)" else ()
   and output_pretty write_data oc data =
     (* TODO(mathieubaudet): find out how to write directly pretty json? *)
     let pid, icp = P.fork (fun ocp -> write_data ocp data; true) in
@@ -54,7 +57,7 @@ let write_data_to_file ?(pretty=false) ?(compact_json=false) ?(std_json=false) w
     and r2 = P.wait pid
     in
     P.close_in icp;
-    if not (r1 && r2) then failwith "write_data_from_file (pretty)" else ();
+    if not (r1 && r2) then failwith "write_data_to_file (pretty)" else ();
   in
   let write_json ocx data =
     if pretty then
