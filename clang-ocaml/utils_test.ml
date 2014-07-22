@@ -82,3 +82,18 @@ let () =
   in
   DisjointSet.iter s (fun x y -> l := (y,x)::(!l));
   assert_equal "DisjointSetFinal" (List.sort compare (!l) |> List.map snd) [1;2;3;4;5;6]
+
+let () =
+  let take13 = List.map (fun (x,y,z) -> (x,z))
+  in
+  assert_equal "fix_arg_spec"
+    (fix_arg_spec [] "bla" |> take13)
+    ["-h", "     Display this list of options.";
+     "-help", "  ";
+     "--help", " "];
+  assert_equal "fix_arg_spec"
+    (fix_arg_spec [ "--foo", Arg.String ignore, "FOO fooling"] "bla" |> take13)
+    ["--foo", "FOO fooling";
+     "-h", "       Display this list of options.";
+     "-help", "    ";
+     "--help", "   "]

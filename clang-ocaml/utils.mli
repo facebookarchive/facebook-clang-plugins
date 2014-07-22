@@ -43,3 +43,5 @@ module DisjointSet :
     val union : 'a t -> 'a -> 'a -> unit
     val iter : 'a t -> ('a -> 'a -> unit) -> unit
   end
+
+val fix_arg_spec : (Arg.key * Arg.spec * Arg.doc) list -> Arg.usage_msg -> (Arg.key * Arg.spec * Arg.doc) list

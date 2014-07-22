@@ -14,4 +14,4 @@ val write_data_to_file :
 
 val ydump : ?compact_json:bool -> ?std_json:bool -> in_channel -> out_channel -> bool
 
-val make_converter : 'a Ag_util.Json.reader -> 'a Ag_util.Json.writer -> string array -> unit
+val run_converter_tool : 'a Ag_util.Json.reader -> 'a Ag_util.Json.writer -> unit

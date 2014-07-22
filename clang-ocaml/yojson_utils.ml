@@ -12,9 +12,9 @@ module U = Utils
 module P = Process
 
 let ydump ?(compact_json=false) ?(std_json=false) ic oc =
-  let cmd = "ydump" ^ (if compact_json then " -c" else "") ^ (if std_json then " -std" else "")
+  let cmd = ["ydump"] @ (if compact_json then ["-c"] else []) @ (if std_json then ["-std"] else [])
   in
-  P.exec [| cmd |] ic oc stderr
+  P.exec (Array.of_list cmd) ic oc stderr
 
 let read_data_from_file reader fname =
   let input_gunzipped read_data ic =
@@ -87,22 +87,31 @@ let convert ?(pretty=false) ?(compact_json=false) ?(std_json=false) reader write
       exit 1
     end
 
-let make_converter reader writer argv =
-  let len = Array.length argv
+let run_converter_tool reader writer =
+  let pretty = ref false
+  and std_json = ref false
+  and compact_json = ref false
+  and files = ref []
   in
-  let i, pretty =
-    if len > 1 && argv.(1) = "--pretty"
-    then 2, true
-    else 1, false
+  let add_files x = files := x::(!files)
+  and usage_msg = "Usage: " ^ Sys.argv.(0) ^ "[OPTIONS] INPUT_FILE [OUTPUT_FILE]\n"
+    ^ "Parse yojson values and convert them to another format based on the extension"
+    ^ " of the output file (default: ${INPUT_FILE}.value.gz).\n"
   in
-  let process = convert ~pretty reader writer
-  in 
-  if i + 1 < len then
-    process argv.(i) argv.(i+1)
-  else if i < len then
-    process argv.(i) (argv.(i) ^ ".value.gz")
-  else begin
-    Printf.fprintf stderr "Usage: %s [--pretty] INPUT_FILE [OUTPUT_FILE]\n" argv.(0);
-    Printf.fprintf stderr "Parse yojson values and convert them to another format based on the extension of the output file (default: ${INPUT_FILE}.value.gz).\n";
-    exit 1
-  end
+  let spec = Utils.fix_arg_spec [
+    "--pretty", Arg.Set pretty, " Pretty print outputs.";
+    "--std", Arg.Set std_json, " Use standard json for outputs.";
+    "--compact", Arg.Set compact_json, " Use compact json for outputs.";
+    "--", Arg.Rest add_files, " Mark the end of options."
+  ] usage_msg
+  in
+  (* Parse the command line. *)
+  Arg.parse spec add_files usage_msg;
+
+  let input, output =
+    match List.rev (!files) with
+    | [input] -> input, input ^ ".value.gz"
+    | [input; output] -> input, output
+    | _ -> prerr_string usage_msg; exit 1
+  in
+  convert ~pretty:(!pretty) ~std_json:(!std_json) ~compact_json:(!compact_json) reader writer input output

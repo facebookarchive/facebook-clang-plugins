@@ -8,4 +8,4 @@
  *
  *)
 
-let main = Yojson_utils.make_converter Clang_ast_j.read_decl Clang_ast_j.write_decl Sys.argv
+let () = Yojson_utils.run_converter_tool Clang_ast_j.read_decl Clang_ast_j.write_decl

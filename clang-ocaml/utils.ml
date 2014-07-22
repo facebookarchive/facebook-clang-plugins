@@ -185,3 +185,19 @@ module DisjointSet = struct
   let iter t f = Hashtbl.iter (fun x b -> f x (if x = b.parent then x else find t b.parent)) t
 
 end
+
+(* Helper for command line parsing with Arg *)
+
+let fix_arg_spec l usage_msg =
+  let result = ref []
+  in
+  let usage () = Arg.usage (!result) usage_msg; exit 0
+  in
+  let extra = [
+    "-h", Arg.Unit usage, " Display this list of options.";
+    "-help", Arg.Unit usage, " ";
+    "--help", Arg.Unit usage, " ";
+  ]
+  in
+  result := Arg.align (l @ extra);
+  !result
