@@ -7,7 +7,7 @@
   60 And
    5 AndAssign
  131 ArraySubscriptExpr
- 128 ArrayToPointerDecay
+ 138 ArrayToPointerDecay
   51 AsmLabel
  480 Assign
  136 Availability
@@ -21,7 +21,7 @@
  191 CXXBoolLiteralExpr
   49 CXXCatchStmt
    2 CXXConstCastExpr
- 138 CXXConstructExpr
+ 148 CXXConstructExpr
  320 CXXConstructorDecl
   16 CXXConversionDecl
    3 CXXDefaultArgExpr
@@ -29,7 +29,7 @@
 1342 CXXDependentScopeMemberExpr
  129 CXXDestructorDecl
   51 CXXFunctionalCastExpr
- 227 CXXMemberCallExpr
+ 272 CXXMemberCallExpr
  128 CXXMethod
 1450 CXXMethodDecl
   15 CXXNewExpr
@@ -39,8 +39,8 @@
    1 CXXReinterpretCastExpr
    3 CXXScalarValueInitExpr
  149 CXXStaticCastExpr
-  20 CXXTemporaryObjectExpr
-1704 CXXThisExpr
+  24 CXXTemporaryObjectExpr
+1710 CXXThisExpr
   14 CXXThrowExpr
   49 CXXTryStmt
   13 CXXTypeidExpr
@@ -58,7 +58,7 @@
   41 ConditionalOperator
   25 Const
   11 ConstructorConversion
-6047 DeclRefExpr
+6086 DeclRefExpr
  729 DeclStmt
    5 DefaultStmt
  161 Dependent
@@ -89,7 +89,7 @@
   33 GT
    1 GotoStmt
  568 IfStmt
-3282 ImplicitCastExpr
+3331 ImplicitCastExpr
    2 ImplicitValueInitExpr
   11 IndirectFieldDecl
   30 InitListExpr
@@ -103,20 +103,20 @@
   55 LNot
   43 LOr
   46 LT
-10387 LValue
+10475 LValue
 1609 LValueToRValue
    1 LabelStmt
   76 LinkageSpecDecl
    6 Malloc
   55 MaterializeTemporaryExpr
  129 Member
-1286 MemberExpr
+1331 MemberExpr
   74 Minus
   77 Mul
    6 MulAssign
   51 NE
   89 NamespaceDecl
- 333 NoOp
+ 372 NoOp
   24 NoThrow
  347 NoType
   49 NonTypeTemplateParm
@@ -128,7 +128,7 @@
   48 OrAssign
  411 ParenExpr
  241 ParenListExpr
-2925 ParmVar
+2964 ParmVar
 4485 ParmVarDecl
    2 PointerToIntegral
   55 PostInc
@@ -142,7 +142,7 @@
   33 Shr
    2 ShrAssign
   70 SizeOf
-  44 StringLiteral
+  54 StringLiteral
   70 Sub
    7 SubAssign
    4 SubstNonTypeTemplateParmExpr
@@ -168,19 +168,20 @@
   10 Xor
   14 XorAssign
 13387 attributes
-3661 base_path
+3710 base_path
   32 bit_width_expr
 1512 bitwidth
 1107 body
-3661 cast_kind
-89187 column
+3710 cast_kind
+89603 column
  116 cxx_ctor_initializers
-6047 decl_ref
-9158 desugared
+  59 cxx_temporary
+6086 decl_ref
+9164 desugared
 6447 file
   58 found_decl_ref
 1211 init_expr
-1102 is_arrow
+1108 is_arrow
  621 is_complete_definition
   46 is_elidable
   47 is_implicit
@@ -189,21 +190,22 @@
   32 is_pure
 1502 is_signed
  343 is_virtual
-8828 kind
+8867 kind
    1 label
  132 lhs_type
 24516 line
-7521 name
+7605 name
 1992 parameters
  718 parent_pointer
-47126 pointer
+47379 pointer
  875 previous_decl
-31325 qual_type
-41198 raw
-  12 requires_zero_initialization
+31586 qual_type
+41459 raw
+  16 requires_zero_initialization
  132 result_type
-45839 source_range
+46047 source_range
  567 storage_class
+  59 sub_expr
  174 subject
 1512 value
-10387 value_kind
+10475 value_kind

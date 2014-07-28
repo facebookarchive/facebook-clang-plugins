@@ -236,11 +236,11 @@ namespace {
     void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
     void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
     void VisitCXXConstructExpr(const CXXConstructExpr *Node);
-//    void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
+    void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
 //    void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
 //    void VisitExprWithCleanups(const ExprWithCleanups *Node);
 //    void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
-//    void dumpCXXTemporary(const CXXTemporary *Temporary);
+    void dumpBareCXXTemporary(const CXXTemporary *Temporary);
 //    void VisitLambdaExpr(const LambdaExpr *Node) {
 //      VisitExpr(Node);
 //      dumpBareDecl(Node->getLambdaClass());
@@ -2510,13 +2510,22 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node)
   OF.emitFlag("requires_zero_initialization", Node->requiresZeroInitialization());
 }
 
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node) {
-//  VisitExpr(Node);
-//  OS << " ";
-//  dumpCXXTemporary(Node->getTemporary());
-//}
-//
+/// \atd
+/// #define cxx_bind_temporary_expr_tuple expr_tuple * cxx_bind_temporary_expr_info
+/// type cxx_bind_temporary_expr_info = {
+///   cxx_temporary : cxx_temporary;
+///   sub_expr : stmt;
+/// } <ocaml field_prefix="xbtei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
+  OF.emitTag("cxx_temporary");
+  dumpBareCXXTemporary(Node->getTemporary());
+  OF.emitTag("sub_expr");
+  dumpBareStmt(Node->getSubExpr());
+}
+
 //void
 //ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node) {
 //  VisitExpr(Node);
@@ -2533,13 +2542,14 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node)
 //    dumpDeclRef(Node->getObject(i), "cleanup");
 //}
 //
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::dumpCXXTemporary(const CXXTemporary *Temporary) {
-//  OS << "(CXXTemporary";
-//  dumpBarePointer(Temporary);
-//  OS << ")";
-//}
-//
+
+/// \atd
+/// type cxx_temporary = pointer
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpBareCXXTemporary(const CXXTemporary *Temporary) {
+  dumpBarePointer(Temporary);
+}
+
 ////===----------------------------------------------------------------------===//
 //// Obj-C Expressions
 ////===----------------------------------------------------------------------===//
