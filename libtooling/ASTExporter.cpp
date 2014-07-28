@@ -238,7 +238,7 @@ namespace {
     void VisitCXXConstructExpr(const CXXConstructExpr *Node);
     void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
     void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
-//    void VisitExprWithCleanups(const ExprWithCleanups *Node);
+    void VisitExprWithCleanups(const ExprWithCleanups *Node);
 //    void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
     void dumpBareCXXTemporary(const CXXTemporary *Temporary);
 //    void VisitLambdaExpr(const LambdaExpr *Node) {
@@ -437,7 +437,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpDeclRef(const Decl *D, const char *Label) {
   if (!D)
     return;
-
+  
   if (Label) {
     // ATD TODO: not supported
     OF.emitTag(Label);
@@ -2541,13 +2541,25 @@ void ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(const MaterializeTemp
   }
 }
 
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitExprWithCleanups(const ExprWithCleanups *Node) {
-//  VisitExpr(Node);
-//  for (unsigned i = 0, e = Node->getNumObjects(); i != e; ++i)
-//    dumpDeclRef(Node->getObject(i), "cleanup");
-//}
-//
+/// \atd
+/// #define expr_with_cleanups_tuple expr_tuple * expr_with_cleanups_info
+/// type expr_with_cleanups_info = {
+///  ~decl_refs : decl_ref list;
+///  sub_expr : stmt;
+/// }
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitExprWithCleanups(const ExprWithCleanups *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
+    if (Node->getNumObjects() > 0) {
+      OF.emitTag("decl_refs");
+      ArrayScope Scope(OF);
+      for (unsigned i = 0, e = Node->getNumObjects(); i != e; ++i)
+        dumpBareDeclRef(*Node->getObject(i));
+    }
+  OF.emitTag("sub_expr");
+  dumpBareStmt(Node->getSubExpr());
+}
 
 /// \atd
 /// type cxx_temporary = pointer

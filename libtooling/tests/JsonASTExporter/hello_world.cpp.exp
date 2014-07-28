@@ -1,5 +1,5 @@
  271 AccessSpecDecl
-  87 Add
+  88 Add
   45 AddAssign
  149 AddrOf
   15 Aligned
@@ -7,29 +7,29 @@
   60 And
    5 AndAssign
  131 ArraySubscriptExpr
- 138 ArrayToPointerDecay
+ 159 ArrayToPointerDecay
   51 AsmLabel
  480 Assign
  136 Availability
   45 BaseClass
-1370 BinaryOperator
+1371 BinaryOperator
   23 BitCast
   76 BreakStmt
   22 BuiltinFnToFnPtr
  176 CStyleCastExpr
-  59 CXXBindTemporaryExpr
+ 118 CXXBindTemporaryExpr
  191 CXXBoolLiteralExpr
   49 CXXCatchStmt
    2 CXXConstCastExpr
- 148 CXXConstructExpr
+ 200 CXXConstructExpr
  320 CXXConstructorDecl
   16 CXXConversionDecl
    3 CXXDefaultArgExpr
    6 CXXDeleteExpr
-1342 CXXDependentScopeMemberExpr
+1349 CXXDependentScopeMemberExpr
  129 CXXDestructorDecl
-  51 CXXFunctionalCastExpr
- 272 CXXMemberCallExpr
+  61 CXXFunctionalCastExpr
+ 362 CXXMemberCallExpr
  128 CXXMethod
 1450 CXXMethodDecl
   15 CXXNewExpr
@@ -39,13 +39,13 @@
    1 CXXReinterpretCastExpr
    3 CXXScalarValueInitExpr
  149 CXXStaticCastExpr
-  24 CXXTemporaryObjectExpr
-1710 CXXThisExpr
-  14 CXXThrowExpr
+  32 CXXTemporaryObjectExpr
+1728 CXXThisExpr
+  28 CXXThrowExpr
   49 CXXTryStmt
   13 CXXTypeidExpr
  142 CXXUnresolvedConstructExpr
-2367 CallExpr
+2395 CallExpr
   54 CaseStmt
  184 CharacterLiteral
  413 ClassTemplateDecl
@@ -57,8 +57,8 @@
 1556 CompoundStmt
   41 ConditionalOperator
   25 Const
-  11 ConstructorConversion
-6086 DeclRefExpr
+  21 ConstructorConversion
+6203 DeclRefExpr
  729 DeclStmt
    5 DefaultStmt
  161 Dependent
@@ -89,11 +89,11 @@
   33 GT
    1 GotoStmt
  568 IfStmt
-3331 ImplicitCastExpr
+3462 ImplicitCastExpr
    2 ImplicitValueInitExpr
   11 IndirectFieldDecl
   30 InitListExpr
-1512 IntegerLiteral
+1513 IntegerLiteral
  877 IntegralCast
   57 IntegralToBoolean
    3 IntegralToFloating
@@ -103,20 +103,20 @@
   55 LNot
   43 LOr
   46 LT
-10475 LValue
+10750 LValue
 1609 LValueToRValue
    1 LabelStmt
   76 LinkageSpecDecl
    6 Malloc
-  55 MaterializeTemporaryExpr
+  87 MaterializeTemporaryExpr
  129 Member
-1331 MemberExpr
+1421 MemberExpr
   74 Minus
   77 Mul
    6 MulAssign
   51 NE
   89 NamespaceDecl
- 372 NoOp
+ 482 NoOp
   24 NoThrow
  347 NoType
   49 NonTypeTemplateParm
@@ -128,7 +128,7 @@
   48 OrAssign
  411 ParenExpr
  241 ParenListExpr
-2964 ParmVar
+3042 ParmVar
 4485 ParmVarDecl
    2 PointerToIntegral
   55 PostInc
@@ -142,7 +142,7 @@
   33 Shr
    2 ShrAssign
   70 SizeOf
-  54 StringLiteral
+  74 StringLiteral
   70 Sub
    7 SubAssign
    4 SubstNonTypeTemplateParmExpr
@@ -155,57 +155,57 @@
   70 UnaryExprOrTypeTraitExpr
 1000 UnaryOperator
    4 UncheckedDerivedToBase
-1229 UnresolvedLookupExpr
+1250 UnresolvedLookupExpr
  156 UnresolvedMemberExpr
    5 UserDefinedConversion
  253 UsingDecl
   43 UsingShadow
  250 UsingShadowDecl
-2593 Var
+2632 Var
 1138 VarDecl
  798 Visibility
   11 WhileStmt
   10 Xor
   14 XorAssign
 13387 attributes
-3710 base_path
+3851 base_path
   32 bit_width_expr
-1512 bitwidth
+1513 bitwidth
 1107 body
-3710 cast_kind
-89603 column
+3851 cast_kind
+91001 column
  116 cxx_ctor_initializers
-  59 cxx_temporary
-6086 decl_ref
-9164 desugared
+ 118 cxx_temporary
+6203 decl_ref
+9188 desugared
 6447 file
   58 found_decl_ref
 1211 init_expr
-1108 is_arrow
+1120 is_arrow
  621 is_complete_definition
-  46 is_elidable
+  78 is_elidable
   47 is_implicit
  497 is_inline
   55 is_postfix
   32 is_pure
-1502 is_signed
+1503 is_signed
  343 is_virtual
-8867 kind
+8985 kind
    1 label
  132 lhs_type
-24516 line
-7605 name
+24520 line
+7812 name
 1992 parameters
  718 parent_pointer
-47379 pointer
+48168 pointer
  875 previous_decl
-31586 qual_type
-41459 raw
-  16 requires_zero_initialization
+32462 qual_type
+42345 raw
+  24 requires_zero_initialization
  132 result_type
-46047 source_range
+46746 source_range
  567 storage_class
-  59 sub_expr
+ 177 sub_expr
  174 subject
-1512 value
-10475 value_kind
+1513 value
+10750 value_kind
