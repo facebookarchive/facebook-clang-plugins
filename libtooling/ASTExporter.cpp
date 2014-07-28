@@ -237,7 +237,7 @@ namespace {
     void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
     void VisitCXXConstructExpr(const CXXConstructExpr *Node);
     void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
-//    void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
+    void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
 //    void VisitExprWithCleanups(const ExprWithCleanups *Node);
 //    void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
     void dumpBareCXXTemporary(const CXXTemporary *Temporary);
@@ -2526,15 +2526,21 @@ void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExp
   dumpBareStmt(Node->getSubExpr());
 }
 
-//void
-//ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node) {
-//  VisitExpr(Node);
-//  if (const ValueDecl *VD = Node->getExtendingDecl()) {
-//    OS << " extended by ";
-//    dumpBareDeclRef(VD);
-//  }
-//}
-//
+/// \atd
+/// #define materialize_temporary_expr_tuple expr_tuple * materialize_temporary_expr_info
+/// type materialize_temporary_expr_info = {
+///   ?decl_ref : decl_ref option;
+/// } <ocaml field_prefix="mtei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
+  if (const ValueDecl *VD = Node->getExtendingDecl()) {
+    OF.emitTag("decl_ref");
+    dumpBareDeclRef(*VD);
+  }
+}
+
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitExprWithCleanups(const ExprWithCleanups *Node) {
 //  VisitExpr(Node);
