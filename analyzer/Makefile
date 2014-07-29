@@ -64,10 +64,11 @@ endif
 
 OUT_TEST_FILES= ${TEST_DIRS:%=%/*.out} ${TEST_DIRS:%=%_arc/*.out} ${TEST_DIRS:%=%_noinline/*.out}
 C_TEST_FILES=${TEST_DIRS:%=%/*.c}
+CXX_TEST_FILES=${TEST_DIRS:%=%/*.cpp}
 ifdef IOSFLAGS
-IOS_TEST_FILES=${TEST_DIRS:%=%/*.m}
-IOS_ARC_TEST_FILES=${TEST_DIRS:%=%_arc/*.m}
-IOS_NOINLINE_TEST_FILES=${TEST_DIRS:%=%_noinline/*.m}
+IOS_TEST_FILES=${TEST_DIRS:%=%/*.m} ${TEST_DIRS:%=%/*.mm}
+IOS_ARC_TEST_FILES=${TEST_DIRS:%=%_arc/*.m} ${TEST_DIRS:%=%/*.mm}
+IOS_NOINLINE_TEST_FILES=${TEST_DIRS:%=%_noinline/*.m} ${TEST_DIRS:%=%/*.mm}
 else
 IOS_TEST_FILES=
 IOS_ARC_TEST_FILES=
@@ -76,6 +77,7 @@ endif
 
 test: all
 	@for F in $(C_TEST_FILES); do $(RUNTEST) $$F $(CLANG) -cc1 $(CC1_PLUGIN_ARGS) $$F; done; \
+	 for F in $(CXX_TEST_FILES); do $(RUNTEST) $$F $(CLANG) -cc1 $(CC1_PLUGIN_ARGS) $$F; done; \
 	 for F in $(IOS_TEST_FILES); do $(RUNTEST) $$F $(CLANG) --analyze $(IOSFLAGS) $(PLUGIN_ARGS) $$F; done; \
 	 for F in $(IOS_ARC_TEST_FILES); do $(RUNTEST) $$F $(CLANG) --analyze $(IOSFLAGS) -fobjc-arc $(PLUGIN_ARGS) $$F; done; \
 	 for F in $(IOS_NOINLINE_TEST_FILES); do $(RUNTEST) $$F $(CLANG) --analyze $(IOSFLAGS) -Xclang -analyzer-config -Xclang ipa=none $(PLUGIN_ARGS) $$F; done; \
