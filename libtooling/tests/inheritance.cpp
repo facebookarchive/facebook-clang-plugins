@@ -1,4 +1,5 @@
-#include <math.h>
+extern double sqrt(double);
+extern double pow(double, double);
 
 class Form {
 private:
