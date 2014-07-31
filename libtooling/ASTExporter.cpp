@@ -119,7 +119,6 @@ namespace {
     void dumpQualType(QualType T);
     void dumpBareDeclRef(const Decl &Node);
     void dumpDeclRef(const Decl *Node, const char *Label = 0);
-    void dumpName(const NamedDecl *D);
     bool hasNodes(const DeclContext *DC);
     void dumpBareLookups(const DeclContext &DC);
     void dumpBareAttr(const Attr &A);
@@ -394,19 +393,9 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
 }
 
 /// \atd
-/// type _name = { ?name : string option }
-template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpName(const NamedDecl *ND) {
-  if (ND && ND->getDeclName()) {
-    OF.emitTag("name");
-    OF.emitString(ND->getNameAsString());
-  }
-}
-
-/// \atd
 /// type decl_ref = {
 ///   kind : decl_kind;
-///   inherit _name;
+///   ?name : string option;
 ///   ~is_hidden : bool;
 ///   ?qual_type : qual_type option
 /// } <ocaml field_prefix="dr_">
@@ -423,7 +412,8 @@ void ASTExporter<ATDWriter>::dumpBareDeclRef(const Decl &D) {
   OF.emitSimpleVariant(D.getDeclKindName());
   const NamedDecl *ND = dyn_cast<NamedDecl>(&D);
   if (ND) {
-    dumpName(ND);
+    OF.emitTag("name");
+    OF.emitString(ND->getNameAsString());
     OF.emitFlag("is_hidden", ND->isHidden());
   }
   if (const ValueDecl *VD = dyn_cast<ValueDecl>(&D)) {
@@ -1739,7 +1729,6 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
 /// \atd
 /// #define obj_c_property_impl_decl_tuple decl_tuple * obj_c_property_impl_decl_info
 /// type obj_c_property_impl_decl_info = {
-///   inherit _name;
 ///   implementation : property_implementation;
 ///   ?property_decl : decl_ref option;
 ///   ?ivar_decl : decl_ref option;
@@ -1749,7 +1738,6 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCPropertyImplDecl(const ObjCPropertyImplDecl *D) {
   VisitDecl(D);
   ObjectScope Scope(OF);
-  dumpName(D->getPropertyDecl());
   OF.emitTag("implementation");
   switch (D->getPropertyImplementation()) {
     case ObjCPropertyImplDecl::Synthesize: OF.emitSimpleVariant("Synthesize"); break;

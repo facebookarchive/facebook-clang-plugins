@@ -75,7 +75,7 @@ More complex example
 /// \atd
 /// type decl_ref = {
 ///   kind : decl_kind;                (* ATD type declared below *)
-///   inherit _name;                   (* inline previous ATD definition *)
+///   ?name : string;
 ///   ~is_hidden : bool;
 ///   ?qual_type : qual_type option
 /// } <ocaml field_prefix="dr_">
@@ -92,7 +92,8 @@ void ASTExporter<ATDWriter>::dumpBareDeclRef(const Decl &D) {
   OF.emitSimpleVariant(D.getDeclKindName());            // case of an algebraic datatype that carries no value (like a C enum field)
   const NamedDecl *ND = dyn_cast<NamedDecl>(&D);
   if (ND) {
-    dumpName(ND);
+    OF.emitTag("name");
+    OF.emitString(ND->getNameAsString());
     OF.emitFlag("is_hidden", ND->isHidden());           // flags correspond to ATD fields of the form "~tag : bool"
   }
   if (const ValueDecl *VD = dyn_cast<ValueDecl>(&D)) {  // ok not to output anything because the field is optional
