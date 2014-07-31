@@ -112,7 +112,7 @@ namespace {
 
     // Utilities
     void dumpBarePointer(const void *Ptr);
-    void dumpSourceRange(SourceRange R);
+    void dumpBareSourceRange(SourceRange R);
     void dumpBareSourceLocation(SourceLocation Loc);
     void dumpBareQualType(QualType T);
     void dumpBareType(const Type *T);
@@ -338,13 +338,9 @@ void ASTExporter<ATDWriter>::dumpBareSourceLocation(SourceLocation Loc) {
 }
 
 /// \atd
-/// type _source_range = {
-///   ?source_range : source_range option
-/// }
 /// type source_range = (source_location * source_location)
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpSourceRange(SourceRange R) {
-  OF.emitTag("source_range");
+void ASTExporter<ATDWriter>::dumpBareSourceRange(SourceRange R) {
   TupleScope Scope(OF);
   dumpBareSourceLocation(R.getBegin());
   dumpBareSourceLocation(R.getEnd());
@@ -531,7 +527,7 @@ void ASTExporter<ATDWriter>::dumpBareLookups(const DeclContext &DC) {
 /// ] <ocaml repr="classic">
 /// type attribute_info = {
 ///   pointer : pointer;
-///   inherit _source_range;
+///   source_range : source_range;
 ///   ~is_implicit : bool
 /// } <ocaml field_prefix="ai_">
 template <class ATDWriter>
@@ -547,7 +543,8 @@ void ASTExporter<ATDWriter>::dumpBareAttr(const Attr &A) {
     ObjectScope Scope(OF);
     OF.emitTag("pointer");
     dumpBarePointer(&A);
-    dumpSourceRange(A.getRange());
+    OF.emitTag("source_range");
+    dumpBareSourceRange(A.getRange());
 
 // TODO
 //#include <clang/AST/AttrDump.inc>
@@ -773,7 +770,7 @@ void ASTExporter<ATDWriter>::dumpBareDecl(const Decl *D) {
 ///   pointer : pointer;
 ///   ?parent_pointer : pointer option;
 ///   inherit _previous_decl;
-///   inherit _source_range;
+///   source_range : source_range;
 ///   ?owning_module : string option;
 ///   ~is_hidden : bool;
 ///   attributes : attribute list;
@@ -792,7 +789,8 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
       dumpBarePointer(cast<Decl>(D->getDeclContext()));
     }
     dumpPreviousDecl(OF, D);
-    dumpSourceRange(D->getSourceRange());
+    OF.emitTag("source_range");
+    dumpBareSourceRange(D->getSourceRange());
     if (Module *M = D->getOwningModule()) {
       OF.emitTag("owning_module");
       OF.emitString(M->getFullModuleName());
@@ -1851,7 +1849,7 @@ void ASTExporter<ATDWriter>::dumpBareStmt(const Stmt *S) {
 /// #define stmt_tuple stmt_info * stmt list
 /// type stmt_info = {
 ///   pointer : pointer;
-///   inherit _source_range;
+///   source_range : source_range;
 /// } <ocaml field_prefix="si_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
@@ -1860,7 +1858,8 @@ void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
 
     OF.emitTag("pointer");
     dumpBarePointer(S);
-    dumpSourceRange(S->getSourceRange());
+    OF.emitTag("source_range");
+    dumpBareSourceRange(S->getSourceRange());
   }
   {
     ArrayScope Scope(OF);
@@ -2793,7 +2792,7 @@ void ASTExporter<ATDWriter>::dumpBareComment(const Comment *C) {
 /// #define comment_tuple comment_info * comment list
 /// type comment_info = {
 ///   parent_pointer : pointer;
-///   inherit _source_range;
+///   source_range : source_range;
 /// } <ocaml field_prefix="ci_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::visitComment(const Comment *C) {
@@ -2801,7 +2800,8 @@ void ASTExporter<ATDWriter>::visitComment(const Comment *C) {
     ObjectScope ObjComment(OF);
     OF.emitTag("parent_pointer");
     dumpBarePointer(C);
-    dumpSourceRange(C->getSourceRange());
+    OF.emitTag("source_range");
+    dumpBareSourceRange(C->getSourceRange());
   }
   {
     ArrayScope Scope(OF);
