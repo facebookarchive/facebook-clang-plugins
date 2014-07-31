@@ -536,9 +536,9 @@ void ASTExporter<ATDWriter>::dumpBareLookups(const DeclContext &DC) {
 
 /// \atd
 /// type attribute = [
-#define ATTR(X) ///   | X of attribute_info
+#define ATTR(X) ///   | X@@Attr of attribute_info
 #include <clang/Basic/AttrList.inc>
-/// ]
+/// ] <ocaml repr="classic">
 /// type attribute_info = {
 ///   pointer : pointer;
 ///   inherit _source_range;
@@ -548,7 +548,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpBareAttr(const Attr &A) {
   std::string tag;
   switch (A.getKind()) {
-#define ATTR(X) case attr::X: tag = #X; break;
+#define ATTR(X) case attr::X: tag = #X "Attr"; break;
 #include <clang/Basic/AttrList.inc>
   default: llvm_unreachable("unexpected attribute kind");
   }
@@ -1833,7 +1833,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
 #define DECL(DERIVED, BASE)   ///   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
 #define ABSTRACT_DECL(DECL)
 #include <clang/AST/DeclNodes.inc>
-/// ]
+/// ] <ocaml repr="classic">
 
 //===----------------------------------------------------------------------===//
 //  Stmt dumping methods.
@@ -2760,7 +2760,7 @@ void ASTExporter<ATDWriter>::VisitObjCBoolLiteralExpr(const ObjCBoolLiteralExpr 
 #define STMT(CLASS, PARENT) ///   | CLASS of (@CLASS@_tuple)
 #define ABSTRACT_STMT(STMT)
 #include <clang/AST/StmtNodes.inc>
-/// ]
+/// ] <ocaml repr="classic">
 
 //===----------------------------------------------------------------------===//
 // Comments
@@ -2942,7 +2942,7 @@ void ASTExporter<ATDWriter>::visitTextComment(const TextComment *C) {
 #define COMMENT(CLASS, PARENT) ///   | CLASS of (@CLASS@_tuple)
 #define ABSTRACT_COMMENT(COMMENT)
 #include <clang/AST/CommentNodes.inc>
-/// ]
+/// ] <ocaml repr="classic">
 
 //===----------------------------------------------------------------------===//
 // ASTExporter Plugin Main
