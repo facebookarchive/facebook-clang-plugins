@@ -116,7 +116,6 @@ namespace {
     void dumpBareSourceLocation(SourceLocation Loc);
     void dumpBareQualType(QualType T);
     void dumpBareType(const Type *T);
-    void dumpQualType(QualType T);
     void dumpBareDeclRef(const Decl &Node);
     void dumpDeclRef(const Decl *Node, const char *Label = 0);
     bool hasNodes(const DeclContext *DC);
@@ -381,14 +380,6 @@ void ASTExporter<ATDWriter>::dumpBareQualType(QualType T) {
 }
 
 /// \atd
-/// type _qual_type = { qual_type : qual_type }
-template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
-  OF.emitTag("qual_type");
-  dumpBareQualType(T);
-}
-
-/// \atd
 /// type decl_ref = {
 ///   kind : decl_kind;
 ///   ?name : string option;
@@ -413,7 +404,8 @@ void ASTExporter<ATDWriter>::dumpBareDeclRef(const Decl &D) {
     OF.emitFlag("is_hidden", ND->isHidden());
   }
   if (const ValueDecl *VD = dyn_cast<ValueDecl>(&D)) {
-    dumpQualType(VD->getType());
+    OF.emitTag("qual_type");
+  dumpBareQualType(VD->getType());
   }
 }
 
@@ -1650,7 +1642,7 @@ void ASTExporter<ATDWriter>::VisitObjCCompatibleAliasDecl(const ObjCCompatibleAl
 /// #define obj_c_property_decl_tuple named_decl_tuple * obj_c_property_decl_info
 /// type obj_c_property_decl_info = {
 ///   ?class_interface : decl_ref option;
-///   inherit _qual_type;
+///   qual_type : qual_type;
 ///   ~property_control <ocaml default="`None"> : obj_c_property_control;
 ///   ~property_attributes : property_attribute list
 /// } <ocaml field_prefix="opdi_">
@@ -1673,7 +1665,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   VisitNamedDecl(D);
   ObjectScope Scope(OF);
-  dumpQualType(D->getType());
+  OF.emitTag("qual_type");
+  dumpBareQualType(D->getType());
 
   ObjCPropertyDecl::PropertyControl PC = D->getPropertyImplementation();
   if (PC != ObjCPropertyDecl::None) {
@@ -1942,7 +1935,7 @@ void ASTExporter<ATDWriter>::VisitCXXCatchStmt(const CXXCatchStmt *Node) {
 /// \atd
 /// #define expr_tuple stmt_tuple * expr_info
 /// type expr_info = {
-///   inherit _qual_type;
+///   qual_type : qual_type;
 ///   ~value_kind <ocaml default="`RValue"> : value_kind;
 ///   ~object_kind <ocaml default="`Ordinary"> : object_kind;
 /// } <ocaml field_prefix="ei_">
@@ -1954,7 +1947,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
   VisitStmt(Node);
   ObjectScope Scope(OF);
-  dumpQualType(Node->getType());
+  OF.emitTag("qual_type");
+  dumpBareQualType(Node->getType());
 
   ExprValueKind VK = Node->getValueKind();
   if (VK != VK_RValue) {
@@ -2289,7 +2283,8 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     break;
   }
   if (Node->isArgumentType()) {
-    dumpQualType(Node->getArgumentType());
+    OF.emitTag("qual_type");
+  dumpBareQualType(Node->getArgumentType());
   }
 }
 
