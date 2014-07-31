@@ -108,7 +108,7 @@ namespace {
 
     void dumpBareDecl(const Decl *D);
     void dumpBareStmt(const Stmt *S);
-    void dumpFullComment(const FullComment *C);
+    void dumpBareFullComment(const FullComment *C);
 
     // Utilities
     void dumpBarePointer(const void *Ptr);
@@ -774,7 +774,7 @@ void ASTExporter<ATDWriter>::dumpBareDecl(const Decl *D) {
 ///   ?owning_module : string option;
 ///   ~is_hidden : bool;
 ///   attributes : attribute list;
-///   inherit _full_comment;
+///   ?full_comment : comment option;
 ///   ~is_invalid_decl : bool
 /// } <ocaml field_prefix="di_">
 template <class ATDWriter>
@@ -810,7 +810,10 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     }
 
     const FullComment *Comment = D->getASTContext().getLocalCommentForDeclUncached(D);
-    dumpFullComment(Comment);
+    if (Comment) {
+      OF.emitTag("full_comment");
+      dumpBareFullComment(Comment);
+    }
 
     OF.emitFlag("is_invalid_decl", D->isInvalidDecl());
   }
@@ -2758,14 +2761,8 @@ const char *ASTExporter<ATDWriter>::getCommandName(unsigned CommandID) {
   return Traits.getCommandInfo(CommandID)->Name;
 }
 
-/// \atd
-/// type _full_comment = { ?full_comment : comment option }
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpFullComment(const FullComment *C) {
-  if (!C)
-    return;
-
-  OF.emitTag("full_comment");
+void ASTExporter<ATDWriter>::dumpBareFullComment(const FullComment *C) {
   FC = C;
   dumpBareComment(C);
   FC = 0;
