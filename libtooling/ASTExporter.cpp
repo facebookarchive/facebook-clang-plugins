@@ -125,7 +125,7 @@ namespace {
     void dumpBareSelector(const Selector sel);
 
     // C++ Utilities
-    void dumpAccessSpecifier(AccessSpecifier AS);
+    void dumpBareAccessSpecifier(AccessSpecifier AS);
     void dumpBareCXXCtorInitializer(const CXXCtorInitializer &Init);
 //    void dumpTemplateParameters(const TemplateParameterList *TPL);
 //    void dumpTemplateArgumentListInfo(const TemplateArgumentListInfo &TALI);
@@ -604,14 +604,9 @@ static void dumpPreviousDecl(ATDWriter &OF, const Decl *D) {
 //===----------------------------------------------------------------------===//
 
 /// \atd
-/// type _access_specifier = { ~access_specifier <ocaml default="`None"> : access_specifier }
 /// type access_specifier = [ None | Public | Protected | Private ]
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
-  if (AS == AS_none) {
-    return;
-  }
-  OF.emitTag("access_specifier");
+void ASTExporter<ATDWriter>::dumpBareAccessSpecifier(AccessSpecifier AS) {
   switch (AS) {
   case AS_public:
     OF.emitSimpleVariant("Public");
@@ -622,8 +617,8 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
   case AS_private:
     OF.emitSimpleVariant("Private");
     break;
-  default:
-    llvm_unreachable("unknown case");
+  case AS_none:
+    OF.emitSimpleVariant("None");
     break;
   }
 }
