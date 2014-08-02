@@ -2,7 +2,7 @@
    1 ArrayToPointerDecay
   10 Assign
    7 BinaryOperator
-  19 BitCast
+  10 BitCast
    2 Block
    4 BlockDecl
    4 BlockExpr
@@ -20,13 +20,14 @@
    1 FunctionDecl
    9 FunctionToPointerDecay
    1 GotoStmt
-  72 ImplicitCastExpr
+  71 ImplicitCastExpr
   27 ImplicitParam
   18 IntegerLiteral
    1 IntegralCast
-  97 LValue
+ 106 LValue
   43 LValueToRValue
    1 LabelStmt
+   8 NoOp
    3 NoType
    5 Nonatomic
    7 NullToPointer
@@ -79,17 +80,17 @@
    4 VarDecl
    4 access_control
   70 attributes
-  80 base_path
+  79 base_path
   18 bitwidth
    7 body
    4 captured_variables
-  80 cast_kind
+  79 cast_kind
    1 category_decl
    4 class_interface
- 850 column
+ 848 column
   60 decl_ref
    2 decl_refs
-  46 desugared
+  41 desugared
   29 file
    6 implementation
    3 init_expr
@@ -104,19 +105,19 @@
   89 name
    7 object_kind
   14 parameters
- 436 pointer
+ 435 pointer
    5 property_attributes
    4 property_decl
    1 protocols
- 412 qual_type
- 465 raw
+ 411 qual_type
+ 464 raw
    2 receiver_kind
   14 result_type
   22 selector
   69 source_expr
- 435 source_range
+ 434 source_range
    2 sub_expr
    1 super
   18 value
-  97 value_kind
+ 106 value_kind
    4 variable

@@ -70,7 +70,7 @@ test: build/FacebookClangPlugin.dylib
 	   for EXPFILE in $(EXPFILES_FORMULA); do                                       \
 	     TEST=$${EXPFILE%.exp};                                                     \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
-	       $(CLANG_FRONTEND) -Xclang -plugin -Xclang $$P                            \
+	       $(CLANG_FRONTEND) -ObjC++ --std=c++11 -Xclang -plugin -Xclang $$P        \
 	       -Xclang -plugin-arg-$$P -Xclang -                                        \
 	       -Xclang -plugin-arg-$$P -Xclang build/tmp_$$P                            \
 	       -c $(SRCFILE_FORMULA);                                                   \
@@ -101,7 +101,7 @@ build/ast_samples/%.cpp.yjson: %.cpp build/FacebookClangPlugin.dylib
 
 build/ast_samples/%.cpp.yjson: tests/%.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(YJ_DUMPER_ARGS) $@ -c $<
+	@$(CLANG_FRONTEND) --std=c++11 $(YJ_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.c.yjson: tests/%.c build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
@@ -120,7 +120,7 @@ build/ast_samples/%.cpp.json: %.cpp build/FacebookClangPlugin.dylib
 
 build/ast_samples/%.cpp.json: tests/%.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(J_DUMPER_ARGS) $@ -c $<
+	@$(CLANG_FRONTEND) --std=c++11 $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.c.json: tests/%.c build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
