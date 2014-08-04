@@ -238,10 +238,7 @@ namespace {
     void VisitExprWithCleanups(const ExprWithCleanups *Node);
 //    void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
     void dumpCXXTemporary(const CXXTemporary *Temporary);
-//    void VisitLambdaExpr(const LambdaExpr *Node) {
-//      VisitExpr(Node);
-//      dumpDecl(Node->getLambdaClass());
-//    }
+    void VisitLambdaExpr(const LambdaExpr *Node);
 
     // ObjC
     void VisitObjCAtCatchStmt(const ObjCAtCatchStmt *Node);
@@ -2527,6 +2524,15 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXTemporary(const CXXTemporary *Temporary) {
   dumpPointer(Temporary);
 }
+
+/// \atd
+/// #define lambda_expr_tuple expr_tuple * decl
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
+  VisitExpr(Node);
+  dumpDecl(Node->getLambdaClass());
+}
+
 
 ////===----------------------------------------------------------------------===//
 //// Obj-C Expressions
