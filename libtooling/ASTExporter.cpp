@@ -125,6 +125,7 @@ namespace {
     // C++ Utilities
     void dumpAccessSpecifier(AccessSpecifier AS);
     void dumpCXXCtorInitializer(const CXXCtorInitializer &Init);
+    void dumpDeclarationName(const DeclarationName &Name);
 //    void dumpTemplateParameters(const TemplateParameterList *TPL);
 //    void dumpTemplateArgumentListInfo(const TemplateArgumentListInfo &TALI);
 //    void dumpTemplateArgumentLoc(const TemplateArgumentLoc &A);
@@ -236,7 +237,8 @@ namespace {
     void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
     void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
     void VisitExprWithCleanups(const ExprWithCleanups *Node);
-//    void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
+    void VisitOverloadExpr(const OverloadExpr *Node);
+    void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
     void dumpCXXTemporary(const CXXTemporary *Temporary);
     void VisitLambdaExpr(const LambdaExpr *Node);
 
@@ -625,6 +627,63 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(const CXXCtorInitializer &In
     OF.emitTag("init_expr");
     dumpStmt(E);
   }
+}
+
+/// \atd
+/// type declaration_name = {
+///   kind : declaration_name_kind;
+///   name : string;
+/// }  <ocaml field_prefix="dn_">
+/// type declaration_name_kind = [
+///   Identifier
+/// | ObjCZeroArgSelector
+/// | ObjCOneArgSelector
+/// | ObjCMultiArgSelector
+/// | CXXConstructorName
+/// | CXXDestructorName
+/// | CXXConversionFunctionName
+/// | CXXOperatorName
+/// | CXXLiteralOperatorName
+/// | CXXUsingDirective
+/// ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
+  ObjectScope Scope(OF);
+  OF.emitTag("kind");
+  switch (Name.getNameKind()) {
+    case DeclarationName::Identifier:
+      OF.emitSimpleVariant("Identifier");
+      break;
+    case DeclarationName::ObjCZeroArgSelector:
+      OF.emitSimpleVariant("ObjCZeroArgSelector");
+      break;
+    case DeclarationName::ObjCOneArgSelector:
+      OF.emitSimpleVariant("ObjCOneArgSelector");
+      break;
+    case DeclarationName::ObjCMultiArgSelector:
+      OF.emitSimpleVariant("ObjCMultiArgSelector");
+      break;
+    case DeclarationName::CXXConstructorName:
+      OF.emitSimpleVariant("CXXConstructorName");
+      break;
+    case DeclarationName::CXXDestructorName:
+      OF.emitSimpleVariant("CXXDestructorName");
+      break;
+    case DeclarationName::CXXConversionFunctionName:
+      OF.emitSimpleVariant("CXXConversionFunctionName");
+      break;
+    case DeclarationName::CXXOperatorName:
+      OF.emitSimpleVariant("CXXOperatorName");
+      break;
+    case DeclarationName::CXXLiteralOperatorName:
+      OF.emitSimpleVariant("CXXLiteralOperatorName");
+      break;
+    case DeclarationName::CXXUsingDirective:
+      OF.emitSimpleVariant("CXXUsingDirective");
+      break;
+  }
+  OF.emitTag("name");
+  OF.emitString(Name.getAsString());
 }
 
 //template <class ATDWriter>
@@ -2088,21 +2147,49 @@ void ASTExporter<ATDWriter>::VisitDeclRefExpr(const DeclRefExpr *Node) {
   }
 }
 
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node) {
-//  VisitExpr(Node);
-//  OS << " (";
-//  if (!Node->requiresADL())
-//    OS << "no ";
-//  OS << "ADL) = '" << Node->getName() << '\'';
-//
-//  UnresolvedLookupExpr::decls_iterator
-//    I = Node->decls_begin(), E = Node->decls_end();
-//  if (I == E)
-//    OS << " empty";
-//  for (; I != E; ++I)
-//    dumpPointer(*I);
-//}
+/// \atd
+/// #define overload_expr_tuple expr_tuple * overload_expr_info
+/// type overload_expr_info = {
+///   ~decls : decl_ref list;
+///   name : declaration_name;
+/// } <ocaml field_prefix="oei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitOverloadExpr(const OverloadExpr *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
+  {
+    
+    if (Node->getNumDecls() > 0) {
+      OF.emitTag("decls");
+      ArrayScope Scope(OF);
+      for(OverloadExpr::decls_iterator
+          OvI=Node->decls_begin(), OvE = Node->decls_end(); OvI != OvE; ++OvI) {
+        dumpDeclRef(*OvI.getDecl());
+      }
+    }
+  }
+  OF.emitTag("name");
+  dumpDeclarationName(Node->getName());
+}
+
+/// \atd
+/// #define unresolved_lookup_expr_tuple overload_expr_tuple * unresolved_lookup_expr_info
+/// type unresolved_lookup_expr_info = {
+///   ~requires_ADL : bool;
+///   ~is_overloaded : bool;
+///   ?naming_class : decl_ref option;
+/// } <ocaml field_prefix="ulei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node) {
+  VisitOverloadExpr(Node);
+  ObjectScope Scope(OF);
+  OF.emitFlag("requires_ADL",Node->requiresADL());
+  OF.emitFlag("is_overloaded", Node->isOverloaded());
+  if (Node->getNamingClass()) {
+    OF.emitTag("naming_class");
+    dumpDeclRef(*Node->getNamingClass());
+  }
+}
 
 /// \atd
 /// #define obj_c_ivar_ref_expr_tuple expr_tuple * obj_c_ivar_ref_expr_info

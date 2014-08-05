@@ -75,7 +75,8 @@ build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
 	cpp -P -I$(CLANG_PREFIX)/include $< | python $(ATDLIB)/normalize_names_in_atd.py | cpp -P -w -include build/ast_inline.pat.inc > $@
 
 TEST_FILES=ASTExporter.cpp Hello.m ObjCTest.m c_cast.cpp const_cast.cpp dynamic_cast.cpp \
-	inheritance.cpp struct.cpp this.cpp bind_temporary.cpp materialize_temporary.cpp expr_with_cleanups.cpp
+	inheritance.cpp struct.cpp this.cpp bind_temporary.cpp materialize_temporary.cpp expr_with_cleanups.cpp \
+	unresolved_lookup.cpp
 PRINTER_TEST_FILES=ObjCTest.m
 CONVERTER_TEST_FILE=Hello.m
 
