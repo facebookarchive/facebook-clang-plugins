@@ -2590,7 +2590,7 @@ void ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(const MaterializeTemp
 /// type expr_with_cleanups_info = {
 ///  ~decl_refs : decl_ref list;
 ///  sub_expr : stmt;
-/// }
+/// } <ocaml field_prefix="ewci_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExprWithCleanups(const ExprWithCleanups *Node) {
   VisitExpr(Node);
