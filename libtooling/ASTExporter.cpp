@@ -159,7 +159,6 @@ namespace {
     void VisitImportDecl(const ImportDecl *D);
 
 //    // C++ Decls
-//    void VisitNamespaceDecl(const NamespaceDecl *D);
 //    void VisitUsingDirectiveDecl(const UsingDirectiveDecl *D);
 //    void VisitNamespaceAliasDecl(const NamespaceAliasDecl *D);
 //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
@@ -859,11 +858,21 @@ void ASTExporter<ATDWriter>::VisitLinkageSpecDecl(const LinkageSpecDecl *D) {
 }
 
 /// \atd
-/// #define namespace_decl_tuple named_decl_tuple * decl_context_tuple
+/// #define namespace_decl_tuple named_decl_tuple * decl_context_tuple * namespace_decl_info
+/// type namespace_decl_info = {
+///   ~is_inline : bool;
+///   ?original_namespace : decl_ref option;
+/// } <ocaml field_prefix="ndi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *D) {
   VisitNamedDecl(D);
   VisitDeclContext(D);
+  ObjectScope Scope(OF);
+  OF.emitFlag("is_inline", D->isInline());
+  if (!D->isOriginalNamespace()) {
+    OF.emitTag("original_namespace");
+    dumpDeclRef(*D->getOriginalNamespace());
+  }
 }
 
 /// \atd
@@ -1176,16 +1185,7 @@ void ASTExporter<ATDWriter>::VisitImportDecl(const ImportDecl *D) {
 ////===----------------------------------------------------------------------===//
 //// C++ Declarations
 ////===----------------------------------------------------------------------===//
-//
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *D) {
-//  dumpName(D);
-//  if (D->isInline())
-//    OS << " inline";
-//  if (!D->isOriginalNamespace())
-//    dumpDeclRef(D->getOriginalNamespace(), "original");
-//}
-//
+
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(const UsingDirectiveDecl *D) {
 //  OS << ' ';

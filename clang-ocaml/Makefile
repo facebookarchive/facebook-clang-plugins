@@ -76,7 +76,7 @@ build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
 
 TEST_FILES=ASTExporter.cpp Hello.m ObjCTest.m c_cast.cpp const_cast.cpp dynamic_cast.cpp \
 	inheritance.cpp struct.cpp this.cpp bind_temporary.cpp materialize_temporary.cpp expr_with_cleanups.cpp \
-	unresolved_lookup.cpp
+	unresolved_lookup.cpp namespace_decl.cpp
 PRINTER_TEST_FILES=ObjCTest.m
 CONVERTER_TEST_FILE=Hello.m
 
