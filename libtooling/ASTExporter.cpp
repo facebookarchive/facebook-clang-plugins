@@ -126,6 +126,7 @@ namespace {
     void dumpAccessSpecifier(AccessSpecifier AS);
     void dumpCXXCtorInitializer(const CXXCtorInitializer &Init);
     void dumpDeclarationName(const DeclarationName &Name);
+    void dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS);
 //    void dumpTemplateParameters(const TemplateParameterList *TPL);
 //    void dumpTemplateArgumentListInfo(const TemplateArgumentListInfo &TALI);
 //    void dumpTemplateArgumentLoc(const TemplateArgumentLoc &A);
@@ -158,8 +159,8 @@ namespace {
     void VisitFileScopeAsmDecl(const FileScopeAsmDecl *D);
     void VisitImportDecl(const ImportDecl *D);
 
-//    // C++ Decls
-//    void VisitUsingDirectiveDecl(const UsingDirectiveDecl *D);
+    // C++ Decls
+    void VisitUsingDirectiveDecl(const UsingDirectiveDecl *D);
 //    void VisitNamespaceAliasDecl(const NamespaceAliasDecl *D);
 //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
 //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
@@ -684,6 +685,58 @@ void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
   OF.emitTag("name");
   OF.emitString(Name.getAsString());
 }
+/// \atd
+/// type nested_name_specifier_loc = {
+///   kind : specifier_kind;
+///   ?ref : decl_ref option;
+/// } <ocaml field_prefix="nnsl_">
+/// type specifier_kind = [
+///    Identifier
+///  | Namespace
+///  | NamespaceAlias
+///  | TypeSpec
+///  | TypeSpecWithTemplate
+///  | Global
+/// ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS) {
+  ArrayScope Scope(OF);
+  SmallVector<NestedNameSpecifierLoc , 8> NestedNames;
+  while (NNS) {
+    NestedNames.push_back(NNS);
+    NNS = NNS.getPrefix();
+  }
+  while(!NestedNames.empty()) {
+    NNS = NestedNames.pop_back_val();
+    NestedNameSpecifier::SpecifierKind Kind = NNS.getNestedNameSpecifier()->getKind();
+    ObjectScope Scope(OF);
+    OF.emitTag("kind");
+    switch (Kind) {
+      case NestedNameSpecifier::Identifier:
+        OF.emitSimpleVariant("Identifier");
+        break;
+      case NestedNameSpecifier::Namespace:
+        OF.emitSimpleVariant("Namespace");
+        OF.emitTag("ref");
+        dumpDeclRef(*NNS.getNestedNameSpecifier()->getAsNamespace());
+        break;
+      case NestedNameSpecifier::NamespaceAlias:
+        OF.emitSimpleVariant("NamespaceAlias");
+        OF.emitTag("ref");
+        dumpDeclRef(*NNS.getNestedNameSpecifier()->getAsNamespaceAlias());
+        break;
+      case NestedNameSpecifier::TypeSpec:
+        OF.emitSimpleVariant("TypeSpec");
+        break;
+      case NestedNameSpecifier::TypeSpecWithTemplate:
+        OF.emitSimpleVariant("TypeSpecWithTemplate");
+        break;
+      case NestedNameSpecifier::Global:
+        OF.emitSimpleVariant("Global");
+        break;
+    }
+  }
+}
 
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::dumpTemplateParameters(const TemplateParameterList *TPL) {
@@ -1182,16 +1235,34 @@ void ASTExporter<ATDWriter>::VisitImportDecl(const ImportDecl *D) {
   OF.emitString(D->getImportedModule()->getFullModuleName());
 }
 
-////===----------------------------------------------------------------------===//
-//// C++ Declarations
-////===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+// C++ Declarations
+//===----------------------------------------------------------------------===//
 
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(const UsingDirectiveDecl *D) {
-//  OS << ' ';
-//  dumpDeclRef(D->getNominatedNamespace());
-//}
-//
+/// \atd
+/// #define using_directive_decl_tuple named_decl_tuple * using_directive_decl_info
+/// type using_directive_decl_info = {
+///   using_location : source_location;
+///   namespace_key_location : source_location;
+///   nested_name_specifier_locs : nested_name_specifier_loc list;
+///   ?nominated_namespace : decl_ref option;
+/// } <ocaml field_prefix="uddi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(const UsingDirectiveDecl *D) {
+  VisitNamedDecl(D);
+  ObjectScope Scope(OF);
+  OF.emitTag("using_location");
+  dumpSourceLocation(D->getUsingLoc());
+  OF.emitTag("namespace_key_location");
+  dumpSourceLocation(D->getNamespaceKeyLocation());
+  OF.emitTag("nested_name_specifier_locs");
+  dumpNestedNameSpecifierLoc(D->getQualifierLoc());
+  if (D->getNominatedNamespace()) {
+    OF.emitTag("nominated_namespace");
+    dumpDeclRef(*D->getNominatedNamespace());
+  }
+}
+
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D) {
 //  dumpName(D);
