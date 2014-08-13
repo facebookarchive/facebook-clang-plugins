@@ -161,7 +161,7 @@ namespace {
 
     // C++ Decls
     void VisitUsingDirectiveDecl(const UsingDirectiveDecl *D);
-//    void VisitNamespaceAliasDecl(const NamespaceAliasDecl *D);
+    void VisitNamespaceAliasDecl(const NamespaceAliasDecl *D);
 //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
 //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
 //    void VisitCXXRecordDecl(const CXXRecordDecl *D);
@@ -1263,12 +1263,23 @@ void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(const UsingDirectiveDecl *D
   }
 }
 
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D) {
-//  dumpName(D);
-//  dumpDeclRef(D->getAliasedNamespace());
-//}
-//
+/// \atd
+/// #define namespace_alias_decl named_decl_tuple * namespace_alias_decl_info
+/// type namespace_alias_decl_info = {
+///   namespace_loc : source_location;
+///   target_name_loc : source_location;
+///   nested_name_specifier_locs : nested_name_specifier_loc list;
+///   namespace : decl_ref;
+/// } <ocaml field_prefix="nadi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D) {
+  VisitNamedDecl(D);
+  dumpSourceLocation(D->getNamespaceLoc());
+  dumpSourceLocation(D->getTargetNameLoc());
+  dumpNestedNameSpecifierLoc(D->getQualifierLoc());
+  dumpDeclRef(*D->getNamespace());
+}
+
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitTypeAliasDecl(const TypeAliasDecl *D) {
 //  dumpName(D);

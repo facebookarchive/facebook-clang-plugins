@@ -4,4 +4,5 @@ namespace nsa {
   }
 }
 using namespace nsa::nsb;
+namespace B = nsa::nsb;
 int b = a;
