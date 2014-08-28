@@ -10,6 +10,13 @@
 
 open Clang_ast_t
 
+#define s(x) #x
+
+let get_decl_kind_string = function
+#define DECL(DERIVED, BASE) | DERIVED@@Decl (@DERIVED@_decl_tuple) -> s(DERIVED) ^ "Decl"
+#define ABSTRACT_DECL(DECL)
+#include <clang/AST/DeclNodes.inc>
+
 let get_decl_tuple = function
 #define DECL(DERIVED, BASE) | DERIVED@@Decl (@DERIVED@_decl_tuple) -> (decl_tuple)
 #define ABSTRACT_DECL(DECL)
@@ -101,6 +108,11 @@ let update_tag_decl_tuple __f = function
 #include <clang/AST/DeclNodes.inc>
 | x -> x
 
+
+let get_stmt_kind_string = function
+#define STMT(CLASS, PARENT) | CLASS (@CLASS@_tuple) -> s(CLASS)
+#define ABSTRACT_STMT(STMT)
+#include <clang/AST/StmtNodes.inc>
 
 let get_stmt_tuple = function
 #define STMT(CLASS, PARENT) | CLASS (@CLASS@_tuple) -> (stmt_tuple)

@@ -93,6 +93,9 @@ CLANG_AST_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j process utils yo
 build/yojson_utils_test: $(CLANG_AST_LIBS) build/yojson_utils_test.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
+build/clang_ast_proj_test: $(CLANG_AST_LIBS) build/clang_ast_proj.cmx build/clang_ast_proj_test.cmx
+	$(OCAMLOPT) -linkpkg -o $@ $^
+
 # AST format converter
 build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
@@ -101,12 +104,13 @@ build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
 build/clang_ast_named_decl_printer: $(patsubst %,build/%.cmx,clang_ast_t clang_ast_j clang_ast_proj clang_ast_named_decl_printer)
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_converter clang_ast_named_decl_printer)
+test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_proj_test clang_ast_converter clang_ast_named_decl_printer)
 	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
 	 $(RUNTEST) tests/utils_test build/utils_test; \
 	 $(RUNTEST) tests/yojson_utils_test build/yojson_utils_test; \
+	 $(RUNTEST) tests/clang_ast_proj_test build/clang_ast_proj_test; \
 	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
 	 $(RUNTEST) tests/clang_ast_converter build/clang_ast_converter --pretty $(CONVERTER_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
 	 $(RUNTEST) tests/clang_ast_yojson_validation ./yojson_validator.sh build/clang_ast_converter $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz)

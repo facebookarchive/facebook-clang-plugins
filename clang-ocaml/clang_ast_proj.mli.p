@@ -10,12 +10,14 @@
 
 open Clang_ast_t
 
+val get_decl_kind_string : decl -> string
 val get_decl_tuple : decl -> (decl_tuple)
 val get_decl_context_tuple : decl -> (decl_context_tuple) option
 val get_named_decl_tuple : decl -> (named_decl_tuple) option
 val get_type_decl_tuple : decl -> (type_decl_tuple) option
 val get_tag_decl_tuple : decl -> (tag_decl_tuple) option
 
+val get_stmt_kind_string : stmt -> string
 val get_stmt_tuple : stmt -> (stmt_tuple)
 val get_expr_tuple : stmt -> (expr_tuple) option
 
