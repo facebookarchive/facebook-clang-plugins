@@ -112,7 +112,6 @@ let update_stmt_tuple __f = function
     let (stmt_tuple) = __f (stmt_tuple) in CLASS (@CLASS@_tuple)
 #define ABSTRACT_STMT(STMT)
 #include <clang/AST/StmtNodes.inc>
-| x -> x
 
 
 let get_expr_tuple = function
