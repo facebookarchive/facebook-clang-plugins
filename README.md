@@ -36,6 +36,12 @@ Clang plugins needs to be loaded in a target compiler that matches the API in us
 
 General instructions to compile clang can be found here: http://clang.llvm.org/get_started.html
 
+Compile clang with a setup script:
+ To compile and use the required version of clang, please run ./clang/setup.sh. 
+If you use this script, you don't need to export the variable  CLANG_PREFIX to compile the plugin.
+
+Alternatively, here are the steps to do this manually:
+
 The current version of the plugins requires a clang compiler to be compiled from the following sources:
 
 - `llvm` http://llvm.org/git/llvm.git 070b5745aef302b3d391840eb323ad6a3c5aa9e6
