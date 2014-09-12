@@ -135,7 +135,7 @@ namespace DanglingDelegate {
   eval::Assume
   >
   {
-    OwningPtr<BugType> _bugType;
+    std::unique_ptr<BugType> _bugType;
     mutable std::map<std::string, ObjCImplFacts> _implFacts;
 
     // tries to retrieve the syntactic facts of the current class interface

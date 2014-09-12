@@ -44,10 +44,10 @@ Alternatively, here are the steps to do this manually:
 
 The current version of the plugins requires a clang compiler to be compiled from the following sources:
 
-- `llvm` http://llvm.org/git/llvm.git 070b5745aef302b3d391840eb323ad6a3c5aa9e6
-- `llvm/tools/clang` http://llvm.org/git/clang.git 182109a097267d9d2e90fa6235e4da4a09f86ad8
-- `llvm/projects/compiler-rt` http://llvm.org/git/compiler-rt.git 4819e32d7d9862dec08ed171765713b3cb40fdbf
-- `llvm/projects/libcxx` http://llvm.org/git/libcxx.git a2df82b98e2e55019180b0c8de88211954de0646
+- `llvm` http://llvm.org/git/llvm.git dcc0e7eaa12e0005a8eb8a92d1500129dced6153
+- `llvm/tools/clang` http://llvm.org/git/clang.git 37e48be46c18b9322ff88daca6c096d86bd8e619
+- `llvm/projects/compiler-rt` http://llvm.org/git/compiler-rt.git 3451762a4db1036b0576cbaa9d1a1309b981a634
+- `llvm/projects/libcxx` http://llvm.org/git/libcxx.git 7ba3c57565e6658d8265b028a61c5731cf899495
 
 Typically, compilation is made from a directory next to `llvm` along the following lines:
 ```

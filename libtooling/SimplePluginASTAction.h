@@ -29,7 +29,7 @@ class SimplePluginASTAction : public PluginASTAction {
   StringRef DeduplicationServicePath;
 
  protected:
-  ASTConsumer *CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
+  std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
     llvm::raw_fd_ostream *OS = NULL;
 
     if (TakePercentAsInputFile && OutputPath.startswith("%")) {
@@ -57,7 +57,7 @@ class SimplePluginASTAction : public PluginASTAction {
     }
 
     SmallString<256> CurrentDir;
-    if (llvm::sys::fs::current_path(CurrentDir) != llvm::errc::success) {
+    if (llvm::sys::fs::current_path(CurrentDir)) {
       llvm::errs() << "Failed to retrieve current working directory\n";
       exit(1);
     }
@@ -68,7 +68,7 @@ class SimplePluginASTAction : public PluginASTAction {
     }
 
     // /!\ T must make a local copy of the strings passed by reference here.
-    return new T(CI, InputFile, BasePath, DeduplicationServicePath, *OS);
+    return std::unique_ptr<ASTConsumer>(new T(CI, InputFile, BasePath, DeduplicationServicePath, *OS));
   }
 
   bool ParseArgs(const CompilerInstance &CI,

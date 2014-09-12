@@ -79,7 +79,7 @@ namespace {
     // This is a hack but using option types in children lists would make the Json terribly verbose.
     // Also these useless nodes could have occurred in the original AST anyway :)
     //
-    // Note: We are not using OwningPtr because 'delete' appears to be protected (at least on Stmt).
+    // Note: We are not using std::unique_ptr because 'delete' appears to be protected (at least on Stmt).
     const Stmt *const NullPtrStmt;
     const Decl *const NullPtrDecl;
     const Comment *const NullPtrComment;
