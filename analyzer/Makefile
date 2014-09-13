@@ -23,10 +23,6 @@ HEADERS+=DanglingDelegateCommon.h DanglingDelegateFactFinder.h
 CHECKERS+=facebook.DanglingDelegateChecker
 OBJS+=DanglingDelegateCommon.o DanglingDelegateFactFinder.o DanglingDelegateChecker.o
 
-# DoubleBooleanArgumentChecker
-CHECKERS+=facebook.DoubleBooleanArgumentChecker
-OBJS+=DoubleBooleanArgumentChecker.o
-
 # GlobalOrStaticVariableForDispatchOnceChecker
 CHECKERS+=facebook.GlobalOrStaticVariableForDispatchOnceChecker
 OBJS+=GlobalOrStaticVariableForDispatchOnceChecker.o

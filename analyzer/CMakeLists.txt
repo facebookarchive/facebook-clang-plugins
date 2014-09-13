@@ -40,7 +40,6 @@ add_library(
   DanglingDelegateFactFinder.h
   DanglingDelegateFactFinder.cpp
   DanglingDelegateChecker.cpp
-  DoubleBooleanArgumentChecker.cpp
   GlobalOrStaticVariableForDispatchOnceChecker.cpp
   ${EXTRA_SOURCES}
 )
