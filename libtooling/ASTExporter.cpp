@@ -2296,8 +2296,9 @@ void ASTExporter<ATDWriter>::VisitObjCIvarRefExpr(const ObjCIvarRefExpr *Node) {
 /// type predefined_expr_type = [
 /// | Func
 /// | Function
-/// | FuncDName
 /// | LFunction
+/// | FuncDName
+/// | FuncSig
 /// | PrettyFunction
 /// | PrettyFunctionNoVirtual
 /// ]
@@ -2307,8 +2308,9 @@ void ASTExporter<ATDWriter>::VisitPredefinedExpr(const PredefinedExpr *Node) {
   switch (Node->getIdentType()) {
   case PredefinedExpr::Func: OF.emitSimpleVariant("Func"); break;
   case PredefinedExpr::Function: OF.emitSimpleVariant("Function"); break;
-  case PredefinedExpr::FuncDName: OF.emitSimpleVariant("FuncDName"); break;
   case PredefinedExpr::LFunction: OF.emitSimpleVariant("LFunction"); break;
+  case PredefinedExpr::FuncDName: OF.emitSimpleVariant("FuncDName"); break;
+  case PredefinedExpr::FuncSig: OF.emitSimpleVariant("FuncSig"); break;
   case PredefinedExpr::PrettyFunction: OF.emitSimpleVariant("PrettyFunction"); break;
   case PredefinedExpr::PrettyFunctionNoVirtual: OF.emitSimpleVariant("PrettyFunctionNoVirtual"); break;
   }
