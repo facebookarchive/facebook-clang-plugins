@@ -422,10 +422,9 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   }
   {
     ArrayScope Scope(OF);
-    for (DeclContext::decl_iterator I = DC->decls_begin(), E = DC->decls_end();
-         I != E; ++I) {
-      if (!DedupService || DedupService->verifyDeclFileLocation(**I)) {
-        dumpDecl(*I);
+    for (auto I : DC->decls()) {
+      if (!DedupService || DedupService->verifyDeclFileLocation(*I)) {
+        dumpDecl(I);
       }
     }
   }
@@ -877,10 +876,8 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     OF.emitTag("attributes");
     {
       ArrayScope ArrayAttr(OF);
-      for (Decl::attr_iterator I = D->attr_begin(), E = D->attr_end();
-           I != E; ++I) {
-        assert(*I);
-        dumpAttr(**I);
+      for (auto I : D->attrs()) {
+        dumpAttr(*I);
       }
     }
 
@@ -1045,11 +1042,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitIndirectFieldDecl(const IndirectFieldDecl *D) {
   VisitValueDecl(D);
   ArrayScope Scope(OF);
-  for (IndirectFieldDecl::chain_iterator I = D->chain_begin(),
-                                         E = D->chain_end();
-       I != E; ++I) {
-    assert(*I);
-    dumpDeclRef(**I);
+  for (auto I : D->chain()) {
+    dumpDeclRef(*I);
   }
 }
 
@@ -1136,11 +1130,8 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   if (HasCtorInitializers) {
     OF.emitTag("cxx_ctor_initializers");
     ArrayScope Scope(OF);
-    for (CXXConstructorDecl::init_const_iterator I = C->init_begin(),
-         E = C->init_end();
-         I != E; ++I) {
-      assert(*I);
-      dumpCXXCtorInitializer(**I);
+    for (auto I : C->inits()) {
+      dumpCXXCtorInitializer(*I);
     }
   }
 
@@ -1984,10 +1975,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclStmt(const DeclStmt *Node) {
   VisitStmt(Node);
   ArrayScope Scope(OF);
-  for (DeclStmt::const_decl_iterator I = Node->decl_begin(),
-                                     E = Node->decl_end();
-       I != E; ++I) {
-    dumpDecl(*I);
+  for (auto I : Node->decls()) {
+    dumpDecl(I);
   }
 }
 
@@ -1997,11 +1986,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAttributedStmt(const AttributedStmt *Node) {
   VisitStmt(Node);
   ArrayScope Scope(OF);
-  for (ArrayRef<const Attr *>::iterator I = Node->getAttrs().begin(),
-                                        E = Node->getAttrs().end();
-       I != E; ++I) {
-    assert(*I);
-    dumpAttr(**I);
+  for (auto I : Node->getAttrs()) {
+    dumpAttr(*I);
   }
 }
 
@@ -2240,13 +2226,11 @@ void ASTExporter<ATDWriter>::VisitOverloadExpr(const OverloadExpr *Node) {
   VisitExpr(Node);
   ObjectScope Scope(OF);
   {
-    
     if (Node->getNumDecls() > 0) {
       OF.emitTag("decls");
       ArrayScope Scope(OF);
-      for(OverloadExpr::decls_iterator
-          OvI=Node->decls_begin(), OvE = Node->decls_end(); OvI != OvE; ++OvI) {
-        dumpDeclRef(*OvI.getDecl());
+      for(auto I : Node->decls()) {
+        dumpDeclRef(*I);
       }
     }
   }
