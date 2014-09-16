@@ -166,6 +166,11 @@ namespace {
 //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
 //    void VisitCXXRecordDecl(const CXXRecordDecl *D);
 //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
+//    template<typename SpecializationDecl>
+//    void VisitTemplateDeclSpecialization(ChildDumper &Children,
+//                                         const SpecializationDecl *D,
+//                                         bool DumpExplicitInst,
+//                                         bool DumpRefOnly);
 //    void VisitFunctionTemplateDecl(const FunctionTemplateDecl *D);
 //    void VisitClassTemplateDecl(const ClassTemplateDecl *D);
 //    void VisitClassTemplateSpecializationDecl(
@@ -220,6 +225,7 @@ namespace {
     void VisitIntegerLiteral(const IntegerLiteral *Node);
     void VisitFloatingLiteral(const FloatingLiteral *Node);
     void VisitStringLiteral(const StringLiteral *Str);
+//    void VisitInitListExpr(const InitListExpr *ILE);
     void VisitUnaryOperator(const UnaryOperator *Node);
     void VisitUnaryExprOrTypeTraitExpr(const UnaryExprOrTypeTraitExpr *Node);
     void VisitMemberExpr(const MemberExpr *Node);
@@ -501,6 +507,7 @@ void ASTExporter<ATDWriter>::dumpLookups(const DeclContext &DC) {
 /// type attribute_info = {
 ///   pointer : pointer;
 ///   source_range : source_range;
+///   ~is_inherited : bool;
 ///   ~is_implicit : bool
 /// } <ocaml field_prefix="ai_">
 template <class ATDWriter>
@@ -521,6 +528,7 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &A) {
 
 // TODO
 //#include <clang/AST/AttrDump.inc>
+    OF.emitFlag("is_inherited", A.isInherited());
     OF.emitFlag("is_implicit", A.isImplicit());
   }
 }
@@ -846,9 +854,12 @@ void ASTExporter<ATDWriter>::dumpDecl(const Decl *D) {
 ///   source_range : source_range;
 ///   ?owning_module : string option;
 ///   ~is_hidden : bool;
+///   ~is_implicit : bool;
+///   ~is_used : bool;
+///   ~is_this_declaration_referenced : bool;
+///   ~is_invalid_decl : bool;
 ///   attributes : attribute list;
-///   ?full_comment : comment option;
-///   ~is_invalid_decl : bool
+///   ?full_comment : comment option
 /// } <ocaml field_prefix="di_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
@@ -872,6 +883,10 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     if (const NamedDecl *ND = dyn_cast<NamedDecl>(D)) {
       OF.emitFlag("is_hidden", ND->isHidden());
     }
+    OF.emitFlag("is_implicit", D->isImplicit());
+    OF.emitFlag("is_used", D->isUsed());
+    OF.emitFlag("is_this_declaration_referenced", D->isThisDeclarationReferenced());
+    OF.emitFlag("is_invalid_decl", D->isInvalidDecl());
 
     OF.emitTag("attributes");
     {
@@ -886,8 +901,6 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
       OF.emitTag("full_comment");
       dumpFullComment(Comment);
     }
-
-    OF.emitFlag("is_invalid_decl", D->isInvalidDecl());
   }
 }
 
@@ -1081,13 +1094,13 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
 
 //  if (const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>()) {
 //    FunctionProtoType::ExtProtoInfo EPI = FPT->getExtProtoInfo();
-//    switch (EPI.ExceptionSpecType) {
+//    switch (EPI.ExceptionSpec.Type) {
 //    default: break;
 //    case EST_Unevaluated:
-//      OS << " noexcept-unevaluated " << EPI.ExceptionSpecDecl;
+//      OS << " noexcept-unevaluated " << EPI.ExceptionSpec.SourceDecl;
 //      break;
 //    case EST_Uninstantiated:
-//      OS << " noexcept-uninstantiated " << EPI.ExceptionSpecTemplate;
+//      OS << " noexcept-uninstantiated " << EPI.ExceptionSpec.SourceTemplate;
 //      break;
 //    }
 //  }
@@ -3012,7 +3025,7 @@ void ASTExporter<ATDWriter>::visitTextComment(const TextComment *C) {
 //      OS << " Param=\"" << C->getParamNameAsWritten() << "\"";
 //  }
 //
-//  if (C->isParamIndexValid())
+//  if (C->isParamIndexValid() && !C->isVarArgParam())
 //    OS << " ParamIndex=" << C->getParamIndex();
 //}
 //

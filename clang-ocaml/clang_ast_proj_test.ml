@@ -28,9 +28,12 @@ let decl_info start stop = {
   di_source_range = (start, stop) ;
   di_owning_module = None;
   di_is_hidden = false;
+  di_is_implicit = false;
+  di_is_used = false;
+  di_is_this_declaration_referenced = false;
+  di_is_invalid_decl = false;
   di_attributes = [];
-  di_full_comment = None;
-  di_is_invalid_decl = false
+  di_full_comment = None
 }
 
 let () =
