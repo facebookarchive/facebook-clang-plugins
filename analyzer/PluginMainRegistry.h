@@ -8,6 +8,8 @@
  *
  */
 
+#pragma once
+
 #include <clang/StaticAnalyzer/Core/CheckerRegistry.h>
 
 typedef void (*register_checker_callback_t)(clang::ento::CheckerRegistry &registry);

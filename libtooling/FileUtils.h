@@ -8,6 +8,8 @@
  *
  */
 
+#pragma once
+
 #include <string>
 #include <map>
 #include <clang/AST/Decl.h>

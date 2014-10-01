@@ -8,6 +8,8 @@
  *
  */
 
+#pragma once
+
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/CompilerInstance.h>
 

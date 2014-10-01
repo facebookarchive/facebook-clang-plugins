@@ -12,6 +12,8 @@
  * Utility functions for the "dangling delegate" checker.
  */
 
+#pragma once
+
 #include <clang/StaticAnalyzer/Core/Checker.h>
 #include <clang/StaticAnalyzer/Core/BugReporter/BugType.h>
 #include <clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h>
