@@ -14,7 +14,7 @@ HEADERS+=SimplePluginASTAction.h FileUtils.h
 OBJS+=FileUtils.o
 
 # ASTExporter
-HEADERS+=atdlib/ATDWriter.h
+HEADERS+=atdlib/ATDWriter.h ASTExporter.h
 OBJS+=ASTExporter.o
 
 # Json
@@ -135,6 +135,6 @@ build/ast_samples/%.gz: build/ast_samples/%
 
 # generate a preprocessed version of ASTExporter.cpp where ATD directives can be read
 # we do not include the C/C++ headers to avoid parsing issues with the 'traditional' cpp (needed for precisely expanding our /// comments)
-build/ASTExporter.cpp.p: ASTExporter.cpp
+build/ASTExporter.h.p: ASTExporter.h
 	@mkdir -p build
-	@cat $< | grep -v '#include *["<][^.]*\(\.h\)\?[">]' | $(ATD_CPP) -I$(CLANG_PREFIX)/include > build/ASTExporter.cpp.p
+	@cat $< | grep -v '#include *["<][^.]*\(\.h\)\?[">]' | $(ATD_CPP) -I$(CLANG_PREFIX)/include > $@

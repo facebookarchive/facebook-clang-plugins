@@ -51,10 +51,10 @@ build/%.cmi:build/%.mli
 	$(OCAMLOPT) -o $@ -c $<
 
 # clang AST
-build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.cpp
+build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.h
 	@mkdir -p build
-	@make -C $(LIBTOOLING) build/ASTExporter.cpp.p
-	python $(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.cpp.p | python $(ATDLIB)/normalize_names_in_atd.py > $@
+	@make -C $(LIBTOOLING) build/ASTExporter.h.p
+	python $(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.h.p | python $(ATDLIB)/normalize_names_in_atd.py > $@
 
 build/ast_inline.atd: build/ast_inline.atd.p
 	$(ATD_CPP) $< > $@

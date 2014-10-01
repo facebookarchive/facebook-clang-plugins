@@ -34,6 +34,7 @@ add_library(
   FileUtils.h
   FileUtils.cpp
   atdlib/ATDWriter.h
+  ASTExporter.h
   ASTExporter.cpp
   ${EXTRA_SOURCES}
 )
