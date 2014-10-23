@@ -2640,7 +2640,6 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node)
 /// #define cxx_bind_temporary_expr_tuple expr_tuple * cxx_bind_temporary_expr_info
 /// type cxx_bind_temporary_expr_info = {
 ///   cxx_temporary : cxx_temporary;
-///   sub_expr : stmt;
 /// } <ocaml field_prefix="xbtei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node) {
@@ -2648,8 +2647,6 @@ void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExp
   ObjectScope Scope(OF);
   OF.emitTag("cxx_temporary");
   dumpCXXTemporary(Node->getTemporary());
-  OF.emitTag("sub_expr");
-  dumpStmt(Node->getSubExpr());
 }
 
 /// \atd
