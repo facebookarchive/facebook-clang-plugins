@@ -54,8 +54,8 @@ OUT_TEST_FILES=${TEST_DIRS:%=%/*/*.out}
 # corresponding subdirectory.
 ifneq "$(EXTRA_DIR)" ""
 EXPFILES_FORMULA=tests/$$P/*.exp "$(EXTRA_DIR)"/tests/$$P/*.exp
-SRCFILE_FORMULA=$$(ls {tests,"$(EXTRA_DIR)"}/$$(basename $$TEST) 2>/dev/null || true)
-FILTERFILE_FORMULA=$$(ls {tests,"$(EXTRA_DIR)"}/$${P}/filter.sh 2>/dev/null || true)
+SRCFILE_FORMULA=$$(ls {tests,"$(EXTRA_DIR)"/tests}/$$(basename $$TEST) 2>/dev/null || true)
+FILTERFILE_FORMULA=$$(ls {tests,"$(EXTRA_DIR)"/tests}/$${P}/filter.sh 2>/dev/null || true)
 else
 EXPFILES_FORMULA=tests/$$P/*.exp
 SRCFILE_FORMULA=tests/$$(basename $$TEST)
