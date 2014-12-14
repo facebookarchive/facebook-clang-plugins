@@ -44,11 +44,11 @@ namespace DanglingDelegate {
     do {
       expr = E;
       E = E->IgnoreParenImpCasts();
-      const OpaqueValueExpr *ove = dyn_cast<OpaqueValueExpr>(E);
+      const OpaqueValueExpr *ove = dyn_cast_or_null<OpaqueValueExpr>(E);
       if (ove) {
         E = ove->getSourceExpr();
       }
-    } while (E != expr);
+    } while (E != NULL && E != expr);
 
     return E;
   }
@@ -132,15 +132,14 @@ namespace DanglingDelegate {
       return NULL;
     }
     // ivar?
-    const ObjCIvarRefExpr *ivarRef = dyn_cast_or_null<ObjCIvarRefExpr>(normExpr);
+    const ObjCIvarRefExpr *ivarRef = dyn_cast<ObjCIvarRefExpr>(normExpr);
     if (ivarRef) {
       return ivarRef->getDecl();
     }
 
     // getter on self?
-    const PseudoObjectExpr *poe = dyn_cast_or_null<PseudoObjectExpr>(normExpr);
-    if (!poe || !poe->getSyntacticForm()) {
-      assert(!poe);
+    const PseudoObjectExpr *poe = dyn_cast<PseudoObjectExpr>(normExpr);
+    if (!poe) {
       return NULL;
     }
     const ObjCPropertyRefExpr *pre = dyn_cast_or_null<ObjCPropertyRefExpr>(poe->getSyntacticForm());
@@ -148,9 +147,14 @@ namespace DanglingDelegate {
       return  NULL;
     }
     // we want a getter corresponding to a real ivar of the current class
-    if (!pre->isMessagingGetter() || pre->isImplicitProperty() || !ignoreOpaqueValParenImpCasts(pre->getBase())->isObjCSelfExpr()) {
+    if (!pre->isMessagingGetter() || pre->isImplicitProperty()) {
       return NULL;
     }
+    const Expr *base = ignoreOpaqueValParenImpCasts(pre->getBase());
+    if (!base || !base->isObjCSelfExpr()) {
+      return NULL;
+    }
+
     ObjCPropertyDecl *propDecl = pre->getExplicitProperty();
     if (!propDecl) {
       return NULL;
