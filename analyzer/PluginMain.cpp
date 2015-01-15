@@ -14,15 +14,19 @@
 
 #include "PluginMainRegistry.h"
 
-static std::vector<register_checker_callback_t> callbacks;
+static std::vector<register_checker_callback_t>& getCallbacks() {
+  static std::vector<register_checker_callback_t> callbacks;
+  return callbacks;
+}
 
 extern "C"
 void add_register_checker_callback(register_checker_callback_t f) {
-  callbacks.push_back(f);
+  getCallbacks().push_back(f);
 }
 
 extern "C"
 void clang_registerCheckers(clang::ento::CheckerRegistry &registry) {
+  auto callbacks = getCallbacks();
   for(std::vector<register_checker_callback_t>::iterator it = callbacks.begin(); it != callbacks.end(); ++it) {
     (*it)(registry);
   }
