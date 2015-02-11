@@ -15,6 +15,8 @@
 #include <vector>
 
 #include <clang/AST/Decl.h>
+#include <clang/AST/DeclCXX.h>
+#include <clang/AST/DeclTemplate.h>
 #include <llvm/Support/Path.h>
 
 #include "FileUtils.h"
@@ -61,8 +63,18 @@ namespace FileUtils {
     if (!DC || !clang::isa<clang::TranslationUnitDecl>(*DC)) {
       return true;
     }
-    // Avoid in particular LinkageSpec which can have misleading locations.
+    // Skip only NamedDecl's. Avoid in particular LinkageSpec's which can have misleading locations.
     if (!clang::isa<clang::NamedDecl>(Decl)) {
+      return true;
+    }
+    // Do not skip Namespace, ClassTemplate(Partial)Specialization, Using, UsingShadow, CXXRecord declarations.
+    // (CXXRecord mostly because they can contain UsingShadow declarations.)
+    if (clang::isa<clang::NamespaceDecl>(Decl)
+        || clang::isa<clang::ClassTemplateSpecializationDecl>(Decl)
+        || clang::isa<clang::UsingDecl>(Decl)
+        || clang::isa<clang::UsingShadowDecl>(Decl)
+        || clang::isa<clang::CXXRecordDecl>(Decl)
+        ) {
       return true;
     }
     clang::SourceLocation SpellingLoc = sourceManager.getSpellingLoc(Decl.getLocation());
