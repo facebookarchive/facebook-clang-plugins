@@ -10,6 +10,9 @@
 
 #pragma once
 
+#include <string>
+#include <memory>
+
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/CompilerInstance.h>
 
@@ -18,59 +21,34 @@
 
 using namespace clang;
 
-template <
-  class T,
-  bool Binary=0,
-  bool RemoveFileOnSignal=1,
-  bool UseTemporary=1,
-  bool CreateMissingDirectories=0,
-  bool TakePercentAsInputFile=1
->
-class SimplePluginASTAction : public PluginASTAction {
+class PluginASTActionBase {
+protected:
   StringRef OutputPath;
   StringRef DeduplicationServicePath;
+  StringRef RealOutputPath;
+  StringRef BasePath;
 
- protected:
-  std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
-    llvm::raw_fd_ostream *OS = NULL;
-
-    if (TakePercentAsInputFile && OutputPath.startswith("%")) {
-      // Take the remaining of OutputPath as a suffix to append to InputFile.
-      // (Purposely keep the existing suffix of InputFile.)
-      OS = CI.createOutputFile(InputFile.str() + OutputPath.slice(1, OutputPath.size()).str(),
-                               Binary,
-                               RemoveFileOnSignal,
-                               "",
-                               "",
-                               UseTemporary,
-                               CreateMissingDirectories);
-    } else {
-      // Use stdout if OutputPath == "" or "-", the given file name otherwise.
-      OS = CI.createOutputFile(OutputPath,
-                               Binary,
-                               RemoveFileOnSignal,
-                               "",
-                               "",
-                               UseTemporary,
-                               CreateMissingDirectories);
-    }
-    if (!OS) {
-      return NULL;
-    }
-
-    SmallString<256> CurrentDir;
+  void SetBasePath(llvm::StringRef InputFile) {
+    SmallString<1024> CurrentDir;
     if (llvm::sys::fs::current_path(CurrentDir)) {
       llvm::errs() << "Failed to retrieve current working directory\n";
       exit(1);
     }
-    StringRef BasePath;
+
     // Force absolute paths everywhere if InputFile was given absolute.
     if (InputFile.startswith("/")) {
-      BasePath = CurrentDir;
+      BasePath = CurrentDir.str();
+    } else {
+      BasePath = StringRef();
     }
+  }
 
-    // /!\ T must make a local copy of the strings passed by reference here.
-    return std::unique_ptr<ASTConsumer>(new T(CI, InputFile, BasePath, DeduplicationServicePath, *OS));
+  void SetRealOutputPath(llvm::StringRef InputFile) {
+    if (OutputPath.startswith("%")) {
+      RealOutputPath = InputFile.str() + OutputPath.slice(1, OutputPath.size()).str();
+    } else {
+      RealOutputPath = OutputPath;
+    }
   }
 
   bool ParseArgs(const CompilerInstance &CI,
@@ -82,6 +60,74 @@ class SimplePluginASTAction : public PluginASTAction {
       }
     }
     return true;
+  }
+
+};
+
+
+template <
+  class T,
+  bool Binary=0,
+  bool RemoveFileOnSignal=1,
+  bool UseTemporary=1,
+  bool CreateMissingDirectories=0
+>
+class SimplePluginASTAction : public PluginASTAction, PluginASTActionBase {
+
+ protected:
+  std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
+    PluginASTActionBase::SetBasePath(InputFile);
+    PluginASTActionBase::SetRealOutputPath(InputFile);
+
+    llvm::raw_fd_ostream *OS =
+      CI.createOutputFile(PluginASTActionBase::RealOutputPath,
+                          Binary,
+                          RemoveFileOnSignal,
+                          "",
+                          "",
+                          UseTemporary,
+                          CreateMissingDirectories);
+
+    if (!OS) {
+      return nullptr;
+    }
+
+    // /!\ T must make a local copy of the strings passed by reference here.
+    return std::unique_ptr<ASTConsumer>(
+      new T(CI,
+            InputFile,
+            PluginASTActionBase::BasePath,
+            PluginASTActionBase::DeduplicationServicePath,
+            *OS));
+  }
+
+  bool ParseArgs(const CompilerInstance &CI,
+                 const std::vector<std::string>& args) {
+    return PluginASTActionBase::ParseArgs(CI, args);
+  }
+
+};
+
+template <class T>
+class NoOpenSimplePluginASTAction : public PluginASTAction, PluginASTActionBase {
+
+protected:
+  std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
+    PluginASTActionBase::SetBasePath(InputFile);
+    PluginASTActionBase::SetRealOutputPath(InputFile);
+
+    // /!\ T must make a local copy of the strings passed by reference here.
+    return std::unique_ptr<ASTConsumer>(
+       new T(CI,
+             InputFile,
+             PluginASTActionBase::BasePath,
+             PluginASTActionBase::DeduplicationServicePath,
+             PluginASTActionBase::RealOutputPath));
+  }
+
+  bool ParseArgs(const CompilerInstance &CI,
+                 const std::vector<std::string>& args) {
+    return PluginASTActionBase::ParseArgs(CI, args);
   }
 
 };
