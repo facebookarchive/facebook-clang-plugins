@@ -33,16 +33,6 @@ endif
 # project headers (if any)
 HEADERS?=
 
-build/%.o: %.cpp $(HEADERS)
-	@mkdir -p build
-	$(CXX) $(CFLAGS) -c $< -o $@
-
-ifneq "$(EXTRA_DIR)" ""
-build/%.o: $(EXTRA_DIR)/%.cpp $(HEADERS) $(EXTRA_HEADERS:%=$(EXTRA_DIR)/%)
-	@mkdir -p build
-	$(CXX) $(CFLAGS) -I . -c $< -o $@
-endif
-
 # test runner
 RUNTEST=$(LEVEL)/scripts/run_test.sh
 

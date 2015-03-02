@@ -8,7 +8,7 @@
 .PHONY: clean all test all_ast_samples
 
 LEVEL=..
-include $(LEVEL)/Makefile.config
+include $(LEVEL)/Makefile.common
 
 HEADERS+=SimplePluginASTAction.h FileUtils.h
 OBJS+=FileUtils.o
@@ -33,7 +33,7 @@ ifneq "$(EXTRA_DIR)" ""
 include $(EXTRA_DIR)/Makefile.include
 endif
 
-include $(LEVEL)/Makefile.common
+include $(LEVEL)/Makefile.rules
 
 CLANG_FRONTEND=$(CLANG) -fsyntax-only -Xpreprocessor -detailed-preprocessing-record -Xclang -load -Xclang $(shell pwd)/build/FacebookClangPlugin.dylib
 

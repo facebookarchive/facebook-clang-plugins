@@ -8,10 +8,10 @@
 .PHONY: clean all test test-quiet record-test-outputs
 
 LEVEL=..
-include $(LEVEL)/Makefile.config
+include $(LEVEL)/Makefile.common
 
 # plugin framework and project libraries
-HEADERS=PluginMainRegistry.h
+HEADERS+=PluginMainRegistry.h
 OBJS=PluginMain.o
 
 # ObjCARCQualifierChecker
@@ -44,7 +44,7 @@ ifneq "$(EXTRA_DIR)" ""
 include $(EXTRA_DIR)/Makefile.include
 endif
 
-include $(LEVEL)/Makefile.common
+include $(LEVEL)/Makefile.rules
 
 build/FacebookAnalyzerPlugin.dylib: $(OBJS:%=build/%)
 	@mkdir -p build
