@@ -11,10 +11,9 @@
 #pragma once
 
 #include <string>
-#include <map>
 #include <clang/AST/Decl.h>
-#include <clang/AST/Stmt.h>
-#include <clang/AST/ASTContext.h>
+
+#include "FileServices.h"
 
 namespace FileUtils {
 
@@ -22,36 +21,16 @@ namespace FileUtils {
    * Simplify away "." and ".." elements.
    * If pathToNormalize is a relative path, it will be pre-pended with currentWorkingDirectory unless currentWorkingDirectory == "".
    */
-  std::string normalizePath(const std::string &currentWorkingDirectory, const std::string &pathToNormalize);
+  std::string makeAbsolutePath(const std::string &currentWorkingDirectory, std::string pathToNormalize);
 
   /**
-   * Simple class to avoid duplicating outputs when a frontend plugin is run independently on multiple files.
-   * Currently we simply use lock files in a tmp directory 'servicePath'.
-   * This tmp directory must be setup and cleaned correctly outside this code.
+   * Try to delete a prefix "repoRoot/" from the given absolute path. Return the same path otherwise.
    */
-  class DeduplicationService {
-    const std::string servicePath;
-    const std::string basePath;
-    const clang::SourceManager &sourceManager;
-    std::map<std::string, bool> cache;
+  std::string makeRelativePath(const std::string &repoRoot, const std::string &path, bool keepExternalPaths);
 
-  public:
-    DeduplicationService(const std::string &servicePath,
-                         const std::string &basePath,
-                         const clang::SourceManager &sourceManager)
-    : servicePath(servicePath),
-      basePath(basePath),
-      sourceManager(sourceManager)
-    {}
-
-    /* Returns true if we can proceed with the data corresponding to the key.
-     * From then on, other clients (processes, etc) will get false for the same key.
-     */
-    bool verifyKey(const std::string &key);
-
-    bool verifyDeclFileLocation(const clang::Decl &Decl);
-
-    bool verifyStmtFileLocation(const clang::Stmt &Stmt);
-  };
+  /**
+   * Determine if a declaration should be traversed.
+   */
+  bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService, const std::string &BasePath, const clang::SourceManager &SM,const clang::Decl &Decl);
 
 }

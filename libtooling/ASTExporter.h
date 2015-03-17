@@ -43,7 +43,6 @@
 
 #include "atdlib/ATDWriter.h"
 #include "SimplePluginASTAction.h"
-#include "FileUtils.h"
 
 //===----------------------------------------------------------------------===//
 // ASTExporter Visitor
@@ -69,13 +68,10 @@ class ASTExporter :
   typedef typename ATDWriter::VariantScope VariantScope;
   ATDWriter OF;
 
+  const ASTPluginLib::PluginASTOptionsBase &Options;
+
   const CommandTraits &Traits;
   const SourceManager &SM;
-
-  // Optional currentWorkingDirectory to normalize relative paths.
-  StringRef BasePath;
-  // Optional service to avoid repeating the content of a same header file across a compilation.
-  FileUtils::DeduplicationService *DedupService;
 
   // Encoding of NULL pointers into suitable empty nodes
   // This is a hack but using option types in children lists would make the Json terribly verbose.
@@ -95,18 +91,16 @@ class ASTExporter :
   const FullComment *FC;
 
 public:
-  ASTExporter(raw_ostream &OS, ASTContext &Context, StringRef BasePath, FileUtils::DeduplicationService *DedupService)
+  ASTExporter(raw_ostream &OS, ASTContext &Context, const ASTPluginLib::PluginASTOptionsBase &Opts)
     : OF(OS),
+      Options(Opts),
       Traits(Context.getCommentCommandTraits()),
       SM(Context.getSourceManager()),
-      BasePath(BasePath),
-      DedupService(DedupService),
       NullPtrStmt(new (Context) NullStmt(SourceLocation())),
       NullPtrDecl(EmptyDecl::Create(Context, Context.getTranslationUnitDecl(), SourceLocation())),
       NullPtrComment(new (Context) Comment(Comment::NoCommentKind, SourceLocation(), SourceLocation())),
       LastLocFilename(""), LastLocLine(~0U), FC(0)
-  {
-  }
+  { }
 
   void dumpDecl(const Decl *D);
   void dumpStmt(const Stmt *S);
@@ -322,7 +316,7 @@ void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
   if (strcmp(PLoc.getFilename(), LastLocFilename) != 0) {
     OF.emitTag("file");
     // Normalizing filenames matters because the current directory may change during the compilation of large projects.
-    OF.emitString(FileUtils::normalizePath(BasePath, PLoc.getFilename()));
+    OF.emitString(Options.normalizeSourcePath(PLoc.getFilename()));
     OF.emitTag("line");
     OF.emitInteger(PLoc.getLine());
     OF.emitTag("column");
@@ -430,7 +424,11 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   {
     ArrayScope Scope(OF);
     for (auto I : DC->decls()) {
-      if (!DedupService || DedupService->verifyDeclFileLocation(*I)) {
+      if (Options.deduplicationService == nullptr
+          || FileUtils::shouldTraverseDeclFile(*Options.deduplicationService,
+                                               Options.basePath,
+                                               DC->getParentASTContext().getSourceManager(),
+                                               *I)) {
         dumpDecl(I);
       }
     }

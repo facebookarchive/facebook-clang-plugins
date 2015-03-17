@@ -25,10 +25,8 @@ private:
   llvm::raw_ostream &OS;
 
 public:
-  PrintDeclarationsConsumer(CompilerInstance &CI,
-                            llvm::StringRef InputFile,
-                            llvm::StringRef BasePath,
-                            llvm::StringRef DeduplicationServicePath,
+  PrintDeclarationsConsumer(const CompilerInstance &CI,
+                            std::unique_ptr<ASTPluginLib::PluginASTOptionsBase> &&Options,
                             raw_ostream &OS) : OS(OS) {}
 
   virtual bool HandleTopLevelDecl(DeclGroupRef DG) {
@@ -52,7 +50,7 @@ public:
   }
 };
 
-  typedef SimplePluginASTAction<PrintDeclarationsConsumer> PrintTopDeclarations;
+  typedef ASTPluginLib::SimplePluginASTAction<PrintDeclarationsConsumer> PrintTopDeclarations;
 
 }
 

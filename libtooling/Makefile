@@ -10,8 +10,8 @@
 LEVEL=..
 include $(LEVEL)/Makefile.common
 
-HEADERS+=SimplePluginASTAction.h FileUtils.h
-OBJS+=FileUtils.o
+HEADERS+=SimplePluginASTAction.h FileUtils.h FileServices.h
+OBJS+=SimplePluginASTAction.o FileUtils.o FileServices.o
 
 # ASTExporter
 HEADERS+=atdlib/ATDWriter.h ASTExporter.h
@@ -71,8 +71,8 @@ test: build/FacebookClangPlugin.dylib
 	     TEST=$${EXPFILE%.exp};                                                     \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
 	       $(CLANG_FRONTEND) -ObjC++ --std=c++11 -Xclang -plugin -Xclang $$P        \
-	       -Xclang -plugin-arg-$$P -Xclang -                                        \
-	       -Xclang -plugin-arg-$$P -Xclang build/tmp_$$P                            \
+	       -Xclang -plugin-arg-$$P -Xclang -                                 \
+	       -Xclang -plugin-arg-$$P -Xclang USE_TEMP_DIR_FOR_DEDUPLICATION=build/tmp_$$P \
 	       -c $(SRCFILE_FORMULA);                                                   \
 	   done;                                                                        \
 	done

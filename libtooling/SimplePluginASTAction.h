@@ -10,77 +10,98 @@
 
 #pragma once
 
+#include <functional>
 #include <string>
+#include <unordered_map>
 #include <memory>
+#include <stdlib.h>
 
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/CompilerInstance.h>
+#include <clang/Frontend/FrontendAction.h>
 
-#include <llvm/Support/Path.h>
-#include <llvm/Support/raw_ostream.h>
+#include "FileServices.h"
+#include "FileUtils.h"
 
-using namespace clang;
+namespace ASTPluginLib {
 
-class PluginASTActionBase {
+struct PluginASTOptionsBase {
+  std::string inputFile;
+  std::string outputFile;
+
+  /* Will contain the current directory if PREPEND_CURRENT_DIR was specified.
+   * The intention is to make file paths in the AST absolute if needed.
+   */
+  std::string basePath;
+
+  /* Configure a second pass on file paths to make them relative to the repo root. */
+  std::string repoRoot;
+  /* Whether file paths not under the repo root should be kept or blanked. */
+  bool keepExternalPaths = false;
+
+  /* Deduplication service: whether certain files should be visited once. */
+  std::unique_ptr<FileServices::DeduplicationService> deduplicationService;
+
+  typedef std::unordered_map<std::string, std::string> argmap_t;
+
+  static argmap_t makeMap(const std::vector<std::string> &args);
+
 protected:
-  StringRef OutputPath;
-  StringRef DeduplicationServicePath;
-  StringRef RealOutputPath;
-  StringRef BasePath;
+  static const std::string envPrefix;
 
-  void SetBasePath(llvm::StringRef InputFile) {
-    SmallString<1024> CurrentDir;
-    if (llvm::sys::fs::current_path(CurrentDir)) {
-      llvm::errs() << "Failed to retrieve current working directory\n";
-      exit(1);
-    }
+  static bool loadString(const argmap_t &map, const char *key, std::string &val);
 
-    // Force absolute paths everywhere if InputFile was given absolute.
-    if (InputFile.startswith("/")) {
-      BasePath = CurrentDir.str();
-    } else {
-      BasePath = StringRef();
-    }
-  }
+  static bool loadBool(const argmap_t &map, const char *key, bool &val);
 
-  void SetRealOutputPath(llvm::StringRef InputFile) {
-    if (OutputPath.startswith("%")) {
-      RealOutputPath = InputFile.str() + OutputPath.slice(1, OutputPath.size()).str();
-    } else {
-      RealOutputPath = OutputPath;
-    }
-  }
+public:
+  void loadValuesFromEnvAndMap(const argmap_t map);
 
-  bool ParseArgs(const CompilerInstance &CI,
-                 const std::vector<std::string>& args) {
+  void setOutputFile(const std::string &path);
+
+  // This should be called last.
+  // It will also finalize the output file in case of a pattern "%.bla".
+  void setInputFile(const std::string &path);
+
+  std::string normalizeSourcePath(std::string path) const;
+
+};
+
+template <class PluginASTOptions = PluginASTOptionsBase>
+class SimplePluginASTActionBase : public clang::PluginASTAction {
+protected:
+  std::unique_ptr<PluginASTOptions> Options;
+
+  virtual bool ParseArgs(const clang::CompilerInstance &CI,
+                         const std::vector<std::string> &args_) {
+    std::vector<std::string> args = args_;
+    Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
     if (args.size() > 0) {
-      OutputPath = args[0];
-      if (args.size() > 1) {
-        DeduplicationServicePath = args[1];
-      }
+      Options->setOutputFile(args[0]);
+      args.erase(args.begin());
     }
+    Options->loadValuesFromEnvAndMap(PluginASTOptions::makeMap(args));
     return true;
   }
 
 };
 
-
 template <
   class T,
-  bool Binary=0,
-  bool RemoveFileOnSignal=1,
-  bool UseTemporary=1,
-  bool CreateMissingDirectories=0
+  class PluginASTOptions = PluginASTOptionsBase,
+  bool Binary = 0,
+  bool RemoveFileOnSignal = 1,
+  bool UseTemporary = 1,
+  bool CreateMissingDirectories = 0
 >
-class SimplePluginASTAction : public PluginASTAction, PluginASTActionBase {
+class SimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions> {
+  typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
- protected:
-  std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
-    PluginASTActionBase::SetBasePath(InputFile);
-    PluginASTActionBase::SetRealOutputPath(InputFile);
+protected:
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef InputFile) {
+    Parent::Options->setInputFile(InputFile);
 
     llvm::raw_fd_ostream *OS =
-      CI.createOutputFile(PluginASTActionBase::RealOutputPath,
+      CI.createOutputFile(Parent::Options->outputFile,
                           Binary,
                           RemoveFileOnSignal,
                           "",
@@ -92,42 +113,25 @@ class SimplePluginASTAction : public PluginASTAction, PluginASTActionBase {
       return nullptr;
     }
 
-    // /!\ T must make a local copy of the strings passed by reference here.
-    return std::unique_ptr<ASTConsumer>(
-      new T(CI,
-            InputFile,
-            PluginASTActionBase::BasePath,
-            PluginASTActionBase::DeduplicationServicePath,
-            *OS));
+    return std::unique_ptr<
+    clang::ASTConsumer>(new T(CI, std::move(Parent::Options), *OS));
   }
-
-  bool ParseArgs(const CompilerInstance &CI,
-                 const std::vector<std::string>& args) {
-    return PluginASTActionBase::ParseArgs(CI, args);
-  }
-
 };
 
-template <class T>
-class NoOpenSimplePluginASTAction : public PluginASTAction, PluginASTActionBase {
+template <
+  class T,
+  class PluginASTOptions = PluginASTOptionsBase
+>
+class NoOpenSimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions> {
+  typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
 protected:
-  std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, llvm::StringRef InputFile) {
-    PluginASTActionBase::SetBasePath(InputFile);
-    PluginASTActionBase::SetRealOutputPath(InputFile);
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+    Parent::Options->setInputFile(inputFile);
 
-    // /!\ T must make a local copy of the strings passed by reference here.
-    return std::unique_ptr<ASTConsumer>(
-       new T(CI,
-             InputFile,
-             PluginASTActionBase::BasePath,
-             PluginASTActionBase::DeduplicationServicePath,
-             PluginASTActionBase::RealOutputPath));
+    std::string outputFile = Parent::Options->outputFile;
+    return std::unique_ptr<clang::ASTConsumer>(new T(CI, std::move(Parent::Options), outputFile));
   }
-
-  bool ParseArgs(const CompilerInstance &CI,
-                 const std::vector<std::string>& args) {
-    return PluginASTActionBase::ParseArgs(CI, args);
-  }
-
 };
+
+}

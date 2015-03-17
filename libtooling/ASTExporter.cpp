@@ -22,37 +22,32 @@
 namespace {
 
   using namespace ASTLib;
+  using namespace ASTPluginLib;
 
-  template <class ATDWriter>
+  template <class ATDWriter=YojsonWriter>
   class ExporterASTConsumer : public ASTConsumer {
   private:
-    std::string BasePath;
-    std::string DeduplicationServicePath;
+    PluginASTOptionsBase Options;
     raw_ostream &OS;
 
   public:
-    ExporterASTConsumer(CompilerInstance &CI,
-                        StringRef InputFile,
-                        StringRef BasePath,
-                        StringRef DeduplicationServicePath,
+    ExporterASTConsumer(const CompilerInstance &CI,
+                        std::unique_ptr<PluginASTOptionsBase> &&Opts,
                         raw_ostream &OS)
-    : BasePath(BasePath),
-      DeduplicationServicePath(DeduplicationServicePath),
-      OS(OS)
-    {}
+    : Options(std::move(*Opts)), OS(OS)
+    { }
 
     virtual void HandleTranslationUnit(ASTContext &Context) {
       TranslationUnitDecl *D = Context.getTranslationUnitDecl();
-      FileUtils::DeduplicationService Dedup(DeduplicationServicePath, BasePath, Context.getSourceManager());
-      ASTExporter<ATDWriter> P(OS, Context, BasePath, DeduplicationServicePath != "" ? &Dedup : nullptr);
+      ASTExporter<ATDWriter> P(OS, Context, Options);
       P.dumpDecl(D);
     }
   };
 
 }
 
-typedef SimplePluginASTAction<ExporterASTConsumer<JsonWriter>> JsonExporterASTAction;
-typedef SimplePluginASTAction<ExporterASTConsumer<YojsonWriter>> YojsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter>> JsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<YojsonWriter>> YojsonExporterASTAction;
 
 static FrontendPluginRegistry::Add<JsonExporterASTAction>
 X("JsonASTExporter", "Export the AST of source files into ATD-specified Json data");
