@@ -62,4 +62,33 @@ namespace FileServices {
     return result;
   }
 
+  const std::string &TranslationService::findOriginalFile(const std::string &path) {
+    auto I = cache.find(path);
+    auto E = cache.end();
+    if (I != E) {
+      return I->second;
+    }
+
+    char *file = create_filename("copy", servicePath, path);
+    std::string result = path;
+    std::ifstream fin(file);
+    if (fin.is_open()) {
+      // Read the real path behind a copied path.
+      std::getline(fin, result);
+    }
+
+    free(file);
+    cache[path] = result;
+    return cache[path];
+  }
+
+  void TranslationService::recordCopiedFile(const std::string &copiedPath, const std::string &realPath) {
+    char *file = create_filename("copy", servicePath, copiedPath);
+    int fd = open(file, O_CREAT | O_EXCL | O_WRONLY, 0644);
+    dprintf(fd, "%s\n", realPath.c_str());
+    close(fd);
+
+    free(file);
+  }
+
 }

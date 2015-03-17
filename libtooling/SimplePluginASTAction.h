@@ -42,6 +42,9 @@ struct PluginASTOptionsBase {
   /* Deduplication service: whether certain files should be visited once. */
   std::unique_ptr<FileServices::DeduplicationService> deduplicationService;
 
+  /* Translation service: whether certain copied source files should be translated back to the original name. */
+  std::unique_ptr<FileServices::TranslationService> translationService;
+
   typedef std::unordered_map<std::string, std::string> argmap_t;
 
   static argmap_t makeMap(const std::vector<std::string> &args);

@@ -45,3 +45,9 @@ add_library(
 target_link_libraries(
   FacebookClangPlugin
 )
+
+add_executable(record_copied_file
+  FileServices.h
+  FileServices.cpp
+  record_copied_file.cpp
+)

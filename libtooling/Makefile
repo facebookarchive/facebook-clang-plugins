@@ -25,7 +25,7 @@ EXTS+=.json
 PLUGINS+=YojsonASTExporter
 EXTS+=.yjson
 
-all: build/FacebookClangPlugin.dylib
+all: build/FacebookClangPlugin.dylib build/record_copied_file
 
 # hook to optional external sources
 include $(LEVEL)/Makefile.extra
@@ -40,6 +40,9 @@ CLANG_FRONTEND=$(CLANG) -fsyntax-only -Xpreprocessor -detailed-preprocessing-rec
 build/FacebookClangPlugin.dylib: $(OBJS:%=build/%) $(HEADERS)
 	@mkdir -p build
 	$(CXX) $(LDFLAGS) -o $@ $(OBJS:%=build/%) -lz -lpthread -lm
+
+build/record_copied_file: build/record_copied_file.o build/FileServices.o $(HEADERS)
+	$(CXX) -o $@ build/record_copied_file.o build/FileServices.o
 
 TEST_DIRS=tests
 ifneq "$(EXTRA_DIR)" ""
