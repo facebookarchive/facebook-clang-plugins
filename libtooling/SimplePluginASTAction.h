@@ -26,8 +26,12 @@
 namespace ASTPluginLib {
 
 struct PluginASTOptionsBase {
+  // source file being parsed
   std::string inputFile;
+  // output file for the plugin
   std::string outputFile;
+  // object file produced by the usual frontend (possibly empty)
+  std::string objectFile;
 
   /* Will contain the current directory if PREPEND_CURRENT_DIR was specified.
    * The intention is to make file paths in the AST absolute if needed.
@@ -59,11 +63,9 @@ protected:
 public:
   void loadValuesFromEnvAndMap(const argmap_t map);
 
-  void setOutputFile(const std::string &path);
-
-  // This should be called last.
-  // It will also finalize the output file in case of a pattern "%.bla".
-  void setInputFile(const std::string &path);
+  // This should be called after outputFile has been set, so as to finalize
+  // the output file in case a pattern "%.bla" was given.
+  void setObjectFile(const std::string &path);
 
   std::string normalizeSourcePath(std::string path) const;
 
@@ -79,7 +81,7 @@ protected:
     std::vector<std::string> args = args_;
     Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
     if (args.size() > 0) {
-      Options->setOutputFile(args[0]);
+      Options->outputFile = args[0];
       args.erase(args.begin());
     }
     Options->loadValuesFromEnvAndMap(PluginASTOptions::makeMap(args));
@@ -100,8 +102,9 @@ class SimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions>
   typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
 protected:
-  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef InputFile) {
-    Parent::Options->setInputFile(InputFile);
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+    Parent::Options->inputFile = inputFile;
+    Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
     llvm::raw_fd_ostream *OS =
       CI.createOutputFile(Parent::Options->outputFile,
@@ -130,7 +133,8 @@ class NoOpenSimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOp
 
 protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
-    Parent::Options->setInputFile(inputFile);
+    Parent::Options->inputFile = inputFile;
+    Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
     std::string outputFile = Parent::Options->outputFile;
     return std::unique_ptr<clang::ASTConsumer>(new T(CI, std::move(Parent::Options), outputFile));

@@ -21,7 +21,7 @@
 #include "SimplePluginASTAction.h"
 
 namespace ASTPluginLib {
-  
+
   /**
    * The actual prefix to prepend to environment variables (but not for the command line).
    */
@@ -95,13 +95,9 @@ namespace ASTPluginLib {
     }
   }
 
-  void PluginASTOptionsBase::setOutputFile(const std::string &path) {
-    outputFile = path;
-  }
-
-  void PluginASTOptionsBase::setInputFile(const std::string &path) {
-    inputFile = path;
-    if (outputFile.size() > 0 and outputFile[0] == '%') {
+  void PluginASTOptionsBase::setObjectFile(const std::string &path) {
+    objectFile = path;
+    if (path != "" && outputFile.size() > 0 && outputFile[0] == '%') {
       outputFile = path + outputFile.substr(1);
     }
   }
