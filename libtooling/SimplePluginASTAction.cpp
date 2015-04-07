@@ -12,6 +12,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <iostream>
 #include <stdlib.h>
 
 #include <llvm/Support/Path.h>
@@ -57,7 +58,37 @@ namespace ASTPluginLib {
   bool PluginASTOptionsBase::loadBool(const argmap_t &map, const char *key, bool &val) {
     std::string s_val;
     if (loadString(map, key, s_val)) {
+      errno = 0;
       val = (bool)strtol(s_val.c_str(), nullptr, 10);
+      if (errno) {
+        std::cerr << "[!] Failed to read a bool from " << key << "\n";
+      }
+      return true;
+    }
+    return false;
+  }
+
+  bool PluginASTOptionsBase::loadInt(const argmap_t &map, const char *key, long &val) {
+    std::string s_val;
+    if (loadString(map, key, s_val)) {
+      errno = 0;
+      val = strtol(s_val.c_str(), nullptr, 10);
+      if (errno) {
+        std::cerr << "[!] Failed to read an int from " << key << "\n";
+      }
+      return true;
+    }
+    return false;
+  }
+
+  bool PluginASTOptionsBase::loadUnsignedInt(const argmap_t &map, const char *key, unsigned long &val) {
+    std::string s_val;
+    if (loadString(map, key, s_val)) {
+      errno = 0;
+      val = strtoul(s_val.c_str(), nullptr, 10);
+      if (errno) {
+        std::cerr << "[!] Failed to read an unsigned int from " << key << "\n";
+      }
       return true;
     }
     return false;

@@ -60,6 +60,10 @@ protected:
 
   static bool loadBool(const argmap_t &map, const char *key, bool &val);
 
+  static bool loadInt(const argmap_t &map, const char *key, long &val);
+
+  static bool loadUnsignedInt(const argmap_t &map, const char *key, unsigned long &val);
+
 public:
   void loadValuesFromEnvAndMap(const argmap_t map);
 
