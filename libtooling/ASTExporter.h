@@ -424,13 +424,7 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   {
     ArrayScope Scope(OF);
     for (auto I : DC->decls()) {
-      if (Options.deduplicationService == nullptr
-          || FileUtils::shouldTraverseDeclFile(*Options.deduplicationService,
-                                               Options.basePath,
-                                               DC->getParentASTContext().getSourceManager(),
-                                               *I)) {
-        dumpDecl(I);
-      }
+      dumpDecl(I);
     }
   }
   {

@@ -96,7 +96,6 @@ namespace ASTPluginLib {
 
   void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
     bool needBasePath = false;
-    std::string tempDirDeduplication;
     std::string tempDirTranslation;
 
     // Possibly override the first argument given on the command line.
@@ -106,7 +105,6 @@ namespace ASTPluginLib {
     loadString(map, "MAKE_RELATIVE_TO", repoRoot);
     loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
 
-    loadString(map, "USE_TEMP_DIR_FOR_DEDUPLICATION", tempDirDeduplication);
     loadString(map, "USE_TEMP_DIR_FOR_COPIED_PATHS", tempDirTranslation);
 
     if (needBasePath) {
@@ -118,9 +116,6 @@ namespace ASTPluginLib {
       }
     }
 
-    if (tempDirDeduplication != "") {
-      deduplicationService.reset(new FileServices::DeduplicationService(tempDirDeduplication));
-    }
     if (tempDirTranslation != "") {
       translationService.reset(new FileServices::TranslationService(tempDirTranslation));
     }

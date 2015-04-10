@@ -68,14 +68,11 @@ endif
 test: build/FacebookClangPlugin.dylib
 	@for P in $(PLUGINS); do                                                        \
 	   echo "-- $$P --";                                                            \
-	   rm -rf build/tmp_$$P;                                                        \
-	   mkdir -p build/tmp_$$P;                                                      \
 	   for EXPFILE in $(EXPFILES_FORMULA); do                                       \
 	     TEST=$${EXPFILE%.exp};                                                     \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
 	       $(CLANG_FRONTEND) -ObjC++ --std=c++11 -Xclang -plugin -Xclang $$P        \
 	       -Xclang -plugin-arg-$$P -Xclang -                                 \
-	       -Xclang -plugin-arg-$$P -Xclang USE_TEMP_DIR_FOR_DEDUPLICATION=build/tmp_$$P \
 	       -c $(SRCFILE_FORMULA);                                                   \
 	   done;                                                                        \
 	done

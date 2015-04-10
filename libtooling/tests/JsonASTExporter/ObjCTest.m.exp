@@ -17,7 +17,7 @@
    1 DictionarySubscript
    2 ExprWithCleanups
    9 Function
-   1 FunctionDecl
+   2 FunctionDecl
    9 FunctionToPointerDecay
    1 GotoStmt
   71 ImplicitCastExpr
@@ -45,12 +45,12 @@
    1 ObjCEncodeExpr
    1 ObjCImplementation
    1 ObjCImplementationDecl
-   5 ObjCInterface
-   2 ObjCInterfaceDecl
+  10 ObjCInterface
+   8 ObjCInterfaceDecl
    4 ObjCIvar
    4 ObjCIvarDecl
   22 ObjCMessageExpr
-  14 ObjCMethodDecl
+  27 ObjCMethodDecl
   18 ObjCProperty
    5 ObjCPropertyDecl
    4 ObjCPropertyImplDecl
@@ -64,7 +64,7 @@
   69 OpaqueValueExpr
    7 ParenExpr
   20 ParmVar
-  19 ParmVarDecl
+  30 ParmVarDecl
    4 Private
    7 PropertyRef
    9 PseudoObjectExpr
@@ -73,13 +73,13 @@
   16 StringLiteral
    4 Synthesize
    1 TranslationUnitDecl
-   3 Type
-   6 TypedefDecl
+   5 Type
+   8 TypedefDecl
    3 Unsafe_unretained
    8 Var
    4 VarDecl
    4 access_control
-  70 attributes
+ 103 attributes
   79 base_path
   18 bitwidth
    7 body
@@ -87,40 +87,41 @@
   79 cast_kind
    1 category_decl
    4 class_interface
- 848 column
+ 914 column
   60 decl_ref
    2 decl_refs
-  41 desugared
-  29 file
+  60 desugared
+  30 file
    6 implementation
    3 init_expr
   17 is_implicit
-  14 is_instance_method
+  22 is_instance_method
    7 is_messaging_setter
   18 is_signed
    4 is_synthesize
-  15 is_this_declaration_referenced
-  12 is_used
+  18 is_this_declaration_referenced
+  13 is_used
    4 ivar_decl
- 107 kind
+ 112 kind
    1 label
- 142 line
-  89 name
+ 170 line
+  94 name
    7 object_kind
-  14 parameters
- 435 pointer
+  22 parameters
+ 468 pointer
    5 property_attributes
    4 property_decl
    1 protocols
  411 qual_type
- 464 raw
+ 489 raw
    2 receiver_kind
-  14 result_type
+  27 result_type
   22 selector
   69 source_expr
- 434 source_range
+ 467 source_range
+   1 storage_class
    2 sub_expr
-   1 super
+   6 super
   18 value
  106 value_kind
    4 variable
