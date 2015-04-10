@@ -1,4 +1,4 @@
-Facebook clang plugins
+Facebook Clang Plugins
 ======================
 
 This [repository](https://github.com/facebook/facebook-clang-plugins) aims to share some useful clang plugins developed at Facebook.
