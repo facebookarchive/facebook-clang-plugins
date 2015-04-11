@@ -1,36 +1,456 @@
-   1 CStyleCastExpr
-   1 CXXFunctionalCastExpr
-   2 DeclRefExpr
-   4 ImplicitCastExpr
-   1 IntegerLiteral
-   2 IntegralCast
-   2 LValue
-   2 LValueToRValue
-   2 NoOp
-   6 NoType
-   1 ObjCInterfaceDecl
-   1 TranslationUnitDecl
-   6 TypedefDecl
-   2 Var
-   3 VarDecl
-  11 attributes
-   6 base_path
-   1 bitwidth
-   6 cast_kind
-  24 column
-   2 decl_ref
-   1 file
-   3 init_expr
-   7 is_implicit
-   1 is_signed
-   1 is_this_declaration_referenced
-   1 is_used
-   2 kind
-   3 line
-   2 name
-  20 pointer
-  11 qual_type
-  16 raw
-  20 source_range
-   1 value
-   2 value_kind
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : "0x0",
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/c_cast.cpp",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "column" : 9
+          }
+        ),
+        "is_used" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "i",
+      {
+        "raw" : "int"
+      },
+      {
+        "init_expr" : <"IntegerLiteral" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 9
+              },
+              {
+                "column" : 9
+              }
+            )
+          },
+          [
+          ],
+          {
+            "qual_type" : {
+              "raw" : "int"
+            }
+          },
+          {
+            "is_signed" : true,
+            "bitwidth" : 32,
+            "value" : "10"
+          }
+        )>
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 2,
+            "column" : 1
+          },
+          {
+            "column" : 17
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "l",
+      {
+        "raw" : "long"
+      },
+      {
+        "init_expr" : <"CStyleCastExpr" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 17
+              }
+            )
+          },
+          [
+            <"ImplicitCastExpr" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 17
+                  },
+                  {
+                    "column" : 17
+                  }
+                )
+              },
+              [
+                <"ImplicitCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 17
+                      },
+                      {
+                        "column" : 17
+                      }
+                    )
+                  },
+                  [
+                    <"DeclRefExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 17
+                          },
+                          {
+                            "column" : 17
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : <"Var">,
+                          "name" : "i",
+                          "qual_type" : {
+                            "raw" : "int"
+                          }
+                        }
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "int"
+                    }
+                  },
+                  {
+                    "cast_kind" : <"LValueToRValue">,
+                    "base_path" : [
+                    ]
+                  }
+                )>
+              ],
+              {
+                "qual_type" : {
+                  "raw" : "long"
+                }
+              },
+              {
+                "cast_kind" : <"IntegralCast">,
+                "base_path" : [
+                ]
+              }
+            )>
+          ],
+          {
+            "qual_type" : {
+              "raw" : "long"
+            }
+          },
+          {
+            "cast_kind" : <"NoOp">,
+            "base_path" : [
+            ]
+          },
+          {
+            "raw" : "long"
+          }
+        )>
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 3,
+            "column" : 1
+          },
+          {
+            "column" : 17
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "m",
+      {
+        "raw" : "long"
+      },
+      {
+        "init_expr" : <"CXXFunctionalCastExpr" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 17
+              }
+            )
+          },
+          [
+            <"ImplicitCastExpr" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 16
+                  },
+                  {
+                    "column" : 16
+                  }
+                )
+              },
+              [
+                <"ImplicitCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 16
+                      },
+                      {
+                        "column" : 16
+                      }
+                    )
+                  },
+                  [
+                    <"DeclRefExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 16
+                          },
+                          {
+                            "column" : 16
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : <"Var">,
+                          "name" : "i",
+                          "qual_type" : {
+                            "raw" : "int"
+                          }
+                        }
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "int"
+                    }
+                  },
+                  {
+                    "cast_kind" : <"LValueToRValue">,
+                    "base_path" : [
+                    ]
+                  }
+                )>
+              ],
+              {
+                "qual_type" : {
+                  "raw" : "long"
+                }
+              },
+              {
+                "cast_kind" : <"IntegralCast">,
+                "base_path" : [
+                ]
+              }
+            )>
+          ],
+          {
+            "qual_type" : {
+              "raw" : "long"
+            }
+          },
+          {
+            "cast_kind" : <"NoOp">,
+            "base_path" : [
+            ]
+          },
+          {
+            "raw" : "long"
+          }
+        )>
+      }
+    )>
+  ],
+  {
+  }
+)>

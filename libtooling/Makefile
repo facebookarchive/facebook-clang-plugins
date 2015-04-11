@@ -68,6 +68,7 @@ endif
 test: build/FacebookClangPlugin.dylib
 	@for P in $(PLUGINS); do                                                        \
 	   echo "-- $$P --";                                                            \
+	   export CLANG_FRONTEND_PLUGIN__AST_WITH_POINTERS=0;                           \
 	   for EXPFILE in $(EXPFILES_FORMULA); do                                       \
 	     TEST=$${EXPFILE%.exp};                                                     \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \

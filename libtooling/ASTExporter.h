@@ -50,6 +50,16 @@
 
 namespace ASTLib {
 
+struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
+  bool withPointers = true;
+
+  void loadValuesFromEnvAndMap(const ASTPluginLib::PluginASTOptionsBase::argmap_t &map)  {
+    ASTPluginLib::PluginASTOptionsBase::loadValuesFromEnvAndMap(map);
+    loadBool(map, "AST_WITH_POINTERS", withPointers);
+  }
+
+};
+
 using namespace clang;
 using namespace clang::comments;
 
@@ -68,7 +78,7 @@ class ASTExporter :
   typedef typename ATDWriter::VariantScope VariantScope;
   ATDWriter OF;
 
-  const ASTPluginLib::PluginASTOptionsBase &Options;
+  const ASTExporterOptions &Options;
 
   const CommandTraits &Traits;
   const SourceManager &SM;
@@ -91,7 +101,7 @@ class ASTExporter :
   const FullComment *FC;
 
 public:
-  ASTExporter(raw_ostream &OS, ASTContext &Context, const ASTPluginLib::PluginASTOptionsBase &Opts)
+  ASTExporter(raw_ostream &OS, ASTContext &Context, const ASTExporterOptions &Opts)
     : OF(OS),
       Options(Opts),
       Traits(Context.getCommentCommandTraits()),
@@ -283,15 +293,20 @@ public:
 /// \atd
 /// type pointer = string
 template <class ATDWriter>
-static void writePointer(ATDWriter &OF, const void *Ptr) {
-  char str[20];
-  snprintf(str, 20, "%p", Ptr);
-  OF.emitString(std::string(str));
+void writePointer(ATDWriter &OF, bool withPointers, const void *Ptr) {
+  if (withPointers) {
+    char str[20];
+    snprintf(str, 20, "%p", Ptr);
+    OF.emitString(str);
+  } else {
+    // %p seems to print (nil) on Linux.
+    OF.emitString("0x0");
+  }
 }
 
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
-  writePointer(OF, Ptr);
+  writePointer(OF, Options.withPointers, Ptr);
 }
 
 /// \atd
@@ -533,32 +548,32 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &A) {
 /// | Previous of pointer
 /// ]
 template <class ATDWriter>
-static void dumpPreviousDeclImpl(ATDWriter &OF, ...) {}
+static void dumpPreviousDeclImpl(ATDWriter &OF, bool withPointers, ...) {}
 
 template <class ATDWriter, typename T>
-static void dumpPreviousDeclImpl(ATDWriter &OF, const Mergeable<T> *D) {
+static void dumpPreviousDeclImpl(ATDWriter &OF, bool withPointers, const Mergeable<T> *D) {
   const T *First = D->getFirstDecl();
   if (First != D) {
     OF.emitTag("previous_decl");
     typename ATDWriter::VariantScope Scope(OF, "First");
-    writePointer(OF, First);
+    writePointer(OF, withPointers, First);
   }
 }
 
 template <class ATDWriter, typename T>
-static void dumpPreviousDeclImpl(ATDWriter &OF, const Redeclarable<T> *D) {
+static void dumpPreviousDeclImpl(ATDWriter &OF, bool withPointers, const Redeclarable<T> *D) {
   const T *Prev = D->getPreviousDecl();
   if (Prev) {
     OF.emitTag("previous_decl");
     typename ATDWriter::VariantScope Scope(OF, "Previous");
-    writePointer(OF, Prev);
+    writePointer(OF, withPointers, Prev);
   }
 }
 
 /// Dump the previous declaration in the redeclaration chain for a declaration,
 /// if any.
 template <class ATDWriter>
-static void dumpPreviousDeclOptionallyWithTag(ATDWriter &OF, const Decl *D) {
+static void dumpPreviousDeclOptionallyWithTag(ATDWriter &OF, bool withPointers, const Decl *D) {
   switch (D->getKind()) {
 #define DECL(DERIVED, BASE) \
   case Decl::DERIVED: \
@@ -865,7 +880,7 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
       OF.emitTag("parent_pointer");
       dumpPointer(cast<Decl>(D->getDeclContext()));
     }
-    dumpPreviousDeclOptionallyWithTag(OF, D);
+    dumpPreviousDeclOptionallyWithTag(OF, Options.withPointers, D);
 
     OF.emitTag("source_range");
     dumpSourceRange(D->getSourceRange());

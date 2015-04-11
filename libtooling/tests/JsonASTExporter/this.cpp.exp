@@ -1,34 +1,357 @@
-   1 Assign
-   1 BinaryOperator
-   1 CXXMethodDecl
-   2 CXXRecordDecl
-   1 CXXThisExpr
-   1 CompoundStmt
-   1 FieldDecl
-   1 IntegerLiteral
-   2 LValue
-   1 MemberExpr
-   6 NoType
-   1 ObjCInterfaceDecl
-   1 TranslationUnitDecl
-   2 Type
-   6 TypedefDecl
-  12 attributes
-   1 bitwidth
-   1 body
-  18 column
-   1 file
-   1 is_arrow
-   1 is_complete_definition
-   8 is_implicit
-   1 is_signed
-   1 is_this_declaration_referenced
-   1 kind
-   9 line
-   1 name
-  18 pointer
-   4 qual_type
-   6 raw
-  17 source_range
-   1 value
-   2 value_kind
+["TranslationUnitDecl" , [
+  {
+    "pointer" : "0x0",
+    "source_range" : [
+      {
+      },
+      {
+      }
+    ],
+    "attributes" : [
+    ]
+  },
+  [
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["ObjCInterfaceDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["CXXRecordDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+            "file" : "tests/this.cpp",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "line" : 6,
+            "column" : 1
+          }
+        ],
+        "attributes" : [
+        ]
+      },
+      "T",
+      ["Type" , "class T"],
+      [
+        ["CXXRecordDecl" , [
+          {
+            "pointer" : "0x0",
+            "source_range" : [
+              {
+                "line" : 1,
+                "column" : 1
+              },
+              {
+                "column" : 7
+              }
+            ],
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "T",
+          ["Type" , "class T"],
+          [
+          ],
+          {
+          },
+          {
+          }
+        ]],
+        ["FieldDecl" , [
+          {
+            "pointer" : "0x0",
+            "source_range" : [
+              {
+                "line" : 2,
+                "column" : 5
+              },
+              {
+                "column" : 9
+              }
+            ],
+            "is_this_declaration_referenced" : true,
+            "attributes" : [
+            ]
+          },
+          "age",
+          {
+            "raw" : "int"
+          },
+          {
+          }
+        ]],
+        ["CXXMethodDecl" , [
+          {
+            "pointer" : "0x0",
+            "source_range" : [
+              {
+                "line" : 3,
+                "column" : 5
+              },
+              {
+                "line" : 5,
+                "column" : 5
+              }
+            ],
+            "attributes" : [
+            ]
+          },
+          "foo",
+          {
+            "raw" : "void (void)"
+          },
+          {
+            "body" : ["CompoundStmt" , [
+              {
+                "pointer" : "0x0",
+                "source_range" : [
+                  {
+                    "line" : 3,
+                    "column" : 16
+                  },
+                  {
+                    "line" : 5,
+                    "column" : 5
+                  }
+                ]
+              },
+              [
+                ["BinaryOperator" , [
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : [
+                      {
+                        "line" : 4,
+                        "column" : 7
+                      },
+                      {
+                        "column" : 19
+                      }
+                    ]
+                  },
+                  [
+                    ["MemberExpr" , [
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : [
+                          {
+                            "column" : 7
+                          },
+                          {
+                            "column" : 13
+                          }
+                        ]
+                      },
+                      [
+                        ["CXXThisExpr" , [
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : [
+                              {
+                                "column" : 7
+                              },
+                              {
+                                "column" : 7
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "class T *"
+                            }
+                          }
+                        ]]
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        },
+                        "value_kind" : ["LValue"]
+                      },
+                      {
+                        "is_arrow" : true,
+                        "name" : "age",
+                        "pointer" : "0x0"
+                      }
+                    ]],
+                    ["IntegerLiteral" , [
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : [
+                          {
+                            "column" : 19
+                          },
+                          {
+                            "column" : 19
+                          }
+                        ]
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        }
+                      },
+                      {
+                        "is_signed" : true,
+                        "bitwidth" : 32,
+                        "value" : "1"
+                      }
+                    ]]
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "int"
+                    },
+                    "value_kind" : ["LValue"]
+                  },
+                  {
+                    "kind" : ["Assign"]
+                  }
+                ]]
+              ]
+            ]]
+          }
+        ]]
+      ],
+      {
+      },
+      {
+        "is_complete_definition" : true
+      }
+    ]]
+  ],
+  {
+  }
+]]

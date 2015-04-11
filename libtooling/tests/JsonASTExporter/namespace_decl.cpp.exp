@@ -1,18 +1,223 @@
-   1 Namespace
-   3 NamespaceDecl
-   6 NoType
-   1 ObjCInterfaceDecl
-   1 Previous
-   1 TranslationUnitDecl
-   6 TypedefDecl
-  11 attributes
-   6 column
-   1 file
-   7 is_implicit
-   1 kind
-   6 line
-   1 name
-   1 original_namespace
-  11 pointer
-   1 previous_decl
-  11 source_range
+["TranslationUnitDecl" , [
+  {
+    "pointer" : "0x0",
+    "source_range" : [
+      {
+      },
+      {
+      }
+    ],
+    "attributes" : [
+    ]
+  },
+  [
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["ObjCInterfaceDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      ["NoType"],
+      {
+      }
+    ]],
+    ["NamespaceDecl" , [
+      {
+        "pointer" : "0x0",
+        "source_range" : [
+          {
+            "file" : "tests/namespace_decl.cpp",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "line" : 6,
+            "column" : 1
+          }
+        ],
+        "attributes" : [
+        ]
+      },
+      "Q",
+      [
+        ["NamespaceDecl" , [
+          {
+            "pointer" : "0x0",
+            "source_range" : [
+              {
+                "line" : 2,
+                "column" : 3
+              },
+              {
+                "line" : 3,
+                "column" : 3
+              }
+            ],
+            "attributes" : [
+            ]
+          },
+          "V",
+          [
+          ],
+          {
+          },
+          {
+          }
+        ]],
+        ["NamespaceDecl" , [
+          {
+            "pointer" : "0x0",
+            "source_range" : [
+              {
+                "line" : 4,
+                "column" : 3
+              },
+              {
+                "line" : 5,
+                "column" : 3
+              }
+            ],
+            "attributes" : [
+            ]
+          },
+          "V",
+          [
+          ],
+          {
+          },
+          {
+            "original_namespace" : {
+              "kind" : ["Namespace"],
+              "name" : "V"
+            }
+          }
+        ]]
+      ],
+      {
+      },
+      {
+      }
+    ]]
+  ],
+  {
+  }
+]]

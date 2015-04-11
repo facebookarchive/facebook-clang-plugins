@@ -1,42 +1,555 @@
-   1 AccessSpecDecl
-   2 CXXConstCastExpr
-   1 CXXMemberCallExpr
-   1 CXXMethodDecl
-   2 CXXRecordDecl
-   2 CompoundStmt
-   3 DeclRefExpr
-   1 DeclStmt
-   1 FunctionDecl
-   5 LValue
-   1 MemberExpr
-   2 NoOp
-   6 NoType
-   1 ObjCInterfaceDecl
-   2 ParmVar
-   1 ParmVarDecl
-   1 TranslationUnitDecl
-   2 Type
-   6 TypedefDecl
-   1 Var
-   1 VarDecl
-  15 attributes
-   2 base_path
-   2 body
-   2 cast_kind
-  34 column
-   3 decl_ref
-   1 file
-   1 init_expr
-   1 is_complete_definition
-   8 is_implicit
-   4 is_this_declaration_referenced
-   3 is_used
-   3 kind
-  11 line
-   4 name
-   1 parameters
-  26 pointer
-  10 qual_type
-  16 raw
-  25 source_range
-   5 value_kind
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : "0x0",
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"CXXRecordDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/const_cast.cpp",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "line" : 4,
+            "column" : 1
+          }
+        ),
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "Foo",
+      <"Type" : "class Foo">,
+      [
+        <"CXXRecordDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 1,
+                "column" : 1
+              },
+              {
+                "column" : 7
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "Foo",
+          <"Type" : "class Foo">,
+          [
+          ],
+          {
+          },
+          {
+          }
+        )>,
+        <"AccessSpecDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 2,
+                "column" : 1
+              },
+              {
+                "column" : 7
+              }
+            ),
+            "attributes" : [
+            ]
+          }
+        )>,
+        <"CXXMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 3,
+                "column" : 3
+              },
+              {
+                "column" : 16
+              }
+            ),
+            "is_used" : true,
+            "is_this_declaration_referenced" : true,
+            "attributes" : [
+            ]
+          },
+          "func",
+          {
+            "raw" : "void (void)"
+          },
+          {
+            "body" : <"CompoundStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 15
+                  },
+                  {
+                    "column" : 16
+                  }
+                )
+              },
+              [
+              ]
+            )>
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "is_complete_definition" : true
+      }
+    )>,
+    <"FunctionDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 6,
+            "column" : 1
+          },
+          {
+            "line" : 9,
+            "column" : 1
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "someFunction",
+      {
+        "raw" : "void (const class Foo &)"
+      },
+      {
+        "parameters" : [
+          <"ParmVarDecl" : (
+            {
+              "pointer" : "0x0",
+              "source_range" : (
+                {
+                  "line" : 6,
+                  "column" : 20
+                },
+                {
+                  "column" : 31
+                }
+              ),
+              "is_used" : true,
+              "is_this_declaration_referenced" : true,
+              "attributes" : [
+              ]
+            },
+            "f",
+            {
+              "raw" : "const class Foo &"
+            },
+            {
+            }
+          )>
+        ],
+        "body" : <"CompoundStmt" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 36
+              },
+              {
+                "line" : 9,
+                "column" : 1
+              }
+            )
+          },
+          [
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 7,
+                    "column" : 3
+                  },
+                  {
+                    "column" : 34
+                  }
+                )
+              },
+              [
+                <"CXXConstCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 15
+                      },
+                      {
+                        "column" : 33
+                      }
+                    )
+                  },
+                  [
+                    <"DeclRefExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 32
+                          },
+                          {
+                            "column" : 32
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "const class Foo"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : <"ParmVar">,
+                          "name" : "f",
+                          "qual_type" : {
+                            "raw" : "const class Foo &"
+                          }
+                        }
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "class Foo"
+                    },
+                    "value_kind" : <"LValue">
+                  },
+                  {
+                    "cast_kind" : <"NoOp">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "class Foo &"
+                  },
+                  "const_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 3
+                      },
+                      {
+                        "column" : 33
+                      }
+                    ),
+                    "is_used" : true,
+                    "is_this_declaration_referenced" : true,
+                    "attributes" : [
+                    ]
+                  },
+                  "fRef",
+                  {
+                    "raw" : "class Foo &"
+                  },
+                  {
+                    "init_expr" : <"CXXConstCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 15
+                          },
+                          {
+                            "column" : 33
+                          }
+                        )
+                      },
+                      [
+                        <"DeclRefExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 32
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "const class Foo"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : <"ParmVar">,
+                              "name" : "f",
+                              "qual_type" : {
+                                "raw" : "const class Foo &"
+                              }
+                            }
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "class Foo"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "cast_kind" : <"NoOp">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "class Foo &"
+                      },
+                      "const_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"CXXMemberCallExpr" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 8,
+                    "column" : 3
+                  },
+                  {
+                    "column" : 13
+                  }
+                )
+              },
+              [
+                <"MemberExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 3
+                      },
+                      {
+                        "column" : 8
+                      }
+                    )
+                  },
+                  [
+                    <"DeclRefExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 3
+                          },
+                          {
+                            "column" : 3
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "class Foo"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : <"Var">,
+                          "name" : "fRef",
+                          "qual_type" : {
+                            "raw" : "class Foo &"
+                          }
+                        }
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "<bound member function type>"
+                    }
+                  },
+                  {
+                    "name" : "func",
+                    "pointer" : "0x0"
+                  }
+                )>
+              ],
+              {
+                "qual_type" : {
+                  "raw" : "void"
+                }
+              }
+            )>
+          ]
+        )>
+      }
+    )>
+  ],
+  {
+  }
+)>

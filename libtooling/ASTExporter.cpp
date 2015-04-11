@@ -27,12 +27,12 @@ namespace {
   template <class ATDWriter=YojsonWriter>
   class ExporterASTConsumer : public ASTConsumer {
   private:
-    PluginASTOptionsBase Options;
+    ASTExporterOptions Options;
     raw_ostream &OS;
 
   public:
     ExporterASTConsumer(const CompilerInstance &CI,
-                        std::unique_ptr<PluginASTOptionsBase> &&Opts,
+                        std::unique_ptr<ASTExporterOptions> &&Opts,
                         raw_ostream &OS)
     : Options(std::move(*Opts)), OS(OS)
     { }
@@ -46,8 +46,8 @@ namespace {
 
 }
 
-typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter>> JsonExporterASTAction;
-typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<YojsonWriter>> YojsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter>, ASTExporterOptions> JsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<YojsonWriter>, ASTExporterOptions> YojsonExporterASTAction;
 
 static FrontendPluginRegistry::Add<JsonExporterASTAction>
 X("JsonASTExporter", "Export the AST of source files into ATD-specified Json data");

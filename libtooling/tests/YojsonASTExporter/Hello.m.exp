@@ -1,71 +1,2010 @@
-   2 BinaryOperator
-   1 CallExpr
-   1 Class
-   5 CompoundStmt
-   6 DeclRefExpr
-   1 DeclStmt
-   1 ForStmt
-   1 Function
-   2 FunctionDecl
-   1 FunctionToPointerDecay
-   1 GT
-   1 IfStmt
-   5 ImplicitCastExpr
-   5 IntegerLiteral
-   1 LT
-   7 LValue
-   4 LValueToRValue
-   3 NoType
-   3 NullStmt
-   1 ObjCAutoreleasePoolStmt
-   1 ObjCImplementation
-   1 ObjCImplementationDecl
-   7 ObjCInterface
-   8 ObjCInterfaceDecl
-   2 ObjCMessageExpr
-  15 ObjCMethodDecl
-   1 ObjCStringLiteral
-   2 ParmVar
-  15 ParmVarDecl
-   1 PostInc
-   1 ReturnStmt
-   1 StringLiteral
-   1 TranslationUnitDecl
-   5 Type
-   8 TypedefDecl
-   1 UnaryOperator
-   3 Var
-   1 VarDecl
-  51 attributes
-   5 base_path
-   5 bitwidth
-   2 body
-   5 cast_kind
-   1 class_interface
- 154 column
-   6 decl_ref
-  20 desugared
-   2 file
-   1 implementation
-   1 init_expr
-   7 is_implicit
-  10 is_instance_method
-   1 is_postfix
-   5 is_signed
-   8 is_this_declaration_referenced
-   3 is_used
-  17 kind
-  57 line
-  14 name
-  11 parameters
-  88 pointer
-  30 qual_type
-  64 raw
-   1 receiver_kind
-  15 result_type
-   2 selector
-  88 source_range
-   1 storage_class
-   6 super
-   5 value
-   7 value_kind
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : "0x0",
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      <"Type" : "SEL *">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      <"Type" : "id">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      <"Type" : "Class">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/FoundationStub.h",
+            "line" : 3,
+            "column" : 1
+          },
+          {
+            "column" : 13
+          }
+        ),
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "BOOL",
+      <"Type" : "int">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 4,
+            "column" : 1
+          },
+          {
+            "column" : 22
+          }
+        ),
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "NSUInteger",
+      <"Type" : "unsigned int">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 11,
+            "column" : 1
+          },
+          {
+            "line" : 22,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "NSObject",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 13,
+                "column" : 1
+              },
+              {
+                "column" : 22
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "alloc",
+          {
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            }
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 14,
+                "column" : 1
+              },
+              {
+                "column" : 20
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "new",
+          {
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            }
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 15,
+                "column" : 1
+              },
+              {
+                "column" : 28
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "autorelease",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            }
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 16,
+                "column" : 1
+              },
+              {
+                "column" : 21
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "init",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            }
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 17,
+                "column" : 1
+              },
+              {
+                "column" : 15
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "class",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "Class",
+              "desugared" : "Class"
+            }
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 19,
+                "column" : 1
+              },
+              {
+                "column" : 34
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "respondsToSelector:",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "BOOL",
+              "desugared" : "int"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 29
+                    },
+                    {
+                      "column" : 33
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "s",
+                {
+                  "raw" : "SEL",
+                  "desugared" : "SEL *"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 20,
+                "column" : 1
+              },
+              {
+                "column" : 41
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "conformsToProtocol:",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "BOOL",
+              "desugared" : "int"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 29
+                    },
+                    {
+                      "column" : 40
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "p",
+                {
+                  "raw" : "Protocol *"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 25,
+            "column" : 1
+          },
+          {
+            "line" : 27,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "NSNumber",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 26,
+                "column" : 1
+              },
+              {
+                "column" : 37
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "numberWithInt:",
+          {
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 32
+                    },
+                    {
+                      "column" : 36
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "x",
+                {
+                  "raw" : "int"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "NSObject"
+        }
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 29,
+            "column" : 1
+          },
+          {
+            "line" : 31,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "NSString",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 30,
+                "column" : 1
+              },
+              {
+                "column" : 21
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "length",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "NSUInteger",
+              "desugared" : "unsigned int"
+            }
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "NSObject"
+        }
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 33,
+            "column" : 1
+          },
+          {
+            "line" : 36,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "NSDictionary",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 34,
+                "column" : 1
+              },
+              {
+                "column" : 109
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "dictionaryWithObjects:forKeys:count:",
+          {
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 46
+                    },
+                    {
+                      "column" : 52
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "objects",
+                {
+                  "raw" : "const id *",
+                  "desugared" : "const id *"
+                },
+                {
+                }
+              )>,
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 75
+                    },
+                    {
+                      "column" : 81
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "keys",
+                {
+                  "raw" : "const id *",
+                  "desugared" : "const id *"
+                },
+                {
+                }
+              )>,
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 93
+                    },
+                    {
+                      "column" : 104
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "count",
+                {
+                  "raw" : "NSUInteger",
+                  "desugared" : "unsigned int"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 35,
+                "column" : 1
+              },
+              {
+                "column" : 38
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "objectForKeyedSubscript:",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "id",
+              "desugared" : "id"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 32
+                    },
+                    {
+                      "column" : 35
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "key",
+                {
+                  "raw" : "id",
+                  "desugared" : "id"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "NSObject"
+        }
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 38,
+            "column" : 1
+          },
+          {
+            "line" : 41,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "NSArray",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 39,
+                "column" : 1
+              },
+              {
+                "column" : 64
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "arrayWithObjects:count:",
+          {
+            "result_type" : {
+              "raw" : "instancetype",
+              "desugared" : "id"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 35
+                    },
+                    {
+                      "column" : 40
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "objs",
+                {
+                  "raw" : "id *"
+                },
+                {
+                }
+              )>,
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 52
+                    },
+                    {
+                      "column" : 61
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "cnt",
+                {
+                  "raw" : "unsigned int"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 40,
+                "column" : 1
+              },
+              {
+                "column" : 49
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "objectAtIndexedSubscript:",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "id",
+              "desugared" : "id"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 33
+                    },
+                    {
+                      "column" : 44
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "index",
+                {
+                  "raw" : "NSUInteger",
+                  "desugared" : "unsigned int"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "NSObject"
+        }
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 43,
+            "column" : 1
+          },
+          {
+            "line" : 44,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "NSException",
+      [
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "NSObject"
+        }
+      }
+    )>,
+    <"FunctionDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 46,
+            "column" : 1
+          },
+          {
+            "column" : 34
+          }
+        ),
+        "is_used" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "NSLog",
+      {
+        "raw" : "void (NSString *, ...)"
+      },
+      {
+        "storage_class" : "extern",
+        "parameters" : [
+          <"ParmVarDecl" : (
+            {
+              "pointer" : "0x0",
+              "source_range" : (
+                {
+                  "column" : 19
+                },
+                {
+                  "column" : 28
+                }
+              ),
+              "attributes" : [
+              ]
+            },
+            "",
+            {
+              "raw" : "NSString *"
+            },
+            {
+            }
+          )>
+        ]
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/Hello.m",
+            "line" : 5,
+            "column" : 1
+          },
+          {
+            "line" : 7,
+            "column" : 2
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "Hello",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 6,
+                "column" : 1
+              },
+              {
+                "column" : 19
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "say:",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "void"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 14
+                    },
+                    {
+                      "column" : 18
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "i",
+                {
+                  "raw" : "int"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "NSObject"
+        },
+        "implementation" : {
+          "kind" : <"ObjCImplementation">,
+          "name" : "Hello"
+        }
+      }
+    )>,
+    <"ObjCImplementationDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 9,
+            "column" : 1
+          },
+          {
+            "line" : 15,
+            "column" : 1
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "Hello",
+      [
+        <"ObjCMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 10,
+                "column" : 1
+              },
+              {
+                "line" : 14,
+                "column" : 1
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "say:",
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "raw" : "void"
+            },
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "line" : 10,
+                      "column" : 14
+                    },
+                    {
+                      "column" : 18
+                    }
+                  ),
+                  "is_used" : true,
+                  "is_this_declaration_referenced" : true,
+                  "attributes" : [
+                  ]
+                },
+                "i",
+                {
+                  "raw" : "int"
+                },
+                {
+                }
+              )>
+            ],
+            "body" : <"CompoundStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 20
+                  },
+                  {
+                    "line" : 14,
+                    "column" : 1
+                  }
+                )
+              },
+              [
+                <"IfStmt" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "line" : 11,
+                        "column" : 3
+                      },
+                      {
+                        "line" : 13,
+                        "column" : 3
+                      }
+                    )
+                  },
+                  [
+                    <"NullStmt" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                          },
+                          {
+                          }
+                        )
+                      },
+                      [
+                      ]
+                    )>,
+                    <"BinaryOperator" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "line" : 11,
+                            "column" : 7
+                          },
+                          {
+                            "column" : 11
+                          }
+                        )
+                      },
+                      [
+                        <"ImplicitCastExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 7
+                              },
+                              {
+                                "column" : 7
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 7
+                                  },
+                                  {
+                                    "column" : 7
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "int"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"ParmVar">,
+                                  "name" : "i",
+                                  "qual_type" : {
+                                    "raw" : "int"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "int"
+                            }
+                          },
+                          {
+                            "cast_kind" : <"LValueToRValue">,
+                            "base_path" : [
+                            ]
+                          }
+                        )>,
+                        <"IntegerLiteral" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 11
+                              },
+                              {
+                                "column" : 11
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "int"
+                            }
+                          },
+                          {
+                            "is_signed" : true,
+                            "bitwidth" : 32,
+                            "value" : "0"
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "_Bool"
+                        }
+                      },
+                      {
+                        "kind" : <"GT">
+                      }
+                    )>,
+                    <"CompoundStmt" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 14
+                          },
+                          {
+                            "line" : 13,
+                            "column" : 3
+                          }
+                        )
+                      },
+                      [
+                        <"CallExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "line" : 12,
+                                "column" : 5
+                              },
+                              {
+                                "column" : 35
+                              }
+                            )
+                          },
+                          [
+                            <"ImplicitCastExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 5
+                                  },
+                                  {
+                                    "column" : 5
+                                  }
+                                )
+                              },
+                              [
+                                <"DeclRefExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 5
+                                      },
+                                      {
+                                        "column" : 5
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "void (NSString *, ...)"
+                                    },
+                                    "value_kind" : <"LValue">
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : <"Function">,
+                                      "name" : "NSLog",
+                                      "qual_type" : {
+                                        "raw" : "void (NSString *, ...)"
+                                      }
+                                    }
+                                  }
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "void (*)(NSString *, ...)"
+                                }
+                              },
+                              {
+                                "cast_kind" : <"FunctionToPointerDecay">,
+                                "base_path" : [
+                                ]
+                              }
+                            )>,
+                            <"ObjCStringLiteral" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 11
+                                  },
+                                  {
+                                    "column" : 12
+                                  }
+                                )
+                              },
+                              [
+                                <"StringLiteral" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 12
+                                      },
+                                      {
+                                        "column" : 12
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "const char [19]"
+                                    },
+                                    "value_kind" : <"LValue">
+                                  },
+                                  "Hello, world! (%d)"
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "NSString *"
+                                }
+                              }
+                            )>,
+                            <"ImplicitCastExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 34
+                                  },
+                                  {
+                                    "column" : 34
+                                  }
+                                )
+                              },
+                              [
+                                <"DeclRefExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 34
+                                      },
+                                      {
+                                        "column" : 34
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "int"
+                                    },
+                                    "value_kind" : <"LValue">
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : <"ParmVar">,
+                                      "name" : "i",
+                                      "qual_type" : {
+                                        "raw" : "int"
+                                      }
+                                    }
+                                  }
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "int"
+                                }
+                              },
+                              {
+                                "cast_kind" : <"LValueToRValue">,
+                                "base_path" : [
+                                ]
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "void"
+                            }
+                          }
+                        )>
+                      ]
+                    )>,
+                    <"NullStmt" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                          },
+                          {
+                          }
+                        )
+                      },
+                      [
+                      ]
+                    )>
+                  ]
+                )>
+              ]
+            )>
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "class_interface" : {
+          "kind" : <"ObjCInterface">,
+          "name" : "Hello"
+        }
+      }
+    )>,
+    <"FunctionDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 17,
+            "column" : 1
+          },
+          {
+            "line" : 25,
+            "column" : 1
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "main",
+      {
+        "raw" : "int (int, char **)"
+      },
+      {
+        "parameters" : [
+          <"ParmVarDecl" : (
+            {
+              "pointer" : "0x0",
+              "source_range" : (
+                {
+                  "line" : 17,
+                  "column" : 10
+                },
+                {
+                  "column" : 14
+                }
+              ),
+              "attributes" : [
+              ]
+            },
+            "argc",
+            {
+              "raw" : "int"
+            },
+            {
+            }
+          )>,
+          <"ParmVarDecl" : (
+            {
+              "pointer" : "0x0",
+              "source_range" : (
+                {
+                  "column" : 20
+                },
+                {
+                  "column" : 31
+                }
+              ),
+              "attributes" : [
+              ]
+            },
+            "argv",
+            {
+              "raw" : "char **",
+              "desugared" : "char **"
+            },
+            {
+            }
+          )>
+        ],
+        "body" : <"CompoundStmt" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 18,
+                "column" : 1
+              },
+              {
+                "line" : 25,
+                "column" : 1
+              }
+            )
+          },
+          [
+            <"ForStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 19,
+                    "column" : 3
+                  },
+                  {
+                    "line" : 23,
+                    "column" : 3
+                  }
+                )
+              },
+              [
+                <"DeclStmt" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "line" : 19,
+                        "column" : 8
+                      },
+                      {
+                        "column" : 17
+                      }
+                    )
+                  },
+                  [
+                    <"IntegerLiteral" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 16
+                          },
+                          {
+                            "column" : 16
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        }
+                      },
+                      {
+                        "is_signed" : true,
+                        "bitwidth" : 32,
+                        "value" : "0"
+                      }
+                    )>
+                  ],
+                  [
+                    <"VarDecl" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 8
+                          },
+                          {
+                            "column" : 16
+                          }
+                        ),
+                        "is_used" : true,
+                        "is_this_declaration_referenced" : true,
+                        "attributes" : [
+                        ]
+                      },
+                      "i",
+                      {
+                        "raw" : "int"
+                      },
+                      {
+                        "init_expr" : <"IntegerLiteral" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 16
+                              },
+                              {
+                                "column" : 16
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "int"
+                            }
+                          },
+                          {
+                            "is_signed" : true,
+                            "bitwidth" : 32,
+                            "value" : "0"
+                          }
+                        )>
+                      }
+                    )>
+                  ]
+                )>,
+                <"NullStmt" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                      },
+                      {
+                      }
+                    )
+                  },
+                  [
+                  ]
+                )>,
+                <"BinaryOperator" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 19
+                      },
+                      {
+                        "column" : 23
+                      }
+                    )
+                  },
+                  [
+                    <"ImplicitCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 19
+                          },
+                          {
+                            "column" : 19
+                          }
+                        )
+                      },
+                      [
+                        <"DeclRefExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 19
+                              },
+                              {
+                                "column" : 19
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "int"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : <"Var">,
+                              "name" : "i",
+                              "qual_type" : {
+                                "raw" : "int"
+                              }
+                            }
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"LValueToRValue">,
+                        "base_path" : [
+                        ]
+                      }
+                    )>,
+                    <"IntegerLiteral" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 23
+                          },
+                          {
+                            "column" : 23
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        }
+                      },
+                      {
+                        "is_signed" : true,
+                        "bitwidth" : 32,
+                        "value" : "3"
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "_Bool"
+                    }
+                  },
+                  {
+                    "kind" : <"LT">
+                  }
+                )>,
+                <"UnaryOperator" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 26
+                      },
+                      {
+                        "column" : 27
+                      }
+                    )
+                  },
+                  [
+                    <"DeclRefExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 26
+                          },
+                          {
+                            "column" : 26
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "int"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : <"Var">,
+                          "name" : "i",
+                          "qual_type" : {
+                            "raw" : "int"
+                          }
+                        }
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "int"
+                    }
+                  },
+                  {
+                    "kind" : <"PostInc">,
+                    "is_postfix" : true
+                  }
+                )>,
+                <"CompoundStmt" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 31
+                      },
+                      {
+                        "line" : 23,
+                        "column" : 3
+                      }
+                    )
+                  },
+                  [
+                    <"ObjCAutoreleasePoolStmt" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "line" : 20,
+                            "column" : 5
+                          },
+                          {
+                            "line" : 22,
+                            "column" : 5
+                          }
+                        )
+                      },
+                      [
+                        <"CompoundStmt" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "line" : 20,
+                                "column" : 22
+                              },
+                              {
+                                "line" : 22,
+                                "column" : 5
+                              }
+                            )
+                          },
+                          [
+                            <"ObjCMessageExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "line" : 21,
+                                    "column" : 7
+                                  },
+                                  {
+                                    "column" : 25
+                                  }
+                                )
+                              },
+                              [
+                                <"ObjCMessageExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 8
+                                      },
+                                      {
+                                        "column" : 18
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "Hello *"
+                                    }
+                                  },
+                                  {
+                                    "selector" : "new",
+                                    "receiver_kind" : <"Class" : {
+                                      "raw" : "Hello"
+                                    }>
+                                  }
+                                )>,
+                                <"ImplicitCastExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 24
+                                      },
+                                      {
+                                        "column" : 24
+                                      }
+                                    )
+                                  },
+                                  [
+                                    <"DeclRefExpr" : (
+                                      {
+                                        "pointer" : "0x0",
+                                        "source_range" : (
+                                          {
+                                            "column" : 24
+                                          },
+                                          {
+                                            "column" : 24
+                                          }
+                                        )
+                                      },
+                                      [
+                                      ],
+                                      {
+                                        "qual_type" : {
+                                          "raw" : "int"
+                                        },
+                                        "value_kind" : <"LValue">
+                                      },
+                                      {
+                                        "decl_ref" : {
+                                          "kind" : <"Var">,
+                                          "name" : "i",
+                                          "qual_type" : {
+                                            "raw" : "int"
+                                          }
+                                        }
+                                      }
+                                    )>
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "int"
+                                    }
+                                  },
+                                  {
+                                    "cast_kind" : <"LValueToRValue">,
+                                    "base_path" : [
+                                    ]
+                                  }
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "void"
+                                }
+                              },
+                              {
+                                "selector" : "say:"
+                              }
+                            )>
+                          ]
+                        )>
+                      ]
+                    )>
+                  ]
+                )>
+              ]
+            )>,
+            <"ReturnStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 24,
+                    "column" : 3
+                  },
+                  {
+                    "column" : 10
+                  }
+                )
+              },
+              [
+                <"IntegerLiteral" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 10
+                      },
+                      {
+                        "column" : 10
+                      }
+                    )
+                  },
+                  [
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "int"
+                    }
+                  },
+                  {
+                    "is_signed" : true,
+                    "bitwidth" : 32,
+                    "value" : "0"
+                  }
+                )>
+              ]
+            )>
+          ]
+        )>
+      }
+    )>
+  ],
+  {
+  }
+)>

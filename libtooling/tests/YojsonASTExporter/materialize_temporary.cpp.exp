@@ -1,27 +1,245 @@
-   1 FloatingLiteral
-   1 FloatingToIntegral
-   1 ImplicitCastExpr
-   1 LValue
-   1 MaterializeTemporaryExpr
-   6 NoType
-   1 ObjCInterfaceDecl
-   1 TranslationUnitDecl
-   6 TypedefDecl
-   1 Var
-   1 VarDecl
-   9 attributes
-   1 base_path
-   1 cast_kind
-   8 column
-   1 decl_ref
-   1 file
-   1 init_expr
-   7 is_implicit
-   1 kind
-   1 line
-   1 name
-  12 pointer
-   4 qual_type
-   5 raw
-  12 source_range
-   1 value_kind
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : "0x0",
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/materialize_temporary.cpp",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "column" : 16
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "r",
+      {
+        "raw" : "const int &"
+      },
+      {
+        "init_expr" : <"MaterializeTemporaryExpr" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 16
+              },
+              {
+                "column" : 16
+              }
+            )
+          },
+          [
+            <"ImplicitCastExpr" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 16
+                  },
+                  {
+                    "column" : 16
+                  }
+                )
+              },
+              [
+                <"FloatingLiteral" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 16
+                      },
+                      {
+                        "column" : 16
+                      }
+                    )
+                  },
+                  [
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "double"
+                    }
+                  },
+                  "1"
+                )>
+              ],
+              {
+                "qual_type" : {
+                  "raw" : "const int"
+                }
+              },
+              {
+                "cast_kind" : <"FloatingToIntegral">,
+                "base_path" : [
+                ]
+              }
+            )>
+          ],
+          {
+            "qual_type" : {
+              "raw" : "const int"
+            },
+            "value_kind" : <"LValue">
+          },
+          {
+            "decl_ref" : {
+              "kind" : <"Var">,
+              "name" : "r",
+              "qual_type" : {
+                "raw" : "const int &"
+              }
+            }
+          }
+        )>
+      }
+    )>
+  ],
+  {
+  }
+)>

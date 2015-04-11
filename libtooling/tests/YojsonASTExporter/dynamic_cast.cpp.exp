@@ -1,53 +1,2678 @@
-   4 AddrOf
-   1 BaseClass
-   5 CXXConstructExpr
-   6 CXXConstructorDecl
-   2 CXXDestructorDecl
-  12 CXXDynamicCastExpr
-   5 CXXMethodDecl
-   6 CXXRecordDecl
-   4 CompoundStmt
-  14 DeclRefExpr
-   9 DeclStmt
-   6 Deref
-   2 DerivedToBase
-  10 Dynamic
-   1 FunctionDecl
-  12 ImplicitCastExpr
-  26 LValue
-  10 LValueToRValue
-   2 NoOp
-   6 NoType
-   1 ObjCInterfaceDecl
-   8 ParmVarDecl
-   1 TranslationUnitDecl
-   6 Type
-   6 TypedefDecl
-  10 UnaryOperator
-  14 Var
-   9 VarDecl
-  45 attributes
-  24 base_path
-   4 body
-  24 cast_kind
- 202 column
-   1 cxx_ctor_initializers
-  14 decl_ref
-   1 file
-  10 init_expr
-   3 is_complete_definition
-  22 is_implicit
-  12 is_inline
-   9 is_this_declaration_referenced
-   6 is_used
-   1 is_virtual
-  24 kind
-  20 line
-  16 name
-   8 parameters
- 111 pointer
-  72 qual_type
- 116 raw
- 111 source_range
-   1 subject
-  26 value_kind
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : "0x0",
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"CXXRecordDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/dynamic_cast.cpp",
+            "line" : 1,
+            "column" : 3
+          },
+          {
+            "line" : 3,
+            "column" : 3
+          }
+        ),
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "A",
+      <"Type" : "struct A">,
+      [
+        <"CXXRecordDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 1,
+                "column" : 3
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "A",
+          <"Type" : "struct A">,
+          [
+          ],
+          {
+          },
+          {
+          }
+        )>,
+        <"CXXMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 2,
+                "column" : 5
+              },
+              {
+                "column" : 24
+              }
+            ),
+            "is_used" : true,
+            "is_this_declaration_referenced" : true,
+            "attributes" : [
+            ]
+          },
+          "f",
+          {
+            "raw" : "void (void)"
+          },
+          {
+            "is_virtual" : true,
+            "body" : <"CompoundStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 22
+                  },
+                  {
+                    "column" : 24
+                  }
+                )
+              },
+              [
+              ]
+            )>
+          }
+        )>,
+        <"CXXMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 1,
+                "column" : 10
+              },
+              {
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "operator=",
+          {
+            "raw" : "struct A &(const struct A &)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "const struct A &"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"CXXMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "operator=",
+          {
+            "raw" : "struct A &(struct A &&)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "struct A &&"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"CXXDestructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "~A",
+          {
+            "raw" : "void (void)"
+          },
+          {
+            "is_inline" : true
+          }
+        )>,
+        <"CXXConstructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "is_used" : true,
+            "is_this_declaration_referenced" : true,
+            "attributes" : [
+            ]
+          },
+          "A",
+          {
+            "raw" : "void (void) noexcept"
+          },
+          {
+            "is_inline" : true,
+            "body" : <"CompoundStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 10
+                  },
+                  {
+                    "column" : 10
+                  }
+                )
+              },
+              [
+              ]
+            )>
+          }
+        )>,
+        <"CXXConstructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "A",
+          {
+            "raw" : "void (const struct A &)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "const struct A &"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"CXXConstructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "A",
+          {
+            "raw" : "void (struct A &&)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "struct A &&"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "is_complete_definition" : true
+      }
+    )>,
+    <"CXXRecordDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 4,
+            "column" : 3
+          },
+          {
+            "column" : 25
+          }
+        ),
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "B",
+      <"Type" : "struct B">,
+      [
+        <"CXXRecordDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 3
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "B",
+          <"Type" : "struct B">,
+          [
+          ],
+          {
+          },
+          {
+          }
+        )>,
+        <"CXXMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "operator=",
+          {
+            "raw" : "struct B &(const struct B &)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "const struct B &"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"CXXMethodDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "operator=",
+          {
+            "raw" : "struct B &(struct B &&)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "struct B &&"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"CXXDestructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "~B",
+          {
+            "raw" : "void (void)"
+          },
+          {
+            "is_inline" : true
+          }
+        )>,
+        <"CXXConstructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "is_used" : true,
+            "is_this_declaration_referenced" : true,
+            "attributes" : [
+            ]
+          },
+          "B",
+          {
+            "raw" : "void (void) noexcept"
+          },
+          {
+            "is_inline" : true,
+            "cxx_ctor_initializers" : [
+              {
+                "subject" : <"BaseClass" : (
+                  {
+                    "raw" : "struct A"
+                  },
+                  false
+                )>,
+                "init_expr" : <"CXXConstructExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 10
+                      },
+                      {
+                        "column" : 10
+                      }
+                    )
+                  },
+                  [
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct A"
+                    }
+                  },
+                  {
+                    "qual_type" : {
+                      "raw" : "void (void) noexcept"
+                    }
+                  }
+                )>
+              }
+            ],
+            "body" : <"CompoundStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 10
+                  },
+                  {
+                    "column" : 10
+                  }
+                )
+              },
+              [
+              ]
+            )>
+          }
+        )>,
+        <"CXXConstructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "B",
+          {
+            "raw" : "void (const struct B &)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "const struct B &"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>,
+        <"CXXConstructorDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 10
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "B",
+          {
+            "raw" : "void (struct B &&)"
+          },
+          {
+            "is_inline" : true,
+            "parameters" : [
+              <"ParmVarDecl" : (
+                {
+                  "pointer" : "0x0",
+                  "source_range" : (
+                    {
+                      "column" : 10
+                    },
+                    {
+                      "column" : 10
+                    }
+                  ),
+                  "attributes" : [
+                  ]
+                },
+                "",
+                {
+                  "raw" : "struct B &&"
+                },
+                {
+                }
+              )>
+            ]
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "is_complete_definition" : true
+      }
+    )>,
+    <"CXXRecordDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 5,
+            "column" : 3
+          },
+          {
+            "column" : 14
+          }
+        ),
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+        ]
+      },
+      "C",
+      <"Type" : "struct C">,
+      [
+        <"CXXRecordDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 3
+              },
+              {
+                "column" : 10
+              }
+            ),
+            "is_implicit" : true,
+            "attributes" : [
+            ]
+          },
+          "C",
+          <"Type" : "struct C">,
+          [
+          ],
+          {
+          },
+          {
+          }
+        )>
+      ],
+      {
+      },
+      {
+        "is_complete_definition" : true
+      }
+    )>,
+    <"FunctionDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 7,
+            "column" : 3
+          },
+          {
+            "line" : 19,
+            "column" : 3
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "f",
+      {
+        "raw" : "void (void)"
+      },
+      {
+        "body" : <"CompoundStmt" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 7,
+                "column" : 13
+              },
+              {
+                "line" : 19,
+                "column" : 3
+              }
+            )
+          },
+          [
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 8,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 8
+                  }
+                )
+              },
+              [
+                <"CXXConstructExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 7
+                      },
+                      {
+                        "column" : 7
+                      }
+                    )
+                  },
+                  [
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct A"
+                    }
+                  },
+                  {
+                    "qual_type" : {
+                      "raw" : "void (void) noexcept"
+                    }
+                  }
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 7
+                      }
+                    ),
+                    "is_used" : true,
+                    "is_this_declaration_referenced" : true,
+                    "attributes" : [
+                    ]
+                  },
+                  "a",
+                  {
+                    "raw" : "struct A"
+                  },
+                  {
+                    "init_expr" : <"CXXConstructExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 7
+                          },
+                          {
+                            "column" : 7
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A"
+                        }
+                      },
+                      {
+                        "qual_type" : {
+                          "raw" : "void (void) noexcept"
+                        }
+                      }
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 9,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 8
+                  }
+                )
+              },
+              [
+                <"CXXConstructExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 7
+                      },
+                      {
+                        "column" : 7
+                      }
+                    )
+                  },
+                  [
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct B"
+                    }
+                  },
+                  {
+                    "qual_type" : {
+                      "raw" : "void (void) noexcept"
+                    }
+                  }
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 7
+                      }
+                    ),
+                    "is_used" : true,
+                    "is_this_declaration_referenced" : true,
+                    "attributes" : [
+                    ]
+                  },
+                  "b",
+                  {
+                    "raw" : "struct B"
+                  },
+                  {
+                    "init_expr" : <"CXXConstructExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 7
+                          },
+                          {
+                            "column" : 7
+                          }
+                        )
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct B"
+                        }
+                      },
+                      {
+                        "qual_type" : {
+                          "raw" : "void (void) noexcept"
+                        }
+                      }
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 11,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 15
+                  }
+                )
+              },
+              [
+                <"ImplicitCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 13
+                      },
+                      {
+                        "column" : 14
+                      }
+                    )
+                  },
+                  [
+                    <"UnaryOperator" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 14
+                          }
+                        )
+                      },
+                      [
+                        <"DeclRefExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 14
+                              },
+                              {
+                                "column" : 14
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct B"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : <"Var">,
+                              "name" : "b",
+                              "qual_type" : {
+                                "raw" : "struct B"
+                              }
+                            }
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct B *"
+                        }
+                      },
+                      {
+                        "kind" : <"AddrOf">
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct A *"
+                    }
+                  },
+                  {
+                    "cast_kind" : <"DerivedToBase">,
+                    "base_path" : [
+                      {
+                        "name" : "A"
+                      }
+                    ]
+                  }
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 14
+                      }
+                    ),
+                    "is_used" : true,
+                    "is_this_declaration_referenced" : true,
+                    "attributes" : [
+                    ]
+                  },
+                  "ap",
+                  {
+                    "raw" : "struct A *"
+                  },
+                  {
+                    "init_expr" : <"ImplicitCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 14
+                          }
+                        )
+                      },
+                      [
+                        <"UnaryOperator" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 13
+                              },
+                              {
+                                "column" : 14
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 14
+                                  },
+                                  {
+                                    "column" : 14
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct B"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "b",
+                                  "qual_type" : {
+                                    "raw" : "struct B"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct B *"
+                            }
+                          },
+                          {
+                            "kind" : <"AddrOf">
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A *"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"DerivedToBase">,
+                        "base_path" : [
+                          {
+                            "name" : "A"
+                          }
+                        ]
+                      }
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 12,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 34
+                  }
+                )
+              },
+              [
+                <"CXXDynamicCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 13
+                      },
+                      {
+                        "column" : 33
+                      }
+                    )
+                  },
+                  [
+                    <"UnaryOperator" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 31
+                          },
+                          {
+                            "column" : 32
+                          }
+                        )
+                      },
+                      [
+                        <"DeclRefExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 32
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : <"Var">,
+                              "name" : "a",
+                              "qual_type" : {
+                                "raw" : "struct A"
+                              }
+                            }
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A *"
+                        }
+                      },
+                      {
+                        "kind" : <"AddrOf">
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct B *"
+                    }
+                  },
+                  {
+                    "cast_kind" : <"Dynamic">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "struct B *"
+                  },
+                  "dynamic_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 33
+                      }
+                    ),
+                    "attributes" : [
+                    ]
+                  },
+                  "b1",
+                  {
+                    "raw" : "struct B *"
+                  },
+                  {
+                    "init_expr" : <"CXXDynamicCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 33
+                          }
+                        )
+                      },
+                      [
+                        <"UnaryOperator" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 31
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "a",
+                                  "qual_type" : {
+                                    "raw" : "struct A"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            }
+                          },
+                          {
+                            "kind" : <"AddrOf">
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct B *"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"Dynamic">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "struct B *"
+                      },
+                      "dynamic_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 13,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 34
+                  }
+                )
+              },
+              [
+                <"CXXDynamicCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 13
+                      },
+                      {
+                        "column" : 33
+                      }
+                    )
+                  },
+                  [
+                    <"ImplicitCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 31
+                          },
+                          {
+                            "column" : 31
+                          }
+                        )
+                      },
+                      [
+                        <"DeclRefExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 31
+                              },
+                              {
+                                "column" : 31
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : <"Var">,
+                              "name" : "ap",
+                              "qual_type" : {
+                                "raw" : "struct A *"
+                              }
+                            }
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A *"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"LValueToRValue">,
+                        "base_path" : [
+                        ]
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct B *"
+                    }
+                  },
+                  {
+                    "cast_kind" : <"Dynamic">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "struct B *"
+                  },
+                  "dynamic_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 33
+                      }
+                    ),
+                    "attributes" : [
+                    ]
+                  },
+                  "b2",
+                  {
+                    "raw" : "struct B *"
+                  },
+                  {
+                    "init_expr" : <"CXXDynamicCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 33
+                          }
+                        )
+                      },
+                      [
+                        <"ImplicitCastExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 31
+                              },
+                              {
+                                "column" : 31
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 31
+                                  },
+                                  {
+                                    "column" : 31
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "ap",
+                                  "qual_type" : {
+                                    "raw" : "struct A *"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            }
+                          },
+                          {
+                            "cast_kind" : <"LValueToRValue">,
+                            "base_path" : [
+                            ]
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct B *"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"Dynamic">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "struct B *"
+                      },
+                      "dynamic_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 14,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 33
+                  }
+                )
+              },
+              [
+                <"CXXDynamicCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 12
+                      },
+                      {
+                        "column" : 32
+                      }
+                    )
+                  },
+                  [
+                    <"ImplicitCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 30
+                          },
+                          {
+                            "column" : 30
+                          }
+                        )
+                      },
+                      [
+                        <"DeclRefExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 30
+                              },
+                              {
+                                "column" : 30
+                              }
+                            )
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : <"Var">,
+                              "name" : "ap",
+                              "qual_type" : {
+                                "raw" : "struct A *"
+                              }
+                            }
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A *"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"LValueToRValue">,
+                        "base_path" : [
+                        ]
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct C *"
+                    }
+                  },
+                  {
+                    "cast_kind" : <"Dynamic">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "struct C *"
+                  },
+                  "dynamic_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 32
+                      }
+                    ),
+                    "attributes" : [
+                    ]
+                  },
+                  "c",
+                  {
+                    "raw" : "struct C *"
+                  },
+                  {
+                    "init_expr" : <"CXXDynamicCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 12
+                          },
+                          {
+                            "column" : 32
+                          }
+                        )
+                      },
+                      [
+                        <"ImplicitCastExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 30
+                              },
+                              {
+                                "column" : 30
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 30
+                                  },
+                                  {
+                                    "column" : 30
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "ap",
+                                  "qual_type" : {
+                                    "raw" : "struct A *"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            }
+                          },
+                          {
+                            "cast_kind" : <"LValueToRValue">,
+                            "base_path" : [
+                            ]
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct C *"
+                        }
+                      },
+                      {
+                        "cast_kind" : <"Dynamic">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "struct C *"
+                      },
+                      "dynamic_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 16,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 35
+                  }
+                )
+              },
+              [
+                <"CXXDynamicCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 13
+                      },
+                      {
+                        "column" : 34
+                      }
+                    )
+                  },
+                  [
+                    <"UnaryOperator" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 31
+                          },
+                          {
+                            "column" : 32
+                          }
+                        )
+                      },
+                      [
+                        <"ImplicitCastExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 32
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "ap",
+                                  "qual_type" : {
+                                    "raw" : "struct A *"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            }
+                          },
+                          {
+                            "cast_kind" : <"LValueToRValue">,
+                            "base_path" : [
+                            ]
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "kind" : <"Deref">
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct A"
+                    },
+                    "value_kind" : <"LValue">
+                  },
+                  {
+                    "cast_kind" : <"NoOp">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "struct A &"
+                  },
+                  "dynamic_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 34
+                      }
+                    ),
+                    "attributes" : [
+                    ]
+                  },
+                  "ar",
+                  {
+                    "raw" : "struct A &"
+                  },
+                  {
+                    "init_expr" : <"CXXDynamicCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 34
+                          }
+                        )
+                      },
+                      [
+                        <"UnaryOperator" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 31
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"ImplicitCastExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                                <"DeclRefExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 32
+                                      },
+                                      {
+                                        "column" : 32
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "struct A *"
+                                    },
+                                    "value_kind" : <"LValue">
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : <"Var">,
+                                      "name" : "ap",
+                                      "qual_type" : {
+                                        "raw" : "struct A *"
+                                      }
+                                    }
+                                  }
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                }
+                              },
+                              {
+                                "cast_kind" : <"LValueToRValue">,
+                                "base_path" : [
+                                ]
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "kind" : <"Deref">
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "cast_kind" : <"NoOp">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "struct A &"
+                      },
+                      "dynamic_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 17,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 35
+                  }
+                )
+              },
+              [
+                <"CXXDynamicCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 13
+                      },
+                      {
+                        "column" : 34
+                      }
+                    )
+                  },
+                  [
+                    <"UnaryOperator" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 31
+                          },
+                          {
+                            "column" : 32
+                          }
+                        )
+                      },
+                      [
+                        <"ImplicitCastExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 32
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "ap",
+                                  "qual_type" : {
+                                    "raw" : "struct A *"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            }
+                          },
+                          {
+                            "cast_kind" : <"LValueToRValue">,
+                            "base_path" : [
+                            ]
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "kind" : <"Deref">
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct B"
+                    },
+                    "value_kind" : <"LValue">
+                  },
+                  {
+                    "cast_kind" : <"Dynamic">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "struct B &"
+                  },
+                  "dynamic_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 34
+                      }
+                    ),
+                    "attributes" : [
+                    ]
+                  },
+                  "br",
+                  {
+                    "raw" : "struct B &"
+                  },
+                  {
+                    "init_expr" : <"CXXDynamicCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 34
+                          }
+                        )
+                      },
+                      [
+                        <"UnaryOperator" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 31
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"ImplicitCastExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                                <"DeclRefExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 32
+                                      },
+                                      {
+                                        "column" : 32
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "struct A *"
+                                    },
+                                    "value_kind" : <"LValue">
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : <"Var">,
+                                      "name" : "ap",
+                                      "qual_type" : {
+                                        "raw" : "struct A *"
+                                      }
+                                    }
+                                  }
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                }
+                              },
+                              {
+                                "cast_kind" : <"LValueToRValue">,
+                                "base_path" : [
+                                ]
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "kind" : <"Deref">
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct B"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "cast_kind" : <"Dynamic">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "struct B &"
+                      },
+                      "dynamic_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>,
+            <"DeclStmt" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 18,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 35
+                  }
+                )
+              },
+              [
+                <"CXXDynamicCastExpr" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 13
+                      },
+                      {
+                        "column" : 34
+                      }
+                    )
+                  },
+                  [
+                    <"UnaryOperator" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 31
+                          },
+                          {
+                            "column" : 32
+                          }
+                        )
+                      },
+                      [
+                        <"ImplicitCastExpr" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 32
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"DeclRefExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                },
+                                "value_kind" : <"LValue">
+                              },
+                              {
+                                "decl_ref" : {
+                                  "kind" : <"Var">,
+                                  "name" : "ap",
+                                  "qual_type" : {
+                                    "raw" : "struct A *"
+                                  }
+                                }
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A *"
+                            }
+                          },
+                          {
+                            "cast_kind" : <"LValueToRValue">,
+                            "base_path" : [
+                            ]
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct A"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "kind" : <"Deref">
+                      }
+                    )>
+                  ],
+                  {
+                    "qual_type" : {
+                      "raw" : "struct C"
+                    },
+                    "value_kind" : <"LValue">
+                  },
+                  {
+                    "cast_kind" : <"Dynamic">,
+                    "base_path" : [
+                    ]
+                  },
+                  {
+                    "raw" : "struct C &"
+                  },
+                  "dynamic_cast"
+                )>
+              ],
+              [
+                <"VarDecl" : (
+                  {
+                    "pointer" : "0x0",
+                    "source_range" : (
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 34
+                      }
+                    ),
+                    "attributes" : [
+                    ]
+                  },
+                  "cr",
+                  {
+                    "raw" : "struct C &"
+                  },
+                  {
+                    "init_expr" : <"CXXDynamicCastExpr" : (
+                      {
+                        "pointer" : "0x0",
+                        "source_range" : (
+                          {
+                            "column" : 13
+                          },
+                          {
+                            "column" : 34
+                          }
+                        )
+                      },
+                      [
+                        <"UnaryOperator" : (
+                          {
+                            "pointer" : "0x0",
+                            "source_range" : (
+                              {
+                                "column" : 31
+                              },
+                              {
+                                "column" : 32
+                              }
+                            )
+                          },
+                          [
+                            <"ImplicitCastExpr" : (
+                              {
+                                "pointer" : "0x0",
+                                "source_range" : (
+                                  {
+                                    "column" : 32
+                                  },
+                                  {
+                                    "column" : 32
+                                  }
+                                )
+                              },
+                              [
+                                <"DeclRefExpr" : (
+                                  {
+                                    "pointer" : "0x0",
+                                    "source_range" : (
+                                      {
+                                        "column" : 32
+                                      },
+                                      {
+                                        "column" : 32
+                                      }
+                                    )
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "raw" : "struct A *"
+                                    },
+                                    "value_kind" : <"LValue">
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : <"Var">,
+                                      "name" : "ap",
+                                      "qual_type" : {
+                                        "raw" : "struct A *"
+                                      }
+                                    }
+                                  }
+                                )>
+                              ],
+                              {
+                                "qual_type" : {
+                                  "raw" : "struct A *"
+                                }
+                              },
+                              {
+                                "cast_kind" : <"LValueToRValue">,
+                                "base_path" : [
+                                ]
+                              }
+                            )>
+                          ],
+                          {
+                            "qual_type" : {
+                              "raw" : "struct A"
+                            },
+                            "value_kind" : <"LValue">
+                          },
+                          {
+                            "kind" : <"Deref">
+                          }
+                        )>
+                      ],
+                      {
+                        "qual_type" : {
+                          "raw" : "struct C"
+                        },
+                        "value_kind" : <"LValue">
+                      },
+                      {
+                        "cast_kind" : <"Dynamic">,
+                        "base_path" : [
+                        ]
+                      },
+                      {
+                        "raw" : "struct C &"
+                      },
+                      "dynamic_cast"
+                    )>
+                  }
+                )>
+              ]
+            )>
+          ]
+        )>
+      }
+    )>
+  ],
+  {
+  }
+)>

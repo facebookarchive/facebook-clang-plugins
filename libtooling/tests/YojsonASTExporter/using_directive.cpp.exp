@@ -1,37 +1,370 @@
-   1 DeclRefExpr
-   1 ImplicitCastExpr
-   1 LValue
-   1 LValueToRValue
-   6 Namespace
-   1 NamespaceAliasDecl
-   2 NamespaceDecl
-   6 NoType
-   1 ObjCInterfaceDecl
-   1 TranslationUnitDecl
-   6 TypedefDecl
-   1 UsingDirectiveDecl
-   1 Var
-   2 VarDecl
-  14 attributes
-   1 base_path
-   1 cast_kind
-  20 column
-   1 decl_ref
-   1 file
-   1 init_expr
-   7 is_implicit
-   1 is_this_declaration_referenced
-   1 is_used
-   7 kind
-   8 line
-   5 name
-   1 namespace_key_location
-   1 nested_name_specifier_locs
-   1 nominated_namespace
-  16 pointer
-   3 qual_type
-   5 raw
-   2 ref
-  16 source_range
-   1 using_location
-   1 value_kind
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : "0x0",
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__int128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__uint128_t",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "SEL",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "id",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Class",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "Protocol",
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      "__builtin_va_list",
+      <"NoType">,
+      {
+      }
+    )>,
+    <"NamespaceDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "file" : "tests/using_directive.cpp",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "line" : 5,
+            "column" : 1
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "nsa",
+      [
+        <"NamespaceDecl" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "line" : 2,
+                "column" : 3
+              },
+              {
+                "line" : 4,
+                "column" : 3
+              }
+            ),
+            "attributes" : [
+            ]
+          },
+          "nsb",
+          [
+            <"VarDecl" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "line" : 3,
+                    "column" : 5
+                  },
+                  {
+                    "column" : 9
+                  }
+                ),
+                "is_used" : true,
+                "is_this_declaration_referenced" : true,
+                "attributes" : [
+                ]
+              },
+              "a",
+              {
+                "raw" : "int"
+              },
+              {
+              }
+            )>
+          ],
+          {
+          },
+          {
+          }
+        )>
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"UsingDirectiveDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 6,
+            "column" : 1
+          },
+          {
+            "column" : 22
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "<using-directive>",
+      {
+        "using_location" : {
+          "column" : 1
+        },
+        "namespace_key_location" : {
+          "column" : 7
+        },
+        "nested_name_specifier_locs" : [
+          {
+            "kind" : <"Namespace">,
+            "ref" : {
+              "kind" : <"Namespace">,
+              "name" : "nsa"
+            }
+          }
+        ],
+        "nominated_namespace" : {
+          "kind" : <"Namespace">,
+          "name" : "nsb"
+        }
+      }
+    )>,
+    <"NamespaceAliasDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 7,
+            "column" : 1
+          },
+          {
+            "column" : 20
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "B",
+      {
+        "column" : 1
+      },
+      {
+        "column" : 20
+      },
+      [
+        {
+          "kind" : <"Namespace">,
+          "ref" : {
+            "kind" : <"Namespace">,
+            "name" : "nsa"
+          }
+        }
+      ],
+      {
+        "kind" : <"Namespace">,
+        "name" : "nsb"
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : "0x0",
+        "source_range" : (
+          {
+            "line" : 8,
+            "column" : 1
+          },
+          {
+            "column" : 9
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      "b",
+      {
+        "raw" : "int"
+      },
+      {
+        "init_expr" : <"ImplicitCastExpr" : (
+          {
+            "pointer" : "0x0",
+            "source_range" : (
+              {
+                "column" : 9
+              },
+              {
+                "column" : 9
+              }
+            )
+          },
+          [
+            <"DeclRefExpr" : (
+              {
+                "pointer" : "0x0",
+                "source_range" : (
+                  {
+                    "column" : 9
+                  },
+                  {
+                    "column" : 9
+                  }
+                )
+              },
+              [
+              ],
+              {
+                "qual_type" : {
+                  "raw" : "int"
+                },
+                "value_kind" : <"LValue">
+              },
+              {
+                "decl_ref" : {
+                  "kind" : <"Var">,
+                  "name" : "a",
+                  "qual_type" : {
+                    "raw" : "int"
+                  }
+                }
+              }
+            )>
+          ],
+          {
+            "qual_type" : {
+              "raw" : "int"
+            }
+          },
+          {
+            "cast_kind" : <"LValueToRValue">,
+            "base_path" : [
+            ]
+          }
+        )>
+      }
+    )>
+  ],
+  {
+  }
+)>
