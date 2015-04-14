@@ -53,6 +53,10 @@ struct PluginASTOptionsBase {
 
   static argmap_t makeMap(const std::vector<std::string> &args);
 
+private:
+  /* cache for normalizeSourcePath */
+  std::unique_ptr<std::unordered_map<const char *, std::string>> normalizationCache;
+
 protected:
   static const std::string envPrefix;
 
@@ -65,13 +69,15 @@ protected:
   static bool loadUnsignedInt(const argmap_t &map, const char *key, unsigned long &val);
 
 public:
+  PluginASTOptionsBase() { normalizationCache.reset(new std::unordered_map<const char *, std::string>()); };
+
   void loadValuesFromEnvAndMap(const argmap_t map);
 
   // This should be called after outputFile has been set, so as to finalize
   // the output file in case a pattern "%.bla" was given.
   void setObjectFile(const std::string &path);
 
-  std::string normalizeSourcePath(std::string path) const;
+  const std::string &normalizeSourcePath(const char *path) const;
 
 };
 

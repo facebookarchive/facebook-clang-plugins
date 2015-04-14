@@ -133,17 +133,25 @@ namespace ASTPluginLib {
     }
   }
 
-  std::string PluginASTOptionsBase::normalizeSourcePath(std::string path) const {
+  const std::string &PluginASTOptionsBase::normalizeSourcePath(const char *path) const {
+    auto I = normalizationCache->find(path);
+    if (I != normalizationCache->end()) {
+      return I->second;
+    }
+    std::string &result = (*normalizationCache)[path];
     if (basePath == "") {
-      return path;
+      result = path;
+      return result;
     }
     std::string absPath = FileUtils::makeAbsolutePath(basePath, path);
     const std::string &realPath =
       translationService != nullptr ? translationService->findOriginalFile(absPath) : absPath;
     if (repoRoot == "") {
-      return realPath;
+      result = realPath;
+    } else {
+      result = FileUtils::makeRelativePath(repoRoot, realPath, keepExternalPaths);
     }
-    return FileUtils::makeRelativePath(repoRoot, realPath, keepExternalPaths);
+    return result;
   }
 
 }

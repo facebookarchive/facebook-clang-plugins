@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
 namespace FileServices {
@@ -22,7 +22,7 @@ namespace FileServices {
    */
   class DeduplicationService {
     const std::string servicePath;
-    std::map<std::string, bool> cache;
+    std::unordered_map<std::string, bool> cache;
 
   public:
     DeduplicationService(const std::string &servicePath) : servicePath(servicePath) { }
@@ -40,7 +40,7 @@ namespace FileServices {
    */
   class TranslationService {
     const std::string servicePath;
-    std::map<std::string, std::string> cache;
+    std::unordered_map<std::string, std::string> cache;
 
   public:
     TranslationService(const std::string &servicePath) : servicePath(servicePath) {}
