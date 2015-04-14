@@ -16,6 +16,24 @@
 namespace FileServices {
 
   /**
+   * Simple class to avoid duplicating outputs when a frontend plugin is run independently on multiple files.
+   * Currently we simply use lock files in a tmp directory 'servicePath'.
+   * This tmp directory must be setup and cleaned correctly outside this code.
+   */
+  class DeduplicationService {
+    const std::string servicePath;
+    std::map<std::string, bool> cache;
+
+  public:
+    DeduplicationService(const std::string &servicePath) : servicePath(servicePath) { }
+
+    /* Returns true if we can proceed with the data corresponding to the key.
+     * From then on, other clients (processes, etc) will get false for the same key.
+     */
+    bool verifyKey(const std::string &key);
+  };
+
+  /**
    * Translation of source paths. Optionally use a temporary directory as
    * a key value store to retrieve the original path of copied headers.
    * Values have to be written in a separate reporter.

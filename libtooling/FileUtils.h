@@ -28,4 +28,9 @@ namespace FileUtils {
    */
   std::string makeRelativePath(const std::string &repoRoot, const std::string &path, bool keepExternalPaths);
 
+  /**
+   * Determine if a declaration should be traversed.
+   */
+  bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService, const std::string &BasePath, const clang::SourceManager &SM,const clang::Decl &Decl);
+
 }

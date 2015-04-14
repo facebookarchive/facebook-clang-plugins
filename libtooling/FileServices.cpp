@@ -33,6 +33,30 @@ namespace FileServices {
     return file;
   }
 
+  bool DeduplicationService::verifyKey(const std::string &key) {
+    auto I = cache.find(key);
+    auto E = cache.end();
+    if (I != E) {
+      return I->second;
+    }
+
+    std::string file = create_filename("lock", servicePath, key);
+    int fd = open(file.c_str(), O_CREAT | O_EXCL, 0644);
+    bool result = (fd > 0);
+    if (result) {
+      close(fd);
+#ifdef DEBUG
+      // Re-open to write the key being tagged.
+      int fd = open(file.c_str(), O_WRONLY, 0644);
+      dprintf(fd, "%s\n", key.c_str());
+      close(fd);
+#endif
+    }
+
+    cache[key] = result;
+    return result;
+  }
+
   const std::string &TranslationService::findOriginalFile(const std::string &path) {
     auto I = cache.find(path);
     if (I != cache.end()) {

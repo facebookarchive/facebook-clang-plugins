@@ -43,6 +43,9 @@ struct PluginASTOptionsBase {
   /* Whether file paths not under the repo root should be kept or blanked. */
   bool keepExternalPaths = false;
 
+  /* Deduplication service: whether certain files should be visited once. */
+  std::unique_ptr<FileServices::DeduplicationService> deduplicationService;
+
   /* Translation service: whether certain copied source files should be translated back to the original name. */
   std::unique_ptr<FileServices::TranslationService> translationService;
 
