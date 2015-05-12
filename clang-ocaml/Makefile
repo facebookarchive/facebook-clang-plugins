@@ -72,7 +72,7 @@ build/clang_ast_proj.mli: clang_ast_proj.mli.p build/ast_inline.atd.inc
 	cat $< | $(ATD_CPP) -include build/ast_inline.atd.inc > $@
 
 build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
-	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o /dev/stdout | python $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
+	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o - | python $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
 
 TEST_FILES=ASTExporter.cpp Hello.m ObjCTest.m c_cast.cpp const_cast.cpp dynamic_cast.cpp \
 	inheritance.cpp struct.cpp this.cpp bind_temporary.cpp materialize_temporary.cpp expr_with_cleanups.cpp \
