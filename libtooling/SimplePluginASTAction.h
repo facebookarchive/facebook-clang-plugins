@@ -42,6 +42,8 @@ struct PluginASTOptionsBase {
   std::string repoRoot;
   /* Whether file paths not under the repo root should be kept or blanked. */
   bool keepExternalPaths = false;
+  /* Resolve symlinks to their real path. */
+  bool resolveSymlinks = false;
 
   /* Deduplication service: whether certain files should be visited once. */
   std::unique_ptr<FileServices::DeduplicationService> deduplicationService;

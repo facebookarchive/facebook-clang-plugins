@@ -14,6 +14,7 @@
 #include <memory>
 #include <iostream>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include <llvm/Support/Path.h>
 
@@ -105,6 +106,7 @@ namespace ASTPluginLib {
     loadBool(map, "PREPEND_CURRENT_DIR", needBasePath);
     loadString(map, "MAKE_RELATIVE_TO", repoRoot);
     loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
+    loadBool(map, "RESOLVE_SYMLINKS", resolveSymlinks);
 
     loadString(map, "USE_TEMP_DIR_FOR_DEDUPLICATION", tempDirDeduplication);
     loadString(map, "USE_TEMP_DIR_FOR_COPIED_PATHS", tempDirTranslation);
@@ -149,6 +151,16 @@ namespace ASTPluginLib {
     if (repoRoot == "") {
       result = realPath;
     } else {
+      if (resolveSymlinks) {
+        // if absPath is a symlink, resolve it
+        char buf[1024];
+        int len = readlink(realPath.c_str(), buf, sizeof(buf) - 1);
+        if (len != -1) {
+          buf[len] = '\0';
+          result = FileUtils::makeRelativePath(repoRoot, buf, keepExternalPaths);
+          return result;
+        }
+      }
       result = FileUtils::makeRelativePath(repoRoot, realPath, keepExternalPaths);
     }
     return result;
