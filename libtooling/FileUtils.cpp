@@ -83,10 +83,12 @@ namespace FileUtils {
     if (!clang::isa<clang::NamedDecl>(Decl)) {
       return true;
     }
-    // Do not skip Namespace, ClassTemplate(Partial)Specialization, Using, UsingShadow, CXXRecord declarations.
+    // Do not skip Namespace, ClassTemplate/Specialization, Using, UsingShadow, CXXRecord declarations.
     // (CXXRecord mostly because they can contain UsingShadow declarations.)
     if (clang::isa<clang::NamespaceDecl>(Decl)
+        || clang::isa<clang::ClassTemplateDecl>(Decl)
         || clang::isa<clang::ClassTemplateSpecializationDecl>(Decl)
+        || clang::isa<clang::FunctionTemplateDecl>(Decl)
         || clang::isa<clang::UsingDecl>(Decl)
         || clang::isa<clang::UsingShadowDecl>(Decl)
         || clang::isa<clang::CXXRecordDecl>(Decl)
