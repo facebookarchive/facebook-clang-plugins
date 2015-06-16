@@ -36,7 +36,11 @@ tar xzf "$CLANG_SRC"
 llvm/configure "${CONFIGURE_ARGS[@]}"
 
 mkdir -p "$CLANG_PREFIX"
-make -j 8 && make install
+JOBS=8
+if [ -f /proc/cpuinfo ]; then
+       JOBS=`grep -c processor /proc/cpuinfo`
+fi
+make -j $JOBS && make install
 cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
 strip -x "$CLANG_PREFIX/bin/clang"
 popd
