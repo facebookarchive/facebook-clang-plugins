@@ -4,7 +4,7 @@ set -e
 # Simple installation script for llvm/clang.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLANG_SRC="$SCRIPT_DIR/src/clang-3.6.1-dev.tar.xz"
+CLANG_SRC="$SCRIPT_DIR/src/clang-3.6.1.tar.xz"
 CLANG_PATCH="$SCRIPT_DIR/src/attachment-0001.obj"
 CLANG_PREFIX="$SCRIPT_DIR"
 
