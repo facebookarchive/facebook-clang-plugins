@@ -718,6 +718,7 @@ void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
 ///  | TypeSpec
 ///  | TypeSpecWithTemplate
 ///  | Global
+///  | Super
 /// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS) {
@@ -754,6 +755,9 @@ void ASTExporter<ATDWriter>::dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc N
         break;
       case NestedNameSpecifier::Global:
         OF.emitSimpleVariant("Global");
+        break;
+      case NestedNameSpecifier::Super:
+        OF.emitSimpleVariant("Super");
         break;
     }
   }

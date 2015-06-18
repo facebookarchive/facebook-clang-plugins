@@ -32,22 +32,23 @@ Structure of the repository
 Quick start
 -----------
 
-Clang plugins needs to be loaded in a target compiler that matches the API in use.
+The current version of the plugins requires the version 3.6.1 of the clang compiler, re-compiled from source.
 
 General instructions to compile clang can be found here: http://clang.llvm.org/get_started.html
 
-Compile clang with a setup script:
- To compile and use the required version of clang, please run ./clang/setup.sh. 
-If you use this script, you don't need to export the variable  CLANG_PREFIX to compile the plugin.
+(a) Compiling clang from the included sources and script
 
-Alternatively, here are the steps to do this manually:
+To compile and use the required version of clang, please run ./clang/setup.sh.
+Using this script should make the variable CLANG_PREFIX unnecessary to compile the plugin.
 
-The current version of the plugins requires a clang compiler to be compiled from the following sources:
+(b) Manual steps
 
-- `llvm` http://llvm.org/git/llvm.git dcc0e7eaa12e0005a8eb8a92d1500129dced6153
-- `llvm/tools/clang` http://llvm.org/git/clang.git 37e48be46c18b9322ff88daca6c096d86bd8e619
-- `llvm/projects/compiler-rt` http://llvm.org/git/compiler-rt.git 3451762a4db1036b0576cbaa9d1a1309b981a634
-- `llvm/projects/libcxx` http://llvm.org/git/libcxx.git 7ba3c57565e6658d8265b028a61c5731cf899495
+We have tested the following git checkouts under Mac OS:
+- `llvm` http://llvm.org/git/llvm.git 66ad281fb93b92858f443915f7811b16c131d3eb
+- `llvm/tools/clang` http://llvm.org/git/clang.git 9fd69610a42900694945c75448efd04373359dff
+   with Apple's patch for nullability annotations: http://lists.cs.uiuc.edu/pipermail/cfe-dev/2015-March/041798.html
+- `llvm/projects/compiler-rt` http://llvm.org/git/compiler-rt.git 55a3690916df972339fe877e077a2f27c7117211
+- `llvm/projects/libcxx` http://llvm.org/git/libcxx.git 3da9473a817576c6a94c3f8e0842f3210b0e8aa9
 
 Typically, compilation is made from a directory next to `llvm` along the following lines:
 ```

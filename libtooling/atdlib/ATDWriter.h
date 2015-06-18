@@ -10,9 +10,9 @@
 
 #pragma once
 
+#include <assert.h>
 #include <iostream>
 #include <vector>
-#include <assert.h>
 
 namespace ATDWriter {
 

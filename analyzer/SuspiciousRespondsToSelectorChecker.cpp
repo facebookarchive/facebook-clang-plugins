@@ -170,7 +170,7 @@ namespace {
     if (const Expr *expr = dyn_cast<Expr>(thenBodyStmt)) {
       thenBodyStmt = expr->IgnoreParenImpCasts();
     }
-    
+
     if (const ObjCMessageExpr *thenBodyMsgExpr = dyn_cast<ObjCMessageExpr>(thenBodyStmt)) {
       const Selector &thenBodySel = getNormalizedSelector(*thenBodyMsgExpr);
       const Expr *thenBodyRec = thenBodyMsgExpr->getInstanceReceiver();
