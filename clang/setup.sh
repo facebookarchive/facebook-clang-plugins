@@ -1,11 +1,12 @@
 #!/bin/bash
-set -x
+set -e
 
 # Simple installation script for llvm/clang.
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CLANG_SRC="$REPO_ROOT/clang/src/clang-3.6dev.tgz"
-CLANG_PREFIX="$REPO_ROOT/clang"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLANG_SRC="$SCRIPT_DIR/src/clang-3.6.1-dev.tar.xz"
+CLANG_PATCH="$SCRIPT_DIR/src/attachment-0001.obj"
+CLANG_PREFIX="$SCRIPT_DIR"
 
 platform=`uname`
 
@@ -16,6 +17,7 @@ if [ $platform == 'Darwin' ]; then
         --enable-cxx11
         --disable-assertions
         --enable-optimized
+        --enable-bindings=none
     )
 elif [ $platform == 'Linux' ]; then
     CONFIGURE_ARGS=(
@@ -23,6 +25,7 @@ elif [ $platform == 'Linux' ]; then
         --enable-cxx11
         --disable-assertions
         --enable-optimized
+        --enable-bindings=none
     )
 else
     echo "Clang setup: platform $platform is currently not supported by this script"; exit 1
@@ -32,10 +35,13 @@ fi
 echo "Installing clang..."
 TMP=`mktemp -d /tmp/clang-setup.XXXXXX`
 pushd "$TMP"
-tar xzf "$CLANG_SRC"
+tar xf "$CLANG_SRC"
+# apply patch to add nullability support
+pushd llvm/tools/clang
+patch -p0 -i "$CLANG_PATCH"
+popd
 llvm/configure "${CONFIGURE_ARGS[@]}"
 
-mkdir -p "$CLANG_PREFIX"
 make -j 8 && make install
 cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
 strip -x "$CLANG_PREFIX/bin/clang"

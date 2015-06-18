@@ -1,0 +1,4761 @@
+Index: include/clang/AST/DeclBase.h
+===================================================================
+--- include/clang/AST/DeclBase.h	(revision 231004)
++++ include/clang/AST/DeclBase.h	(working copy)
+@@ -178,7 +178,12 @@
+     OBJC_TQ_Out = 0x4,
+     OBJC_TQ_Bycopy = 0x8,
+     OBJC_TQ_Byref = 0x10,
+-    OBJC_TQ_Oneway = 0x20
++    OBJC_TQ_Oneway = 0x20,
++
++    /// The nullability qualifier is set when the nullability of the
++    /// result or parameter was expressed via a context-sensitive
++    /// keyword.
++    OBJC_TQ_CSNullability = 0x40
+   };
+ 
+ protected:
+Index: include/clang/AST/DeclObjC.h
+===================================================================
+--- include/clang/AST/DeclObjC.h	(revision 231004)
++++ include/clang/AST/DeclObjC.h	(working copy)
+@@ -141,7 +141,7 @@
+ 
+   // NOTE: VC++ treats enums as signed, avoid using the ObjCDeclQualifier enum
+   /// in, inout, etc.
+-  unsigned objcDeclQualifier : 6;
++  unsigned objcDeclQualifier : 7;
+ 
+   /// \brief Indicates whether this method has a related result type.
+   unsigned RelatedResultType : 1;
+@@ -2200,13 +2200,17 @@
+     OBJC_PR_atomic    = 0x100,
+     OBJC_PR_weak      = 0x200,
+     OBJC_PR_strong    = 0x400,
+-    OBJC_PR_unsafe_unretained = 0x800
++    OBJC_PR_unsafe_unretained = 0x800,
++    /// Indicates that the nullability of the type was spelled with a
++    /// property attribute rather than a type qualifier.
++    OBJC_PR_nullability = 0x1000,
++    OBJC_PR_null_resettable = 0x2000
+     // Adding a property should change NumPropertyAttrsBits
+   };
+ 
+   enum {
+     /// \brief Number of bits fitting all the property attributes.
+-    NumPropertyAttrsBits = 12
++    NumPropertyAttrsBits = 14
+   };
+ 
+   enum SetterKind { Assign, Retain, Copy, Weak };
+@@ -2214,7 +2218,8 @@
+ private:
+   SourceLocation AtLoc;   // location of \@property
+   SourceLocation LParenLoc; // location of '(' starting attribute list or null.
+-  TypeSourceInfo *DeclType;
++  QualType DeclType;
++  TypeSourceInfo *DeclTypeSourceInfo;
+   unsigned PropertyAttributes : NumPropertyAttrsBits;
+   unsigned PropertyAttributesAsWritten : NumPropertyAttrsBits;
+   // \@required/\@optional
+@@ -2229,12 +2234,13 @@
+ 
+   ObjCPropertyDecl(DeclContext *DC, SourceLocation L, IdentifierInfo *Id,
+                    SourceLocation AtLocation,  SourceLocation LParenLocation,
+-                   TypeSourceInfo *T)
++                   QualType T, TypeSourceInfo *TSI,
++                   PropertyControl propControl)
+     : NamedDecl(ObjCProperty, DC, L, Id), AtLoc(AtLocation), 
+-      LParenLoc(LParenLocation), DeclType(T),
++      LParenLoc(LParenLocation), DeclType(T), DeclTypeSourceInfo(TSI),
+       PropertyAttributes(OBJC_PR_noattr),
+       PropertyAttributesAsWritten(OBJC_PR_noattr),
+-      PropertyImplementation(None),
++      PropertyImplementation(propControl),
+       GetterName(Selector()),
+       SetterName(Selector()),
+       GetterMethodDecl(nullptr), SetterMethodDecl(nullptr),
+@@ -2245,7 +2251,8 @@
+                                   SourceLocation L,
+                                   IdentifierInfo *Id, SourceLocation AtLocation,
+                                   SourceLocation LParenLocation,
+-                                  TypeSourceInfo *T,
++                                  QualType T,
++                                  TypeSourceInfo *TSI,
+                                   PropertyControl propControl = None);
+   
+   static ObjCPropertyDecl *CreateDeserialized(ASTContext &C, unsigned ID);
+@@ -2256,10 +2263,15 @@
+   SourceLocation getLParenLoc() const { return LParenLoc; }
+   void setLParenLoc(SourceLocation L) { LParenLoc = L; }
+ 
+-  TypeSourceInfo *getTypeSourceInfo() const { return DeclType; }
+-  QualType getType() const { return DeclType->getType(); }
+-  void setType(TypeSourceInfo *T) { DeclType = T; }
++  TypeSourceInfo *getTypeSourceInfo() const { return DeclTypeSourceInfo; }
+ 
++  QualType getType() const { return DeclType; }
++
++  void setType(QualType T, TypeSourceInfo *TSI) {
++    DeclType = T;
++    DeclTypeSourceInfo = TSI; 
++  }
++
+   PropertyAttributeKind getPropertyAttributes() const {
+     return PropertyAttributeKind(PropertyAttributes);
+   }
+Index: include/clang/AST/ExprObjC.h
+===================================================================
+--- include/clang/AST/ExprObjC.h	(revision 231004)
++++ include/clang/AST/ExprObjC.h	(working copy)
+@@ -687,40 +687,7 @@
+   QualType getSuperReceiverType() const { 
+     return QualType(Receiver.get<const Type*>(), 0); 
+   }
+-  QualType getGetterResultType() const {
+-    QualType ResultType;
+-    if (isExplicitProperty()) {
+-      const ObjCPropertyDecl *PDecl = getExplicitProperty();
+-      if (const ObjCMethodDecl *Getter = PDecl->getGetterMethodDecl())
+-        ResultType = Getter->getReturnType();
+-      else
+-        ResultType = PDecl->getType();
+-    } else {
+-      const ObjCMethodDecl *Getter = getImplicitPropertyGetter();
+-      if (Getter)
+-        ResultType = Getter->getReturnType(); // with reference!
+-    }
+-    return ResultType;
+-  }
+ 
+-  QualType getSetterArgType() const {
+-    QualType ArgType;
+-    if (isImplicitProperty()) {
+-      const ObjCMethodDecl *Setter = getImplicitPropertySetter();
+-      ObjCMethodDecl::param_const_iterator P = Setter->param_begin(); 
+-      ArgType = (*P)->getType();
+-    } else {
+-      if (ObjCPropertyDecl *PDecl = getExplicitProperty())
+-        if (const ObjCMethodDecl *Setter = PDecl->getSetterMethodDecl()) {
+-          ObjCMethodDecl::param_const_iterator P = Setter->param_begin(); 
+-          ArgType = (*P)->getType();
+-        }
+-      if (ArgType.isNull())
+-        ArgType = getType();
+-    }
+-    return ArgType;
+-  }
+-  
+   ObjCInterfaceDecl *getClassReceiver() const {
+     return Receiver.get<ObjCInterfaceDecl*>();
+   }
+@@ -728,6 +695,9 @@
+   bool isSuperReceiver() const { return Receiver.is<const Type*>(); }
+   bool isClassReceiver() const { return Receiver.is<ObjCInterfaceDecl*>(); }
+ 
++  /// Determine the type of the base, regardless of the kind of receiver.
++  QualType getReceiverType(const ASTContext &ctx) const;
++
+   SourceLocation getLocStart() const LLVM_READONLY {
+     return isObjectReceiver() ? getBase()->getLocStart() :getReceiverLocation();
+   }
+Index: include/clang/AST/Type.h
+===================================================================
+--- include/clang/AST/Type.h	(revision 231004)
++++ include/clang/AST/Type.h	(working copy)
+@@ -1817,6 +1817,19 @@
+   /// checking. Should always return true.
+   bool isLinkageValid() const;
+ 
++  /// Determine the nullability of the given type.
++  ///
++  /// Note that nullability is only captured as sugar within the type
++  /// system, not as part of the canonical type, so nullability will
++  /// be lost by canonicalization and desugaring.
++  Optional<NullabilityKind> getNullability(const ASTContext &context) const;
++
++  /// Determine whether the given type can have a nullability
++  /// specifier applied to it, i.e., if it is any kind of pointer type
++  /// or a dependent type that could instantiate to any kind of
++  /// pointer type.
++  bool canHaveNullability() const;
++
+   const char *getTypeClassName() const;
+ 
+   QualType getCanonicalTypeInternal() const {
+@@ -3478,7 +3491,10 @@
+     attr_ptr32,
+     attr_ptr64,
+     attr_sptr,
+-    attr_uptr
++    attr_uptr,
++    attr_nonnull,
++    attr_nullable,
++    attr_null_unspecified,
+   };
+ 
+ private:
+@@ -3512,6 +3528,34 @@
+ 
+   bool isCallingConv() const;
+ 
++  llvm::Optional<NullabilityKind> getImmediateNullability() const;
++
++  /// Retrieve the attribute kind corresponding to the given
++  /// nullability kind.
++  static Kind getNullabilityAttrKind(NullabilityKind kind) {
++    switch (kind) {
++    case NullabilityKind::NonNull:
++      return attr_nonnull;
++     
++    case NullabilityKind::Nullable:
++      return attr_nullable;
++
++    case NullabilityKind::Unspecified:
++      return attr_null_unspecified;
++    }
++  }
++
++  /// Strip off the top-level nullability annotation on the given
++  /// type, if it's there.
++  ///
++  /// \param T The type to strip. If the type is exactly an
++  /// AttributedType specifying nullability (without looking through
++  /// type sugar), the nullability is returned and this type changed
++  /// to the underlying modified type.
++  ///
++  /// \returns the top-level nullability, if present.
++  static Optional<NullabilityKind> stripOuterNullability(QualType &T);
++
+   void Profile(llvm::FoldingSetNodeID &ID) {
+     Profile(ID, getAttrKind(), ModifiedType, EquivalentType);
+   }
+Index: include/clang/AST/TypeLoc.h
+===================================================================
+--- include/clang/AST/TypeLoc.h	(revision 231004)
++++ include/clang/AST/TypeLoc.h	(working copy)
+@@ -185,6 +185,10 @@
+     return !(LHS == RHS);
+   }
+ 
++  /// Find the location of the nullability specifier (__nonnull,
++  /// __nullable, or __null_unspecified), if there is one.
++  SourceLocation findNullabilityLoc() const;
++
+ private:
+   static bool isKind(const TypeLoc&) {
+     return true;
+Index: include/clang/Basic/Attr.td
+===================================================================
+--- include/clang/Basic/Attr.td	(revision 231004)
++++ include/clang/Basic/Attr.td	(working copy)
+@@ -957,6 +957,22 @@
+   let Documentation = [Undocumented];
+ }
+ 
++// Nullability type attributes.
++def TypeNonNull : TypeAttr {
++  let Spellings = [Keyword<"__nonnull">];
++  let Documentation = [Undocumented];
++}
++
++def TypeNullable : TypeAttr {
++  let Spellings = [Keyword<"__nullable">];
++  let Documentation = [Undocumented];
++}
++
++def TypeNullUnspecified : TypeAttr {
++  let Spellings = [Keyword<"__null_unspecified">];
++  let Documentation = [Undocumented];
++}
++
+ def AssumeAligned : InheritableAttr {
+   let Spellings = [GCC<"assume_aligned">];
+   let Subjects = SubjectList<[ObjCMethod, Function]>;
+Index: include/clang/Basic/DiagnosticCommonKinds.td
+===================================================================
+--- include/clang/Basic/DiagnosticCommonKinds.td	(revision 231004)
++++ include/clang/Basic/DiagnosticCommonKinds.td	(working copy)
+@@ -99,6 +99,26 @@
+ 
+ }
+ 
++let CategoryName = "Nullability Issue" in {
++
++def warn_nullability_duplicate : Warning<
++  "duplicate nullability specifier "
++  "'%select{%select{__|}1nonnull|%select{__|}1nullable|"
++  "%select{__|}1null_unspecified}0'">,
++  InGroup<Nullability>;
++
++def err_nullability_conflicting : Error<
++  "nullability specifier "
++  "'%select{%select{__|}1nonnull|%select{__|}1nullable|"
++  "%select{__|}1null_unspecified}0' "
++  "conflicts with existing specifier '%select{%select{__|}3nonnull|"
++  "%select{__|}3nullable|%select{__|}3null_unspecified}2'">;
++
++def note_nullability_here : Note<
++  "'%select{__nonnull|__nullable|__null_unspecified}0' specified here">;
++
++}
++
+ // Sema && Lex
+ def ext_c99_longlong : Extension<
+   "'long long' is an extension when C99 mode is not enabled">,
+Index: include/clang/Basic/DiagnosticGroups.td
+===================================================================
+--- include/clang/Basic/DiagnosticGroups.td	(revision 231004)
++++ include/clang/Basic/DiagnosticGroups.td	(working copy)
+@@ -240,6 +240,10 @@
+ def ModuleBuild : DiagGroup<"module-build">;
+ def ModuleConflict : DiagGroup<"module-conflict">;
+ def NewlineEOF : DiagGroup<"newline-eof">;
++def NullabilityCompleteness : DiagGroup<"nullability-completeness">;
++def Nullability : DiagGroup<"nullability",
++                            [NullabilityCompleteness]>;
++def NullableToNonNullConversion : DiagGroup<"nullable-to-nonnull-conversion">;
+ def NullArithmetic : DiagGroup<"null-arithmetic">;
+ def NullCharacter : DiagGroup<"null-character">;
+ def NullDereference : DiagGroup<"null-dereference">;
+Index: include/clang/Basic/DiagnosticLexKinds.td
+===================================================================
+--- include/clang/Basic/DiagnosticLexKinds.td	(revision 231004)
++++ include/clang/Basic/DiagnosticLexKinds.td	(working copy)
+@@ -642,5 +642,20 @@
+   "%0 is used as a header guard here, followed by #define of a different macro">,
+   InGroup<DiagGroup<"header-guard">>;
+ def note_header_guard : Note<
+-  "%0 is defined here; did you mean %1?">;  
++  "%0 is defined here; did you mean %1?">;
++
++let CategoryName = "Nullability Issue" in {
++
++def err_pp_assume_nonnull_syntax : Error<"expected 'begin' or 'end'">;
++def err_pp_double_begin_of_assume_nonnull : Error<
++  "already inside '#pragma clang assume_nonnull'">;
++def err_pp_unmatched_end_of_assume_nonnull : Error<
++  "not currently inside '#pragma clang assume_nonnull'">;
++def err_pp_include_in_assume_nonnull : Error<
++  "cannot #include files inside '#pragma clang assume_nonnull'">;
++def err_pp_eof_in_assume_nonnull : Error<
++  "'#pragma clang assume_nonnull' was not ended within this file">;
++
+ }
++
++}
+Index: include/clang/Basic/DiagnosticParseKinds.td
+===================================================================
+--- include/clang/Basic/DiagnosticParseKinds.td	(revision 231004)
++++ include/clang/Basic/DiagnosticParseKinds.td	(working copy)
+@@ -65,6 +65,10 @@
+   "%select{here|for the remainder of the translation unit}1">,
+   InGroup<KeywordCompat>;
+ 
++def ext_nullability : Extension<
++  "type nullability specifier %0 is a Clang extension">,
++  InGroup<Nullability>;
++
+ def error_empty_enum : Error<"use of empty enum">;
+ def err_invalid_sign_spec : Error<"'%0' cannot be signed or unsigned">;
+ def err_invalid_short_spec : Error<"'short %0' is invalid">;
+Index: include/clang/Basic/DiagnosticSemaKinds.td
+===================================================================
+--- include/clang/Basic/DiagnosticSemaKinds.td	(revision 231004)
++++ include/clang/Basic/DiagnosticSemaKinds.td	(working copy)
+@@ -7573,4 +7573,37 @@
+ 
+ } // end of instrumentation issue category
+ 
++let CategoryName = "Nullability Issue" in {
++
++def err_nullability_nonpointer : Error<
++  "nullability specifier "
++  "'%select{%select{__|}1nonnull|%select{__|}1nullable|%select{__|}1"
++  "null_unspecified}0' cannot be applied to non-pointer type %2">;
++
++def err_nullability_cs_multilevel : Error<
++  "nullability keyword "
++  "'%select{nonnull|nullable|null_unspecified}0' cannot be applied to "
++  "multi-level pointer type %1">;
++
++def note_nullability_type_specifier : Note<
++  "use nullability type specifier "
++  "'%select{__nonnull|__nullable|__null_unspecified}0' to affect the innermost "
++  "pointer type of %1">;
++
++def warn_nullability_missing : Warning<
++  "%select{pointer|block pointer|member pointer}0 is missing a nullability "
++  "type specifier (__nonnull or __nullable)">,
++  InGroup<NullabilityCompleteness>;
++
++def warn_nullability_lost : Warning<
++  "implicit conversion from nullable pointer %0 to non-nullable pointer "
++  "type %1">,
++  InGroup<NullableToNonNullConversion>, DefaultIgnore;
++
++def warn_null_resettable_setter : Warning<
++  "synthesized setter %0 for null_resettable property %1 does not handle nil">,
++  InGroup<Nullability>;
++
++}
++
+ } // end of sema component.
+Index: include/clang/Basic/Specifiers.h
+===================================================================
+--- include/clang/Basic/Specifiers.h	(revision 231004)
++++ include/clang/Basic/Specifiers.h	(working copy)
+@@ -16,6 +16,9 @@
+ #ifndef LLVM_CLANG_BASIC_SPECIFIERS_H
+ #define LLVM_CLANG_BASIC_SPECIFIERS_H
+ 
++#include "llvm/ADT/StringRef.h"
++#include "llvm/Support/DataTypes.h"
++
+ namespace clang {
+   /// \brief Specifies the width of a type, e.g., short, long, or long long.
+   enum TypeSpecifierWidth {
+@@ -239,6 +242,22 @@
+     SD_Static,         ///< Static storage duration.
+     SD_Dynamic         ///< Dynamic storage duration.
+   };
++
++  /// Describes the nullability of a particular type.
++  enum class NullabilityKind : uint8_t {
++    /// Values of this type can never be null.
++    NonNull = 0,
++    /// Values of this type can be null.
++    Nullable,
++    /// Whether values of this type can be null is (explicitly)
++    /// unspecified. This captures a (fairly rare) case where we
++    /// can't conclude anything about the nullability of the type even
++    /// though it has been considered.
++    Unspecified
++  };
++
++  /// Retrieve the spelling of the given nullability kind.
++  llvm::StringRef getNullabilitySpelling(NullabilityKind kind);
+ } // end namespace clang
+ 
+ #endif // LLVM_CLANG_BASIC_SPECIFIERS_H
+Index: include/clang/Basic/TokenKinds.def
+===================================================================
+--- include/clang/Basic/TokenKinds.def	(revision 231004)
++++ include/clang/Basic/TokenKinds.def	(working copy)
+@@ -534,6 +534,11 @@
+ ALIAS("__volatile"   , volatile   , KEYALL)
+ ALIAS("__volatile__" , volatile   , KEYALL)
+ 
++// Type nullability.
++KEYWORD(__nonnull                 , KEYALL)
++KEYWORD(__nullable                , KEYALL)
++KEYWORD(__null_unspecified        , KEYALL)
++
+ // Microsoft extensions which should be disabled in strict conformance mode
+ KEYWORD(__ptr64                       , KEYMS)
+ KEYWORD(__ptr32                       , KEYMS)
+Index: include/clang/Lex/Preprocessor.h
+===================================================================
+--- include/clang/Lex/Preprocessor.h	(revision 231004)
++++ include/clang/Lex/Preprocessor.h	(working copy)
+@@ -255,6 +255,10 @@
+   /// \#pragma clang arc_cf_code_audited begin.
+   SourceLocation PragmaARCCFCodeAuditedLoc;
+ 
++  /// \brief The source location of the currently-active
++  /// \#pragma clang assume_nonnull begin.
++  SourceLocation PragmaAssumeNonNullLoc;
++
+   /// \brief True if we hit the code-completion point.
+   bool CodeCompletionReached;
+ 
+@@ -1020,6 +1024,20 @@
+     PragmaARCCFCodeAuditedLoc = Loc;
+   }
+ 
++  /// \brief The location of the currently-active \#pragma clang
++  /// assume_nonnull begin.
++  ///
++  /// Returns an invalid location if there is no such pragma active.
++  SourceLocation getPragmaAssumeNonNullLoc() const {
++    return PragmaAssumeNonNullLoc;
++  }
++
++  /// \brief Set the location of the currently-active \#pragma clang
++  /// assume_nonnull begin.  An invalid location ends the pragma.
++  void setPragmaAssumeNonNullLoc(SourceLocation Loc) {
++    PragmaAssumeNonNullLoc = Loc;
++  }
++
+   /// \brief Set the directory in which the main file should be considered
+   /// to have been found, if it is not a real file.
+   void setMainFileDir(const DirectoryEntry *Dir) {
+Index: include/clang/Parse/Parser.h
+===================================================================
+--- include/clang/Parse/Parser.h	(revision 231004)
++++ include/clang/Parse/Parser.h	(working copy)
+@@ -303,6 +303,12 @@
+     return true;
+   }
+ 
++  /// Retrieve the underscored keyword (__nonnull, __nullable) that corresponds
++  /// to the given nullability kind.
++  IdentifierInfo *getNullabilityKeyword(NullabilityKind nullability) {
++    return Actions.getNullabilityKeyword(nullability);
++  }
++
+ private:
+   //===--------------------------------------------------------------------===//
+   // Low-Level token peeking and consumption methods.
+@@ -1282,6 +1288,7 @@
+   // Definitions for Objective-c context sensitive keywords recognition.
+   enum ObjCTypeQual {
+     objc_in=0, objc_out, objc_inout, objc_oneway, objc_bycopy, objc_byref,
++    objc_nonnull, objc_nullable, objc_null_unspecified,
+     objc_NumQuals
+   };
+   IdentifierInfo *ObjCTypeQuals[objc_NumQuals];
+@@ -2095,6 +2102,7 @@
+   void ParseBorlandTypeAttributes(ParsedAttributes &attrs);
+   void ParseOpenCLAttributes(ParsedAttributes &attrs);
+   void ParseOpenCLQualifiers(ParsedAttributes &Attrs);
++  void ParseNullabilityTypeSpecifiers(ParsedAttributes &attrs);
+ 
+   VersionTuple ParseVersionTuple(SourceRange &Range);
+   void ParseAvailabilityAttribute(IdentifierInfo &Availability,
+Index: include/clang/Sema/AttributeList.h
+===================================================================
+--- include/clang/Sema/AttributeList.h	(revision 231004)
++++ include/clang/Sema/AttributeList.h	(working copy)
+@@ -81,6 +81,8 @@
+     AS_Declspec,
+     /// __ptr16, alignas(...), etc.
+     AS_Keyword,
++    /// Context-sensitive version of a keyword attribute.
++    AS_ContextSensitiveKeyword,
+     /// #pragma ...
+     AS_Pragma
+   };
+@@ -343,15 +345,21 @@
+ 
+   bool isAlignasAttribute() const {
+     // FIXME: Use a better mechanism to determine this.
+-    return getKind() == AT_Aligned && SyntaxUsed == AS_Keyword;
++    return getKind() == AT_Aligned && isKeywordAttribute();
+   }
+ 
+   bool isDeclspecAttribute() const { return SyntaxUsed == AS_Declspec; }
+   bool isCXX11Attribute() const {
+     return SyntaxUsed == AS_CXX11 || isAlignasAttribute();
+   }
+-  bool isKeywordAttribute() const { return SyntaxUsed == AS_Keyword; }
++  bool isKeywordAttribute() const {
++    return SyntaxUsed == AS_Keyword || SyntaxUsed == AS_ContextSensitiveKeyword;
++  }
+ 
++  bool isContextSensitiveKeywordAttribute() const {
++    return SyntaxUsed == AS_ContextSensitiveKeyword;
++  }
++
+   bool isInvalid() const { return Invalid; }
+   void setInvalid(bool b = true) const { Invalid = b; }
+ 
+Index: include/clang/Sema/DeclSpec.h
+===================================================================
+--- include/clang/Sema/DeclSpec.h	(revision 231004)
++++ include/clang/Sema/DeclSpec.h	(working copy)
+@@ -785,7 +785,8 @@
+     DQ_Out = 0x4,
+     DQ_Bycopy = 0x8,
+     DQ_Byref = 0x10,
+-    DQ_Oneway = 0x20
++    DQ_Oneway = 0x20,
++    DQ_CSNullability = 0x40
+   };
+ 
+   /// PropertyAttributeKind - list of property attributes.
+@@ -802,13 +803,15 @@
+     DQ_PR_atomic = 0x100,
+     DQ_PR_weak =   0x200,
+     DQ_PR_strong = 0x400,
+-    DQ_PR_unsafe_unretained = 0x800
++    DQ_PR_unsafe_unretained = 0x800,
++    DQ_PR_nullability = 0x1000,
++    DQ_PR_null_resettable = 0x2000
+   };
+ 
+-
+   ObjCDeclSpec()
+     : objcDeclQualifier(DQ_None), PropertyAttributes(DQ_PR_noattr),
+-      GetterName(nullptr), SetterName(nullptr) { }
++      Nullability(0), GetterName(nullptr), SetterName(nullptr) { }
++
+   ObjCDeclQualifier getObjCDeclQualifier() const { return objcDeclQualifier; }
+   void setObjCDeclQualifier(ObjCDeclQualifier DQVal) {
+     objcDeclQualifier = (ObjCDeclQualifier) (objcDeclQualifier | DQVal);
+@@ -822,6 +825,28 @@
+       (ObjCPropertyAttributeKind)(PropertyAttributes | PRVal);
+   }
+ 
++  NullabilityKind getNullability() const {
++    assert(((getObjCDeclQualifier() & DQ_CSNullability) ||
++            (getPropertyAttributes() & DQ_PR_nullability)) &&
++           "Objective-C declspec doesn't have nullability");
++    return static_cast<NullabilityKind>(Nullability);
++  }
++
++  SourceLocation getNullabilityLoc() const {
++    assert(((getObjCDeclQualifier() & DQ_CSNullability) ||
++            (getPropertyAttributes() & DQ_PR_nullability)) &&
++           "Objective-C declspec doesn't have nullability");
++    return NullabilityLoc;
++  }
++
++  void setNullability(SourceLocation loc, NullabilityKind kind) {
++    assert(((getObjCDeclQualifier() & DQ_CSNullability) ||
++            (getPropertyAttributes() & DQ_PR_nullability)) &&
++           "Set the nullability declspec or property attribute first");
++    Nullability = static_cast<unsigned>(kind);
++    NullabilityLoc = loc;
++  }
++
+   const IdentifierInfo *getGetterName() const { return GetterName; }
+   IdentifierInfo *getGetterName() { return GetterName; }
+   void setGetterName(IdentifierInfo *name) { GetterName = name; }
+@@ -834,10 +859,15 @@
+   // FIXME: These two are unrelated and mutually exclusive. So perhaps
+   // we can put them in a union to reflect their mutual exclusivity
+   // (space saving is negligible).
+-  ObjCDeclQualifier objcDeclQualifier : 6;
++  ObjCDeclQualifier objcDeclQualifier : 7;
+ 
+   // NOTE: VC++ treats enums as signed, avoid using ObjCPropertyAttributeKind
+-  unsigned PropertyAttributes : 12;
++  unsigned PropertyAttributes : 14;
++
++  unsigned Nullability : 2;
++
++  SourceLocation NullabilityLoc;
++
+   IdentifierInfo *GetterName;    // getter name or NULL if no getter
+   IdentifierInfo *SetterName;    // setter name or NULL if no setter
+ };
+@@ -1614,8 +1644,11 @@
+   bool InlineParamsUsed;
+ 
+   /// \brief true if the declaration is preceded by \c __extension__.
+-  bool Extension : 1;
++  unsigned Extension : 1;
+ 
++  /// Indicates whether this is an Objective-C instance variable.
++  unsigned ObjCIvar : 1;
++
+   /// \brief If this is the second or subsequent declarator in this declaration,
+   /// the location of the comma before this declarator.
+   SourceLocation CommaLoc;
+@@ -1633,7 +1666,7 @@
+       GroupingParens(false), FunctionDefinition(FDK_Declaration), 
+       Redeclaration(false),
+       Attrs(ds.getAttributePool().getFactory()), AsmLabel(nullptr),
+-      InlineParamsUsed(false), Extension(false) {
++      InlineParamsUsed(false), Extension(false), ObjCIvar(false) {
+   }
+ 
+   ~Declarator() {
+@@ -1711,6 +1744,7 @@
+     Attrs.clear();
+     AsmLabel = nullptr;
+     InlineParamsUsed = false;
++    ObjCIvar = false;
+     CommaLoc = SourceLocation();
+     EllipsisLoc = SourceLocation();
+   }
+@@ -2119,6 +2153,9 @@
+   void setExtension(bool Val = true) { Extension = Val; }
+   bool getExtension() const { return Extension; }
+ 
++  void setObjCIvar(bool Val = true) { ObjCIvar = Val; }
++  bool isObjCIvar() const { return ObjCIvar; }
++
+   void setInvalidType(bool Val = true) { InvalidType = Val; }
+   bool isInvalidType() const {
+     return InvalidType || DS.getTypeSpecType() == DeclSpec::TST_error;
+Index: include/clang/Sema/Sema.h
+===================================================================
+--- include/clang/Sema/Sema.h	(revision 231004)
++++ include/clang/Sema/Sema.h	(working copy)
+@@ -209,6 +209,50 @@
+ typedef std::pair<llvm::PointerUnion<const TemplateTypeParmType*, NamedDecl*>,
+                   SourceLocation> UnexpandedParameterPack;
+ 
++/// Describes whether we've seen any nullability information for the given
++/// file.
++struct FileNullability {
++  /// The first pointer declarator (of any pointer kind) in the file that does
++  /// not have a corresponding nullability annotation.
++  SourceLocation PointerLoc;
++
++  /// Which kind of pointer declarator we saw.
++  uint8_t PointerKind;
++
++  /// Whether we saw any type nullability annotations in the given file.
++  bool SawTypeNullability = false;
++};
++
++/// A mapping from file IDs to a record of whether we've seen nullability
++/// information in that file.
++class FileNullabilityMap {
++  /// A mapping from file IDs to the nullability information for each file ID.
++  llvm::DenseMap<FileID, FileNullability> Map;
++
++  /// A single-element cache based on the file ID.
++  struct {
++    FileID File;
++    FileNullability Nullability;
++  } Cache;
++
++public:
++  FileNullability &operator[](FileID file) {
++    // Check the single-element cache.
++    if (file == Cache.File)
++      return Cache.Nullability;
++
++    // It's not in the single-element cache; flush the cache if we have one.
++    if (!Cache.File.isInvalid()) {
++      Map[Cache.File] = Cache.Nullability;
++    }
++
++    // Pull this entry into the cache.
++    Cache.File = file;
++    Cache.Nullability = Map[file];
++    return Cache.Nullability;
++  }
++};
++
+ /// Sema - This implements semantic analysis and AST building for C.
+ class Sema {
+   Sema(const Sema &) = delete;
+@@ -335,6 +379,9 @@
+   PragmaStack<StringLiteral *> ConstSegStack;
+   PragmaStack<StringLiteral *> CodeSegStack;
+ 
++  /// A mapping that describes the nullability we've seen in each header file.
++  FileNullabilityMap NullabilityMap;
++
+   /// Last section used with #pragma init_seg.
+   StringLiteral *CurInitSeg;
+   SourceLocation CurInitSegLoc;
+@@ -2827,6 +2874,30 @@
+   /// Valid types should not have multiple attributes with different CCs.
+   const AttributedType *getCallingConvAttributedType(QualType T) const;
+ 
++  /// Check whether a nullability type specifier can be added to the given
++  /// type.
++  ///
++  /// \param type The type to which the nullability specifier will be
++  /// added. On success, this type will be updated appropriately.
++  ///
++  /// \param nullability The nullability specifier to add.
++  ///
++  /// \param nullabilityLoc The location of the nullability specifier.
++  ///
++  /// \param isContextSensitive Whether this nullability specifier was
++  /// written as a context-sensitive keyword (in an Objective-C
++  /// method) or an Objective-C property attribute, rather than as an
++  /// underscored type specifier.
++  ///
++  /// \param implicit Whether nullability is being added implicitly, which
++  /// suppresses some diagnostics.
++  ///
++  /// \returns true if nullability cannot be applied, false otherwise.
++  bool checkNullabilityTypeSpecifier(QualType &type, NullabilityKind nullability,
++                                     SourceLocation nullabilityLoc,
++                                     bool isContextSensitive,
++                                     bool implicit);
++
+   /// \brief Stmt attributes - this routine is the top level dispatcher.
+   StmtResult ProcessStmtAttributes(Stmt *Stmt, AttributeList *Attrs,
+                                    SourceRange Range);
+@@ -2866,6 +2937,9 @@
+                                        ObjCContainerDecl *CDecl,
+                                        bool SynthesizeProperties);
+ 
++  /// Diagnose any null-resettable synthesized setters.
++  void diagnoseNullResettableSynthesizedSetters(ObjCImplDecl *impDecl);
++
+   /// DefaultSynthesizeProperties - This routine default synthesizes all
+   /// properties which must be synthesized in the class's \@implementation.
+   void DefaultSynthesizeProperties (Scope *S, ObjCImplDecl* IMPDecl,
+@@ -2902,7 +2976,8 @@
+                       const unsigned Attributes,
+                       const unsigned AttributesAsWritten,
+                       bool *isOverridingProperty,
+-                      TypeSourceInfo *T,
++                      QualType T,
++                      TypeSourceInfo *TSI,
+                       tok::ObjCKeywordKind MethodImplKind);
+ 
+   /// Called by ActOnProperty and HandlePropertyInClassExtension to
+@@ -2918,7 +2993,8 @@
+                                        const bool isReadWrite,
+                                        const unsigned Attributes,
+                                        const unsigned AttributesAsWritten,
+-                                       TypeSourceInfo *T,
++                                       QualType T,
++                                       TypeSourceInfo *TSI,
+                                        tok::ObjCKeywordKind MethodImplKind,
+                                        DeclContext *lexicalDC = nullptr);
+ 
+@@ -8525,9 +8601,10 @@
+                             const FunctionProtoType *Proto,
+                             SourceLocation Loc);
+ 
+-  void checkCall(NamedDecl *FDecl, ArrayRef<const Expr *> Args,
+-                 unsigned NumParams, bool IsMemberFunction, SourceLocation Loc,
+-                 SourceRange Range, VariadicCallType CallType);
++  void checkCall(NamedDecl *FDecl, const FunctionProtoType *Proto,
++                 ArrayRef<const Expr *> Args, bool IsMemberFunction, 
++                 SourceLocation Loc, SourceRange Range, 
++                 VariadicCallType CallType);
+ 
+   bool CheckObjCString(Expr *Arg);
+ 
+@@ -8689,6 +8766,13 @@
+   mutable IdentifierInfo *Ident_super;
+   mutable IdentifierInfo *Ident___float128;
+ 
++  /// Nullability type specifiers.
++  IdentifierInfo *Ident___nonnull = nullptr;
++  IdentifierInfo *Ident___nullable = nullptr;
++  IdentifierInfo *Ident___null_unspecified = nullptr;
++
++  IdentifierInfo *Ident_NSError = nullptr;
++
+ protected:
+   friend class Parser;
+   friend class InitializationSequence;
+@@ -8696,6 +8780,15 @@
+   friend class ASTWriter;
+ 
+ public:
++  /// Retrieve the keyword associated
++  IdentifierInfo *getNullabilityKeyword(NullabilityKind nullability);
++
++  /// The struct behind the CFErrorRef pointer.
++  RecordDecl *CFError = nullptr;
++
++  /// Retrieve the identifier "NSError".
++  IdentifierInfo *getNSErrorIdent();
++
+   /// \brief Retrieve the parser's current scope.
+   ///
+   /// This routine must only be used when it is certain that semantic analysis
+Index: lib/AST/ASTImporter.cpp
+===================================================================
+--- lib/AST/ASTImporter.cpp	(revision 231004)
++++ lib/AST/ASTImporter.cpp	(working copy)
+@@ -3797,8 +3797,8 @@
+   }
+ 
+   // Import the type.
+-  TypeSourceInfo *T = Importer.Import(D->getTypeSourceInfo());
+-  if (!T)
++  TypeSourceInfo *TSI = Importer.Import(D->getTypeSourceInfo());
++  if (!TSI)
+     return nullptr;
+ 
+   // Create the new property.
+@@ -3807,7 +3807,8 @@
+                                Name.getAsIdentifierInfo(), 
+                                Importer.Import(D->getAtLoc()),
+                                Importer.Import(D->getLParenLoc()),
+-                               T,
++                               Importer.Import(D->getType()),
++                               TSI,
+                                D->getPropertyImplementation());
+   Importer.Imported(D, ToProperty);
+   ToProperty->setLexicalDeclContext(LexicalDC);
+@@ -4633,7 +4634,7 @@
+     return nullptr;
+ 
+   return ToContext.getTrivialTypeSourceInfo(T, 
+-                        FromTSI->getTypeLoc().getLocStart());
++           Import(FromTSI->getTypeLoc().getLocStart()));
+ }
+ 
+ Decl *ASTImporter::Import(Decl *FromD) {
+Index: lib/AST/DeclObjC.cpp
+===================================================================
+--- lib/AST/DeclObjC.cpp	(revision 231004)
++++ lib/AST/DeclObjC.cpp	(working copy)
+@@ -1857,16 +1857,18 @@
+                                            IdentifierInfo *Id,
+                                            SourceLocation AtLoc,
+                                            SourceLocation LParenLoc,
+-                                           TypeSourceInfo *T,
++                                           QualType T,
++                                           TypeSourceInfo *TSI,
+                                            PropertyControl propControl) {
+-  return new (C, DC) ObjCPropertyDecl(DC, L, Id, AtLoc, LParenLoc, T);
++  return new (C, DC) ObjCPropertyDecl(DC, L, Id, AtLoc, LParenLoc, T, TSI,
++                                      propControl);
+ }
+ 
+ ObjCPropertyDecl *ObjCPropertyDecl::CreateDeserialized(ASTContext &C,
+                                                        unsigned ID) {
+   return new (C, ID) ObjCPropertyDecl(nullptr, SourceLocation(), nullptr,
+                                       SourceLocation(), SourceLocation(),
+-                                      nullptr);
++                                      QualType(), nullptr, None);
+ }
+ 
+ //===----------------------------------------------------------------------===//
+Index: lib/AST/DeclPrinter.cpp
+===================================================================
+--- lib/AST/DeclPrinter.cpp	(revision 231004)
++++ lib/AST/DeclPrinter.cpp	(working copy)
+@@ -37,6 +37,13 @@
+ 
+     void Print(AccessSpecifier AS);
+ 
++    /// Print an Objective-C method type in parentheses.
++    ///
++    /// \param Quals The Objective-C declaration qualifiers.
++    /// \param T The type to print.
++    void PrintObjCMethodType(ASTContext &Ctx, Decl::ObjCDeclQualifier Quals, 
++                             QualType T);
++
+   public:
+     DeclPrinter(raw_ostream &Out, const PrintingPolicy &Policy,
+                 unsigned Indentation = 0, bool PrintInstantiation = false)
+@@ -928,24 +935,52 @@
+ // Objective-C declarations
+ //----------------------------------------------------------------------------
+ 
++void DeclPrinter::PrintObjCMethodType(ASTContext &Ctx, 
++                                      Decl::ObjCDeclQualifier Quals, 
++                                      QualType T) {
++  Out << '(';
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_In)
++    Out << "in ";
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_Inout)
++    Out << "inout ";
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_Out)
++    Out << "out ";
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_Bycopy)
++    Out << "bycopy ";
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_Byref)
++    Out << "byref ";
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_Oneway)
++    Out << "oneway ";
++  if (Quals & Decl::ObjCDeclQualifier::OBJC_TQ_CSNullability) {
++    if (auto nullability = AttributedType::stripOuterNullability(T)) {
++      Out << getNullabilitySpelling(*nullability).substr(2) << ' ';
++    }
++  }
++  
++  Out << Ctx.getUnqualifiedObjCPointerType(T).getAsString(Policy);
++  Out << ')';
++}
++
+ void DeclPrinter::VisitObjCMethodDecl(ObjCMethodDecl *OMD) {
+   if (OMD->isInstanceMethod())
+     Out << "- ";
+   else
+     Out << "+ ";
+-  if (!OMD->getReturnType().isNull())
+-    Out << '(' << OMD->getASTContext()
+-                      .getUnqualifiedObjCPointerType(OMD->getReturnType())
+-                      .getAsString(Policy) << ")";
++  if (!OMD->getReturnType().isNull()) {
++    PrintObjCMethodType(OMD->getASTContext(), OMD->getObjCDeclQualifier(),
++                        OMD->getReturnType());
++  }
+ 
+   std::string name = OMD->getSelector().getAsString();
+   std::string::size_type pos, lastPos = 0;
+   for (const auto *PI : OMD->params()) {
+     // FIXME: selector is missing here!
+     pos = name.find_first_of(':', lastPos);
+-    Out << " " << name.substr(lastPos, pos - lastPos);
+-    Out << ":(" << PI->getASTContext().getUnqualifiedObjCPointerType(PI->getType()).
+-                      getAsString(Policy) << ')' << *PI;
++    Out << " " << name.substr(lastPos, pos - lastPos) << ':';
++    PrintObjCMethodType(OMD->getASTContext(), 
++                        PI->getObjCDeclQualifier(),
++                        PI->getType());
++    Out << *PI;
+     lastPos = pos + 1;
+   }
+ 
+@@ -1101,6 +1136,8 @@
+   else if (PDecl->getPropertyImplementation() == ObjCPropertyDecl::Optional)
+     Out << "@optional\n";
+ 
++  QualType T = PDecl->getType();
++
+   Out << "@property";
+   if (PDecl->getPropertyAttributes() != ObjCPropertyDecl::OBJC_PR_noattr) {
+     bool first = true;
+@@ -1159,10 +1196,25 @@
+       first = false;
+     }
+     
++    if (PDecl->getPropertyAttributes() &
++        ObjCPropertyDecl::OBJC_PR_nullability) {
++      if (auto nullability = AttributedType::stripOuterNullability(T)) {
++        if (*nullability == NullabilityKind::Unspecified &&
++            (PDecl->getPropertyAttributes() &
++               ObjCPropertyDecl::OBJC_PR_null_resettable)) {
++          Out << (first ? ' ' : ',') << "null_resettable";
++        } else {
++          Out << (first ? ' ' : ',')
++              << getNullabilitySpelling(*nullability).substr(2);
++        }
++        first = false;
++      }
++    }
++
+     (void) first; // Silence dead store warning due to idiomatic code.
+     Out << " )";
+   }
+-  Out << ' ' << PDecl->getASTContext().getUnqualifiedObjCPointerType(PDecl->getType()).
++  Out << ' ' << PDecl->getASTContext().getUnqualifiedObjCPointerType(T).
+                   getAsString(Policy) << ' ' << *PDecl;
+   if (Policy.PolishForDeclaration)
+     Out << ';';
+Index: lib/AST/Expr.cpp
+===================================================================
+--- lib/AST/Expr.cpp	(revision 231004)
++++ lib/AST/Expr.cpp	(working copy)
+@@ -3731,6 +3731,16 @@
+   return nullptr;
+ }
+ 
++QualType ObjCPropertyRefExpr::getReceiverType(const ASTContext &ctx) const {
++  if (isClassReceiver())
++    return ctx.getObjCInterfaceType(getClassReceiver());
++
++  if (isSuperReceiver())
++    return getSuperReceiverType();
++
++  return getBase()->getType();
++}
++
+ StringRef ObjCBridgedCastExpr::getBridgeKindName() const {
+   switch (getBridgeKind()) {
+   case OBC_Bridge:
+Index: lib/AST/Type.cpp
+===================================================================
+--- lib/AST/Type.cpp	(revision 231004)
++++ lib/AST/Type.cpp	(working copy)
+@@ -1926,7 +1926,10 @@
+   case attr_objc_gc:
+   case attr_objc_ownership:
+   case attr_noreturn:
+-      return false;
++  case attr_nonnull:
++  case attr_nullable:
++  case attr_null_unspecified:
++    return false;
+   case attr_pcs:
+   case attr_pcs_vfp:
+   case attr_cdecl:
+@@ -1943,6 +1946,18 @@
+   llvm_unreachable("invalid attr kind");
+ }
+ 
++/// Strip off the top-level nullability annotation, if it's there.
++Optional<NullabilityKind> AttributedType::stripOuterNullability(QualType &T) {
++  if (auto attributed = dyn_cast<AttributedType>(T.getTypePtr())) {
++    if (auto nullability = attributed->getImmediateNullability()) {
++      T = attributed->getModifiedType();
++      return nullability;
++    }
++  }
++
++  return None;
++}
++
+ CXXRecordDecl *InjectedClassNameType::getDecl() const {
+   return cast<CXXRecordDecl>(getInterestingTagDecl(Decl));
+ }
+@@ -2347,6 +2362,141 @@
+   return LV;
+ }
+ 
++Optional<NullabilityKind> Type::getNullability(const ASTContext &context) const {
++  QualType type(this, 0);
++  do {
++    // Check whether this is an attributed type with nullability
++    // information.
++    if (auto attributed = dyn_cast<AttributedType>(type.getTypePtr())) {
++      if (auto nullability = attributed->getImmediateNullability())
++        return nullability;
++    }
++
++    // Desugar the type. If desugaring does nothing, we're done.
++    QualType desugared = type.getSingleStepDesugaredType(context);
++    if (desugared.getTypePtr() == type.getTypePtr())
++      return None;
++
++    type = desugared;
++  } while (true);
++}
++
++bool Type::canHaveNullability() const {
++  QualType type = getCanonicalTypeInternal();
++  
++  switch (type->getTypeClass()) {
++  // We'll only see canonical types here.
++#define NON_CANONICAL_TYPE(Class, Parent)       \
++  case Type::Class:                             \
++    llvm_unreachable("non-canonical type");
++#define TYPE(Class, Parent)
++#include "clang/AST/TypeNodes.def"
++
++  // Pointer types.
++  case Type::Pointer:
++  case Type::BlockPointer:
++  case Type::MemberPointer:
++  case Type::ObjCObjectPointer:
++    return true;
++
++  // Dependent types that could instantiate to pointer types.
++  case Type::UnresolvedUsing:
++  case Type::TypeOfExpr:
++  case Type::TypeOf:
++  case Type::Decltype:
++  case Type::UnaryTransform:
++  case Type::TemplateTypeParm:
++  case Type::SubstTemplateTypeParmPack:
++  case Type::DependentName:
++  case Type::DependentTemplateSpecialization:
++    return true;
++
++  // Dependent template specializations can instantiate to pointer
++  // types unless they're known to be specializations of a class
++  // template.
++  case Type::TemplateSpecialization:
++    if (TemplateDecl *templateDecl
++          = cast<TemplateSpecializationType>(type.getTypePtr())
++              ->getTemplateName().getAsTemplateDecl()) {
++      if (isa<ClassTemplateDecl>(templateDecl))
++        return false;
++    }
++    return true;
++
++  // auto is considered dependent when it isn't deduced.
++  case Type::Auto:
++    return !cast<AutoType>(type.getTypePtr())->isDeduced();
++
++  case Type::Builtin:
++    switch (cast<BuiltinType>(type.getTypePtr())->getKind()) {
++      // Signed, unsigned, and floating-point types cannot have nullability.
++#define SIGNED_TYPE(Id, SingletonId) case BuiltinType::Id:
++#define UNSIGNED_TYPE(Id, SingletonId) case BuiltinType::Id:
++#define FLOATING_TYPE(Id, SingletonId) case BuiltinType::Id:
++#define BUILTIN_TYPE(Id, SingletonId)
++#include "clang/AST/BuiltinTypes.def"
++      return false;
++
++    // Dependent types that could instantiate to a pointer type.
++    case BuiltinType::Dependent:
++    case BuiltinType::Overload:
++    case BuiltinType::BoundMember:
++    case BuiltinType::PseudoObject:
++    case BuiltinType::UnknownAny:
++    case BuiltinType::ARCUnbridgedCast:
++      return true;
++
++    case BuiltinType::Void:
++    case BuiltinType::ObjCId:
++    case BuiltinType::ObjCClass:
++    case BuiltinType::ObjCSel:
++    case BuiltinType::OCLImage1d:
++    case BuiltinType::OCLImage1dArray:
++    case BuiltinType::OCLImage1dBuffer:
++    case BuiltinType::OCLImage2d:
++    case BuiltinType::OCLImage2dArray:
++    case BuiltinType::OCLImage3d:
++    case BuiltinType::OCLSampler:
++    case BuiltinType::OCLEvent:
++    case BuiltinType::BuiltinFn:
++    case BuiltinType::NullPtr:
++      return false;
++    }
++
++  // Non-pointer types.
++  case Type::Complex:
++  case Type::LValueReference:
++  case Type::RValueReference:
++  case Type::ConstantArray:
++  case Type::IncompleteArray:
++  case Type::VariableArray:
++  case Type::DependentSizedArray:
++  case Type::DependentSizedExtVector:
++  case Type::Vector:
++  case Type::ExtVector:
++  case Type::FunctionProto:
++  case Type::FunctionNoProto:
++  case Type::Record:
++  case Type::Enum:
++  case Type::InjectedClassName:
++  case Type::PackExpansion:
++  case Type::ObjCObject:
++  case Type::ObjCInterface:
++  case Type::Atomic:
++    return false;
++  }
++}
++
++llvm::Optional<NullabilityKind> AttributedType::getImmediateNullability() const {
++  if (getAttrKind() == AttributedType::attr_nonnull)
++    return NullabilityKind::NonNull;
++  if (getAttrKind() == AttributedType::attr_nullable)
++    return NullabilityKind::Nullable;
++  if (getAttrKind() == AttributedType::attr_null_unspecified)
++    return NullabilityKind::Unspecified;
++  return None;
++}
++
+ Qualifiers::ObjCLifetime Type::getObjCARCImplicitLifetime() const {
+   if (isObjCARCImplicitlyUnretainedType())
+     return Qualifiers::OCL_ExplicitNone;
+Index: lib/AST/TypeLoc.cpp
+===================================================================
+--- lib/AST/TypeLoc.cpp	(revision 231004)
++++ lib/AST/TypeLoc.cpp	(working copy)
+@@ -312,6 +312,17 @@
+   return TL;
+ }
+ 
++SourceLocation TypeLoc::findNullabilityLoc() const {
++  if (auto attributedLoc = getAs<AttributedTypeLoc>()) {
++    if (attributedLoc.getAttrKind() == AttributedType::attr_nullable ||
++        attributedLoc.getAttrKind() == AttributedType::attr_nonnull ||
++        attributedLoc.getAttrKind() == AttributedType::attr_null_unspecified)
++      return attributedLoc.getAttrNameLoc();
++  }
++
++  return SourceLocation();
++}
++
+ void TypeOfTypeLoc::initializeLocal(ASTContext &Context,
+                                        SourceLocation Loc) {
+   TypeofLikeTypeLoc<TypeOfTypeLoc, TypeOfType, TypeOfTypeLocInfo>
+Index: lib/AST/TypePrinter.cpp
+===================================================================
+--- lib/AST/TypePrinter.cpp	(revision 231004)
++++ lib/AST/TypePrinter.cpp	(working copy)
+@@ -1118,6 +1118,16 @@
+   OS << "...";
+ }
+ 
++/// Determine whether this is a multi-level pointer type.
++static bool isMultiLevelPointerType(QualType type) {
++  QualType pointee = type->getPointeeType();
++  if (pointee.isNull())
++    return false;
++
++  return pointee->isAnyPointerType() || pointee->isObjCObjectPointerType() ||
++  pointee->isMemberPointerType();
++}
++
+ void TypePrinter::printAttributedBefore(const AttributedType *T,
+                                         raw_ostream &OS) {
+   // Prefer the macro forms of the GC and ownership qualifiers.
+@@ -1125,6 +1135,23 @@
+       T->getAttrKind() == AttributedType::attr_objc_ownership)
+     return printBefore(T->getEquivalentType(), OS);
+ 
++  // Nullability is expressed as a type specifier.
++  if ((T->getAttrKind() == AttributedType::attr_nonnull ||
++       T->getAttrKind() == AttributedType::attr_nullable ||
++       T->getAttrKind() == AttributedType::attr_null_unspecified) &&
++      !isMultiLevelPointerType(T->getModifiedType())) {
++    if (T->getAttrKind() == AttributedType::attr_nonnull)
++      OS << "__nonnull ";
++    else if (T->getAttrKind() == AttributedType::attr_nullable)
++      OS << "__nullable ";
++    else if (T->getAttrKind() == AttributedType::attr_null_unspecified)
++      OS << "__null_unspecified ";
++    else
++      llvm_unreachable("unhandled nullability");
++
++    return printBefore(T->getModifiedType(), OS);
++  }
++
+   printBefore(T->getModifiedType(), OS);
+ 
+   if (T->isMSTypeSpec()) {
+@@ -1146,6 +1173,12 @@
+       T->getAttrKind() == AttributedType::attr_objc_ownership)
+     return printAfter(T->getEquivalentType(), OS);
+ 
++  if ((T->getAttrKind() == AttributedType::attr_nonnull ||
++       T->getAttrKind() == AttributedType::attr_nullable ||
++       T->getAttrKind() == AttributedType::attr_null_unspecified) &&
++      !isMultiLevelPointerType(T->getModifiedType()))
++    return printAfter(T->getEquivalentType(), OS);
++
+   // TODO: not all attributes are GCC-style attributes.
+   if (T->isMSTypeSpec())
+     return;
+@@ -1156,6 +1189,22 @@
+ 
+   printAfter(T->getModifiedType(), OS);
+ 
++  // Print nullability type specifiers that occur after
++  if (T->getAttrKind() == AttributedType::attr_nonnull ||
++      T->getAttrKind() == AttributedType::attr_nullable ||
++      T->getAttrKind() == AttributedType::attr_null_unspecified) {
++    if (T->getAttrKind() == AttributedType::attr_nonnull)
++      OS << " __nonnull";
++    else if (T->getAttrKind() == AttributedType::attr_nullable)
++      OS << " __nullable";
++    else if (T->getAttrKind() == AttributedType::attr_null_unspecified)
++      OS << "__null_unspecified";
++    else
++      llvm_unreachable("unhandled nullability");
++
++    return;
++  }
++
+   OS << " __attribute__((";
+   switch (T->getAttrKind()) {
+   default: llvm_unreachable("This attribute should have been handled already");
+Index: lib/Basic/IdentifierTable.cpp
+===================================================================
+--- lib/Basic/IdentifierTable.cpp	(revision 231004)
++++ lib/Basic/IdentifierTable.cpp	(working copy)
+@@ -16,6 +16,7 @@
+ #include "clang/Basic/IdentifierTable.h"
+ #include "clang/Basic/LangOptions.h"
+ #include "clang/Basic/OperatorKinds.h"
++#include "clang/Basic/Specifiers.h"
+ #include "llvm/ADT/DenseMap.h"
+ #include "llvm/ADT/FoldingSet.h"
+ #include "llvm/ADT/SmallString.h"
+@@ -629,3 +630,16 @@
+ 
+   llvm_unreachable("Invalid OverloadedOperatorKind!");
+ }
++
++StringRef clang::getNullabilitySpelling(NullabilityKind kind) {
++  switch (kind) {
++  case NullabilityKind::NonNull:
++    return "__nonnull";
++
++  case NullabilityKind::Nullable:
++    return "__nullable";
++
++  case NullabilityKind::Unspecified:
++    return "__null_unspecified";
++  }
++}
+Index: lib/Lex/PPDirectives.cpp
+===================================================================
+--- lib/Lex/PPDirectives.cpp	(revision 231004)
++++ lib/Lex/PPDirectives.cpp	(working copy)
+@@ -1533,6 +1533,15 @@
+     PragmaARCCFCodeAuditedLoc = SourceLocation();
+   }
+ 
++  // Complain about attempts to #include files in an assume-nonnull pragma.
++  if (PragmaAssumeNonNullLoc.isValid()) {
++    Diag(HashLoc, diag::err_pp_include_in_assume_nonnull);
++    Diag(PragmaAssumeNonNullLoc, diag::note_pragma_entered_here);
++
++    // Immediately leave the pragma.
++    PragmaAssumeNonNullLoc = SourceLocation();
++  }
++
+   if (HeaderInfo.HasIncludeAliasMap()) {
+     // Map the filename with the brackets still attached.  If the name doesn't 
+     // map to anything, fall back on the filename we've already gotten the 
+Index: lib/Lex/PPLexerChange.cpp
+===================================================================
+--- lib/Lex/PPLexerChange.cpp	(revision 231004)
++++ lib/Lex/PPLexerChange.cpp	(working copy)
+@@ -355,6 +355,17 @@
+     PragmaARCCFCodeAuditedLoc = SourceLocation();
+   }
+ 
++  // Complain about reaching a true EOF within assume_nonnull.
++  // We don't want to complain about reaching the end of a macro
++  // instantiation or a _Pragma.
++  if (PragmaAssumeNonNullLoc.isValid() &&
++      !isEndOfMacro && !(CurLexer && CurLexer->Is_PragmaLexer)) {
++    Diag(PragmaAssumeNonNullLoc, diag::err_pp_eof_in_assume_nonnull);
++
++    // Recover by leaving immediately.
++    PragmaAssumeNonNullLoc = SourceLocation();
++  }
++
+   // If this is a #include'd file, pop it off the include stack and continue
+   // lexing the #includer file.
+   if (!IncludeMacroStack.empty()) {
+Index: lib/Lex/PPMacroExpansion.cpp
+===================================================================
+--- lib/Lex/PPMacroExpansion.cpp	(revision 231004)
++++ lib/Lex/PPMacroExpansion.cpp	(working copy)
+@@ -865,6 +865,7 @@
+ 
+   return llvm::StringSwitch<bool>(Feature)
+       .Case("address_sanitizer", LangOpts.Sanitize.has(SanitizerKind::Address))
++      .Case("assume_nonnull", LangOpts.ObjC1 || LangOpts.GNUMode)
+       .Case("attribute_analyzer_noreturn", true)
+       .Case("attribute_availability", true)
+       .Case("attribute_availability_with_message", true)
+@@ -888,6 +889,7 @@
+       .Case("cxx_exceptions", LangOpts.CXXExceptions)
+       .Case("cxx_rtti", LangOpts.RTTI)
+       .Case("enumerator_attributes", true)
++      .Case("nullability", LangOpts.ObjC1 || LangOpts.GNUMode)
+       .Case("memory_sanitizer", LangOpts.Sanitize.has(SanitizerKind::Memory))
+       .Case("thread_sanitizer", LangOpts.Sanitize.has(SanitizerKind::Thread))
+       .Case("dataflow_sanitizer", LangOpts.Sanitize.has(SanitizerKind::DataFlow))
+@@ -1034,6 +1036,8 @@
+   // Because we inherit the feature list from HasFeature, this string switch
+   // must be less restrictive than HasFeature's.
+   return llvm::StringSwitch<bool>(Extension)
++           .Case("assume_nonnull", true)
++           .Case("nullability", true)
+            // C11 features supported by other languages as extensions.
+            .Case("c_alignas", true)
+            .Case("c_alignof", true)
+Index: lib/Lex/Pragma.cpp
+===================================================================
+--- lib/Lex/Pragma.cpp	(revision 231004)
++++ lib/Lex/Pragma.cpp	(working copy)
+@@ -1321,6 +1321,60 @@
+   }
+ };
+ 
++/// PragmaAssumeNonNullHandler -
++///   \#pragma clang assume_nonnull begin/end
++struct PragmaAssumeNonNullHandler : public PragmaHandler {
++  PragmaAssumeNonNullHandler() : PragmaHandler("assume_nonnull") {}
++  void HandlePragma(Preprocessor &PP, PragmaIntroducerKind Introducer,
++                    Token &NameTok) override {
++    SourceLocation Loc = NameTok.getLocation();
++    bool IsBegin;
++
++    Token Tok;
++
++    // Lex the 'begin' or 'end'.
++    PP.LexUnexpandedToken(Tok);
++    const IdentifierInfo *BeginEnd = Tok.getIdentifierInfo();
++    if (BeginEnd && BeginEnd->isStr("begin")) {
++      IsBegin = true;
++    } else if (BeginEnd && BeginEnd->isStr("end")) {
++      IsBegin = false;
++    } else {
++      PP.Diag(Tok.getLocation(), diag::err_pp_assume_nonnull_syntax);
++      return;
++    }
++
++    // Verify that this is followed by EOD.
++    PP.LexUnexpandedToken(Tok);
++    if (Tok.isNot(tok::eod))
++      PP.Diag(Tok, diag::ext_pp_extra_tokens_at_eol) << "pragma";
++
++    // The start location of the active audit.
++    SourceLocation BeginLoc = PP.getPragmaAssumeNonNullLoc();
++
++    // The start location we want after processing this.
++    SourceLocation NewLoc;
++
++    if (IsBegin) {
++      // Complain about attempts to re-enter an audit.
++      if (BeginLoc.isValid()) {
++        PP.Diag(Loc, diag::err_pp_double_begin_of_assume_nonnull);
++        PP.Diag(BeginLoc, diag::note_pragma_entered_here);
++      }
++      NewLoc = Loc;
++    } else {
++      // Complain about attempts to leave an audit that doesn't exist.
++      if (!BeginLoc.isValid()) {
++        PP.Diag(Loc, diag::err_pp_unmatched_end_of_assume_nonnull);
++        return;
++      }
++      NewLoc = SourceLocation();
++    }
++
++    PP.setPragmaAssumeNonNullLoc(NewLoc);
++  }
++};
++
+ /// \brief Handle "\#pragma region [...]"
+ ///
+ /// The syntax is
+@@ -1372,6 +1426,7 @@
+   AddPragmaHandler("clang", new PragmaDependencyHandler());
+   AddPragmaHandler("clang", new PragmaDiagnosticHandler("clang"));
+   AddPragmaHandler("clang", new PragmaARCCFCodeAuditedHandler());
++  AddPragmaHandler("clang", new PragmaAssumeNonNullHandler());
+ 
+   AddPragmaHandler("STDC", new PragmaSTDC_FENV_ACCESSHandler());
+   AddPragmaHandler("STDC", new PragmaSTDC_CX_LIMITED_RANGEHandler());
+Index: lib/Parse/ParseDecl.cpp
+===================================================================
+--- lib/Parse/ParseDecl.cpp	(revision 231004)
++++ lib/Parse/ParseDecl.cpp	(working copy)
+@@ -679,6 +679,28 @@
+                AttributeList::AS_Keyword);
+ }
+ 
++void Parser::ParseNullabilityTypeSpecifiers(ParsedAttributes &attrs) {
++  // Treat these like attributes, even though they're type specifiers.
++  while (true) {
++    switch (Tok.getKind()) {
++    case tok::kw___nonnull:
++    case tok::kw___nullable:
++    case tok::kw___null_unspecified: {
++      IdentifierInfo *AttrName = Tok.getIdentifierInfo();
++      SourceLocation AttrNameLoc = ConsumeToken();
++      if (!getLangOpts().ObjC1)
++        Diag(AttrNameLoc, diag::ext_nullability)
++          << AttrName;
++      attrs.addNew(AttrName, AttrNameLoc, nullptr, AttrNameLoc, nullptr, 0, 
++                   AttributeList::AS_Keyword);
++      break;
++    }
++    default:
++      return;
++    }
++  }
++}
++
+ static bool VersionNumberSeparator(const char Separator) {
+   return (Separator == '.' || Separator == '_');
+ }
+@@ -2992,6 +3014,13 @@
+       ParseOpenCLAttributes(DS.getAttributes());
+       continue;
+ 
++    // Nullability type specifiers.
++    case tok::kw___nonnull:
++    case tok::kw___nullable:
++    case tok::kw___null_unspecified:
++      ParseNullabilityTypeSpecifiers(DS.getAttributes());
++      continue;
++
+     // storage-class-specifier
+     case tok::kw_typedef:
+       isInvalid = DS.SetStorageClassSpec(Actions, DeclSpec::SCS_typedef, Loc,
+@@ -4207,6 +4236,10 @@
+   case tok::kw___pascal:
+   case tok::kw___unaligned:
+ 
++  case tok::kw___nonnull:
++  case tok::kw___nullable:
++  case tok::kw___null_unspecified:
++
+   case tok::kw___private:
+   case tok::kw___local:
+   case tok::kw___global:
+@@ -4380,6 +4413,10 @@
+   case tok::kw___pascal:
+   case tok::kw___unaligned:
+ 
++  case tok::kw___nonnull:
++  case tok::kw___nullable:
++  case tok::kw___null_unspecified:
++
+   case tok::kw___private:
+   case tok::kw___local:
+   case tok::kw___global:
+@@ -4609,6 +4646,14 @@
+         continue;
+       }
+       goto DoneWithTypeQuals;
++
++    // Nullability type specifiers.
++    case tok::kw___nonnull:
++    case tok::kw___nullable:
++    case tok::kw___null_unspecified:
++      ParseNullabilityTypeSpecifiers(DS.getAttributes());
++      continue;
++
+     case tok::kw___attribute:
+       if (AttrReqs & AR_GNUAttributesParsedAndRejected)
+         // When GNU attributes are expressly forbidden, diagnose their usage.
+Index: lib/Parse/ParseObjc.cpp
+===================================================================
+--- lib/Parse/ParseObjc.cpp	(revision 231004)
++++ lib/Parse/ParseObjc.cpp	(working copy)
+@@ -13,6 +13,7 @@
+ 
+ #include "clang/Parse/Parser.h"
+ #include "RAIIObjectsForParser.h"
++#include "clang/AST/ASTContext.h"
+ #include "clang/Basic/CharInfo.h"
+ #include "clang/Parse/ParseDiagnostic.h"
+ #include "clang/Sema/DeclSpec.h"
+@@ -307,6 +308,37 @@
+   return ClsType;
+ }
+ 
++/// Add an attribute for a context-sensitive type nullability to the given
++/// declarator.
++static void addContextSensitiveTypeNullability(Parser &P,
++                                               Declarator &D,
++                                               NullabilityKind nullability,
++                                               SourceLocation nullabilityLoc,
++                                               bool &addedToDeclSpec) {
++  // Create the attribute.
++  auto getNullabilityAttr = [&]() -> AttributeList * {
++    return D.getAttributePool().create(
++             P.getNullabilityKeyword(nullability),
++             SourceRange(nullabilityLoc),
++             nullptr, SourceLocation(),
++             nullptr, 0,
++             AttributeList::AS_ContextSensitiveKeyword);
++  };
++
++  if (D.getNumTypeObjects() > 0) {
++    // Add the attribute to the declarator chunk nearest the declarator.
++    auto nullabilityAttr = getNullabilityAttr();
++    DeclaratorChunk &chunk = D.getTypeObject(0);
++    nullabilityAttr->setNext(chunk.getAttrListRef());
++    chunk.getAttrListRef() = nullabilityAttr;
++  } else if (!addedToDeclSpec) {
++    // Otherwise, just put it on the declaration specifiers (if one
++    // isn't there already).
++    D.getMutableDeclSpec().addAttributes(getNullabilityAttr());
++    addedToDeclSpec = true;
++  }
++}
++
+ ///   objc-interface-decl-list:
+ ///     empty
+ ///     objc-interface-decl-list objc-property-decl [OBJC2]
+@@ -445,6 +477,7 @@
+         ParseObjCPropertyAttribute(OCDS);
+       }
+ 
++      bool addedToDeclSpec = false;
+       auto ObjCPropertyCallback = [&](ParsingFieldDeclarator &FD) {
+         if (FD.D.getIdentifier() == nullptr) {
+           Diag(AtLoc, diag::err_objc_property_requires_field_name)
+@@ -457,6 +490,13 @@
+           return;
+         }
+ 
++        // Map a nullability property attribute to a context-sensitive keyword
++        // attribute.
++        if (OCDS.getPropertyAttributes() & ObjCDeclSpec::DQ_PR_nullability)
++          addContextSensitiveTypeNullability(*this, FD.D, OCDS.getNullability(),
++                                             OCDS.getNullabilityLoc(),
++                                             addedToDeclSpec);
++
+         // Install the property declarator into interfaceDecl.
+         IdentifierInfo *SelName =
+             OCDS.getGetterName() ? OCDS.getGetterName() : FD.D.getIdentifier();
+@@ -510,6 +550,24 @@
+   Actions.ActOnAtEnd(getCurScope(), AtEnd, allMethods, allTUVariables);
+ }
+ 
++/// Diagnose redundant or conflicting nullability information.
++static void diagnoseRedundantPropertyNullability(Parser &P,
++                                                 ObjCDeclSpec &DS,
++                                                 NullabilityKind nullability,
++                                                 SourceLocation nullabilityLoc){
++  if (DS.getNullability() == nullability) {
++    P.Diag(nullabilityLoc, diag::warn_nullability_duplicate)
++      << static_cast<unsigned>(nullability) << true
++      << SourceRange(DS.getNullabilityLoc());
++    return;
++  }
++
++  P.Diag(nullabilityLoc, diag::err_nullability_conflicting)
++    << static_cast<unsigned>(nullability) << true
++    << static_cast<unsigned>(DS.getNullability()) << true
++    << SourceRange(DS.getNullabilityLoc());
++}
++
+ ///   Parse property attribute declarations.
+ ///
+ ///   property-attr-decl: '(' property-attrlist ')'
+@@ -529,6 +587,10 @@
+ ///     strong
+ ///     weak
+ ///     unsafe_unretained
++///     nonnull
++///     nullable
++///     null_unspecified
++///     null_resettable
+ ///
+ void Parser::ParseObjCPropertyAttribute(ObjCDeclSpec &DS) {
+   assert(Tok.getKind() == tok::l_paren);
+@@ -614,6 +676,37 @@
+         DS.setPropertyAttributes(ObjCDeclSpec::DQ_PR_getter);
+         DS.setGetterName(SelIdent);
+       }
++    } else if (II->isStr("nonnull")) {
++      if (DS.getPropertyAttributes() & ObjCDeclSpec::DQ_PR_nullability)
++        diagnoseRedundantPropertyNullability(*this, DS,
++                                             NullabilityKind::NonNull,
++                                             Tok.getLocation());
++      DS.setPropertyAttributes(ObjCDeclSpec::DQ_PR_nullability);
++      DS.setNullability(Tok.getLocation(), NullabilityKind::NonNull);
++    } else if (II->isStr("nullable")) {
++      if (DS.getPropertyAttributes() & ObjCDeclSpec::DQ_PR_nullability)
++        diagnoseRedundantPropertyNullability(*this, DS,
++                                             NullabilityKind::Nullable,
++                                             Tok.getLocation());
++      DS.setPropertyAttributes(ObjCDeclSpec::DQ_PR_nullability);
++      DS.setNullability(Tok.getLocation(), NullabilityKind::Nullable);
++    } else if (II->isStr("null_unspecified")) {
++      if (DS.getPropertyAttributes() & ObjCDeclSpec::DQ_PR_nullability)
++        diagnoseRedundantPropertyNullability(*this, DS,
++                                             NullabilityKind::Unspecified,
++                                             Tok.getLocation());
++      DS.setPropertyAttributes(ObjCDeclSpec::DQ_PR_nullability);
++      DS.setNullability(Tok.getLocation(), NullabilityKind::Unspecified);
++    } else if (II->isStr("null_resettable")) {
++      if (DS.getPropertyAttributes() & ObjCDeclSpec::DQ_PR_nullability)
++        diagnoseRedundantPropertyNullability(*this, DS,
++                                             NullabilityKind::Unspecified,
++                                             Tok.getLocation());
++      DS.setPropertyAttributes(ObjCDeclSpec::DQ_PR_nullability);
++      DS.setNullability(Tok.getLocation(), NullabilityKind::Unspecified);
++
++      // Also set the null_resettable bit.
++      DS.setPropertyAttributes(ObjCDeclSpec::DQ_PR_null_resettable);
+     } else {
+       Diag(AttrName, diag::err_objc_expected_property_attr) << II;
+       SkipUntil(tok::r_paren, StopAtSemi);
+@@ -779,6 +872,17 @@
+ ///     objc-type-qualifier
+ ///     objc-type-qualifiers objc-type-qualifier
+ ///
++///   objc-type-qualifier:
++///     'in'
++///     'out'
++///     'inout'
++///     'oneway'
++///     'bycopy'
++///     'byref'
++///     'nonnull'
++///     'nullable'
++///     'null_unspecified'
++///
+ void Parser::ParseObjCTypeQualifierList(ObjCDeclSpec &DS,
+                                         Declarator::TheContext Context) {
+   assert(Context == Declarator::ObjCParameterContext ||
+@@ -796,10 +900,13 @@
+ 
+     const IdentifierInfo *II = Tok.getIdentifierInfo();
+     for (unsigned i = 0; i != objc_NumQuals; ++i) {
+-      if (II != ObjCTypeQuals[i])
++      if (II != ObjCTypeQuals[i] ||
++          NextToken().is(tok::less) ||
++          NextToken().is(tok::coloncolon))
+         continue;
+ 
+       ObjCDeclSpec::ObjCDeclQualifier Qual;
++      NullabilityKind Nullability;
+       switch (i) {
+       default: llvm_unreachable("Unknown decl qualifier");
+       case objc_in:     Qual = ObjCDeclSpec::DQ_In; break;
+@@ -808,8 +915,28 @@
+       case objc_oneway: Qual = ObjCDeclSpec::DQ_Oneway; break;
+       case objc_bycopy: Qual = ObjCDeclSpec::DQ_Bycopy; break;
+       case objc_byref:  Qual = ObjCDeclSpec::DQ_Byref; break;
++
++      case objc_nonnull: 
++        Qual = ObjCDeclSpec::DQ_CSNullability;
++        Nullability = NullabilityKind::NonNull;
++        break;
++
++      case objc_nullable: 
++        Qual = ObjCDeclSpec::DQ_CSNullability;
++        Nullability = NullabilityKind::Nullable;
++        break;
++
++      case objc_null_unspecified:
++        Qual = ObjCDeclSpec::DQ_CSNullability;
++        Nullability = NullabilityKind::Unspecified;
++        break;
+       }
++
++      // FIXME: Diagnose redundant specifiers.
+       DS.setObjCDeclQualifier(Qual);
++      if (Qual == ObjCDeclSpec::DQ_CSNullability)
++        DS.setNullability(Tok.getLocation(), Nullability);
++
+       ConsumeToken();
+       II = nullptr;
+       break;
+@@ -889,6 +1016,14 @@
+ 
+     // If that's not invalid, extract a type.
+     if (!declarator.isInvalidType()) {
++      // Map a nullability specifier to a context-sensitive keyword attribute.
++      bool addedToDeclSpec = false;
++      if (DS.getObjCDeclQualifier() & ObjCDeclSpec::DQ_CSNullability)
++        addContextSensitiveTypeNullability(*this, declarator,
++                                           DS.getNullability(),
++                                           DS.getNullabilityLoc(),
++                                           addedToDeclSpec);
++
+       TypeResult type = Actions.ActOnTypeName(getCurScope(), declarator);
+       if (!type.isInvalid())
+         Ty = type.get();
+@@ -904,8 +1039,32 @@
+       Ident_instancetype = PP.getIdentifierInfo("instancetype");
+     
+     if (Tok.getIdentifierInfo() == Ident_instancetype) {
+-      Ty = Actions.ActOnObjCInstanceType(Tok.getLocation());
+-      ConsumeToken();
++      SourceLocation loc = ConsumeToken();
++      Ty = Actions.ActOnObjCInstanceType(loc);
++
++      // Synthesize an abstract declarator so we can use Sema::ActOnTypeName.
++      const char *prevSpec;
++      unsigned diagID;
++      DeclSpec declSpec(AttrFactory);
++      declSpec.setObjCQualifiers(&DS);
++      declSpec.SetTypeSpecType(DeclSpec::TST_typename, loc, prevSpec, diagID,
++                               Ty,
++                               Actions.getASTContext().getPrintingPolicy());
++      declSpec.SetRangeEnd(loc);
++      Declarator declarator(declSpec, context);
++
++      // Map a nullability specifier to a context-sensitive keyword attribute.
++      if (DS.getObjCDeclQualifier() & ObjCDeclSpec::DQ_CSNullability) {
++        bool addedToDeclSpec = false;
++        addContextSensitiveTypeNullability(*this, declarator,
++                                           DS.getNullability(),
++                                           DS.getNullabilityLoc(),
++                                           addedToDeclSpec);
++      }
++
++      TypeResult type = Actions.ActOnTypeName(getCurScope(), declarator);
++      if (!type.isInvalid())
++        Ty = type.get();
+     }
+   }
+ 
+@@ -1308,6 +1467,7 @@
+     auto ObjCIvarCallback = [&](ParsingFieldDeclarator &FD) {
+       Actions.ActOnObjCContainerStartDefinition(interfaceDecl);
+       // Install the declarator into the interface decl.
++      FD.D.setObjCIvar(true);
+       Decl *Field = Actions.ActOnIvar(
+           getCurScope(), FD.D.getDeclSpec().getSourceRange().getBegin(), FD.D,
+           FD.BitfieldSize, visibility);
+Index: lib/Parse/ParseTentative.cpp
+===================================================================
+--- lib/Parse/ParseTentative.cpp	(revision 231004)
++++ lib/Parse/ParseTentative.cpp	(working copy)
+@@ -635,7 +635,10 @@
+       ConsumeToken();
+       while (Tok.is(tok::kw_const)    ||
+              Tok.is(tok::kw_volatile) ||
+-             Tok.is(tok::kw_restrict))
++             Tok.is(tok::kw_restrict) ||
++             Tok.is(tok::kw___nonnull) ||
++             Tok.is(tok::kw___nullable) ||
++             Tok.is(tok::kw___null_unspecified))
+         ConsumeToken();
+     } else {
+       return TPResult::True;
+@@ -1284,6 +1287,9 @@
+   case tok::kw___ptr32:
+   case tok::kw___forceinline:
+   case tok::kw___unaligned:
++  case tok::kw___nonnull:
++  case tok::kw___nullable:
++  case tok::kw___null_unspecified:
+     return TPResult::True;
+ 
+     // Borland
+Index: lib/Parse/Parser.cpp
+===================================================================
+--- lib/Parse/Parser.cpp	(revision 231004)
++++ lib/Parse/Parser.cpp	(working copy)
+@@ -434,6 +434,10 @@
+     ObjCTypeQuals[objc_oneway] = &PP.getIdentifierTable().get("oneway");
+     ObjCTypeQuals[objc_bycopy] = &PP.getIdentifierTable().get("bycopy");
+     ObjCTypeQuals[objc_byref] = &PP.getIdentifierTable().get("byref");
++    ObjCTypeQuals[objc_nonnull] = &PP.getIdentifierTable().get("nonnull");
++    ObjCTypeQuals[objc_nullable] = &PP.getIdentifierTable().get("nullable");
++    ObjCTypeQuals[objc_null_unspecified]
++      = &PP.getIdentifierTable().get("null_unspecified");
+   }
+ 
+   Ident_instancetype = nullptr;
+Index: lib/Sema/Sema.cpp
+===================================================================
+--- lib/Sema/Sema.cpp	(revision 231004)
++++ lib/Sema/Sema.cpp	(working copy)
+@@ -332,6 +332,19 @@
+   assert((VK == VK_RValue || !E->isRValue()) && "can't cast rvalue to lvalue");
+ #endif
+ 
++  // Check whether we're implicitly casting from a nullable type to a nonnull
++  // type.
++  if (auto exprNullability = E->getType()->getNullability(Context)) {
++    if (*exprNullability == NullabilityKind::Nullable) {
++      if (auto typeNullability = Ty->getNullability(Context)) {
++        if (*typeNullability == NullabilityKind::NonNull) {
++          Diag(E->getLocStart(), diag::warn_nullability_lost)
++            << E->getType() << Ty;
++        }
++      }
++    }
++  }
++
+   QualType ExprTy = Context.getCanonicalType(E->getType());
+   QualType TypeTy = Context.getCanonicalType(Ty);
+ 
+Index: lib/Sema/SemaChecking.cpp
+===================================================================
+--- lib/Sema/SemaChecking.cpp	(revision 231004)
++++ lib/Sema/SemaChecking.cpp	(working copy)
+@@ -969,6 +969,13 @@
+ /// \brief Returns true if the value evaluates to null.
+ static bool CheckNonNullExpr(Sema &S,
+                              const Expr *Expr) {
++  // If the expression has non-null type, it doesn't evaluate to null.
++  if (auto nullability
++        = Expr->IgnoreImplicit()->getType()->getNullability(S.Context)) {
++    if (*nullability == NullabilityKind::NonNull)
++      return false;
++  }
++
+   // As a special case, transparent unions initialized with zero are
+   // considered null for the purposes of the nonnull attribute.
+   if (const RecordType *UT = Expr->getType()->getAsUnionType()) {
+@@ -1044,56 +1051,111 @@
+   }
+ }
+ 
++/// Determine whether the given type has a non-null nullability annotation.
++static bool isNonNullType(ASTContext &ctx, QualType type) {
++  if (auto nullability = type->getNullability(ctx))
++    return *nullability == NullabilityKind::NonNull;
++     
++  return false;
++}
++
+ static void CheckNonNullArguments(Sema &S,
+                                   const NamedDecl *FDecl,
++                                  const FunctionProtoType *Proto,
+                                   ArrayRef<const Expr *> Args,
+                                   SourceLocation CallSiteLoc) {
++  assert((FDecl || Proto) && "Need a function declaration or prototype");
++
+   // Check the attributes attached to the method/function itself.
+   llvm::SmallBitVector NonNullArgs;
+-  for (const auto *NonNull : FDecl->specific_attrs<NonNullAttr>()) {
+-    if (!NonNull->args_size()) {
+-      // Easy case: all pointer arguments are nonnull.
+-      for (const auto *Arg : Args)
+-        if (S.isValidPointerAttrType(Arg->getType()))
+-          CheckNonNullArgument(S, Arg, CallSiteLoc);
+-      return;
+-    }
++  if (FDecl) {
++    // Handle the nonnull attribute on the function/method declaration itself.
++    for (const auto *NonNull : FDecl->specific_attrs<NonNullAttr>()) {
++      if (!NonNull->args_size()) {
++        // Easy case: all pointer arguments are nonnull.
++        for (const auto *Arg : Args)
++          if (S.isValidPointerAttrType(Arg->getType()))
++            CheckNonNullArgument(S, Arg, CallSiteLoc);
++        return;
++      }
+ 
+-    for (unsigned Val : NonNull->args()) {
+-      if (Val >= Args.size())
+-        continue;
+-      if (NonNullArgs.empty())
+-        NonNullArgs.resize(Args.size());
+-      NonNullArgs.set(Val);
++      for (unsigned Val : NonNull->args()) {
++        if (Val >= Args.size())
++          continue;
++        if (NonNullArgs.empty())
++          NonNullArgs.resize(Args.size());
++        NonNullArgs.set(Val);
++      }
+     }
+   }
+ 
+-  // Check the attributes on the parameters.
+-  ArrayRef<ParmVarDecl*> parms;
+-  if (const FunctionDecl *FD = dyn_cast<FunctionDecl>(FDecl))
+-    parms = FD->parameters();
+-  else if (const ObjCMethodDecl *MD = dyn_cast<ObjCMethodDecl>(FDecl))
+-    parms = MD->parameters();
++  if (FDecl && (isa<FunctionDecl>(FDecl) || isa<ObjCMethodDecl>(FDecl))) {
++    // Handle the nonnull attribute on the parameters of the
++    // function/method.
++    ArrayRef<ParmVarDecl*> parms;
++    if (const FunctionDecl *FD = dyn_cast<FunctionDecl>(FDecl))
++      parms = FD->parameters();
++    else
++      parms = cast<ObjCMethodDecl>(FDecl)->parameters();
++    
++    unsigned ParamIndex = 0;
++    for (ArrayRef<ParmVarDecl*>::iterator I = parms.begin(), E = parms.end();
++         I != E; ++I, ++ParamIndex) {
++      const ParmVarDecl *PVD = *I;
++      if (PVD->hasAttr<NonNullAttr>() || 
++          isNonNullType(S.Context, PVD->getType())) {
++        if (NonNullArgs.empty())
++          NonNullArgs.resize(Args.size());
+ 
+-  unsigned ArgIndex = 0;
+-  for (ArrayRef<ParmVarDecl*>::iterator I = parms.begin(), E = parms.end();
+-       I != E; ++I, ++ArgIndex) {
+-    const ParmVarDecl *PVD = *I;
+-    if (PVD->hasAttr<NonNullAttr>() ||
+-        (ArgIndex < NonNullArgs.size() && NonNullArgs[ArgIndex]))
+-      CheckNonNullArgument(S, Args[ArgIndex], CallSiteLoc);
++        NonNullArgs.set(ParamIndex);
++      }
++    }
++  } else {
++    // If we have a non-function, non-method declaration but no
++    // function prototype, try to dig out the function prototype.
++    if (!Proto) {
++      if (const ValueDecl *VD = dyn_cast<ValueDecl>(FDecl)) {
++        QualType type = VD->getType().getNonReferenceType();
++        if (auto pointerType = type->getAs<PointerType>())
++          type = pointerType->getPointeeType();
++        else if (auto blockType = type->getAs<BlockPointerType>())
++          type = blockType->getPointeeType();
++        // FIXME: data member pointers?
++
++        // Dig out the function prototype, if there is one.
++        Proto = type->getAs<FunctionProtoType>();
++      } 
++    }
++
++    // Fill in non-null argument information from the nullability
++    // information on the parameter types (if we have them).
++    if (Proto) {
++      unsigned Index = 0;
++      for (auto paramType : Proto->getParamTypes()) {
++        if (isNonNullType(S.Context, paramType)) {
++          if (NonNullArgs.empty())
++            NonNullArgs.resize(Args.size());
++          
++          NonNullArgs.set(Index);
++        }
++        
++        ++Index;
++      }
++    }
+   }
+ 
+-  // In case this is a variadic call, check any remaining arguments.
+-  for (/**/; ArgIndex < NonNullArgs.size(); ++ArgIndex)
++  // Check for non-null arguments.
++  for (unsigned ArgIndex = 0, ArgIndexEnd = NonNullArgs.size(); 
++       ArgIndex != ArgIndexEnd; ++ArgIndex) {
+     if (NonNullArgs[ArgIndex])
+       CheckNonNullArgument(S, Args[ArgIndex], CallSiteLoc);
++  }
+ }
+ 
+ /// Handles the checks for format strings, non-POD arguments to vararg
+ /// functions, and NULL arguments passed to non-NULL parameters.
+-void Sema::checkCall(NamedDecl *FDecl, ArrayRef<const Expr *> Args,
+-                     unsigned NumParams, bool IsMemberFunction,
++void Sema::checkCall(NamedDecl *FDecl, const FunctionProtoType *Proto,
++                     ArrayRef<const Expr *> Args, bool IsMemberFunction,
+                      SourceLocation Loc, SourceRange Range,
+                      VariadicCallType CallType) {
+   // FIXME: We should check as much as we can in the template definition.
+@@ -1115,6 +1177,13 @@
+   // Refuse POD arguments that weren't caught by the format string
+   // checks above.
+   if (CallType != VariadicDoesNotApply) {
++    unsigned NumParams = Proto ? Proto->getNumParams()
++                       : FDecl && isa<FunctionDecl>(FDecl)
++                           ? cast<FunctionDecl>(FDecl)->getNumParams()
++                       : FDecl && isa<ObjCMethodDecl>(FDecl)
++                           ? cast<ObjCMethodDecl>(FDecl)->param_size()
++                       : 0;
++
+     for (unsigned ArgIdx = NumParams; ArgIdx < Args.size(); ++ArgIdx) {
+       // Args[ArgIdx] can be null in malformed code.
+       if (const Expr *Arg = Args[ArgIdx]) {
+@@ -1124,12 +1193,14 @@
+     }
+   }
+ 
+-  if (FDecl) {
+-    CheckNonNullArguments(*this, FDecl, Args, Loc);
++  if (FDecl || Proto) {
++    CheckNonNullArguments(*this, FDecl, Proto, Args, Loc);
+ 
+     // Type safety checking.
+-    for (const auto *I : FDecl->specific_attrs<ArgumentWithTypeTagAttr>())
+-      CheckArgumentWithTypeTag(I, Args.data());
++    if (FDecl) {
++      for (const auto *I : FDecl->specific_attrs<ArgumentWithTypeTagAttr>())
++        CheckArgumentWithTypeTag(I, Args.data());
++    }
+   }
+ }
+ 
+@@ -1141,8 +1212,8 @@
+                                 SourceLocation Loc) {
+   VariadicCallType CallType =
+     Proto->isVariadic() ? VariadicConstructor : VariadicDoesNotApply;
+-  checkCall(FDecl, Args, Proto->getNumParams(),
+-            /*IsMemberFunction=*/true, Loc, SourceRange(), CallType);
++  checkCall(FDecl, Proto, Args, /*IsMemberFunction=*/true, Loc, SourceRange(), 
++            CallType);
+ }
+ 
+ /// CheckFunctionCall - Check a direct function call for various correctness
+@@ -1155,7 +1226,6 @@
+                           IsMemberOperatorCall;
+   VariadicCallType CallType = getVariadicCallType(FDecl, Proto,
+                                                   TheCall->getCallee());
+-  unsigned NumParams = Proto ? Proto->getNumParams() : 0;
+   Expr** Args = TheCall->getArgs();
+   unsigned NumArgs = TheCall->getNumArgs();
+   if (IsMemberOperatorCall) {
+@@ -1165,7 +1235,7 @@
+     ++Args;
+     --NumArgs;
+   }
+-  checkCall(FDecl, llvm::makeArrayRef(Args, NumArgs), NumParams,
++  checkCall(FDecl, Proto, llvm::makeArrayRef(Args, NumArgs), 
+             IsMemberFunction, TheCall->getRParenLoc(),
+             TheCall->getCallee()->getSourceRange(), CallType);
+ 
+@@ -1199,9 +1269,9 @@
+   VariadicCallType CallType =
+       Method->isVariadic() ? VariadicMethod : VariadicDoesNotApply;
+ 
+-  checkCall(Method, Args, Method->param_size(),
+-            /*IsMemberFunction=*/false,
+-            lbrac, Method->getSourceRange(), CallType);
++  checkCall(Method, nullptr, Args,
++            /*IsMemberFunction=*/false, lbrac, Method->getSourceRange(), 
++            CallType);
+ 
+   return false;
+ }
+@@ -1212,8 +1282,9 @@
+   if (!V)
+     return false;
+ 
+-  QualType Ty = V->getType();
+-  if (!Ty->isBlockPointerType() && !Ty->isFunctionPointerType())
++  QualType Ty = V->getType().getNonReferenceType();
++  if (!Ty->isBlockPointerType() && !Ty->isFunctionPointerType() &&
++      !Ty->isFunctionProtoType())
+     return false;
+ 
+   VariadicCallType CallType;
+@@ -1224,11 +1295,10 @@
+   } else { // Ty->isFunctionPointerType()
+     CallType = VariadicFunction;
+   }
+-  unsigned NumParams = Proto ? Proto->getNumParams() : 0;
+ 
+-  checkCall(NDecl, llvm::makeArrayRef(TheCall->getArgs(),
+-                                      TheCall->getNumArgs()),
+-            NumParams, /*IsMemberFunction=*/false, TheCall->getRParenLoc(),
++  checkCall(NDecl, Proto,
++            llvm::makeArrayRef(TheCall->getArgs(), TheCall->getNumArgs()),
++            /*IsMemberFunction=*/false, TheCall->getRParenLoc(),
+             TheCall->getCallee()->getSourceRange(), CallType);
+ 
+   return false;
+@@ -1239,11 +1309,9 @@
+ bool Sema::CheckOtherCall(CallExpr *TheCall, const FunctionProtoType *Proto) {
+   VariadicCallType CallType = getVariadicCallType(/*FDecl=*/nullptr, Proto,
+                                                   TheCall->getCallee());
+-  unsigned NumParams = Proto ? Proto->getNumParams() : 0;
+-
+-  checkCall(/*FDecl=*/nullptr,
++  checkCall(/*FDecl=*/nullptr, Proto,
+             llvm::makeArrayRef(TheCall->getArgs(), TheCall->getNumArgs()),
+-            NumParams, /*IsMemberFunction=*/false, TheCall->getRParenLoc(),
++            /*IsMemberFunction=*/false, TheCall->getRParenLoc(),
+             TheCall->getCallee()->getSourceRange(), CallType);
+ 
+   return false;
+@@ -5385,7 +5453,8 @@
+   CheckReturnStackAddr(*this, RetValExp, lhsType, ReturnLoc);
+ 
+   // Check if the return value is null but should not be.
+-  if (Attrs && hasSpecificAttr<ReturnsNonNullAttr>(*Attrs) &&
++  if (((Attrs && hasSpecificAttr<ReturnsNonNullAttr>(*Attrs)) ||
++       (!isObjCMethod && isNonNullType(Context, lhsType))) &&
+       CheckNonNullExpr(*this, RetValExp))
+     Diag(ReturnLoc, diag::warn_null_ret)
+       << (isObjCMethod ? 1 : 0) << RetValExp->getSourceRange();
+Index: lib/Sema/SemaCodeComplete.cpp
+===================================================================
+--- lib/Sema/SemaCodeComplete.cpp	(revision 231004)
++++ lib/Sema/SemaCodeComplete.cpp	(working copy)
+@@ -1343,6 +1343,11 @@
+     Builder.AddChunk(CodeCompletionString::CK_RightParen);
+     Results.AddResult(Result(Builder.TakeString()));
+   }
++
++  // Nullability
++  Results.AddResult(Result("__nonnull", CCP_Type));
++  Results.AddResult(Result("__nullable", CCP_Type));
++  Results.AddResult(Result("__null_unspecified", CCP_Type));
+ }
+ 
+ static void AddStorageSpecifiers(Sema::ParserCompletionContext CCC,
+@@ -2100,7 +2105,8 @@
+     }
+ }
+ 
+-static std::string formatObjCParamQualifiers(unsigned ObjCQuals) {
++static std::string formatObjCParamQualifiers(unsigned ObjCQuals, 
++                                             QualType &Type) {
+   std::string Result;
+   if (ObjCQuals & Decl::OBJC_TQ_In)
+     Result += "in ";
+@@ -2114,6 +2120,23 @@
+     Result += "byref ";
+   if (ObjCQuals & Decl::OBJC_TQ_Oneway)
+     Result += "oneway ";
++  if (ObjCQuals & Decl::OBJC_TQ_CSNullability) {
++    if (auto nullability = AttributedType::stripOuterNullability(Type)) {
++      switch (*nullability) {
++      case NullabilityKind::NonNull:
++        Result += "nonnull ";
++        break;
++
++      case NullabilityKind::Nullable:
++        Result += "nullable ";
++        break;
++
++      case NullabilityKind::Unspecified:
++          Result += "null_unspecified ";
++        break;
++      }
++    }
++  }
+   return Result;
+ }
+ 
+@@ -2132,13 +2155,15 @@
+     if (Param->getIdentifier() && !ObjCMethodParam && !SuppressName)
+       Result = Param->getIdentifier()->getName();
+     
+-    Param->getType().getAsStringInternal(Result, Policy);
+-    
++    QualType Type = Param->getType();
+     if (ObjCMethodParam) {
+-      Result = "(" + formatObjCParamQualifiers(Param->getObjCDeclQualifier())
+-             + Result + ")";
++      Result = "(" + formatObjCParamQualifiers(Param->getObjCDeclQualifier(),
++                                               Type);
++      Result += Type.getAsString(Policy) + ")";
+       if (Param->getIdentifier() && !SuppressName)
+         Result += Param->getIdentifier()->getName();
++    } else {
++      Type.getAsStringInternal(Result, Policy);
+     }
+     return Result;
+   }
+@@ -2186,13 +2211,16 @@
+     if (!ObjCMethodParam && Param->getIdentifier())
+       Result = Param->getIdentifier()->getName();
+ 
+-    Param->getType().getUnqualifiedType().getAsStringInternal(Result, Policy);
++    QualType Type = Param->getType().getUnqualifiedType();
+     
+     if (ObjCMethodParam) {
+-      Result = "(" + formatObjCParamQualifiers(Param->getObjCDeclQualifier())
+-             + Result + ")";
++      Result = "(" + formatObjCParamQualifiers(Param->getObjCDeclQualifier(),
++                                               Type);
++      Result += Type.getAsString(Policy) + Result + ")";
+       if (Param->getIdentifier())
+         Result += Param->getIdentifier()->getName();
++    } else {
++      Type.getAsStringInternal(Result, Policy);
+     }
+       
+     return Result;
+@@ -2771,9 +2799,10 @@
+       if ((*P)->getType()->isBlockPointerType() && !DeclaringEntity)
+         Arg = FormatFunctionParameter(Ctx, Policy, *P, true);
+       else {
+-        (*P)->getType().getAsStringInternal(Arg, Policy);
+-        Arg = "(" + formatObjCParamQualifiers((*P)->getObjCDeclQualifier()) 
+-            + Arg + ")";
++        QualType Type = (*P)->getType();
++        Arg = "(" + formatObjCParamQualifiers((*P)->getObjCDeclQualifier(),
++                                              Type);
++        Arg += Type.getAsString(Policy) + ")";
+         if (IdentifierInfo *II = (*P)->getIdentifier())
+           if (DeclaringEntity || AllParametersAreInformative)
+             Arg += II->getName();
+@@ -4861,6 +4890,11 @@
+     Getter.AddPlaceholderChunk("method");
+     Results.AddResult(CodeCompletionResult(Getter.TakeString()));
+   }
++  if (!ObjCPropertyFlagConflicts(Attributes, ObjCDeclSpec::DQ_PR_nullability)){
++    Results.AddResult(CodeCompletionResult("nonnull"));
++    Results.AddResult(CodeCompletionResult("nullable"));
++    Results.AddResult(CodeCompletionResult("null_resettable"));
++  }
+   Results.ExitScope();
+   HandleCodeCompleteResults(this, CodeCompleter, 
+                             CodeCompletionContext::CCC_Other,
+@@ -5110,6 +5144,10 @@
+      Results.AddResult("byref");
+      Results.AddResult("oneway");
+   }
++  if ((DS.getObjCDeclQualifier() & ObjCDeclSpec::DQ_CSNullability) == 0) {
++    Results.AddResult("nonnull");
++    Results.AddResult("nullable");
++  }
+   
+   // If we're completing the return type of an Objective-C method and the 
+   // identifier IBAction refers to a macro, provide a completion item for
+@@ -6282,7 +6320,7 @@
+                                     const PrintingPolicy &Policy,
+                                     CodeCompletionBuilder &Builder) {
+   Builder.AddChunk(CodeCompletionString::CK_LeftParen);
+-  std::string Quals = formatObjCParamQualifiers(ObjCDeclQuals);
++  std::string Quals = formatObjCParamQualifiers(ObjCDeclQuals, Type);
+   if (!Quals.empty())
+     Builder.AddTextChunk(Builder.getAllocator().CopyString(Quals));
+   Builder.AddTextChunk(GetCompletionTypeString(Type, Context, Policy,
+@@ -7021,7 +7059,12 @@
+         break;
+ 
+       // Add the parameter type.
+-      AddObjCPassingTypeChunk((*P)->getOriginalType(),
++      QualType ParamType;
++      if ((*P)->getObjCDeclQualifier() & Decl::OBJC_TQ_CSNullability)
++        ParamType = (*P)->getType();
++      else
++        ParamType = (*P)->getOriginalType();
++      AddObjCPassingTypeChunk(ParamType,
+                               (*P)->getObjCDeclQualifier(),
+                               Context, Policy,
+                               Builder);
+Index: lib/Sema/SemaDeclObjC.cpp
+===================================================================
+--- lib/Sema/SemaDeclObjC.cpp	(revision 231004)
++++ lib/Sema/SemaDeclObjC.cpp	(working copy)
+@@ -1341,6 +1341,13 @@
+   return (TSI ? TSI->getTypeLoc().getSourceRange() : SourceRange());
+ }
+ 
++/// Determine whether two set of Objective-C declaration qualifiers conflict.
++static bool objcModifiersConflict(Decl::ObjCDeclQualifier x,
++                                  Decl::ObjCDeclQualifier y) {
++  return (x & ~Decl::OBJC_TQ_CSNullability) !=
++         (y & ~Decl::OBJC_TQ_CSNullability);
++}
++
+ static bool CheckMethodOverrideReturn(Sema &S,
+                                       ObjCMethodDecl *MethodImpl,
+                                       ObjCMethodDecl *MethodDecl,
+@@ -1348,8 +1355,8 @@
+                                       bool IsOverridingMode,
+                                       bool Warn) {
+   if (IsProtocolMethodDecl &&
+-      (MethodDecl->getObjCDeclQualifier() !=
+-       MethodImpl->getObjCDeclQualifier())) {
++      objcModifiersConflict(MethodDecl->getObjCDeclQualifier(),
++                            MethodImpl->getObjCDeclQualifier())) {
+     if (Warn) {
+       S.Diag(MethodImpl->getLocation(),
+              (IsOverridingMode
+@@ -1413,8 +1420,8 @@
+                                      bool IsOverridingMode,
+                                      bool Warn) {
+   if (IsProtocolMethodDecl &&
+-      (ImplVar->getObjCDeclQualifier() !=
+-       IfaceVar->getObjCDeclQualifier())) {
++      objcModifiersConflict(ImplVar->getObjCDeclQualifier(),
++                            IfaceVar->getObjCDeclQualifier())) {
+     if (Warn) {
+       if (IsOverridingMode)
+         S.Diag(ImplVar->getLocation(), 
+@@ -1963,6 +1970,9 @@
+     DiagnoseUnimplementedProperties(S, IMPDecl, CDecl, SynthesizeProperties);
+   }
+ 
++  // Diagnose null-resettable synthesized setters.
++  diagnoseNullResettableSynthesizedSetters(IMPDecl);
++
+   SelectorSet ClsMap;
+   for (const auto *I : IMPDecl->class_methods())
+     ClsMap.insert(I->getSelector());
+@@ -3086,6 +3096,89 @@
+   ObjCMethod->setOverriding(hasOverriddenMethodsInBaseOrProtocol);
+ }
+ 
++/// Merge type nullability from for a redeclaration of the same entity,
++/// producing the updated type of the redeclared entity.
++static QualType mergeTypeNullabilityForRedecl(Sema &S, SourceLocation loc,
++                                              QualType type,
++                                              bool usesCSKeyword,
++                                              SourceLocation prevLoc,
++                                              QualType prevType,
++                                              bool prevUsesCSKeyword) {
++  // Determine the nullability of both types.
++  auto nullability = type->getNullability(S.Context);
++  auto prevNullability = prevType->getNullability(S.Context);
++
++  // Easy case: both have nullability.
++  if (nullability.hasValue() == prevNullability.hasValue()) {
++    // Neither has nullability; continue.
++    if (!nullability)
++      return type;
++
++    // The nullabilities are equivalent; do nothing.
++    if (*nullability == *prevNullability)
++      return type;
++
++    // Complain about mismatched nullability.
++    S.Diag(loc, diag::err_nullability_conflicting)
++      << static_cast<unsigned>(*nullability) << usesCSKeyword
++      << static_cast<unsigned>(*prevNullability) << prevUsesCSKeyword;
++    return type;
++  }
++
++  // If it's the redeclaration that has nullability, don't change anything.
++  if (nullability)
++    return type;
++
++  // Otherwise, provide the result with the same nullability.
++  return S.Context.getAttributedType(
++           AttributedType::getNullabilityAttrKind(*prevNullability),
++           type, type);
++}
++
++/// Merge information from the declaration of a method in the @interface
++/// (or a category/extension) into the corresponding method in the
++/// @implementation (for a class or category).
++static void mergeInterfaceMethodToImpl(Sema &S,
++                                       ObjCMethodDecl *method,
++                                       ObjCMethodDecl *prevMethod) {
++  // Merge the objc_requires_super attribute.
++  if (prevMethod->hasAttr<ObjCRequiresSuperAttr>() &&
++      !method->hasAttr<ObjCRequiresSuperAttr>()) {
++    // merge the attribute into implementation.
++    method->addAttr(
++      ObjCRequiresSuperAttr::CreateImplicit(S.Context,
++                                            method->getLocation()));
++  }
++
++  // Merge nullability of the result type.
++  QualType newReturnType
++    = mergeTypeNullabilityForRedecl(
++        S, method->getReturnTypeSourceRange().getBegin(),
++        method->getReturnType(),
++        method->getObjCDeclQualifier() & Decl::OBJC_TQ_CSNullability,
++        prevMethod->getReturnTypeSourceRange().getBegin(),
++        prevMethod->getReturnType(),
++        prevMethod->getObjCDeclQualifier() & Decl::OBJC_TQ_CSNullability);
++  method->setReturnType(newReturnType);
++
++  // Handle each of the parameters.
++  unsigned numParams = method->param_size();
++  unsigned numPrevParams = prevMethod->param_size();
++  for (unsigned i = 0, n = std::min(numParams, numPrevParams); i != n; ++i) {
++    ParmVarDecl *param = method->param_begin()[i];
++    ParmVarDecl *prevParam = prevMethod->param_begin()[i];
++
++    // Merge nullability.
++    QualType newParamType
++      = mergeTypeNullabilityForRedecl(
++          S, param->getLocation(), param->getType(),
++          param->getObjCDeclQualifier() & Decl::OBJC_TQ_CSNullability,
++          prevParam->getLocation(), prevParam->getType(),
++          prevParam->getObjCDeclQualifier() & Decl::OBJC_TQ_CSNullability);
++    param->setType(newParamType);
++  }
++}
++
+ Decl *Sema::ActOnMethodDeclaration(
+     Scope *S,
+     SourceLocation MethodLoc, SourceLocation EndLoc,
+@@ -3116,7 +3209,9 @@
+     if (CheckFunctionReturnType(resultDeclType, MethodLoc))
+       return nullptr;
+ 
+-    HasRelatedResultType = (resultDeclType == Context.getObjCInstanceType());
++    QualType bareResultType = resultDeclType;
++    (void)AttributedType::stripOuterNullability(bareResultType);
++    HasRelatedResultType = (bareResultType == Context.getObjCInstanceType());
+   } else { // get the type for "id".
+     resultDeclType = Context.getObjCIdType();
+     Diag(MethodLoc, diag::warn_missing_method_return_type)
+@@ -3217,23 +3312,21 @@
+       ImpDecl->addClassMethod(ObjCMethod);
+     }
+ 
+-    ObjCMethodDecl *IMD = nullptr;
+-    if (ObjCInterfaceDecl *IDecl = ImpDecl->getClassInterface())
+-      IMD = IDecl->lookupMethod(ObjCMethod->getSelector(), 
+-                                ObjCMethod->isInstanceMethod());
+-    if (IMD && IMD->hasAttr<ObjCRequiresSuperAttr>() &&
+-        !ObjCMethod->hasAttr<ObjCRequiresSuperAttr>()) {
+-      // merge the attribute into implementation.
+-      ObjCMethod->addAttr(ObjCRequiresSuperAttr::CreateImplicit(Context,
+-                                                   ObjCMethod->getLocation()));
++    // Merge information from the @interface declaration into the
++    // @implementation.
++    if (ObjCInterfaceDecl *IDecl = ImpDecl->getClassInterface()) {
++      if (auto *IMD = IDecl->lookupMethod(ObjCMethod->getSelector(),
++                                          ObjCMethod->isInstanceMethod())) {
++        mergeInterfaceMethodToImpl(*this, ObjCMethod, IMD);
++
++        // Warn about defining -dealloc in a category.
++        if (isa<ObjCCategoryImplDecl>(ImpDecl) && IMD->isOverriding() &&
++            ObjCMethod->getSelector().getMethodFamily() == OMF_dealloc) {
++          Diag(ObjCMethod->getLocation(), diag::warn_dealloc_in_category)
++            << ObjCMethod->getDeclName();
++        }
++      }
+     }
+-    if (isa<ObjCCategoryImplDecl>(ImpDecl)) {
+-      ObjCMethodFamily family = 
+-        ObjCMethod->getSelector().getMethodFamily();
+-      if (family == OMF_dealloc && IMD && IMD->isOverriding()) 
+-        Diag(ObjCMethod->getLocation(), diag::warn_dealloc_in_category)
+-          << ObjCMethod->getDeclName();
+-    }
+   } else {
+     cast<DeclContext>(ClassDecl)->addDecl(ObjCMethod);
+   }
+Index: lib/Sema/SemaExprObjC.cpp
+===================================================================
+--- lib/Sema/SemaExprObjC.cpp	(revision 231004)
++++ lib/Sema/SemaExprObjC.cpp	(working copy)
+@@ -1139,51 +1139,159 @@
+ }
+ 
+ static QualType stripObjCInstanceType(ASTContext &Context, QualType T) {
++  QualType origType = T;
++  if (auto nullability = AttributedType::stripOuterNullability(T)) {
++    if (T == Context.getObjCInstanceType()) {
++      return Context.getAttributedType(
++               AttributedType::getNullabilityAttrKind(*nullability),
++               Context.getObjCIdType(),
++               Context.getObjCIdType());
++    }
++
++    return origType;
++  }
++
+   if (T == Context.getObjCInstanceType())
+     return Context.getObjCIdType();
+   
+-  return T;
++  return origType;
+ }
+ 
+-QualType Sema::getMessageSendResultType(QualType ReceiverType,
+-                                        ObjCMethodDecl *Method,
+-                                    bool isClassMessage, bool isSuperMessage) {
++/// Determine the result type of a message send based on the receiver type,
++/// method, and the kind of message send.
++///
++/// This is the "base" result type, which will still need to be adjusted
++/// to account for nullability.
++static QualType getBaseMessageSendResultType(Sema &S,
++                                             QualType ReceiverType,
++                                             ObjCMethodDecl *Method,
++                                             bool isClassMessage,
++                                             bool isSuperMessage) {
+   assert(Method && "Must have a method");
+   if (!Method->hasRelatedResultType())
+     return Method->getSendResultType();
+-  
++
++  ASTContext &Context = S.Context;
++
++  // Local function that transfers the nullability of the method's
++  // result type to the returned result.
++  auto transferNullability = [&](QualType type) -> QualType {
++    // If the method's result type has nullability, extract it.
++    if (auto nullability = Method->getSendResultType()
++                             ->getNullability(Context)){
++      // Strip off any outer nullability sugar from the provided type.
++      (void)AttributedType::stripOuterNullability(type);
++
++      // Form a new attributed type using the method result type's nullability.
++      return Context.getAttributedType(
++               AttributedType::getNullabilityAttrKind(*nullability),
++               type,
++               type);
++    }
++
++    return type;
++  };
++
+   // If a method has a related return type:
+   //   - if the method found is an instance method, but the message send
+   //     was a class message send, T is the declared return type of the method
+   //     found
+   if (Method->isInstanceMethod() && isClassMessage)
+-    return stripObjCInstanceType(Context, Method->getSendResultType());
+-  
+-  //   - if the receiver is super, T is a pointer to the class of the 
++    return stripObjCInstanceType(Context, 
++                                 Method->getSendResultType());
++
++  //   - if the receiver is super, T is a pointer to the class of the
+   //     enclosing method definition
+   if (isSuperMessage) {
+-    if (ObjCMethodDecl *CurMethod = getCurMethodDecl())
+-      if (ObjCInterfaceDecl *Class = CurMethod->getClassInterface())
+-        return Context.getObjCObjectPointerType(
+-                                        Context.getObjCInterfaceType(Class));
++    if (ObjCMethodDecl *CurMethod = S.getCurMethodDecl())
++      if (ObjCInterfaceDecl *Class = CurMethod->getClassInterface()) {
++        return transferNullability(
++                 Context.getObjCObjectPointerType(
++                   Context.getObjCInterfaceType(Class)));
++      }
+   }
+-    
++
+   //   - if the receiver is the name of a class U, T is a pointer to U
+   if (ReceiverType->getAs<ObjCInterfaceType>() ||
+       ReceiverType->isObjCQualifiedInterfaceType())
+-    return Context.getObjCObjectPointerType(ReceiverType);
+-  //   - if the receiver is of type Class or qualified Class type, 
++    return transferNullability(Context.getObjCObjectPointerType(ReceiverType));
++  //   - if the receiver is of type Class or qualified Class type,
+   //     T is the declared return type of the method.
+   if (ReceiverType->isObjCClassType() ||
+       ReceiverType->isObjCQualifiedClassType())
+-    return stripObjCInstanceType(Context, Method->getSendResultType());
+-  
++    return stripObjCInstanceType(Context, 
++                                 Method->getSendResultType());
++
+   //   - if the receiver is id, qualified id, Class, or qualified Class, T
+   //     is the receiver type, otherwise
+   //   - T is the type of the receiver expression.
+-  return ReceiverType;
++  return transferNullability(ReceiverType);
+ }
+ 
++QualType Sema::getMessageSendResultType(QualType ReceiverType,
++                                        ObjCMethodDecl *Method,
++                                        bool isClassMessage,
++                                        bool isSuperMessage) {
++  // Produce the result type.
++  QualType resultType = getBaseMessageSendResultType(*this, ReceiverType,
++                                                     Method,
++                                                     isClassMessage,
++                                                     isSuperMessage);
++
++  // If this is a class message, ignore the nullability of the receiver.
++  if (isClassMessage)
++    return resultType;
++
++  // Map the nullability of the result into a table index.
++  unsigned receiverNullabilityIdx = 0;
++  if (auto nullability = ReceiverType->getNullability(Context))
++    receiverNullabilityIdx = 1 + static_cast<unsigned>(*nullability);
++
++  unsigned resultNullabilityIdx = 0;
++  if (auto nullability = resultType->getNullability(Context))
++    resultNullabilityIdx = 1 + static_cast<unsigned>(*nullability);
++
++  // The table of nullability mappings, indexed by the receiver's nullability
++  // and then the result type's nullability.
++  static const uint8_t None = 0;
++  static const uint8_t NonNull = 1;
++  static const uint8_t Nullable = 2;
++  static const uint8_t Unspecified = 3;
++  static const uint8_t nullabilityMap[4][4] = {
++    //                  None        NonNull       Nullable    Unspecified
++    /* None */        { None,       None,         Nullable,   None },
++    /* NonNull */     { None,       NonNull,      Nullable,   Unspecified },
++    /* Nullable */    { Nullable,   Nullable,     Nullable,   Nullable },
++    /* Unspecified */ { None,       Unspecified,  Nullable,   Unspecified }
++  };
++
++  unsigned newResultNullabilityIdx
++    = nullabilityMap[receiverNullabilityIdx][resultNullabilityIdx];
++  if (newResultNullabilityIdx == resultNullabilityIdx)
++    return resultType;
++
++  // Strip off the existing nullability. This removes as little type sugar as
++  // possible.
++  do {
++    if (auto attributed = dyn_cast<AttributedType>(resultType.getTypePtr())) {
++      resultType = attributed->getModifiedType();
++    } else {
++      resultType = resultType.getDesugaredType(Context);
++    }
++  } while (resultType->getNullability(Context));
++
++  // Add nullability back if needed.
++  if (newResultNullabilityIdx > 0) {
++    auto newNullability
++      = static_cast<NullabilityKind>(newResultNullabilityIdx-1);
++    return Context.getAttributedType(
++             AttributedType::getNullabilityAttrKind(newNullability),
++             resultType, resultType);
++  }
++
++  return resultType;
++}
++
+ /// Look for an ObjC method whose result type exactly matches the given type.
+ static const ObjCMethodDecl *
+ findExplicitInstancetypeDeclarer(const ObjCMethodDecl *MD,
+Index: lib/Sema/SemaObjCProperty.cpp
+===================================================================
+--- lib/Sema/SemaObjCProperty.cpp	(revision 231004)
++++ lib/Sema/SemaObjCProperty.cpp	(working copy)
+@@ -173,7 +173,7 @@
+                                            isAssign, isReadWrite,
+                                            Attributes,
+                                            ODS.getPropertyAttributes(),
+-                                           isOverridingProperty, TSI,
++                                           isOverridingProperty, T, TSI,
+                                            MethodImplKind);
+       if (!Res)
+         return nullptr;
+@@ -184,7 +184,7 @@
+     Res = CreatePropertyDecl(S, ClassDecl, AtLoc, LParenLoc, FD,
+                              GetterSel, SetterSel, isAssign, isReadWrite,
+                              Attributes, ODS.getPropertyAttributes(),
+-                             TSI, MethodImplKind);
++                             T, TSI, MethodImplKind);
+     if (lexicalDC)
+       Res->setLexicalDeclContext(lexicalDC);
+   }
+@@ -322,7 +322,8 @@
+                                      const unsigned Attributes,
+                                      const unsigned AttributesAsWritten,
+                                      bool *isOverridingProperty,
+-                                     TypeSourceInfo *T,
++                                     QualType T,
++                                     TypeSourceInfo *TSI,
+                                      tok::ObjCKeywordKind MethodImplKind) {
+   ObjCCategoryDecl *CDecl = cast<ObjCCategoryDecl>(CurContext);
+   // Diagnose if this property is already in continuation class.
+@@ -348,7 +349,7 @@
+   // FIXME. We should really be using CreatePropertyDecl for this.
+   ObjCPropertyDecl *PDecl =
+     ObjCPropertyDecl::Create(Context, DC, FD.D.getIdentifierLoc(),
+-                             PropertyId, AtLoc, LParenLoc, T);
++                             PropertyId, AtLoc, LParenLoc, T, TSI);
+   PDecl->setPropertyAttributesAsWritten(
+                           makePropertyAttributesAsWritten(AttributesAsWritten));
+   if (Attributes & ObjCDeclSpec::DQ_PR_readonly)
+@@ -359,6 +360,11 @@
+     PDecl->setPropertyAttributes(ObjCPropertyDecl::OBJC_PR_nonatomic);
+   if (Attributes & ObjCDeclSpec::DQ_PR_atomic)
+     PDecl->setPropertyAttributes(ObjCPropertyDecl::OBJC_PR_atomic);
++  if (Attributes & ObjCDeclSpec::DQ_PR_nullability)
++    PDecl->setPropertyAttributes(ObjCPropertyDecl::OBJC_PR_nullability);
++  if (Attributes & ObjCDeclSpec::DQ_PR_null_resettable)
++    PDecl->setPropertyAttributes(ObjCPropertyDecl::OBJC_PR_null_resettable);
++
+   // Set setter/getter selector name. Needed later.
+   PDecl->setGetterName(GetterSel);
+   PDecl->setSetterName(SetterSel);
+@@ -383,7 +389,8 @@
+     ObjCPropertyDecl *PrimaryPDecl =
+       CreatePropertyDecl(S, CCPrimary, AtLoc, LParenLoc,
+                          FD, GetterSel, SetterSel, isAssign, isReadWrite,
+-                         Attributes,AttributesAsWritten, T, MethodImplKind, DC);
++                         Attributes,AttributesAsWritten, T, TSI, MethodImplKind, 
++                         DC);
+ 
+     // A case of continuation class adding a new property in the class. This
+     // is not what it was meant for. However, gcc supports it and so should we.
+@@ -529,11 +536,11 @@
+                                            const bool isReadWrite,
+                                            const unsigned Attributes,
+                                            const unsigned AttributesAsWritten,
++                                           QualType T,
+                                            TypeSourceInfo *TInfo,
+                                            tok::ObjCKeywordKind MethodImplKind,
+                                            DeclContext *lexicalDC){
+   IdentifierInfo *PropertyId = FD.D.getIdentifier();
+-  QualType T = TInfo->getType();
+ 
+   // Issue a warning if property is 'assign' as default and its object, which is
+   // gc'able conforms to NSCopying protocol
+@@ -562,7 +569,8 @@
+   DeclContext *DC = cast<DeclContext>(CDecl);
+   ObjCPropertyDecl *PDecl = ObjCPropertyDecl::Create(Context, DC,
+                                                      FD.D.getIdentifierLoc(),
+-                                                     PropertyId, AtLoc, LParenLoc, TInfo);
++                                                     PropertyId, AtLoc, 
++                                                     LParenLoc, T, TInfo);
+ 
+   if (ObjCPropertyDecl *prevDecl =
+         ObjCPropertyDecl::findPropertyDecl(DC, PropertyId)) {
+@@ -637,6 +645,12 @@
+   else if (MethodImplKind == tok::objc_optional)
+     PDecl->setPropertyImplementation(ObjCPropertyDecl::Optional);
+ 
++  if (Attributes & ObjCDeclSpec::DQ_PR_nullability)
++    PDecl->setPropertyAttributes(ObjCPropertyDecl::OBJC_PR_nullability);
++
++  if (Attributes & ObjCDeclSpec::DQ_PR_null_resettable)
++    PDecl->setPropertyAttributes(ObjCPropertyDecl::OBJC_PR_null_resettable);
++
+   return PDecl;
+ }
+ 
+@@ -1751,6 +1765,33 @@
+   }
+ }
+ 
++void Sema::diagnoseNullResettableSynthesizedSetters(ObjCImplDecl *impDecl) {
++  for (const auto *propertyImpl : impDecl->property_impls()) {
++    const auto *property = propertyImpl->getPropertyDecl();
++
++    // Warn about null_resettable properties with synthesized setters,
++    // because the setter won't properly handle nil.
++    if (propertyImpl->getPropertyImplementation()
++          == ObjCPropertyImplDecl::Synthesize &&
++        (property->getPropertyAttributes() &
++         ObjCPropertyDecl::OBJC_PR_null_resettable) &&
++        property->getGetterMethodDecl() &&
++        property->getSetterMethodDecl()) {
++      auto *getterMethod = property->getGetterMethodDecl();
++      auto *setterMethod = property->getSetterMethodDecl();
++      if (!impDecl->getInstanceMethod(setterMethod->getSelector()) &&
++          !impDecl->getInstanceMethod(getterMethod->getSelector())) {
++        SourceLocation loc = propertyImpl->getLocation();
++        if (loc.isInvalid())
++          loc = impDecl->getLocStart();
++
++        Diag(loc, diag::warn_null_resettable_setter)
++          << setterMethod->getSelector() << property->getDeclName();
++      }
++    }
++  }
++}
++
+ void
+ Sema::AtomicPropertySetterGetterRules (ObjCImplDecl* IMPDecl,
+                                        ObjCContainerDecl* IDecl) {
+@@ -1986,9 +2027,21 @@
+       redeclaredProperty->getLocation() :
+       property->getLocation();
+ 
++    // If the property is null_resettable, the getter returns nonnull.
++    QualType resultTy = property->getType();
++    if (property->getPropertyAttributes() &
++        ObjCPropertyDecl::OBJC_PR_null_resettable) {
++      QualType modifiedTy = resultTy;
++      if (auto nullability = AttributedType::stripOuterNullability(modifiedTy)){
++        if (*nullability == NullabilityKind::Unspecified)
++          resultTy = Context.getAttributedType(AttributedType::attr_nonnull,
++                                               modifiedTy, modifiedTy);
++      }
++    }
++
+     GetterMethod = ObjCMethodDecl::Create(Context, Loc, Loc,
+                              property->getGetterName(),
+-                             property->getType(), nullptr, CD,
++                             resultTy, nullptr, CD,
+                              /*isInstance=*/true, /*isVariadic=*/false,
+                              /*isPropertyAccessor=*/true,
+                              /*isImplicitlyDeclared=*/true, /*isDefined=*/false,
+@@ -2049,12 +2102,25 @@
+                                 ObjCMethodDecl::Optional :
+                                 ObjCMethodDecl::Required);
+ 
++      // If the property is null_resettable, the setter accepts a
++      // nullable value.
++      QualType paramTy = property->getType().getUnqualifiedType();
++      if (property->getPropertyAttributes() &
++          ObjCPropertyDecl::OBJC_PR_null_resettable) {
++        QualType modifiedTy = paramTy;
++        if (auto nullability = AttributedType::stripOuterNullability(modifiedTy)){
++          if (*nullability == NullabilityKind::Unspecified)
++            paramTy = Context.getAttributedType(AttributedType::attr_nullable,
++                                                modifiedTy, modifiedTy);
++        }
++      }
++
+       // Invent the arguments for the setter. We don't bother making a
+       // nice name for the argument.
+       ParmVarDecl *Argument = ParmVarDecl::Create(Context, SetterMethod,
+                                                   Loc, Loc,
+                                                   property->getIdentifier(),
+-                                    property->getType().getUnqualifiedType(),
++                                                  paramTy,
+                                                   /*TInfo=*/nullptr,
+                                                   SC_None,
+                                                   nullptr);
+Index: lib/Sema/SemaOverload.cpp
+===================================================================
+--- lib/Sema/SemaOverload.cpp	(revision 231004)
++++ lib/Sema/SemaOverload.cpp	(working copy)
+@@ -11253,7 +11253,7 @@
+         if (Op == OO_Equal)
+           DiagnoseSelfMove(Args[0], Args[1], OpLoc);
+ 
+-        checkCall(FnDecl, ArgsArray, 0, isa<CXXMethodDecl>(FnDecl), OpLoc,
++        checkCall(FnDecl, nullptr, ArgsArray, isa<CXXMethodDecl>(FnDecl), OpLoc, 
+                   TheCall->getSourceRange(), VariadicDoesNotApply);
+ 
+         return MaybeBindToTemporary(TheCall);
+Index: lib/Sema/SemaPseudoObject.cpp
+===================================================================
+--- lib/Sema/SemaPseudoObject.cpp	(revision 231004)
++++ lib/Sema/SemaPseudoObject.cpp	(working copy)
+@@ -689,15 +689,7 @@
+   if (SyntacticRefExpr)
+     SyntacticRefExpr->setIsMessagingGetter();
+ 
+-  QualType receiverType;
+-  if (RefExpr->isClassReceiver()) {
+-    receiverType = S.Context.getObjCInterfaceType(RefExpr->getClassReceiver());
+-  } else if (RefExpr->isSuperReceiver()) {
+-    receiverType = RefExpr->getSuperReceiverType();
+-  } else {
+-    assert(InstanceReceiver);
+-    receiverType = InstanceReceiver->getType();
+-  }
++  QualType receiverType = RefExpr->getReceiverType(S.Context);
+   if (!Getter->isImplicit())
+     S.DiagnoseUseOfDecl(Getter, GenericLoc, nullptr, true);
+   // Build a message-send.
+@@ -730,15 +722,7 @@
+   if (SyntacticRefExpr)
+     SyntacticRefExpr->setIsMessagingSetter();
+ 
+-  QualType receiverType;
+-  if (RefExpr->isClassReceiver()) {
+-    receiverType = S.Context.getObjCInterfaceType(RefExpr->getClassReceiver());
+-  } else if (RefExpr->isSuperReceiver()) {
+-    receiverType = RefExpr->getSuperReceiverType();
+-  } else {
+-    assert(InstanceReceiver);
+-    receiverType = InstanceReceiver->getType();
+-  }
++  QualType receiverType = RefExpr->getReceiverType(S.Context);
+ 
+   // Use assignment constraints when possible; they give us better
+   // diagnostics.  "When possible" basically means anything except a
+Index: lib/Sema/SemaType.cpp
+===================================================================
+--- lib/Sema/SemaType.cpp	(revision 231004)
++++ lib/Sema/SemaType.cpp	(working copy)
+@@ -24,6 +24,7 @@
+ #include "clang/AST/TypeLocVisitor.h"
+ #include "clang/Basic/PartialDiagnostic.h"
+ #include "clang/Basic/TargetInfo.h"
++#include "clang/Lex/Preprocessor.h"
+ #include "clang/Parse/ParseDiagnostic.h"
+ #include "clang/Sema/DeclSpec.h"
+ #include "clang/Sema/DelayedDiagnostic.h"
+@@ -121,6 +122,12 @@
+     case AttributeList::AT_SPtr: \
+     case AttributeList::AT_UPtr
+ 
++// Nullability qualifiers.
++#define NULLABILITY_TYPE_ATTRS_CASELIST         \
++    case AttributeList::AT_TypeNonNull:         \
++    case AttributeList::AT_TypeNullable:        \
++    case AttributeList::AT_TypeNullUnspecified
++
+ namespace {
+   /// An object which stores processing state for the entire
+   /// GetTypeForDeclarator process.
+@@ -307,8 +314,12 @@
+ ///
+ /// \param i - a notional index which the search will start
+ ///   immediately inside
++///
++/// \param onlyBlockPointers Whether we should only look into block
++/// pointer types (vs. all pointer types).
+ static DeclaratorChunk *maybeMovePastReturnType(Declarator &declarator,
+-                                                unsigned i) {
++                                                unsigned i,
++                                                bool onlyBlockPointers) {
+   assert(i <= declarator.getNumTypeObjects());
+ 
+   DeclaratorChunk *result = nullptr;
+@@ -329,20 +340,26 @@
+       return result;
+ 
+     // If we do find a function declarator, scan inwards from that,
+-    // looking for a block-pointer declarator.
++    // looking for a (block-)pointer declarator.
+     case DeclaratorChunk::Function:
+       for (--i; i != 0; --i) {
+-        DeclaratorChunk &blockChunk = declarator.getTypeObject(i-1);
+-        switch (blockChunk.Kind) {
++        DeclaratorChunk &ptrChunk = declarator.getTypeObject(i-1);
++        switch (ptrChunk.Kind) {
+         case DeclaratorChunk::Paren:
+-        case DeclaratorChunk::Pointer:
+         case DeclaratorChunk::Array:
+         case DeclaratorChunk::Function:
+         case DeclaratorChunk::Reference:
++          continue;
++
+         case DeclaratorChunk::MemberPointer:
+-          continue;
++        case DeclaratorChunk::Pointer:
++          if (onlyBlockPointers)
++            continue;
++
++          // fallthrough
++
+         case DeclaratorChunk::BlockPointer:
+-          result = &blockChunk;
++          result = &ptrChunk;
+           goto continue_outer;
+         }
+         llvm_unreachable("bad declarator chunk kind");
+@@ -382,7 +399,8 @@
+       DeclaratorChunk *destChunk = nullptr;
+       if (state.isProcessingDeclSpec() &&
+           attr.getKind() == AttributeList::AT_ObjCOwnership)
+-        destChunk = maybeMovePastReturnType(declarator, i - 1);
++        destChunk = maybeMovePastReturnType(declarator, i - 1,
++                                            /*onlyBlockPointers=*/true);
+       if (!destChunk) destChunk = &chunk;
+ 
+       moveAttrFromListToList(attr, state.getCurrentAttrListRef(),
+@@ -398,7 +416,9 @@
+     case DeclaratorChunk::Function:
+       if (state.isProcessingDeclSpec() &&
+           attr.getKind() == AttributeList::AT_ObjCOwnership) {
+-        if (DeclaratorChunk *dest = maybeMovePastReturnType(declarator, i)) {
++        if (DeclaratorChunk *dest = maybeMovePastReturnType(
++                                      declarator, i,
++                                      /*onlyBlockPointers=*/true)) {
+           moveAttrFromListToList(attr, state.getCurrentAttrListRef(),
+                                  dest->getAttrListRef());
+           return;
+@@ -620,6 +640,10 @@
+       // Microsoft type attributes cannot go after the declarator-id.
+       continue;
+ 
++    NULLABILITY_TYPE_ATTRS_CASELIST:
++      // Nullability specifiers cannot go after the declarator-id.
++      continue;
++
+     default:
+       break;
+     }
+@@ -2491,6 +2515,277 @@
+   return CC;
+ }
+ 
++namespace {
++  /// A simple notion of pointer kinds, which matches up with the various
++  /// pointer declarators.
++  enum class SimplePointerKind {
++    Pointer,
++    BlockPointer,
++    MemberPointer,
++  };
++}
++
++static FileID getNullabilityCompletenessCheckFileID(Sema &S,
++                                                    SourceLocation loc) {
++  // If we're anywhere in a function, method, or closure context, don't perform
++  // completeness checks.
++  for (DeclContext *ctx = S.CurContext; ctx; ctx = ctx->getParent()) {
++    if (ctx->isFunctionOrMethod())
++      return FileID();
++
++    if (ctx->isFileContext())
++      break;
++  }
++
++  // We only care about the expansion location.
++  loc = S.SourceMgr.getExpansionLoc(loc);
++  FileID file = S.SourceMgr.getFileID(loc);
++  if (file.isInvalid())
++    return FileID();
++
++  // Retrieve file information.
++  bool invalid = false;
++  const SrcMgr::SLocEntry &sloc = S.SourceMgr.getSLocEntry(file, &invalid);
++  if (invalid || !sloc.isFile())
++    return FileID();
++
++  // We don't want to perform completeness checks on the main file or in
++  // system headers.
++  const SrcMgr::FileInfo &fileInfo = sloc.getFile();
++  if (fileInfo.getIncludeLoc().isInvalid() ||
++      fileInfo.getFileCharacteristic() != SrcMgr::C_User)
++    return FileID();
++
++  return file;
++}
++
++IdentifierInfo *Sema::getNullabilityKeyword(NullabilityKind nullability) {
++  switch (nullability) {
++  case NullabilityKind::NonNull:
++    if (!Ident___nonnull)
++      Ident___nonnull = PP.getIdentifierInfo("__nonnull");
++    return Ident___nonnull;
++
++  case NullabilityKind::Nullable:
++    if (!Ident___nullable)
++      Ident___nullable = PP.getIdentifierInfo("__nullable");
++    return Ident___nullable;
++
++  case NullabilityKind::Unspecified:
++    if (!Ident___null_unspecified)
++      Ident___null_unspecified = PP.getIdentifierInfo("__null_unspecified");
++    return Ident___null_unspecified;
++  }
++}
++
++/// Retrieve the identifier "NSError".
++IdentifierInfo *Sema::getNSErrorIdent() {
++  if (!Ident_NSError)
++    Ident_NSError = PP.getIdentifierInfo("NSError");
++
++  return Ident_NSError;
++}
++
++/// Check whether there is a nullability attribute of any kind in the given
++/// attribute list.
++static bool hasNullabilityAttr(const AttributeList *attrs) {
++  for (const AttributeList *attr = attrs; attr;
++       attr = attr->getNext()) {
++    if (attr->getKind() == AttributeList::AT_TypeNonNull ||
++        attr->getKind() == AttributeList::AT_TypeNullable ||
++        attr->getKind() == AttributeList::AT_TypeNullUnspecified)
++      return true;
++  }
++
++  return false;
++}
++
++/// Check for consistent use of nullability.
++static void checkNullabilityConsistency(TypeProcessingState &state,
++                                        SimplePointerKind pointerKind,
++                                        SourceLocation pointerLoc) {
++  Sema &S = state.getSema();
++
++  // Determine which file we're performing consistency checking for.
++  FileID file = getNullabilityCompletenessCheckFileID(S, pointerLoc);
++  if (file.isInvalid())
++    return;
++
++  // If we haven't seen any type nullability in this file, we won't warn now
++  // about anything.
++  FileNullability &fileNullability = S.NullabilityMap[file];
++  if (!fileNullability.SawTypeNullability) {
++    // If this is the first pointer declarator in the file, record it.
++    if (fileNullability.PointerLoc.isInvalid() &&
++        !S.Context.getDiagnostics().isIgnored(diag::warn_nullability_missing,
++                                              pointerLoc)) {
++      fileNullability.PointerLoc = pointerLoc;
++      fileNullability.PointerKind = static_cast<unsigned>(pointerKind);
++    }
++
++    return;
++  }
++
++  // Complain about missing nullability.
++  S.Diag(pointerLoc, diag::warn_nullability_missing)
++    << static_cast<unsigned>(pointerKind);
++}
++
++namespace {
++  /// Describes the kind of a pointer a declarator describes.
++  enum class PointerDeclaratorKind {
++    // Not a pointer.
++    NonPointer,
++    // Single-level pointer.
++    SingleLevelPointer,
++    // Multi-level pointer (of any pointer kind).
++    MultiLevelPointer,
++    // CFErrorRef*
++    CFErrorRefPointer,
++    // NSError**
++    NSErrorPointerPointer,
++  };
++
++}
++
++/// Classify the given declarator, whose type-specified is \c type, based on
++/// what kind of pointer it refers to.
++///
++/// This is used to determine the default nullability.
++static PointerDeclaratorKind classifyPointerDeclarator(Sema &S,
++                                                       QualType type,
++                                                       Declarator &declarator) {
++  unsigned numNormalPointers = 0;
++
++  // For any dependent type, we consider it a non-pointer.
++  if (type->isDependentType())
++    return PointerDeclaratorKind::NonPointer;
++
++  // Look through the declarator chunks to identify pointers.
++  for (unsigned i = 0, n = declarator.getNumTypeObjects(); i != n; ++i) {
++    DeclaratorChunk &chunk = declarator.getTypeObject(i);
++    switch (chunk.Kind) {
++    case DeclaratorChunk::Array:
++    case DeclaratorChunk::Function:
++      break;
++
++    case DeclaratorChunk::BlockPointer:
++    case DeclaratorChunk::MemberPointer:
++      return numNormalPointers > 0 ? PointerDeclaratorKind::MultiLevelPointer
++                                   : PointerDeclaratorKind::SingleLevelPointer;
++
++    case DeclaratorChunk::Paren:
++    case DeclaratorChunk::Reference:
++      continue;
++
++    case DeclaratorChunk::Pointer:
++      ++numNormalPointers;
++      if (numNormalPointers > 2)
++        return PointerDeclaratorKind::MultiLevelPointer;
++      continue;
++    }
++  }
++
++  // Then, dig into the type specifier itself.
++  unsigned numTypeSpecifierPointers = 0;
++  do {
++    // Decompose normal pointers.
++    if (auto ptrType = type->getAs<PointerType>()) {
++      ++numNormalPointers;
++
++      if (numNormalPointers > 2)
++        return PointerDeclaratorKind::MultiLevelPointer;
++
++      type = ptrType->getPointeeType();
++      ++numTypeSpecifierPointers;
++      continue;
++    }
++
++    // Decompose block pointers.
++    if (type->getAs<BlockPointerType>()) {
++      return numNormalPointers > 0 ? PointerDeclaratorKind::MultiLevelPointer
++                                   : PointerDeclaratorKind::SingleLevelPointer;
++    }
++
++    // Decompose member pointers.
++    if (type->getAs<MemberPointerType>()) {
++      return numNormalPointers > 0 ? PointerDeclaratorKind::MultiLevelPointer
++                                   : PointerDeclaratorKind::SingleLevelPointer;
++    }
++
++    // Look at Objective-C object pointers.
++    if (auto objcObjectPtr = type->getAs<ObjCObjectPointerType>()) {
++      ++numNormalPointers;
++      ++numTypeSpecifierPointers;
++
++      // If this is NSError**, report that.
++      if (auto objcClassDecl = objcObjectPtr->getInterfaceDecl()) {
++        if (objcClassDecl->getIdentifier() == S.getNSErrorIdent() &&
++            numNormalPointers == 2 && numTypeSpecifierPointers < 2) {
++          return PointerDeclaratorKind::NSErrorPointerPointer;
++        }
++      }
++
++      break;
++    }
++
++    // Look at Objective-C class types.
++    if (auto objcClass = type->getAs<ObjCInterfaceType>()) {
++      if (objcClass->getInterface()->getIdentifier() == S.getNSErrorIdent()) {
++        if (numNormalPointers == 2 && numTypeSpecifierPointers < 2)
++          return PointerDeclaratorKind::NSErrorPointerPointer;;
++      }
++
++      break;
++    }
++
++    // If at this point we haven't seen a pointer, we won't see one.
++    if (numNormalPointers == 0)
++      return PointerDeclaratorKind::NonPointer;
++
++    if (auto recordType = type->getAs<RecordType>()) {
++      RecordDecl *recordDecl = recordType->getDecl();
++
++      bool isCFError = false;
++      if (S.CFError) {
++        // If we already know about CFError, test it directly.
++        isCFError = (S.CFError == recordDecl);
++      } else {
++        // Check whether this is CFError, which we identify based on its bridge
++        // to NSError.
++        if (recordDecl->getTagKind() == TTK_Struct && numNormalPointers > 0) {
++          if (auto bridgeAttr = recordDecl->getAttr<ObjCBridgeAttr>()) {
++            if (bridgeAttr->getBridgedType() == S.getNSErrorIdent()) {
++              S.CFError = recordDecl;
++              isCFError = true;
++            }
++          }
++        }
++      }
++
++      // If this is CFErrorRef*, report it as such.
++      if (isCFError && numNormalPointers == 2 && numTypeSpecifierPointers < 2) {
++        return PointerDeclaratorKind::CFErrorRefPointer;
++      }
++      break;
++    }
++
++    break;
++  } while (true);
++
++
++  switch (numNormalPointers) {
++  case 0:
++    return PointerDeclaratorKind::NonPointer;
++
++  case 1:
++    return PointerDeclaratorKind::SingleLevelPointer;
++
++  default:
++    return PointerDeclaratorKind::MultiLevelPointer;
++  }
++}
++
+ static TypeSourceInfo *GetFullTypeForDeclarator(TypeProcessingState &state,
+                                                 QualType declSpecType,
+                                                 TypeSourceInfo *TInfo) {
+@@ -2558,6 +2853,213 @@
+     }
+   }
+ 
++  // Determine whether we should infer __nonnull on pointer types.
++  Optional<NullabilityKind> inferNullability;
++  bool inferNullabilityCS = false;
++
++  // Are we in an assume-nonnull region?
++  bool inAssumeNonNullRegion = false;
++  if (S.PP.getPragmaAssumeNonNullLoc().isValid()) {
++    inAssumeNonNullRegion = true;
++    // Determine which file we saw the assume-nonnull region in.
++    FileID file = getNullabilityCompletenessCheckFileID(
++                    S, S.PP.getPragmaAssumeNonNullLoc());
++    if (!file.isInvalid()) {
++      FileNullability &fileNullability = S.NullabilityMap[file];
++
++      // If we haven't seen any type nullability before, now we have.
++      if (!fileNullability.SawTypeNullability) {
++        if (fileNullability.PointerLoc.isValid()) {
++          S.Diag(fileNullability.PointerLoc, diag::warn_nullability_missing)
++              << fileNullability.PointerKind;
++        }
++
++        fileNullability.SawTypeNullability = true;
++      }
++    }
++  }
++
++  // Whether to complain about missing nullability specifiers or not.
++  enum {
++    /// Never complain.
++    CAMN_No,
++    /// Complain on the inner pointers (but not the outermost
++    /// pointer).
++    CAMN_InnerPointers,
++    /// Complain about any pointers that don't have nullability
++    /// specified or inferred.
++    CAMN_Yes
++  } complainAboutMissingNullability = CAMN_No;
++  unsigned NumPointersRemaining = 0;
++
++  if (IsTypedefName) {
++    // For typedefs, we do not infer any nullability (the default),
++    // and we only complain about missing nullability specifiers on
++    // inner pointers.
++    complainAboutMissingNullability = CAMN_InnerPointers;
++
++    if (T->canHaveNullability() && !T->getNullability(S.Context)) {
++      ++NumPointersRemaining;
++    }
++
++    for (unsigned i = 0, n = D.getNumTypeObjects(); i != n; ++i) {
++      DeclaratorChunk &chunk = D.getTypeObject(i);
++      switch (chunk.Kind) {
++      case DeclaratorChunk::Array:
++      case DeclaratorChunk::Function:
++        break;
++
++      case DeclaratorChunk::BlockPointer:
++      case DeclaratorChunk::MemberPointer:
++        ++NumPointersRemaining;
++        break;
++
++      case DeclaratorChunk::Paren:
++      case DeclaratorChunk::Reference:
++        continue;
++
++      case DeclaratorChunk::Pointer:
++        ++NumPointersRemaining;
++        continue;
++      }
++    }
++  } else {
++    bool isFunctionOrMethod = false;
++    switch (auto context = state.getDeclarator().getContext()) {
++    case Declarator::ObjCParameterContext:
++    case Declarator::ObjCResultContext:
++    case Declarator::PrototypeContext:
++    case Declarator::TrailingReturnContext:
++      isFunctionOrMethod = true;
++      // fallthrough
++
++    case Declarator::MemberContext:
++      if (state.getDeclarator().isObjCIvar() && !isFunctionOrMethod) {
++        complainAboutMissingNullability = CAMN_No;
++        break;
++      }
++      // fallthrough
++
++    case Declarator::FileContext:
++    case Declarator::KNRTypeListContext:
++      complainAboutMissingNullability = CAMN_Yes;
++
++      // Nullability inference depends on the type and declarator.
++      switch (classifyPointerDeclarator(S, T, D)) {
++      case PointerDeclaratorKind::NonPointer:
++      case PointerDeclaratorKind::MultiLevelPointer:
++        // Cannot infer nullability.
++        break;
++
++      case PointerDeclaratorKind::SingleLevelPointer:
++        // Infer __nonnull if we are in an assumes-nonnull region.
++        if (inAssumeNonNullRegion) {
++          inferNullability = NullabilityKind::NonNull;
++          inferNullabilityCS = (context == Declarator::ObjCParameterContext ||
++                                context == Declarator::ObjCResultContext);
++        }
++        break;
++
++      case PointerDeclaratorKind::CFErrorRefPointer:
++      case PointerDeclaratorKind::NSErrorPointerPointer:
++        // Within a function or method signature, infer __nullable at both
++        // levels.
++        if (isFunctionOrMethod && inAssumeNonNullRegion)
++          inferNullability = NullabilityKind::Nullable;
++        break;
++      }
++      break;
++
++    case Declarator::ConversionIdContext:
++      complainAboutMissingNullability = CAMN_Yes;
++      break;
++
++    case Declarator::AliasDeclContext:
++    case Declarator::AliasTemplateContext:
++    case Declarator::BlockContext:
++    case Declarator::BlockLiteralContext:
++    case Declarator::ConditionContext:
++    case Declarator::CXXCatchContext:
++    case Declarator::CXXNewContext:
++    case Declarator::ForContext:
++    case Declarator::LambdaExprContext:
++    case Declarator::LambdaExprParameterContext:
++    case Declarator::ObjCCatchContext:
++    case Declarator::TemplateParamContext:
++    case Declarator::TemplateTypeArgContext:
++    case Declarator::TypeNameContext:
++      // Don't infer in these contexts.
++      break;
++    }
++  }
++
++  // Local function that checks the nullability for a given pointer declarator.
++  // Returns true if __nonnull was inferred.
++  auto inferPointerNullability = [&](SimplePointerKind pointerKind,
++                                     SourceLocation pointerLoc,
++                                     AttributeList *&attrs) -> AttributeList * {
++    // We've seen a pointer.
++    if (NumPointersRemaining > 0)
++      --NumPointersRemaining;
++
++    // If a nullability attribute is present, there's nothing to do.
++    if (hasNullabilityAttr(attrs))
++      return nullptr;
++
++    // If we're supposed to infer nullability, do so now.
++    if (inferNullability) {
++      AttributeList::Syntax syntax
++        = inferNullabilityCS ? AttributeList::AS_ContextSensitiveKeyword
++                             : AttributeList::AS_Keyword;
++      AttributeList *nullabilityAttr = state.getDeclarator().getAttributePool()
++                                         .create(
++                                           S.getNullabilityKeyword(
++                                             *inferNullability),
++                                           SourceRange(pointerLoc),
++                                           nullptr, SourceLocation(),
++                                           nullptr, 0,
++                                           syntax);
++
++      spliceAttrIntoList(*nullabilityAttr, attrs);
++      return nullabilityAttr;
++    }
++
++    // If we're supposed to complain about missing nullability, do so
++    // now if it's truly missing.
++    switch (complainAboutMissingNullability) {
++    case CAMN_No:
++      break;
++
++    case CAMN_InnerPointers:
++      if (NumPointersRemaining == 0)
++        break;
++      // Fallthrough.
++
++    case CAMN_Yes:
++      checkNullabilityConsistency(state, pointerKind, pointerLoc);
++    }
++    return nullptr;
++  };
++
++  // If the type itself could have nullability but does not, infer pointer
++  // nullability.
++  if (T->canHaveNullability() && S.ActiveTemplateInstantiations.empty() &&
++      !T->getNullability(S.Context)) {
++    SimplePointerKind pointerKind = SimplePointerKind::Pointer;
++    if (T->isBlockPointerType())
++      pointerKind = SimplePointerKind::BlockPointer;
++    else if (T->isMemberPointerType())
++      pointerKind = SimplePointerKind::MemberPointer;
++
++    if (auto *attr = inferPointerNullability(
++                       pointerKind, D.getDeclSpec().getTypeSpecTypeLoc(),
++                       D.getMutableDeclSpec().getAttributes().getListRef())) {
++      T = Context.getAttributedType(
++            AttributedType::getNullabilityAttrKind(*inferNullability), T, T);
++      attr->setUsedAsTypeAttr();
++    }
++  }
++
+   // Walk the DeclTypeInfo, building the recursive type as we go.
+   // DeclTypeInfos are ordered from the identifier out, which is
+   // opposite of what we want :).
+@@ -2575,6 +3077,10 @@
+       if (!LangOpts.Blocks)
+         S.Diag(DeclType.Loc, diag::err_blocks_disable);
+ 
++      // Handle pointer nullability.
++      inferPointerNullability(SimplePointerKind::BlockPointer,
++                              DeclType.Loc, DeclType.getAttrListRef());
++
+       T = S.BuildBlockPointerType(T, D.getIdentifierLoc(), Name);
+       if (DeclType.Cls.TypeQuals)
+         T = S.BuildQualifiedType(T, DeclType.Loc, DeclType.Cls.TypeQuals);
+@@ -2587,6 +3093,11 @@
+         D.setInvalidType(true);
+         // Build the type anyway.
+       }
++
++      // Handle pointer nullability
++      inferPointerNullability(SimplePointerKind::Pointer, DeclType.Loc,
++                              DeclType.getAttrListRef());
++
+       if (LangOpts.ObjC1 && T->getAs<ObjCObjectType>()) {
+         T = Context.getObjCObjectPointerType(T);
+         if (DeclType.Ptr.TypeQuals)
+@@ -3028,6 +3539,11 @@
+       // The scope spec must refer to a class, or be dependent.
+       CXXScopeSpec &SS = DeclType.Mem.Scope();
+       QualType ClsType;
++
++      // Handle pointer nullability.
++      inferPointerNullability(SimplePointerKind::MemberPointer,
++                              DeclType.Loc, DeclType.getAttrListRef());
++
+       if (SS.isInvalid()) {
+         // Avoid emitting extra errors if we already errored on the scope.
+         D.setInvalidType(true);
+@@ -3457,6 +3973,12 @@
+     return AttributeList::AT_SPtr;
+   case AttributedType::attr_uptr:
+     return AttributeList::AT_UPtr;
++  case AttributedType::attr_nonnull:
++    return AttributeList::AT_TypeNonNull;
++  case AttributedType::attr_nullable:
++    return AttributeList::AT_TypeNullable;
++  case AttributedType::attr_null_unspecified:
++    return AttributeList::AT_TypeNullUnspecified;
+   }
+   llvm_unreachable("unexpected attribute kind!");
+ }
+@@ -4064,7 +4586,8 @@
+     // just be the return type of a block pointer.
+     if (state.isProcessingDeclSpec()) {
+       Declarator &D = state.getDeclarator();
+-      if (maybeMovePastReturnType(D, D.getNumTypeObjects()))
++      if (maybeMovePastReturnType(D, D.getNumTypeObjects(),
++                                  /*onlyBlockPointers=*/true))
+         return false;
+     }
+   }
+@@ -4441,6 +4964,165 @@
+   return false;
+ }
+ 
++bool Sema::checkNullabilityTypeSpecifier(QualType &type,
++                                         NullabilityKind nullability,
++                                         SourceLocation nullabilityLoc,
++                                         bool isContextSensitive,
++                                         bool implicit) {
++  if (!implicit) {
++    // We saw a nullability type specifier. If this is the first one for
++    // this file, note that.
++    FileID file = getNullabilityCompletenessCheckFileID(*this, nullabilityLoc);
++    if (!file.isInvalid()) {
++      FileNullability &fileNullability = NullabilityMap[file];
++      if (!fileNullability.SawTypeNullability) {
++        // If we have already seen a pointer declarator without a nullability
++        // annotation, complain about it.
++        if (fileNullability.PointerLoc.isValid()) {
++          Diag(fileNullability.PointerLoc, diag::warn_nullability_missing)
++            << fileNullability.PointerKind;
++        }
++
++        fileNullability.SawTypeNullability = true;
++      }
++    }
++  }
++
++  // Check for existing nullability attributes on the type.
++  QualType desugared = type;
++  while (auto attributed = dyn_cast<AttributedType>(desugared.getTypePtr())) {
++    // Check whether there is already a null
++    if (auto existingNullability = attributed->getImmediateNullability()) {
++      // Duplicated nullability.
++      if (nullability == *existingNullability) {
++        if (implicit)
++          break;
++
++        Diag(nullabilityLoc, diag::warn_nullability_duplicate)
++          << static_cast<unsigned>(nullability)
++          << isContextSensitive
++          << FixItHint::CreateRemoval(nullabilityLoc);
++
++        break;
++      } 
++
++      // Conflicting nullability.
++      Diag(nullabilityLoc, diag::err_nullability_conflicting)
++        << static_cast<unsigned>(nullability) 
++        << isContextSensitive
++        << static_cast<unsigned>(*existingNullability)
++        << false;
++      return true;
++    }
++
++    desugared = attributed->getModifiedType();
++  }
++
++  // If there is already a different nullability specifier, complain.
++  // This (unlike the code above) looks through typedefs that might
++  // have nullability specifiers on them, which means we cannot
++  // provide a useful Fix-It.
++  if (auto existingNullability = desugared->getNullability(Context)) {
++    if (nullability != *existingNullability && !implicit) {
++      Diag(nullabilityLoc, diag::err_nullability_conflicting)
++        << static_cast<unsigned>(nullability)
++        << isContextSensitive
++        << static_cast<unsigned>(*existingNullability)
++        << false;
++
++      // Try to find the typedef with the existing nullability specifier.
++      if (auto typedefType = desugared->getAs<TypedefType>()) {
++        TypedefNameDecl *typedefDecl = typedefType->getDecl();
++        QualType underlyingType = typedefDecl->getUnderlyingType();
++        if (auto typedefNullability
++              = AttributedType::stripOuterNullability(underlyingType)) {
++          if (*typedefNullability == *existingNullability) {
++            Diag(typedefDecl->getLocation(), diag::note_nullability_here)
++              << static_cast<unsigned>(*existingNullability);
++          }
++        }
++      }
++
++      return true;
++    }
++  }
++
++  // If this definitely isn't a pointer type, reject the specifier.
++  if (!desugared->canHaveNullability()) {
++    if (!implicit) {
++      Diag(nullabilityLoc, diag::err_nullability_nonpointer)
++        << static_cast<unsigned>(nullability)
++        << isContextSensitive << type;
++    }
++    return true;
++  }
++
++  // For the context-sensitive keywords/Objective-C property
++  // attributes, require that the type be a single-level pointer.
++  if (isContextSensitive) {
++    // Make sure that the pointee isn't itself a pointer type.
++    QualType pointeeType = desugared->getPointeeType();
++    if (pointeeType->isAnyPointerType() ||
++        pointeeType->isObjCObjectPointerType() ||
++        pointeeType->isMemberPointerType()) {
++      Diag(nullabilityLoc, diag::err_nullability_cs_multilevel)
++        << static_cast<unsigned>(nullability)
++        << type;
++      if (nullability != NullabilityKind::Unspecified) {
++        Diag(nullabilityLoc, diag::note_nullability_type_specifier)
++          << static_cast<unsigned>(nullability)
++          << type
++          << FixItHint::CreateReplacement(nullabilityLoc,
++                                          getNullabilitySpelling(nullability));
++      }
++      return true;
++    }
++  }
++
++  // Form the attributed type.
++  type = Context.getAttributedType(
++           AttributedType::getNullabilityAttrKind(nullability), type, type);
++  return false;
++}
++
++/// Handle a nullability type attribute.
++/// Check whether we need to distribute the given nullability type
++/// attribute to another declarator chunk that is a pointer, member
++/// pointer, or block pointer declarator.
++///
++/// \returns true if the nullability annotation was distributed, false
++/// otherwise.
++static bool distributeNullabilityTypeAttr(TypeProcessingState &state,
++                                          AttributeList &attr) {
++  Declarator &declarator = state.getDeclarator();
++
++  // Move it to the outermost pointer, member pointer, or block
++  // pointer declarator.
++  for (unsigned i = state.getCurrentChunkIndex(); i != 0; --i) {
++    DeclaratorChunk &chunk = declarator.getTypeObject(i-1);
++    switch (chunk.Kind) {
++    case DeclaratorChunk::Pointer:
++    case DeclaratorChunk::BlockPointer:
++    case DeclaratorChunk::MemberPointer: {
++      moveAttrFromListToList(attr, state.getCurrentAttrListRef(),
++                             chunk.getAttrListRef());
++      return true;
++    }
++
++    case DeclaratorChunk::Paren:
++    case DeclaratorChunk::Array:
++      continue;
++
++    // Don't walk through these.
++    case DeclaratorChunk::Reference:
++    case DeclaratorChunk::Function:
++      return false;
++    }
++  }
++
++  return false;
++}
++
+ static AttributedType::Kind getCCTypeAttrKind(AttributeList &Attr) {
+   assert(!Attr.isInvalid());
+   switch (Attr.getKind()) {
+@@ -4843,6 +5525,23 @@
+   CurType = S.Context.getVectorType(CurType, numElts, VecKind);
+ }
+ 
++/// Map a nullability attribute kind to a nullability kind.
++static NullabilityKind mapNullabilityAttrKind(AttributeList::Kind kind) {
++  switch (kind) {
++  case AttributeList::AT_TypeNonNull:
++    return NullabilityKind::NonNull;
++
++  case AttributeList::AT_TypeNullable:
++    return NullabilityKind::Nullable;
++
++  case AttributeList::AT_TypeNullUnspecified:
++    return NullabilityKind::Unspecified;
++
++  default:
++    llvm_unreachable("not a nullability attribute kind");
++  }
++}
++
+ static void processTypeAttrs(TypeProcessingState &state, QualType &type,
+                              TypeAttrLocation TAL, AttributeList *attrs) {
+   // Scan through and apply attributes to this type where it makes sense.  Some
+@@ -4947,6 +5646,25 @@
+         attr.setUsedAsTypeAttr();
+       break;
+ 
++    NULLABILITY_TYPE_ATTRS_CASELIST:
++      // Either add nullability here or try to distribute it.  We
++      // don't want to distribute the nullability specifier past any
++      // dependent type, because that complicates the user model.
++      if (type->canHaveNullability() || type->isDependentType() ||
++          !distributeNullabilityTypeAttr(state, attr)) {
++        if (state.getSema().checkNullabilityTypeSpecifier(
++              type,
++              mapNullabilityAttrKind(attr.getKind()),
++              attr.getLoc(),
++              attr.isContextSensitiveKeywordAttribute(),
++              /*implicit=*/false)) {
++          attr.setInvalid();
++        }
++
++        attr.setUsedAsTypeAttr();
++      }
++      break;
++
+     case AttributeList::AT_NSReturnsRetained:
+       if (!state.getSema().getLangOpts().ObjCAutoRefCount)
+         break;
+Index: lib/Sema/TreeTransform.h
+===================================================================
+--- lib/Sema/TreeTransform.h	(revision 231004)
++++ lib/Sema/TreeTransform.h	(working copy)
+@@ -5368,6 +5368,17 @@
+       = getDerived().TransformType(oldType->getEquivalentType());
+     if (equivalentType.isNull())
+       return QualType();
++
++    // Check whether we can add nullability; it is only represented as
++    // type sugar, and therefore cannot be diagnosed in any other way.
++    if (auto nullability = oldType->getImmediateNullability()) {
++      if (!modifiedType->canHaveNullability()) {
++        SemaRef.Diag(TL.getAttrNameLoc(), diag::err_nullability_nonpointer)
++          << static_cast<unsigned>(*nullability) << false << modifiedType;
++        return QualType();
++      }
++    }
++
+     result = SemaRef.Context.getAttributedType(oldType->getAttrKind(),
+                                                modifiedType,
+                                                equivalentType);
+Index: lib/Serialization/ASTReaderDecl.cpp
+===================================================================
+--- lib/Serialization/ASTReaderDecl.cpp	(revision 231004)
++++ lib/Serialization/ASTReaderDecl.cpp	(working copy)
+@@ -962,7 +962,9 @@
+   VisitNamedDecl(D);
+   D->setAtLoc(ReadSourceLocation(Record, Idx));
+   D->setLParenLoc(ReadSourceLocation(Record, Idx));
+-  D->setType(GetTypeSourceInfo(Record, Idx));
++  QualType T = Reader.readType(F, Record, Idx);
++  TypeSourceInfo *TSI = GetTypeSourceInfo(Record, Idx);
++  D->setType(T, TSI);
+   // FIXME: stable encoding
+   D->setPropertyAttributes(
+                       (ObjCPropertyDecl::PropertyAttributeKind)Record[Idx++]);
+Index: lib/Serialization/ASTWriterDecl.cpp
+===================================================================
+--- lib/Serialization/ASTWriterDecl.cpp	(revision 231004)
++++ lib/Serialization/ASTWriterDecl.cpp	(working copy)
+@@ -676,6 +676,7 @@
+   VisitNamedDecl(D);
+   Writer.AddSourceLocation(D->getAtLoc(), Record);
+   Writer.AddSourceLocation(D->getLParenLoc(), Record);
++  Writer.AddTypeRef(D->getType(), Record);
+   Writer.AddTypeSourceInfo(D->getTypeSourceInfo(), Record);
+   // FIXME: stable encoding
+   Record.push_back((unsigned)D->getPropertyAttributes());
+Index: test/Index/complete-method-decls.m
+===================================================================
+--- test/Index/complete-method-decls.m	(revision 231004)
++++ test/Index/complete-method-decls.m	(working copy)
+@@ -82,6 +82,14 @@
+ @end
+ 
+ @implementation I1
++-(void)foo {}
++@end
++
++@interface I2
++-(nonnull I2 *)produceI2:(nullable I2 *)i2;
++@end
++
++@implementation I2
+ -
+ @end
+ 
+@@ -153,6 +161,8 @@
+ // CHECK-CCF: NotImplemented:{TypedText byref} (40)
+ // CHECK-CCF: NotImplemented:{TypedText in} (40)
+ // CHECK-CCF: NotImplemented:{TypedText inout} (40)
++// CHECK-CCF: NotImplemented:{TypedText nonnull} (40)
++// CHECK-CCF: NotImplemented:{TypedText nullable} (40)
+ // CHECK-CCF: NotImplemented:{TypedText oneway} (40)
+ // CHECK-CCF: NotImplemented:{TypedText out} (40)
+ // CHECK-CCF: NotImplemented:{TypedText unsigned} (50)
+@@ -198,6 +208,8 @@
+ 
+ // RUN: c-index-test -code-completion-at=%s:85:2 %s | FileCheck -check-prefix=CHECK-CLASSTY %s
+ // CHECK-CLASSTY: ObjCInstanceMethodDecl:{LeftParen (}{Text Class<P1>}{RightParen )}{TypedText meth}
+-// FIXME: It should be "MyObject <P1> *""
+ // CHECK-CLASSTY: ObjCInstanceMethodDecl:{LeftParen (}{Text A<P1> *}{RightParen )}{TypedText meth2}
+ // CHECK-CLASSTY: ObjCInstanceMethodDecl:{LeftParen (}{Text MyObjectRef}{RightParen )}{TypedText meth3}
++
++// RUN: c-index-test -code-completion-at=%s:93:2 %s | FileCheck -check-prefix=CHECK-NULLABILITY %s
++// CHECK-NULLABILITY: ObjCInstanceMethodDecl:{LeftParen (}{Text nonnull }{Text I2 *}{RightParen )}{TypedText produceI2}{TypedText :}{LeftParen (}{Text nullable }{Text I2 *}{RightParen )}{Text i2} (40)
+Index: test/Index/complete-objc-message.m
+===================================================================
+--- test/Index/complete-objc-message.m	(revision 231004)
++++ test/Index/complete-objc-message.m	(working copy)
+@@ -189,6 +189,14 @@
+   [d method:a aout:&a];
+ }
+ 
++@interface Nullability
++- (nonnull A *)method:(nullable A *)param;
++@end
++
++void test_Nullability(Nullability *n, A* a) {
++  [n method: a];
++}
++
+ // RUN: c-index-test -code-completion-at=%s:23:19 %s | FileCheck -check-prefix=CHECK-CC1 %s
+ // CHECK-CC1: {TypedText categoryClassMethod} (35)
+ // CHECK-CC1: {TypedText classMethod1:}{Placeholder (id)}{HorizontalSpace  }{TypedText withKeyword:}{Placeholder (int)} (35)
+@@ -335,3 +343,6 @@
+ 
+ // RUN: c-index-test -code-completion-at=%s:189:6 %s | FileCheck -check-prefix=CHECK-DISTRIB-OBJECTS %s
+ // CHECK-DISTRIB-OBJECTS: ObjCInstanceMethodDecl:{ResultType void}{TypedText method:}{Placeholder (in bycopy A *)}{HorizontalSpace  }{TypedText result:}{Placeholder (out byref A **)} (35)
++
++// RUN: c-index-test -code-completion-at=%s:197:6 %s | FileCheck -check-prefix=CHECK-NULLABLE %s
++// CHECK-NULLABLE: ObjCInstanceMethodDecl:{ResultType __nonnull A *}{TypedText method:}{Placeholder (nullable A *)}
+Index: test/Index/complete-property-flags.m
+===================================================================
+--- test/Index/complete-property-flags.m	(revision 231004)
++++ test/Index/complete-property-flags.m	(working copy)
+@@ -13,6 +13,9 @@
+ // CHECK-CC1-NEXT: {TypedText copy}
+ // CHECK-CC1-NEXT: {TypedText getter}{Text =}{Placeholder method}
+ // CHECK-CC1-NEXT: {TypedText nonatomic}
++// CHECK-CC1-NEXT: {TypedText nonnull}
++// CHECK-CC1-NEXT: {TypedText null_resettable}
++// CHECK-CC1-NEXT: {TypedText nullable}
+ // CHECK-CC1-NEXT: {TypedText readonly}
+ // CHECK-CC1-NEXT: {TypedText readwrite}
+ // CHECK-CC1-NEXT: {TypedText retain}
+@@ -27,6 +30,9 @@
+ // CHECK-CC1-ARC-NEXT: {TypedText copy}
+ // CHECK-CC1-ARC-NEXT: {TypedText getter}{Text =}{Placeholder method}
+ // CHECK-CC1-ARC-NEXT: {TypedText nonatomic}
++// CHECK-CC1-ARC-NEXT: {TypedText nonnull}
++// CHECK-CC1-ARC-NEXT: {TypedText null_resettable}
++// CHECK-CC1-ARC-NEXT: {TypedText nullable}
+ // CHECK-CC1-ARC-NEXT: {TypedText readonly}
+ // CHECK-CC1-ARC-NEXT: {TypedText readwrite}
+ // CHECK-CC1-ARC-NEXT: {TypedText retain}
+@@ -38,6 +44,9 @@
+ // RUN: c-index-test -code-completion-at=%s:8:18 %s | FileCheck -check-prefix=CHECK-CC2 %s
+ // CHECK-CC2: {TypedText getter}{Text =}{Placeholder method}
+ // CHECK-CC2-NEXT: {TypedText nonatomic}
++// CHECK-CC2-NEXT: {TypedText nonnull}
++// CHECK-CC2-NEXT: {TypedText null_resettable}
++// CHECK-CC2-NEXT: {TypedText nullable}
+ // CHECK-CC2-NEXT: {TypedText readonly}
+ // CHECK-CC2-NEXT: {TypedText readwrite}
+ // CHECK-CC2-NEXT: {TypedText setter}{Text =}{Placeholder method}
+Index: test/Index/complete-stmt.c
+===================================================================
+--- test/Index/complete-stmt.c	(revision 231004)
++++ test/Index/complete-stmt.c	(working copy)
+@@ -16,6 +16,8 @@
+ // CHECK-IF-ELSE-SIMPLE: NotImplemented:{TypedText else}{HorizontalSpace  }{Text if}{HorizontalSpace  }{LeftParen (}{Placeholder expression}{RightParen )} (40)
+ 
+ // RUN: c-index-test -code-completion-at=%s:6:1 %s | FileCheck -check-prefix=CHECK-STMT %s
++// CHECK-STMT: NotImplemented:{TypedText __nonnull} (50)
++// CHECK-STMT: NotImplemented:{TypedText __nullable} (50)
+ // CHECK-STMT: NotImplemented:{TypedText char} (50)
+ // CHECK-STMT: NotImplemented:{TypedText const} (50)
+ // CHECK-STMT: NotImplemented:{TypedText double} (50)
+Index: test/Parser/nullability.c
+===================================================================
+--- test/Parser/nullability.c	(revision 0)
++++ test/Parser/nullability.c	(working copy)
+@@ -0,0 +1,11 @@
++// RUN: %clang_cc1 -fsyntax-only -std=c99 -pedantic %s -verify
++
++__nonnull int *ptr; // expected-warning{{type nullability specifier '__nonnull' is a Clang extension}}
++
++#if __has_feature(nullability)
++#  error Nullability should not be supported in C under -pedantic -std=c99
++#endif
++
++#if !__has_extension(nullability)
++#  error Nullability should always be supported as an extension
++#endif
+Index: test/Sema/nullability.c
+===================================================================
+--- test/Sema/nullability.c	(revision 0)
++++ test/Sema/nullability.c	(working copy)
+@@ -0,0 +1,110 @@
++// RUN: %clang_cc1 -fsyntax-only -fblocks -Wnullable-to-nonnull-conversion %s -verify
++
++#if __has_feature(nullability)
++#else
++#  error nullability feature should be defined
++#endif
++
++typedef int * int_ptr;
++
++// Parse nullability type specifiers.
++typedef int * __nonnull nonnull_int_ptr; // expected-note{{'__nonnull' specified here}}
++typedef int * __nullable nullable_int_ptr;
++
++// Redundant nullability type specifiers.
++typedef int * __nonnull __nonnull redundant_1; // expected-warning{{duplicate nullability specifier '__nonnull'}}
++
++// Conflicting nullability type specifiers.
++typedef int * __nonnull __nullable conflicting_1; // expected-error{{nullability specifier '__nonnull' conflicts with existing specifier '__nullable'}}
++
++// Redundant nullability specifiers via a typedef are okay.
++typedef nonnull_int_ptr __nonnull redundant_okay_1;
++
++// Conflicting nullability specifiers via a typedef are not.
++typedef nonnull_int_ptr __nullable conflicting_2; // expected-error{{nullability specifier '__nullable' conflicts with existing specifier '__nonnull'}}
++typedef nonnull_int_ptr nonnull_int_ptr_typedef;
++typedef nonnull_int_ptr_typedef __nullable conflicting_2; // expected-error{{nullability specifier '__nullable' conflicts with existing specifier '__nonnull'}}
++typedef nonnull_int_ptr_typedef nonnull_int_ptr_typedef_typedef;
++typedef nonnull_int_ptr_typedef_typedef __null_unspecified conflicting_3; // expected-error{{nullability specifier '__null_unspecified' conflicts with existing specifier '__nonnull'}}
++
++// Nullability applies to all pointer types.
++typedef int (* __nonnull function_pointer_type_1)(int, int);
++typedef int (^ __nonnull block_type_1)(int, int);
++
++// Nullability must be on a pointer type.
++typedef int __nonnull int_type_1; // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'int'}}
++
++// Nullability can move out to a pointer/block pointer declarator.
++typedef __nonnull int * nonnull_int_ptr_2;
++typedef int __nullable * nullable_int_ptr_2;
++typedef __nonnull int (* function_pointer_type_2)(int, int); // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'int'}}
++typedef __nonnull int (^ block_type_2)(int, int); // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'int'}}
++typedef __nonnull int * * __nullable nonnull_int_ptr_ptr_1;
++typedef __nonnull int *(^ block_type_3)(int, int);
++typedef __nonnull int *(* function_pointer_type_3)(int, int);
++typedef __nonnull int_ptr (^ block_type_4)(int, int);
++typedef __nonnull int_ptr (* function_pointer_type_4)(int, int);
++
++void acceptFunctionPtr(__nonnull int *(*)(void));
++void acceptBlockPtr(__nonnull int *(^)(void));
++
++void testBlockFunctionPtrNullability() {
++  float *fp;
++  fp = (function_pointer_type_3)0; // expected-warning{{from 'function_pointer_type_3' (aka '__nonnull int *(*)(int, int)')}}
++  fp = (block_type_3)0; // expected-error{{from incompatible type 'block_type_3' (aka '__nonnull int *(^)(int, int)')}}
++  fp = (function_pointer_type_4)0; // expected-warning{{from 'function_pointer_type_4' (aka '__nonnull int_ptr (*)(int, int)')}}
++  fp = (block_type_4)0; // expected-error{{from incompatible type 'block_type_4' (aka '__nonnull int_ptr (^)(int, int)')}}
++
++  acceptFunctionPtr(0); // no-warning
++  acceptBlockPtr(0); // no-warning
++}
++
++// Moving nullability where it creates a conflict.
++typedef __nonnull int * __nullable *  conflict_int_ptr_ptr_2; // expected-error{{nullability specifier '__nullable' conflicts with existing specifier '__nonnull'}}
++
++// Nullability is not part of the canonical type.
++typedef int * __nonnull ambiguous_int_ptr;
++typedef int * ambiguous_int_ptr;
++typedef int * __nullable ambiguous_int_ptr;
++
++// Printing of nullability.
++float f;
++int * __nonnull ip_1 = &f; // expected-warning{{incompatible pointer types initializing '__nonnull int *' with an expression of type 'float *'}}
++
++// Check passing null to a __nonnull argument.
++void accepts_nonnull_1(__nonnull int *ptr);
++void (*accepts_nonnull_2)(__nonnull int *ptr);
++void (^accepts_nonnull_3)(__nonnull int *ptr);
++
++void test_accepts_nonnull_null_pointer_literal() {
++  accepts_nonnull_1(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  accepts_nonnull_2(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  accepts_nonnull_3(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++}
++
++// Check returning nil from a __nonnull-returning function.
++__nonnull int *returns_int_ptr(int x) {
++  if (x) {
++    return 0; // expected-warning{{null returned from function that requires a non-null return value}}
++  }
++
++  return (__nonnull int *)0;
++}
++
++// Check printing of nullability specifiers.
++void printing_nullability(void) {
++  int * __nonnull iptr;
++  float *fptr = iptr; // expected-warning{{incompatible pointer types initializing 'float *' with an expression of type '__nonnull int *'}}
++
++  int * * __nonnull iptrptr;
++  float **fptrptr = iptrptr; // expected-warning{{incompatible pointer types initializing 'float **' with an expression of type 'int ** __nonnull'}}
++
++  int * __nullable * __nonnull iptrptr2;
++  float * *fptrptr2 = iptrptr2; // expected-warning{{incompatible pointer types initializing 'float **' with an expression of type '__nullable int ** __nonnull'}}
++}
++
++// Check nullable-to-nonnull conversions.
++void nullable_to_nonnull(__nullable int *ptr) {
++  int *a = ptr; // okay
++  __nonnull int *b = ptr; // expected-warning{{implicit conversion from nullable pointer '__nullable int *' to non-nullable pointer type '__nonnull int *'}}
++}
+Index: test/SemaCXX/nullability.cpp
+===================================================================
+--- test/SemaCXX/nullability.cpp	(revision 0)
++++ test/SemaCXX/nullability.cpp	(working copy)
+@@ -0,0 +1,64 @@
++// RUN: %clang_cc1 -std=c++11 -fsyntax-only %s -verify
++
++typedef decltype(nullptr) nullptr_t;
++
++class X {
++};
++
++// Nullability applies to all pointer types.
++typedef int (X::* __nonnull member_function_type_1)(int);
++typedef int X::* __nonnull member_data_type_1;
++typedef nullptr_t __nonnull nonnull_nullptr_t; // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'nullptr_t'}}
++
++// Nullability can move into member pointers (but not through functions).
++typedef __nonnull int (X::* member_function_type_2)(int); // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'int'}}
++typedef int (X::* __nonnull member_function_type_3)(int);
++typedef __nonnull int X::* member_data_type_2;
++
++// Adding non-null via a template.
++template<typename T>
++struct AddNonNull {
++  typedef __nonnull T type; // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'int'}}
++  // expected-error@-1{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'nullptr_t'}}
++};
++
++typedef AddNonNull<int *>::type nonnull_int_ptr_1;
++typedef AddNonNull<int * __nullable>::type nonnull_int_ptr_2; // FIXME: check that it was overridden
++typedef AddNonNull<nullptr_t>::type nonnull_int_ptr_3; // expected-note{{in instantiation of template class}}
++
++typedef AddNonNull<int>::type nonnull_non_pointer_1; // expected-note{{in instantiation of template class 'AddNonNull<int>' requested here}}
++
++// Non-null checking within a template.
++template<typename T>
++struct AddNonNull2 {
++  typedef __nonnull AddNonNull<T> invalid1; // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'AddNonNull<T>'}}
++  typedef __nonnull AddNonNull2 invalid2; // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'AddNonNull2<T>'}}
++  typedef __nonnull AddNonNull2<T> invalid3; // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'AddNonNull2<T>'}}
++  typedef __nonnull typename AddNonNull<T>::type okay1;
++
++  // Don't move past a dependent type even if we know that nullability
++  // cannot apply to that specific dependent type.
++  typedef __nonnull AddNonNull<T> (*invalid4); // expected-error{{nullability specifier '__nonnull' cannot be applied to non-pointer type 'AddNonNull<T>'}}
++};
++
++// Check passing null to a __nonnull argument.
++void (*accepts_nonnull_1)(__nonnull int *ptr);
++void (*& accepts_nonnull_2)(__nonnull int *ptr) = accepts_nonnull_1;
++void (X::* accepts_nonnull_3)(__nonnull int *ptr);
++void accepts_nonnull_4(__nonnull int *ptr);
++void (&accepts_nonnull_5)(__nonnull int *ptr) = accepts_nonnull_4;
++
++void test_accepts_nonnull_null_pointer_literal(X *x) {
++  accepts_nonnull_1(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  accepts_nonnull_2(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  (x->*accepts_nonnull_3)(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  accepts_nonnull_4(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  accepts_nonnull_5(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++}
++
++template<void FP(__nonnull int*)> 
++void test_accepts_nonnull_null_pointer_literal_template() {
++  FP(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++}
++
++template void test_accepts_nonnull_null_pointer_literal_template<&accepts_nonnull_4>(); // expected-note{{instantiation of function template specialization}}
+Index: test/SemaObjC/nullability-arc.m
+===================================================================
+--- test/SemaObjC/nullability-arc.m	(revision 0)
++++ test/SemaObjC/nullability-arc.m	(working copy)
+@@ -0,0 +1,10 @@
++// RUN: %clang_cc1 -fobjc-arc -fsyntax-only -Woverriding-method-mismatch %s -verify
++
++__attribute__((objc_root_class))
++@interface NSFoo
++@end
++
++// ARC qualifiers stacked with nullability.
++void accepts_arc_qualified(NSFoo * __unsafe_unretained __nonnull obj) {
++  accepts_arc_qualified(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++}
+Index: test/SemaObjC/nullability.m
+===================================================================
+--- test/SemaObjC/nullability.m	(revision 0)
++++ test/SemaObjC/nullability.m	(working copy)
+@@ -0,0 +1,202 @@
++// RUN: %clang_cc1 -fsyntax-only -fblocks -Woverriding-method-mismatch %s -verify
++
++__attribute__((objc_root_class))
++@interface NSFoo
++- (void)methodTakingIntPtr:(__nonnull int *)ptr;
++- (__nonnull int *)methodReturningIntPtr;
++@end
++
++// Nullability applies to all pointer types.
++typedef NSFoo * __nonnull nonnull_NSFoo_ptr;
++typedef id __nonnull nonnull_id;
++typedef SEL __nonnull nonnull_SEL;
++
++// Nullability can move into Objective-C pointer types.
++typedef __nonnull NSFoo * nonnull_NSFoo_ptr_2;
++
++// Conflicts from nullability moving into Objective-C pointer type.
++typedef __nonnull NSFoo * __nullable conflict_NSFoo_ptr_2; // expected-error{{nullability specifier '__nullable' conflicts with existing specifier '__nonnull'}}
++
++// Check returning nil from a __nonnull-returning method.
++@implementation NSFoo
++- (void)methodTakingIntPtr:(__nonnull int *)ptr { }
++- (__nonnull int *)methodReturningIntPtr {
++  return 0; // no warning
++}
++@end
++
++// Context-sensitive keywords and property attributes for nullability.
++__attribute__((objc_root_class))
++@interface NSBar
++- (nonnull NSFoo *)methodWithFoo:(nonnull NSFoo *)foo;
++
++- (nonnull NSFoo **)invalidMethod1; // expected-error{{nullability keyword 'nonnull' cannot be applied to multi-level pointer type 'NSFoo **'}}
++// expected-note@-1{{use nullability type specifier '__nonnull' to affect the innermost pointer type of 'NSFoo **'}}
++- (nonnull NSFoo * __nullable)conflictingMethod1; // expected-error{{nullability specifier '__nullable' conflicts with existing specifier '__nonnull'}}
++- (nonnull NSFoo * __nonnull)redundantMethod1; // expected-warning{{duplicate nullability specifier '__nonnull'}}
++
++@property(nonnull,retain) NSFoo *property1;
++@property(nullable,assign) NSFoo ** invalidProperty1; // expected-error{{nullability keyword 'nullable' cannot be applied to multi-level pointer type 'NSFoo **'}}
++// expected-note@-1{{use nullability type specifier '__nullable' to affect the innermost pointer type of 'NSFoo **'}}
++@property(null_unspecified,retain) NSFoo __nullable *conflictingProperty1; // expected-error{{nullability specifier 'null_unspecified' conflicts with existing specifier '__nullable'}}
++@property(retain,nonnull) NSFoo * __nonnull redundantProperty1; // expected-warning{{duplicate nullability specifier '__nonnull'}}
++
++@property(null_unspecified,retain,nullable) NSFoo *conflictingProperty3; // expected-error{{nullability specifier 'nullable' conflicts with existing specifier 'null_unspecified'}}
++@property(nullable,retain,nullable) NSFoo *redundantProperty3; // expected-warning{{duplicate nullability specifier 'nullable'}}
++@end
++
++@interface NSBar ()
++@property(nonnull,retain) NSFoo *property2;
++@property(nullable,assign) NSFoo ** invalidProperty2; // expected-error{{nullability keyword 'nullable' cannot be applied to multi-level pointer type 'NSFoo **'}}
++// expected-note@-1{{use nullability type specifier '__nullable' to affect the innermost pointer type of 'NSFoo **'}}
++@property(null_unspecified,assign) NSFoo ** invalidProperty3; // expected-error{{nullability keyword 'null_unspecified' cannot be applied to multi-level pointer type 'NSFoo **'}}
++@property(null_unspecified,assign) int invalidProperty4; // expected-error{{nullability specifier 'null_unspecified' cannot be applied to non-pointer type 'int'}}
++@property(null_unspecified,retain) NSFoo __nullable *conflictingProperty2; // expected-error{{nullability specifier 'null_unspecified' conflicts with existing specifier '__nullable'}}
++@property(retain,nonnull) NSFoo * __nonnull redundantProperty2; // expected-warning{{duplicate nullability specifier '__nonnull'}}
++@end
++
++void test_accepts_nonnull_null_pointer_literal(NSFoo *foo, __nonnull NSBar *bar) {
++  [foo methodTakingIntPtr: 0]; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  [bar methodWithFoo: 0]; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  bar.property1 = 0; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  bar.property2 = 0; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  [bar setProperty1: 0]; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  [bar setProperty2: 0]; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  int *ptr = bar.property1; // expected-warning{{incompatible pointer types initializing 'int *' with an expression of type '__nonnull NSFoo *'}}
++}
++
++@implementation NSBar
++// Check returning nil from a nonnull-returning method.
++- (nonnull NSFoo *)methodWithFoo:(nonnull NSFoo *)foo {
++  return 0; // no warning
++}
++
++- (NSFoo **)invalidMethod1 { 
++  return 0; 
++}
++
++- (NSFoo *)conflictingMethod1 { 
++  return 0; // no warning
++}
++- (NSFoo *)redundantMethod1 {
++  return 0; // no warning
++}
++@end
++
++__attribute__((objc_root_class))
++@interface NSMerge
++- (nonnull NSFoo *)methodA:(nonnull NSFoo*)foo;
++- (nonnull NSFoo *)methodB:(nonnull NSFoo*)foo;
++- (NSFoo *)methodC:(NSFoo*)foo;
++@end
++
++@implementation NSMerge
++- (NSFoo *)methodA:(NSFoo*)foo {
++  int *ptr = foo; // expected-warning{{incompatible pointer types initializing 'int *' with an expression of type '__nonnull NSFoo *'}}
++  return 0; // no warning
++}
++
++- (nullable NSFoo *)methodB:(nullable NSFoo*)foo { // expected-error{{nullability specifier 'nullable' conflicts with existing specifier 'nonnull'}} \
++  // expected-error{{nullability specifier 'nullable' conflicts with existing specifier 'nonnull'}}
++  return 0;
++}
++
++- (nonnull NSFoo *)methodC:(nullable NSFoo*)foo {
++  return 0; // no warning
++}
++@end
++
++// Checking merging of nullability when sending a message.
++@interface NSMergeReceiver
++- (id)returnsNone;
++- (nonnull id)returnsNonNull;
++- (nullable id)returnsNullable;
++@end
++
++void test_receiver_merge(NSMergeReceiver *none,
++                         __nonnull NSMergeReceiver *nonnull,
++                         __nullable NSMergeReceiver *nullable) {
++  int *ptr;
++
++  ptr = [nullable returnsNullable]; // expected-warning{{'__nullable id'}}
++  ptr = [nullable returnsNonNull]; // expected-warning{{'__nullable id'}}
++  ptr = [nullable returnsNone]; // expected-warning{{'__nullable id'}}
++
++  ptr = [nonnull returnsNullable]; // expected-warning{{'__nullable id'}}
++  ptr = [nonnull returnsNonNull]; // expected-warning{{'__nonnull id'}}
++  ptr = [nonnull returnsNone]; // expected-warning{{'id'}}
++
++  ptr = [none returnsNullable]; // expected-warning{{'__nullable id'}}
++  ptr = [none returnsNonNull]; // expected-warning{{'id'}}
++  ptr = [none returnsNone]; // expected-warning{{'id'}}
++  
++}
++
++// instancetype
++@protocol Initializable
++- (instancetype)initWithBlah:(id)blah;
++@end
++
++__attribute__((objc_root_class))
++@interface InitializableClass <Initializable>
++- (nonnull instancetype)initWithBlah:(nonnull id)blah;
++- (nullable instancetype)returnMe;
+++ (nullable instancetype)returnInstanceOfMe;
++@end
++
++void test_instancetype(__nonnull InitializableClass *ic, __nonnull id object) {
++  int *ip = [ic returnMe]; // expected-warning{{incompatible pointer types initializing 'int *' with an expression of type '__nullable InitializableClass *'}}
++  ip = [InitializableClass returnMe]; // expected-warning{{incompatible pointer types assigning to 'int *' from '__nullable id'}}
++  ip = [InitializableClass returnInstanceOfMe]; // expected-warning{{incompatible pointer types assigning to 'int *' from '__nullable InitializableClass *'}}
++  ip = [object returnMe]; // expected-warning{{incompatible pointer types assigning to 'int *' from '__nullable id'}}
++}
++
++// Check null_resettable getters/setters.
++__attribute__((objc_root_class))
++@interface NSResettable
++@property(null_resettable,retain) NSResettable *resettable1; // expected-note{{passing argument to parameter 'resettable1' here}}
++@property(null_resettable,retain,nonatomic) NSResettable *resettable2;
++@property(null_resettable,retain,nonatomic) NSResettable *resettable3;
++@property(null_resettable,retain,nonatomic) NSResettable *resettable4;
++@property(null_resettable,retain,nonatomic) NSResettable *resettable5;
++@property(null_resettable,retain,nonatomic) NSResettable *resettable6;
++@end
++
++void test_null_resettable(NSResettable *r, int *ip) {
++  [r setResettable1:ip]; // expected-warning{{incompatible pointer types sending 'int *' to parameter of type '__nullable NSResettable *'}}
++  r.resettable1 = ip; // expected-warning{{incompatible pointer types assigning to '__nullable NSResettable *' from 'int *'}}
++}
++
++@implementation NSResettable // expected-warning{{synthesized setter 'setResettable4:' for null_resettable property 'resettable4' does not handle nil}}
++- (NSResettable *)resettable1 {
++  return 0; // no warning
++}
++
++- (void)setResettable1:(NSResettable *)param {
++}
++
++@synthesize resettable2; // no warning; not synthesized
++@synthesize resettable3; // expected-warning{{synthesized setter 'setResettable3:' for null_resettable property 'resettable3' does not handle nil}}
++
++- (void)setResettable2:(NSResettable *)param {
++}
++
++@dynamic resettable5;
++
++- (NSResettable *)resettable6 {
++  return 0; // no warning
++}
++@end
++
++// rdar://problem/19814852
++@interface MultiProp
++@property (nullable, copy) id a, b, c;
++@property (nullable, copy) MultiProp *d, *(^e)(int);
++@end
++
++void testMultiProp(MultiProp *foo) {
++  int *ip;
++  ip = foo.a; // expected-warning{{from '__nullable id'}}
++  ip = foo.d; // expected-warning{{from '__nullable MultiProp *'}}
++  ip = foo.e; // expected-error{{incompatible type '__nullable MultiProp *(^)(int)'}}
++}
+Index: test/SemaObjCXX/Inputs/nullability-consistency-1.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-1.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-1.h	(working copy)
+@@ -0,0 +1,14 @@
++void f1(int *ptr); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
++void f2(__nonnull int *);
++
++#include "nullability-consistency-2.h"
++
++void f3(int *ptr) { // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++  int *other = ptr; // shouldn't warn
++}
++
++class X {
++  void mf(int *ptr); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++  int X:: *memptr; // expected-warning{{member pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++};
+Index: test/SemaObjCXX/Inputs/nullability-consistency-2.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-2.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-2.h	(working copy)
+@@ -0,0 +1,20 @@
++void g1(__nonnull int *);
++
++void g2(int (^block)(int, int)); // expected-warning{{block pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
++void g3(const
++        id // expected-warning{{missing a nullability type specifier}}
++        volatile
++        * // expected-warning{{missing a nullability type specifier}}
++        ); 
++
++@interface SomeClass {
++  __nullable id ivar1;
++  id ivar2;
++}
++
++@property (retain,nonnull) id property1;
++@property (retain,nullable) SomeClass *property2;
++- (nullable SomeClass *)method1;
++- (void)method2:(nonnull SomeClass *)param;
++@end
+Index: test/SemaObjCXX/Inputs/nullability-consistency-3.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-3.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-3.h	(working copy)
+@@ -0,0 +1 @@
++void double_declarator1(int *__nonnull *); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
+Index: test/SemaObjCXX/Inputs/nullability-consistency-4.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-4.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-4.h	(working copy)
+@@ -0,0 +1 @@
++void double_declarator1(int * * __nonnull); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
+Index: test/SemaObjCXX/Inputs/nullability-consistency-5.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-5.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-5.h	(working copy)
+@@ -0,0 +1,14 @@
++#define SUPPRESS_NULLABILITY_WARNING(Type)                              \
++  _Pragma("clang diagnostic push")                                      \
++  _Pragma("clang diagnostic ignored \"-Wnullability-completeness\"")    \
++  Type                                                                  \
++  _Pragma("clang diagnostic pop")
++
++void suppress1(SUPPRESS_NULLABILITY_WARNING(int *) ptr); // no warning
++
++void shouldwarn5(int *ptr); //expected-warning{{missing a nullability type specifier}}
++
++void trigger5(__nonnull int *);
++
++void suppress2(SUPPRESS_NULLABILITY_WARNING(int *) ptr); // no warning
++
+Index: test/SemaObjCXX/Inputs/nullability-consistency-6.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-6.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-6.h	(working copy)
+@@ -0,0 +1,8 @@
++int *ptr; // expected-warning {{missing a nullability type specifier}}
++
++#pragma clang assume_nonnull begin
++
++extern void **blah; // expected-warning 2{{missing a nullability type specifier}}
++
++#pragma clang assume_nonnull end
++
+Index: test/SemaObjCXX/Inputs/nullability-consistency-7.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-7.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-7.h	(working copy)
+@@ -0,0 +1,40 @@
++#ifndef SOMEKIT_H
++#define SOMEKIT_H
++
++__attribute__((objc_root_class))
++#ifndef NS_ASSUME_NONNULL_BEGIN
++#if __has_feature(assume_nonnull)
++#define NS_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
++#define NS_ASSUME_NONNULL_END _Pragma("clang assume_nonnull end")
++#else
++#define NS_ASSUME_NONNULL_BEGIN
++#define NS_ASSUME_NONNULL_END
++#endif
++#endif
++
++NS_ASSUME_NONNULL_BEGIN
++
++@interface A
++-(null_unspecified A*)transform:(null_unspecified A*)input __attribute__((unavailable("anything but this")));
++-(A*)transform:(A*)input integer:(int)integer;
++
++@property (null_unspecified, nonatomic, readonly, retain) A* someA;
++@property (null_unspecified, nonatomic, retain) A* someOtherA;
++
++@property (nonatomic) int intValue __attribute__((unavailable("wouldn't work anyway")));
++@end
++
++NS_ASSUME_NONNULL_END
++
++
++__attribute__((unavailable("just don't")))
++@interface B : A
++@end
++
++@interface C : A
++- (instancetype)init; // expected-warning{{pointer is missing a nullability type specifier}}
++- (nullable instancetype)initWithA:( A*)a __attribute__((objc_designated_initializer)); // expected-warning{{pointer is missing a nullability type specifier}}
++@end
++
++#endif
++
+Index: test/SemaObjCXX/Inputs/nullability-consistency-8.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-consistency-8.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-consistency-8.h	(working copy)
+@@ -0,0 +1,11 @@
++typedef __nonnull int* mynonnull;
++
++__attribute__((objc_root_class))
++@interface typedefClass
++- (void) func1:(mynonnull)i;
++@end
++
++void func2(mynonnull i);
++
++void func3(int *); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
+Index: test/SemaObjCXX/Inputs/nullability-pragmas-1.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-pragmas-1.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-pragmas-1.h	(working copy)
+@@ -0,0 +1,100 @@
++__attribute__((objc_root_class))
++@interface NSError
++@end
++
++__attribute__((objc_root_class))
++@interface A
++@end
++
++struct X { };
++
++void f1(int *x); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
++typedef struct __attribute__((objc_bridge(NSError))) __CFError *CFErrorRef;
++typedef NSError *NSErrorPtr;
++typedef NSError **NSErrorPtrPtr;
++typedef CFErrorRef *CFErrorRefPtr;
++typedef int *int_ptr;
++typedef A *A_ptr;
++typedef int (^block_ptr)(int, int);
++
++#pragma clang assume_nonnull begin
++
++void f2(int *x);
++void f3(A* obj);
++void f4(int (^block)(int, int));
++void f5(int_ptr x);
++void f6(A_ptr obj);
++void f7(__nullable int *x);
++void f8(__nullable A *obj);
++void f9(int X::* mem_ptr);
++void f10(int (X::*mem_func)(int, int));
++void f11(__nullable int X::* mem_ptr);
++void f12(int (X::* __nullable mem_func)(int, int));
++
++int_ptr f13(void);
++A *f14(void);
++
++__null_unspecified int *f15(void);
++__null_unspecified A *f16(void);
++void f17(CFErrorRef *error); // expected-note{{no known conversion from '__nonnull A *' to '__nullable CFErrorRef * __nullable' (aka '__CFError **') for 1st argument}}
++void f18(A **); // expected-warning 2{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++void f19(CFErrorRefPtr error); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
++void g1(int (^)(int, int));
++void g2(int (^ *bp)(int, int)); // expected-warning{{block pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++// expected-warning@-1{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++void g3(block_ptr *bp); // expected-warning{{block pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++// expected-warning@-1{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++void g4(int (*fp)(int, int));
++void g5(int (**fp)(int, int)); // expected-warning 2{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
++@interface A(Pragmas1)
+++ (instancetype)aWithA:(A *)a;
++- (A *)method1:(A_ptr)ptr;
++- (null_unspecified A *)method2;
++- (void)method3:(NSError **)error; // expected-note{{passing argument to parameter 'error' here}}
++- (void)method4:(NSErrorPtr *)error; // expected-note{{passing argument to parameter 'error' here}}
++- (void)method5:(NSErrorPtrPtr)error; // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++
++@property A *aProp;
++@property NSError **anError; // expected-warning 2{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++@end
++
++int *global_int_ptr;
++
++// typedefs not inferred __nonnull
++typedef int *int_ptr_2;
++
++typedef int * // expected-warning{{pointer is missing a nullability type}}
++            *int_ptr_ptr;
++
++static inline void f30(void) {
++  float *fp = global_int_ptr; // expected-error{{cannot initialize a variable of type 'float *' with an lvalue of type '__nonnull int *'}}
++
++  int_ptr_2 ip2;
++  float *fp2 = ip2; // expected-error{{cannot initialize a variable of type 'float *' with an lvalue of type 'int_ptr_2' (aka 'int *')}}
++
++  int_ptr_ptr ipp;
++  float *fp3 = ipp; // expected-error{{lvalue of type 'int_ptr_ptr' (aka 'int **')}}
++}
++
++@interface AA : A {
++@public
++  id ivar1;
++  __nonnull id ivar2;
++}
++@end
++
++#pragma clang assume_nonnull end
++
++void f20(A *a); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++void f21(int_ptr x); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++void f22(A_ptr y); // expected-warning{{pointer is missing a nullability type specifier (__nonnull or __nullable)}}
++void f23(__nullable int_ptr x);
++void f24(__nullable A_ptr y);
++void f25(int_ptr_2 x); // expected-warning{{pointer is missing a nullability type specifier}}
++
++@interface A(OutsidePragmas1)
+++ (instancetype)aWithInt:(int)value; // expected-warning{{pointer is missing a nullability type specifier}}
++@end
+Index: test/SemaObjCXX/Inputs/nullability-pragmas-2.h
+===================================================================
+--- test/SemaObjCXX/Inputs/nullability-pragmas-2.h	(revision 0)
++++ test/SemaObjCXX/Inputs/nullability-pragmas-2.h	(working copy)
+@@ -0,0 +1,12 @@
++#pragma clang assume_nonnull start // expected-error{{expected 'begin' or 'end'}}
++
++#pragma clang assume_nonnull begin // expected-note{{#pragma entered here}}
++
++#include "nullability-pragmas-3.h" // expected-error{{cannot #include files inside '#pragma clang assume_nonnull'}}
++
++#pragma clang assume_nonnull begin // expected-note{{#pragma entered here}}
++#pragma clang assume_nonnull begin // expected-error{{already inside '#pragma clang assume_nonnull'}}
++#pragma clang assume_nonnull end
++
++#pragma clang assume_nonnull begin // expected-error{{'#pragma clang assume_nonnull' was not ended within this file}}
++
+Index: test/SemaObjCXX/Inputs/nullability-pragmas-3.h
+===================================================================
+Index: test/SemaObjCXX/nullability-consistency.mm
+===================================================================
+--- test/SemaObjCXX/nullability-consistency.mm	(revision 0)
++++ test/SemaObjCXX/nullability-consistency.mm	(working copy)
+@@ -0,0 +1,14 @@
++// RUN: %clang_cc1 -fsyntax-only -fblocks -I %S/Inputs %s -verify
++
++#include "nullability-consistency-1.h"
++#include "nullability-consistency-3.h"
++#include "nullability-consistency-4.h"
++#include "nullability-consistency-5.h"
++#include "nullability-consistency-5.h"
++#include "nullability-consistency-6.h"
++#include "nullability-consistency-7.h"
++#include "nullability-consistency-8.h"
++
++void h1(int *ptr) { } // don't warn
++
++void h2(__nonnull int *) { }
+Index: test/SemaObjCXX/nullability-pragmas.mm
+===================================================================
+--- test/SemaObjCXX/nullability-pragmas.mm	(revision 0)
++++ test/SemaObjCXX/nullability-pragmas.mm	(working copy)
+@@ -0,0 +1,41 @@
++// RUN: %clang_cc1 -fsyntax-only -fblocks -I %S/Inputs %s -verify
++
++#include "nullability-pragmas-1.h"
++#include "nullability-pragmas-2.h"
++
++#if !__has_feature(assume_nonnull)
++#  error assume_nonnull feature is not set
++#endif
++
++void test_pragmas_1(__nonnull A *a, __nonnull AA *aa) {
++  f1(0); // okay: no nullability annotations
++  f2(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f3(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f4(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f5(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f6(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f7(0); // okay
++  f8(0); // okay
++  f9(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f10(0); // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f11(0); // okay
++  f12(0); // okay
++  [a method1:0]; // expected-warning{{null passed to a callee that requires a non-null argument}}
++  f17(a); // expected-error{{no matching function for call to 'f17'}}
++  [a method3: a]; // expected-error{{cannot initialize a parameter of type '__nullable NSError ** __nullable' with an lvalue of type '__nonnull A *'}}
++  [a method4: a]; // expected-error{{cannot initialize a parameter of type '__nullable NSErrorPtr * __nullable' (aka 'NSError **') with an lvalue of type '__nonnull A *'}}
++  
++  float *ptr;
++  ptr = f13(); // expected-error{{assigning to 'float *' from incompatible type '__nonnull int_ptr' (aka 'int *')}}
++  ptr = f14(); // expected-error{{assigning to 'float *' from incompatible type '__nonnull A *'}}
++  ptr = [A aWithA:a]; // expected-error{{assigning to 'float *' from incompatible type '__nonnull A *'}}
++  ptr = [a method1:a]; // expected-error{{assigning to 'float *' from incompatible type '__nonnull A *'}}
++  ptr = a.aProp; // expected-error{{assigning to 'float *' from incompatible type '__nonnull A *'}}
++  ptr = global_int_ptr; // expected-error{{assigning to 'float *' from incompatible type '__nonnull int *'}}
++  ptr = f15(); // expected-error{{assigning to 'float *' from incompatible type '__null_unspecified int *'}}
++  ptr = f16(); // expected-error{{assigning to 'float *' from incompatible type '__null_unspecified A *'}}
++  ptr = [a method2]; // expected-error{{assigning to 'float *' from incompatible type '__null_unspecified A *'}}
++
++  ptr = aa->ivar1; // expected-error{{from incompatible type 'id'}}
++  ptr = aa->ivar2; // expected-error{{from incompatible type '__nonnull id'}}
++}
+Index: utils/TableGen/ClangAttrEmitter.cpp
+===================================================================
+--- utils/TableGen/ClangAttrEmitter.cpp	(revision 231004)
++++ utils/TableGen/ClangAttrEmitter.cpp	(working copy)
+@@ -2679,7 +2679,8 @@
+   StringMatcher("Name", Declspec, OS).Emit();
+   OS << "  } else if (AttributeList::AS_CXX11 == Syntax) {\n";
+   StringMatcher("Name", CXX11, OS).Emit();
+-  OS << "  } else if (AttributeList::AS_Keyword == Syntax) {\n";
++  OS << "  } else if (AttributeList::AS_Keyword == Syntax || ";
++  OS << "AttributeList::AS_ContextSensitiveKeyword == Syntax) {\n";
+   StringMatcher("Name", Keywords, OS).Emit();
+   OS << "  } else if (AttributeList::AS_Pragma == Syntax) {\n";
+   StringMatcher("Name", Pragma, OS).Emit();
