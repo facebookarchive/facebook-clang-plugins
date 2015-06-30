@@ -42,6 +42,7 @@
 #include <llvm/Support/raw_ostream.h>
 
 #include "atdlib/ATDWriter.h"
+#include "AttrParameterVectorStream.h"
 #include "SimplePluginASTAction.h"
 
 //===----------------------------------------------------------------------===//
@@ -545,11 +546,6 @@ void ASTExporter<ATDWriter>::dumpLookups(const DeclContext &DC) {
   OF.emitFlag("has_undeserialized_decls", HasUndeserializedLookups);
 }
 
-//TODO: dump the content of the attributes
-//static bool hasMoreChildren() { return false; }
-//static void setMoreChildren(bool x) {}
-//static void lastChild() {}
-
 /// \atd
 /// type attribute = [
 #define ATTR(X) ///   | X@@Attr of attribute_info
@@ -558,13 +554,14 @@ void ASTExporter<ATDWriter>::dumpLookups(const DeclContext &DC) {
 /// type attribute_info = {
 ///   pointer : pointer;
 ///   source_range : source_range;
+///   parameters : string list;
 ///   ~is_inherited : bool;
 ///   ~is_implicit : bool
 /// } <ocaml field_prefix="ai_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpAttr(const Attr &A) {
+void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
   std::string tag;
-  switch (A.getKind()) {
+  switch (Att.getKind()) {
 #define ATTR(X) case attr::X: tag = #X "Attr"; break;
 #include <clang/Basic/AttrList.inc>
   default: llvm_unreachable("unexpected attribute kind");
@@ -573,14 +570,37 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &A) {
   {
     ObjectScope Scope(OF);
     OF.emitTag("pointer");
-    dumpPointer(&A);
+    dumpPointer(&Att);
     OF.emitTag("source_range");
-    dumpSourceRange(A.getRange());
+    dumpSourceRange(Att.getRange());
 
-// TODO
-//#include <clang/AST/AttrDump.inc>
-    OF.emitFlag("is_inherited", A.isInherited());
-    OF.emitFlag("is_implicit", A.isImplicit());
+    OF.emitTag("parameters");
+    {
+      AttrParameterVectorStream OS{};
+
+      // TODO: better dumping of attribute parameters.
+      // Here we skip three types of parameters (see #define's below)
+      // and output the others as strings, so clients reading the
+      // emitted AST will have to parse them.
+      const Attr *A = &Att;
+#define dumpBareDeclRef(X) OS << "?"
+#define dumpStmt(X) OS << "?"
+#define dumpType(X) OS << "?"
+#include <clang/AST/AttrDump.inc>
+#undef dumpBareDeclRef
+#undef dumpStmt
+#undef dumpType
+
+      {
+        ArrayScope Scope(OF);
+        for (const std::string& item : OS.getContent()) {
+          OF.emitString(item);
+        }
+      }
+    }
+
+    OF.emitFlag("is_inherited", Att.isInherited());
+    OF.emitFlag("is_implicit", Att.isImplicit());
   }
 }
 

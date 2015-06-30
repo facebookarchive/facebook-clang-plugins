@@ -10,8 +10,8 @@
 LEVEL=..
 include $(LEVEL)/Makefile.common
 
-HEADERS+=SimplePluginASTAction.h FileUtils.h FileServices.h
-OBJS+=SimplePluginASTAction.o FileUtils.o FileServices.o
+HEADERS+=SimplePluginASTAction.h FileUtils.h FileServices.h AttrParameterVectorStream.h
+OBJS+=SimplePluginASTAction.o FileUtils.o FileServices.o AttrParameterVectorStream.o
 
 # ASTExporter
 HEADERS+=atdlib/ATDWriter.h ASTExporter.h
