@@ -24,7 +24,12 @@
         "attributes" : [
         ]
       },
-      "__int128_t",
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -42,7 +47,12 @@
         "attributes" : [
         ]
       },
-      "__uint128_t",
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -61,7 +71,12 @@
         "attributes" : [
         ]
       },
-      "SEL",
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
       <"Type" : "SEL *">,
       {
       }
@@ -80,7 +95,12 @@
         "attributes" : [
         ]
       },
-      "id",
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
       <"Type" : "id">,
       {
       }
@@ -99,7 +119,12 @@
         "attributes" : [
         ]
       },
-      "Class",
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
       <"Type" : "Class">,
       {
       }
@@ -117,7 +142,12 @@
         "attributes" : [
         ]
       },
-      "Protocol",
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
       [
       ],
       {
@@ -138,7 +168,12 @@
         "attributes" : [
         ]
       },
-      "__builtin_va_list",
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -160,7 +195,12 @@
         "attributes" : [
         ]
       },
-      "BOOL",
+      {
+        "name" : "BOOL",
+        "qual_name" : [
+          "BOOL"
+        ]
+      },
       <"Type" : "int">,
       {
       }
@@ -181,7 +221,12 @@
         "attributes" : [
         ]
       },
-      "NSUInteger",
+      {
+        "name" : "NSUInteger",
+        "qual_name" : [
+          "NSUInteger"
+        ]
+      },
       <"Type" : "unsigned int">,
       {
       }
@@ -202,7 +247,12 @@
         "attributes" : [
         ]
       },
-      "NSObject",
+      {
+        "name" : "NSObject",
+        "qual_name" : [
+          "NSObject"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -219,7 +269,13 @@
             "attributes" : [
             ]
           },
-          "alloc",
+          {
+            "name" : "alloc",
+            "qual_name" : [
+              "alloc",
+              "NSObject"
+            ]
+          },
           {
             "result_type" : {
               "raw" : "instancetype",
@@ -242,7 +298,13 @@
             "attributes" : [
             ]
           },
-          "new",
+          {
+            "name" : "new",
+            "qual_name" : [
+              "new",
+              "NSObject"
+            ]
+          },
           {
             "result_type" : {
               "raw" : "instancetype",
@@ -265,7 +327,13 @@
             "attributes" : [
             ]
           },
-          "autorelease",
+          {
+            "name" : "autorelease",
+            "qual_name" : [
+              "autorelease",
+              "NSObject"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -289,7 +357,13 @@
             "attributes" : [
             ]
           },
-          "init",
+          {
+            "name" : "init",
+            "qual_name" : [
+              "init",
+              "NSObject"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -313,7 +387,13 @@
             "attributes" : [
             ]
           },
-          "class",
+          {
+            "name" : "class",
+            "qual_name" : [
+              "class",
+              "NSObject"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -337,7 +417,13 @@
             "attributes" : [
             ]
           },
-          "respondsToSelector:",
+          {
+            "name" : "respondsToSelector:",
+            "qual_name" : [
+              "respondsToSelector:",
+              "NSObject"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -359,7 +445,12 @@
                   "attributes" : [
                   ]
                 },
-                "s",
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
                 {
                   "raw" : "SEL",
                   "desugared" : "SEL *"
@@ -385,7 +476,13 @@
             "attributes" : [
             ]
           },
-          "conformsToProtocol:",
+          {
+            "name" : "conformsToProtocol:",
+            "qual_name" : [
+              "conformsToProtocol:",
+              "NSObject"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -407,7 +504,12 @@
                   "attributes" : [
                   ]
                 },
-                "p",
+                {
+                  "name" : "p",
+                  "qual_name" : [
+                    "p"
+                  ]
+                },
                 {
                   "raw" : "Protocol *"
                 },
@@ -439,7 +541,12 @@
         "attributes" : [
         ]
       },
-      "NSNumber",
+      {
+        "name" : "NSNumber",
+        "qual_name" : [
+          "NSNumber"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -456,7 +563,13 @@
             "attributes" : [
             ]
           },
-          "numberWithInt:",
+          {
+            "name" : "numberWithInt:",
+            "qual_name" : [
+              "numberWithInt:",
+              "NSNumber"
+            ]
+          },
           {
             "result_type" : {
               "raw" : "instancetype",
@@ -477,7 +590,12 @@
                   "attributes" : [
                   ]
                 },
-                "x",
+                {
+                  "name" : "x",
+                  "qual_name" : [
+                    "x"
+                  ]
+                },
                 {
                   "raw" : "int"
                 },
@@ -493,7 +611,12 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         }
       }
     )>,
@@ -513,7 +636,12 @@
         "attributes" : [
         ]
       },
-      "NSString",
+      {
+        "name" : "NSString",
+        "qual_name" : [
+          "NSString"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -530,7 +658,13 @@
             "attributes" : [
             ]
           },
-          "length",
+          {
+            "name" : "length",
+            "qual_name" : [
+              "length",
+              "NSString"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -545,7 +679,12 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         }
       }
     )>,
@@ -565,7 +704,12 @@
         "attributes" : [
         ]
       },
-      "NSDictionary",
+      {
+        "name" : "NSDictionary",
+        "qual_name" : [
+          "NSDictionary"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -582,7 +726,13 @@
             "attributes" : [
             ]
           },
-          "dictionaryWithObjects:forKeys:count:",
+          {
+            "name" : "dictionaryWithObjects:forKeys:count:",
+            "qual_name" : [
+              "dictionaryWithObjects:forKeys:count:",
+              "NSDictionary"
+            ]
+          },
           {
             "result_type" : {
               "raw" : "instancetype",
@@ -603,7 +753,12 @@
                   "attributes" : [
                   ]
                 },
-                "objects",
+                {
+                  "name" : "objects",
+                  "qual_name" : [
+                    "objects"
+                  ]
+                },
                 {
                   "raw" : "const id *",
                   "desugared" : "const id *"
@@ -625,7 +780,12 @@
                   "attributes" : [
                   ]
                 },
-                "keys",
+                {
+                  "name" : "keys",
+                  "qual_name" : [
+                    "keys"
+                  ]
+                },
                 {
                   "raw" : "const id *",
                   "desugared" : "const id *"
@@ -647,7 +807,12 @@
                   "attributes" : [
                   ]
                 },
-                "count",
+                {
+                  "name" : "count",
+                  "qual_name" : [
+                    "count"
+                  ]
+                },
                 {
                   "raw" : "NSUInteger",
                   "desugared" : "unsigned int"
@@ -673,7 +838,13 @@
             "attributes" : [
             ]
           },
-          "objectForKeyedSubscript:",
+          {
+            "name" : "objectForKeyedSubscript:",
+            "qual_name" : [
+              "objectForKeyedSubscript:",
+              "NSDictionary"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -695,7 +866,12 @@
                   "attributes" : [
                   ]
                 },
-                "key",
+                {
+                  "name" : "key",
+                  "qual_name" : [
+                    "key"
+                  ]
+                },
                 {
                   "raw" : "id",
                   "desugared" : "id"
@@ -712,7 +888,12 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         }
       }
     )>,
@@ -732,7 +913,12 @@
         "attributes" : [
         ]
       },
-      "NSArray",
+      {
+        "name" : "NSArray",
+        "qual_name" : [
+          "NSArray"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -749,7 +935,13 @@
             "attributes" : [
             ]
           },
-          "arrayWithObjects:count:",
+          {
+            "name" : "arrayWithObjects:count:",
+            "qual_name" : [
+              "arrayWithObjects:count:",
+              "NSArray"
+            ]
+          },
           {
             "result_type" : {
               "raw" : "instancetype",
@@ -770,7 +962,12 @@
                   "attributes" : [
                   ]
                 },
-                "objs",
+                {
+                  "name" : "objs",
+                  "qual_name" : [
+                    "objs"
+                  ]
+                },
                 {
                   "raw" : "id *"
                 },
@@ -791,7 +988,12 @@
                   "attributes" : [
                   ]
                 },
-                "cnt",
+                {
+                  "name" : "cnt",
+                  "qual_name" : [
+                    "cnt"
+                  ]
+                },
                 {
                   "raw" : "unsigned int"
                 },
@@ -816,7 +1018,13 @@
             "attributes" : [
             ]
           },
-          "objectAtIndexedSubscript:",
+          {
+            "name" : "objectAtIndexedSubscript:",
+            "qual_name" : [
+              "objectAtIndexedSubscript:",
+              "NSArray"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -838,7 +1046,12 @@
                   "attributes" : [
                   ]
                 },
-                "index",
+                {
+                  "name" : "index",
+                  "qual_name" : [
+                    "index"
+                  ]
+                },
                 {
                   "raw" : "NSUInteger",
                   "desugared" : "unsigned int"
@@ -855,7 +1068,12 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         }
       }
     )>,
@@ -875,7 +1093,12 @@
         "attributes" : [
         ]
       },
-      "NSException",
+      {
+        "name" : "NSException",
+        "qual_name" : [
+          "NSException"
+        ]
+      },
       [
       ],
       {
@@ -883,7 +1106,12 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         }
       }
     )>,
@@ -904,7 +1132,12 @@
         "attributes" : [
         ]
       },
-      "NSLog",
+      {
+        "name" : "NSLog",
+        "qual_name" : [
+          "NSLog"
+        ]
+      },
       {
         "raw" : "void (NSString *, ...)"
       },
@@ -925,7 +1158,12 @@
               "attributes" : [
               ]
             },
-            "",
+            {
+              "name" : "",
+              "qual_name" : [
+                ""
+              ]
+            },
             {
               "raw" : "NSString *"
             },
@@ -952,7 +1190,12 @@
         "attributes" : [
         ]
       },
-      "Hello",
+      {
+        "name" : "Hello",
+        "qual_name" : [
+          "Hello"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -969,7 +1212,13 @@
             "attributes" : [
             ]
           },
-          "say:",
+          {
+            "name" : "say:",
+            "qual_name" : [
+              "say:",
+              "Hello"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -990,7 +1239,12 @@
                   "attributes" : [
                   ]
                 },
-                "i",
+                {
+                  "name" : "i",
+                  "qual_name" : [
+                    "i"
+                  ]
+                },
                 {
                   "raw" : "int"
                 },
@@ -1006,11 +1260,21 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         },
         "implementation" : {
           "kind" : <"ObjCImplementation">,
-          "name" : "Hello"
+          "name" : {
+            "name" : "Hello",
+            "qual_name" : [
+              "Hello"
+            ]
+          }
         }
       }
     )>,
@@ -1030,7 +1294,12 @@
         "attributes" : [
         ]
       },
-      "Hello",
+      {
+        "name" : "Hello",
+        "qual_name" : [
+          "Hello"
+        ]
+      },
       [
         <"ObjCMethodDecl" : (
           {
@@ -1048,7 +1317,13 @@
             "attributes" : [
             ]
           },
-          "say:",
+          {
+            "name" : "say:",
+            "qual_name" : [
+              "say:",
+              "Hello"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -1072,7 +1347,12 @@
                   "attributes" : [
                   ]
                 },
-                "i",
+                {
+                  "name" : "i",
+                  "qual_name" : [
+                    "i"
+                  ]
+                },
                 {
                   "raw" : "int"
                 },
@@ -1172,7 +1452,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"ParmVar">,
-                                  "name" : "i",
+                                  "name" : {
+                                    "name" : "i",
+                                    "qual_name" : [
+                                      "i"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "int"
                                   }
@@ -1290,7 +1575,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Function">,
-                                      "name" : "NSLog",
+                                      "name" : {
+                                        "name" : "NSLog",
+                                        "qual_name" : [
+                                          "NSLog"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "void (NSString *, ...)"
                                       }
@@ -1387,7 +1677,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"ParmVar">,
-                                      "name" : "i",
+                                      "name" : {
+                                        "name" : "i",
+                                        "qual_name" : [
+                                          "i"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "int"
                                       }
@@ -1440,7 +1735,12 @@
       {
         "class_interface" : {
           "kind" : <"ObjCInterface">,
-          "name" : "Hello"
+          "name" : {
+            "name" : "Hello",
+            "qual_name" : [
+              "Hello"
+            ]
+          }
         }
       }
     )>,
@@ -1460,7 +1760,12 @@
         "attributes" : [
         ]
       },
-      "main",
+      {
+        "name" : "main",
+        "qual_name" : [
+          "main"
+        ]
+      },
       {
         "raw" : "int (int, char **)"
       },
@@ -1481,7 +1786,12 @@
               "attributes" : [
               ]
             },
-            "argc",
+            {
+              "name" : "argc",
+              "qual_name" : [
+                "argc"
+              ]
+            },
             {
               "raw" : "int"
             },
@@ -1502,7 +1812,12 @@
               "attributes" : [
               ]
             },
-            "argv",
+            {
+              "name" : "argv",
+              "qual_name" : [
+                "argv"
+              ]
+            },
             {
               "raw" : "char **",
               "desugared" : "char **"
@@ -1598,7 +1913,12 @@
                         "attributes" : [
                         ]
                       },
-                      "i",
+                      {
+                        "name" : "i",
+                        "qual_name" : [
+                          "i"
+                        ]
+                      },
                       {
                         "raw" : "int"
                       },
@@ -1694,7 +2014,12 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Var">,
-                              "name" : "i",
+                              "name" : {
+                                "name" : "i",
+                                "qual_name" : [
+                                  "i"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "int"
                               }
@@ -1784,7 +2109,12 @@
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "name" : "i",
+                          "name" : {
+                            "name" : "i",
+                            "qual_name" : [
+                              "i"
+                            ]
+                          },
                           "qual_type" : {
                             "raw" : "int"
                           }
@@ -1922,7 +2252,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"Var">,
-                                          "name" : "i",
+                                          "name" : {
+                                            "name" : "i",
+                                            "qual_name" : [
+                                              "i"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "int"
                                           }

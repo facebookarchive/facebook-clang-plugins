@@ -36,21 +36,31 @@ let decl_info start stop = {
   di_full_comment = None
 }
 
+let name_info name = {
+  ni_name = name;
+  ni_qual_name = [name]
+}
+
+let append_name_info info suffix = {
+  ni_name = info.ni_name ^ suffix;
+  ni_qual_name = List.map (fun x -> x ^ suffix) info.ni_qual_name
+}
+
 let () =
   let di = decl_info empty_source_location empty_source_location
   in
-  let decl = LabelDecl(di, "foo")
+  let decl = LabelDecl(di, name_info "foo")
   in
   assert_equal "get_decl_kind_string" (get_decl_kind_string decl) "LabelDecl";
   assert_equal "get_decl_tuple" (get_decl_tuple decl) di;
   assert_equal "get_decl_context_tuple" (get_decl_context_tuple decl) None;
-  assert_equal "get_named_decl_tuple" (get_named_decl_tuple decl) (Some (di, "foo"));
+  assert_equal "get_named_decl_tuple" (get_named_decl_tuple decl) (Some (di, name_info "foo"));
   assert_equal "get_type_decl_tuple" (get_type_decl_tuple decl) None;
   assert_equal "get_tag_decl_tuple" (get_tag_decl_tuple decl) None;
 
-  let decl2 = update_named_decl_tuple (fun (di, s) -> (di, s ^ "bar")) decl
+  let decl2 = update_named_decl_tuple (fun (di, info) -> (di, append_name_info info "bar")) decl
   in
-  assert_equal "update_named_decl_tuple" (get_named_decl_tuple decl2) (Some (di, "foobar"));
+  assert_equal "update_named_decl_tuple" (get_named_decl_tuple decl2) (Some (di, name_info "foobar"));
 
   let di2 = decl_info (source_location ~file:"bla" ()) (source_location ~file:"bleh" ())
   in

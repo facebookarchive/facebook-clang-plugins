@@ -22,9 +22,9 @@ let rec visit_named_decls f decl =
 
 
 let print_named_decl_from_file fname =
-  let ast = Ag_util.Json.from_file Clang_ast_j.read_decl fname
-  in
-  visit_named_decls (fun _ s -> print_string s; print_newline ()) ast
+  let ast = Ag_util.Json.from_file Clang_ast_j.read_decl fname in
+  let getname name_info = name_info.Clang_ast_t.ni_name in
+  visit_named_decls (fun _ info -> print_string (getname info); print_newline ()) ast
 
 let main =
   let v = Sys.argv

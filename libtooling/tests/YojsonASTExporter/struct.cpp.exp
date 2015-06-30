@@ -24,7 +24,12 @@
         "attributes" : [
         ]
       },
-      "__int128_t",
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -42,7 +47,12 @@
         "attributes" : [
         ]
       },
-      "__uint128_t",
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -60,7 +70,12 @@
         "attributes" : [
         ]
       },
-      "SEL",
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -78,7 +93,12 @@
         "attributes" : [
         ]
       },
-      "id",
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -96,7 +116,12 @@
         "attributes" : [
         ]
       },
-      "Class",
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -114,7 +139,12 @@
         "attributes" : [
         ]
       },
-      "Protocol",
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
       [
       ],
       {
@@ -135,7 +165,12 @@
         "attributes" : [
         ]
       },
-      "__builtin_va_list",
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -158,7 +193,12 @@
         "attributes" : [
         ]
       },
-      "Point",
+      {
+        "name" : "Point",
+        "qual_name" : [
+          "Point"
+        ]
+      },
       <"Type" : "struct Point">,
       [
         <"CXXRecordDecl" : (
@@ -177,7 +217,13 @@
             "attributes" : [
             ]
           },
-          "Point",
+          {
+            "name" : "Point",
+            "qual_name" : [
+              "Point",
+              "Point"
+            ]
+          },
           <"Type" : "struct Point">,
           [
           ],
@@ -201,7 +247,13 @@
             "attributes" : [
             ]
           },
-          "x",
+          {
+            "name" : "x",
+            "qual_name" : [
+              "x",
+              "Point"
+            ]
+          },
           {
             "raw" : "double"
           },
@@ -222,7 +274,13 @@
             "attributes" : [
             ]
           },
-          "y",
+          {
+            "name" : "y",
+            "qual_name" : [
+              "y",
+              "Point"
+            ]
+          },
           {
             "raw" : "double"
           },
@@ -251,7 +309,12 @@
         "attributes" : [
         ]
       },
-      "blank",
+      {
+        "name" : "blank",
+        "qual_name" : [
+          "blank"
+        ]
+      },
       {
         "raw" : "struct Point"
       },

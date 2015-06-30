@@ -24,7 +24,12 @@
         "attributes" : [
         ]
       },
-      "__int128_t",
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -42,7 +47,12 @@
         "attributes" : [
         ]
       },
-      "__uint128_t",
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -60,7 +70,12 @@
         "attributes" : [
         ]
       },
-      "SEL",
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -78,7 +93,12 @@
         "attributes" : [
         ]
       },
-      "id",
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -96,7 +116,12 @@
         "attributes" : [
         ]
       },
-      "Class",
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -114,7 +139,12 @@
         "attributes" : [
         ]
       },
-      "Protocol",
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
       [
       ],
       {
@@ -135,7 +165,12 @@
         "attributes" : [
         ]
       },
-      "__builtin_va_list",
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -158,7 +193,12 @@
         "attributes" : [
         ]
       },
-      "A",
+      {
+        "name" : "A",
+        "qual_name" : [
+          "A"
+        ]
+      },
       <"Type" : "struct A">,
       [
         <"CXXRecordDecl" : (
@@ -177,7 +217,13 @@
             "attributes" : [
             ]
           },
-          "A",
+          {
+            "name" : "A",
+            "qual_name" : [
+              "A",
+              "A"
+            ]
+          },
           <"Type" : "struct A">,
           [
           ],
@@ -203,7 +249,13 @@
             "attributes" : [
             ]
           },
-          "f",
+          {
+            "name" : "f",
+            "qual_name" : [
+              "f",
+              "A"
+            ]
+          },
           {
             "raw" : "void (void)"
           },
@@ -241,7 +293,13 @@
             "attributes" : [
             ]
           },
-          "operator=",
+          {
+            "name" : "operator=",
+            "qual_name" : [
+              "operator=",
+              "A"
+            ]
+          },
           {
             "raw" : "struct A &(const struct A &)"
           },
@@ -262,7 +320,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "const struct A &"
                 },
@@ -286,7 +349,13 @@
             "attributes" : [
             ]
           },
-          "operator=",
+          {
+            "name" : "operator=",
+            "qual_name" : [
+              "operator=",
+              "A"
+            ]
+          },
           {
             "raw" : "struct A &(struct A &&)"
           },
@@ -307,7 +376,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "struct A &&"
                 },
@@ -332,7 +406,13 @@
             "attributes" : [
             ]
           },
-          "~A",
+          {
+            "name" : "~A",
+            "qual_name" : [
+              "~A",
+              "A"
+            ]
+          },
           {
             "raw" : "void (void)"
           },
@@ -357,7 +437,13 @@
             "attributes" : [
             ]
           },
-          "A",
+          {
+            "name" : "A",
+            "qual_name" : [
+              "A",
+              "A"
+            ]
+          },
           {
             "raw" : "void (void) noexcept"
           },
@@ -395,7 +481,13 @@
             "attributes" : [
             ]
           },
-          "A",
+          {
+            "name" : "A",
+            "qual_name" : [
+              "A",
+              "A"
+            ]
+          },
           {
             "raw" : "void (const struct A &)"
           },
@@ -416,7 +508,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "const struct A &"
                 },
@@ -441,7 +538,13 @@
             "attributes" : [
             ]
           },
-          "A",
+          {
+            "name" : "A",
+            "qual_name" : [
+              "A",
+              "A"
+            ]
+          },
           {
             "raw" : "void (struct A &&)"
           },
@@ -462,7 +565,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "struct A &&"
                 },
@@ -495,7 +603,12 @@
         "attributes" : [
         ]
       },
-      "B",
+      {
+        "name" : "B",
+        "qual_name" : [
+          "B"
+        ]
+      },
       <"Type" : "struct B">,
       [
         <"CXXRecordDecl" : (
@@ -513,7 +626,13 @@
             "attributes" : [
             ]
           },
-          "B",
+          {
+            "name" : "B",
+            "qual_name" : [
+              "B",
+              "B"
+            ]
+          },
           <"Type" : "struct B">,
           [
           ],
@@ -536,7 +655,13 @@
             "attributes" : [
             ]
           },
-          "operator=",
+          {
+            "name" : "operator=",
+            "qual_name" : [
+              "operator=",
+              "B"
+            ]
+          },
           {
             "raw" : "struct B &(const struct B &)"
           },
@@ -557,7 +682,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "const struct B &"
                 },
@@ -581,7 +711,13 @@
             "attributes" : [
             ]
           },
-          "operator=",
+          {
+            "name" : "operator=",
+            "qual_name" : [
+              "operator=",
+              "B"
+            ]
+          },
           {
             "raw" : "struct B &(struct B &&)"
           },
@@ -602,7 +738,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "struct B &&"
                 },
@@ -627,7 +768,13 @@
             "attributes" : [
             ]
           },
-          "~B",
+          {
+            "name" : "~B",
+            "qual_name" : [
+              "~B",
+              "B"
+            ]
+          },
           {
             "raw" : "void (void)"
           },
@@ -652,7 +799,13 @@
             "attributes" : [
             ]
           },
-          "B",
+          {
+            "name" : "B",
+            "qual_name" : [
+              "B",
+              "B"
+            ]
+          },
           {
             "raw" : "void (void) noexcept"
           },
@@ -725,7 +878,13 @@
             "attributes" : [
             ]
           },
-          "B",
+          {
+            "name" : "B",
+            "qual_name" : [
+              "B",
+              "B"
+            ]
+          },
           {
             "raw" : "void (const struct B &)"
           },
@@ -746,7 +905,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "const struct B &"
                 },
@@ -771,7 +935,13 @@
             "attributes" : [
             ]
           },
-          "B",
+          {
+            "name" : "B",
+            "qual_name" : [
+              "B",
+              "B"
+            ]
+          },
           {
             "raw" : "void (struct B &&)"
           },
@@ -792,7 +962,12 @@
                   "attributes" : [
                   ]
                 },
-                "",
+                {
+                  "name" : "",
+                  "qual_name" : [
+                    ""
+                  ]
+                },
                 {
                   "raw" : "struct B &&"
                 },
@@ -825,7 +1000,12 @@
         "attributes" : [
         ]
       },
-      "C",
+      {
+        "name" : "C",
+        "qual_name" : [
+          "C"
+        ]
+      },
       <"Type" : "struct C">,
       [
         <"CXXRecordDecl" : (
@@ -843,7 +1023,13 @@
             "attributes" : [
             ]
           },
-          "C",
+          {
+            "name" : "C",
+            "qual_name" : [
+              "C",
+              "C"
+            ]
+          },
           <"Type" : "struct C">,
           [
           ],
@@ -875,7 +1061,12 @@
         "attributes" : [
         ]
       },
-      "f",
+      {
+        "name" : "f",
+        "qual_name" : [
+          "f"
+        ]
+      },
       {
         "raw" : "void (void)"
       },
@@ -952,7 +1143,12 @@
                     "attributes" : [
                     ]
                   },
-                  "a",
+                  {
+                    "name" : "a",
+                    "qual_name" : [
+                      "a"
+                    ]
+                  },
                   {
                     "raw" : "struct A"
                   },
@@ -1043,7 +1239,12 @@
                     "attributes" : [
                     ]
                   },
-                  "b",
+                  {
+                    "name" : "b",
+                    "qual_name" : [
+                      "b"
+                    ]
+                  },
                   {
                     "raw" : "struct B"
                   },
@@ -1140,7 +1341,12 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Var">,
-                              "name" : "b",
+                              "name" : {
+                                "name" : "b",
+                                "qual_name" : [
+                                  "b"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "struct B"
                               }
@@ -1190,7 +1396,12 @@
                     "attributes" : [
                     ]
                   },
-                  "ap",
+                  {
+                    "name" : "ap",
+                    "qual_name" : [
+                      "ap"
+                    ]
+                  },
                   {
                     "raw" : "struct A *"
                   },
@@ -1244,7 +1455,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "b",
+                                  "name" : {
+                                    "name" : "b",
+                                    "qual_name" : [
+                                      "b"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct B"
                                   }
@@ -1343,7 +1559,12 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Var">,
-                              "name" : "a",
+                              "name" : {
+                                "name" : "a",
+                                "qual_name" : [
+                                  "a"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "struct A"
                               }
@@ -1392,7 +1613,12 @@
                     "attributes" : [
                     ]
                   },
-                  "b1",
+                  {
+                    "name" : "b1",
+                    "qual_name" : [
+                      "b1"
+                    ]
+                  },
                   {
                     "raw" : "struct B *"
                   },
@@ -1446,7 +1672,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "a",
+                                  "name" : {
+                                    "name" : "a",
+                                    "qual_name" : [
+                                      "a"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct A"
                                   }
@@ -1546,7 +1777,12 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Var">,
-                              "name" : "ap",
+                              "name" : {
+                                "name" : "ap",
+                                "qual_name" : [
+                                  "ap"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "struct A *"
                               }
@@ -1597,7 +1833,12 @@
                     "attributes" : [
                     ]
                   },
-                  "b2",
+                  {
+                    "name" : "b2",
+                    "qual_name" : [
+                      "b2"
+                    ]
+                  },
                   {
                     "raw" : "struct B *"
                   },
@@ -1651,7 +1892,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "ap",
+                                  "name" : {
+                                    "name" : "ap",
+                                    "qual_name" : [
+                                      "ap"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct A *"
                                   }
@@ -1753,7 +1999,12 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Var">,
-                              "name" : "ap",
+                              "name" : {
+                                "name" : "ap",
+                                "qual_name" : [
+                                  "ap"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "struct A *"
                               }
@@ -1804,7 +2055,12 @@
                     "attributes" : [
                     ]
                   },
-                  "c",
+                  {
+                    "name" : "c",
+                    "qual_name" : [
+                      "c"
+                    ]
+                  },
                   {
                     "raw" : "struct C *"
                   },
@@ -1858,7 +2114,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "ap",
+                                  "name" : {
+                                    "name" : "ap",
+                                    "qual_name" : [
+                                      "ap"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct A *"
                                   }
@@ -1973,7 +2234,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "ap",
+                                  "name" : {
+                                    "name" : "ap",
+                                    "qual_name" : [
+                                      "ap"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct A *"
                                   }
@@ -2036,7 +2302,12 @@
                     "attributes" : [
                     ]
                   },
-                  "ar",
+                  {
+                    "name" : "ar",
+                    "qual_name" : [
+                      "ar"
+                    ]
+                  },
                   {
                     "raw" : "struct A &"
                   },
@@ -2103,7 +2374,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Var">,
-                                      "name" : "ap",
+                                      "name" : {
+                                        "name" : "ap",
+                                        "qual_name" : [
+                                          "ap"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "struct A *"
                                       }
@@ -2230,7 +2506,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "ap",
+                                  "name" : {
+                                    "name" : "ap",
+                                    "qual_name" : [
+                                      "ap"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct A *"
                                   }
@@ -2293,7 +2574,12 @@
                     "attributes" : [
                     ]
                   },
-                  "br",
+                  {
+                    "name" : "br",
+                    "qual_name" : [
+                      "br"
+                    ]
+                  },
                   {
                     "raw" : "struct B &"
                   },
@@ -2360,7 +2646,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Var">,
-                                      "name" : "ap",
+                                      "name" : {
+                                        "name" : "ap",
+                                        "qual_name" : [
+                                          "ap"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "struct A *"
                                       }
@@ -2487,7 +2778,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Var">,
-                                  "name" : "ap",
+                                  "name" : {
+                                    "name" : "ap",
+                                    "qual_name" : [
+                                      "ap"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "struct A *"
                                   }
@@ -2550,7 +2846,12 @@
                     "attributes" : [
                     ]
                   },
-                  "cr",
+                  {
+                    "name" : "cr",
+                    "qual_name" : [
+                      "cr"
+                    ]
+                  },
                   {
                     "raw" : "struct C &"
                   },
@@ -2617,7 +2918,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Var">,
-                                      "name" : "ap",
+                                      "name" : {
+                                        "name" : "ap",
+                                        "qual_name" : [
+                                          "ap"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "struct A *"
                                       }

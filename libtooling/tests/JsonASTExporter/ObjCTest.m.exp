@@ -24,7 +24,12 @@
         "attributes" : [
         ]
       },
-      "__int128_t",
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -42,7 +47,12 @@
         "attributes" : [
         ]
       },
-      "__uint128_t",
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -61,7 +71,12 @@
         "attributes" : [
         ]
       },
-      "SEL",
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
       ["Type" , "SEL *"],
       {
       }
@@ -80,7 +95,12 @@
         "attributes" : [
         ]
       },
-      "id",
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
       ["Type" , "id"],
       {
       }
@@ -99,7 +119,12 @@
         "attributes" : [
         ]
       },
-      "Class",
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
       ["Type" , "Class"],
       {
       }
@@ -117,7 +142,12 @@
         "attributes" : [
         ]
       },
-      "Protocol",
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
       [
       ],
       {
@@ -138,7 +168,12 @@
         "attributes" : [
         ]
       },
-      "__builtin_va_list",
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -160,7 +195,12 @@
         "attributes" : [
         ]
       },
-      "MyProtocol",
+      {
+        "name" : "MyProtocol",
+        "qual_name" : [
+          "MyProtocol"
+        ]
+      },
       [
         ["ObjCPropertyDecl" , [
           {
@@ -177,7 +217,13 @@
             "attributes" : [
             ]
           },
-          "str",
+          {
+            "name" : "str",
+            "qual_name" : [
+              "str",
+              "MyProtocol"
+            ]
+          },
           {
             "qual_type" : {
               "raw" : "NSString *"
@@ -204,7 +250,13 @@
             "attributes" : [
             ]
           },
-          "str",
+          {
+            "name" : "str",
+            "qual_name" : [
+              "str",
+              "MyProtocol"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -227,7 +279,13 @@
             "attributes" : [
             ]
           },
-          "setStr:",
+          {
+            "name" : "setStr:",
+            "qual_name" : [
+              "setStr:",
+              "MyProtocol"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -248,7 +306,12 @@
                   "attributes" : [
                   ]
                 },
-                "str",
+                {
+                  "name" : "str",
+                  "qual_name" : [
+                    "str"
+                  ]
+                },
                 {
                   "raw" : "NSString *"
                 },
@@ -279,7 +342,12 @@
         "attributes" : [
         ]
       },
-      "SomeProtocol",
+      {
+        "name" : "SomeProtocol",
+        "qual_name" : [
+          "SomeProtocol"
+        ]
+      },
       [
       ],
       {
@@ -303,7 +371,12 @@
         "attributes" : [
         ]
       },
-      "MyClass",
+      {
+        "name" : "MyClass",
+        "qual_name" : [
+          "MyClass"
+        ]
+      },
       [
         ["ObjCPropertyDecl" , [
           {
@@ -320,7 +393,13 @@
             "attributes" : [
             ]
           },
-          "str",
+          {
+            "name" : "str",
+            "qual_name" : [
+              "str",
+              "MyClass"
+            ]
+          },
           {
             "qual_type" : {
               "raw" : "NSString *"
@@ -347,7 +426,13 @@
             "attributes" : [
             ]
           },
-          "x",
+          {
+            "name" : "x",
+            "qual_name" : [
+              "x",
+              "MyClass"
+            ]
+          },
           {
             "qual_type" : {
               "raw" : "void *"
@@ -375,7 +460,13 @@
             "attributes" : [
             ]
           },
-          "y",
+          {
+            "name" : "y",
+            "qual_name" : [
+              "y",
+              "MyClass"
+            ]
+          },
           {
             "qual_type" : {
               "raw" : "int"
@@ -403,7 +494,13 @@
             "attributes" : [
             ]
           },
-          "delegate",
+          {
+            "name" : "delegate",
+            "qual_name" : [
+              "delegate",
+              "MyClass"
+            ]
+          },
           {
             "qual_type" : {
               "raw" : "NSObject<SomeProtocol> *"
@@ -432,7 +529,13 @@
             "attributes" : [
             ]
           },
-          "str",
+          {
+            "name" : "str",
+            "qual_name" : [
+              "str",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -455,7 +558,13 @@
             "attributes" : [
             ]
           },
-          "setStr:",
+          {
+            "name" : "setStr:",
+            "qual_name" : [
+              "setStr:",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -476,7 +585,12 @@
                   "attributes" : [
                   ]
                 },
-                "str",
+                {
+                  "name" : "str",
+                  "qual_name" : [
+                    "str"
+                  ]
+                },
                 {
                   "raw" : "NSString *"
                 },
@@ -502,7 +616,13 @@
             "attributes" : [
             ]
           },
-          "x",
+          {
+            "name" : "x",
+            "qual_name" : [
+              "x",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -525,7 +645,13 @@
             "attributes" : [
             ]
           },
-          "setX:",
+          {
+            "name" : "setX:",
+            "qual_name" : [
+              "setX:",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -546,7 +672,12 @@
                   "attributes" : [
                   ]
                 },
-                "x",
+                {
+                  "name" : "x",
+                  "qual_name" : [
+                    "x"
+                  ]
+                },
                 {
                   "raw" : "void *"
                 },
@@ -572,7 +703,13 @@
             "attributes" : [
             ]
           },
-          "y",
+          {
+            "name" : "y",
+            "qual_name" : [
+              "y",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -595,7 +732,13 @@
             "attributes" : [
             ]
           },
-          "setY:",
+          {
+            "name" : "setY:",
+            "qual_name" : [
+              "setY:",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -616,7 +759,12 @@
                   "attributes" : [
                   ]
                 },
-                "y",
+                {
+                  "name" : "y",
+                  "qual_name" : [
+                    "y"
+                  ]
+                },
                 {
                   "raw" : "int"
                 },
@@ -642,7 +790,13 @@
             "attributes" : [
             ]
           },
-          "delegate",
+          {
+            "name" : "delegate",
+            "qual_name" : [
+              "delegate",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -665,7 +819,13 @@
             "attributes" : [
             ]
           },
-          "setDelegate:",
+          {
+            "name" : "setDelegate:",
+            "qual_name" : [
+              "setDelegate:",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -686,7 +846,12 @@
                   "attributes" : [
                   ]
                 },
-                "delegate",
+                {
+                  "name" : "delegate",
+                  "qual_name" : [
+                    "delegate"
+                  ]
+                },
                 {
                   "raw" : "NSObject<SomeProtocol> *"
                 },
@@ -702,16 +867,31 @@
       {
         "super" : {
           "kind" : ["ObjCInterface"],
-          "name" : "NSObject"
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
         },
         "implementation" : {
           "kind" : ["ObjCImplementation"],
-          "name" : "MyClass"
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
         },
         "protocols" : [
           {
             "kind" : ["ObjCProtocol"],
-            "name" : "MyProtocol"
+            "name" : {
+              "name" : "MyProtocol",
+              "qual_name" : [
+                "MyProtocol"
+              ]
+            }
           }
         ]
       }
@@ -732,7 +912,12 @@
         "attributes" : [
         ]
       },
-      "",
+      {
+        "name" : "",
+        "qual_name" : [
+          "(anonymous)"
+        ]
+      },
       [
         ["ObjCMethodDecl" , [
           {
@@ -749,7 +934,13 @@
             "attributes" : [
             ]
           },
-          "foo:",
+          {
+            "name" : "foo:",
+            "qual_name" : [
+              "foo:",
+              ""
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -770,7 +961,12 @@
                   "attributes" : [
                   ]
                 },
-                "s",
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
                 {
                   "raw" : "NSString *"
                 },
@@ -786,7 +982,12 @@
       {
         "class_interface" : {
           "kind" : ["ObjCInterface"],
-          "name" : "MyClass"
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
         }
       }
     ]],
@@ -806,7 +1007,12 @@
         "attributes" : [
         ]
       },
-      "MyClass",
+      {
+        "name" : "MyClass",
+        "qual_name" : [
+          "MyClass"
+        ]
+      },
       [
         ["ObjCMethodDecl" , [
           {
@@ -824,7 +1030,13 @@
             "attributes" : [
             ]
           },
-          "foo:",
+          {
+            "name" : "foo:",
+            "qual_name" : [
+              "foo:",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -846,7 +1058,12 @@
                   "attributes" : [
                   ]
                 },
-                "s",
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
                 {
                   "raw" : "NSString *"
                 },
@@ -918,7 +1135,12 @@
                           {
                             "decl_ref" : {
                               "kind" : ["Function"],
-                              "name" : "NSLog",
+                              "name" : {
+                                "name" : "NSLog",
+                                "qual_name" : [
+                                  "NSLog"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "void (NSString *, ...)"
                               }
@@ -1085,7 +1307,12 @@
                           {
                             "decl_ref" : {
                               "kind" : ["Function"],
-                              "name" : "NSLog",
+                              "name" : {
+                                "name" : "NSLog",
+                                "qual_name" : [
+                                  "NSLog"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "void (NSString *, ...)"
                               }
@@ -1195,7 +1422,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : ["ImplicitParam"],
-                                  "name" : "self",
+                                  "name" : {
+                                    "name" : "self",
+                                    "qual_name" : [
+                                      "self"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "MyClass *"
                                   }
@@ -1304,7 +1536,12 @@
                           {
                             "decl_ref" : {
                               "kind" : ["Function"],
-                              "name" : "NSLog",
+                              "name" : {
+                                "name" : "NSLog",
+                                "qual_name" : [
+                                  "NSLog"
+                                ]
+                              },
                               "qual_type" : {
                                 "raw" : "void (NSString *, ...)"
                               }
@@ -1427,7 +1664,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["ImplicitParam"],
-                                      "name" : "self",
+                                      "name" : {
+                                        "name" : "self",
+                                        "qual_name" : [
+                                          "self"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "MyClass *"
                                       }
@@ -1478,7 +1720,12 @@
                           },
                           {
                             "kind" : ["ObjCProtocol"],
-                            "name" : "MyProtocol"
+                            "name" : {
+                              "name" : "MyProtocol",
+                              "qual_name" : [
+                                "MyProtocol"
+                              ]
+                            }
                           }
                         ]]
                       ],
@@ -1584,7 +1831,12 @@
                                   "attributes" : [
                                   ]
                                 },
-                                "x",
+                                {
+                                  "name" : "x",
+                                  "qual_name" : [
+                                    "x"
+                                  ]
+                                },
                                 {
                                   "raw" : "NSString *"
                                 },
@@ -1612,7 +1864,12 @@
                                     "attributes" : [
                                     ]
                                   },
-                                  "x",
+                                  {
+                                    "name" : "x",
+                                    "qual_name" : [
+                                      "x"
+                                    ]
+                                  },
                                   {
                                     "raw" : "NSString *"
                                   },
@@ -1624,7 +1881,12 @@
                                 {
                                   "variable" : {
                                     "kind" : ["ImplicitParam"],
-                                    "name" : "self",
+                                    "name" : {
+                                      "name" : "self",
+                                      "qual_name" : [
+                                        "self"
+                                      ]
+                                    },
                                     "qual_type" : {
                                       "raw" : "MyClass *"
                                     }
@@ -1741,7 +2003,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ImplicitParam"],
-                                                            "name" : "self",
+                                                            "name" : {
+                                                              "name" : "self",
+                                                              "qual_name" : [
+                                                                "self"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "MyClass *"
                                                             }
@@ -1773,7 +2040,13 @@
                                             {
                                               "kind" : ["PropertyRef" , {
                                                 "kind" : ["ObjCProperty"],
-                                                "name" : "str"
+                                                "name" : {
+                                                  "name" : "str",
+                                                  "qual_name" : [
+                                                    "str",
+                                                    "MyClass"
+                                                  ]
+                                                }
                                               }],
                                               "is_messaging_setter" : true
                                             }
@@ -1822,7 +2095,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ParmVar"],
-                                                    "name" : "x",
+                                                    "name" : {
+                                                      "name" : "x",
+                                                      "qual_name" : [
+                                                        "x"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "NSString *"
                                                     }
@@ -1898,7 +2176,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ImplicitParam"],
-                                                    "name" : "self",
+                                                    "name" : {
+                                                      "name" : "self",
+                                                      "qual_name" : [
+                                                        "self"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "MyClass *"
                                                     }
@@ -1963,7 +2246,12 @@
                                             {
                                               "decl_ref" : {
                                                 "kind" : ["ParmVar"],
-                                                "name" : "x",
+                                                "name" : {
+                                                  "name" : "x",
+                                                  "qual_name" : [
+                                                    "x"
+                                                  ]
+                                                },
                                                 "qual_type" : {
                                                   "raw" : "NSString *"
                                                 }
@@ -2049,7 +2337,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ParmVar"],
-                                                        "name" : "x",
+                                                        "name" : {
+                                                          "name" : "x",
+                                                          "qual_name" : [
+                                                            "x"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "NSString *"
                                                         }
@@ -2141,7 +2434,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ImplicitParam"],
-                                                        "name" : "self",
+                                                        "name" : {
+                                                          "name" : "self",
+                                                          "qual_name" : [
+                                                            "self"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "MyClass *"
                                                         }
@@ -2239,7 +2537,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ParmVar"],
-                                                            "name" : "x",
+                                                            "name" : {
+                                                              "name" : "x",
+                                                              "qual_name" : [
+                                                                "x"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "NSString *"
                                                             }
@@ -2342,7 +2645,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ParmVar"],
-                                                    "name" : "x",
+                                                    "name" : {
+                                                      "name" : "x",
+                                                      "qual_name" : [
+                                                        "x"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "NSString *"
                                                     }
@@ -2446,7 +2754,12 @@
                                   "attributes" : [
                                   ]
                                 },
-                                "x",
+                                {
+                                  "name" : "x",
+                                  "qual_name" : [
+                                    "x"
+                                  ]
+                                },
                                 {
                                   "raw" : "NSString *"
                                 },
@@ -2474,7 +2787,12 @@
                                     "attributes" : [
                                     ]
                                   },
-                                  "x",
+                                  {
+                                    "name" : "x",
+                                    "qual_name" : [
+                                      "x"
+                                    ]
+                                  },
                                   {
                                     "raw" : "NSString *"
                                   },
@@ -2486,7 +2804,12 @@
                                 {
                                   "variable" : {
                                     "kind" : ["ImplicitParam"],
-                                    "name" : "self",
+                                    "name" : {
+                                      "name" : "self",
+                                      "qual_name" : [
+                                        "self"
+                                      ]
+                                    },
                                     "qual_type" : {
                                       "raw" : "MyClass *"
                                     }
@@ -2603,7 +2926,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ImplicitParam"],
-                                                            "name" : "self",
+                                                            "name" : {
+                                                              "name" : "self",
+                                                              "qual_name" : [
+                                                                "self"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "MyClass *"
                                                             }
@@ -2635,7 +2963,13 @@
                                             {
                                               "kind" : ["PropertyRef" , {
                                                 "kind" : ["ObjCProperty"],
-                                                "name" : "str"
+                                                "name" : {
+                                                  "name" : "str",
+                                                  "qual_name" : [
+                                                    "str",
+                                                    "MyClass"
+                                                  ]
+                                                }
                                               }],
                                               "is_messaging_setter" : true
                                             }
@@ -2684,7 +3018,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ParmVar"],
-                                                    "name" : "x",
+                                                    "name" : {
+                                                      "name" : "x",
+                                                      "qual_name" : [
+                                                        "x"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "NSString *"
                                                     }
@@ -2760,7 +3099,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ImplicitParam"],
-                                                    "name" : "self",
+                                                    "name" : {
+                                                      "name" : "self",
+                                                      "qual_name" : [
+                                                        "self"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "MyClass *"
                                                     }
@@ -2825,7 +3169,12 @@
                                             {
                                               "decl_ref" : {
                                                 "kind" : ["ParmVar"],
-                                                "name" : "x",
+                                                "name" : {
+                                                  "name" : "x",
+                                                  "qual_name" : [
+                                                    "x"
+                                                  ]
+                                                },
                                                 "qual_type" : {
                                                   "raw" : "NSString *"
                                                 }
@@ -2911,7 +3260,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ParmVar"],
-                                                        "name" : "x",
+                                                        "name" : {
+                                                          "name" : "x",
+                                                          "qual_name" : [
+                                                            "x"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "NSString *"
                                                         }
@@ -3003,7 +3357,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ImplicitParam"],
-                                                        "name" : "self",
+                                                        "name" : {
+                                                          "name" : "self",
+                                                          "qual_name" : [
+                                                            "self"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "MyClass *"
                                                         }
@@ -3101,7 +3460,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ParmVar"],
-                                                            "name" : "x",
+                                                            "name" : {
+                                                              "name" : "x",
+                                                              "qual_name" : [
+                                                                "x"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "NSString *"
                                                             }
@@ -3204,7 +3568,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ParmVar"],
-                                                    "name" : "x",
+                                                    "name" : {
+                                                      "name" : "x",
+                                                      "qual_name" : [
+                                                        "x"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "NSString *"
                                                     }
@@ -3263,7 +3632,12 @@
                         "attributes" : [
                         ]
                       },
-                      "block",
+                      {
+                        "name" : "block",
+                        "qual_name" : [
+                          "block"
+                        ]
+                      },
                       {
                         "raw" : "NSUInteger (^)(NSString *)"
                       },
@@ -3338,7 +3712,12 @@
                                       "attributes" : [
                                       ]
                                     },
-                                    "x",
+                                    {
+                                      "name" : "x",
+                                      "qual_name" : [
+                                        "x"
+                                      ]
+                                    },
                                     {
                                       "raw" : "NSString *"
                                     },
@@ -3366,7 +3745,12 @@
                                         "attributes" : [
                                         ]
                                       },
-                                      "x",
+                                      {
+                                        "name" : "x",
+                                        "qual_name" : [
+                                          "x"
+                                        ]
+                                      },
                                       {
                                         "raw" : "NSString *"
                                       },
@@ -3378,7 +3762,12 @@
                                     {
                                       "variable" : {
                                         "kind" : ["ImplicitParam"],
-                                        "name" : "self",
+                                        "name" : {
+                                          "name" : "self",
+                                          "qual_name" : [
+                                            "self"
+                                          ]
+                                        },
                                         "qual_type" : {
                                           "raw" : "MyClass *"
                                         }
@@ -3495,7 +3884,12 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : ["ImplicitParam"],
-                                                                "name" : "self",
+                                                                "name" : {
+                                                                  "name" : "self",
+                                                                  "qual_name" : [
+                                                                    "self"
+                                                                  ]
+                                                                },
                                                                 "qual_type" : {
                                                                   "raw" : "MyClass *"
                                                                 }
@@ -3527,7 +3921,13 @@
                                                 {
                                                   "kind" : ["PropertyRef" , {
                                                     "kind" : ["ObjCProperty"],
-                                                    "name" : "str"
+                                                    "name" : {
+                                                      "name" : "str",
+                                                      "qual_name" : [
+                                                        "str",
+                                                        "MyClass"
+                                                      ]
+                                                    }
                                                   }],
                                                   "is_messaging_setter" : true
                                                 }
@@ -3576,7 +3976,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ParmVar"],
-                                                        "name" : "x",
+                                                        "name" : {
+                                                          "name" : "x",
+                                                          "qual_name" : [
+                                                            "x"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "NSString *"
                                                         }
@@ -3652,7 +4057,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ImplicitParam"],
-                                                        "name" : "self",
+                                                        "name" : {
+                                                          "name" : "self",
+                                                          "qual_name" : [
+                                                            "self"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "MyClass *"
                                                         }
@@ -3717,7 +4127,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ParmVar"],
-                                                    "name" : "x",
+                                                    "name" : {
+                                                      "name" : "x",
+                                                      "qual_name" : [
+                                                        "x"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "NSString *"
                                                     }
@@ -3803,7 +4218,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ParmVar"],
-                                                            "name" : "x",
+                                                            "name" : {
+                                                              "name" : "x",
+                                                              "qual_name" : [
+                                                                "x"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "NSString *"
                                                             }
@@ -3895,7 +4315,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ImplicitParam"],
-                                                            "name" : "self",
+                                                            "name" : {
+                                                              "name" : "self",
+                                                              "qual_name" : [
+                                                                "self"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "MyClass *"
                                                             }
@@ -3993,7 +4418,12 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : ["ParmVar"],
-                                                                "name" : "x",
+                                                                "name" : {
+                                                                  "name" : "x",
+                                                                  "qual_name" : [
+                                                                    "x"
+                                                                  ]
+                                                                },
                                                                 "qual_type" : {
                                                                   "raw" : "NSString *"
                                                                 }
@@ -4096,7 +4526,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ParmVar"],
-                                                        "name" : "x",
+                                                        "name" : {
+                                                          "name" : "x",
+                                                          "qual_name" : [
+                                                            "x"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "NSString *"
                                                         }
@@ -4200,7 +4635,12 @@
                                       "attributes" : [
                                       ]
                                     },
-                                    "x",
+                                    {
+                                      "name" : "x",
+                                      "qual_name" : [
+                                        "x"
+                                      ]
+                                    },
                                     {
                                       "raw" : "NSString *"
                                     },
@@ -4228,7 +4668,12 @@
                                         "attributes" : [
                                         ]
                                       },
-                                      "x",
+                                      {
+                                        "name" : "x",
+                                        "qual_name" : [
+                                          "x"
+                                        ]
+                                      },
                                       {
                                         "raw" : "NSString *"
                                       },
@@ -4240,7 +4685,12 @@
                                     {
                                       "variable" : {
                                         "kind" : ["ImplicitParam"],
-                                        "name" : "self",
+                                        "name" : {
+                                          "name" : "self",
+                                          "qual_name" : [
+                                            "self"
+                                          ]
+                                        },
                                         "qual_type" : {
                                           "raw" : "MyClass *"
                                         }
@@ -4357,7 +4807,12 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : ["ImplicitParam"],
-                                                                "name" : "self",
+                                                                "name" : {
+                                                                  "name" : "self",
+                                                                  "qual_name" : [
+                                                                    "self"
+                                                                  ]
+                                                                },
                                                                 "qual_type" : {
                                                                   "raw" : "MyClass *"
                                                                 }
@@ -4389,7 +4844,13 @@
                                                 {
                                                   "kind" : ["PropertyRef" , {
                                                     "kind" : ["ObjCProperty"],
-                                                    "name" : "str"
+                                                    "name" : {
+                                                      "name" : "str",
+                                                      "qual_name" : [
+                                                        "str",
+                                                        "MyClass"
+                                                      ]
+                                                    }
                                                   }],
                                                   "is_messaging_setter" : true
                                                 }
@@ -4438,7 +4899,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ParmVar"],
-                                                        "name" : "x",
+                                                        "name" : {
+                                                          "name" : "x",
+                                                          "qual_name" : [
+                                                            "x"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "NSString *"
                                                         }
@@ -4514,7 +4980,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ImplicitParam"],
-                                                        "name" : "self",
+                                                        "name" : {
+                                                          "name" : "self",
+                                                          "qual_name" : [
+                                                            "self"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "MyClass *"
                                                         }
@@ -4579,7 +5050,12 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : ["ParmVar"],
-                                                    "name" : "x",
+                                                    "name" : {
+                                                      "name" : "x",
+                                                      "qual_name" : [
+                                                        "x"
+                                                      ]
+                                                    },
                                                     "qual_type" : {
                                                       "raw" : "NSString *"
                                                     }
@@ -4665,7 +5141,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ParmVar"],
-                                                            "name" : "x",
+                                                            "name" : {
+                                                              "name" : "x",
+                                                              "qual_name" : [
+                                                                "x"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "NSString *"
                                                             }
@@ -4757,7 +5238,12 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : ["ImplicitParam"],
-                                                            "name" : "self",
+                                                            "name" : {
+                                                              "name" : "self",
+                                                              "qual_name" : [
+                                                                "self"
+                                                              ]
+                                                            },
                                                             "qual_type" : {
                                                               "raw" : "MyClass *"
                                                             }
@@ -4855,7 +5341,12 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : ["ParmVar"],
-                                                                "name" : "x",
+                                                                "name" : {
+                                                                  "name" : "x",
+                                                                  "qual_name" : [
+                                                                    "x"
+                                                                  ]
+                                                                },
                                                                 "qual_type" : {
                                                                   "raw" : "NSString *"
                                                                 }
@@ -4958,7 +5449,12 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : ["ParmVar"],
-                                                        "name" : "x",
+                                                        "name" : {
+                                                          "name" : "x",
+                                                          "qual_name" : [
+                                                            "x"
+                                                          ]
+                                                        },
                                                         "qual_type" : {
                                                           "raw" : "NSString *"
                                                         }
@@ -5163,7 +5659,12 @@
                                 "attributes" : [
                                 ]
                               },
-                              "a",
+                              {
+                                "name" : "a",
+                                "qual_name" : [
+                                  "a"
+                                ]
+                              },
                               {
                                 "raw" : "NSArray *"
                               },
@@ -5321,7 +5822,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["Function"],
-                                      "name" : "NSLog",
+                                      "name" : {
+                                        "name" : "NSLog",
+                                        "qual_name" : [
+                                          "NSLog"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "void (NSString *, ...)"
                                       }
@@ -5464,7 +5970,12 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : ["Var"],
-                                                  "name" : "a",
+                                                  "name" : {
+                                                    "name" : "a",
+                                                    "qual_name" : [
+                                                      "a"
+                                                    ]
+                                                  },
                                                   "qual_type" : {
                                                     "raw" : "NSArray *"
                                                   }
@@ -5599,7 +6110,12 @@
                                           {
                                             "decl_ref" : {
                                               "kind" : ["Var"],
-                                              "name" : "a",
+                                              "name" : {
+                                                "name" : "a",
+                                                "qual_name" : [
+                                                  "a"
+                                                ]
+                                              },
                                               "qual_type" : {
                                                 "raw" : "NSArray *"
                                               }
@@ -5736,7 +6252,12 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : ["Var"],
-                                                  "name" : "a",
+                                                  "name" : {
+                                                    "name" : "a",
+                                                    "qual_name" : [
+                                                      "a"
+                                                    ]
+                                                  },
                                                   "qual_type" : {
                                                     "raw" : "NSArray *"
                                                   }
@@ -6048,7 +6569,12 @@
                                 "attributes" : [
                                 ]
                               },
-                              "d",
+                              {
+                                "name" : "d",
+                                "qual_name" : [
+                                  "d"
+                                ]
+                              },
                               {
                                 "raw" : "NSDictionary *"
                               },
@@ -6267,7 +6793,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["Function"],
-                                      "name" : "NSLog",
+                                      "name" : {
+                                        "name" : "NSLog",
+                                        "qual_name" : [
+                                          "NSLog"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "void (NSString *, ...)"
                                       }
@@ -6410,7 +6941,12 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : ["Var"],
-                                                  "name" : "d",
+                                                  "name" : {
+                                                    "name" : "d",
+                                                    "qual_name" : [
+                                                      "d"
+                                                    ]
+                                                  },
                                                   "qual_type" : {
                                                     "raw" : "NSDictionary *"
                                                   }
@@ -6562,7 +7098,12 @@
                                           {
                                             "decl_ref" : {
                                               "kind" : ["Var"],
-                                              "name" : "d",
+                                              "name" : {
+                                                "name" : "d",
+                                                "qual_name" : [
+                                                  "d"
+                                                ]
+                                              },
                                               "qual_type" : {
                                                 "raw" : "NSDictionary *"
                                               }
@@ -6716,7 +7257,12 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : ["Var"],
-                                                  "name" : "d",
+                                                  "name" : {
+                                                    "name" : "d",
+                                                    "qual_name" : [
+                                                      "d"
+                                                    ]
+                                                  },
                                                   "qual_type" : {
                                                     "raw" : "NSDictionary *"
                                                   }
@@ -6903,7 +7449,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["Function"],
-                                      "name" : "NSLog",
+                                      "name" : {
+                                        "name" : "NSLog",
+                                        "qual_name" : [
+                                          "NSLog"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "void (NSString *, ...)"
                                       }
@@ -7026,7 +7577,12 @@
                                           {
                                             "decl_ref" : {
                                               "kind" : ["Var"],
-                                              "name" : "block",
+                                              "name" : {
+                                                "name" : "block",
+                                                "qual_name" : [
+                                                  "block"
+                                                ]
+                                              },
                                               "qual_type" : {
                                                 "raw" : "NSUInteger (^)(NSString *)"
                                               }
@@ -7161,7 +7717,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : ["Function"],
-                                          "name" : "NSLog",
+                                          "name" : {
+                                            "name" : "NSLog",
+                                            "qual_name" : [
+                                              "NSLog"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "void (NSString *, ...)"
                                           }
@@ -7258,7 +7819,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : ["Var"],
-                                          "name" : "e",
+                                          "name" : {
+                                            "name" : "e",
+                                            "qual_name" : [
+                                              "e"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "NSException *"
                                           }
@@ -7304,7 +7870,12 @@
                           "attributes" : [
                           ]
                         },
-                        "e",
+                        {
+                          "name" : "e",
+                          "qual_name" : [
+                            "e"
+                          ]
+                        },
                         {
                           "raw" : "NSException *"
                         },
@@ -7392,7 +7963,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : ["Function"],
-                                          "name" : "NSLog",
+                                          "name" : {
+                                            "name" : "NSLog",
+                                            "qual_name" : [
+                                              "NSLog"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "void (NSString *, ...)"
                                           }
@@ -7566,7 +8142,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : ["Function"],
-                                  "name" : "NSLog",
+                                  "name" : {
+                                    "name" : "NSLog",
+                                    "qual_name" : [
+                                      "NSLog"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "void (NSString *, ...)"
                                   }
@@ -7656,7 +8237,13 @@
             "attributes" : [
             ]
           },
-          "_str",
+          {
+            "name" : "_str",
+            "qual_name" : [
+              "_str",
+              "MyClass"
+            ]
+          },
           {
             "raw" : "NSString *"
           },
@@ -7684,11 +8271,23 @@
             "implementation" : ["Synthesize"],
             "property_decl" : {
               "kind" : ["ObjCProperty"],
-              "name" : "str"
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyClass"
+                ]
+              }
             },
             "ivar_decl" : {
               "kind" : ["ObjCIvar"],
-              "name" : "_str",
+              "name" : {
+                "name" : "_str",
+                "qual_name" : [
+                  "_str",
+                  "MyClass"
+                ]
+              },
               "qual_type" : {
                 "raw" : "NSString *"
               }
@@ -7710,7 +8309,13 @@
             "attributes" : [
             ]
           },
-          "_x",
+          {
+            "name" : "_x",
+            "qual_name" : [
+              "_x",
+              "MyClass"
+            ]
+          },
           {
             "raw" : "void *"
           },
@@ -7738,11 +8343,23 @@
             "implementation" : ["Synthesize"],
             "property_decl" : {
               "kind" : ["ObjCProperty"],
-              "name" : "x"
+              "name" : {
+                "name" : "x",
+                "qual_name" : [
+                  "x",
+                  "MyClass"
+                ]
+              }
             },
             "ivar_decl" : {
               "kind" : ["ObjCIvar"],
-              "name" : "_x",
+              "name" : {
+                "name" : "_x",
+                "qual_name" : [
+                  "_x",
+                  "MyClass"
+                ]
+              },
               "qual_type" : {
                 "raw" : "void *"
               }
@@ -7764,7 +8381,13 @@
             "attributes" : [
             ]
           },
-          "_y",
+          {
+            "name" : "_y",
+            "qual_name" : [
+              "_y",
+              "MyClass"
+            ]
+          },
           {
             "raw" : "int"
           },
@@ -7792,11 +8415,23 @@
             "implementation" : ["Synthesize"],
             "property_decl" : {
               "kind" : ["ObjCProperty"],
-              "name" : "y"
+              "name" : {
+                "name" : "y",
+                "qual_name" : [
+                  "y",
+                  "MyClass"
+                ]
+              }
             },
             "ivar_decl" : {
               "kind" : ["ObjCIvar"],
-              "name" : "_y",
+              "name" : {
+                "name" : "_y",
+                "qual_name" : [
+                  "_y",
+                  "MyClass"
+                ]
+              },
               "qual_type" : {
                 "raw" : "int"
               }
@@ -7818,7 +8453,13 @@
             "attributes" : [
             ]
           },
-          "_delegate",
+          {
+            "name" : "_delegate",
+            "qual_name" : [
+              "_delegate",
+              "MyClass"
+            ]
+          },
           {
             "raw" : "NSObject<SomeProtocol> *"
           },
@@ -7846,11 +8487,23 @@
             "implementation" : ["Synthesize"],
             "property_decl" : {
               "kind" : ["ObjCProperty"],
-              "name" : "delegate"
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "MyClass"
+                ]
+              }
             },
             "ivar_decl" : {
               "kind" : ["ObjCIvar"],
-              "name" : "_delegate",
+              "name" : {
+                "name" : "_delegate",
+                "qual_name" : [
+                  "_delegate",
+                  "MyClass"
+                ]
+              },
               "qual_type" : {
                 "raw" : "NSObject<SomeProtocol> *"
               }
@@ -7863,7 +8516,12 @@
       {
         "class_interface" : {
           "kind" : ["ObjCInterface"],
-          "name" : "MyClass"
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
         }
       }
     ]],
@@ -7883,7 +8541,12 @@
         "attributes" : [
         ]
       },
-      "MyCategory",
+      {
+        "name" : "MyCategory",
+        "qual_name" : [
+          "MyCategory"
+        ]
+      },
       [
         ["ObjCMethodDecl" , [
           {
@@ -7900,7 +8563,13 @@
             "attributes" : [
             ]
           },
-          "bar:",
+          {
+            "name" : "bar:",
+            "qual_name" : [
+              "bar:",
+              "MyCategory"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -7921,7 +8590,12 @@
                   "attributes" : [
                   ]
                 },
-                "s",
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
                 {
                   "raw" : "NSString *"
                 },
@@ -7937,11 +8611,21 @@
       {
         "class_interface" : {
           "kind" : ["ObjCInterface"],
-          "name" : "MyClass"
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
         },
         "implementation" : {
           "kind" : ["ObjCCategoryImpl"],
-          "name" : "MyClass"
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
         }
       }
     ]],
@@ -7961,7 +8645,12 @@
         "attributes" : [
         ]
       },
-      "MyClass",
+      {
+        "name" : "MyClass",
+        "qual_name" : [
+          "MyClass"
+        ]
+      },
       [
         ["ObjCMethodDecl" , [
           {
@@ -7979,7 +8668,13 @@
             "attributes" : [
             ]
           },
-          "bar:",
+          {
+            "name" : "bar:",
+            "qual_name" : [
+              "bar:",
+              "MyClass"
+            ]
+          },
           {
             "is_instance_method" : true,
             "result_type" : {
@@ -8001,7 +8696,12 @@
                   "attributes" : [
                   ]
                 },
-                "s",
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
                 {
                   "raw" : "NSString *"
                 },
@@ -8127,7 +8827,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : ["ImplicitParam"],
-                                          "name" : "self",
+                                          "name" : {
+                                            "name" : "self",
+                                            "qual_name" : [
+                                              "self"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "MyClass *"
                                           }
@@ -8159,7 +8864,13 @@
                           {
                             "kind" : ["PropertyRef" , {
                               "kind" : ["ObjCProperty"],
-                              "name" : "x"
+                              "name" : {
+                                "name" : "x",
+                                "qual_name" : [
+                                  "x",
+                                  "MyClass"
+                                ]
+                              }
                             }],
                             "is_messaging_setter" : true
                           }
@@ -8354,7 +9065,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : ["ImplicitParam"],
-                                  "name" : "self",
+                                  "name" : {
+                                    "name" : "self",
+                                    "qual_name" : [
+                                      "self"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "MyClass *"
                                   }
@@ -8568,7 +9284,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["ImplicitParam"],
-                                      "name" : "self",
+                                      "name" : {
+                                        "name" : "self",
+                                        "qual_name" : [
+                                          "self"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "MyClass *"
                                       }
@@ -8825,7 +9546,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : ["ImplicitParam"],
-                                          "name" : "self",
+                                          "name" : {
+                                            "name" : "self",
+                                            "qual_name" : [
+                                              "self"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "MyClass *"
                                           }
@@ -8857,7 +9583,13 @@
                           {
                             "kind" : ["PropertyRef" , {
                               "kind" : ["ObjCProperty"],
-                              "name" : "y"
+                              "name" : {
+                                "name" : "y",
+                                "qual_name" : [
+                                  "y",
+                                  "MyClass"
+                                ]
+                              }
                             }],
                             "is_messaging_setter" : true
                           }
@@ -8975,7 +9707,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : ["ImplicitParam"],
-                                  "name" : "self",
+                                  "name" : {
+                                    "name" : "self",
+                                    "qual_name" : [
+                                      "self"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "MyClass *"
                                   }
@@ -9112,7 +9849,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["ImplicitParam"],
-                                      "name" : "self",
+                                      "name" : {
+                                        "name" : "self",
+                                        "qual_name" : [
+                                          "self"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "MyClass *"
                                       }
@@ -9301,7 +10043,12 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : ["ImplicitParam"],
-                                          "name" : "self",
+                                          "name" : {
+                                            "name" : "self",
+                                            "qual_name" : [
+                                              "self"
+                                            ]
+                                          },
                                           "qual_type" : {
                                             "raw" : "MyClass *"
                                           }
@@ -9333,7 +10080,13 @@
                           {
                             "kind" : ["PropertyRef" , {
                               "kind" : ["ObjCProperty"],
-                              "name" : "delegate"
+                              "name" : {
+                                "name" : "delegate",
+                                "qual_name" : [
+                                  "delegate",
+                                  "MyClass"
+                                ]
+                              }
                             }],
                             "is_messaging_setter" : true
                           }
@@ -9534,7 +10287,12 @@
                               {
                                 "decl_ref" : {
                                   "kind" : ["ImplicitParam"],
-                                  "name" : "self",
+                                  "name" : {
+                                    "name" : "self",
+                                    "qual_name" : [
+                                      "self"
+                                    ]
+                                  },
                                   "qual_type" : {
                                     "raw" : "MyClass *"
                                   }
@@ -9925,7 +10683,12 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : ["ImplicitParam"],
-                                      "name" : "self",
+                                      "name" : {
+                                        "name" : "self",
+                                        "qual_name" : [
+                                          "self"
+                                        ]
+                                      },
                                       "qual_type" : {
                                         "raw" : "MyClass *"
                                       }
@@ -10147,11 +10910,21 @@
       {
         "class_interface" : {
           "kind" : ["ObjCInterface"],
-          "name" : "MyClass"
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
         },
         "category_decl" : {
           "kind" : ["ObjCCategory"],
-          "name" : "MyCategory"
+          "name" : {
+            "name" : "MyCategory",
+            "qual_name" : [
+              "MyCategory"
+            ]
+          }
         }
       }
     ]],
@@ -10172,7 +10945,12 @@
         "attributes" : [
         ]
       },
-      "main",
+      {
+        "name" : "main",
+        "qual_name" : [
+          "main"
+        ]
+      },
       {
         "raw" : "int (int, char **)"
       },
@@ -10193,7 +10971,12 @@
               "attributes" : [
               ]
             },
-            "argc",
+            {
+              "name" : "argc",
+              "qual_name" : [
+                "argc"
+              ]
+            },
             {
               "raw" : "int"
             },
@@ -10214,7 +10997,12 @@
               "attributes" : [
               ]
             },
-            "argv",
+            {
+              "name" : "argv",
+              "qual_name" : [
+                "argv"
+              ]
+            },
             {
               "raw" : "char **"
             },

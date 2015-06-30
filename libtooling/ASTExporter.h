@@ -127,6 +127,8 @@ public:
   void dumpLookups(const DeclContext &DC);
   void dumpAttr(const Attr &A);
   void dumpSelector(const Selector sel);
+  void dumpName(const NamedDecl& decl);
+
 
   // C++ Utilities
   void dumpAccessSpecifier(AccessSpecifier AS);
@@ -394,9 +396,44 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
 }
 
 /// \atd
+/// type named_decl_info = {
+///   name : string;
+///   qual_name : string list
+/// } <ocaml field_prefix="ni_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpName(const NamedDecl& decl) {
+  // dump name
+  ObjectScope oScope(OF);
+  OF.emitTag("name");
+  OF.emitString(decl.getNameAsString());
+  OF.emitTag("qual_name");
+  {
+    ArrayScope aScope(OF);
+    std::string qualName = decl.getQualifiedNameAsString();
+    // split name with :: and reverse the list
+    std::vector<std::string> splitted;
+    std::string token = "::";
+    std::string::size_type firstChar = 0;
+    std::string::size_type lastChar = qualName.find(token, firstChar);
+    while (lastChar != std::string::npos) {
+
+      splitted.push_back(qualName.substr(firstChar, lastChar - firstChar));
+      firstChar = lastChar + token.length();
+      lastChar = qualName.find(token, firstChar);
+    }
+    splitted.push_back(qualName.substr(firstChar));
+
+    // dump list in reverse
+    for (int i = splitted.size() - 1; i >= 0; i--) {
+      OF.emitString(splitted[i]);
+    }
+  }
+}
+
+/// \atd
 /// type decl_ref = {
 ///   kind : decl_kind;
-///   ?name : string option;
+///   ?name : named_decl_info option;
 ///   ~is_hidden : bool;
 ///   ?qual_type : qual_type option
 /// } <ocaml field_prefix="dr_">
@@ -414,7 +451,7 @@ void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
   const NamedDecl *ND = dyn_cast<NamedDecl>(&D);
   if (ND) {
     OF.emitTag("name");
-    OF.emitString(ND->getNameAsString());
+    dumpName(*ND);
     OF.emitFlag("is_hidden", ND->isHidden());
   }
   if (const ValueDecl *VD = dyn_cast<ValueDecl>(&D)) {
@@ -998,11 +1035,11 @@ void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(const TranslationUnitDecl 
 }
 
 /// \atd
-/// #define named_decl_tuple decl_tuple * string
+/// #define named_decl_tuple decl_tuple * named_decl_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamedDecl(const NamedDecl *D) {
   VisitDecl(D);
-  OF.emitString(D->getNameAsString());
+  dumpName(*D);
 }
 
 /// \atd
@@ -2455,7 +2492,7 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
 /// #define member_expr_tuple expr_tuple * member_expr_info
 /// type member_expr_info = {
 ///   ~is_arrow : bool;
-///   name : string;
+///   name : named_decl_info;
 ///   pointer : pointer
 /// } <ocaml field_prefix="mei_">
 template <class ATDWriter>
@@ -2464,9 +2501,10 @@ void ASTExporter<ATDWriter>::VisitMemberExpr(const MemberExpr *Node) {
   ObjectScope Scope(OF);
   OF.emitFlag("is_arrow", Node->isArrow());
   OF.emitTag("name");
-  OF.emitString(Node->getMemberDecl()->getNameAsString());
+  ValueDecl *memberDecl = Node->getMemberDecl();
+  dumpName(*memberDecl);
   OF.emitTag("pointer");
-  dumpPointer(Node->getMemberDecl());
+  dumpPointer(memberDecl);
 }
 
 /// \atd

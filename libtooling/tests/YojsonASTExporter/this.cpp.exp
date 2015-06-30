@@ -24,7 +24,12 @@
         "attributes" : [
         ]
       },
-      "__int128_t",
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -42,7 +47,12 @@
         "attributes" : [
         ]
       },
-      "__uint128_t",
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -60,7 +70,12 @@
         "attributes" : [
         ]
       },
-      "SEL",
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -78,7 +93,12 @@
         "attributes" : [
         ]
       },
-      "id",
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -96,7 +116,12 @@
         "attributes" : [
         ]
       },
-      "Class",
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -114,7 +139,12 @@
         "attributes" : [
         ]
       },
-      "Protocol",
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
       [
       ],
       {
@@ -135,7 +165,12 @@
         "attributes" : [
         ]
       },
-      "__builtin_va_list",
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
       <"NoType">,
       {
       }
@@ -157,7 +192,12 @@
         "attributes" : [
         ]
       },
-      "T",
+      {
+        "name" : "T",
+        "qual_name" : [
+          "T"
+        ]
+      },
       <"Type" : "class T">,
       [
         <"CXXRecordDecl" : (
@@ -176,7 +216,13 @@
             "attributes" : [
             ]
           },
-          "T",
+          {
+            "name" : "T",
+            "qual_name" : [
+              "T",
+              "T"
+            ]
+          },
           <"Type" : "class T">,
           [
           ],
@@ -201,7 +247,13 @@
             "attributes" : [
             ]
           },
-          "age",
+          {
+            "name" : "age",
+            "qual_name" : [
+              "age",
+              "T"
+            ]
+          },
           {
             "raw" : "int"
           },
@@ -224,7 +276,13 @@
             "attributes" : [
             ]
           },
-          "foo",
+          {
+            "name" : "foo",
+            "qual_name" : [
+              "foo",
+              "T"
+            ]
+          },
           {
             "raw" : "void (void)"
           },
@@ -300,7 +358,13 @@
                       },
                       {
                         "is_arrow" : true,
-                        "name" : "age",
+                        "name" : {
+                          "name" : "age",
+                          "qual_name" : [
+                            "age",
+                            "T"
+                          ]
+                        },
                         "pointer" : "0x0"
                       }
                     )>,

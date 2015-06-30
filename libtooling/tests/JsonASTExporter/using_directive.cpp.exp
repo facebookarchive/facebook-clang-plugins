@@ -24,7 +24,12 @@
         "attributes" : [
         ]
       },
-      "__int128_t",
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -42,7 +47,12 @@
         "attributes" : [
         ]
       },
-      "__uint128_t",
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -60,7 +70,12 @@
         "attributes" : [
         ]
       },
-      "SEL",
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -78,7 +93,12 @@
         "attributes" : [
         ]
       },
-      "id",
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -96,7 +116,12 @@
         "attributes" : [
         ]
       },
-      "Class",
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -114,7 +139,12 @@
         "attributes" : [
         ]
       },
-      "Protocol",
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
       [
       ],
       {
@@ -135,7 +165,12 @@
         "attributes" : [
         ]
       },
-      "__builtin_va_list",
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
       ["NoType"],
       {
       }
@@ -157,7 +192,12 @@
         "attributes" : [
         ]
       },
-      "nsa",
+      {
+        "name" : "nsa",
+        "qual_name" : [
+          "nsa"
+        ]
+      },
       [
         ["NamespaceDecl" , [
           {
@@ -175,7 +215,13 @@
             "attributes" : [
             ]
           },
-          "nsb",
+          {
+            "name" : "nsb",
+            "qual_name" : [
+              "nsb",
+              "nsa"
+            ]
+          },
           [
             ["VarDecl" , [
               {
@@ -194,7 +240,14 @@
                 "attributes" : [
                 ]
               },
-              "a",
+              {
+                "name" : "a",
+                "qual_name" : [
+                  "a",
+                  "nsb",
+                  "nsa"
+                ]
+              },
               {
                 "raw" : "int"
               },
@@ -228,7 +281,12 @@
         "attributes" : [
         ]
       },
-      "<using-directive>",
+      {
+        "name" : "<using-directive>",
+        "qual_name" : [
+          "<using-directive>"
+        ]
+      },
       {
         "using_location" : {
           "column" : 1
@@ -241,13 +299,24 @@
             "kind" : ["Namespace"],
             "ref" : {
               "kind" : ["Namespace"],
-              "name" : "nsa"
+              "name" : {
+                "name" : "nsa",
+                "qual_name" : [
+                  "nsa"
+                ]
+              }
             }
           }
         ],
         "nominated_namespace" : {
           "kind" : ["Namespace"],
-          "name" : "nsb"
+          "name" : {
+            "name" : "nsb",
+            "qual_name" : [
+              "nsb",
+              "nsa"
+            ]
+          }
         }
       }
     ]],
@@ -266,7 +335,12 @@
         "attributes" : [
         ]
       },
-      "B",
+      {
+        "name" : "B",
+        "qual_name" : [
+          "B"
+        ]
+      },
       {
         "column" : 1
       },
@@ -278,13 +352,24 @@
           "kind" : ["Namespace"],
           "ref" : {
             "kind" : ["Namespace"],
-            "name" : "nsa"
+            "name" : {
+              "name" : "nsa",
+              "qual_name" : [
+                "nsa"
+              ]
+            }
           }
         }
       ],
       {
         "kind" : ["Namespace"],
-        "name" : "nsb"
+        "name" : {
+          "name" : "nsb",
+          "qual_name" : [
+            "nsb",
+            "nsa"
+          ]
+        }
       }
     ]],
     ["VarDecl" , [
@@ -302,7 +387,12 @@
         "attributes" : [
         ]
       },
-      "b",
+      {
+        "name" : "b",
+        "qual_name" : [
+          "b"
+        ]
+      },
       {
         "raw" : "int"
       },
@@ -343,7 +433,14 @@
               {
                 "decl_ref" : {
                   "kind" : ["Var"],
-                  "name" : "a",
+                  "name" : {
+                    "name" : "a",
+                    "qual_name" : [
+                      "a",
+                      "nsb",
+                      "nsa"
+                    ]
+                  },
                   "qual_type" : {
                     "raw" : "int"
                   }
