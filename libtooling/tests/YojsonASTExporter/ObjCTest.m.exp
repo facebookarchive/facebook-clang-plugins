@@ -867,6 +867,7 @@
       {
         "super" : {
           "kind" : <"ObjCInterface">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "NSObject",
             "qual_name" : [
@@ -876,6 +877,7 @@
         },
         "implementation" : {
           "kind" : <"ObjCImplementation">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyClass",
             "qual_name" : [
@@ -886,6 +888,7 @@
         "protocols" : [
           {
             "kind" : <"ObjCProtocol">,
+            "decl_pointer" : "0x0",
             "name" : {
               "name" : "MyProtocol",
               "qual_name" : [
@@ -982,6 +985,7 @@
       {
         "class_interface" : {
           "kind" : <"ObjCInterface">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyClass",
             "qual_name" : [
@@ -1135,6 +1139,7 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Function">,
+                              "decl_pointer" : "0x0",
                               "name" : {
                                 "name" : "NSLog",
                                 "qual_name" : [
@@ -1307,6 +1312,7 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Function">,
+                              "decl_pointer" : "0x0",
                               "name" : {
                                 "name" : "NSLog",
                                 "qual_name" : [
@@ -1422,6 +1428,7 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"ImplicitParam">,
+                                  "decl_pointer" : "0x0",
                                   "name" : {
                                     "name" : "self",
                                     "qual_name" : [
@@ -1536,6 +1543,7 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Function">,
+                              "decl_pointer" : "0x0",
                               "name" : {
                                 "name" : "NSLog",
                                 "qual_name" : [
@@ -1664,6 +1672,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"ImplicitParam">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "self",
                                         "qual_name" : [
@@ -1720,6 +1729,7 @@
                           },
                           {
                             "kind" : <"ObjCProtocol">,
+                            "decl_pointer" : "0x0",
                             "name" : {
                               "name" : "MyProtocol",
                               "qual_name" : [
@@ -1881,6 +1891,7 @@
                                 {
                                   "variable" : {
                                     "kind" : <"ImplicitParam">,
+                                    "decl_pointer" : "0x0",
                                     "name" : {
                                       "name" : "self",
                                       "qual_name" : [
@@ -2003,6 +2014,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ImplicitParam">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "self",
                                                               "qual_name" : [
@@ -2040,6 +2052,7 @@
                                             {
                                               "kind" : <"PropertyRef" : {
                                                 "kind" : <"ObjCProperty">,
+                                                "decl_pointer" : "0x0",
                                                 "name" : {
                                                   "name" : "str",
                                                   "qual_name" : [
@@ -2095,6 +2108,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ParmVar">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "x",
                                                       "qual_name" : [
@@ -2176,6 +2190,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ImplicitParam">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "self",
                                                       "qual_name" : [
@@ -2246,6 +2261,7 @@
                                             {
                                               "decl_ref" : {
                                                 "kind" : <"ParmVar">,
+                                                "decl_pointer" : "0x0",
                                                 "name" : {
                                                   "name" : "x",
                                                   "qual_name" : [
@@ -2337,6 +2353,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ParmVar">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "x",
                                                           "qual_name" : [
@@ -2434,6 +2451,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ImplicitParam">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "self",
                                                           "qual_name" : [
@@ -2537,6 +2555,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ParmVar">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "x",
                                                               "qual_name" : [
@@ -2645,6 +2664,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ParmVar">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "x",
                                                       "qual_name" : [
@@ -2696,7 +2716,8 @@
                       {
                         "decl_refs" : [
                           {
-                            "kind" : <"Block">
+                            "kind" : <"Block">,
+                            "decl_pointer" : "0x0"
                           }
                         ],
                         "sub_expr" : <"BlockExpr" : (
@@ -2804,6 +2825,7 @@
                                 {
                                   "variable" : {
                                     "kind" : <"ImplicitParam">,
+                                    "decl_pointer" : "0x0",
                                     "name" : {
                                       "name" : "self",
                                       "qual_name" : [
@@ -2926,6 +2948,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ImplicitParam">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "self",
                                                               "qual_name" : [
@@ -2963,6 +2986,7 @@
                                             {
                                               "kind" : <"PropertyRef" : {
                                                 "kind" : <"ObjCProperty">,
+                                                "decl_pointer" : "0x0",
                                                 "name" : {
                                                   "name" : "str",
                                                   "qual_name" : [
@@ -3018,6 +3042,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ParmVar">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "x",
                                                       "qual_name" : [
@@ -3099,6 +3124,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ImplicitParam">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "self",
                                                       "qual_name" : [
@@ -3169,6 +3195,7 @@
                                             {
                                               "decl_ref" : {
                                                 "kind" : <"ParmVar">,
+                                                "decl_pointer" : "0x0",
                                                 "name" : {
                                                   "name" : "x",
                                                   "qual_name" : [
@@ -3260,6 +3287,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ParmVar">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "x",
                                                           "qual_name" : [
@@ -3357,6 +3385,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ImplicitParam">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "self",
                                                           "qual_name" : [
@@ -3460,6 +3489,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ParmVar">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "x",
                                                               "qual_name" : [
@@ -3568,6 +3598,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ParmVar">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "x",
                                                       "qual_name" : [
@@ -3762,6 +3793,7 @@
                                     {
                                       "variable" : {
                                         "kind" : <"ImplicitParam">,
+                                        "decl_pointer" : "0x0",
                                         "name" : {
                                           "name" : "self",
                                           "qual_name" : [
@@ -3884,6 +3916,7 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : <"ImplicitParam">,
+                                                                "decl_pointer" : "0x0",
                                                                 "name" : {
                                                                   "name" : "self",
                                                                   "qual_name" : [
@@ -3921,6 +3954,7 @@
                                                 {
                                                   "kind" : <"PropertyRef" : {
                                                     "kind" : <"ObjCProperty">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "str",
                                                       "qual_name" : [
@@ -3976,6 +4010,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ParmVar">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "x",
                                                           "qual_name" : [
@@ -4057,6 +4092,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ImplicitParam">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "self",
                                                           "qual_name" : [
@@ -4127,6 +4163,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ParmVar">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "x",
                                                       "qual_name" : [
@@ -4218,6 +4255,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ParmVar">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "x",
                                                               "qual_name" : [
@@ -4315,6 +4353,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ImplicitParam">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "self",
                                                               "qual_name" : [
@@ -4418,6 +4457,7 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : <"ParmVar">,
+                                                                "decl_pointer" : "0x0",
                                                                 "name" : {
                                                                   "name" : "x",
                                                                   "qual_name" : [
@@ -4526,6 +4566,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ParmVar">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "x",
                                                           "qual_name" : [
@@ -4577,7 +4618,8 @@
                           {
                             "decl_refs" : [
                               {
-                                "kind" : <"Block">
+                                "kind" : <"Block">,
+                                "decl_pointer" : "0x0"
                               }
                             ],
                             "sub_expr" : <"BlockExpr" : (
@@ -4685,6 +4727,7 @@
                                     {
                                       "variable" : {
                                         "kind" : <"ImplicitParam">,
+                                        "decl_pointer" : "0x0",
                                         "name" : {
                                           "name" : "self",
                                           "qual_name" : [
@@ -4807,6 +4850,7 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : <"ImplicitParam">,
+                                                                "decl_pointer" : "0x0",
                                                                 "name" : {
                                                                   "name" : "self",
                                                                   "qual_name" : [
@@ -4844,6 +4888,7 @@
                                                 {
                                                   "kind" : <"PropertyRef" : {
                                                     "kind" : <"ObjCProperty">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "str",
                                                       "qual_name" : [
@@ -4899,6 +4944,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ParmVar">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "x",
                                                           "qual_name" : [
@@ -4980,6 +5026,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ImplicitParam">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "self",
                                                           "qual_name" : [
@@ -5050,6 +5097,7 @@
                                                 {
                                                   "decl_ref" : {
                                                     "kind" : <"ParmVar">,
+                                                    "decl_pointer" : "0x0",
                                                     "name" : {
                                                       "name" : "x",
                                                       "qual_name" : [
@@ -5141,6 +5189,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ParmVar">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "x",
                                                               "qual_name" : [
@@ -5238,6 +5287,7 @@
                                                         {
                                                           "decl_ref" : {
                                                             "kind" : <"ImplicitParam">,
+                                                            "decl_pointer" : "0x0",
                                                             "name" : {
                                                               "name" : "self",
                                                               "qual_name" : [
@@ -5341,6 +5391,7 @@
                                                             {
                                                               "decl_ref" : {
                                                                 "kind" : <"ParmVar">,
+                                                                "decl_pointer" : "0x0",
                                                                 "name" : {
                                                                   "name" : "x",
                                                                   "qual_name" : [
@@ -5449,6 +5500,7 @@
                                                     {
                                                       "decl_ref" : {
                                                         "kind" : <"ParmVar">,
+                                                        "decl_pointer" : "0x0",
                                                         "name" : {
                                                           "name" : "x",
                                                           "qual_name" : [
@@ -5822,6 +5874,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Function">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "NSLog",
                                         "qual_name" : [
@@ -5970,6 +6023,7 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : <"Var">,
+                                                  "decl_pointer" : "0x0",
                                                   "name" : {
                                                     "name" : "a",
                                                     "qual_name" : [
@@ -6110,6 +6164,7 @@
                                           {
                                             "decl_ref" : {
                                               "kind" : <"Var">,
+                                              "decl_pointer" : "0x0",
                                               "name" : {
                                                 "name" : "a",
                                                 "qual_name" : [
@@ -6252,6 +6307,7 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : <"Var">,
+                                                  "decl_pointer" : "0x0",
                                                   "name" : {
                                                     "name" : "a",
                                                     "qual_name" : [
@@ -6793,6 +6849,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Function">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "NSLog",
                                         "qual_name" : [
@@ -6941,6 +6998,7 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : <"Var">,
+                                                  "decl_pointer" : "0x0",
                                                   "name" : {
                                                     "name" : "d",
                                                     "qual_name" : [
@@ -7098,6 +7156,7 @@
                                           {
                                             "decl_ref" : {
                                               "kind" : <"Var">,
+                                              "decl_pointer" : "0x0",
                                               "name" : {
                                                 "name" : "d",
                                                 "qual_name" : [
@@ -7257,6 +7316,7 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : <"Var">,
+                                                  "decl_pointer" : "0x0",
                                                   "name" : {
                                                     "name" : "d",
                                                     "qual_name" : [
@@ -7449,6 +7509,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Function">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "NSLog",
                                         "qual_name" : [
@@ -7577,6 +7638,7 @@
                                           {
                                             "decl_ref" : {
                                               "kind" : <"Var">,
+                                              "decl_pointer" : "0x0",
                                               "name" : {
                                                 "name" : "block",
                                                 "qual_name" : [
@@ -7717,6 +7779,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"Function">,
+                                          "decl_pointer" : "0x0",
                                           "name" : {
                                             "name" : "NSLog",
                                             "qual_name" : [
@@ -7819,6 +7882,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"Var">,
+                                          "decl_pointer" : "0x0",
                                           "name" : {
                                             "name" : "e",
                                             "qual_name" : [
@@ -7963,6 +8027,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"Function">,
+                                          "decl_pointer" : "0x0",
                                           "name" : {
                                             "name" : "NSLog",
                                             "qual_name" : [
@@ -8142,6 +8207,7 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"Function">,
+                                  "decl_pointer" : "0x0",
                                   "name" : {
                                     "name" : "NSLog",
                                     "qual_name" : [
@@ -8271,6 +8337,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "str",
                 "qual_name" : [
@@ -8281,6 +8348,7 @@
             },
             "ivar_decl" : {
               "kind" : <"ObjCIvar">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "_str",
                 "qual_name" : [
@@ -8343,6 +8411,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "x",
                 "qual_name" : [
@@ -8353,6 +8422,7 @@
             },
             "ivar_decl" : {
               "kind" : <"ObjCIvar">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "_x",
                 "qual_name" : [
@@ -8415,6 +8485,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "y",
                 "qual_name" : [
@@ -8425,6 +8496,7 @@
             },
             "ivar_decl" : {
               "kind" : <"ObjCIvar">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "_y",
                 "qual_name" : [
@@ -8487,6 +8559,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "delegate",
                 "qual_name" : [
@@ -8497,6 +8570,7 @@
             },
             "ivar_decl" : {
               "kind" : <"ObjCIvar">,
+              "decl_pointer" : "0x0",
               "name" : {
                 "name" : "_delegate",
                 "qual_name" : [
@@ -8516,6 +8590,7 @@
       {
         "class_interface" : {
           "kind" : <"ObjCInterface">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyClass",
             "qual_name" : [
@@ -8611,6 +8686,7 @@
       {
         "class_interface" : {
           "kind" : <"ObjCInterface">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyClass",
             "qual_name" : [
@@ -8620,6 +8696,7 @@
         },
         "implementation" : {
           "kind" : <"ObjCCategoryImpl">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyClass",
             "qual_name" : [
@@ -8827,6 +8904,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"ImplicitParam">,
+                                          "decl_pointer" : "0x0",
                                           "name" : {
                                             "name" : "self",
                                             "qual_name" : [
@@ -8864,6 +8942,7 @@
                           {
                             "kind" : <"PropertyRef" : {
                               "kind" : <"ObjCProperty">,
+                              "decl_pointer" : "0x0",
                               "name" : {
                                 "name" : "x",
                                 "qual_name" : [
@@ -9065,6 +9144,7 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"ImplicitParam">,
+                                  "decl_pointer" : "0x0",
                                   "name" : {
                                     "name" : "self",
                                     "qual_name" : [
@@ -9284,6 +9364,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"ImplicitParam">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "self",
                                         "qual_name" : [
@@ -9546,6 +9627,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"ImplicitParam">,
+                                          "decl_pointer" : "0x0",
                                           "name" : {
                                             "name" : "self",
                                             "qual_name" : [
@@ -9583,6 +9665,7 @@
                           {
                             "kind" : <"PropertyRef" : {
                               "kind" : <"ObjCProperty">,
+                              "decl_pointer" : "0x0",
                               "name" : {
                                 "name" : "y",
                                 "qual_name" : [
@@ -9707,6 +9790,7 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"ImplicitParam">,
+                                  "decl_pointer" : "0x0",
                                   "name" : {
                                     "name" : "self",
                                     "qual_name" : [
@@ -9849,6 +9933,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"ImplicitParam">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "self",
                                         "qual_name" : [
@@ -10043,6 +10128,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"ImplicitParam">,
+                                          "decl_pointer" : "0x0",
                                           "name" : {
                                             "name" : "self",
                                             "qual_name" : [
@@ -10080,6 +10166,7 @@
                           {
                             "kind" : <"PropertyRef" : {
                               "kind" : <"ObjCProperty">,
+                              "decl_pointer" : "0x0",
                               "name" : {
                                 "name" : "delegate",
                                 "qual_name" : [
@@ -10287,6 +10374,7 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"ImplicitParam">,
+                                  "decl_pointer" : "0x0",
                                   "name" : {
                                     "name" : "self",
                                     "qual_name" : [
@@ -10683,6 +10771,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"ImplicitParam">,
+                                      "decl_pointer" : "0x0",
                                       "name" : {
                                         "name" : "self",
                                         "qual_name" : [
@@ -10910,6 +10999,7 @@
       {
         "class_interface" : {
           "kind" : <"ObjCInterface">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyClass",
             "qual_name" : [
@@ -10919,6 +11009,7 @@
         },
         "category_decl" : {
           "kind" : <"ObjCCategory">,
+          "decl_pointer" : "0x0",
           "name" : {
             "name" : "MyCategory",
             "qual_name" : [

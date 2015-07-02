@@ -434,6 +434,7 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl& decl) {
 /// \atd
 /// type decl_ref = {
 ///   kind : decl_kind;
+///   decl_pointer : pointer;
 ///   ?name : named_decl_info option;
 ///   ~is_hidden : bool;
 ///   ?qual_type : qual_type option
@@ -449,6 +450,8 @@ void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
   ObjectScope Scope(OF);
   OF.emitTag("kind");
   OF.emitSimpleVariant(D.getDeclKindName());
+  OF.emitTag("decl_pointer");
+  dumpPointer(&D);
   const NamedDecl *ND = dyn_cast<NamedDecl>(&D);
   if (ND) {
     OF.emitTag("name");
