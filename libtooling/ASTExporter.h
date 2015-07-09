@@ -2010,7 +2010,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
 #define DECL(DERIVED, BASE)   ///   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
 #define ABSTRACT_DECL(DECL)
 #include <clang/AST/DeclNodes.inc>
-/// ] <ocaml repr="classic">
+/// ] <ocaml repr="classic" valid="Clang_ast_cache.add_decl_to_cache">
 
 //===----------------------------------------------------------------------===//
 //  Stmt dumping methods.
