@@ -184,9 +184,9 @@ public:
   // C++ Decls
   void VisitUsingDirectiveDecl(const UsingDirectiveDecl *D);
   void VisitNamespaceAliasDecl(const NamespaceAliasDecl *D);
+  void VisitCXXRecordDecl(const CXXRecordDecl *D);
 //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
 //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
-//    void VisitCXXRecordDecl(const CXXRecordDecl *D);
 //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
 //    template<typename SpecializationDecl>
 //    void VisitTemplateDeclSpecialization(ChildDumper &Children,
@@ -1417,6 +1417,46 @@ void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D
   dumpDeclRef(*D->getNamespace());
 }
 
+/// \atd
+/// #define cxx_record_decl_tuple record_decl_tuple * cxx_record_decl_info
+/// type cxx_record_decl_info = {
+///   ~bases : type_ptr list;
+///   ~vbases : type_ptr list;
+///   ~is_c_like : bool;
+/// } <ocaml field_prefix="xrdi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
+  VisitRecordDecl(D);
+
+  ObjectScope Scope(OF);
+  if (!D->isCompleteDefinition()) {
+    // We need to return early here. Otherwise plugin will crash.
+    // It looks like CXXRecordDecl may be initialized with garbage.
+    // Not sure what to do when we'll have some non-optional data to generate??
+    return;
+  }
+
+  uint vBasesNum = D->getNumVBases();
+  uint nonVBasesNum = D->getNumBases() - vBasesNum;
+  if (nonVBasesNum > 0) {
+    OF.emitTag("bases");
+    ArrayScope aScope(OF);
+    for (const auto base : D->bases()) {
+      if (!base.isVirtual()) {
+        dumpPointerToType(base.getType());
+      }
+    }
+  }
+  if (vBasesNum > 0) {
+    OF.emitTag("vbases");
+    ArrayScope aScope(OF);
+    for (const auto base : D->vbases()) {
+      dumpPointerToType(base.getType());
+    }
+  }
+  OF.emitFlag("is_c_like", D->isCLike());
+}
+
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitTypeAliasDecl(const TypeAliasDecl *D) {
 //  dumpName(D);
@@ -1429,26 +1469,6 @@ void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D
 //  dumpTemplateParameters(D->getTemplateParameters());
 //  dumpDecl(D->getTemplatedDecl());
 //}
-//
-//template <class ATDWriter>
-//void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
-//  VisitRecordDecl(D);
-//  if (!D->isCompleteDefinition())
-//    return;
-//
-//  for (CXXRecordDecl::base_class_const_iterator I = D->bases_begin(),
-//                                                E = D->bases_end();
-//       I != E; ++I) {
-//    ObjectScope Scope(OF);
-//    if (I->isVirtual())
-//      OS << "virtual ";
-//    dumpAccessSpecifier(I->getAccessSpecifier());
-//    dumpQualType(I->getType());
-//    if (I->isPackExpansion())
-//      OS << "...";
-//  }
-//}
-//
 //template <class ATDWriter>
 //void ASTExporter<ATDWriter>::VisitStaticAssertDecl(const StaticAssertDecl *D) {
 //  dumpStmt(D->getAssertExpr());
