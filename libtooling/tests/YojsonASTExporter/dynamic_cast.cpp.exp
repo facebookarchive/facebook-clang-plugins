@@ -31,6 +31,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -54,6 +55,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -77,6 +79,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -100,6 +103,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -123,6 +127,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -172,6 +177,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -200,6 +206,7 @@
         ]
       },
       <"Type" : "struct A">,
+      "0x0",
       [
         <"CXXRecordDecl" : (
           {
@@ -225,6 +232,7 @@
             ]
           },
           <"Type" : "struct A">,
+          "0x0",
           [
           ],
           {
@@ -257,7 +265,8 @@
             ]
           },
           {
-            "raw" : "void (void)"
+            "raw" : "void (void)",
+            "type_ptr" : "0x0"
           },
           {
             "is_virtual" : true,
@@ -301,7 +310,8 @@
             ]
           },
           {
-            "raw" : "struct A &(const struct A &)"
+            "raw" : "struct A &(const struct A &)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -327,7 +337,8 @@
                   ]
                 },
                 {
-                  "raw" : "const struct A &"
+                  "raw" : "const struct A &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -357,7 +368,8 @@
             ]
           },
           {
-            "raw" : "struct A &(struct A &&)"
+            "raw" : "struct A &(struct A &&)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -383,7 +395,8 @@
                   ]
                 },
                 {
-                  "raw" : "struct A &&"
+                  "raw" : "struct A &&",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -414,7 +427,8 @@
             ]
           },
           {
-            "raw" : "void (void)"
+            "raw" : "void (void)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true
@@ -445,7 +459,8 @@
             ]
           },
           {
-            "raw" : "void (void) noexcept"
+            "raw" : "void (void) noexcept",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -489,7 +504,8 @@
             ]
           },
           {
-            "raw" : "void (const struct A &)"
+            "raw" : "void (const struct A &)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -515,7 +531,8 @@
                   ]
                 },
                 {
-                  "raw" : "const struct A &"
+                  "raw" : "const struct A &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -546,7 +563,8 @@
             ]
           },
           {
-            "raw" : "void (struct A &&)"
+            "raw" : "void (struct A &&)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -572,7 +590,8 @@
                   ]
                 },
                 {
-                  "raw" : "struct A &&"
+                  "raw" : "struct A &&",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -610,6 +629,7 @@
         ]
       },
       <"Type" : "struct B">,
+      "0x0",
       [
         <"CXXRecordDecl" : (
           {
@@ -634,6 +654,7 @@
             ]
           },
           <"Type" : "struct B">,
+          "0x0",
           [
           ],
           {
@@ -663,7 +684,8 @@
             ]
           },
           {
-            "raw" : "struct B &(const struct B &)"
+            "raw" : "struct B &(const struct B &)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -689,7 +711,8 @@
                   ]
                 },
                 {
-                  "raw" : "const struct B &"
+                  "raw" : "const struct B &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -719,7 +742,8 @@
             ]
           },
           {
-            "raw" : "struct B &(struct B &&)"
+            "raw" : "struct B &(struct B &&)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -745,7 +769,8 @@
                   ]
                 },
                 {
-                  "raw" : "struct B &&"
+                  "raw" : "struct B &&",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -776,7 +801,8 @@
             ]
           },
           {
-            "raw" : "void (void)"
+            "raw" : "void (void)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true
@@ -807,7 +833,8 @@
             ]
           },
           {
-            "raw" : "void (void) noexcept"
+            "raw" : "void (void) noexcept",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -815,7 +842,8 @@
               {
                 "subject" : <"BaseClass" : (
                   {
-                    "raw" : "struct A"
+                    "raw" : "struct A",
+                    "type_ptr" : "0x0"
                   },
                   false
                 )>,
@@ -835,12 +863,14 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct A"
+                      "raw" : "struct A",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
                     "qual_type" : {
-                      "raw" : "void (void) noexcept"
+                      "raw" : "void (void) noexcept",
+                      "type_ptr" : "0x0"
                     }
                   }
                 )>
@@ -886,7 +916,8 @@
             ]
           },
           {
-            "raw" : "void (const struct B &)"
+            "raw" : "void (const struct B &)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -912,7 +943,8 @@
                   ]
                 },
                 {
-                  "raw" : "const struct B &"
+                  "raw" : "const struct B &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -943,7 +975,8 @@
             ]
           },
           {
-            "raw" : "void (struct B &&)"
+            "raw" : "void (struct B &&)",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -969,7 +1002,8 @@
                   ]
                 },
                 {
-                  "raw" : "struct B &&"
+                  "raw" : "struct B &&",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -1007,6 +1041,7 @@
         ]
       },
       <"Type" : "struct C">,
+      "0x0",
       [
         <"CXXRecordDecl" : (
           {
@@ -1031,6 +1066,7 @@
             ]
           },
           <"Type" : "struct C">,
+          "0x0",
           [
           ],
           {
@@ -1068,7 +1104,8 @@
         ]
       },
       {
-        "raw" : "void (void)"
+        "raw" : "void (void)",
+        "type_ptr" : "0x0"
       },
       {
         "body" : <"CompoundStmt" : (
@@ -1116,12 +1153,14 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct A"
+                      "raw" : "struct A",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
                     "qual_type" : {
-                      "raw" : "void (void) noexcept"
+                      "raw" : "void (void) noexcept",
+                      "type_ptr" : "0x0"
                     }
                   }
                 )>
@@ -1150,7 +1189,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct A"
+                    "raw" : "struct A",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXConstructExpr" : (
@@ -1169,12 +1209,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A"
+                          "raw" : "struct A",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (void) noexcept"
+                          "raw" : "void (void) noexcept",
+                          "type_ptr" : "0x0"
                         }
                       }
                     )>
@@ -1212,12 +1254,14 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct B"
+                      "raw" : "struct B",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
                     "qual_type" : {
-                      "raw" : "void (void) noexcept"
+                      "raw" : "void (void) noexcept",
+                      "type_ptr" : "0x0"
                     }
                   }
                 )>
@@ -1246,7 +1290,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B"
+                    "raw" : "struct B",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXConstructExpr" : (
@@ -1265,12 +1310,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct B"
+                          "raw" : "struct B",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (void) noexcept"
+                          "raw" : "void (void) noexcept",
+                          "type_ptr" : "0x0"
                         }
                       }
                     )>
@@ -1334,7 +1381,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct B"
+                              "raw" : "struct B",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -1349,7 +1397,8 @@
                                 ]
                               },
                               "qual_type" : {
-                                "raw" : "struct B"
+                                "raw" : "struct B",
+                                "type_ptr" : "0x0"
                               }
                             }
                           }
@@ -1357,7 +1406,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct B *"
+                          "raw" : "struct B *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -1367,7 +1417,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct A *"
+                      "raw" : "struct A *",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
@@ -1404,7 +1455,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct A *"
+                    "raw" : "struct A *",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"ImplicitCastExpr" : (
@@ -1449,7 +1501,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct B"
+                                  "raw" : "struct B",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -1464,7 +1517,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct B"
+                                    "raw" : "struct B",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -1472,7 +1526,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct B *"
+                              "raw" : "struct B *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -1482,7 +1537,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A *"
+                          "raw" : "struct A *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -1554,7 +1610,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A"
+                              "raw" : "struct A",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -1569,7 +1626,8 @@
                                 ]
                               },
                               "qual_type" : {
-                                "raw" : "struct A"
+                                "raw" : "struct A",
+                                "type_ptr" : "0x0"
                               }
                             }
                           }
@@ -1577,7 +1635,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A *"
+                          "raw" : "struct A *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -1587,7 +1646,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct B *"
+                      "raw" : "struct B *",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
@@ -1596,7 +1656,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B *"
+                    "raw" : "struct B *",
+                    "type_ptr" : "0x0"
                   },
                   "dynamic_cast"
                 )>
@@ -1623,7 +1684,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B *"
+                    "raw" : "struct B *",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXDynamicCastExpr" : (
@@ -1668,7 +1730,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A"
+                                  "raw" : "struct A",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -1683,7 +1746,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct A"
+                                    "raw" : "struct A",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -1691,7 +1755,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -1701,7 +1766,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct B *"
+                          "raw" : "struct B *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -1710,7 +1776,8 @@
                         ]
                       },
                       {
-                        "raw" : "struct B *"
+                        "raw" : "struct B *",
+                        "type_ptr" : "0x0"
                       },
                       "dynamic_cast"
                     )>
@@ -1774,7 +1841,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -1789,7 +1857,8 @@
                                 ]
                               },
                               "qual_type" : {
-                                "raw" : "struct A *"
+                                "raw" : "struct A *",
+                                "type_ptr" : "0x0"
                               }
                             }
                           }
@@ -1797,7 +1866,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A *"
+                          "raw" : "struct A *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -1809,7 +1879,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct B *"
+                      "raw" : "struct B *",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
@@ -1818,7 +1889,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B *"
+                    "raw" : "struct B *",
+                    "type_ptr" : "0x0"
                   },
                   "dynamic_cast"
                 )>
@@ -1845,7 +1917,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B *"
+                    "raw" : "struct B *",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXDynamicCastExpr" : (
@@ -1890,7 +1963,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -1905,7 +1979,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct A *"
+                                    "raw" : "struct A *",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -1913,7 +1988,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -1925,7 +2001,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct B *"
+                          "raw" : "struct B *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -1934,7 +2011,8 @@
                         ]
                       },
                       {
-                        "raw" : "struct B *"
+                        "raw" : "struct B *",
+                        "type_ptr" : "0x0"
                       },
                       "dynamic_cast"
                     )>
@@ -1998,7 +2076,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -2013,7 +2092,8 @@
                                 ]
                               },
                               "qual_type" : {
-                                "raw" : "struct A *"
+                                "raw" : "struct A *",
+                                "type_ptr" : "0x0"
                               }
                             }
                           }
@@ -2021,7 +2101,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A *"
+                          "raw" : "struct A *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -2033,7 +2114,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct C *"
+                      "raw" : "struct C *",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
@@ -2042,7 +2124,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct C *"
+                    "raw" : "struct C *",
+                    "type_ptr" : "0x0"
                   },
                   "dynamic_cast"
                 )>
@@ -2069,7 +2152,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct C *"
+                    "raw" : "struct C *",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXDynamicCastExpr" : (
@@ -2114,7 +2198,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -2129,7 +2214,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct A *"
+                                    "raw" : "struct A *",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -2137,7 +2223,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -2149,7 +2236,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct C *"
+                          "raw" : "struct C *",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -2158,7 +2246,8 @@
                         ]
                       },
                       {
-                        "raw" : "struct C *"
+                        "raw" : "struct C *",
+                        "type_ptr" : "0x0"
                       },
                       "dynamic_cast"
                     )>
@@ -2235,7 +2324,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -2250,7 +2340,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct A *"
+                                    "raw" : "struct A *",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -2258,7 +2349,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -2270,7 +2362,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A"
+                          "raw" : "struct A",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -2281,7 +2374,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct A"
+                      "raw" : "struct A",
+                      "type_ptr" : "0x0"
                     },
                     "value_kind" : <"LValue">
                   },
@@ -2291,7 +2385,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct A &"
+                    "raw" : "struct A &",
+                    "type_ptr" : "0x0"
                   },
                   "dynamic_cast"
                 )>
@@ -2318,7 +2413,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct A &"
+                    "raw" : "struct A &",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXDynamicCastExpr" : (
@@ -2376,7 +2472,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "struct A *"
+                                      "raw" : "struct A *",
+                                      "type_ptr" : "0x0"
                                     },
                                     "value_kind" : <"LValue">
                                   },
@@ -2391,7 +2488,8 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "raw" : "struct A *"
+                                        "raw" : "struct A *",
+                                        "type_ptr" : "0x0"
                                       }
                                     }
                                   }
@@ -2399,7 +2497,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -2411,7 +2510,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A"
+                              "raw" : "struct A",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -2422,7 +2522,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A"
+                          "raw" : "struct A",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -2432,7 +2533,8 @@
                         ]
                       },
                       {
-                        "raw" : "struct A &"
+                        "raw" : "struct A &",
+                        "type_ptr" : "0x0"
                       },
                       "dynamic_cast"
                     )>
@@ -2509,7 +2611,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -2524,7 +2627,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct A *"
+                                    "raw" : "struct A *",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -2532,7 +2636,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -2544,7 +2649,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A"
+                          "raw" : "struct A",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -2555,7 +2661,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct B"
+                      "raw" : "struct B",
+                      "type_ptr" : "0x0"
                     },
                     "value_kind" : <"LValue">
                   },
@@ -2565,7 +2672,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B &"
+                    "raw" : "struct B &",
+                    "type_ptr" : "0x0"
                   },
                   "dynamic_cast"
                 )>
@@ -2592,7 +2700,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct B &"
+                    "raw" : "struct B &",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXDynamicCastExpr" : (
@@ -2650,7 +2759,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "struct A *"
+                                      "raw" : "struct A *",
+                                      "type_ptr" : "0x0"
                                     },
                                     "value_kind" : <"LValue">
                                   },
@@ -2665,7 +2775,8 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "raw" : "struct A *"
+                                        "raw" : "struct A *",
+                                        "type_ptr" : "0x0"
                                       }
                                     }
                                   }
@@ -2673,7 +2784,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -2685,7 +2797,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A"
+                              "raw" : "struct A",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -2696,7 +2809,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct B"
+                          "raw" : "struct B",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -2706,7 +2820,8 @@
                         ]
                       },
                       {
-                        "raw" : "struct B &"
+                        "raw" : "struct B &",
+                        "type_ptr" : "0x0"
                       },
                       "dynamic_cast"
                     )>
@@ -2783,7 +2898,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -2798,7 +2914,8 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "raw" : "struct A *"
+                                    "raw" : "struct A *",
+                                    "type_ptr" : "0x0"
                                   }
                                 }
                               }
@@ -2806,7 +2923,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A *"
+                              "raw" : "struct A *",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -2818,7 +2936,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct A"
+                          "raw" : "struct A",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -2829,7 +2948,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "struct C"
+                      "raw" : "struct C",
+                      "type_ptr" : "0x0"
                     },
                     "value_kind" : <"LValue">
                   },
@@ -2839,7 +2959,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct C &"
+                    "raw" : "struct C &",
+                    "type_ptr" : "0x0"
                   },
                   "dynamic_cast"
                 )>
@@ -2866,7 +2987,8 @@
                     ]
                   },
                   {
-                    "raw" : "struct C &"
+                    "raw" : "struct C &",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXDynamicCastExpr" : (
@@ -2924,7 +3046,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "struct A *"
+                                      "raw" : "struct A *",
+                                      "type_ptr" : "0x0"
                                     },
                                     "value_kind" : <"LValue">
                                   },
@@ -2939,7 +3062,8 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "raw" : "struct A *"
+                                        "raw" : "struct A *",
+                                        "type_ptr" : "0x0"
                                       }
                                     }
                                   }
@@ -2947,7 +3071,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "struct A *"
+                                  "raw" : "struct A *",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -2959,7 +3084,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "struct A"
+                              "raw" : "struct A",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -2970,7 +3096,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "struct C"
+                          "raw" : "struct C",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -2980,7 +3107,8 @@
                         ]
                       },
                       {
-                        "raw" : "struct C &"
+                        "raw" : "struct C &",
+                        "type_ptr" : "0x0"
                       },
                       "dynamic_cast"
                     )>
@@ -2994,5 +3122,723 @@
     )>
   ],
   {
-  }
+  },
+  [
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void"
+      },
+      <"Void">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Bool"
+      },
+      <"Bool">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "char"
+      },
+      <"Char_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "signed char"
+      },
+      <"SChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "short"
+      },
+      <"Short">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "int"
+      },
+      <"Int">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "long"
+      },
+      <"Long">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "long long"
+      },
+      <"LongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned char"
+      },
+      <"UChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned short"
+      },
+      <"UShort">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned int"
+      },
+      <"UInt">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned long"
+      },
+      <"ULong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned long long"
+      },
+      <"ULongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "float"
+      },
+      <"Float">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "double"
+      },
+      <"Double">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "long double"
+      },
+      <"LongDouble">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__int128"
+      },
+      <"Int128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned __int128"
+      },
+      <"UInt128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "wchar_t"
+      },
+      <"WChar_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "char16_t"
+      },
+      <"Char16">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "char32_t"
+      },
+      <"Char32">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<dependent type>"
+      },
+      <"Dependent">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<overloaded function type>"
+      },
+      <"Overload">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<bound member function type>"
+      },
+      <"BoundMember">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<pseudo-object type>"
+      },
+      <"PseudoObject">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<unknown type>"
+      },
+      <"UnknownAny">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<ARC unbridged cast type>"
+      },
+      <"ARCUnbridgedCast">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<builtin fn type>"
+      },
+      <"BuiltinFn">
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Complex float"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Complex double"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Complex long double"
+      }
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "id"
+      },
+      <"ObjCId">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Class"
+      },
+      <"ObjCClass">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "SEL"
+      },
+      <"ObjCSel">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void *"
+      },
+      "0x0"
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "nullptr_t"
+      },
+      <"NullPtr">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__fp16"
+      },
+      <"Half">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "SEL *"
+      },
+      "0x0"
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "id"
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "id"
+      },
+      "0x0"
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Class"
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Class"
+      },
+      "0x0"
+    )>,
+    <"ObjCInterfaceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Protocol"
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct __va_list_tag"
+      },
+      "0x0"
+    )>,
+    <"TypedefType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__va_list_tag",
+        "desugared_type" : "0x0"
+      },
+      {
+        "child_type" : "0x0",
+        "decl_ptr" : "0x0"
+      }
+    )>,
+    <"ConstantArrayType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct __va_list_tag [1]"
+      },
+      "0x0",
+      1
+    )>,
+    <"ConstantArrayType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__va_list_tag [1]"
+      },
+      "0x0",
+      1
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A"
+      },
+      "0x0"
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A *"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A &"
+      },
+      "0x0"
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "const struct A &"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A &(const struct A &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A &(const struct A &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"RValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A &&"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A &(struct A &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct A &(struct A &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B"
+      },
+      "0x0"
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B &"
+      },
+      "0x0"
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "const struct B &"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B &(const struct B &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B &(const struct B &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"RValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B &&"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B &(struct B &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B &(struct B &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct C"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const struct A &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const struct A &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (struct A &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (struct A &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void) noexcept"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const struct B &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const struct B &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (struct B &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (struct B &&)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct B *"
+      },
+      "0x0"
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct C *"
+      },
+      "0x0"
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct C &"
+      },
+      "0x0"
+    )>,
+    <"NoneType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "NULL TYPE"
+      }
+    )>
+  ]
 )>

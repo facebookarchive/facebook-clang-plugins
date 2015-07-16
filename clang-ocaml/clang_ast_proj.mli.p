@@ -21,6 +21,8 @@ val get_stmt_kind_string : stmt -> string
 val get_stmt_tuple : stmt -> (stmt_tuple)
 val get_expr_tuple : stmt -> (expr_tuple) option
 
+val get_type_tuple : c_type -> (type_tuple)
+
 val update_decl_tuple : ((decl_tuple) -> (decl_tuple)) -> decl -> decl
 val update_decl_context_tuple : ((decl_context_tuple) -> (decl_context_tuple)) -> decl -> decl
 val update_named_decl_tuple : ((named_decl_tuple) -> (named_decl_tuple)) -> decl -> decl

@@ -16,6 +16,7 @@ Extract the ATD specifications inlined in a C/C++ file
 atd_begin = re.compile(r'^ */// *\\atd *(.*)')
 atd_continue = re.compile(r'^ */// ?(.*)')
 empty = re.compile(r'^ *$')
+non_atd_comment = re.compile(r'^ *// ?(.*)')
 
 def start(file):
     for line in file:
@@ -35,6 +36,8 @@ def atd(file):
             print(m.group(1))
         else:
             if empty.match(line):
+                continue
+            elif non_atd_comment.match(line):
                 continue
             else:
                 break

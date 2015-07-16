@@ -15,10 +15,19 @@ module PointerOrd = struct
 module PointerMap = Map.Make(PointerOrd)
 
 let declMap = ref PointerMap.empty
+let typeMap = ref PointerMap.empty
 
 let add_decl_to_cache decl =
 	let decl_info = Clang_ast_proj.get_decl_tuple decl in
 	let ptr = decl_info.Clang_ast_t.di_pointer in
 	declMap := PointerMap.add ptr decl !declMap;
+	(* return true to pass atd validation *)
+	true
+
+
+let add_type_to_cache c_type =
+	let type_info = Clang_ast_proj.get_type_tuple c_type in
+	let ptr = type_info.Clang_ast_t.ti_pointer in
+	typeMap := PointerMap.add ptr c_type !typeMap;
 	(* return true to pass atd validation *)
 	true

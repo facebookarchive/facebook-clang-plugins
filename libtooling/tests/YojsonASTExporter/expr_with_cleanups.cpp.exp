@@ -31,6 +31,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -54,6 +55,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -77,6 +79,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -100,6 +103,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -123,6 +127,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -172,6 +177,7 @@
         ]
       },
       <"NoType">,
+      "0x0",
       {
       }
     )>,
@@ -200,6 +206,7 @@
         ]
       },
       <"Type" : "class X">,
+      "0x0",
       [
         <"CXXRecordDecl" : (
           {
@@ -226,6 +233,7 @@
             ]
           },
           <"Type" : "class X">,
+          "0x0",
           [
           ],
           {
@@ -274,7 +282,8 @@
             ]
           },
           {
-            "raw" : "void (int)"
+            "raw" : "void (int)",
+            "type_ptr" : "0x0"
           },
           {
             "parameters" : [
@@ -299,7 +308,8 @@
                   ]
                 },
                 {
-                  "raw" : "int"
+                  "raw" : "int",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -332,7 +342,8 @@
             ]
           },
           {
-            "raw" : "void (const class X &)"
+            "raw" : "void (const class X &)",
+            "type_ptr" : "0x0"
           },
           {
             "parameters" : [
@@ -357,7 +368,8 @@
                   ]
                 },
                 {
-                  "raw" : "const class X &"
+                  "raw" : "const class X &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -390,7 +402,8 @@
             ]
           },
           {
-            "raw" : "class X &(const class X &)"
+            "raw" : "class X &(const class X &)",
+            "type_ptr" : "0x0"
           },
           {
             "parameters" : [
@@ -415,7 +428,8 @@
                   ]
                 },
                 {
-                  "raw" : "const class X &"
+                  "raw" : "const class X &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -448,7 +462,8 @@
             ]
           },
           {
-            "raw" : "void (void) noexcept"
+            "raw" : "void (void) noexcept",
+            "type_ptr" : "0x0"
           },
           {
           }
@@ -484,6 +499,7 @@
         ]
       },
       <"Type" : "class Y">,
+      "0x0",
       [
         <"CXXRecordDecl" : (
           {
@@ -510,6 +526,7 @@
             ]
           },
           <"Type" : "class Y">,
+          "0x0",
           [
           ],
           {
@@ -558,7 +575,8 @@
             ]
           },
           {
-            "raw" : "void (int)"
+            "raw" : "void (int)",
+            "type_ptr" : "0x0"
           },
           {
             "parameters" : [
@@ -583,7 +601,8 @@
                   ]
                 },
                 {
-                  "raw" : "int"
+                  "raw" : "int",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -616,7 +635,8 @@
             ]
           },
           {
-            "raw" : "void (void) noexcept"
+            "raw" : "void (void) noexcept",
+            "type_ptr" : "0x0"
           },
           {
           }
@@ -647,7 +667,8 @@
             ]
           },
           {
-            "raw" : "void (const class Y &) noexcept"
+            "raw" : "void (const class Y &) noexcept",
+            "type_ptr" : "0x0"
           },
           {
             "is_inline" : true,
@@ -673,7 +694,8 @@
                   ]
                 },
                 {
-                  "raw" : "const class Y &"
+                  "raw" : "const class Y &",
+                  "type_ptr" : "0x0"
                 },
                 {
                 }
@@ -727,7 +749,8 @@
         ]
       },
       {
-        "raw" : "class X (class X)"
+        "raw" : "class X (class X)",
+        "type_ptr" : "0x0"
       },
       {
         "parameters" : [
@@ -752,7 +775,8 @@
               ]
             },
             {
-              "raw" : "class X"
+              "raw" : "class X",
+              "type_ptr" : "0x0"
             },
             {
             }
@@ -784,7 +808,8 @@
         ]
       },
       {
-        "raw" : "class Y (class Y)"
+        "raw" : "class Y (class Y)",
+        "type_ptr" : "0x0"
       },
       {
         "parameters" : [
@@ -809,7 +834,8 @@
               ]
             },
             {
-              "raw" : "class Y"
+              "raw" : "class Y",
+              "type_ptr" : "0x0"
             },
             {
             }
@@ -840,7 +866,8 @@
         ]
       },
       {
-        "raw" : "void (void)"
+        "raw" : "void (void)",
+        "type_ptr" : "0x0"
       },
       {
         "body" : <"CompoundStmt" : (
@@ -901,7 +928,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "int"
+                          "raw" : "int",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -913,12 +941,14 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "class X"
+                      "raw" : "class X",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
                     "qual_type" : {
-                      "raw" : "void (int)"
+                      "raw" : "void (int)",
+                      "type_ptr" : "0x0"
                     }
                   }
                 )>
@@ -947,7 +977,8 @@
                     ]
                   },
                   {
-                    "raw" : "class X"
+                    "raw" : "class X",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"CXXConstructExpr" : (
@@ -979,7 +1010,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "int"
+                              "raw" : "int",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -991,12 +1023,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X"
+                          "raw" : "class X",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (int)"
+                          "raw" : "void (int)",
+                          "type_ptr" : "0x0"
                         }
                       }
                     )>
@@ -1125,7 +1159,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X (class X)"
+                                                  "raw" : "class X (class X)",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "value_kind" : <"LValue">
                                               },
@@ -1140,7 +1175,8 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "raw" : "class X (class X)"
+                                                    "raw" : "class X (class X)",
+                                                    "type_ptr" : "0x0"
                                                   }
                                                 }
                                               }
@@ -1148,7 +1184,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X (*)(class X)"
+                                              "raw" : "class X (*)(class X)",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -1264,7 +1301,8 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "int"
+                                                                          "raw" : "int",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
@@ -1276,19 +1314,22 @@
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class X"
+                                                                      "raw" : "class X",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "void (int)"
+                                                                      "raw" : "void (int)",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   }
                                                                 )>
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class X"
+                                                                  "raw" : "class X",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -1298,7 +1339,8 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "class X"
+                                                              "raw" : "class X",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -1307,13 +1349,15 @@
                                                             ]
                                                           },
                                                           {
-                                                            "raw" : "class X"
+                                                            "raw" : "class X",
+                                                            "type_ptr" : "0x0"
                                                           }
                                                         )>
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class X"
+                                                          "raw" : "const class X",
+                                                          "type_ptr" : "0x0"
                                                         }
                                                       },
                                                       {
@@ -1325,7 +1369,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "const class X"
+                                                      "raw" : "const class X",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -1335,12 +1380,14 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X"
+                                                  "raw" : "class X",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "void (const class X &)"
+                                                  "raw" : "void (const class X &)",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "is_elidable" : true
                                               }
@@ -1348,7 +1395,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X"
+                                              "raw" : "class X",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -1358,14 +1406,16 @@
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X"
+                                          "raw" : "class X",
+                                          "type_ptr" : "0x0"
                                         }
                                       }
                                     )>
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "class X"
+                                      "raw" : "class X",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -1375,7 +1425,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class X"
+                                  "raw" : "const class X",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -1387,7 +1438,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "const class X"
+                              "raw" : "const class X",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -1397,12 +1449,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X"
+                          "raw" : "class X",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (const class X &)"
+                          "raw" : "void (const class X &)",
+                          "type_ptr" : "0x0"
                         },
                         "is_elidable" : true
                       }
@@ -1410,7 +1464,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "class X"
+                      "raw" : "class X",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
@@ -1508,7 +1563,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X (class X)"
+                                                  "raw" : "class X (class X)",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "value_kind" : <"LValue">
                                               },
@@ -1523,7 +1579,8 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "raw" : "class X (class X)"
+                                                    "raw" : "class X (class X)",
+                                                    "type_ptr" : "0x0"
                                                   }
                                                 }
                                               }
@@ -1531,7 +1588,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X (*)(class X)"
+                                              "raw" : "class X (*)(class X)",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -1647,7 +1705,8 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "int"
+                                                                          "raw" : "int",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
@@ -1659,19 +1718,22 @@
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class X"
+                                                                      "raw" : "class X",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "void (int)"
+                                                                      "raw" : "void (int)",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   }
                                                                 )>
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class X"
+                                                                  "raw" : "class X",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -1681,7 +1743,8 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "class X"
+                                                              "raw" : "class X",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -1690,13 +1753,15 @@
                                                             ]
                                                           },
                                                           {
-                                                            "raw" : "class X"
+                                                            "raw" : "class X",
+                                                            "type_ptr" : "0x0"
                                                           }
                                                         )>
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class X"
+                                                          "raw" : "const class X",
+                                                          "type_ptr" : "0x0"
                                                         }
                                                       },
                                                       {
@@ -1708,7 +1773,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "const class X"
+                                                      "raw" : "const class X",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -1718,12 +1784,14 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X"
+                                                  "raw" : "class X",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "void (const class X &)"
+                                                  "raw" : "void (const class X &)",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "is_elidable" : true
                                               }
@@ -1731,7 +1799,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X"
+                                              "raw" : "class X",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -1741,14 +1810,16 @@
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X"
+                                          "raw" : "class X",
+                                          "type_ptr" : "0x0"
                                         }
                                       }
                                     )>
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "class X"
+                                      "raw" : "class X",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -1758,7 +1829,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class X"
+                                  "raw" : "const class X",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -1770,7 +1842,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "const class X"
+                              "raw" : "const class X",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -1780,12 +1853,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X"
+                          "raw" : "class X",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (const class X &)"
+                          "raw" : "void (const class X &)",
+                          "type_ptr" : "0x0"
                         },
                         "is_elidable" : true
                       }
@@ -1815,7 +1890,8 @@
                     ]
                   },
                   {
-                    "raw" : "class X"
+                    "raw" : "class X",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"ExprWithCleanups" : (
@@ -1925,7 +2001,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class X (class X)"
+                                                      "raw" : "class X (class X)",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -1940,7 +2017,8 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "raw" : "class X (class X)"
+                                                        "raw" : "class X (class X)",
+                                                        "type_ptr" : "0x0"
                                                       }
                                                     }
                                                   }
@@ -1948,7 +2026,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X (*)(class X)"
+                                                  "raw" : "class X (*)(class X)",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -2064,7 +2143,8 @@
                                                                           ],
                                                                           {
                                                                             "qual_type" : {
-                                                                              "raw" : "int"
+                                                                              "raw" : "int",
+                                                                              "type_ptr" : "0x0"
                                                                             }
                                                                           },
                                                                           {
@@ -2076,19 +2156,22 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "class X"
+                                                                          "raw" : "class X",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "void (int)"
+                                                                          "raw" : "void (int)",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       }
                                                                     )>
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class X"
+                                                                      "raw" : "class X",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
@@ -2098,7 +2181,8 @@
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class X"
+                                                                  "raw" : "class X",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -2107,13 +2191,15 @@
                                                                 ]
                                                               },
                                                               {
-                                                                "raw" : "class X"
+                                                                "raw" : "class X",
+                                                                "type_ptr" : "0x0"
                                                               }
                                                             )>
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "const class X"
+                                                              "raw" : "const class X",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -2125,7 +2211,8 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class X"
+                                                          "raw" : "const class X",
+                                                          "type_ptr" : "0x0"
                                                         },
                                                         "value_kind" : <"LValue">
                                                       },
@@ -2135,12 +2222,14 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class X"
+                                                      "raw" : "class X",
+                                                      "type_ptr" : "0x0"
                                                     }
                                                   },
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "void (const class X &)"
+                                                      "raw" : "void (const class X &)",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "is_elidable" : true
                                                   }
@@ -2148,7 +2237,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X"
+                                                  "raw" : "class X",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -2158,14 +2248,16 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X"
+                                              "raw" : "class X",
+                                              "type_ptr" : "0x0"
                                             }
                                           }
                                         )>
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X"
+                                          "raw" : "class X",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -2175,7 +2267,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "const class X"
+                                      "raw" : "const class X",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -2187,7 +2280,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class X"
+                                  "raw" : "const class X",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -2197,12 +2291,14 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "class X"
+                              "raw" : "class X",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
                             "qual_type" : {
-                              "raw" : "void (const class X &)"
+                              "raw" : "void (const class X &)",
+                              "type_ptr" : "0x0"
                             },
                             "is_elidable" : true
                           }
@@ -2210,7 +2306,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X"
+                          "raw" : "class X",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -2308,7 +2405,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class X (class X)"
+                                                      "raw" : "class X (class X)",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -2323,7 +2421,8 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "raw" : "class X (class X)"
+                                                        "raw" : "class X (class X)",
+                                                        "type_ptr" : "0x0"
                                                       }
                                                     }
                                                   }
@@ -2331,7 +2430,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X (*)(class X)"
+                                                  "raw" : "class X (*)(class X)",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -2447,7 +2547,8 @@
                                                                           ],
                                                                           {
                                                                             "qual_type" : {
-                                                                              "raw" : "int"
+                                                                              "raw" : "int",
+                                                                              "type_ptr" : "0x0"
                                                                             }
                                                                           },
                                                                           {
@@ -2459,19 +2560,22 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "class X"
+                                                                          "raw" : "class X",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "void (int)"
+                                                                          "raw" : "void (int)",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       }
                                                                     )>
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class X"
+                                                                      "raw" : "class X",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
@@ -2481,7 +2585,8 @@
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class X"
+                                                                  "raw" : "class X",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -2490,13 +2595,15 @@
                                                                 ]
                                                               },
                                                               {
-                                                                "raw" : "class X"
+                                                                "raw" : "class X",
+                                                                "type_ptr" : "0x0"
                                                               }
                                                             )>
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "const class X"
+                                                              "raw" : "const class X",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -2508,7 +2615,8 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class X"
+                                                          "raw" : "const class X",
+                                                          "type_ptr" : "0x0"
                                                         },
                                                         "value_kind" : <"LValue">
                                                       },
@@ -2518,12 +2626,14 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class X"
+                                                      "raw" : "class X",
+                                                      "type_ptr" : "0x0"
                                                     }
                                                   },
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "void (const class X &)"
+                                                      "raw" : "void (const class X &)",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "is_elidable" : true
                                                   }
@@ -2531,7 +2641,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class X"
+                                                  "raw" : "class X",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -2541,14 +2652,16 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X"
+                                              "raw" : "class X",
+                                              "type_ptr" : "0x0"
                                             }
                                           }
                                         )>
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X"
+                                          "raw" : "class X",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -2558,7 +2671,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "const class X"
+                                      "raw" : "const class X",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -2570,7 +2684,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class X"
+                                  "raw" : "const class X",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -2580,12 +2695,14 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "class X"
+                              "raw" : "class X",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
                             "qual_type" : {
-                              "raw" : "void (const class X &)"
+                              "raw" : "void (const class X &)",
+                              "type_ptr" : "0x0"
                             },
                             "is_elidable" : true
                           }
@@ -2717,7 +2834,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y (class Y)"
+                                                  "raw" : "class Y (class Y)",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "value_kind" : <"LValue">
                                               },
@@ -2732,7 +2850,8 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "raw" : "class Y (class Y)"
+                                                    "raw" : "class Y (class Y)",
+                                                    "type_ptr" : "0x0"
                                                   }
                                                 }
                                               }
@@ -2740,7 +2859,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class Y (*)(class Y)"
+                                              "raw" : "class Y (*)(class Y)",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -2856,7 +2976,8 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "int"
+                                                                          "raw" : "int",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
@@ -2868,19 +2989,22 @@
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class Y"
+                                                                      "raw" : "class Y",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "void (int)"
+                                                                      "raw" : "void (int)",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   }
                                                                 )>
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class Y"
+                                                                  "raw" : "class Y",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -2890,7 +3014,8 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "class Y"
+                                                              "raw" : "class Y",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -2899,13 +3024,15 @@
                                                             ]
                                                           },
                                                           {
-                                                            "raw" : "class Y"
+                                                            "raw" : "class Y",
+                                                            "type_ptr" : "0x0"
                                                           }
                                                         )>
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class Y"
+                                                          "raw" : "const class Y",
+                                                          "type_ptr" : "0x0"
                                                         }
                                                       },
                                                       {
@@ -2917,7 +3044,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "const class Y"
+                                                      "raw" : "const class Y",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -2927,12 +3055,14 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y"
+                                                  "raw" : "class Y",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "void (const class Y &) noexcept"
+                                                  "raw" : "void (const class Y &) noexcept",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "is_elidable" : true
                                               }
@@ -2940,7 +3070,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class Y"
+                                              "raw" : "class Y",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -2950,14 +3081,16 @@
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class Y"
+                                          "raw" : "class Y",
+                                          "type_ptr" : "0x0"
                                         }
                                       }
                                     )>
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "class Y"
+                                      "raw" : "class Y",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -2967,7 +3100,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class Y"
+                                  "raw" : "const class Y",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -2979,7 +3113,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "const class Y"
+                              "raw" : "const class Y",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -2989,12 +3124,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class Y"
+                          "raw" : "class Y",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (const class Y &) noexcept"
+                          "raw" : "void (const class Y &) noexcept",
+                          "type_ptr" : "0x0"
                         },
                         "is_elidable" : true
                       }
@@ -3002,7 +3139,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "class Y"
+                      "raw" : "class Y",
+                      "type_ptr" : "0x0"
                     }
                   },
                   {
@@ -3100,7 +3238,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y (class Y)"
+                                                  "raw" : "class Y (class Y)",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "value_kind" : <"LValue">
                                               },
@@ -3115,7 +3254,8 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "raw" : "class Y (class Y)"
+                                                    "raw" : "class Y (class Y)",
+                                                    "type_ptr" : "0x0"
                                                   }
                                                 }
                                               }
@@ -3123,7 +3263,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class Y (*)(class Y)"
+                                              "raw" : "class Y (*)(class Y)",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -3239,7 +3380,8 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "int"
+                                                                          "raw" : "int",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
@@ -3251,19 +3393,22 @@
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class Y"
+                                                                      "raw" : "class Y",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "void (int)"
+                                                                      "raw" : "void (int)",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   }
                                                                 )>
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class Y"
+                                                                  "raw" : "class Y",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -3273,7 +3418,8 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "class Y"
+                                                              "raw" : "class Y",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -3282,13 +3428,15 @@
                                                             ]
                                                           },
                                                           {
-                                                            "raw" : "class Y"
+                                                            "raw" : "class Y",
+                                                            "type_ptr" : "0x0"
                                                           }
                                                         )>
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class Y"
+                                                          "raw" : "const class Y",
+                                                          "type_ptr" : "0x0"
                                                         }
                                                       },
                                                       {
@@ -3300,7 +3448,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "const class Y"
+                                                      "raw" : "const class Y",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -3310,12 +3459,14 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y"
+                                                  "raw" : "class Y",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "void (const class Y &) noexcept"
+                                                  "raw" : "void (const class Y &) noexcept",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "is_elidable" : true
                                               }
@@ -3323,7 +3474,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class Y"
+                                              "raw" : "class Y",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
@@ -3333,14 +3485,16 @@
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class Y"
+                                          "raw" : "class Y",
+                                          "type_ptr" : "0x0"
                                         }
                                       }
                                     )>
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "class Y"
+                                      "raw" : "class Y",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -3350,7 +3504,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class Y"
+                                  "raw" : "const class Y",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -3362,7 +3517,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "const class Y"
+                              "raw" : "const class Y",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -3372,12 +3528,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class Y"
+                          "raw" : "class Y",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
                         "qual_type" : {
-                          "raw" : "void (const class Y &) noexcept"
+                          "raw" : "void (const class Y &) noexcept",
+                          "type_ptr" : "0x0"
                         },
                         "is_elidable" : true
                       }
@@ -3407,7 +3565,8 @@
                     ]
                   },
                   {
-                    "raw" : "class Y"
+                    "raw" : "class Y",
+                    "type_ptr" : "0x0"
                   },
                   {
                     "init_expr" : <"ExprWithCleanups" : (
@@ -3517,7 +3676,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class Y (class Y)"
+                                                      "raw" : "class Y (class Y)",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -3532,7 +3692,8 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "raw" : "class Y (class Y)"
+                                                        "raw" : "class Y (class Y)",
+                                                        "type_ptr" : "0x0"
                                                       }
                                                     }
                                                   }
@@ -3540,7 +3701,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y (*)(class Y)"
+                                                  "raw" : "class Y (*)(class Y)",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -3656,7 +3818,8 @@
                                                                           ],
                                                                           {
                                                                             "qual_type" : {
-                                                                              "raw" : "int"
+                                                                              "raw" : "int",
+                                                                              "type_ptr" : "0x0"
                                                                             }
                                                                           },
                                                                           {
@@ -3668,19 +3831,22 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "class Y"
+                                                                          "raw" : "class Y",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "void (int)"
+                                                                          "raw" : "void (int)",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       }
                                                                     )>
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class Y"
+                                                                      "raw" : "class Y",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
@@ -3690,7 +3856,8 @@
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class Y"
+                                                                  "raw" : "class Y",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -3699,13 +3866,15 @@
                                                                 ]
                                                               },
                                                               {
-                                                                "raw" : "class Y"
+                                                                "raw" : "class Y",
+                                                                "type_ptr" : "0x0"
                                                               }
                                                             )>
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "const class Y"
+                                                              "raw" : "const class Y",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -3717,7 +3886,8 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class Y"
+                                                          "raw" : "const class Y",
+                                                          "type_ptr" : "0x0"
                                                         },
                                                         "value_kind" : <"LValue">
                                                       },
@@ -3727,12 +3897,14 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class Y"
+                                                      "raw" : "class Y",
+                                                      "type_ptr" : "0x0"
                                                     }
                                                   },
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "void (const class Y &) noexcept"
+                                                      "raw" : "void (const class Y &) noexcept",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "is_elidable" : true
                                                   }
@@ -3740,7 +3912,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y"
+                                                  "raw" : "class Y",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -3750,14 +3923,16 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class Y"
+                                              "raw" : "class Y",
+                                              "type_ptr" : "0x0"
                                             }
                                           }
                                         )>
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class Y"
+                                          "raw" : "class Y",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -3767,7 +3942,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "const class Y"
+                                      "raw" : "const class Y",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -3779,7 +3955,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class Y"
+                                  "raw" : "const class Y",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -3789,12 +3966,14 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "class Y"
+                              "raw" : "class Y",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
                             "qual_type" : {
-                              "raw" : "void (const class Y &) noexcept"
+                              "raw" : "void (const class Y &) noexcept",
+                              "type_ptr" : "0x0"
                             },
                             "is_elidable" : true
                           }
@@ -3802,7 +3981,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class Y"
+                          "raw" : "class Y",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -3900,7 +4080,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class Y (class Y)"
+                                                      "raw" : "class Y (class Y)",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -3915,7 +4096,8 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "raw" : "class Y (class Y)"
+                                                        "raw" : "class Y (class Y)",
+                                                        "type_ptr" : "0x0"
                                                       }
                                                     }
                                                   }
@@ -3923,7 +4105,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y (*)(class Y)"
+                                                  "raw" : "class Y (*)(class Y)",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -4039,7 +4222,8 @@
                                                                           ],
                                                                           {
                                                                             "qual_type" : {
-                                                                              "raw" : "int"
+                                                                              "raw" : "int",
+                                                                              "type_ptr" : "0x0"
                                                                             }
                                                                           },
                                                                           {
@@ -4051,19 +4235,22 @@
                                                                       ],
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "class Y"
+                                                                          "raw" : "class Y",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       },
                                                                       {
                                                                         "qual_type" : {
-                                                                          "raw" : "void (int)"
+                                                                          "raw" : "void (int)",
+                                                                          "type_ptr" : "0x0"
                                                                         }
                                                                       }
                                                                     )>
                                                                   ],
                                                                   {
                                                                     "qual_type" : {
-                                                                      "raw" : "class Y"
+                                                                      "raw" : "class Y",
+                                                                      "type_ptr" : "0x0"
                                                                     }
                                                                   },
                                                                   {
@@ -4073,7 +4260,8 @@
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "raw" : "class Y"
+                                                                  "raw" : "class Y",
+                                                                  "type_ptr" : "0x0"
                                                                 }
                                                               },
                                                               {
@@ -4082,13 +4270,15 @@
                                                                 ]
                                                               },
                                                               {
-                                                                "raw" : "class Y"
+                                                                "raw" : "class Y",
+                                                                "type_ptr" : "0x0"
                                                               }
                                                             )>
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "raw" : "const class Y"
+                                                              "raw" : "const class Y",
+                                                              "type_ptr" : "0x0"
                                                             }
                                                           },
                                                           {
@@ -4100,7 +4290,8 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "raw" : "const class Y"
+                                                          "raw" : "const class Y",
+                                                          "type_ptr" : "0x0"
                                                         },
                                                         "value_kind" : <"LValue">
                                                       },
@@ -4110,12 +4301,14 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class Y"
+                                                      "raw" : "class Y",
+                                                      "type_ptr" : "0x0"
                                                     }
                                                   },
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "void (const class Y &) noexcept"
+                                                      "raw" : "void (const class Y &) noexcept",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "is_elidable" : true
                                                   }
@@ -4123,7 +4316,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "class Y"
+                                                  "raw" : "class Y",
+                                                  "type_ptr" : "0x0"
                                                 }
                                               },
                                               {
@@ -4133,14 +4327,16 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class Y"
+                                              "raw" : "class Y",
+                                              "type_ptr" : "0x0"
                                             }
                                           }
                                         )>
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class Y"
+                                          "raw" : "class Y",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -4150,7 +4346,8 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "const class Y"
+                                      "raw" : "const class Y",
+                                      "type_ptr" : "0x0"
                                     }
                                   },
                                   {
@@ -4162,7 +4359,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "const class Y"
+                                  "raw" : "const class Y",
+                                  "type_ptr" : "0x0"
                                 },
                                 "value_kind" : <"LValue">
                               },
@@ -4172,12 +4370,14 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "class Y"
+                              "raw" : "class Y",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
                             "qual_type" : {
-                              "raw" : "void (const class Y &) noexcept"
+                              "raw" : "void (const class Y &) noexcept",
+                              "type_ptr" : "0x0"
                             },
                             "is_elidable" : true
                           }
@@ -4244,7 +4444,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "class X &(const class X &)"
+                              "raw" : "class X &(const class X &)",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -4260,7 +4461,8 @@
                                 ]
                               },
                               "qual_type" : {
-                                "raw" : "class X &(const class X &)"
+                                "raw" : "class X &(const class X &)",
+                                "type_ptr" : "0x0"
                               }
                             }
                           }
@@ -4268,7 +4470,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X &(*)(const class X &)"
+                          "raw" : "class X &(*)(const class X &)",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -4293,7 +4496,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X"
+                          "raw" : "class X",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -4308,7 +4512,8 @@
                             ]
                           },
                           "qual_type" : {
-                            "raw" : "class X"
+                            "raw" : "class X",
+                            "type_ptr" : "0x0"
                           }
                         }
                       }
@@ -4394,7 +4599,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X (class X)"
+                                              "raw" : "class X (class X)",
+                                              "type_ptr" : "0x0"
                                             },
                                             "value_kind" : <"LValue">
                                           },
@@ -4409,7 +4615,8 @@
                                                 ]
                                               },
                                               "qual_type" : {
-                                                "raw" : "class X (class X)"
+                                                "raw" : "class X (class X)",
+                                                "type_ptr" : "0x0"
                                               }
                                             }
                                           }
@@ -4417,7 +4624,8 @@
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X (*)(class X)"
+                                          "raw" : "class X (*)(class X)",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -4481,7 +4689,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class X"
+                                                      "raw" : "class X",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -4496,7 +4705,8 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "raw" : "class X"
+                                                        "raw" : "class X",
+                                                        "type_ptr" : "0x0"
                                                       }
                                                     }
                                                   }
@@ -4504,7 +4714,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "const class X"
+                                                  "raw" : "const class X",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "value_kind" : <"LValue">
                                               },
@@ -4517,19 +4728,22 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X"
+                                              "raw" : "class X",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
                                             "qual_type" : {
-                                              "raw" : "void (const class X &)"
+                                              "raw" : "void (const class X &)",
+                                              "type_ptr" : "0x0"
                                             }
                                           }
                                         )>
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X"
+                                          "raw" : "class X",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -4539,14 +4753,16 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "class X"
+                                      "raw" : "class X",
+                                      "type_ptr" : "0x0"
                                     }
                                   }
                                 )>
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "class X"
+                                  "raw" : "class X",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -4556,7 +4772,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "const class X"
+                              "raw" : "const class X",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -4568,7 +4785,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "const class X"
+                          "raw" : "const class X",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -4578,7 +4796,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "class X"
+                      "raw" : "class X",
+                      "type_ptr" : "0x0"
                     },
                     "value_kind" : <"LValue">
                   }
@@ -4586,7 +4805,8 @@
               ],
               {
                 "qual_type" : {
-                  "raw" : "class X"
+                  "raw" : "class X",
+                  "type_ptr" : "0x0"
                 },
                 "value_kind" : <"LValue">
               },
@@ -4633,7 +4853,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "class X &(const class X &)"
+                              "raw" : "class X &(const class X &)",
+                              "type_ptr" : "0x0"
                             },
                             "value_kind" : <"LValue">
                           },
@@ -4649,7 +4870,8 @@
                                 ]
                               },
                               "qual_type" : {
-                                "raw" : "class X &(const class X &)"
+                                "raw" : "class X &(const class X &)",
+                                "type_ptr" : "0x0"
                               }
                             }
                           }
@@ -4657,7 +4879,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X &(*)(const class X &)"
+                          "raw" : "class X &(*)(const class X &)",
+                          "type_ptr" : "0x0"
                         }
                       },
                       {
@@ -4682,7 +4905,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "class X"
+                          "raw" : "class X",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -4697,7 +4921,8 @@
                             ]
                           },
                           "qual_type" : {
-                            "raw" : "class X"
+                            "raw" : "class X",
+                            "type_ptr" : "0x0"
                           }
                         }
                       }
@@ -4783,7 +5008,8 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X (class X)"
+                                              "raw" : "class X (class X)",
+                                              "type_ptr" : "0x0"
                                             },
                                             "value_kind" : <"LValue">
                                           },
@@ -4798,7 +5024,8 @@
                                                 ]
                                               },
                                               "qual_type" : {
-                                                "raw" : "class X (class X)"
+                                                "raw" : "class X (class X)",
+                                                "type_ptr" : "0x0"
                                               }
                                             }
                                           }
@@ -4806,7 +5033,8 @@
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X (*)(class X)"
+                                          "raw" : "class X (*)(class X)",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -4870,7 +5098,8 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "raw" : "class X"
+                                                      "raw" : "class X",
+                                                      "type_ptr" : "0x0"
                                                     },
                                                     "value_kind" : <"LValue">
                                                   },
@@ -4885,7 +5114,8 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "raw" : "class X"
+                                                        "raw" : "class X",
+                                                        "type_ptr" : "0x0"
                                                       }
                                                     }
                                                   }
@@ -4893,7 +5123,8 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "raw" : "const class X"
+                                                  "raw" : "const class X",
+                                                  "type_ptr" : "0x0"
                                                 },
                                                 "value_kind" : <"LValue">
                                               },
@@ -4906,19 +5137,22 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "raw" : "class X"
+                                              "raw" : "class X",
+                                              "type_ptr" : "0x0"
                                             }
                                           },
                                           {
                                             "qual_type" : {
-                                              "raw" : "void (const class X &)"
+                                              "raw" : "void (const class X &)",
+                                              "type_ptr" : "0x0"
                                             }
                                           }
                                         )>
                                       ],
                                       {
                                         "qual_type" : {
-                                          "raw" : "class X"
+                                          "raw" : "class X",
+                                          "type_ptr" : "0x0"
                                         }
                                       },
                                       {
@@ -4928,14 +5162,16 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "class X"
+                                      "raw" : "class X",
+                                      "type_ptr" : "0x0"
                                     }
                                   }
                                 )>
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "class X"
+                                  "raw" : "class X",
+                                  "type_ptr" : "0x0"
                                 }
                               },
                               {
@@ -4945,7 +5181,8 @@
                           ],
                           {
                             "qual_type" : {
-                              "raw" : "const class X"
+                              "raw" : "const class X",
+                              "type_ptr" : "0x0"
                             }
                           },
                           {
@@ -4957,7 +5194,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "const class X"
+                          "raw" : "const class X",
+                          "type_ptr" : "0x0"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -4967,7 +5205,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "class X"
+                      "raw" : "class X",
+                      "type_ptr" : "0x0"
                     },
                     "value_kind" : <"LValue">
                   }
@@ -4980,5 +5219,568 @@
     )>
   ],
   {
-  }
+  },
+  [
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void"
+      },
+      <"Void">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Bool"
+      },
+      <"Bool">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "char"
+      },
+      <"Char_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "signed char"
+      },
+      <"SChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "short"
+      },
+      <"Short">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "int"
+      },
+      <"Int">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "long"
+      },
+      <"Long">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "long long"
+      },
+      <"LongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned char"
+      },
+      <"UChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned short"
+      },
+      <"UShort">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned int"
+      },
+      <"UInt">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned long"
+      },
+      <"ULong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned long long"
+      },
+      <"ULongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "float"
+      },
+      <"Float">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "double"
+      },
+      <"Double">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "long double"
+      },
+      <"LongDouble">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__int128"
+      },
+      <"Int128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "unsigned __int128"
+      },
+      <"UInt128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "wchar_t"
+      },
+      <"WChar_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "char16_t"
+      },
+      <"Char16">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "char32_t"
+      },
+      <"Char32">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<dependent type>"
+      },
+      <"Dependent">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<overloaded function type>"
+      },
+      <"Overload">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<bound member function type>"
+      },
+      <"BoundMember">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<pseudo-object type>"
+      },
+      <"PseudoObject">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<unknown type>"
+      },
+      <"UnknownAny">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<ARC unbridged cast type>"
+      },
+      <"ARCUnbridgedCast">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "<builtin fn type>"
+      },
+      <"BuiltinFn">
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Complex float"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Complex double"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "_Complex long double"
+      }
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "id"
+      },
+      <"ObjCId">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Class"
+      },
+      <"ObjCClass">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "SEL"
+      },
+      <"ObjCSel">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void *"
+      },
+      "0x0"
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "nullptr_t"
+      },
+      <"NullPtr">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__fp16"
+      },
+      <"Half">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "SEL *"
+      },
+      "0x0"
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "id"
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "id"
+      },
+      "0x0"
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Class"
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Class"
+      },
+      "0x0"
+    )>,
+    <"ObjCInterfaceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "Protocol"
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct __va_list_tag"
+      },
+      "0x0"
+    )>,
+    <"TypedefType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__va_list_tag",
+        "desugared_type" : "0x0"
+      },
+      {
+        "child_type" : "0x0",
+        "decl_ptr" : "0x0"
+      }
+    )>,
+    <"ConstantArrayType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "struct __va_list_tag [1]"
+      },
+      "0x0",
+      1
+    )>,
+    <"ConstantArrayType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "__va_list_tag [1]"
+      },
+      "0x0",
+      1
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X"
+      },
+      "0x0"
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X *"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (int)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "const class X &"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const class X &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X &"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X &(const class X &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class Y"
+      },
+      "0x0"
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class Y *"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X (class X)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class Y (class Y)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (void) noexcept"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X (*)(class X)"
+      },
+      "0x0"
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "const class Y &"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const class Y &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const class Y &)"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class Y (*)(class Y)"
+      },
+      "0x0"
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "void (const class Y &) noexcept"
+      },
+      {
+        "return_type" : "0x0"
+      },
+      {
+        "params_type" : [
+          "0x0"
+        ]
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "class X &(*)(const class X &)"
+      },
+      "0x0"
+    )>,
+    <"NoneType" : (
+      {
+        "pointer" : "0x0",
+        "raw" : "NULL TYPE"
+      }
+    )>
+  ]
 )>

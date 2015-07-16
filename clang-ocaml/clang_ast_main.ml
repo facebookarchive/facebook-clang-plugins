@@ -9,9 +9,14 @@
  *)
 
 (* This function is not thread-safe *)
-let index_decl_pointers top_decl =
-	Clang_ast_cache.declMap := Clang_ast_cache.PointerMap.empty; (* just in case *)
-	ignore(Clang_ast_v.validate_decl [] top_decl); (* populate cache *)
-	let result = !Clang_ast_cache.declMap in
+let index_decl_type_pointers top_decl =
+	(* just in case *)
+	Clang_ast_cache.declMap := Clang_ast_cache.PointerMap.empty; 
+	Clang_ast_cache.typeMap := Clang_ast_cache.PointerMap.empty;
+	(* populate caches *)
+	ignore(Clang_ast_v.validate_decl [] top_decl);
+
+	let result = !Clang_ast_cache.declMap, !Clang_ast_cache.typeMap in
 	Clang_ast_cache.declMap := Clang_ast_cache.PointerMap.empty;
+	Clang_ast_cache.typeMap := Clang_ast_cache.PointerMap.empty;
 	result

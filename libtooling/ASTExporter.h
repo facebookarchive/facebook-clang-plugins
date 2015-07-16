@@ -32,6 +32,7 @@
 #include <clang/AST/DeclObjC.h>
 #include <clang/AST/DeclVisitor.h>
 #include <clang/AST/StmtVisitor.h>
+#include <clang/AST/TypeVisitor.h>
 #include <clang/Basic/Module.h>
 #include <clang/Basic/SourceManager.h>
 #include <clang/Frontend/FrontendPluginRegistry.h>
@@ -71,7 +72,8 @@ template <class ATDWriter = YojsonWriter>
 class ASTExporter :
   public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   public ConstStmtVisitor<ASTExporter<ATDWriter>>,
-  public ConstCommentVisitor<ASTExporter<ATDWriter>>
+  public ConstCommentVisitor<ASTExporter<ATDWriter>>,
+  public TypeVisitor<ASTExporter<ATDWriter>>
 {
   typedef typename ATDWriter::ObjectScope ObjectScope;
   typedef typename ATDWriter::ArrayScope ArrayScope;
@@ -101,6 +103,8 @@ class ASTExporter :
   /// The \c FullComment parent of the comment being dumped.
   const FullComment *FC;
 
+  std::vector<const Type*> types;
+
 public:
   ASTExporter(raw_ostream &OS, ASTContext &Context, const ASTExporterOptions &Opts)
     : OF(OS),
@@ -111,18 +115,27 @@ public:
       NullPtrDecl(EmptyDecl::Create(Context, Context.getTranslationUnitDecl(), SourceLocation())),
       NullPtrComment(new (Context) Comment(Comment::NoCommentKind, SourceLocation(), SourceLocation())),
       LastLocFilename(""), LastLocLine(~0U), FC(0)
-  { }
+  {
+    /* this should work because ASTContext will hold on to these for longer */
+    for (const Type* t : Context.getTypes()) {
+      types.push_back(t);
+    }
+    // Just in case, add NoneType to dumped types
+    types.push_back(nullptr);
+  }
 
   void dumpDecl(const Decl *D);
   void dumpStmt(const Stmt *S);
   void dumpFullComment(const FullComment *C);
+  void dumpType(const Type *T);
+  void dumpPointerToType(const QualType &qt);
 
   // Utilities
   void dumpPointer(const void *Ptr);
   void dumpSourceRange(SourceRange R);
   void dumpSourceLocation(SourceLocation Loc);
   void dumpQualType(QualType T);
-  void dumpType(const Type *T);
+  void dumpTypeOld(const Type *T);
   void dumpDeclRef(const Decl &Node);
   bool hasNodes(const DeclContext *DC);
   void dumpLookups(const DeclContext &DC);
@@ -287,7 +300,38 @@ public:
 //    void visitVerbatimBlockComment(const VerbatimBlockComment *C);
 //    void visitVerbatimBlockLineComment(const VerbatimBlockLineComment *C);
 //    void visitVerbatimLineComment(const VerbatimLineComment *C);
+
+// Types - no template type handling yet
+  void VisitType(const Type* T);
+// void VisitAdjustedType(const AdjustedType *T);
+  void VisitArrayType(const ArrayType *T);
+  void VisitConstantArrayType(const ConstantArrayType *T);
+//  void VisitDependentSizedArrayType(const DependentSizedArrayType *T);
+//  void VisitIncompleteArrayType(const IncompleteArrayType *T);
+//  void VisitVariableArrayType(const VariableArrayType *T);
+  void VisitAtomicType(const AtomicType *T);
+//  void VisitAttributedType(const AttributedType *T); // getEquivalentType() + getAttrKind -> string
+//  void VisitAutoType(const AutoType *T);
+  void VisitBlockPointerType(const BlockPointerType *T);
+  void VisitBuiltinType(const BuiltinType* T);
+//  void VisitComplexType(const ComplexType *T);
+  void VisitDecltypeType(const DecltypeType *T);
+//  void VisitDependentSizedExtVectorType(const DependentSizedExtVectorType *T);  
+  void VisitFunctionType(const FunctionType *T);
+//  void VisitFunctionNoProtoType(const FunctionNoProtoType *T);
+  void VisitFunctionProtoType(const FunctionProtoType *T);
+//  void VisitInjectedClassNameType(const InjectedClassNameType *T);
+  void VisitMemberPointerType(const MemberPointerType *T);
+  void VisitObjCObjectPointerType(const ObjCObjectPointerType *T);
+//  void VisitObjCObjectType(const ObjCObjectType *T);
+//  void VisitObjCInterfaceType(const ObjCInterfaceType *T);
+  void VisitParenType(const ParenType *T);
+  void VisitPointerType(const PointerType *T);
+  void VisitReferenceType(const ReferenceType *T);
+  void VisitTagType(const TagType *T);
+  void VisitTypedefType(const TypedefType *T);
 };
+
 
 //===----------------------------------------------------------------------===//
 //  Utilities
@@ -366,7 +410,7 @@ void ASTExporter<ATDWriter>::dumpSourceRange(SourceRange R) {
 /// \atd
 /// type opt_type = [Type of string | NoType]
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpType(const Type *T) {
+void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
   if (!T) {
     OF.emitSimpleVariant("NoType");
   } else {
@@ -378,10 +422,12 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
 /// \atd
 /// type qual_type = {
 ///   raw : string;
-///   ?desugared : string option
+///   ?desugared : string option;
+///   type_ptr : type_ptr 
 /// } <ocaml field_prefix="qt_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
+  // TODO - clean it up - remove raw and desugared info type_ptr has this information already
   ObjectScope Scope(OF);
   SplitQualType T_split = T.split();
   OF.emitTag("raw");
@@ -394,6 +440,9 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
       OF.emitString(QualType::getAsString(D_split));
     }
   }
+  
+  OF.emitTag("type_ptr");
+  dumpPointerToType(T);
 }
 
 /// \atd
@@ -1033,11 +1082,13 @@ void ASTExporter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
 }
 
 /// \atd
-/// #define type_decl_tuple named_decl_tuple * opt_type
+/// #define type_decl_tuple named_decl_tuple * opt_type * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypeDecl(const TypeDecl *D) {
   VisitNamedDecl(D);
-  dumpType(D->getTypeForDecl());
+  const Type* T = D->getTypeForDecl();
+  dumpTypeOld(T);
+  dumpPointer(T);
 }
 
 /// \atd
@@ -1050,11 +1101,15 @@ void ASTExporter<ATDWriter>::VisitValueDecl(const ValueDecl *D) {
 
 
 /// \atd
-/// #define translation_unit_decl_tuple decl_tuple * decl_context_tuple
+/// #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * c_type list
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(const TranslationUnitDecl *D) {
   VisitDecl(D);
   VisitDeclContext(D);
+  ArrayScope Scope(OF);
+  for (const Type* type : types) {
+    dumpType(type);
+  }
 }
 
 /// \atd
@@ -3148,5 +3203,237 @@ void ASTExporter<ATDWriter>::visitTextComment(const TextComment *C) {
 #define ABSTRACT_COMMENT(COMMENT)
 #include <clang/AST/CommentNodes.inc>
 /// ] <ocaml repr="classic">
+
+
+/// \atd
+#define TYPE(DERIVED, BASE) /// #define @DERIVED@_type_tuple @BASE@_tuple
+#define ABSTRACT_TYPE(DERIVED, BASE) TYPE(DERIVED, BASE)
+TYPE(None, Type)
+#include <clang/AST/TypeNodes.def>
+#undef TYPE
+#undef ABSTRACT_TYPE
+///
+
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpType(const Type *T) {
+
+  std::string typeClassName = T ? T->getTypeClassName() : "None";
+  VariantScope Scope(OF, typeClassName + "Type");
+  {
+    TupleScope Scope(OF);
+    if (T) {
+      // TypeVisitor assumes T is non-null
+      TypeVisitor<ASTExporter<ATDWriter>>::Visit(T);
+    } else {
+      VisitType(nullptr);
+    }
+  }
+}
+/// \atd
+/// type type_ptr = pointer
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpPointerToType(const QualType &qt) {
+  const Type *T = qt.getTypePtrOrNull();
+  dumpPointer(T);
+}
+
+/// \atd
+/// #define type_tuple type_info
+/// type type_info = {
+///   pointer : pointer;
+///   raw : string;
+///   ?desugared_type : type_ptr option;
+/// } <ocaml field_prefix="ti_">
+/// #define type_with_child_info type_info * type_ptr
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitType(const Type *T) {
+  // NOTE: T can (and will) be null here!!
+  ObjectScope Scope(OF);
+
+  OF.emitTag("pointer");
+  dumpPointer(T);
+
+  OF.emitTag("raw");
+
+  QualType qt(T, 0);
+  OF.emitString(qt.getAsString());
+
+  if (T && T->getUnqualifiedDesugaredType() != T) {
+    OF.emitTag("desugared_type");
+    dumpPointerToType(QualType(T->getUnqualifiedDesugaredType(),0));
+  }
+}
+
+/// \atd
+/// #define array_type_tuple type_with_child_info
+///
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitArrayType(const ArrayType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getElementType());
+}
+
+/// \atd
+/// #define constant_array_type_tuple array_type_tuple * int
+///
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitConstantArrayType(const ConstantArrayType *T) {
+  VisitArrayType(T);
+  OF.emitInteger(T->getSize().getLimitedValue());
+}
+
+/// \atd
+/// #define atomic_type_tuple type_with_child_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getValueType());
+}
+
+/// \atd
+/// #define block_pointer_type_tuple type_with_child_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitBlockPointerType(const BlockPointerType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getPointeeType());
+}
+
+
+/// \atd
+/// #define builtin_type_tuple type_tuple * builtin_type_kind
+/// type builtin_type_kind = [
+#define BUILTIN_TYPE(TYPE, ID) ///   | TYPE
+#include <clang/AST/BuiltinTypes.def>
+/// ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitBuiltinType(const BuiltinType *T) {
+  VisitType(T);
+  std::string type_name;
+  switch (T->getKind()) {
+#define BUILTIN_TYPE(TYPE, ID) case BuiltinType::TYPE: {type_name = #TYPE; break;}
+#include <clang/AST/BuiltinTypes.def>
+    default: llvm_unreachable("unexpected builtin kind");
+  }
+  OF.emitSimpleVariant(type_name);
+}
+
+/// \atd
+/// #define decltype_type_tuple type_with_child_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitDecltypeType(const DecltypeType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getUnderlyingType());
+}
+
+/// \atd
+/// #define function_type_tuple type_tuple * function_type_info
+/// type function_type_info = {
+///   return_type : type_ptr
+/// } <ocaml field_prefix="fti_">
+///
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitFunctionType(const FunctionType *T) {
+  VisitType(T);
+  ObjectScope Scope(OF);
+  OF.emitTag("return_type");
+  dumpPointerToType(T->getReturnType());
+}
+
+/// \atd
+/// #define function_proto_type_tuple function_type_tuple * params_type_info
+/// type params_type_info = {
+///   ?params_type : type_ptr list option
+/// } <ocaml field_prefix="pti_">
+///
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitFunctionProtoType(const FunctionProtoType *T) {
+  VisitFunctionType(T);
+  ObjectScope Scope(OF);
+  if (T->getNumParams() > 0) {
+    OF.emitTag("params_type");
+    ArrayScope aScope(OF);
+    for (const auto& paramType : T->getParamTypes()) {
+      dumpPointerToType(paramType);
+    }
+  }
+}
+
+/// \atd
+/// #define member_pointer_type_tuple type_with_child_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitMemberPointerType(const MemberPointerType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getPointeeType());
+}
+
+/// \atd
+/// #define obj_c_object_pointer_type_tuple type_with_child_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCObjectPointerType(const ObjCObjectPointerType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getPointeeType());
+}
+
+/// \atd
+/// #define paren_type_tuple type_with_child_info
+///
+template<class ATDWriter>
+void ASTExporter<ATDWriter>::VisitParenType(const ParenType *T) {
+  // this is just syntactic sugar
+  VisitType(T);
+  dumpPointerToType(T->getInnerType());
+}
+
+/// \atd
+/// #define pointer_type_tuple type_with_child_info
+///
+template<class ATDWriter>
+void ASTExporter<ATDWriter>::VisitPointerType(const PointerType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getPointeeType());
+}
+
+/// \atd
+/// #define reference_type_tuple type_with_child_info
+///
+template<class ATDWriter>
+void ASTExporter<ATDWriter>::VisitReferenceType(const ReferenceType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getPointeeType());
+}
+
+/// \atd
+/// #define tag_type_tuple type_tuple * pointer
+///
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitTagType(const TagType *T) {
+  VisitType(T);
+  dumpPointer(T->getDecl());
+}
+
+/// \atd
+/// #define typedef_type_tuple type_tuple * typedef_type_info 
+/// type typedef_type_info = {
+///   child_type : type_ptr;
+///   decl_ptr : pointer;
+/// } <ocaml field_prefix="tti_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
+  VisitType(T);
+  ObjectScope Scope(OF);
+  OF.emitTag("child_type");
+  dumpPointerToType(T->desugar());
+  OF.emitTag("decl_ptr");
+  dumpPointer(T->getDecl());
+}
+
+
+/// \atd
+/// type c_type = [
+#define TYPE(CLASS, PARENT) ///   | CLASS@@Type of (@CLASS@_type_tuple)
+#define ABSTRACT_TYPE(CLASS, PARENT)
+TYPE(None, Type)
+#include <clang/AST/TypeNodes.def>
+/// ] <ocaml repr="classic" valid="Clang_ast_cache.add_type_to_cache">
 
 } // end of namespace ASTLib

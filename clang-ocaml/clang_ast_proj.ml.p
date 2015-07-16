@@ -140,3 +140,9 @@ let update_expr_tuple __f = function
 #define ABSTRACT_STMT(STMT)
 #include <clang/AST/StmtNodes.inc>
 | x -> x
+
+let get_type_tuple = function
+#define TYPE(DERIVED, BASE) | DERIVED@@Type (@DERIVED@_type_tuple) -> (type_tuple)
+#define ABSTRACT_TYPE(DERIVED, BASE)
+TYPE(None, Type) (*  special case for nullptr type *)
+#include <clang/AST/TypeNodes.def>

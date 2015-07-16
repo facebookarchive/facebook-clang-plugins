@@ -10,15 +10,22 @@
 
 exception PointerMismatch
 
-let validate_ptr key_ptr decl =
+let validate_decl_ptr key_ptr decl =
   let decl_info = Clang_ast_proj.get_decl_tuple decl in
   let ptr = decl_info.Clang_ast_t.di_pointer in
   if ptr != key_ptr then raise PointerMismatch
 
+let validate_type_ptr key_ptr c_type =
+  let type_info = Clang_ast_proj.get_type_tuple c_type in
+  let ptr = type_info.Clang_ast_t.ti_pointer in
+  if ptr != key_ptr then raise PointerMismatch
+
 let check_decl_cache_from_file fname =
   let ast = Ag_util.Json.from_file Clang_ast_j.read_decl fname in
-  let cache = Clang_ast_main.index_decl_pointers ast in
-  Clang_ast_cache.PointerMap.iter validate_ptr cache
+  let decl_cache, type_cache = Clang_ast_main.index_decl_type_pointers ast in
+  Clang_ast_cache.PointerMap.iter validate_decl_ptr decl_cache;
+  Clang_ast_cache.PointerMap.iter validate_type_ptr type_cache
+
 
 let main =
   let v = Sys.argv
