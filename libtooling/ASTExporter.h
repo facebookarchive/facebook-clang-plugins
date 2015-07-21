@@ -2099,7 +2099,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
 #define DECL(DERIVED, BASE)   ///   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
 #define ABSTRACT_DECL(DECL)
 #include <clang/AST/DeclNodes.inc>
-/// ] <ocaml repr="classic" valid="Clang_ast_cache.add_decl_to_cache">
+/// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_decl">
 
 //===----------------------------------------------------------------------===//
 //  Stmt dumping methods.
@@ -3123,7 +3123,7 @@ void ASTExporter<ATDWriter>::VisitObjCBoolLiteralExpr(const ObjCBoolLiteralExpr 
 #define STMT(CLASS, PARENT) ///   | CLASS of (@CLASS@_tuple)
 #define ABSTRACT_STMT(STMT)
 #include <clang/AST/StmtNodes.inc>
-/// ] <ocaml repr="classic">
+/// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_stmt">
 
 //===----------------------------------------------------------------------===//
 // Comments
@@ -3573,6 +3573,6 @@ void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
 #define ABSTRACT_TYPE(CLASS, PARENT)
 TYPE(None, Type)
 #include <clang/AST/TypeNodes.def>
-/// ] <ocaml repr="classic" valid="Clang_ast_cache.add_type_to_cache">
+/// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_type">
 
 } // end of namespace ASTLib

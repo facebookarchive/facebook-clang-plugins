@@ -100,16 +100,16 @@ build/clang_ast_proj_test: $(CLANG_AST_LIBS) build/clang_ast_proj.cmx build/clan
 build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-CLANG_AST_PROJ_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j clang_ast_proj clang_ast_cache clang_ast_v clang_ast_main)
+CLANG_AST_PROJ_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j clang_ast_proj clang_ast_visit clang_ast_v clang_ast_main)
 
 # example of AST visitor
 build/clang_ast_named_decl_printer: $(CLANG_AST_PROJ_LIBS) build/clang_ast_named_decl_printer.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-build/clang_ast_cache_test: $(CLANG_AST_PROJ_LIBS) build/clang_ast_cache_test.cmx 
+build/clang_ast_main_test: $(CLANG_AST_PROJ_LIBS) build/clang_ast_main_test.cmx 
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_proj_test clang_ast_converter clang_ast_named_decl_printer clang_ast_cache_test)
+test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_proj_test clang_ast_converter clang_ast_named_decl_printer clang_ast_main_test)
 	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
@@ -119,7 +119,7 @@ test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_p
 	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
 	 $(RUNTEST) tests/clang_ast_converter build/clang_ast_converter --pretty $(CONVERTER_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
 	 $(RUNTEST) tests/clang_ast_yojson_validation ./yojson_validator.sh build/clang_ast_converter $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz); \
-	 $(RUNTEST) tests/clang_ast_cache_test build/clang_ast_cache_test $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson)
+	 $(RUNTEST) tests/clang_ast_main_test build/clang_ast_main_test $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson)
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi
 
 record-test-outputs:
