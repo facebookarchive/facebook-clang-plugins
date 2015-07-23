@@ -9,9 +9,11 @@ typedef JsonWriter::TupleScope TupleScope;
 int main(int argc, char **argv) {
   const struct ATDWriter::ATDWriterOptions jsonWriterOptions = {
     .useYojson = false,
+    .prettifyJson = true,
   };
   const struct ATDWriter::ATDWriterOptions yojsonWriterOptions = {
     .useYojson = true,
+    .prettifyJson = true,
   };
 
   {

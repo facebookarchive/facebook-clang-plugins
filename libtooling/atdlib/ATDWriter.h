@@ -18,6 +18,7 @@ namespace ATDWriter {
 
   struct ATDWriterOptions {
     bool useYojson;
+    bool prettifyJson;
   };
 
   // Symbols to be stacked
@@ -272,7 +273,8 @@ namespace ATDWriter {
     const char *COMMA = ",";
     const char *TAB = "  ";
     const char *NEWLINE = "\n";
-    const char *COLON = " : ";
+    const char *COLON = ":";
+    const char *COLONWITHSPACES = " : ";
     const char *COMMAWITHSPACES = " , ";
     const char *NULLSTR = "null";
     const char *FALSESTR = "false";
@@ -306,11 +308,15 @@ namespace ATDWriter {
 
     void tab() {
       if (previousElementIsVariantTag_) {
-        os_ << (options_.useYojson ? COLON : COMMAWITHSPACES);
+        if (options_.prettifyJson) {
+          os_ << (options_.useYojson ? COLONWITHSPACES : COMMAWITHSPACES);
+        } else {
+          os_ << (options_.useYojson ? COLON : COMMA);
+        }
       } else if (previousElementNeedsComma_) {
         os_ << COMMA;
       }
-      if (nextElementNeedsNewLine_) {
+      if (nextElementNeedsNewLine_ && options_.prettifyJson) {
         os_ << NEWLINE;
         for (size_t i = 0; i < indentLevel_; i++) {
           os_ << TAB;
@@ -394,7 +400,12 @@ namespace ATDWriter {
       tab();
       os_ << QUOTE;
       write_escaped(val);
-      os_ << QUOTE << COLON;
+      os_ << QUOTE;
+      if (options_.prettifyJson) {
+        os_ << COLONWITHSPACES;
+      } else {
+        os_ << COLON;
+      }
       previousElementNeedsComma_ = false;
       nextElementNeedsNewLine_ = false;
       previousElementIsVariantTag_ = false;

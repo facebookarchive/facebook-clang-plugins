@@ -56,12 +56,14 @@ struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
   bool withPointers = true;
   ATDWriter::ATDWriterOptions atdWriterOptions = {
     .useYojson = false,
+    .prettifyJson = true,
   };
 
   void loadValuesFromEnvAndMap(const ASTPluginLib::PluginASTOptionsBase::argmap_t &map)  {
     ASTPluginLib::PluginASTOptionsBase::loadValuesFromEnvAndMap(map);
     loadBool(map, "AST_WITH_POINTERS", withPointers);
     loadBool(map, "USE_YOJSON", atdWriterOptions.useYojson);
+    loadBool(map, "PRETTIFY_JSON", atdWriterOptions.prettifyJson);
   }
 
 };
