@@ -303,7 +303,7 @@ public:
 
 // Types - no template type handling yet
   void VisitType(const Type* T);
-// void VisitAdjustedType(const AdjustedType *T);
+  void VisitAdjustedType(const AdjustedType *T);
   void VisitArrayType(const ArrayType *T);
   void VisitConstantArrayType(const ConstantArrayType *T);
 //  void VisitDependentSizedArrayType(const DependentSizedArrayType *T);
@@ -323,8 +323,8 @@ public:
 //  void VisitInjectedClassNameType(const InjectedClassNameType *T);
   void VisitMemberPointerType(const MemberPointerType *T);
   void VisitObjCObjectPointerType(const ObjCObjectPointerType *T);
-//  void VisitObjCObjectType(const ObjCObjectType *T);
-//  void VisitObjCInterfaceType(const ObjCInterfaceType *T);
+  void VisitObjCObjectType(const ObjCObjectType *T);
+  void VisitObjCInterfaceType(const ObjCInterfaceType *T);
   void VisitParenType(const ParenType *T);
   void VisitPointerType(const PointerType *T);
   void VisitReferenceType(const ReferenceType *T);
@@ -3285,6 +3285,15 @@ void ASTExporter<ATDWriter>::VisitType(const Type *T) {
 }
 
 /// \atd
+/// #define adjusted_type_tuple type_with_child_info
+///
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitAdjustedType(const AdjustedType *T) {
+  VisitType(T);
+  dumpPointerToType(T->getAdjustedType());
+}
+
+/// \atd
 /// #define array_type_tuple type_with_child_info
 ///
 template <class ATDWriter>
@@ -3362,7 +3371,7 @@ void ASTExporter<ATDWriter>::VisitFunctionType(const FunctionType *T) {
 /// \atd
 /// #define function_proto_type_tuple function_type_tuple * params_type_info
 /// type params_type_info = {
-///   ?params_type : type_ptr list option
+///   ~params_type : type_ptr list
 /// } <ocaml field_prefix="pti_">
 ///
 template <class ATDWriter>
@@ -3392,6 +3401,38 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCObjectPointerType(const ObjCObjectPointerType *T) {
   VisitType(T);
   dumpPointerToType(T->getPointeeType());
+}
+
+/// \atd
+/// #define obj_c_object_type_tuple type_tuple * objc_object_type_info
+/// type objc_object_type_info = {
+///   base_type : type_ptr;
+///   ~protocol_decls_ptr : pointer list;
+/// } <ocaml prefix="ooti_">
+template<class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
+  VisitType(T);
+  ObjectScope Scope(OF);
+  OF.emitTag("base_type");
+  dumpPointerToType(T->getBaseType());
+
+  int numProtocols = T->getNumProtocols();
+  if(numProtocols > 0) {
+    OF.emitTag("protocol_decls_ptr");
+    ArrayScope aScope(OF);
+    for (int i = 0; i < numProtocols; i++) {
+      dumpPointer(T->getProtocol(i));
+    }
+  }
+}
+
+/// \atd
+/// #define obj_c_interface_type_tuple type_tuple * pointer
+template<class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCInterfaceType(const ObjCInterfaceType *T) {
+  // skip VisitObjCObjectType deliberately - ObjCInterfaceType can't have any protocols
+  VisitType(T);
+  dumpPointer(T->getDecl());
 }
 
 /// \atd
