@@ -2861,6 +2861,7 @@ void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
 /// #define obj_c_message_expr_tuple expr_tuple * obj_c_message_expr_info
 /// type obj_c_message_expr_info = {
 ///   selector : string;
+///   ?decl_pointer : pointer option;
 ///   ~receiver_kind <ocaml default="`Instance"> : receiver_kind
 /// } <ocaml field_prefix="omei_">
 ///
@@ -2870,8 +2871,21 @@ void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
   VisitExpr(Node);
   ObjectScope Scope(OF);
 
+  const Selector selector = Node->getSelector();
   OF.emitTag("selector");
-  OF.emitString(Node->getSelector().getAsString());
+  OF.emitString(selector.getAsString());
+
+  // Do not rely on Node->getMethodDecl() - it might be wrong if
+  // selector doesn't type check (ie. method of subclass is called)
+  const ObjCInterfaceDecl *receiver = Node->getReceiverInterface();
+  if (receiver) {
+    bool isInst = Node->isInstanceMessage();
+    const ObjCMethodDecl *m_decl = receiver->lookupMethod(selector, isInst);
+    if (m_decl) {
+      OF.emitTag("decl_pointer");
+      dumpPointer(m_decl);
+    }
+  }
 
   ObjCMessageExpr::ReceiverKind RK = Node->getReceiverKind();
   if (RK != ObjCMessageExpr::Instance) {
