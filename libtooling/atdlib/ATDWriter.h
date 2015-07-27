@@ -16,6 +16,10 @@
 
 namespace ATDWriter {
 
+  struct ATDWriterOptions {
+    bool useYojson;
+  };
+
   // Symbols to be stacked
   enum Symbol {
     SARRAY,
@@ -261,8 +265,8 @@ namespace ATDWriter {
   };
 
   // Configure GenWriter for Yojson / Json textual outputs
-  template <class OStream, bool standardJson = false>
-  class YojsonEmitter {
+  template <class OStream>
+  class JsonEmitter {
 
     const char *QUOTE = "\"";
     const char *COMMA = ",";
@@ -284,14 +288,16 @@ namespace ATDWriter {
 
   private:
     OStream &os_;
+    const ATDWriterOptions options_;
     unsigned indentLevel_;
     bool nextElementNeedsNewLine_;
     bool previousElementNeedsComma_;
     bool previousElementIsVariantTag_;
 
   public:
-    YojsonEmitter(OStream &os)
+    JsonEmitter(OStream &os, const ATDWriterOptions opts)
     : os_(os),
+      options_(opts),
       indentLevel_(0),
       nextElementNeedsNewLine_(false),
       previousElementNeedsComma_(false),
@@ -300,7 +306,7 @@ namespace ATDWriter {
 
     void tab() {
       if (previousElementIsVariantTag_) {
-        os_ << (standardJson ? COMMAWITHSPACES : COLON);
+        os_ << (options_.useYojson ? COLON : COMMAWITHSPACES);
       } else if (previousElementNeedsComma_) {
         os_ << COMMA;
       }
@@ -419,35 +425,36 @@ namespace ATDWriter {
       leaveContainer(RBRACE);
     }
     void enterTuple() {
-      enterContainer(standardJson ? LBRACKET : LPAREN);
+      enterContainer(options_.useYojson ? LPAREN : LBRACKET);
     }
     void enterTuple(size_t size) {
       enterTuple();
     }
     void leaveTuple() {
-      leaveContainer(standardJson ? RBRACKET : RPAREN);
+      leaveContainer(options_.useYojson ? RPAREN : RBRACKET);
     }
     void enterVariant() {
-      enterContainer(standardJson ? LBRACKET : LANGLE);
+      enterContainer(options_.useYojson ? LANGLE : LBRACKET);
       // cancel indent
       indentLevel_--;
       nextElementNeedsNewLine_ = false;
     }
     void leaveVariant() {
       nextElementNeedsNewLine_ = false;
-      leaveContainer(standardJson ? RBRACKET : RANGLE);
+      leaveContainer(options_.useYojson ? RANGLE : RBRACKET);
       indentLevel_++;
     }
 
   };
 
   // The full classes for JSON and YOJSON writing
-  template <class OStream, bool standardJson = false>
-  class YojsonWriter : public GenWriter<YojsonEmitter<OStream, standardJson>> {
-    typedef YojsonEmitter<OStream, standardJson> Emitter;
+  template <class OStream>
+  class JsonWriter : public GenWriter<JsonEmitter<OStream>> {
+    typedef JsonEmitter<OStream> Emitter;
   public:
-    YojsonWriter(OStream &os) : GenWriter<Emitter>(Emitter(os)) {}
+    JsonWriter(OStream &os, const ATDWriterOptions opts)
+      : GenWriter<Emitter>(Emitter(os, opts))
+      {}
   };
 
-  template <class OStream> using JsonWriter=YojsonWriter<OStream, true>;
 }

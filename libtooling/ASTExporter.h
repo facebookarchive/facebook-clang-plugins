@@ -54,10 +54,14 @@ namespace ASTLib {
 
 struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
   bool withPointers = true;
+  ATDWriter::ATDWriterOptions atdWriterOptions = {
+    .useYojson = false,
+  };
 
   void loadValuesFromEnvAndMap(const ASTPluginLib::PluginASTOptionsBase::argmap_t &map)  {
     ASTPluginLib::PluginASTOptionsBase::loadValuesFromEnvAndMap(map);
     loadBool(map, "AST_WITH_POINTERS", withPointers);
+    loadBool(map, "USE_YOJSON", atdWriterOptions.useYojson);
   }
 
 };
@@ -66,9 +70,8 @@ using namespace clang;
 using namespace clang::comments;
 
 typedef ATDWriter::JsonWriter<raw_ostream> JsonWriter;
-typedef ATDWriter::YojsonWriter<raw_ostream> YojsonWriter;
 
-template <class ATDWriter = YojsonWriter>
+template <class ATDWriter = JsonWriter>
 class ASTExporter :
   public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   public ConstStmtVisitor<ASTExporter<ATDWriter>>,
@@ -107,7 +110,7 @@ class ASTExporter :
 
 public:
   ASTExporter(raw_ostream &OS, ASTContext &Context, const ASTExporterOptions &Opts)
-    : OF(OS),
+    : OF(OS, Opts.atdWriterOptions),
       Options(Opts),
       Traits(Context.getCommentCommandTraits()),
       SM(Context.getSourceManager()),

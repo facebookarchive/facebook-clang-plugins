@@ -24,7 +24,10 @@ namespace {
   using namespace ASTLib;
   using namespace ASTPluginLib;
 
-  template <class ATDWriter=YojsonWriter>
+  template <
+    class ATDWriter=JsonWriter,
+    bool ForceYojson=false
+  >
   class ExporterASTConsumer : public ASTConsumer {
   private:
     ASTExporterOptions Options;
@@ -35,7 +38,11 @@ namespace {
                         std::unique_ptr<ASTExporterOptions> &&Opts,
                         raw_ostream &OS)
     : Options(std::move(*Opts)), OS(OS)
-    { }
+    {
+      if (ForceYojson) {
+        this->Options.atdWriterOptions.useYojson = true;
+      }
+    }
 
     virtual void HandleTranslationUnit(ASTContext &Context) {
       TranslationUnitDecl *D = Context.getTranslationUnitDecl();
@@ -46,8 +53,8 @@ namespace {
 
 }
 
-typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter>, ASTExporterOptions> JsonExporterASTAction;
-typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<YojsonWriter>, ASTExporterOptions> YojsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter, false>, ASTExporterOptions> JsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter, true>, ASTExporterOptions> YojsonExporterASTAction;
 
 static FrontendPluginRegistry::Add<JsonExporterASTAction>
 X("JsonASTExporter", "Export the AST of source files into ATD-specified Json data");

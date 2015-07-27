@@ -1,40 +1,40 @@
 #include "../ATDWriter.h"
 
-typedef ATDWriter::YojsonWriter<std::ostream> YojsonWriter;
-typedef YojsonWriter::ObjectScope ObjectScope;
-typedef YojsonWriter::ArrayScope ArrayScope;
-typedef YojsonWriter::VariantScope VariantScope;
-typedef YojsonWriter::TupleScope TupleScope;
-
 typedef ATDWriter::JsonWriter<std::ostream> JsonWriter;
-typedef JsonWriter::ObjectScope STDObjectScope;
-typedef JsonWriter::ArrayScope STDArrayScope;
-typedef JsonWriter::VariantScope STDVariantScope;
-typedef JsonWriter::TupleScope STDTupleScope;
+typedef JsonWriter::ObjectScope ObjectScope;
+typedef JsonWriter::ArrayScope ArrayScope;
+typedef JsonWriter::VariantScope VariantScope;
+typedef JsonWriter::TupleScope TupleScope;
 
 int main(int argc, char **argv) {
+  const struct ATDWriter::ATDWriterOptions jsonWriterOptions = {
+    .useYojson = false,
+  };
+  const struct ATDWriter::ATDWriterOptions yojsonWriterOptions = {
+    .useYojson = true,
+  };
 
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     OF.emitInteger(100000);
   }
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     OF.emitString("Hello");
   }
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     OF.emitBoolean(true);
   }
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     ArrayScope Scope(OF, 3);
     OF.emitString("Hello");
     OF.emitBoolean(true);
     OF.emitInteger(100000);
   }
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     ObjectScope Scope(OF);
     OF.emitTag("string");
     OF.emitString("Hello");
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
     OF.emitInteger(100000);
   }
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     ObjectScope Scope(OF);
     OF.emitTag("integer");
     OF.emitInteger(100000);
@@ -56,19 +56,19 @@ int main(int argc, char **argv) {
     }
   }
   {
-    JsonWriter OF(std::cout);
-    STDTupleScope Scope(OF, 2);
+    JsonWriter OF(std::cout, jsonWriterOptions);
+    TupleScope Scope(OF, 2);
     OF.emitSimpleVariant("zero");
     {
-      STDVariantScope Scope(OF, "succ");
+      VariantScope Scope(OF, "succ");
       {
-        STDVariantScope Scope(OF, "pred");
+        VariantScope Scope(OF, "pred");
         OF.emitSimpleVariant("zero");
       }
     }
   }
   {
-    YojsonWriter OF(std::cout);
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     TupleScope Scope(OF, 2);
     OF.emitSimpleVariant("zero");
     {
