@@ -498,13 +498,228 @@ namespace ATDWriter {
 
   };
 
-  // The full classes for JSON and YOJSON writing
+  // Configure GenWriter for Biniou binary output
+  template <class OStream>
+  class BiniouEmitter {
+
+  private:
+    OStream &os_;
+
+    const uint8_t bool_tag = 0;
+    const uint8_t int8_tag = 1;
+    const uint8_t int16_tag = 2;
+    const uint8_t int32_tag = 3;
+    const uint8_t int64_tag = 4;
+    const uint8_t float64_tag = 12;
+    const uint8_t uvint_tag = 16;
+    const uint8_t svint_tag = 17;
+    const uint8_t string_tag = 18;
+    const uint8_t ARRAY_tag = 19;
+    const uint8_t TUPLE_tag = 20;
+    const uint8_t RECORD_tag = 21;
+    const uint8_t NUM_VARIANT_tag = 22;
+    const uint8_t VARIANT_tag = 23;
+    const uint8_t unit_tag = 24;
+    const uint8_t TABLE_tag = 25;
+    const uint8_t SHARED_tag = 26;
+
+    // How many elements do we expect at most for the currently opened RECORDs?
+    // Records must remember how many items are supposed to be in the record.
+    // If a record is closed when not all items have been emitted then the
+    // remaining number of dummy items are emitted to make biniou happy.
+    // This is because, thanks to optional fields and fields with default arguments,
+    // it can be hard to precisely estimate how many items of the record are
+    // actually going to be emitted in advance.
+    std::vector<int> recordMaxSize_;
+    // Are we the first element of an array?
+    // This is needed because arrays are monomorphic and only the first element
+    // of the array carries a value tag.
+    bool isFirstInArray_;
+    // Are we currently in a record/an array?
+    std::vector<bool> isCurrentValueInRecord_;
+    std::vector<bool> isCurrentValueInArray_;
+
+  public:
+    bool shouldSimpleVariantsBeEmittedAsStrings = false;
+
+    BiniouEmitter(OStream &os)
+    : os_(os)
+    {
+      isCurrentValueInRecord_.push_back(false);
+      isCurrentValueInArray_.push_back(false);
+    }
+
+  private:
+    void enterContainer(uint8_t tag, int size) {
+      writeValueTag(tag);
+      if (size >= 0) {
+        writeUvint(size);
+      }
+
+      bool isRecord = tag == RECORD_tag;
+      isCurrentValueInRecord_.push_back(isRecord);
+      bool isArray = tag == ARRAY_tag;
+      isCurrentValueInArray_.push_back(isArray);
+
+      // extra initialization for some containers
+      if (isArray) {
+        isFirstInArray_ = true;
+      }
+      if (isRecord) {
+        recordMaxSize_.push_back(size);
+      }
+    }
+
+    void leaveValue() {
+      if (isCurrentValueInRecord_.back()) {
+        recordMaxSize_.back() -= 1;
+      }
+      isFirstInArray_ = false;
+    }
+
+    void leaveContainer() {
+      isCurrentValueInRecord_.pop_back();
+      isCurrentValueInArray_.pop_back();
+      leaveValue();
+    }
+
+    // string hash algorithm from the biniou spec
+    uint32_t biniou_hash(const std::string &str) {
+      uint32_t hash = 0;
+      for (const char &c : str) {
+        hash = 223 * hash + c;
+      }
+      hash %= 1 << 31;
+      return hash;
+    }
+
+    void write8(uint8_t c) {
+      os_.write((const char *)&c, 1);
+    }
+
+    void write32(int32_t x) {
+      write8(x >> 24);
+      write8(x >> 16);
+      write8(x >> 8);
+      write8(x);
+    }
+
+    void write64(int64_t x) {
+      write32(x >> 32);
+      write32(x);
+    }
+
+    void writeUvint(size_t x) {
+      while (x > 127) {
+        write8(x | 0x100);
+        x >>= 8;
+      }
+
+      write8((uint8_t) x);
+    }
+
+    void writeValueTag(uint8_t tag) {
+      if (!isCurrentValueInArray_.back() || isFirstInArray_) {
+        write8(tag);
+      }
+    }
+
+    void emitDummyRecordField() {
+      emitTag("!!DUMMY!!");
+      // unit is the smallest value (2 bytes)
+      write8(unit_tag);
+      write8(0);
+    }
+
+  public:
+    void emitEOF() { }
+
+    void emitBoolean(bool val) {
+      writeValueTag(bool_tag);
+      write8(val);
+      leaveValue();
+    }
+
+    // assume all integers fit in 32 bits
+    void emitInteger(uint32_t val) {
+      writeValueTag(int32_tag);
+      write32(val);
+      leaveValue();
+    }
+
+    void emitString(const std::string &val) {
+      writeValueTag(string_tag);
+      writeUvint(val.length());
+      for(const char &c: val) {
+        write8(c);
+      }
+      leaveValue();
+    }
+
+    void emitTag(const std::string &val) {
+      int32_t hash = biniou_hash(val);
+      // set first bit of hash
+      hash |= 1 << 31;
+      write32(hash);
+    }
+
+    void emitVariantTag(const std::string &val, bool hasArg) {
+      int32_t hash = biniou_hash(val);
+      // set first bit of hash if the variant has an argument
+      if (hasArg) {
+        hash |= 1 << 31;
+      }
+      write32(hash);
+    }
+
+    void enterArray(int size) {
+      enterContainer(ARRAY_tag, size);
+    }
+    void leaveArray() {
+      leaveContainer();
+    }
+    void enterObject(int size) {
+      enterContainer(RECORD_tag, size);
+    }
+    void leaveObject() {
+      for (int i = recordMaxSize_.back(); i > 0; --i) {
+        emitDummyRecordField();
+      }
+      recordMaxSize_.back() = 0; // just in case
+      leaveContainer();
+    }
+    void enterTuple(int size) {
+      enterContainer(TUPLE_tag, size);
+    }
+    void leaveTuple() {
+      leaveContainer();
+    }
+    void enterVariant() {
+      enterContainer(VARIANT_tag, -1);
+    }
+    void leaveVariant() {
+      leaveContainer();
+    }
+
+  };
+
+  // The full class for JSON and YOJSON writing
   template <class OStream>
   class JsonWriter : public GenWriter<JsonEmitter<OStream>> {
     typedef JsonEmitter<OStream> Emitter;
   public:
     JsonWriter(OStream &os, const ATDWriterOptions opts)
       : GenWriter<Emitter>(Emitter(os, opts))
+      {}
+  };
+
+  // The full class for biniou writing
+  template <class OStream>
+  class BiniouWriter : public GenWriter<BiniouEmitter<OStream>> {
+    typedef BiniouEmitter<OStream> Emitter;
+  public:
+    BiniouWriter(OStream &os)
+      : GenWriter<Emitter>(Emitter(os))
       {}
   };
 
