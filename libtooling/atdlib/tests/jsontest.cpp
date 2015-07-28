@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
   }
   {
     JsonWriter OF(std::cout);
-    STDTupleScope Scope(OF);
+    STDTupleScope Scope(OF, 2);
     OF.emitSimpleVariant("zero");
     {
       STDVariantScope Scope(OF, "succ");
@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
   }
   {
     YojsonWriter OF(std::cout);
-    TupleScope Scope(OF);
+    TupleScope Scope(OF, 2);
     OF.emitSimpleVariant("zero");
     {
       VariantScope Scope(OF, "succ");
@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
         {
 	  VariantScope Scope(OF, "eval");
 	  {
-	    TupleScope Scope(OF);
+	    TupleScope Scope(OF, 2);
 	    OF.emitString("f");
 	    OF.emitString("\"3\t4\n\"");
 	  }

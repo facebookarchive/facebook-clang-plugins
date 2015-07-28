@@ -50,6 +50,10 @@ namespace ATDWriter {
     static bool canTakeOneValueAtMost(enum Symbol s) {
       return s == SVARIANT;
     }
+
+    // How many elements are expected in the current container
+    std::vector<size_t> containerSize_;
+    std::vector<bool> containerHasSize_;
 #endif
 
     void enterValue() {
@@ -64,6 +68,9 @@ namespace ATDWriter {
 
     void leaveValue() {
 #ifdef DEBUG
+      if (containerHasSize_.back()) {
+        containerSize_.back() -= 1;
+      }
       if (stack_.empty()) {
         return;
       }
@@ -80,10 +87,14 @@ namespace ATDWriter {
       leaveValue();
     }
 
-    void enterContainer(enum Symbol s) {
+    void enterContainer(enum Symbol s, bool hasSize = false, size_t numElems = 0) {
 #ifdef DEBUG
       enterValue();
       stack_.push_back(s);
+      containerHasSize_.push_back(hasSize);
+      if (hasSize) {
+        containerSize_.push_back(numElems);
+      }
       lastContainerHasElements_ = false;
 #endif
     }
@@ -92,6 +103,12 @@ namespace ATDWriter {
 #ifdef DEBUG
       assert(stack_.back() == s);
       stack_.pop_back();
+      if (containerHasSize_.back()) {
+        assert(!containerSize_.empty());
+        assert(containerSize_.back() == 0);
+        containerSize_.pop_back();
+      }
+      containerHasSize_.pop_back();
       leaveValue();
 #endif
     }
@@ -101,11 +118,17 @@ namespace ATDWriter {
 #ifdef DEBUG
     , lastContainerHasElements_(false)
 #endif
-    {}
+    {
+#ifdef DEBUG
+      containerHasSize_.push_back(false);
+#endif
+    }
 
     ~GenWriter() {
 #ifdef DEBUG
       assert(stack_.empty());
+      assert(containerHasSize_.size() == 1);
+      assert(!containerHasSize_.back());
 #endif
       emitter_.emitEOF();
     }
@@ -153,6 +176,10 @@ namespace ATDWriter {
     void leaveObject() {
       leaveContainer(SOBJECT);
       emitter_.leaveObject();
+    }
+    void enterTuple(size_t numElems) {
+      enterContainer(STUPLE, true, numElems);
+      emitter_.enterTuple(numElems);
     }
     void enterTuple() {
       enterContainer(STUPLE);
@@ -202,8 +229,21 @@ namespace ATDWriter {
     };                                                          \
 
     DECLARE_SCOPE(Array)
-    DECLARE_SCOPE(Tuple)
     DECLARE_SCOPE(Object)
+
+    class TupleScope {
+      GenWriter &f_;
+    public:
+      TupleScope(GenWriter &f, size_t size) : f_(f) {
+        f_.enterTuple(size);
+      }
+      TupleScope(GenWriter &f) : f_(f) {
+        f_.enterTuple();
+      }
+      ~TupleScope() {
+        f_.leaveTuple();
+      }
+    };
 
     class VariantScope {
       GenWriter &f_;
@@ -375,6 +415,9 @@ namespace ATDWriter {
     }
     void enterTuple() {
       enterContainer(standardJson ? LBRACKET : LPAREN);
+    }
+    void enterTuple(size_t size) {
+      enterTuple();
     }
     void leaveTuple() {
       leaveContainer(standardJson ? RBRACKET : RPAREN);
