@@ -39,16 +39,9 @@ namespace ATDWriter {
     // State of the automaton
     std::vector<enum Symbol> stack_;
 
-    // The next element does not need to be stacked because it is always true (or undef) when we leave a container
-    bool lastContainerHasElements_;
-
     // Objects want tagged values
     static bool needsTag(enum Symbol s) {
       return s == SOBJECT;
-    }
-    // Variants want at most one value
-    static bool canTakeOneValueAtMost(enum Symbol s) {
-      return s == SVARIANT;
     }
 
     // How many elements are expected in the current container
@@ -62,7 +55,6 @@ namespace ATDWriter {
         return;
       }
       assert(!needsTag(stack_.back()));
-      assert(!canTakeOneValueAtMost(stack_.back()) || !lastContainerHasElements_);
 #endif
     }
 
@@ -78,7 +70,6 @@ namespace ATDWriter {
         stack_.pop_back();
         assert(needsTag(stack_.back()));
       }
-      lastContainerHasElements_ = true;
 #endif
     }
 
@@ -95,7 +86,6 @@ namespace ATDWriter {
       if (hasSize) {
         containerSize_.push_back(numElems);
       }
-      lastContainerHasElements_ = false;
 #endif
     }
 
@@ -115,9 +105,6 @@ namespace ATDWriter {
 
   public:
     GenWriter(const ATDEmitter &emitter) : emitter_(emitter)
-#ifdef DEBUG
-    , lastContainerHasElements_(false)
-#endif
     {
 #ifdef DEBUG
       containerHasSize_.push_back(false);
@@ -194,22 +181,23 @@ namespace ATDWriter {
       emitter_.leaveTuple();
     }
 
-    void enterVariant(const std::string &tag) {
-      enterContainer(SVARIANT);
+    void enterVariant(const std::string &tag, bool hasArg = true) {
+      // variants have at most one value, so we can safely use hasArg
+      // as the number of arguments
+      enterContainer(SVARIANT, true, hasArg);
       emitter_.enterVariant();
-      emitter_.emitVariantTag(tag);
+      emitter_.emitVariantTag(tag, hasArg);
     }
     void leaveVariant() {
       leaveContainer(SVARIANT);
       emitter_.leaveVariant();
     }
-
-    // convenient methods
-
     void emitSimpleVariant(const std::string &tag) {
-      enterVariant(tag);
+      enterVariant(tag, false);
       leaveVariant();
     }
+
+    // convenient methods
 
     void emitFlag(const std::string &tag, bool val) {
       if (val) {
@@ -263,7 +251,7 @@ namespace ATDWriter {
       GenWriter &f_;
     public:
       VariantScope(GenWriter &f, const std::string &tag) : f_(f) {
-        f_.enterVariant(tag);
+        f_.enterVariant(tag, true);
       }
       ~VariantScope() {
         f_.leaveVariant();
@@ -405,7 +393,7 @@ namespace ATDWriter {
       nextElementNeedsNewLine_ = false;
       previousElementIsVariantTag_ = false;
     }
-    void emitVariantTag(const std::string &val) {
+    void emitVariantTag(const std::string &val, bool hasArgs) {
       tab();
       os_ << QUOTE;
       write_escaped(val);
