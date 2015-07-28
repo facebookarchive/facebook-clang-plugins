@@ -2861,6 +2861,7 @@ void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
 /// #define obj_c_message_expr_tuple expr_tuple * obj_c_message_expr_info
 /// type obj_c_message_expr_info = {
 ///   selector : string;
+///   ~is_definition_found : bool;
 ///   ?decl_pointer : pointer option;
 ///   ~receiver_kind <ocaml default="`Instance"> : receiver_kind
 /// } <ocaml field_prefix="omei_">
@@ -2880,8 +2881,22 @@ void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
   const ObjCInterfaceDecl *receiver = Node->getReceiverInterface();
   if (receiver) {
     bool isInst = Node->isInstanceMessage();
-    const ObjCMethodDecl *m_decl = receiver->lookupMethod(selector, isInst);
+    bool isDefinitionFound;
+    // Look for definition first. It's possible that class redefines it without
+    // redeclaring. It needs to be defined in same translation unit to work.
+    const ObjCMethodDecl *m_decl = receiver->lookupPrivateMethod(selector, isInst);
     if (m_decl) {
+      isDefinitionFound = true;
+    } else {
+      // As a fallback look through method declarations in the interface.
+      // It's not very reliable (subclass might have redefined it)
+      // but it's better than nothing
+      isDefinitionFound = false;
+      m_decl = receiver->lookupMethod(selector, isInst);
+    }
+
+    if (m_decl) {
+      OF.emitFlag("is_definition_found", isDefinitionFound);
       OF.emitTag("decl_pointer");
       dumpPointer(m_decl);
     }
