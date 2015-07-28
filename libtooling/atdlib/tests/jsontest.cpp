@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
   }
   {
     YojsonWriter OF(std::cout);
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, 3);
     OF.emitString("Hello");
     OF.emitBoolean(true);
     OF.emitInteger(100000);
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
     OF.emitInteger(100000);
     OF.emitTag("array");
     {
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, 2);
       OF.emitInteger(1);
       OF.emitInteger(2);
     }

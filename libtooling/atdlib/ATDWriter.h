@@ -161,6 +161,10 @@ namespace ATDWriter {
       emitter_.emitTag(val);
     }
 
+    void enterArray(size_t numElems) {
+      enterContainer(SARRAY, true, numElems);
+      emitter_.enterArray(numElems);
+    }
     void enterArray() {
       enterContainer(SARRAY);
       emitter_.enterArray();
@@ -216,20 +220,30 @@ namespace ATDWriter {
 
     // convenient classes for automatically closing containers using C++ scoping
 
-#define DECLARE_SCOPE(Name)                                     \
-    class Name##Scope {                                         \
-      GenWriter &f_;                                            \
-    public:                                                     \
-    Name##Scope(GenWriter &f) : f_(f) {                         \
-        f_.enter##Name();                                       \
-      }                                                         \
-      ~Name##Scope() {                                          \
-        f_.leave##Name();                                       \
-      }                                                         \
-    };                                                          \
+    class ArrayScope {
+      GenWriter &f_;
+    public:
+      ArrayScope(GenWriter &f, size_t size) : f_(f) {
+        f_.enterArray(size);
+      }
+      ArrayScope(GenWriter &f) : f_(f) {
+        f_.enterArray();
+      }
+      ~ArrayScope() {
+        f_.leaveArray();
+      }
+    };
 
-    DECLARE_SCOPE(Array)
-    DECLARE_SCOPE(Object)
+    class ObjectScope {
+      GenWriter &f_;
+    public:
+      ObjectScope(GenWriter &f) : f_(f) {
+        f_.enterObject();
+      }
+      ~ObjectScope() {
+        f_.leaveObject();
+      }
+    };
 
     class TupleScope {
       GenWriter &f_;
@@ -403,6 +417,9 @@ namespace ATDWriter {
 
     void enterArray() {
       enterContainer(LBRACKET);
+    }
+    void enterArray(size_t size) {
+      enterArray();
     }
     void leaveArray() {
       leaveContainer(RBRACKET);
