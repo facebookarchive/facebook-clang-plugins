@@ -2591,7 +2591,7 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
 /// type member_expr_info = {
 ///   ~is_arrow : bool;
 ///   name : named_decl_info;
-///   pointer : pointer
+///   decl_ref : decl_ref
 /// } <ocaml field_prefix="mei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitMemberExpr(const MemberExpr *Node) {
@@ -2601,8 +2601,8 @@ void ASTExporter<ATDWriter>::VisitMemberExpr(const MemberExpr *Node) {
   OF.emitTag("name");
   ValueDecl *memberDecl = Node->getMemberDecl();
   dumpName(*memberDecl);
-  OF.emitTag("pointer");
-  dumpPointer(memberDecl);
+  OF.emitTag("decl_ref");
+  dumpDeclRef(*memberDecl);
 }
 
 /// \atd
