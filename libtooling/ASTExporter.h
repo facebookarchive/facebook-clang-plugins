@@ -342,6 +342,9 @@ public:
 //  Utilities
 //===----------------------------------------------------------------------===//
 
+std::unordered_map<const void*, int> pointerMap;
+int pointerCounter = 0;
+
 /// \atd
 /// type pointer = string
 template <class ATDWriter>
@@ -351,8 +354,12 @@ void writePointer(ATDWriter &OF, bool withPointers, const void *Ptr) {
     snprintf(str, 20, "%p", Ptr);
     OF.emitString(str);
   } else {
-    // %p seems to print (nil) on Linux.
-    OF.emitString("0x0");
+    char str[20];
+    if (pointerMap.find(Ptr) == pointerMap.end()) {
+      pointerMap[Ptr] = pointerCounter++;
+    }
+    snprintf(str, 20, "%d", pointerMap[Ptr]);
+    OF.emitString(str);
   }
 }
 
