@@ -274,6 +274,8 @@ public:
   void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
   void dumpCXXTemporary(const CXXTemporary *Temporary);
   void VisitLambdaExpr(const LambdaExpr *Node);
+  void VisitCXXNewExpr(const CXXNewExpr *Node);
+  void VisitCXXDeleteExpr(const CXXDeleteExpr *Node);
 
   // ObjC
   void VisitObjCAtCatchStmt(const ObjCAtCatchStmt *Node);
@@ -2864,7 +2866,42 @@ void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
   dumpDecl(Node->getLambdaClass());
 }
 
+/// \atd
+/// #define cxx_new_expr_tuple expr_tuple * cxx_new_expr_info
+/// type cxx_new_expr_info = {
+///   ~is_array : bool;
+///   ?array_size_expr : pointer option;
+///   ?initializer_expr : pointer option;
+/// } <ocaml field_prefix="xnei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
 
+  ///  ?should_null_check : bool;
+  //OF.emitFlag("should_null_check", Node->shouldNullCheckAllocation());
+  OF.emitFlag("is_array", Node->isArray());
+  if (Node->getArraySize()) {
+    OF.emitTag("array_size_expr");
+    dumpPointer(Node->getArraySize());
+  }
+  if (Node->hasInitializer()) {
+    OF.emitTag("initializer_expr");
+    dumpPointer(Node->getInitializer());
+  }
+}
+
+/// \atd
+/// #define cxx_delete_expr_tuple expr_tuple * cxx_delete_expr_info
+/// type cxx_delete_expr_info = {
+///   ~is_array : bool;
+/// } <ocaml field_prefix="xdei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXDeleteExpr(const CXXDeleteExpr *Node) {
+  VisitExpr(Node);
+  ObjectScope Scope(OF);
+  OF.emitFlag("is_array", Node->isArrayForm());
+}
 ////===----------------------------------------------------------------------===//
 //// Obj-C Expressions
 ////===----------------------------------------------------------------------===//
