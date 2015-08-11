@@ -472,7 +472,6 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl& decl) {
   OF.emitString(decl.getNameAsString());
   OF.emitTag("qual_name");
   {
-    ArrayScope aScope(OF);
     std::string qualName = decl.getQualifiedNameAsString();
     // split name with :: and reverse the list
     std::vector<std::string> splitted;
@@ -487,6 +486,7 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl& decl) {
     }
     splitted.push_back(qualName.substr(firstChar));
 
+    ArrayScope aScope(OF, splitted.size());
     // dump list in reverse
     for (int i = splitted.size() - 1; i >= 0; i--) {
       OF.emitString(splitted[i]);
@@ -536,20 +536,24 @@ void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   if (!DC) {
-    { ArrayScope Scope(OF); }
+    { ArrayScope Scope(OF, 0); }
     { ObjectScope Scope(OF); }
     return;
   }
   {
-    ArrayScope Scope(OF);
+    std::vector<Decl*> declsToDump;
     for (auto I : DC->decls()) {
       if (Options.deduplicationService == nullptr
           || FileUtils::shouldTraverseDeclFile(*Options.deduplicationService,
                                                Options.basePath,
                                                DC->getParentASTContext().getSourceManager(),
                                                *I)) {
-        dumpDecl(I);
+        declsToDump.push_back(I);
       }
+    }
+    ArrayScope Scope(OF, declsToDump.size());
+    for (auto I : declsToDump) {
+      dumpDecl(I);
     }
   }
   {
@@ -661,7 +665,7 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
 #pragma clang diagnostic pop
 
       {
-        ArrayScope Scope(OF);
+        ArrayScope Scope(OF, OS.getContent().size());
         for (const std::string& item : OS.getContent()) {
           OF.emitString(item);
         }
@@ -848,12 +852,12 @@ void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
 /// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS) {
-  ArrayScope Scope(OF);
   SmallVector<NestedNameSpecifierLoc , 8> NestedNames;
   while (NNS) {
     NestedNames.push_back(NNS);
     NNS = NNS.getPrefix();
   }
+  ArrayScope Scope(OF, NestedNames.size());
   while(!NestedNames.empty()) {
     NNS = NestedNames.pop_back_val();
     NestedNameSpecifier::SpecifierKind Kind = NNS.getNestedNameSpecifier()->getKind();
@@ -1034,7 +1038,7 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
 
     OF.emitTag("attributes");
     {
-      ArrayScope ArrayAttr(OF);
+      ArrayScope ArrayAttr(OF, D->getAttrs().size());
       for (auto I : D->attrs()) {
         dumpAttr(*I);
       }
@@ -1123,7 +1127,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(const TranslationUnitDecl *D) {
   VisitDecl(D);
   VisitDeclContext(D);
-  ArrayScope Scope(OF);
+  ArrayScope Scope(OF, types.size());
   for (const Type* type : types) {
     dumpType(type);
   }
@@ -1204,7 +1208,7 @@ void ASTExporter<ATDWriter>::VisitEnumConstantDecl(const EnumConstantDecl *D) {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitIndirectFieldDecl(const IndirectFieldDecl *D) {
   VisitValueDecl(D);
-  ArrayScope Scope(OF);
+  ArrayScope Scope(OF, std::distance(D->chain_begin(), D->chain_end())); // not covered by tests
   for (auto I : D->chain()) {
     dumpDeclRef(*I);
   }
@@ -1265,14 +1269,12 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
 //  }
 
   {
-    ArrayRef<NamedDecl *>::iterator
-    I = D->getDeclsInPrototypeScope().begin(),
-    E = D->getDeclsInPrototypeScope().end();
-    if (I != E) {
+    const auto& decls = D->getDeclsInPrototypeScope();
+    if (!decls.empty()) {
       OF.emitTag("decls_in_prototype_scope");
-      ArrayScope Scope(OF);
-      for (; I != E; ++I) {
-        dumpDecl(*I);
+      ArrayScope Scope(OF, decls.size()); // not covered by tests
+      for (const auto* decl : decls) {
+        dumpDecl(decl);
       }
     }
   }
@@ -1281,7 +1283,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     FunctionDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
     if (I != E) {
       OF.emitTag("parameters");
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, std::distance(I, E));
       for (; I != E; ++I) {
         dumpDecl(*I);
       }
@@ -1292,7 +1294,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool HasCtorInitializers = C && C->init_begin() != C->init_end();
   if (HasCtorInitializers) {
     OF.emitTag("cxx_ctor_initializers");
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, std::distance(C->init_begin(), C->init_end()));
     for (auto I : C->inits()) {
       dumpCXXCtorInitializer(*I);
     }
@@ -1453,21 +1455,28 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
     return;
   }
 
-  uint vBasesNum = D->getNumVBases();
-  uint nonVBasesNum = D->getNumBases() - vBasesNum;
-  if (nonVBasesNum > 0) {
-    OF.emitTag("bases");
-    ArrayScope aScope(OF);
-    for (const auto base : D->bases()) {
-      if (!base.isVirtual()) {
-        dumpPointerToType(base.getType());
-      }
+  // getNumBases and getNumVBases are not reliable, extract this info
+  // directly from what is going to be dumped
+  SmallVector<CXXBaseSpecifier, 2> nonVBases;
+  SmallVector<CXXBaseSpecifier, 2> vBases;
+  for(const auto base : D->bases()) {
+    if (base.isVirtual()) {
+      vBases.push_back(base);
+    } else {
+      nonVBases.push_back(base);
     }
   }
-  if (vBasesNum > 0) {
+  if (nonVBases.size() > 0) {
+    OF.emitTag("bases");
+    ArrayScope aScope(OF, nonVBases.size());
+    for (const auto base : nonVBases) {
+      dumpPointerToType(base.getType());
+    }
+  }
+  if (vBases.size() > 0) {
     OF.emitTag("vbases");
-    ArrayScope aScope(OF);
-    for (const auto base : D->vbases()) {
+    ArrayScope aScope(OF, vBases.size());
+    for (const auto base : vBases) {
       dumpPointerToType(base.getType());
     }
   }
@@ -1757,7 +1766,7 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
     ObjCMethodDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
     if (I != E) {
       OF.emitTag("parameters");
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, std::distance(I, E));
       for (; I != E; ++I) {
         dumpDecl(*I);
       }
@@ -1797,7 +1806,7 @@ void ASTExporter<ATDWriter>::VisitObjCCategoryDecl(const ObjCCategoryDecl *D) {
   E = D->protocol_end();
   if (I != E) {
     OF.emitTag("protocols");
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, std::distance(I,E)); // not covered by tests
     for (; I != E; ++I) {
       assert(*I);
       dumpDeclRef(**I);
@@ -1840,7 +1849,7 @@ void ASTExporter<ATDWriter>::VisitObjCProtocolDecl(const ObjCProtocolDecl *D) {
   E = D->protocol_end();
   if (I != E) {
     OF.emitTag("protocols");
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, std::distance(I, E)); // not covered by tests
     for (; I != E; ++I) {
       assert(*I);
       dumpDeclRef(**I);
@@ -1873,7 +1882,7 @@ void ASTExporter<ATDWriter>::VisitObjCInterfaceDecl(const ObjCInterfaceDecl *D) 
   E = D->protocol_end();
   if (I != E) {
     OF.emitTag("protocols");
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, std::distance(I, E));
     for (; I != E; ++I) {
       assert(*I);
       dumpDeclRef(**I);
@@ -1906,7 +1915,7 @@ void ASTExporter<ATDWriter>::VisitObjCImplementationDecl(const ObjCImplementatio
   E = D->init_end();
   if (I != E) {
     OF.emitTag("ivar_initializers");
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, std::distance(I, E)); // not covered by tests
     for (; I != E; ++I) {
       assert(*I);
       dumpCXXCtorInitializer(**I);
@@ -1975,32 +1984,46 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   ObjCPropertyDecl::PropertyAttributeKind Attrs = D->getPropertyAttributes();
   if (Attrs != ObjCPropertyDecl::OBJC_PR_noattr) {
     OF.emitTag("property_attributes");
-    ArrayScope Scope(OF);
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_readonly)
+    bool readonly = Attrs & ObjCPropertyDecl::OBJC_PR_readonly;
+    bool assign = Attrs & ObjCPropertyDecl::OBJC_PR_assign;
+    bool readwrite = Attrs & ObjCPropertyDecl::OBJC_PR_readwrite;
+    bool retain = Attrs & ObjCPropertyDecl::OBJC_PR_retain;
+    bool copy = Attrs & ObjCPropertyDecl::OBJC_PR_copy;
+    bool nonatomic = Attrs & ObjCPropertyDecl::OBJC_PR_nonatomic;
+    bool atomic = Attrs & ObjCPropertyDecl::OBJC_PR_atomic;
+    bool weak = Attrs & ObjCPropertyDecl::OBJC_PR_weak;
+    bool strong = Attrs & ObjCPropertyDecl::OBJC_PR_strong;
+    bool unsafeUnretained = Attrs & ObjCPropertyDecl::OBJC_PR_unsafe_unretained;
+    bool getter = Attrs & ObjCPropertyDecl::OBJC_PR_getter;
+    bool setter = Attrs & ObjCPropertyDecl::OBJC_PR_setter;
+    int toEmit = readonly + assign + readwrite + retain + copy + nonatomic + atomic
+                 + weak + strong + unsafeUnretained + getter + setter;
+    ArrayScope Scope(OF, toEmit);
+    if (readonly)
       OF.emitSimpleVariant("Readonly");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_assign)
+    if (assign)
       OF.emitSimpleVariant("Assign");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_readwrite)
+    if (readwrite)
       OF.emitSimpleVariant("Readwrite");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_retain)
+    if (retain)
       OF.emitSimpleVariant("Retain");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_copy)
+    if (copy)
       OF.emitSimpleVariant("Copy");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_nonatomic)
+    if (nonatomic)
       OF.emitSimpleVariant("Nonatomic");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_atomic)
+    if (atomic)
       OF.emitSimpleVariant("Atomic");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_weak)
+    if (weak)
       OF.emitSimpleVariant("Weak");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_strong)
+    if (strong)
       OF.emitSimpleVariant("Strong");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_unsafe_unretained)
+    if (unsafeUnretained)
       OF.emitSimpleVariant("Unsafe_unretained");
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_getter) {
+    if (getter) {
       VariantScope Scope(OF, "Getter");
       dumpDeclRef(*D->getGetterMethodDecl());
     }
-    if (Attrs & ObjCPropertyDecl::OBJC_PR_setter) {
+    if (setter) {
       VariantScope Scope(OF, "Setter");
       dumpDeclRef(*D->getSetterMethodDecl());
     }
@@ -2061,7 +2084,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
     ObjCMethodDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
     if (I != E) {
       OF.emitTag("parameters");
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, std::distance(I, E));
       for (; I != E; ++I) {
         dumpDecl(*I);
       }
@@ -2073,7 +2096,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
     BlockDecl::capture_iterator I = D->capture_begin(), E = D->capture_end();
     if (I != E) {
       OF.emitTag("captured_variables");
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, std::distance(I, E));
       for (; I != E; ++I) {
         ObjectScope Scope(OF);
         OF.emitFlag("is_by_ref", I->isByRef());
@@ -2145,7 +2168,7 @@ void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
     dumpSourceRange(S->getSourceRange());
   }
   {
-    ArrayScope Scope(OF);
+    ArrayScope Scope(OF, std::distance(S->child_begin(), S->child_end()));
     for (Stmt::const_child_range CI = S->children(); CI; ++CI) {
       dumpStmt(*CI);
     }
@@ -2157,7 +2180,7 @@ void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclStmt(const DeclStmt *Node) {
   VisitStmt(Node);
-  ArrayScope Scope(OF);
+  ArrayScope Scope(OF, std::distance(Node->decl_begin(), Node->decl_end()));
   for (auto I : Node->decls()) {
     dumpDecl(I);
   }
@@ -2168,7 +2191,7 @@ void ASTExporter<ATDWriter>::VisitDeclStmt(const DeclStmt *Node) {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAttributedStmt(const AttributedStmt *Node) {
   VisitStmt(Node);
-  ArrayScope Scope(OF);
+  ArrayScope Scope(OF, Node->getAttrs().size()); // not covered by tests
   for (auto I : Node->getAttrs()) {
     dumpAttr(*I);
   }
@@ -2360,10 +2383,9 @@ void ASTExporter<ATDWriter>::VisitCastExpr(const CastExpr *Node) {
   OF.emitSimpleVariant(Node->getCastKindName());
   OF.emitTag("base_path");
   {
-    ArrayScope Scope(OF);
-    for (CastExpr::path_const_iterator I = Node->path_begin(),
-         E = Node->path_end();
-         I != E; ++I) {
+    auto I = Node->path_begin(), E = Node->path_end();
+    ArrayScope Scope(OF, std::distance(I, E));
+    for (; I != E; ++I) {
       dumpCXXBaseSpecifier(**I);
     }
   }
@@ -2411,7 +2433,7 @@ void ASTExporter<ATDWriter>::VisitOverloadExpr(const OverloadExpr *Node) {
   {
     if (Node->getNumDecls() > 0) {
       OF.emitTag("decls");
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, std::distance(Node->decls_begin(), Node->decls_end())); // not covered by tests
       for(auto I : Node->decls()) {
         dumpDeclRef(*I);
       }
@@ -2846,7 +2868,7 @@ void ASTExporter<ATDWriter>::VisitExprWithCleanups(const ExprWithCleanups *Node)
   ObjectScope Scope(OF);
     if (Node->getNumObjects() > 0) {
       OF.emitTag("decl_refs");
-      ArrayScope Scope(OF);
+      ArrayScope Scope(OF, Node->getNumObjects());
       for (unsigned i = 0, e = Node->getNumObjects(); i != e; ++i)
         dumpDeclRef(*Node->getObject(i));
     }
@@ -3177,9 +3199,9 @@ void ASTExporter<ATDWriter>::visitComment(const Comment *C) {
     dumpSourceRange(C->getSourceRange());
   }
   {
-    ArrayScope Scope(OF);
-    for (Comment::child_iterator I = C->child_begin(), E = C->child_end();
-         I != E; ++I) {
+    Comment::child_iterator I = C->child_begin(), E = C->child_end();
+    ArrayScope Scope(OF, std::distance(I,E));
+    for (; I != E; ++I) {
       dumpComment(*I);
     }
   }
@@ -3461,7 +3483,7 @@ void ASTExporter<ATDWriter>::VisitFunctionProtoType(const FunctionProtoType *T) 
   ObjectScope Scope(OF);
   if (T->getNumParams() > 0) {
     OF.emitTag("params_type");
-    ArrayScope aScope(OF);
+    ArrayScope aScope(OF, T->getParamTypes().size());
     for (const auto& paramType : T->getParamTypes()) {
       dumpPointerToType(paramType);
     }
@@ -3500,7 +3522,7 @@ void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
   int numProtocols = T->getNumProtocols();
   if(numProtocols > 0) {
     OF.emitTag("protocol_decls_ptr");
-    ArrayScope aScope(OF);
+    ArrayScope aScope(OF, numProtocols);
     for (int i = 0; i < numProtocols; i++) {
       dumpPointer(T->getProtocol(i));
     }
