@@ -30,6 +30,13 @@ namespace ATDWriter {
     STAG
   };
 
+  // whether the container has a {maximum,exact} size
+  enum ContainerSizeKind {
+    CSKNONE,  // no size info
+    CSKEXACT, // the container expects exactly this number of items
+    CSKMAX    // the container expects at most this number of items
+  };
+
   // Main class for writing ATD-like data
   // - In NDEBUG mode this class is only a wrapper around an ATDEmitter
   // - In DEBUG mode it acts as a validator: asserts will fire if the events do not correspond to a well-formed ATD/JSON value
@@ -50,8 +57,8 @@ namespace ATDWriter {
     }
 
     // How many elements are expected in the current container
-    std::vector<size_t> containerSize_;
-    std::vector<bool> containerHasSize_;
+    std::vector<int> containerSize_;
+    std::vector<enum ContainerSizeKind> containerSizeKind_;
 #endif
 
     void enterValue() {
@@ -65,8 +72,13 @@ namespace ATDWriter {
 
     void leaveValue() {
 #ifdef DEBUG
-      if (containerHasSize_.back()) {
+      switch (containerSizeKind_.back()) {
+      case CSKEXACT:
+      case CSKMAX:
         containerSize_.back() -= 1;
+        break;
+      case CSKNONE:
+        break;
       }
       if (stack_.empty()) {
         return;
@@ -83,13 +95,18 @@ namespace ATDWriter {
       leaveValue();
     }
 
-    void enterContainer(enum Symbol s, bool hasSize = false, size_t numElems = 0) {
+    void enterContainer(enum Symbol s, enum ContainerSizeKind csk = CSKNONE, int numElems = 0) {
 #ifdef DEBUG
       enterValue();
       stack_.push_back(s);
-      containerHasSize_.push_back(hasSize);
-      if (hasSize) {
+      containerSizeKind_.push_back(csk);
+      switch (csk) {
+      case CSKEXACT:
+      case CSKMAX:
         containerSize_.push_back(numElems);
+        break;
+      case CSKNONE:
+        break;
       }
 #endif
     }
@@ -98,12 +115,18 @@ namespace ATDWriter {
 #ifdef DEBUG
       assert(stack_.back() == s);
       stack_.pop_back();
-      if (containerHasSize_.back()) {
-        assert(!containerSize_.empty());
+      switch (containerSizeKind_.back()) {
+      case CSKEXACT:
         assert(containerSize_.back() == 0);
+      case CSKMAX:
+        assert(!containerSize_.empty());
+        assert(containerSize_.back() >= 0);
         containerSize_.pop_back();
+        break;
+      case CSKNONE:
+        break;
       }
-      containerHasSize_.pop_back();
+      containerSizeKind_.pop_back();
       leaveValue();
 #endif
     }
@@ -112,15 +135,15 @@ namespace ATDWriter {
     GenWriter(const ATDEmitter &emitter) : emitter_(emitter)
     {
 #ifdef DEBUG
-      containerHasSize_.push_back(false);
+      containerSizeKind_.push_back(CSKNONE);
 #endif
     }
 
     ~GenWriter() {
 #ifdef DEBUG
       assert(stack_.empty());
-      assert(containerHasSize_.size() == 1);
-      assert(!containerHasSize_.back());
+      assert(containerSizeKind_.size() == 1);
+      assert(containerSizeKind_.back() == CSKNONE);
 #endif
       emitter_.emitEOF();
     }
@@ -153,8 +176,8 @@ namespace ATDWriter {
       emitter_.emitTag(val);
     }
 
-    void enterArray(size_t numElems) {
-      enterContainer(SARRAY, true, numElems);
+    void enterArray(int numElems) {
+      enterContainer(SARRAY, CSKEXACT, numElems);
       emitter_.enterArray(numElems);
     }
     void enterArray() {
@@ -165,6 +188,10 @@ namespace ATDWriter {
       leaveContainer(SARRAY);
       emitter_.leaveArray();
     }
+    void enterObject(int numElems) {
+      enterContainer(SOBJECT, CSKMAX, numElems);
+      emitter_.enterObject(numElems);
+    }
     void enterObject() {
       enterContainer(SOBJECT);
       emitter_.enterObject();
@@ -173,8 +200,8 @@ namespace ATDWriter {
       leaveContainer(SOBJECT);
       emitter_.leaveObject();
     }
-    void enterTuple(size_t numElems) {
-      enterContainer(STUPLE, true, numElems);
+    void enterTuple(int numElems) {
+      enterContainer(STUPLE, CSKEXACT, numElems);
       emitter_.enterTuple(numElems);
     }
     void enterTuple() {
@@ -189,7 +216,7 @@ namespace ATDWriter {
     void enterVariant(const std::string &tag, bool hasArg = true) {
       // variants have at most one value, so we can safely use hasArg
       // as the number of arguments
-      enterContainer(SVARIANT, true, hasArg);
+      enterContainer(SVARIANT, CSKEXACT, hasArg);
       emitter_.enterVariant();
       emitter_.emitVariantTag(tag, hasArg);
     }
@@ -216,7 +243,7 @@ namespace ATDWriter {
     class ArrayScope {
       GenWriter &f_;
     public:
-      ArrayScope(GenWriter &f, size_t size) : f_(f) {
+      ArrayScope(GenWriter &f, int size) : f_(f) {
         f_.enterArray(size);
       }
       ArrayScope(GenWriter &f) : f_(f) {
@@ -230,6 +257,9 @@ namespace ATDWriter {
     class ObjectScope {
       GenWriter &f_;
     public:
+      ObjectScope(GenWriter &f, int size) : f_(f) {
+        f_.enterObject(size);
+      }
       ObjectScope(GenWriter &f) : f_(f) {
         f_.enterObject();
       }
@@ -241,7 +271,7 @@ namespace ATDWriter {
     class TupleScope {
       GenWriter &f_;
     public:
-      TupleScope(GenWriter &f, size_t size) : f_(f) {
+      TupleScope(GenWriter &f, int size) : f_(f) {
         f_.enterTuple(size);
       }
       TupleScope(GenWriter &f) : f_(f) {
@@ -423,7 +453,7 @@ namespace ATDWriter {
     void enterArray() {
       enterContainer(LBRACKET);
     }
-    void enterArray(size_t size) {
+    void enterArray(int size) {
       enterArray();
     }
     void leaveArray() {
@@ -432,13 +462,16 @@ namespace ATDWriter {
     void enterObject() {
       enterContainer(LBRACE);
     }
+    void enterObject(int size) {
+      enterObject();
+    }
     void leaveObject() {
       leaveContainer(RBRACE);
     }
     void enterTuple() {
       enterContainer(options_.useYojson ? LPAREN : LBRACKET);
     }
-    void enterTuple(size_t size) {
+    void enterTuple(int size) {
       enterTuple();
     }
     void leaveTuple() {

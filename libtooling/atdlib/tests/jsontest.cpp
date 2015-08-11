@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
   }
   {
     JsonWriter OF(std::cout, yojsonWriterOptions);
-    ObjectScope Scope(OF);
+    ObjectScope Scope(OF, 4); // 4 is larger than the actual size on purpose
     OF.emitTag("string");
     OF.emitString("Hello");
     OF.emitTag("boolean");
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
   }
   {
     JsonWriter OF(std::cout, yojsonWriterOptions);
-    ObjectScope Scope(OF);
+    ObjectScope Scope(OF, 2);
     OF.emitTag("integer");
     OF.emitInteger(100000);
     OF.emitTag("array");
