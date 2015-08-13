@@ -42,7 +42,7 @@ build/FacebookClangPlugin.dylib: $(OBJS:%=build/%) $(HEADERS)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJS:%=build/%) -lz -lpthread -lm
 
 build/record_copied_file: build/record_copied_file.o build/FileServices.o $(HEADERS)
-	$(CXX) -o $@ build/record_copied_file.o build/FileServices.o
+	$(CXX) $(CFLAGS) -o $@ build/record_copied_file.o build/FileServices.o
 
 TEST_DIRS=tests
 ifneq "$(EXTRA_DIR)" ""
