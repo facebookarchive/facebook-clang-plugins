@@ -30,7 +30,7 @@
           "__int128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -54,7 +54,7 @@
           "__uint128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -78,7 +78,7 @@
           "__builtin_va_list"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -495,7 +495,7 @@
                               "raw" : "double",
                               "type_ptr" : "8"
                             },
-                            "value_kind" : ["LValue"]
+                            "value_kind" : "LValue"
                           },
                           {
                             "is_arrow" : true,
@@ -507,7 +507,7 @@
                               ]
                             },
                             "decl_ref" : {
-                              "kind" : ["Field"],
+                              "kind" : "Field",
                               "decl_pointer" : "17",
                               "name" : {
                                 "name" : "area",
@@ -531,7 +531,7 @@
                         }
                       },
                       {
-                        "cast_kind" : ["LValueToRValue"],
+                        "cast_kind" : "LValueToRValue",
                         "base_path" : [
                         ]
                       }
@@ -672,7 +672,7 @@
                           "raw" : "double",
                           "type_ptr" : "8"
                         },
-                        "value_kind" : ["LValue"]
+                        "value_kind" : "LValue"
                       },
                       {
                         "is_arrow" : true,
@@ -684,7 +684,7 @@
                           ]
                         },
                         "decl_ref" : {
-                          "kind" : ["Field"],
+                          "kind" : "Field",
                           "decl_pointer" : "17",
                           "name" : {
                             "name" : "area",
@@ -732,11 +732,11 @@
                               "raw" : "double",
                               "type_ptr" : "8"
                             },
-                            "value_kind" : ["LValue"]
+                            "value_kind" : "LValue"
                           },
                           {
                             "decl_ref" : {
-                              "kind" : ["ParmVar"],
+                              "kind" : "ParmVar",
                               "decl_pointer" : "31",
                               "name" : {
                                 "name" : "area",
@@ -759,7 +759,7 @@
                         }
                       },
                       {
-                        "cast_kind" : ["LValueToRValue"],
+                        "cast_kind" : "LValueToRValue",
                         "base_path" : [
                         ]
                       }
@@ -770,10 +770,10 @@
                       "raw" : "double",
                       "type_ptr" : "8"
                     },
-                    "value_kind" : ["LValue"]
+                    "value_kind" : "LValue"
                   },
                   {
-                    "kind" : ["Assign"]
+                    "kind" : "Assign"
                   }
                 ]]
               ]
@@ -987,11 +987,11 @@
                           "raw" : "double",
                           "type_ptr" : "8"
                         },
-                        "value_kind" : ["LValue"]
+                        "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
-                          "kind" : ["Var"],
+                          "kind" : "Var",
                           "decl_pointer" : "45",
                           "name" : {
                             "name" : "a",
@@ -1074,7 +1074,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["UncheckedDerivedToBase"],
+                                "cast_kind" : "UncheckedDerivedToBase",
                                 "base_path" : [
                                   {
                                     "name" : "Form"
@@ -1099,7 +1099,7 @@
                               ]
                             },
                             "decl_ref" : {
-                              "kind" : ["CXXMethod"],
+                              "kind" : "CXXMethod",
                               "decl_pointer" : "21",
                               "name" : {
                                 "name" : "getArea",
@@ -1129,10 +1129,10 @@
                       "raw" : "double",
                       "type_ptr" : "8"
                     },
-                    "value_kind" : ["LValue"]
+                    "value_kind" : "LValue"
                   },
                   {
-                    "kind" : ["Assign"]
+                    "kind" : "Assign"
                   }
                 ]],
                 ["ReturnStmt" , [
@@ -1194,11 +1194,11 @@
                                   "raw" : "double (double)",
                                   "type_ptr" : "6"
                                 },
-                                "value_kind" : ["LValue"]
+                                "value_kind" : "LValue"
                               },
                               {
                                 "decl_ref" : {
-                                  "kind" : ["Function"],
+                                  "kind" : "Function",
                                   "decl_pointer" : "5",
                                   "name" : {
                                     "name" : "sqrt",
@@ -1221,7 +1221,7 @@
                             }
                           },
                           {
-                            "cast_kind" : ["FunctionToPointerDecay"],
+                            "cast_kind" : "FunctionToPointerDecay",
                             "base_path" : [
                             ]
                           }
@@ -1284,11 +1284,11 @@
                                           "raw" : "double",
                                           "type_ptr" : "8"
                                         },
-                                        "value_kind" : ["LValue"]
+                                        "value_kind" : "LValue"
                                       },
                                       {
                                         "decl_ref" : {
-                                          "kind" : ["Var"],
+                                          "kind" : "Var",
                                           "decl_pointer" : "45",
                                           "name" : {
                                             "name" : "a",
@@ -1311,7 +1311,7 @@
                                     }
                                   },
                                   {
-                                    "cast_kind" : ["LValueToRValue"],
+                                    "cast_kind" : "LValueToRValue",
                                     "base_path" : [
                                     ]
                                   }
@@ -1363,7 +1363,7 @@
                                     }
                                   },
                                   {
-                                    "cast_kind" : ["IntegralToFloating"],
+                                    "cast_kind" : "IntegralToFloating",
                                     "base_path" : [
                                     ]
                                   }
@@ -1376,7 +1376,7 @@
                                 }
                               },
                               {
-                                "kind" : ["Div"]
+                                "kind" : "Div"
                               }
                             ]],
                             ["FloatingLiteral" , [
@@ -1409,7 +1409,7 @@
                             }
                           },
                           {
-                            "kind" : ["Mul"]
+                            "kind" : "Mul"
                           }
                         ]]
                       ],
@@ -1569,7 +1569,7 @@
                             }
                           },
                           {
-                            "cast_kind" : ["UncheckedDerivedToBase"],
+                            "cast_kind" : "UncheckedDerivedToBase",
                             "base_path" : [
                               {
                                 "name" : "Form"
@@ -1594,7 +1594,7 @@
                           ]
                         },
                         "decl_ref" : {
-                          "kind" : ["CXXMethod"],
+                          "kind" : "CXXMethod",
                           "decl_pointer" : "29",
                           "name" : {
                             "name" : "setArea",
@@ -1668,11 +1668,11 @@
                                       "raw" : "double (double, double)",
                                       "type_ptr" : "10"
                                     },
-                                    "value_kind" : ["LValue"]
+                                    "value_kind" : "LValue"
                                   },
                                   {
                                     "decl_ref" : {
-                                      "kind" : ["Function"],
+                                      "kind" : "Function",
                                       "decl_pointer" : "9",
                                       "name" : {
                                         "name" : "pow",
@@ -1695,7 +1695,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["FunctionToPointerDecay"],
+                                "cast_kind" : "FunctionToPointerDecay",
                                 "base_path" : [
                                 ]
                               }
@@ -1745,11 +1745,11 @@
                                           "raw" : "double",
                                           "type_ptr" : "8"
                                         },
-                                        "value_kind" : ["LValue"]
+                                        "value_kind" : "LValue"
                                       },
                                       {
                                         "decl_ref" : {
-                                          "kind" : ["ParmVar"],
+                                          "kind" : "ParmVar",
                                           "decl_pointer" : "67",
                                           "name" : {
                                             "name" : "diameter",
@@ -1772,7 +1772,7 @@
                                     }
                                   },
                                   {
-                                    "cast_kind" : ["LValueToRValue"],
+                                    "cast_kind" : "LValueToRValue",
                                     "base_path" : [
                                     ]
                                   }
@@ -1807,7 +1807,7 @@
                                 }
                               },
                               {
-                                "kind" : ["Mul"]
+                                "kind" : "Mul"
                               }
                             ]],
                             ["ImplicitCastExpr" , [
@@ -1857,7 +1857,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["IntegralToFloating"],
+                                "cast_kind" : "IntegralToFloating",
                                 "base_path" : [
                                 ]
                               }
@@ -1900,7 +1900,7 @@
                         }
                       },
                       {
-                        "kind" : ["Mul"]
+                        "kind" : "Mul"
                       }
                     ]]
                   ],
@@ -2066,7 +2066,7 @@
                                         }
                                       },
                                       {
-                                        "cast_kind" : ["UncheckedDerivedToBase"],
+                                        "cast_kind" : "UncheckedDerivedToBase",
                                         "base_path" : [
                                           {
                                             "name" : "Form"
@@ -2080,7 +2080,7 @@
                                       "raw" : "int",
                                       "type_ptr" : "20"
                                     },
-                                    "value_kind" : ["LValue"]
+                                    "value_kind" : "LValue"
                                   },
                                   {
                                     "is_arrow" : true,
@@ -2092,7 +2092,7 @@
                                       ]
                                     },
                                     "decl_ref" : {
-                                      "kind" : ["Field"],
+                                      "kind" : "Field",
                                       "decl_pointer" : "19",
                                       "name" : {
                                         "name" : "color",
@@ -2116,7 +2116,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["LValueToRValue"],
+                                "cast_kind" : "LValueToRValue",
                                 "base_path" : [
                                 ]
                               }
@@ -2155,7 +2155,7 @@
                             }
                           },
                           {
-                            "kind" : ["GT"]
+                            "kind" : "GT"
                           }
                         ]]
                       ],
@@ -2193,196 +2193,196 @@
         "pointer" : "85",
         "raw" : "void"
       },
-      ["Void"]
+      "Void"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "97",
         "raw" : "_Bool"
       },
-      ["Bool"]
+      "Bool"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "98",
         "raw" : "char"
       },
-      ["Char_S"]
+      "Char_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "99",
         "raw" : "signed char"
       },
-      ["SChar"]
+      "SChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "100",
         "raw" : "short"
       },
-      ["Short"]
+      "Short"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "20",
         "raw" : "int"
       },
-      ["Int"]
+      "Int"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "101",
         "raw" : "long"
       },
-      ["Long"]
+      "Long"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "102",
         "raw" : "long long"
       },
-      ["LongLong"]
+      "LongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "103",
         "raw" : "unsigned char"
       },
-      ["UChar"]
+      "UChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "104",
         "raw" : "unsigned short"
       },
-      ["UShort"]
+      "UShort"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "105",
         "raw" : "unsigned int"
       },
-      ["UInt"]
+      "UInt"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "106",
         "raw" : "unsigned long"
       },
-      ["ULong"]
+      "ULong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "107",
         "raw" : "unsigned long long"
       },
-      ["ULongLong"]
+      "ULongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "108",
         "raw" : "float"
       },
-      ["Float"]
+      "Float"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "8",
         "raw" : "double"
       },
-      ["Double"]
+      "Double"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "109",
         "raw" : "long double"
       },
-      ["LongDouble"]
+      "LongDouble"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "110",
         "raw" : "__int128"
       },
-      ["Int128"]
+      "Int128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "111",
         "raw" : "unsigned __int128"
       },
-      ["UInt128"]
+      "UInt128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "112",
         "raw" : "wchar_t"
       },
-      ["WChar_S"]
+      "WChar_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "113",
         "raw" : "char16_t"
       },
-      ["Char16"]
+      "Char16"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "114",
         "raw" : "char32_t"
       },
-      ["Char32"]
+      "Char32"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "115",
         "raw" : "<dependent type>"
       },
-      ["Dependent"]
+      "Dependent"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "116",
         "raw" : "<overloaded function type>"
       },
-      ["Overload"]
+      "Overload"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "53",
         "raw" : "<bound member function type>"
       },
-      ["BoundMember"]
+      "BoundMember"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "117",
         "raw" : "<pseudo-object type>"
       },
-      ["PseudoObject"]
+      "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "118",
         "raw" : "<unknown type>"
       },
-      ["UnknownAny"]
+      "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "119",
         "raw" : "<ARC unbridged cast type>"
       },
-      ["ARCUnbridgedCast"]
+      "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "120",
         "raw" : "<builtin fn type>"
       },
-      ["BuiltinFn"]
+      "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
@@ -2407,21 +2407,21 @@
         "pointer" : "124",
         "raw" : "id"
       },
-      ["ObjCId"]
+      "ObjCId"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "125",
         "raw" : "Class"
       },
-      ["ObjCClass"]
+      "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "126",
         "raw" : "SEL"
       },
-      ["ObjCSel"]
+      "ObjCSel"
     ]],
     ["PointerType" , [
       {
@@ -2435,14 +2435,14 @@
         "pointer" : "128",
         "raw" : "nullptr_t"
       },
-      ["NullPtr"]
+      "NullPtr"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "129",
         "raw" : "__fp16"
       },
-      ["Half"]
+      "Half"
     ]],
     ["RecordType" , [
       {

@@ -225,8 +225,12 @@ namespace ATDWriter {
       emitter_.leaveVariant();
     }
     void emitSimpleVariant(const std::string &tag) {
-      enterVariant(tag, false);
-      leaveVariant();
+      if (emitter_.shouldSimpleVariantsBeEmittedAsStrings) {
+        emitString(tag);
+      } else {
+        enterVariant(tag, false);
+        leaveVariant();
+      }
     }
 
     // convenient methods
@@ -327,13 +331,16 @@ namespace ATDWriter {
     bool previousElementIsVariantTag_;
 
   public:
+    bool shouldSimpleVariantsBeEmittedAsStrings;
+
     JsonEmitter(OStream &os, const ATDWriterOptions opts)
     : os_(os),
       options_(opts),
       indentLevel_(0),
       nextElementNeedsNewLine_(false),
       previousElementNeedsComma_(false),
-      previousElementIsVariantTag_(false)
+      previousElementIsVariantTag_(false),
+      shouldSimpleVariantsBeEmittedAsStrings(!opts.useYojson)
     {}
 
     void tab() {

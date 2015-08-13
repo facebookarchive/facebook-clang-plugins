@@ -30,7 +30,7 @@
           "__int128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -54,7 +54,7 @@
           "__uint128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -78,7 +78,7 @@
           "__builtin_va_list"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -116,196 +116,196 @@
         "pointer" : "6",
         "raw" : "void"
       },
-      ["Void"]
+      "Void"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "7",
         "raw" : "_Bool"
       },
-      ["Bool"]
+      "Bool"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "8",
         "raw" : "char"
       },
-      ["Char_S"]
+      "Char_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "9",
         "raw" : "signed char"
       },
-      ["SChar"]
+      "SChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "10",
         "raw" : "short"
       },
-      ["Short"]
+      "Short"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "11",
         "raw" : "int"
       },
-      ["Int"]
+      "Int"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "12",
         "raw" : "long"
       },
-      ["Long"]
+      "Long"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "13",
         "raw" : "long long"
       },
-      ["LongLong"]
+      "LongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "14",
         "raw" : "unsigned char"
       },
-      ["UChar"]
+      "UChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "15",
         "raw" : "unsigned short"
       },
-      ["UShort"]
+      "UShort"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "16",
         "raw" : "unsigned int"
       },
-      ["UInt"]
+      "UInt"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "17",
         "raw" : "unsigned long"
       },
-      ["ULong"]
+      "ULong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "18",
         "raw" : "unsigned long long"
       },
-      ["ULongLong"]
+      "ULongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "19",
         "raw" : "float"
       },
-      ["Float"]
+      "Float"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "20",
         "raw" : "double"
       },
-      ["Double"]
+      "Double"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "21",
         "raw" : "long double"
       },
-      ["LongDouble"]
+      "LongDouble"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "22",
         "raw" : "__int128"
       },
-      ["Int128"]
+      "Int128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "23",
         "raw" : "unsigned __int128"
       },
-      ["UInt128"]
+      "UInt128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "24",
         "raw" : "wchar_t"
       },
-      ["WChar_S"]
+      "WChar_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "25",
         "raw" : "char16_t"
       },
-      ["Char16"]
+      "Char16"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "26",
         "raw" : "char32_t"
       },
-      ["Char32"]
+      "Char32"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "27",
         "raw" : "<dependent type>"
       },
-      ["Dependent"]
+      "Dependent"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "28",
         "raw" : "<overloaded function type>"
       },
-      ["Overload"]
+      "Overload"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "29",
         "raw" : "<bound member function type>"
       },
-      ["BoundMember"]
+      "BoundMember"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "30",
         "raw" : "<pseudo-object type>"
       },
-      ["PseudoObject"]
+      "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "31",
         "raw" : "<unknown type>"
       },
-      ["UnknownAny"]
+      "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "32",
         "raw" : "<ARC unbridged cast type>"
       },
-      ["ARCUnbridgedCast"]
+      "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "33",
         "raw" : "<builtin fn type>"
       },
-      ["BuiltinFn"]
+      "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
@@ -330,21 +330,21 @@
         "pointer" : "37",
         "raw" : "id"
       },
-      ["ObjCId"]
+      "ObjCId"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "38",
         "raw" : "Class"
       },
-      ["ObjCClass"]
+      "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "39",
         "raw" : "SEL"
       },
-      ["ObjCSel"]
+      "ObjCSel"
     ]],
     ["PointerType" , [
       {
@@ -358,14 +358,14 @@
         "pointer" : "41",
         "raw" : "nullptr_t"
       },
-      ["NullPtr"]
+      "NullPtr"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "42",
         "raw" : "__fp16"
       },
-      ["Half"]
+      "Half"
     ]],
     ["RecordType" , [
       {

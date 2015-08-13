@@ -30,7 +30,7 @@
           "__int128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -54,7 +54,7 @@
           "__uint128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -78,7 +78,7 @@
           "__builtin_va_list"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -476,7 +476,7 @@
                             }
                           },
                           {
-                            "cast_kind" : ["NoOp"],
+                            "cast_kind" : "NoOp",
                             "base_path" : [
                             ]
                           }
@@ -487,11 +487,11 @@
                           "raw" : "const struct S",
                           "type_ptr" : "6"
                         },
-                        "value_kind" : ["LValue"]
+                        "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
-                          "kind" : ["Var"],
+                          "kind" : "Var",
                           "decl_pointer" : "28",
                           "name" : {
                             "name" : "s_ref",
@@ -512,7 +512,7 @@
                       "raw" : "const struct S",
                       "type_ptr" : "6"
                     },
-                    "value_kind" : ["LValue"]
+                    "value_kind" : "LValue"
                   },
                   {
                     "sub_expr" : ["MaterializeTemporaryExpr" , [
@@ -600,7 +600,7 @@
                             }
                           },
                           {
-                            "cast_kind" : ["NoOp"],
+                            "cast_kind" : "NoOp",
                             "base_path" : [
                             ]
                           }
@@ -611,11 +611,11 @@
                           "raw" : "const struct S",
                           "type_ptr" : "6"
                         },
-                        "value_kind" : ["LValue"]
+                        "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
-                          "kind" : ["Var"],
+                          "kind" : "Var",
                           "decl_pointer" : "28",
                           "name" : {
                             "name" : "s_ref",
@@ -757,7 +757,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["NoOp"],
+                                "cast_kind" : "NoOp",
                                 "base_path" : [
                                 ]
                               }
@@ -768,11 +768,11 @@
                               "raw" : "const struct S",
                               "type_ptr" : "6"
                             },
-                            "value_kind" : ["LValue"]
+                            "value_kind" : "LValue"
                           },
                           {
                             "decl_ref" : {
-                              "kind" : ["Var"],
+                              "kind" : "Var",
                               "decl_pointer" : "28",
                               "name" : {
                                 "name" : "s_ref",
@@ -793,7 +793,7 @@
                           "raw" : "const struct S",
                           "type_ptr" : "6"
                         },
-                        "value_kind" : ["LValue"]
+                        "value_kind" : "LValue"
                       },
                       {
                         "sub_expr" : ["MaterializeTemporaryExpr" , [
@@ -881,7 +881,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["NoOp"],
+                                "cast_kind" : "NoOp",
                                 "base_path" : [
                                 ]
                               }
@@ -892,11 +892,11 @@
                               "raw" : "const struct S",
                               "type_ptr" : "6"
                             },
-                            "value_kind" : ["LValue"]
+                            "value_kind" : "LValue"
                           },
                           {
                             "decl_ref" : {
-                              "kind" : ["Var"],
+                              "kind" : "Var",
                               "decl_pointer" : "28",
                               "name" : {
                                 "name" : "s_ref",
@@ -930,196 +930,196 @@
         "pointer" : "29",
         "raw" : "void"
       },
-      ["Void"]
+      "Void"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "30",
         "raw" : "_Bool"
       },
-      ["Bool"]
+      "Bool"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "31",
         "raw" : "char"
       },
-      ["Char_S"]
+      "Char_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "32",
         "raw" : "signed char"
       },
-      ["SChar"]
+      "SChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "33",
         "raw" : "short"
       },
-      ["Short"]
+      "Short"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "34",
         "raw" : "int"
       },
-      ["Int"]
+      "Int"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "35",
         "raw" : "long"
       },
-      ["Long"]
+      "Long"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "36",
         "raw" : "long long"
       },
-      ["LongLong"]
+      "LongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "37",
         "raw" : "unsigned char"
       },
-      ["UChar"]
+      "UChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "38",
         "raw" : "unsigned short"
       },
-      ["UShort"]
+      "UShort"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "39",
         "raw" : "unsigned int"
       },
-      ["UInt"]
+      "UInt"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "40",
         "raw" : "unsigned long"
       },
-      ["ULong"]
+      "ULong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "41",
         "raw" : "unsigned long long"
       },
-      ["ULongLong"]
+      "ULongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "42",
         "raw" : "float"
       },
-      ["Float"]
+      "Float"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "43",
         "raw" : "double"
       },
-      ["Double"]
+      "Double"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "44",
         "raw" : "long double"
       },
-      ["LongDouble"]
+      "LongDouble"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "45",
         "raw" : "__int128"
       },
-      ["Int128"]
+      "Int128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "46",
         "raw" : "unsigned __int128"
       },
-      ["UInt128"]
+      "UInt128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "47",
         "raw" : "wchar_t"
       },
-      ["WChar_S"]
+      "WChar_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "48",
         "raw" : "char16_t"
       },
-      ["Char16"]
+      "Char16"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "49",
         "raw" : "char32_t"
       },
-      ["Char32"]
+      "Char32"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "50",
         "raw" : "<dependent type>"
       },
-      ["Dependent"]
+      "Dependent"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "51",
         "raw" : "<overloaded function type>"
       },
-      ["Overload"]
+      "Overload"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "52",
         "raw" : "<bound member function type>"
       },
-      ["BoundMember"]
+      "BoundMember"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "53",
         "raw" : "<pseudo-object type>"
       },
-      ["PseudoObject"]
+      "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "54",
         "raw" : "<unknown type>"
       },
-      ["UnknownAny"]
+      "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "55",
         "raw" : "<ARC unbridged cast type>"
       },
-      ["ARCUnbridgedCast"]
+      "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "56",
         "raw" : "<builtin fn type>"
       },
-      ["BuiltinFn"]
+      "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
@@ -1144,21 +1144,21 @@
         "pointer" : "60",
         "raw" : "id"
       },
-      ["ObjCId"]
+      "ObjCId"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "61",
         "raw" : "Class"
       },
-      ["ObjCClass"]
+      "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "62",
         "raw" : "SEL"
       },
-      ["ObjCSel"]
+      "ObjCSel"
     ]],
     ["PointerType" , [
       {
@@ -1172,14 +1172,14 @@
         "pointer" : "64",
         "raw" : "nullptr_t"
       },
-      ["NullPtr"]
+      "NullPtr"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "65",
         "raw" : "__fp16"
       },
-      ["Half"]
+      "Half"
     ]],
     ["RecordType" , [
       {

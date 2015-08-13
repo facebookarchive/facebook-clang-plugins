@@ -30,7 +30,7 @@
           "__int128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -54,7 +54,7 @@
           "__uint128_t"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -179,7 +179,7 @@
           "__builtin_va_list"
         ]
       },
-      ["NoType"],
+      "NoType",
       "2",
       {
       }
@@ -629,7 +629,7 @@
       },
       {
         "super" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "16",
           "name" : {
             "name" : "NSObject",
@@ -699,7 +699,7 @@
       },
       {
         "super" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "16",
           "name" : {
             "name" : "NSObject",
@@ -915,7 +915,7 @@
       },
       {
         "super" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "16",
           "name" : {
             "name" : "NSObject",
@@ -1101,7 +1101,7 @@
       },
       {
         "super" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "16",
           "name" : {
             "name" : "NSObject",
@@ -1140,7 +1140,7 @@
       },
       {
         "super" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "16",
           "name" : {
             "name" : "NSObject",
@@ -1390,7 +1390,7 @@
       },
       {
         "super" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "16",
           "name" : {
             "name" : "NSObject",
@@ -1400,7 +1400,7 @@
           }
         },
         "implementation" : {
-          "kind" : ["ObjCImplementation"],
+          "kind" : "ObjCImplementation",
           "decl_pointer" : "63",
           "name" : {
             "name" : "Hello",
@@ -1583,11 +1583,11 @@
                                   "raw" : "int",
                                   "type_ptr" : "31"
                                 },
-                                "value_kind" : ["LValue"]
+                                "value_kind" : "LValue"
                               },
                               {
                                 "decl_ref" : {
-                                  "kind" : ["ParmVar"],
+                                  "kind" : "ParmVar",
                                   "decl_pointer" : "65",
                                   "name" : {
                                     "name" : "i",
@@ -1610,7 +1610,7 @@
                             }
                           },
                           {
-                            "cast_kind" : ["LValueToRValue"],
+                            "cast_kind" : "LValueToRValue",
                             "base_path" : [
                             ]
                           }
@@ -1649,7 +1649,7 @@
                         }
                       },
                       {
-                        "kind" : ["GT"]
+                        "kind" : "GT"
                       }
                     ]],
                     ["CompoundStmt" , [
@@ -1715,7 +1715,7 @@
                                   },
                                   {
                                     "decl_ref" : {
-                                      "kind" : ["Function"],
+                                      "kind" : "Function",
                                       "decl_pointer" : "55",
                                       "name" : {
                                         "name" : "NSLog",
@@ -1738,7 +1738,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["FunctionToPointerDecay"],
+                                "cast_kind" : "FunctionToPointerDecay",
                                 "base_path" : [
                                 ]
                               }
@@ -1788,7 +1788,7 @@
                                           "raw" : "char [19]",
                                           "type_ptr" : "81"
                                         },
-                                        "value_kind" : ["LValue"]
+                                        "value_kind" : "LValue"
                                       },
                                       "Hello, world! (%d)"
                                     ]]
@@ -1809,7 +1809,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["BitCast"],
+                                "cast_kind" : "BitCast",
                                 "base_path" : [
                                 ]
                               }
@@ -1846,11 +1846,11 @@
                                       "raw" : "int",
                                       "type_ptr" : "31"
                                     },
-                                    "value_kind" : ["LValue"]
+                                    "value_kind" : "LValue"
                                   },
                                   {
                                     "decl_ref" : {
-                                      "kind" : ["ParmVar"],
+                                      "kind" : "ParmVar",
                                       "decl_pointer" : "65",
                                       "name" : {
                                         "name" : "i",
@@ -1873,7 +1873,7 @@
                                 }
                               },
                               {
-                                "cast_kind" : ["LValueToRValue"],
+                                "cast_kind" : "LValueToRValue",
                                 "base_path" : [
                                 ]
                               }
@@ -1912,7 +1912,7 @@
       },
       {
         "class_interface" : {
-          "kind" : ["ObjCInterface"],
+          "kind" : "ObjCInterface",
           "decl_pointer" : "59",
           "name" : {
             "name" : "Hello",
@@ -2195,11 +2195,11 @@
                               "raw" : "int",
                               "type_ptr" : "31"
                             },
-                            "value_kind" : ["LValue"]
+                            "value_kind" : "LValue"
                           },
                           {
                             "decl_ref" : {
-                              "kind" : ["Var"],
+                              "kind" : "Var",
                               "decl_pointer" : "93",
                               "name" : {
                                 "name" : "i",
@@ -2222,7 +2222,7 @@
                         }
                       },
                       {
-                        "cast_kind" : ["LValueToRValue"],
+                        "cast_kind" : "LValueToRValue",
                         "base_path" : [
                         ]
                       }
@@ -2261,7 +2261,7 @@
                     }
                   },
                   {
-                    "kind" : ["LT"]
+                    "kind" : "LT"
                   }
                 ]],
                 ["UnaryOperator" , [
@@ -2296,11 +2296,11 @@
                           "raw" : "int",
                           "type_ptr" : "31"
                         },
-                        "value_kind" : ["LValue"]
+                        "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
-                          "kind" : ["Var"],
+                          "kind" : "Var",
                           "decl_pointer" : "93",
                           "name" : {
                             "name" : "i",
@@ -2323,7 +2323,7 @@
                     }
                   },
                   {
-                    "kind" : ["PostInc"],
+                    "kind" : "PostInc",
                     "is_postfix" : true
                   }
                 ]],
@@ -2446,11 +2446,11 @@
                                           "raw" : "int",
                                           "type_ptr" : "31"
                                         },
-                                        "value_kind" : ["LValue"]
+                                        "value_kind" : "LValue"
                                       },
                                       {
                                         "decl_ref" : {
-                                          "kind" : ["Var"],
+                                          "kind" : "Var",
                                           "decl_pointer" : "93",
                                           "name" : {
                                             "name" : "i",
@@ -2473,7 +2473,7 @@
                                     }
                                   },
                                   {
-                                    "cast_kind" : ["LValueToRValue"],
+                                    "cast_kind" : "LValueToRValue",
                                     "base_path" : [
                                     ]
                                   }
@@ -2554,182 +2554,182 @@
         "pointer" : "61",
         "raw" : "void"
       },
-      ["Void"]
+      "Void"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "111",
         "raw" : "_Bool"
       },
-      ["Bool"]
+      "Bool"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "112",
         "raw" : "char"
       },
-      ["Char_S"]
+      "Char_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "113",
         "raw" : "signed char"
       },
-      ["SChar"]
+      "SChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "114",
         "raw" : "short"
       },
-      ["Short"]
+      "Short"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "31",
         "raw" : "int"
       },
-      ["Int"]
+      "Int"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "115",
         "raw" : "long"
       },
-      ["Long"]
+      "Long"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "116",
         "raw" : "long long"
       },
-      ["LongLong"]
+      "LongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "117",
         "raw" : "unsigned char"
       },
-      ["UChar"]
+      "UChar"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "118",
         "raw" : "unsigned short"
       },
-      ["UShort"]
+      "UShort"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "47",
         "raw" : "unsigned int"
       },
-      ["UInt"]
+      "UInt"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "119",
         "raw" : "unsigned long"
       },
-      ["ULong"]
+      "ULong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "120",
         "raw" : "unsigned long long"
       },
-      ["ULongLong"]
+      "ULongLong"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "121",
         "raw" : "float"
       },
-      ["Float"]
+      "Float"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "122",
         "raw" : "double"
       },
-      ["Double"]
+      "Double"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "123",
         "raw" : "long double"
       },
-      ["LongDouble"]
+      "LongDouble"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "124",
         "raw" : "__int128"
       },
-      ["Int128"]
+      "Int128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "125",
         "raw" : "unsigned __int128"
       },
-      ["UInt128"]
+      "UInt128"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "126",
         "raw" : "wchar_t"
       },
-      ["WChar_S"]
+      "WChar_S"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "127",
         "raw" : "<dependent type>"
       },
-      ["Dependent"]
+      "Dependent"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "128",
         "raw" : "<overloaded function type>"
       },
-      ["Overload"]
+      "Overload"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "129",
         "raw" : "<bound member function type>"
       },
-      ["BoundMember"]
+      "BoundMember"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "130",
         "raw" : "<pseudo-object type>"
       },
-      ["PseudoObject"]
+      "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "131",
         "raw" : "<unknown type>"
       },
-      ["UnknownAny"]
+      "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "132",
         "raw" : "<ARC unbridged cast type>"
       },
-      ["ARCUnbridgedCast"]
+      "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "133",
         "raw" : "<builtin fn type>"
       },
-      ["BuiltinFn"]
+      "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
@@ -2754,21 +2754,21 @@
         "pointer" : "137",
         "raw" : "id"
       },
-      ["ObjCId"]
+      "ObjCId"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "138",
         "raw" : "Class"
       },
-      ["ObjCClass"]
+      "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "139",
         "raw" : "SEL"
       },
-      ["ObjCSel"]
+      "ObjCSel"
     ]],
     ["PointerType" , [
       {
@@ -2782,14 +2782,14 @@
         "pointer" : "141",
         "raw" : "nullptr_t"
       },
-      ["NullPtr"]
+      "NullPtr"
     ]],
     ["BuiltinType" , [
       {
         "pointer" : "142",
         "raw" : "__fp16"
       },
-      ["Half"]
+      "Half"
     ]],
     ["PointerType" , [
       {
