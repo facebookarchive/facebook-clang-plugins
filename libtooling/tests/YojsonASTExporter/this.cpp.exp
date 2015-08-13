@@ -73,104 +73,6 @@
         ]
       },
       {
-        "name" : "SEL",
-        "qual_name" : [
-          "SEL"
-        ]
-      },
-      <"NoType">,
-      "2",
-      {
-      }
-    )>,
-    <"TypedefDecl" : (
-      {
-        "pointer" : "5",
-        "source_range" : (
-          {
-          },
-          {
-          }
-        ),
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "id",
-        "qual_name" : [
-          "id"
-        ]
-      },
-      <"NoType">,
-      "2",
-      {
-      }
-    )>,
-    <"TypedefDecl" : (
-      {
-        "pointer" : "6",
-        "source_range" : (
-          {
-          },
-          {
-          }
-        ),
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "Class",
-        "qual_name" : [
-          "Class"
-        ]
-      },
-      <"NoType">,
-      "2",
-      {
-      }
-    )>,
-    <"ObjCInterfaceDecl" : (
-      {
-        "pointer" : "7",
-        "source_range" : (
-          {
-          },
-          {
-          }
-        ),
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "Protocol",
-        "qual_name" : [
-          "Protocol"
-        ]
-      },
-      [
-      ],
-      {
-      },
-      {
-      }
-    )>,
-    <"TypedefDecl" : (
-      {
-        "pointer" : "8",
-        "source_range" : (
-          {
-          },
-          {
-          }
-        ),
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
         "name" : "__builtin_va_list",
         "qual_name" : [
           "__builtin_va_list"
@@ -183,7 +85,7 @@
     )>,
     <"CXXRecordDecl" : (
       {
-        "pointer" : "9",
+        "pointer" : "5",
         "source_range" : (
           {
             "file" : "tests/this.cpp",
@@ -205,11 +107,11 @@
         ]
       },
       <"Type" : "class T">,
-      "10",
+      "6",
       [
         <"CXXRecordDecl" : (
           {
-            "pointer" : "11",
+            "pointer" : "7",
             "source_range" : (
               {
                 "line" : 1,
@@ -231,7 +133,7 @@
             ]
           },
           <"Type" : "class T">,
-          "10",
+          "6",
           [
           ],
           {
@@ -243,7 +145,7 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : "12",
+            "pointer" : "8",
             "source_range" : (
               {
                 "line" : 2,
@@ -266,14 +168,14 @@
           },
           {
             "raw" : "int",
-            "type_ptr" : "13"
+            "type_ptr" : "9"
           },
           {
           }
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : "14",
+            "pointer" : "10",
             "source_range" : (
               {
                 "line" : 3,
@@ -296,12 +198,12 @@
           },
           {
             "raw" : "void (void)",
-            "type_ptr" : "15"
+            "type_ptr" : "11"
           },
           {
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "16",
+                "pointer" : "12",
                 "source_range" : (
                   {
                     "line" : 3,
@@ -316,7 +218,7 @@
               [
                 <"BinaryOperator" : (
                   {
-                    "pointer" : "17",
+                    "pointer" : "13",
                     "source_range" : (
                       {
                         "line" : 4,
@@ -330,7 +232,7 @@
                   [
                     <"MemberExpr" : (
                       {
-                        "pointer" : "18",
+                        "pointer" : "14",
                         "source_range" : (
                           {
                             "column" : 7
@@ -343,7 +245,7 @@
                       [
                         <"CXXThisExpr" : (
                           {
-                            "pointer" : "19",
+                            "pointer" : "15",
                             "source_range" : (
                               {
                                 "column" : 7
@@ -358,7 +260,7 @@
                           {
                             "qual_type" : {
                               "raw" : "class T *",
-                              "type_ptr" : "20"
+                              "type_ptr" : "16"
                             }
                           }
                         )>
@@ -366,7 +268,7 @@
                       {
                         "qual_type" : {
                           "raw" : "int",
-                          "type_ptr" : "13"
+                          "type_ptr" : "9"
                         },
                         "value_kind" : <"LValue">
                       },
@@ -381,7 +283,7 @@
                         },
                         "decl_ref" : {
                           "kind" : <"Field">,
-                          "decl_pointer" : "12",
+                          "decl_pointer" : "8",
                           "name" : {
                             "name" : "age",
                             "qual_name" : [
@@ -391,14 +293,14 @@
                           },
                           "qual_type" : {
                             "raw" : "int",
-                            "type_ptr" : "13"
+                            "type_ptr" : "9"
                           }
                         }
                       }
                     )>,
                     <"IntegerLiteral" : (
                       {
-                        "pointer" : "21",
+                        "pointer" : "17",
                         "source_range" : (
                           {
                             "column" : 19
@@ -413,7 +315,7 @@
                       {
                         "qual_type" : {
                           "raw" : "int",
-                          "type_ptr" : "13"
+                          "type_ptr" : "9"
                         }
                       },
                       {
@@ -426,7 +328,7 @@
                   {
                     "qual_type" : {
                       "raw" : "int",
-                      "type_ptr" : "13"
+                      "type_ptr" : "9"
                     },
                     "value_kind" : <"LValue">
                   },
@@ -453,361 +355,315 @@
   [
     <"BuiltinType" : (
       {
-        "pointer" : "22",
+        "pointer" : "18",
         "raw" : "void"
       },
       <"Void">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "23",
+        "pointer" : "19",
         "raw" : "_Bool"
       },
       <"Bool">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "24",
+        "pointer" : "20",
         "raw" : "char"
       },
       <"Char_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "25",
+        "pointer" : "21",
         "raw" : "signed char"
       },
       <"SChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "26",
+        "pointer" : "22",
         "raw" : "short"
       },
       <"Short">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "13",
+        "pointer" : "9",
         "raw" : "int"
       },
       <"Int">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "27",
+        "pointer" : "23",
         "raw" : "long"
       },
       <"Long">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "28",
+        "pointer" : "24",
         "raw" : "long long"
       },
       <"LongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "29",
+        "pointer" : "25",
         "raw" : "unsigned char"
       },
       <"UChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "30",
+        "pointer" : "26",
         "raw" : "unsigned short"
       },
       <"UShort">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "31",
+        "pointer" : "27",
         "raw" : "unsigned int"
       },
       <"UInt">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "32",
+        "pointer" : "28",
         "raw" : "unsigned long"
       },
       <"ULong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "33",
+        "pointer" : "29",
         "raw" : "unsigned long long"
       },
       <"ULongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "34",
+        "pointer" : "30",
         "raw" : "float"
       },
       <"Float">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "35",
+        "pointer" : "31",
         "raw" : "double"
       },
       <"Double">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "36",
+        "pointer" : "32",
         "raw" : "long double"
       },
       <"LongDouble">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "37",
+        "pointer" : "33",
         "raw" : "__int128"
       },
       <"Int128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "38",
+        "pointer" : "34",
         "raw" : "unsigned __int128"
       },
       <"UInt128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "39",
+        "pointer" : "35",
         "raw" : "wchar_t"
       },
       <"WChar_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "40",
+        "pointer" : "36",
         "raw" : "char16_t"
       },
       <"Char16">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "41",
+        "pointer" : "37",
         "raw" : "char32_t"
       },
       <"Char32">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "42",
+        "pointer" : "38",
         "raw" : "<dependent type>"
       },
       <"Dependent">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "43",
+        "pointer" : "39",
         "raw" : "<overloaded function type>"
       },
       <"Overload">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "44",
+        "pointer" : "40",
         "raw" : "<bound member function type>"
       },
       <"BoundMember">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "45",
+        "pointer" : "41",
         "raw" : "<pseudo-object type>"
       },
       <"PseudoObject">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "46",
+        "pointer" : "42",
         "raw" : "<unknown type>"
       },
       <"UnknownAny">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "47",
+        "pointer" : "43",
         "raw" : "<ARC unbridged cast type>"
       },
       <"ARCUnbridgedCast">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "48",
+        "pointer" : "44",
         "raw" : "<builtin fn type>"
       },
       <"BuiltinFn">
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "49",
+        "pointer" : "45",
         "raw" : "_Complex float"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "50",
+        "pointer" : "46",
         "raw" : "_Complex double"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "51",
+        "pointer" : "47",
         "raw" : "_Complex long double"
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "52",
+        "pointer" : "48",
         "raw" : "id"
       },
       <"ObjCId">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "53",
+        "pointer" : "49",
         "raw" : "Class"
       },
       <"ObjCClass">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "54",
+        "pointer" : "50",
         "raw" : "SEL"
       },
       <"ObjCSel">
     )>,
     <"PointerType" : (
       {
-        "pointer" : "55",
+        "pointer" : "51",
         "raw" : "void *"
       },
-      "22"
+      "18"
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "56",
+        "pointer" : "52",
         "raw" : "nullptr_t"
       },
       <"NullPtr">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "57",
+        "pointer" : "53",
         "raw" : "__fp16"
       },
       <"Half">
     )>,
-    <"PointerType" : (
-      {
-        "pointer" : "58",
-        "raw" : "SEL *"
-      },
-      "54"
-    )>,
-    <"ObjCObjectType" : (
-      {
-        "pointer" : "59",
-        "raw" : "id"
-      },
-      {
-        "base_type" : "52"
-      }
-    )>,
-    <"ObjCObjectPointerType" : (
-      {
-        "pointer" : "60",
-        "raw" : "id"
-      },
-      "59"
-    )>,
-    <"ObjCObjectType" : (
-      {
-        "pointer" : "61",
-        "raw" : "Class"
-      },
-      {
-        "base_type" : "53"
-      }
-    )>,
-    <"ObjCObjectPointerType" : (
-      {
-        "pointer" : "62",
-        "raw" : "Class"
-      },
-      "61"
-    )>,
-    <"ObjCInterfaceType" : (
-      {
-        "pointer" : "63",
-        "raw" : "Protocol"
-      },
-      "7"
-    )>,
     <"RecordType" : (
       {
-        "pointer" : "64",
+        "pointer" : "54",
         "raw" : "struct __va_list_tag"
       },
-      "65"
+      "55"
     )>,
     <"TypedefType" : (
       {
-        "pointer" : "66",
+        "pointer" : "56",
         "raw" : "__va_list_tag",
-        "desugared_type" : "64"
+        "desugared_type" : "54"
       },
       {
-        "child_type" : "64",
-        "decl_ptr" : "67"
+        "child_type" : "54",
+        "decl_ptr" : "57"
       }
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : "68",
+        "pointer" : "58",
         "raw" : "struct __va_list_tag [1]"
       },
-      "64",
+      "54",
       1
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : "69",
+        "pointer" : "59",
         "raw" : "__va_list_tag [1]"
       },
-      "66",
+      "56",
       1
     )>,
     <"RecordType" : (
       {
-        "pointer" : "10",
+        "pointer" : "6",
         "raw" : "class T"
       },
-      "9"
+      "5"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "20",
+        "pointer" : "16",
         "raw" : "class T *"
       },
-      "10"
+      "6"
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "15",
+        "pointer" : "11",
         "raw" : "void (void)"
       },
       {
-        "return_type" : "22"
+        "return_type" : "18"
       },
       {
       }

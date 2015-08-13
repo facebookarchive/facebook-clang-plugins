@@ -73,104 +73,6 @@
         ]
       },
       {
-        "name" : "SEL",
-        "qual_name" : [
-          "SEL"
-        ]
-      },
-      ["NoType"],
-      "2",
-      {
-      }
-    ]],
-    ["TypedefDecl" , [
-      {
-        "pointer" : "5",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "id",
-        "qual_name" : [
-          "id"
-        ]
-      },
-      ["NoType"],
-      "2",
-      {
-      }
-    ]],
-    ["TypedefDecl" , [
-      {
-        "pointer" : "6",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "Class",
-        "qual_name" : [
-          "Class"
-        ]
-      },
-      ["NoType"],
-      "2",
-      {
-      }
-    ]],
-    ["ObjCInterfaceDecl" , [
-      {
-        "pointer" : "7",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "Protocol",
-        "qual_name" : [
-          "Protocol"
-        ]
-      },
-      [
-      ],
-      {
-      },
-      {
-      }
-    ]],
-    ["TypedefDecl" , [
-      {
-        "pointer" : "8",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
         "name" : "__builtin_va_list",
         "qual_name" : [
           "__builtin_va_list"
@@ -183,7 +85,7 @@
     ]],
     ["CXXRecordDecl" , [
       {
-        "pointer" : "9",
+        "pointer" : "5",
         "source_range" : [
           {
             "file" : "tests/bind_temporary.cpp",
@@ -206,11 +108,11 @@
         ]
       },
       ["Type" , "struct S"],
-      "10",
+      "6",
       [
         ["CXXRecordDecl" , [
           {
-            "pointer" : "11",
+            "pointer" : "7",
             "source_range" : [
               {
                 "line" : 1,
@@ -233,7 +135,7 @@
             ]
           },
           ["Type" , "struct S"],
-          "10",
+          "6",
           [
           ],
           {
@@ -245,7 +147,7 @@
         ]],
         ["AccessSpecDecl" , [
           {
-            "pointer" : "12",
+            "pointer" : "8",
             "source_range" : [
               {
                 "line" : 2,
@@ -261,7 +163,7 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "13",
+            "pointer" : "9",
             "source_range" : [
               {
                 "line" : 3,
@@ -285,12 +187,12 @@
           },
           {
             "raw" : "void (void)",
-            "type_ptr" : "14"
+            "type_ptr" : "10"
           },
           {
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "15",
+                "pointer" : "11",
                 "source_range" : [
                   {
                     "column" : 10
@@ -307,7 +209,7 @@
         ]],
         ["CXXDestructorDecl" , [
           {
-            "pointer" : "16",
+            "pointer" : "12",
             "source_range" : [
               {
                 "line" : 4,
@@ -331,12 +233,12 @@
           },
           {
             "raw" : "void (void) noexcept",
-            "type_ptr" : "17"
+            "type_ptr" : "13"
           },
           {
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "18",
+                "pointer" : "14",
                 "source_range" : [
                   {
                     "column" : 11
@@ -353,7 +255,7 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "19",
+            "pointer" : "15",
             "source_range" : [
               {
                 "line" : 1,
@@ -376,14 +278,14 @@
           },
           {
             "raw" : "void (const struct S &)",
-            "type_ptr" : "20"
+            "type_ptr" : "16"
           },
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "21",
+                  "pointer" : "17",
                   "source_range" : [
                     {
                       "column" : 9
@@ -403,7 +305,7 @@
                 },
                 {
                   "raw" : "const struct S &",
-                  "type_ptr" : "22"
+                  "type_ptr" : "18"
                 },
                 {
                 }
@@ -422,7 +324,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "23",
+        "pointer" : "19",
         "source_range" : [
           {
             "line" : 6,
@@ -444,12 +346,12 @@
       },
       {
         "raw" : "void (void)",
-        "type_ptr" : "14"
+        "type_ptr" : "10"
       },
       {
         "body" : ["CompoundStmt" , [
           {
-            "pointer" : "24",
+            "pointer" : "20",
             "source_range" : [
               {
                 "line" : 6,
@@ -464,7 +366,7 @@
           [
             ["DeclStmt" , [
               {
-                "pointer" : "25",
+                "pointer" : "21",
                 "source_range" : [
                   {
                     "line" : 7,
@@ -478,7 +380,7 @@
               [
                 ["ExprWithCleanups" , [
                   {
-                    "pointer" : "26",
+                    "pointer" : "22",
                     "source_range" : [
                       {
                         "column" : 21
@@ -491,7 +393,7 @@
                   [
                     ["MaterializeTemporaryExpr" , [
                       {
-                        "pointer" : "27",
+                        "pointer" : "23",
                         "source_range" : [
                           {
                             "column" : 21
@@ -504,7 +406,7 @@
                       [
                         ["ImplicitCastExpr" , [
                           {
-                            "pointer" : "28",
+                            "pointer" : "24",
                             "source_range" : [
                               {
                                 "column" : 21
@@ -517,7 +419,7 @@
                           [
                             ["CXXBindTemporaryExpr" , [
                               {
-                                "pointer" : "29",
+                                "pointer" : "25",
                                 "source_range" : [
                                   {
                                     "column" : 21
@@ -530,7 +432,7 @@
                               [
                                 ["CXXTemporaryObjectExpr" , [
                                   {
-                                    "pointer" : "30",
+                                    "pointer" : "26",
                                     "source_range" : [
                                       {
                                         "column" : 21
@@ -545,13 +447,13 @@
                                   {
                                     "qual_type" : {
                                       "raw" : "struct S",
-                                      "type_ptr" : "10"
+                                      "type_ptr" : "6"
                                     }
                                   },
                                   {
                                     "qual_type" : {
                                       "raw" : "void (void)",
-                                      "type_ptr" : "14"
+                                      "type_ptr" : "10"
                                     }
                                   }
                                 ]]
@@ -559,18 +461,18 @@
                               {
                                 "qual_type" : {
                                   "raw" : "struct S",
-                                  "type_ptr" : "10"
+                                  "type_ptr" : "6"
                                 }
                               },
                               {
-                                "cxx_temporary" : "31"
+                                "cxx_temporary" : "27"
                               }
                             ]]
                           ],
                           {
                             "qual_type" : {
                               "raw" : "const struct S",
-                              "type_ptr" : "10"
+                              "type_ptr" : "6"
                             }
                           },
                           {
@@ -583,14 +485,14 @@
                       {
                         "qual_type" : {
                           "raw" : "const struct S",
-                          "type_ptr" : "10"
+                          "type_ptr" : "6"
                         },
                         "value_kind" : ["LValue"]
                       },
                       {
                         "decl_ref" : {
                           "kind" : ["Var"],
-                          "decl_pointer" : "32",
+                          "decl_pointer" : "28",
                           "name" : {
                             "name" : "s_ref",
                             "qual_name" : [
@@ -599,7 +501,7 @@
                           },
                           "qual_type" : {
                             "raw" : "const struct S &",
-                            "type_ptr" : "22"
+                            "type_ptr" : "18"
                           }
                         }
                       }
@@ -608,14 +510,14 @@
                   {
                     "qual_type" : {
                       "raw" : "const struct S",
-                      "type_ptr" : "10"
+                      "type_ptr" : "6"
                     },
                     "value_kind" : ["LValue"]
                   },
                   {
                     "sub_expr" : ["MaterializeTemporaryExpr" , [
                       {
-                        "pointer" : "27",
+                        "pointer" : "23",
                         "source_range" : [
                           {
                             "column" : 21
@@ -628,7 +530,7 @@
                       [
                         ["ImplicitCastExpr" , [
                           {
-                            "pointer" : "28",
+                            "pointer" : "24",
                             "source_range" : [
                               {
                                 "column" : 21
@@ -641,7 +543,7 @@
                           [
                             ["CXXBindTemporaryExpr" , [
                               {
-                                "pointer" : "29",
+                                "pointer" : "25",
                                 "source_range" : [
                                   {
                                     "column" : 21
@@ -654,7 +556,7 @@
                               [
                                 ["CXXTemporaryObjectExpr" , [
                                   {
-                                    "pointer" : "30",
+                                    "pointer" : "26",
                                     "source_range" : [
                                       {
                                         "column" : 21
@@ -669,13 +571,13 @@
                                   {
                                     "qual_type" : {
                                       "raw" : "struct S",
-                                      "type_ptr" : "10"
+                                      "type_ptr" : "6"
                                     }
                                   },
                                   {
                                     "qual_type" : {
                                       "raw" : "void (void)",
-                                      "type_ptr" : "14"
+                                      "type_ptr" : "10"
                                     }
                                   }
                                 ]]
@@ -683,18 +585,18 @@
                               {
                                 "qual_type" : {
                                   "raw" : "struct S",
-                                  "type_ptr" : "10"
+                                  "type_ptr" : "6"
                                 }
                               },
                               {
-                                "cxx_temporary" : "31"
+                                "cxx_temporary" : "27"
                               }
                             ]]
                           ],
                           {
                             "qual_type" : {
                               "raw" : "const struct S",
-                              "type_ptr" : "10"
+                              "type_ptr" : "6"
                             }
                           },
                           {
@@ -707,14 +609,14 @@
                       {
                         "qual_type" : {
                           "raw" : "const struct S",
-                          "type_ptr" : "10"
+                          "type_ptr" : "6"
                         },
                         "value_kind" : ["LValue"]
                       },
                       {
                         "decl_ref" : {
                           "kind" : ["Var"],
-                          "decl_pointer" : "32",
+                          "decl_pointer" : "28",
                           "name" : {
                             "name" : "s_ref",
                             "qual_name" : [
@@ -723,7 +625,7 @@
                           },
                           "qual_type" : {
                             "raw" : "const struct S &",
-                            "type_ptr" : "22"
+                            "type_ptr" : "18"
                           }
                         }
                       }
@@ -734,7 +636,7 @@
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "32",
+                    "pointer" : "28",
                     "source_range" : [
                       {
                         "column" : 4
@@ -754,12 +656,12 @@
                   },
                   {
                     "raw" : "const struct S &",
-                    "type_ptr" : "22"
+                    "type_ptr" : "18"
                   },
                   {
                     "init_expr" : ["ExprWithCleanups" , [
                       {
-                        "pointer" : "26",
+                        "pointer" : "22",
                         "source_range" : [
                           {
                             "column" : 21
@@ -772,7 +674,7 @@
                       [
                         ["MaterializeTemporaryExpr" , [
                           {
-                            "pointer" : "27",
+                            "pointer" : "23",
                             "source_range" : [
                               {
                                 "column" : 21
@@ -785,7 +687,7 @@
                           [
                             ["ImplicitCastExpr" , [
                               {
-                                "pointer" : "28",
+                                "pointer" : "24",
                                 "source_range" : [
                                   {
                                     "column" : 21
@@ -798,7 +700,7 @@
                               [
                                 ["CXXBindTemporaryExpr" , [
                                   {
-                                    "pointer" : "29",
+                                    "pointer" : "25",
                                     "source_range" : [
                                       {
                                         "column" : 21
@@ -811,7 +713,7 @@
                                   [
                                     ["CXXTemporaryObjectExpr" , [
                                       {
-                                        "pointer" : "30",
+                                        "pointer" : "26",
                                         "source_range" : [
                                           {
                                             "column" : 21
@@ -826,13 +728,13 @@
                                       {
                                         "qual_type" : {
                                           "raw" : "struct S",
-                                          "type_ptr" : "10"
+                                          "type_ptr" : "6"
                                         }
                                       },
                                       {
                                         "qual_type" : {
                                           "raw" : "void (void)",
-                                          "type_ptr" : "14"
+                                          "type_ptr" : "10"
                                         }
                                       }
                                     ]]
@@ -840,18 +742,18 @@
                                   {
                                     "qual_type" : {
                                       "raw" : "struct S",
-                                      "type_ptr" : "10"
+                                      "type_ptr" : "6"
                                     }
                                   },
                                   {
-                                    "cxx_temporary" : "31"
+                                    "cxx_temporary" : "27"
                                   }
                                 ]]
                               ],
                               {
                                 "qual_type" : {
                                   "raw" : "const struct S",
-                                  "type_ptr" : "10"
+                                  "type_ptr" : "6"
                                 }
                               },
                               {
@@ -864,14 +766,14 @@
                           {
                             "qual_type" : {
                               "raw" : "const struct S",
-                              "type_ptr" : "10"
+                              "type_ptr" : "6"
                             },
                             "value_kind" : ["LValue"]
                           },
                           {
                             "decl_ref" : {
                               "kind" : ["Var"],
-                              "decl_pointer" : "32",
+                              "decl_pointer" : "28",
                               "name" : {
                                 "name" : "s_ref",
                                 "qual_name" : [
@@ -880,7 +782,7 @@
                               },
                               "qual_type" : {
                                 "raw" : "const struct S &",
-                                "type_ptr" : "22"
+                                "type_ptr" : "18"
                               }
                             }
                           }
@@ -889,14 +791,14 @@
                       {
                         "qual_type" : {
                           "raw" : "const struct S",
-                          "type_ptr" : "10"
+                          "type_ptr" : "6"
                         },
                         "value_kind" : ["LValue"]
                       },
                       {
                         "sub_expr" : ["MaterializeTemporaryExpr" , [
                           {
-                            "pointer" : "27",
+                            "pointer" : "23",
                             "source_range" : [
                               {
                                 "column" : 21
@@ -909,7 +811,7 @@
                           [
                             ["ImplicitCastExpr" , [
                               {
-                                "pointer" : "28",
+                                "pointer" : "24",
                                 "source_range" : [
                                   {
                                     "column" : 21
@@ -922,7 +824,7 @@
                               [
                                 ["CXXBindTemporaryExpr" , [
                                   {
-                                    "pointer" : "29",
+                                    "pointer" : "25",
                                     "source_range" : [
                                       {
                                         "column" : 21
@@ -935,7 +837,7 @@
                                   [
                                     ["CXXTemporaryObjectExpr" , [
                                       {
-                                        "pointer" : "30",
+                                        "pointer" : "26",
                                         "source_range" : [
                                           {
                                             "column" : 21
@@ -950,13 +852,13 @@
                                       {
                                         "qual_type" : {
                                           "raw" : "struct S",
-                                          "type_ptr" : "10"
+                                          "type_ptr" : "6"
                                         }
                                       },
                                       {
                                         "qual_type" : {
                                           "raw" : "void (void)",
-                                          "type_ptr" : "14"
+                                          "type_ptr" : "10"
                                         }
                                       }
                                     ]]
@@ -964,18 +866,18 @@
                                   {
                                     "qual_type" : {
                                       "raw" : "struct S",
-                                      "type_ptr" : "10"
+                                      "type_ptr" : "6"
                                     }
                                   },
                                   {
-                                    "cxx_temporary" : "31"
+                                    "cxx_temporary" : "27"
                                   }
                                 ]]
                               ],
                               {
                                 "qual_type" : {
                                   "raw" : "const struct S",
-                                  "type_ptr" : "10"
+                                  "type_ptr" : "6"
                                 }
                               },
                               {
@@ -988,14 +890,14 @@
                           {
                             "qual_type" : {
                               "raw" : "const struct S",
-                              "type_ptr" : "10"
+                              "type_ptr" : "6"
                             },
                             "value_kind" : ["LValue"]
                           },
                           {
                             "decl_ref" : {
                               "kind" : ["Var"],
-                              "decl_pointer" : "32",
+                              "decl_pointer" : "28",
                               "name" : {
                                 "name" : "s_ref",
                                 "qual_name" : [
@@ -1004,7 +906,7 @@
                               },
                               "qual_type" : {
                                 "raw" : "const struct S &",
-                                "type_ptr" : "22"
+                                "type_ptr" : "18"
                               }
                             }
                           }
@@ -1025,419 +927,373 @@
   [
     ["BuiltinType" , [
       {
-        "pointer" : "33",
+        "pointer" : "29",
         "raw" : "void"
       },
       ["Void"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "34",
+        "pointer" : "30",
         "raw" : "_Bool"
       },
       ["Bool"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "35",
+        "pointer" : "31",
         "raw" : "char"
       },
       ["Char_S"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "36",
+        "pointer" : "32",
         "raw" : "signed char"
       },
       ["SChar"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "37",
+        "pointer" : "33",
         "raw" : "short"
       },
       ["Short"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "38",
+        "pointer" : "34",
         "raw" : "int"
       },
       ["Int"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "39",
+        "pointer" : "35",
         "raw" : "long"
       },
       ["Long"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "40",
+        "pointer" : "36",
         "raw" : "long long"
       },
       ["LongLong"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "41",
+        "pointer" : "37",
         "raw" : "unsigned char"
       },
       ["UChar"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "42",
+        "pointer" : "38",
         "raw" : "unsigned short"
       },
       ["UShort"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "43",
+        "pointer" : "39",
         "raw" : "unsigned int"
       },
       ["UInt"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "44",
+        "pointer" : "40",
         "raw" : "unsigned long"
       },
       ["ULong"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "45",
+        "pointer" : "41",
         "raw" : "unsigned long long"
       },
       ["ULongLong"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "46",
+        "pointer" : "42",
         "raw" : "float"
       },
       ["Float"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "47",
+        "pointer" : "43",
         "raw" : "double"
       },
       ["Double"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "48",
+        "pointer" : "44",
         "raw" : "long double"
       },
       ["LongDouble"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "49",
+        "pointer" : "45",
         "raw" : "__int128"
       },
       ["Int128"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "50",
+        "pointer" : "46",
         "raw" : "unsigned __int128"
       },
       ["UInt128"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "51",
+        "pointer" : "47",
         "raw" : "wchar_t"
       },
       ["WChar_S"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "52",
+        "pointer" : "48",
         "raw" : "char16_t"
       },
       ["Char16"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "53",
+        "pointer" : "49",
         "raw" : "char32_t"
       },
       ["Char32"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "54",
+        "pointer" : "50",
         "raw" : "<dependent type>"
       },
       ["Dependent"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "55",
+        "pointer" : "51",
         "raw" : "<overloaded function type>"
       },
       ["Overload"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "56",
+        "pointer" : "52",
         "raw" : "<bound member function type>"
       },
       ["BoundMember"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "57",
+        "pointer" : "53",
         "raw" : "<pseudo-object type>"
       },
       ["PseudoObject"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "58",
+        "pointer" : "54",
         "raw" : "<unknown type>"
       },
       ["UnknownAny"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "59",
+        "pointer" : "55",
         "raw" : "<ARC unbridged cast type>"
       },
       ["ARCUnbridgedCast"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "60",
+        "pointer" : "56",
         "raw" : "<builtin fn type>"
       },
       ["BuiltinFn"]
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "61",
+        "pointer" : "57",
         "raw" : "_Complex float"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "62",
+        "pointer" : "58",
         "raw" : "_Complex double"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "63",
+        "pointer" : "59",
         "raw" : "_Complex long double"
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "64",
+        "pointer" : "60",
         "raw" : "id"
       },
       ["ObjCId"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "65",
+        "pointer" : "61",
         "raw" : "Class"
       },
       ["ObjCClass"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "66",
+        "pointer" : "62",
         "raw" : "SEL"
       },
       ["ObjCSel"]
     ]],
     ["PointerType" , [
       {
-        "pointer" : "67",
+        "pointer" : "63",
         "raw" : "void *"
       },
-      "33"
+      "29"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "68",
+        "pointer" : "64",
         "raw" : "nullptr_t"
       },
       ["NullPtr"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "69",
+        "pointer" : "65",
         "raw" : "__fp16"
       },
       ["Half"]
     ]],
-    ["PointerType" , [
-      {
-        "pointer" : "70",
-        "raw" : "SEL *"
-      },
-      "66"
-    ]],
-    ["ObjCObjectType" , [
-      {
-        "pointer" : "71",
-        "raw" : "id"
-      },
-      {
-        "base_type" : "64"
-      }
-    ]],
-    ["ObjCObjectPointerType" , [
-      {
-        "pointer" : "72",
-        "raw" : "id"
-      },
-      "71"
-    ]],
-    ["ObjCObjectType" , [
-      {
-        "pointer" : "73",
-        "raw" : "Class"
-      },
-      {
-        "base_type" : "65"
-      }
-    ]],
-    ["ObjCObjectPointerType" , [
-      {
-        "pointer" : "74",
-        "raw" : "Class"
-      },
-      "73"
-    ]],
-    ["ObjCInterfaceType" , [
-      {
-        "pointer" : "75",
-        "raw" : "Protocol"
-      },
-      "7"
-    ]],
     ["RecordType" , [
       {
-        "pointer" : "76",
+        "pointer" : "66",
         "raw" : "struct __va_list_tag"
       },
-      "77"
+      "67"
     ]],
     ["TypedefType" , [
       {
-        "pointer" : "78",
+        "pointer" : "68",
         "raw" : "__va_list_tag",
-        "desugared_type" : "76"
+        "desugared_type" : "66"
       },
       {
-        "child_type" : "76",
-        "decl_ptr" : "79"
+        "child_type" : "66",
+        "decl_ptr" : "69"
       }
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "80",
+        "pointer" : "70",
         "raw" : "struct __va_list_tag [1]"
       },
-      "76",
+      "66",
       1
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "81",
+        "pointer" : "71",
         "raw" : "__va_list_tag [1]"
       },
-      "78",
+      "68",
       1
     ]],
     ["RecordType" , [
       {
-        "pointer" : "10",
+        "pointer" : "6",
         "raw" : "struct S"
       },
-      "9"
+      "5"
     ]],
     ["PointerType" , [
       {
-        "pointer" : "82",
+        "pointer" : "72",
         "raw" : "struct S *"
       },
-      "10"
+      "6"
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "14",
+        "pointer" : "10",
         "raw" : "void (void)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "29"
       },
       {
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "83",
+        "pointer" : "73",
         "raw" : "void (void)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "29"
       },
       {
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "17",
+        "pointer" : "13",
         "raw" : "void (void) noexcept"
       },
       {
-        "return_type" : "33"
+        "return_type" : "29"
       },
       {
       }
     ]],
     ["LValueReferenceType" , [
       {
-        "pointer" : "22",
+        "pointer" : "18",
         "raw" : "const struct S &"
       },
-      "10"
+      "6"
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "84",
+        "pointer" : "74",
         "raw" : "void (const struct S &)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "29"
       },
       {
         "params_type" : [
-          "22"
+          "18"
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "20",
+        "pointer" : "16",
         "raw" : "void (const struct S &)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "29"
       },
       {
         "params_type" : [
-          "22"
+          "18"
         ]
       }
     ]],

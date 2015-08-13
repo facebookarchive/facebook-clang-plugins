@@ -1157,15 +1157,31 @@
         "source_range" : (
           {
             "line" : 46,
-            "column" : 1
+            "column" : 13
           },
           {
-            "column" : 34
+            "column" : 13
           }
         ),
-        "is_used" : true,
-        "is_this_declaration_referenced" : true,
+        "is_implicit" : true,
         "attributes" : [
+          <"FormatAttr" : {
+            "pointer" : "52",
+            "source_range" : (
+              {
+                "column" : 13
+              },
+              {
+                "column" : 13
+              }
+            ),
+            "parameters" : [
+              "NSString",
+              "1",
+              "2"
+            ],
+            "is_implicit" : true
+          }>
         ]
       },
       {
@@ -1175,15 +1191,90 @@
         ]
       },
       {
-        "raw" : "void (NSString *, ...)",
-        "type_ptr" : "52"
+        "raw" : "void (id, ...)",
+        "type_ptr" : "53"
       },
       {
         "storage_class" : "extern",
         "parameters" : [
           <"ParmVarDecl" : (
             {
-              "pointer" : "53",
+              "pointer" : "54",
+              "source_range" : (
+                {
+                },
+                {
+                }
+              ),
+              "attributes" : [
+              ]
+            },
+            {
+              "name" : "",
+              "qual_name" : [
+                ""
+              ]
+            },
+            {
+              "raw" : "id",
+              "desugared" : "id",
+              "type_ptr" : "7"
+            },
+            {
+            }
+          )>
+        ]
+      }
+    )>,
+    <"FunctionDecl" : (
+      {
+        "pointer" : "55",
+        "source_range" : (
+          {
+            "column" : 1
+          },
+          {
+            "column" : 34
+          }
+        ),
+        "is_used" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+          <"FormatAttr" : {
+            "pointer" : "56",
+            "source_range" : (
+              {
+                "column" : 13
+              },
+              {
+                "column" : 13
+              }
+            ),
+            "parameters" : [
+              "NSString",
+              "1",
+              "2"
+            ],
+            "is_inherited" : true
+          }>
+        ]
+      },
+      {
+        "name" : "NSLog",
+        "qual_name" : [
+          "NSLog"
+        ]
+      },
+      {
+        "raw" : "void (id, ...)",
+        "type_ptr" : "53"
+      },
+      {
+        "storage_class" : "extern",
+        "parameters" : [
+          <"ParmVarDecl" : (
+            {
+              "pointer" : "57",
               "source_range" : (
                 {
                   "column" : 19
@@ -1203,7 +1294,7 @@
             },
             {
               "raw" : "NSString *",
-              "type_ptr" : "54"
+              "type_ptr" : "58"
             },
             {
             }
@@ -1213,7 +1304,7 @@
     )>,
     <"ObjCInterfaceDecl" : (
       {
-        "pointer" : "55",
+        "pointer" : "59",
         "source_range" : (
           {
             "file" : "tests/Hello.m",
@@ -1237,7 +1328,7 @@
       [
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "56",
+            "pointer" : "60",
             "source_range" : (
               {
                 "line" : 6,
@@ -1261,12 +1352,12 @@
             "is_instance_method" : true,
             "result_type" : {
               "raw" : "void",
-              "type_ptr" : "57"
+              "type_ptr" : "61"
             },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "58",
+                  "pointer" : "62",
                   "source_range" : (
                     {
                       "column" : 14
@@ -1310,7 +1401,7 @@
         },
         "implementation" : {
           "kind" : <"ObjCImplementation">,
-          "decl_pointer" : "59",
+          "decl_pointer" : "63",
           "name" : {
             "name" : "Hello",
             "qual_name" : [
@@ -1322,7 +1413,7 @@
     )>,
     <"ObjCImplementationDecl" : (
       {
-        "pointer" : "59",
+        "pointer" : "63",
         "source_range" : (
           {
             "line" : 9,
@@ -1345,7 +1436,7 @@
       [
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "60",
+            "pointer" : "64",
             "source_range" : (
               {
                 "line" : 10,
@@ -1370,12 +1461,12 @@
             "is_instance_method" : true,
             "result_type" : {
               "raw" : "void",
-              "type_ptr" : "57"
+              "type_ptr" : "61"
             },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "61",
+                  "pointer" : "65",
                   "source_range" : (
                     {
                       "line" : 10,
@@ -1406,7 +1497,7 @@
             ],
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "62",
+                "pointer" : "66",
                 "source_range" : (
                   {
                     "column" : 20
@@ -1420,7 +1511,7 @@
               [
                 <"IfStmt" : (
                   {
-                    "pointer" : "63",
+                    "pointer" : "67",
                     "source_range" : (
                       {
                         "line" : 11,
@@ -1435,7 +1526,7 @@
                   [
                     <"NullStmt" : (
                       {
-                        "pointer" : "64",
+                        "pointer" : "68",
                         "source_range" : (
                           {
                           },
@@ -1448,7 +1539,7 @@
                     )>,
                     <"BinaryOperator" : (
                       {
-                        "pointer" : "65",
+                        "pointer" : "69",
                         "source_range" : (
                           {
                             "line" : 11,
@@ -1462,7 +1553,7 @@
                       [
                         <"ImplicitCastExpr" : (
                           {
-                            "pointer" : "66",
+                            "pointer" : "70",
                             "source_range" : (
                               {
                                 "column" : 7
@@ -1475,7 +1566,7 @@
                           [
                             <"DeclRefExpr" : (
                               {
-                                "pointer" : "67",
+                                "pointer" : "71",
                                 "source_range" : (
                                   {
                                     "column" : 7
@@ -1497,7 +1588,7 @@
                               {
                                 "decl_ref" : {
                                   "kind" : <"ParmVar">,
-                                  "decl_pointer" : "61",
+                                  "decl_pointer" : "65",
                                   "name" : {
                                     "name" : "i",
                                     "qual_name" : [
@@ -1526,7 +1617,7 @@
                         )>,
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : "68",
+                            "pointer" : "72",
                             "source_range" : (
                               {
                                 "column" : 11
@@ -1553,8 +1644,8 @@
                       ],
                       {
                         "qual_type" : {
-                          "raw" : "_Bool",
-                          "type_ptr" : "69"
+                          "raw" : "int",
+                          "type_ptr" : "31"
                         }
                       },
                       {
@@ -1563,7 +1654,7 @@
                     )>,
                     <"CompoundStmt" : (
                       {
-                        "pointer" : "70",
+                        "pointer" : "73",
                         "source_range" : (
                           {
                             "column" : 14
@@ -1577,7 +1668,7 @@
                       [
                         <"CallExpr" : (
                           {
-                            "pointer" : "71",
+                            "pointer" : "74",
                             "source_range" : (
                               {
                                 "line" : 12,
@@ -1591,7 +1682,7 @@
                           [
                             <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "72",
+                                "pointer" : "75",
                                 "source_range" : (
                                   {
                                     "column" : 5
@@ -1604,7 +1695,7 @@
                               [
                                 <"DeclRefExpr" : (
                                   {
-                                    "pointer" : "73",
+                                    "pointer" : "76",
                                     "source_range" : (
                                       {
                                         "column" : 5
@@ -1618,15 +1709,14 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "void (NSString *, ...)",
-                                      "type_ptr" : "52"
-                                    },
-                                    "value_kind" : <"LValue">
+                                      "raw" : "void (id, ...)",
+                                      "type_ptr" : "53"
+                                    }
                                   },
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Function">,
-                                      "decl_pointer" : "51",
+                                      "decl_pointer" : "55",
                                       "name" : {
                                         "name" : "NSLog",
                                         "qual_name" : [
@@ -1634,8 +1724,8 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "raw" : "void (NSString *, ...)",
-                                        "type_ptr" : "52"
+                                        "raw" : "void (id, ...)",
+                                        "type_ptr" : "53"
                                       }
                                     }
                                   }
@@ -1643,8 +1733,8 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "void (*)(NSString *, ...)",
-                                  "type_ptr" : "74"
+                                  "raw" : "void (*)(id, ...)",
+                                  "type_ptr" : "77"
                                 }
                               },
                               {
@@ -1653,9 +1743,9 @@
                                 ]
                               }
                             )>,
-                            <"ObjCStringLiteral" : (
+                            <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "75",
+                                "pointer" : "78",
                                 "source_range" : (
                                   {
                                     "column" : 11
@@ -1666,12 +1756,12 @@
                                 )
                               },
                               [
-                                <"StringLiteral" : (
+                                <"ObjCStringLiteral" : (
                                   {
-                                    "pointer" : "76",
+                                    "pointer" : "79",
                                     "source_range" : (
                                       {
-                                        "column" : 12
+                                        "column" : 11
                                       },
                                       {
                                         "column" : 12
@@ -1679,27 +1769,54 @@
                                     )
                                   },
                                   [
+                                    <"StringLiteral" : (
+                                      {
+                                        "pointer" : "80",
+                                        "source_range" : (
+                                          {
+                                            "column" : 12
+                                          },
+                                          {
+                                            "column" : 12
+                                          }
+                                        )
+                                      },
+                                      [
+                                      ],
+                                      {
+                                        "qual_type" : {
+                                          "raw" : "char [19]",
+                                          "type_ptr" : "81"
+                                        },
+                                        "value_kind" : <"LValue">
+                                      },
+                                      "Hello, world! (%d)"
+                                    )>
                                   ],
                                   {
                                     "qual_type" : {
-                                      "raw" : "const char [19]",
-                                      "type_ptr" : "77"
-                                    },
-                                    "value_kind" : <"LValue">
-                                  },
-                                  "Hello, world! (%d)"
+                                      "raw" : "NSString *",
+                                      "type_ptr" : "58"
+                                    }
+                                  }
                                 )>
                               ],
                               {
                                 "qual_type" : {
-                                  "raw" : "NSString *",
-                                  "type_ptr" : "54"
+                                  "raw" : "id",
+                                  "desugared" : "id",
+                                  "type_ptr" : "7"
                                 }
+                              },
+                              {
+                                "cast_kind" : <"BitCast">,
+                                "base_path" : [
+                                ]
                               }
                             )>,
                             <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "78",
+                                "pointer" : "82",
                                 "source_range" : (
                                   {
                                     "column" : 34
@@ -1712,7 +1829,7 @@
                               [
                                 <"DeclRefExpr" : (
                                   {
-                                    "pointer" : "79",
+                                    "pointer" : "83",
                                     "source_range" : (
                                       {
                                         "column" : 34
@@ -1734,7 +1851,7 @@
                                   {
                                     "decl_ref" : {
                                       "kind" : <"ParmVar">,
-                                      "decl_pointer" : "61",
+                                      "decl_pointer" : "65",
                                       "name" : {
                                         "name" : "i",
                                         "qual_name" : [
@@ -1765,7 +1882,7 @@
                           {
                             "qual_type" : {
                               "raw" : "void",
-                              "type_ptr" : "57"
+                              "type_ptr" : "61"
                             }
                           }
                         )>
@@ -1773,7 +1890,7 @@
                     )>,
                     <"NullStmt" : (
                       {
-                        "pointer" : "64",
+                        "pointer" : "68",
                         "source_range" : (
                           {
                           },
@@ -1796,7 +1913,7 @@
       {
         "class_interface" : {
           "kind" : <"ObjCInterface">,
-          "decl_pointer" : "55",
+          "decl_pointer" : "59",
           "name" : {
             "name" : "Hello",
             "qual_name" : [
@@ -1808,7 +1925,7 @@
     )>,
     <"FunctionDecl" : (
       {
-        "pointer" : "80",
+        "pointer" : "84",
         "source_range" : (
           {
             "line" : 17,
@@ -1830,13 +1947,13 @@
       },
       {
         "raw" : "int (int, char **)",
-        "type_ptr" : "81"
+        "type_ptr" : "85"
       },
       {
         "parameters" : [
           <"ParmVarDecl" : (
             {
-              "pointer" : "82",
+              "pointer" : "86",
               "source_range" : (
                 {
                   "line" : 17,
@@ -1864,7 +1981,7 @@
           )>,
           <"ParmVarDecl" : (
             {
-              "pointer" : "83",
+              "pointer" : "87",
               "source_range" : (
                 {
                   "column" : 20
@@ -1885,7 +2002,7 @@
             {
               "raw" : "char **",
               "desugared" : "char **",
-              "type_ptr" : "84"
+              "type_ptr" : "88"
             },
             {
             }
@@ -1893,7 +2010,7 @@
         ],
         "body" : <"CompoundStmt" : (
           {
-            "pointer" : "85",
+            "pointer" : "89",
             "source_range" : (
               {
                 "line" : 18,
@@ -1908,7 +2025,7 @@
           [
             <"ForStmt" : (
               {
-                "pointer" : "86",
+                "pointer" : "90",
                 "source_range" : (
                   {
                     "line" : 19,
@@ -1923,7 +2040,7 @@
               [
                 <"DeclStmt" : (
                   {
-                    "pointer" : "87",
+                    "pointer" : "91",
                     "source_range" : (
                       {
                         "line" : 19,
@@ -1937,7 +2054,7 @@
                   [
                     <"IntegerLiteral" : (
                       {
-                        "pointer" : "88",
+                        "pointer" : "92",
                         "source_range" : (
                           {
                             "column" : 16
@@ -1965,7 +2082,7 @@
                   [
                     <"VarDecl" : (
                       {
-                        "pointer" : "89",
+                        "pointer" : "93",
                         "source_range" : (
                           {
                             "column" : 8
@@ -1992,7 +2109,7 @@
                       {
                         "init_expr" : <"IntegerLiteral" : (
                           {
-                            "pointer" : "88",
+                            "pointer" : "92",
                             "source_range" : (
                               {
                                 "column" : 16
@@ -2022,7 +2139,7 @@
                 )>,
                 <"NullStmt" : (
                   {
-                    "pointer" : "64",
+                    "pointer" : "68",
                     "source_range" : (
                       {
                       },
@@ -2035,7 +2152,7 @@
                 )>,
                 <"BinaryOperator" : (
                   {
-                    "pointer" : "90",
+                    "pointer" : "94",
                     "source_range" : (
                       {
                         "column" : 19
@@ -2048,7 +2165,7 @@
                   [
                     <"ImplicitCastExpr" : (
                       {
-                        "pointer" : "91",
+                        "pointer" : "95",
                         "source_range" : (
                           {
                             "column" : 19
@@ -2061,7 +2178,7 @@
                       [
                         <"DeclRefExpr" : (
                           {
-                            "pointer" : "92",
+                            "pointer" : "96",
                             "source_range" : (
                               {
                                 "column" : 19
@@ -2083,7 +2200,7 @@
                           {
                             "decl_ref" : {
                               "kind" : <"Var">,
-                              "decl_pointer" : "89",
+                              "decl_pointer" : "93",
                               "name" : {
                                 "name" : "i",
                                 "qual_name" : [
@@ -2112,7 +2229,7 @@
                     )>,
                     <"IntegerLiteral" : (
                       {
-                        "pointer" : "93",
+                        "pointer" : "97",
                         "source_range" : (
                           {
                             "column" : 23
@@ -2139,8 +2256,8 @@
                   ],
                   {
                     "qual_type" : {
-                      "raw" : "_Bool",
-                      "type_ptr" : "69"
+                      "raw" : "int",
+                      "type_ptr" : "31"
                     }
                   },
                   {
@@ -2149,7 +2266,7 @@
                 )>,
                 <"UnaryOperator" : (
                   {
-                    "pointer" : "94",
+                    "pointer" : "98",
                     "source_range" : (
                       {
                         "column" : 26
@@ -2162,7 +2279,7 @@
                   [
                     <"DeclRefExpr" : (
                       {
-                        "pointer" : "95",
+                        "pointer" : "99",
                         "source_range" : (
                           {
                             "column" : 26
@@ -2184,7 +2301,7 @@
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : "89",
+                          "decl_pointer" : "93",
                           "name" : {
                             "name" : "i",
                             "qual_name" : [
@@ -2212,7 +2329,7 @@
                 )>,
                 <"CompoundStmt" : (
                   {
-                    "pointer" : "96",
+                    "pointer" : "100",
                     "source_range" : (
                       {
                         "column" : 31
@@ -2226,7 +2343,7 @@
                   [
                     <"ObjCAutoreleasePoolStmt" : (
                       {
-                        "pointer" : "97",
+                        "pointer" : "101",
                         "source_range" : (
                           {
                             "line" : 20,
@@ -2241,7 +2358,7 @@
                       [
                         <"CompoundStmt" : (
                           {
-                            "pointer" : "98",
+                            "pointer" : "102",
                             "source_range" : (
                               {
                                 "line" : 20,
@@ -2256,7 +2373,7 @@
                           [
                             <"ObjCMessageExpr" : (
                               {
-                                "pointer" : "99",
+                                "pointer" : "103",
                                 "source_range" : (
                                   {
                                     "line" : 21,
@@ -2270,7 +2387,7 @@
                               [
                                 <"ObjCMessageExpr" : (
                                   {
-                                    "pointer" : "100",
+                                    "pointer" : "104",
                                     "source_range" : (
                                       {
                                         "column" : 8
@@ -2285,7 +2402,7 @@
                                   {
                                     "qual_type" : {
                                       "raw" : "Hello *",
-                                      "type_ptr" : "101"
+                                      "type_ptr" : "105"
                                     }
                                   },
                                   {
@@ -2293,13 +2410,13 @@
                                     "decl_pointer" : "19",
                                     "receiver_kind" : <"Class" : {
                                       "raw" : "Hello",
-                                      "type_ptr" : "102"
+                                      "type_ptr" : "106"
                                     }>
                                   }
                                 )>,
                                 <"ImplicitCastExpr" : (
                                   {
-                                    "pointer" : "103",
+                                    "pointer" : "107",
                                     "source_range" : (
                                       {
                                         "column" : 24
@@ -2312,7 +2429,7 @@
                                   [
                                     <"DeclRefExpr" : (
                                       {
-                                        "pointer" : "104",
+                                        "pointer" : "108",
                                         "source_range" : (
                                           {
                                             "column" : 24
@@ -2334,7 +2451,7 @@
                                       {
                                         "decl_ref" : {
                                           "kind" : <"Var">,
-                                          "decl_pointer" : "89",
+                                          "decl_pointer" : "93",
                                           "name" : {
                                             "name" : "i",
                                             "qual_name" : [
@@ -2365,13 +2482,13 @@
                               {
                                 "qual_type" : {
                                   "raw" : "void",
-                                  "type_ptr" : "57"
+                                  "type_ptr" : "61"
                                 }
                               },
                               {
                                 "selector" : "say:",
                                 "is_definition_found" : true,
-                                "decl_pointer" : "60"
+                                "decl_pointer" : "64"
                               }
                             )>
                           ]
@@ -2384,7 +2501,7 @@
             )>,
             <"ReturnStmt" : (
               {
-                "pointer" : "105",
+                "pointer" : "109",
                 "source_range" : (
                   {
                     "line" : 24,
@@ -2398,7 +2515,7 @@
               [
                 <"IntegerLiteral" : (
                   {
-                    "pointer" : "106",
+                    "pointer" : "110",
                     "source_range" : (
                       {
                         "column" : 10
@@ -2434,35 +2551,35 @@
   [
     <"BuiltinType" : (
       {
-        "pointer" : "57",
+        "pointer" : "61",
         "raw" : "void"
       },
       <"Void">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "69",
+        "pointer" : "111",
         "raw" : "_Bool"
       },
       <"Bool">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "107",
+        "pointer" : "112",
         "raw" : "char"
       },
       <"Char_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "108",
+        "pointer" : "113",
         "raw" : "signed char"
       },
       <"SChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "109",
+        "pointer" : "114",
         "raw" : "short"
       },
       <"Short">
@@ -2476,28 +2593,28 @@
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "110",
+        "pointer" : "115",
         "raw" : "long"
       },
       <"Long">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "111",
+        "pointer" : "116",
         "raw" : "long long"
       },
       <"LongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "112",
+        "pointer" : "117",
         "raw" : "unsigned char"
       },
       <"UChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "113",
+        "pointer" : "118",
         "raw" : "unsigned short"
       },
       <"UShort">
@@ -2511,266 +2628,252 @@
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "114",
+        "pointer" : "119",
         "raw" : "unsigned long"
       },
       <"ULong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "115",
+        "pointer" : "120",
         "raw" : "unsigned long long"
       },
       <"ULongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "116",
+        "pointer" : "121",
         "raw" : "float"
       },
       <"Float">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "117",
+        "pointer" : "122",
         "raw" : "double"
       },
       <"Double">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "118",
+        "pointer" : "123",
         "raw" : "long double"
       },
       <"LongDouble">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "119",
+        "pointer" : "124",
         "raw" : "__int128"
       },
       <"Int128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "120",
+        "pointer" : "125",
         "raw" : "unsigned __int128"
       },
       <"UInt128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "121",
+        "pointer" : "126",
         "raw" : "wchar_t"
       },
       <"WChar_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "122",
-        "raw" : "char16_t"
-      },
-      <"Char16">
-    )>,
-    <"BuiltinType" : (
-      {
-        "pointer" : "123",
-        "raw" : "char32_t"
-      },
-      <"Char32">
-    )>,
-    <"BuiltinType" : (
-      {
-        "pointer" : "124",
+        "pointer" : "127",
         "raw" : "<dependent type>"
       },
       <"Dependent">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "125",
+        "pointer" : "128",
         "raw" : "<overloaded function type>"
       },
       <"Overload">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "126",
+        "pointer" : "129",
         "raw" : "<bound member function type>"
       },
       <"BoundMember">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "127",
+        "pointer" : "130",
         "raw" : "<pseudo-object type>"
       },
       <"PseudoObject">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "128",
+        "pointer" : "131",
         "raw" : "<unknown type>"
       },
       <"UnknownAny">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "129",
+        "pointer" : "132",
         "raw" : "<ARC unbridged cast type>"
       },
       <"ARCUnbridgedCast">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "130",
+        "pointer" : "133",
         "raw" : "<builtin fn type>"
       },
       <"BuiltinFn">
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "131",
+        "pointer" : "134",
         "raw" : "_Complex float"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "132",
+        "pointer" : "135",
         "raw" : "_Complex double"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "133",
+        "pointer" : "136",
         "raw" : "_Complex long double"
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "134",
+        "pointer" : "137",
         "raw" : "id"
       },
       <"ObjCId">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "135",
+        "pointer" : "138",
         "raw" : "Class"
       },
       <"ObjCClass">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "136",
+        "pointer" : "139",
         "raw" : "SEL"
       },
       <"ObjCSel">
     )>,
     <"PointerType" : (
       {
-        "pointer" : "137",
+        "pointer" : "140",
         "raw" : "void *"
       },
-      "57"
+      "61"
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "138",
+        "pointer" : "141",
         "raw" : "nullptr_t"
       },
       <"NullPtr">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "139",
+        "pointer" : "142",
         "raw" : "__fp16"
       },
       <"Half">
     )>,
     <"PointerType" : (
       {
-        "pointer" : "140",
+        "pointer" : "143",
         "raw" : "SEL *"
       },
-      "136"
+      "139"
     )>,
     <"ObjCObjectType" : (
-      {
-        "pointer" : "141",
-        "raw" : "id"
-      },
-      {
-        "base_type" : "134"
-      }
-    )>,
-    <"ObjCObjectPointerType" : (
-      {
-        "pointer" : "142",
-        "raw" : "id"
-      },
-      "141"
-    )>,
-    <"ObjCObjectType" : (
-      {
-        "pointer" : "143",
-        "raw" : "Class"
-      },
-      {
-        "base_type" : "135"
-      }
-    )>,
-    <"ObjCObjectPointerType" : (
       {
         "pointer" : "144",
+        "raw" : "id"
+      },
+      {
+        "base_type" : "137"
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : "145",
+        "raw" : "id"
+      },
+      "144"
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : "146",
         "raw" : "Class"
       },
-      "143"
+      {
+        "base_type" : "138"
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : "147",
+        "raw" : "Class"
+      },
+      "146"
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "145",
+        "pointer" : "148",
         "raw" : "Protocol"
       },
       "10"
     )>,
     <"RecordType" : (
       {
-        "pointer" : "146",
+        "pointer" : "149",
         "raw" : "struct __va_list_tag"
       },
-      "147"
+      "150"
     )>,
     <"TypedefType" : (
       {
-        "pointer" : "148",
+        "pointer" : "151",
         "raw" : "__va_list_tag",
-        "desugared_type" : "146"
+        "desugared_type" : "149"
       },
       {
-        "child_type" : "146",
-        "decl_ptr" : "149"
+        "child_type" : "149",
+        "decl_ptr" : "152"
       }
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : "150",
+        "pointer" : "153",
         "raw" : "struct __va_list_tag [1]"
       },
-      "146",
+      "149",
       1
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : "151",
+        "pointer" : "154",
         "raw" : "__va_list_tag [1]"
       },
-      "148",
+      "151",
       1
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "152",
+        "pointer" : "155",
         "raw" : "NSObject"
       },
       "16"
@@ -2779,10 +2882,10 @@
       {
         "pointer" : "7",
         "raw" : "id",
-        "desugared_type" : "142"
+        "desugared_type" : "145"
       },
       {
-        "child_type" : "142",
+        "child_type" : "145",
         "decl_ptr" : "6"
       }
     )>,
@@ -2790,21 +2893,21 @@
       {
         "pointer" : "18",
         "raw" : "instancetype",
-        "desugared_type" : "142"
+        "desugared_type" : "145"
       },
       {
         "child_type" : "7",
-        "decl_ptr" : "153"
+        "decl_ptr" : "156"
       }
     )>,
     <"TypedefType" : (
       {
         "pointer" : "9",
         "raw" : "Class",
-        "desugared_type" : "144"
+        "desugared_type" : "147"
       },
       {
-        "child_type" : "144",
+        "child_type" : "147",
         "decl_ptr" : "8"
       }
     )>,
@@ -2823,10 +2926,10 @@
       {
         "pointer" : "5",
         "raw" : "SEL",
-        "desugared_type" : "140"
+        "desugared_type" : "143"
       },
       {
-        "child_type" : "140",
+        "child_type" : "143",
         "decl_ptr" : "4"
       }
     )>,
@@ -2835,18 +2938,18 @@
         "pointer" : "27",
         "raw" : "Protocol *"
       },
-      "145"
+      "148"
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "154",
+        "pointer" : "157",
         "raw" : "NSNumber"
       },
       "28"
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "155",
+        "pointer" : "158",
         "raw" : "NSString"
       },
       "32"
@@ -2864,35 +2967,35 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "156",
+        "pointer" : "159",
         "raw" : "NSDictionary"
       },
       "34"
     )>,
     <"IncompleteArrayType" : (
       {
-        "pointer" : "157",
+        "pointer" : "160",
         "raw" : "id []"
       },
-      "142"
+      "145"
     )>,
     <"IncompleteArrayType" : (
       {
-        "pointer" : "158",
+        "pointer" : "161",
         "raw" : "const id []"
       },
       "7"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "159",
+        "pointer" : "162",
         "raw" : "const id *"
       },
-      "142"
+      "145"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "160",
+        "pointer" : "163",
         "raw" : "const id *"
       },
       "7"
@@ -2901,23 +3004,23 @@
       {
         "pointer" : "37",
         "raw" : "const id *",
-        "desugared_type" : "160"
+        "desugared_type" : "163"
       },
-      "160"
+      "163"
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "161",
+        "pointer" : "164",
         "raw" : "NSArray"
       },
       "42"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "162",
+        "pointer" : "165",
         "raw" : "id *"
       },
-      "142"
+      "145"
     )>,
     <"PointerType" : (
       {
@@ -2928,101 +3031,128 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "163",
+        "pointer" : "166",
         "raw" : "NSException"
       },
       "50"
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : "54",
+        "pointer" : "58",
         "raw" : "NSString *"
       },
-      "155"
+      "158"
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "52",
+        "pointer" : "167",
         "raw" : "void (NSString *, ...)"
       },
       {
-        "return_type" : "57"
+        "return_type" : "61"
       },
       {
         "params_type" : [
-          "54"
+          "58"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "168",
+        "raw" : "void (id, ...)"
+      },
+      {
+        "return_type" : "61"
+      },
+      {
+        "params_type" : [
+          "145"
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : "53",
+        "raw" : "void (id, ...)"
+      },
+      {
+        "return_type" : "61"
+      },
+      {
+        "params_type" : [
+          "7"
         ]
       }
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : "102",
+        "pointer" : "106",
         "raw" : "Hello"
       },
-      "55"
+      "59"
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : "101",
+        "pointer" : "105",
         "raw" : "Hello *"
       },
-      "102"
+      "106"
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : "164",
+        "pointer" : "81",
         "raw" : "char [19]"
       },
-      "107",
+      "112",
       19
     )>,
-    <"ConstantArrayType" : (
+    <"PointerType" : (
+      {
+        "pointer" : "169",
+        "raw" : "void (*)(id, ...)"
+      },
+      "168"
+    )>,
+    <"PointerType" : (
       {
         "pointer" : "77",
-        "raw" : "const char [19]"
+        "raw" : "void (*)(id, ...)"
       },
-      "107",
-      19
+      "53"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "74",
-        "raw" : "void (*)(NSString *, ...)"
-      },
-      "52"
-    )>,
-    <"PointerType" : (
-      {
-        "pointer" : "165",
+        "pointer" : "170",
         "raw" : "char *"
       },
-      "107"
+      "112"
     )>,
     <"IncompleteArrayType" : (
       {
-        "pointer" : "166",
+        "pointer" : "171",
         "raw" : "char *[]"
       },
-      "165"
+      "170"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "167",
+        "pointer" : "172",
         "raw" : "char **"
       },
-      "165"
+      "170"
     )>,
     <"DecayedType" : (
       {
-        "pointer" : "84",
+        "pointer" : "88",
         "raw" : "char **",
-        "desugared_type" : "167"
+        "desugared_type" : "172"
       },
-      "167"
+      "172"
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "168",
+        "pointer" : "173",
         "raw" : "int (int, char **)"
       },
       {
@@ -3031,13 +3161,13 @@
       {
         "params_type" : [
           "31",
-          "167"
+          "172"
         ]
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "81",
+        "pointer" : "85",
         "raw" : "int (int, char **)"
       },
       {
@@ -3046,7 +3176,7 @@
       {
         "params_type" : [
           "31",
-          "84"
+          "88"
         ]
       }
     )>,

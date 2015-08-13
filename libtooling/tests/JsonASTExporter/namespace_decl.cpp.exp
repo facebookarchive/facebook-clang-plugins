@@ -73,104 +73,6 @@
         ]
       },
       {
-        "name" : "SEL",
-        "qual_name" : [
-          "SEL"
-        ]
-      },
-      ["NoType"],
-      "2",
-      {
-      }
-    ]],
-    ["TypedefDecl" , [
-      {
-        "pointer" : "5",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "id",
-        "qual_name" : [
-          "id"
-        ]
-      },
-      ["NoType"],
-      "2",
-      {
-      }
-    ]],
-    ["TypedefDecl" , [
-      {
-        "pointer" : "6",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "Class",
-        "qual_name" : [
-          "Class"
-        ]
-      },
-      ["NoType"],
-      "2",
-      {
-      }
-    ]],
-    ["ObjCInterfaceDecl" , [
-      {
-        "pointer" : "7",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
-        "name" : "Protocol",
-        "qual_name" : [
-          "Protocol"
-        ]
-      },
-      [
-      ],
-      {
-      },
-      {
-      }
-    ]],
-    ["TypedefDecl" , [
-      {
-        "pointer" : "8",
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "attributes" : [
-        ]
-      },
-      {
         "name" : "__builtin_va_list",
         "qual_name" : [
           "__builtin_va_list"
@@ -183,7 +85,7 @@
     ]],
     ["NamespaceDecl" , [
       {
-        "pointer" : "9",
+        "pointer" : "5",
         "source_range" : [
           {
             "file" : "tests/namespace_decl.cpp",
@@ -207,7 +109,7 @@
       [
         ["NamespaceDecl" , [
           {
-            "pointer" : "10",
+            "pointer" : "6",
             "source_range" : [
               {
                 "line" : 2,
@@ -237,7 +139,7 @@
         ]],
         ["NamespaceDecl" , [
           {
-            "pointer" : "11",
+            "pointer" : "7",
             "source_range" : [
               {
                 "line" : 4,
@@ -265,7 +167,7 @@
           {
             "original_namespace" : {
               "kind" : ["Namespace"],
-              "decl_pointer" : "10",
+              "decl_pointer" : "6",
               "name" : {
                 "name" : "V",
                 "qual_name" : [
@@ -288,338 +190,292 @@
   [
     ["BuiltinType" , [
       {
-        "pointer" : "12",
+        "pointer" : "8",
         "raw" : "void"
       },
       ["Void"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "13",
+        "pointer" : "9",
         "raw" : "_Bool"
       },
       ["Bool"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "14",
+        "pointer" : "10",
         "raw" : "char"
       },
       ["Char_S"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "15",
+        "pointer" : "11",
         "raw" : "signed char"
       },
       ["SChar"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "16",
+        "pointer" : "12",
         "raw" : "short"
       },
       ["Short"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "17",
+        "pointer" : "13",
         "raw" : "int"
       },
       ["Int"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "18",
+        "pointer" : "14",
         "raw" : "long"
       },
       ["Long"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "19",
+        "pointer" : "15",
         "raw" : "long long"
       },
       ["LongLong"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "20",
+        "pointer" : "16",
         "raw" : "unsigned char"
       },
       ["UChar"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "21",
+        "pointer" : "17",
         "raw" : "unsigned short"
       },
       ["UShort"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "22",
+        "pointer" : "18",
         "raw" : "unsigned int"
       },
       ["UInt"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "23",
+        "pointer" : "19",
         "raw" : "unsigned long"
       },
       ["ULong"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "24",
+        "pointer" : "20",
         "raw" : "unsigned long long"
       },
       ["ULongLong"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "25",
+        "pointer" : "21",
         "raw" : "float"
       },
       ["Float"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "26",
+        "pointer" : "22",
         "raw" : "double"
       },
       ["Double"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "27",
+        "pointer" : "23",
         "raw" : "long double"
       },
       ["LongDouble"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "28",
+        "pointer" : "24",
         "raw" : "__int128"
       },
       ["Int128"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "29",
+        "pointer" : "25",
         "raw" : "unsigned __int128"
       },
       ["UInt128"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "30",
+        "pointer" : "26",
         "raw" : "wchar_t"
       },
       ["WChar_S"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "31",
+        "pointer" : "27",
         "raw" : "char16_t"
       },
       ["Char16"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "32",
+        "pointer" : "28",
         "raw" : "char32_t"
       },
       ["Char32"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "33",
+        "pointer" : "29",
         "raw" : "<dependent type>"
       },
       ["Dependent"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "34",
+        "pointer" : "30",
         "raw" : "<overloaded function type>"
       },
       ["Overload"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "35",
+        "pointer" : "31",
         "raw" : "<bound member function type>"
       },
       ["BoundMember"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "36",
+        "pointer" : "32",
         "raw" : "<pseudo-object type>"
       },
       ["PseudoObject"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "37",
+        "pointer" : "33",
         "raw" : "<unknown type>"
       },
       ["UnknownAny"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "38",
+        "pointer" : "34",
         "raw" : "<ARC unbridged cast type>"
       },
       ["ARCUnbridgedCast"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "39",
+        "pointer" : "35",
         "raw" : "<builtin fn type>"
       },
       ["BuiltinFn"]
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "40",
+        "pointer" : "36",
         "raw" : "_Complex float"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "41",
+        "pointer" : "37",
         "raw" : "_Complex double"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "42",
+        "pointer" : "38",
         "raw" : "_Complex long double"
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "43",
+        "pointer" : "39",
         "raw" : "id"
       },
       ["ObjCId"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "44",
+        "pointer" : "40",
         "raw" : "Class"
       },
       ["ObjCClass"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "45",
+        "pointer" : "41",
         "raw" : "SEL"
       },
       ["ObjCSel"]
     ]],
     ["PointerType" , [
       {
-        "pointer" : "46",
+        "pointer" : "42",
         "raw" : "void *"
       },
-      "12"
+      "8"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "47",
+        "pointer" : "43",
         "raw" : "nullptr_t"
       },
       ["NullPtr"]
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "48",
+        "pointer" : "44",
         "raw" : "__fp16"
       },
       ["Half"]
     ]],
-    ["PointerType" , [
-      {
-        "pointer" : "49",
-        "raw" : "SEL *"
-      },
-      "45"
-    ]],
-    ["ObjCObjectType" , [
-      {
-        "pointer" : "50",
-        "raw" : "id"
-      },
-      {
-        "base_type" : "43"
-      }
-    ]],
-    ["ObjCObjectPointerType" , [
-      {
-        "pointer" : "51",
-        "raw" : "id"
-      },
-      "50"
-    ]],
-    ["ObjCObjectType" , [
-      {
-        "pointer" : "52",
-        "raw" : "Class"
-      },
-      {
-        "base_type" : "44"
-      }
-    ]],
-    ["ObjCObjectPointerType" , [
-      {
-        "pointer" : "53",
-        "raw" : "Class"
-      },
-      "52"
-    ]],
-    ["ObjCInterfaceType" , [
-      {
-        "pointer" : "54",
-        "raw" : "Protocol"
-      },
-      "7"
-    ]],
     ["RecordType" , [
       {
-        "pointer" : "55",
+        "pointer" : "45",
         "raw" : "struct __va_list_tag"
       },
-      "56"
+      "46"
     ]],
     ["TypedefType" , [
       {
-        "pointer" : "57",
+        "pointer" : "47",
         "raw" : "__va_list_tag",
-        "desugared_type" : "55"
+        "desugared_type" : "45"
       },
       {
-        "child_type" : "55",
-        "decl_ptr" : "58"
+        "child_type" : "45",
+        "decl_ptr" : "48"
       }
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "59",
+        "pointer" : "49",
         "raw" : "struct __va_list_tag [1]"
       },
-      "55",
+      "45",
       1
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "60",
+        "pointer" : "50",
         "raw" : "__va_list_tag [1]"
       },
-      "57",
+      "47",
       1
     ]],
     ["NoneType" , [

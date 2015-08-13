@@ -73,9 +73,26 @@ test: build/FacebookClangPlugin.dylib
 	   mkdir -p build/tmp_$$P;                                                      \
 	   for EXPFILE in $(EXPFILES_FORMULA); do                                       \
 	     TEST=$${EXPFILE%.exp};                                                     \
+	     EXTRA_FLAGS="";                                                            \
+	     case "$(SRCFILE_FORMULA)" in                                               \
+	     *.m )                                                                      \
+	       if [ "$(uname)" != "Darwin" ]; then                                      \
+	         printf "[~] %s skipped (non-Darwin architecture detected)\n"           \
+	           "$$(basename $(SRCFILE_FORMULA))";                                   \
+	         continue;                                                              \
+	       fi;                                                                      \
+	       EXTRA_FLAGS="-ObjC -fblocks";                                            \
+	       ;;                                                                       \
+	     *.cpp )                                                                    \
+	       EXTRA_FLAGS="--std=c++11";                                               \
+	       ;;                                                                       \
+	     *.mm )                                                                     \
+	       EXTRA_FLAGS="--std=c++11 -ObjC++ -fblocks";                              \
+	       ;;                                                                       \
+	     esac;                                                                      \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
-	       $(CLANG_FRONTEND) -ObjC++ --std=c++11 -Xclang -plugin -Xclang $$P        \
-	       -Xclang -plugin-arg-$$P -Xclang -                                 \
+	       $(CLANG_FRONTEND) $$EXTRA_FLAGS -Xclang -plugin -Xclang $$P              \
+	       -Xclang -plugin-arg-$$P -Xclang -                                        \
 	       -Xclang -plugin-arg-$$P -Xclang USE_TEMP_DIR_FOR_DEDUPLICATION=build/tmp_$$P \
 	       -c $(SRCFILE_FORMULA);                                                   \
 	   done;                                                                        \
