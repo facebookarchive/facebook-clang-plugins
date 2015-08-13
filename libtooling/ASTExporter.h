@@ -71,6 +71,31 @@ struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
 using namespace clang;
 using namespace clang::comments;
 
+template<class Impl>
+struct TupleSizeBase {
+  // Decls
+
+#define DECL(DERIVED, BASE)                                \
+  int DERIVED##DeclTupleSize() {                           \
+    return static_cast<Impl*>(this)->BASE##TupleSize();    \
+  }
+#define ABSTRACT_DECL(DECL) DECL
+#include <clang/AST/DeclNodes.inc>
+
+  int tupleSizeOfDeclKind(const Decl::Kind kind) {
+    switch (kind) {
+#define DECL(DERIVED, BASE)                                             \
+      case Decl::DERIVED:                                               \
+        return static_cast<Impl*>(this)->DERIVED##DeclTupleSize();
+#define ABSTRACT_DECL(DECL)
+#include <clang/AST/DeclNodes.inc>
+    }
+    llvm_unreachable("Decl that isn't part of DeclNodes.inc!");
+  }
+
+};
+
+
 typedef ATDWriter::JsonWriter<raw_ostream> JsonWriter;
 
 template <class ATDWriter = JsonWriter>
@@ -78,7 +103,8 @@ class ASTExporter :
   public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   public ConstStmtVisitor<ASTExporter<ATDWriter>>,
   public ConstCommentVisitor<ASTExporter<ATDWriter>>,
-  public TypeVisitor<ASTExporter<ATDWriter>>
+  public TypeVisitor<ASTExporter<ATDWriter>>,
+  public TupleSizeBase<ASTExporter<ATDWriter>>
 {
   typedef typename ATDWriter::ObjectScope ObjectScope;
   typedef typename ATDWriter::ArrayScope ArrayScope;
@@ -162,34 +188,38 @@ public:
 //                              SourceRange R = SourceRange());
   void dumpCXXBaseSpecifier(const CXXBaseSpecifier &Base);
 
+#define DECLARE_VISITOR(NAME) \
+  int NAME##TupleSize(); \
+  void Visit##NAME(const NAME *D);
+
   // Decls
-  void VisitDecl(const Decl *D);
-  void VisitDeclContext(const DeclContext *DC);
-  void VisitBlockDecl(const BlockDecl *D);
-  void VisitCapturedDecl(const CapturedDecl *D);
-  void VisitLinkageSpecDecl(const LinkageSpecDecl *D);
-  void VisitNamespaceDecl(const NamespaceDecl *D);
-  void VisitObjCContainerDecl(const ObjCContainerDecl *D);
-  void VisitTagDecl(const TagDecl *D);
-  void VisitTypeDecl(const TypeDecl *D);
-  void VisitTranslationUnitDecl(const TranslationUnitDecl *D);
-  void VisitNamedDecl(const NamedDecl *D);
-  void VisitValueDecl(const ValueDecl *D);
-  void VisitTypedefDecl(const TypedefDecl *D);
-  void VisitEnumDecl(const EnumDecl *D);
-  void VisitRecordDecl(const RecordDecl *D);
-  void VisitEnumConstantDecl(const EnumConstantDecl *D);
-  void VisitIndirectFieldDecl(const IndirectFieldDecl *D);
-  void VisitFunctionDecl(const FunctionDecl *D);
-  void VisitFieldDecl(const FieldDecl *D);
-  void VisitVarDecl(const VarDecl *D);
-  void VisitFileScopeAsmDecl(const FileScopeAsmDecl *D);
-  void VisitImportDecl(const ImportDecl *D);
+  DECLARE_VISITOR(Decl)
+  DECLARE_VISITOR(DeclContext)
+  DECLARE_VISITOR(BlockDecl)
+  DECLARE_VISITOR(CapturedDecl)
+  DECLARE_VISITOR(LinkageSpecDecl)
+  DECLARE_VISITOR(NamespaceDecl)
+  DECLARE_VISITOR(ObjCContainerDecl)
+  DECLARE_VISITOR(TagDecl)
+  DECLARE_VISITOR(TypeDecl)
+  DECLARE_VISITOR(TranslationUnitDecl)
+  DECLARE_VISITOR(NamedDecl)
+  DECLARE_VISITOR(ValueDecl)
+  DECLARE_VISITOR(TypedefDecl)
+  DECLARE_VISITOR(EnumDecl)
+  DECLARE_VISITOR(RecordDecl)
+  DECLARE_VISITOR(EnumConstantDecl)
+  DECLARE_VISITOR(IndirectFieldDecl)
+  DECLARE_VISITOR(FunctionDecl)
+  DECLARE_VISITOR(FieldDecl)
+  DECLARE_VISITOR(VarDecl)
+  DECLARE_VISITOR(FileScopeAsmDecl)
+  DECLARE_VISITOR(ImportDecl)
 
   // C++ Decls
-  void VisitUsingDirectiveDecl(const UsingDirectiveDecl *D);
-  void VisitNamespaceAliasDecl(const NamespaceAliasDecl *D);
-  void VisitCXXRecordDecl(const CXXRecordDecl *D);
+  DECLARE_VISITOR(UsingDirectiveDecl)
+  DECLARE_VISITOR(NamespaceAliasDecl)
+  DECLARE_VISITOR(CXXRecordDecl)
 //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
 //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
 //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
@@ -223,16 +253,16 @@ public:
 //    void VisitFriendDecl(const FriendDecl *D);
 //
 //    // ObjC Decls
-  void VisitObjCIvarDecl(const ObjCIvarDecl *D);
-  void VisitObjCMethodDecl(const ObjCMethodDecl *D);
-  void VisitObjCCategoryDecl(const ObjCCategoryDecl *D);
-  void VisitObjCCategoryImplDecl(const ObjCCategoryImplDecl *D);
-  void VisitObjCProtocolDecl(const ObjCProtocolDecl *D);
-  void VisitObjCInterfaceDecl(const ObjCInterfaceDecl *D);
-  void VisitObjCImplementationDecl(const ObjCImplementationDecl *D);
-  void VisitObjCCompatibleAliasDecl(const ObjCCompatibleAliasDecl *D);
-  void VisitObjCPropertyDecl(const ObjCPropertyDecl *D);
-  void VisitObjCPropertyImplDecl(const ObjCPropertyImplDecl *D);
+  DECLARE_VISITOR(ObjCIvarDecl)
+  DECLARE_VISITOR(ObjCMethodDecl)
+  DECLARE_VISITOR(ObjCCategoryDecl)
+  DECLARE_VISITOR(ObjCCategoryImplDecl)
+  DECLARE_VISITOR(ObjCProtocolDecl)
+  DECLARE_VISITOR(ObjCInterfaceDecl)
+  DECLARE_VISITOR(ObjCImplementationDecl)
+  DECLARE_VISITOR(ObjCCompatibleAliasDecl)
+  DECLARE_VISITOR(ObjCPropertyDecl)
+  DECLARE_VISITOR(ObjCPropertyImplDecl)
 
   // Stmts.
   void VisitStmt(const Stmt *Node);
@@ -339,7 +369,6 @@ public:
   void VisitTypedefType(const TypedefType *T);
 };
 
-
 //===----------------------------------------------------------------------===//
 //  Utilities
 //===----------------------------------------------------------------------===//
@@ -418,7 +447,7 @@ void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
 /// type source_range = (source_location * source_location)
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSourceRange(SourceRange R) {
-  TupleScope Scope(OF);
+  TupleScope Scope(OF, 2);
   dumpSourceLocation(R.getBegin());
   dumpSourceLocation(R.getEnd());
 }
@@ -534,6 +563,8 @@ void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::DeclContextTupleSize() { return 2; }
 /// \atd
 /// #define decl_context_tuple decl list * decl_context_info
 /// type decl_context_info = {
@@ -782,7 +813,7 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(const CXXCtorInitializer &In
   } else {
     VariantScope Scope(OF, "BaseClass");
     {
-      TupleScope Scope(OF);
+      TupleScope Scope(OF, 2);
       dumpQualType(Init.getTypeSourceInfo()->getType());
       OF.emitBoolean(Init.isBaseVirtual());
     }
@@ -1001,11 +1032,13 @@ void ASTExporter<ATDWriter>::dumpDecl(const Decl *D) {
   }
   VariantScope Scope(OF, std::string(D->getDeclKindName()) + "Decl");
   {
-    TupleScope Scope(OF);
+    TupleScope Scope(OF, ASTExporter::tupleSizeOfDeclKind(D->getKind()));
     ConstDeclVisitor<ASTExporter<ATDWriter>>::Visit(D);
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::DeclTupleSize() { return 1; }
 /// \atd
 /// #define decl_tuple decl_info
 /// type decl_info = {
@@ -1073,6 +1106,10 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CapturedDeclTupleSize() {
+  return DeclTupleSize() + DeclContextTupleSize();
+}
 /// \atd
 /// #define captured_decl_tuple decl_tuple * decl_context_tuple
 template <class ATDWriter>
@@ -1081,6 +1118,10 @@ void ASTExporter<ATDWriter>::VisitCapturedDecl(const CapturedDecl *D) {
   VisitDeclContext(D);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::LinkageSpecDeclTupleSize() {
+  return DeclTupleSize() + DeclContextTupleSize();
+}
 /// \atd
 /// #define linkage_spec_decl_tuple decl_tuple * decl_context_tuple
 template <class ATDWriter>
@@ -1089,6 +1130,10 @@ void ASTExporter<ATDWriter>::VisitLinkageSpecDecl(const LinkageSpecDecl *D) {
   VisitDeclContext(D);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::NamespaceDeclTupleSize() {
+  return NamedDeclTupleSize() + DeclContextTupleSize() + 1;
+}
 /// \atd
 /// #define namespace_decl_tuple named_decl_tuple * decl_context_tuple * namespace_decl_info
 /// type namespace_decl_info = {
@@ -1111,6 +1156,10 @@ void ASTExporter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCContainerDeclTupleSize() {
+  return NamedDeclTupleSize() + DeclContextTupleSize();
+}
 /// \atd
 /// #define obj_c_container_decl_tuple named_decl_tuple * decl_context_tuple
 template <class ATDWriter>
@@ -1119,6 +1168,10 @@ void ASTExporter<ATDWriter>::VisitObjCContainerDecl(const ObjCContainerDecl *D) 
   VisitDeclContext(D);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TagDeclTupleSize() {
+  return TypeDeclTupleSize() + DeclContextTupleSize();
+}
 /// \atd
 /// #define tag_decl_tuple type_decl_tuple * decl_context_tuple
 template <class ATDWriter>
@@ -1127,6 +1180,10 @@ void ASTExporter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
   VisitDeclContext(D);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TypeDeclTupleSize () {
+  return NamedDeclTupleSize() + 1 + 1;
+}
 /// \atd
 /// #define type_decl_tuple named_decl_tuple * opt_type * type_ptr
 template <class ATDWriter>
@@ -1137,6 +1194,10 @@ void ASTExporter<ATDWriter>::VisitTypeDecl(const TypeDecl *D) {
   dumpPointer(T);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ValueDeclTupleSize() {
+  return NamedDeclTupleSize() + 1;
+}
 /// \atd
 /// #define value_decl_tuple named_decl_tuple * qual_type
 template <class ATDWriter>
@@ -1146,6 +1207,10 @@ void ASTExporter<ATDWriter>::VisitValueDecl(const ValueDecl *D) {
 }
 
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TranslationUnitDeclTupleSize() {
+  return DeclTupleSize() + DeclContextTupleSize() + 1;
+}
 /// \atd
 /// #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * c_type list
 template <class ATDWriter>
@@ -1158,6 +1223,10 @@ void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(const TranslationUnitDecl 
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::NamedDeclTupleSize() {
+  return DeclTupleSize() + 1;
+}
 /// \atd
 /// #define named_decl_tuple decl_tuple * named_decl_info
 template <class ATDWriter>
@@ -1166,6 +1235,10 @@ void ASTExporter<ATDWriter>::VisitNamedDecl(const NamedDecl *D) {
   dumpName(*D);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TypedefDeclTupleSize() {
+  return ASTExporter::TypedefNameDeclTupleSize() + 1;
+}
 /// \atd
 /// #define typedef_decl_tuple typedef_name_decl_tuple * typedef_decl_info
 /// type typedef_decl_info = {
@@ -1181,6 +1254,10 @@ void ASTExporter<ATDWriter>::VisitTypedefDecl(const TypedefDecl *D) {
   OF.emitFlag("is_module_private", IsModulePrivate);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::EnumDeclTupleSize() {
+  return TagDeclTupleSize() + 1;
+}
 /// \atd
 /// #define enum_decl_tuple tag_decl_tuple * enum_decl_info
 /// type enum_decl_info = {
@@ -1206,6 +1283,10 @@ void ASTExporter<ATDWriter>::VisitEnumDecl(const EnumDecl *D) {
   OF.emitFlag("is_module_private", IsModulePrivate);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::RecordDeclTupleSize() {
+  return TagDeclTupleSize() + 1;
+}
 /// \atd
 /// #define record_decl_tuple tag_decl_tuple * record_decl_info
 /// type record_decl_info = {
@@ -1224,6 +1305,10 @@ void ASTExporter<ATDWriter>::VisitRecordDecl(const RecordDecl *D) {
   OF.emitFlag("is_complete_definition", IsCompleteDefinition);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::EnumConstantDeclTupleSize() {
+  return ValueDeclTupleSize() + 1;
+}
 /// \atd
 /// #define enum_constant_decl_tuple value_decl_tuple * enum_constant_decl_info
 /// type enum_constant_decl_info = {
@@ -1242,6 +1327,10 @@ void ASTExporter<ATDWriter>::VisitEnumConstantDecl(const EnumConstantDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::IndirectFieldDeclTupleSize() {
+  return ValueDeclTupleSize() + 1;
+}
 /// \atd
 /// #define indirect_field_decl_tuple value_decl_tuple * decl_ref list
 template <class ATDWriter>
@@ -1253,6 +1342,10 @@ void ASTExporter<ATDWriter>::VisitIndirectFieldDecl(const IndirectFieldDecl *D) 
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
+  return ASTExporter::DeclaratorDeclTupleSize() + 1;
+}
 /// \atd
 /// #define function_decl_tuple declarator_decl_tuple * function_decl_info
 /// type function_decl_info = {
@@ -1359,6 +1452,10 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FieldDeclTupleSize() {
+  return ASTExporter::DeclaratorDeclTupleSize() + 1;
+}
 /// \atd
 /// #define field_decl_tuple declarator_decl_tuple * field_decl_info
 /// type field_decl_info = {
@@ -1391,6 +1488,10 @@ void ASTExporter<ATDWriter>::VisitFieldDecl(const FieldDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::VarDeclTupleSize() {
+  return ASTExporter::DeclaratorDeclTupleSize() + 1;
+}
 /// \atd
 /// #define var_decl_tuple declarator_decl_tuple * var_decl_info
 /// type var_decl_info = {
@@ -1433,6 +1534,10 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FileScopeAsmDeclTupleSize() {
+  return DeclTupleSize() + 1;
+}
 /// \atd
 /// #define file_scope_asm_decl_tuple decl_tuple * string
 template <class ATDWriter>
@@ -1441,6 +1546,10 @@ void ASTExporter<ATDWriter>::VisitFileScopeAsmDecl(const FileScopeAsmDecl *D) {
   OF.emitString(D->getAsmString()->getBytes());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ImportDeclTupleSize() {
+  return DeclTupleSize() + 1;
+}
 /// \atd
 /// #define import_decl_tuple decl_tuple * string
 template <class ATDWriter>
@@ -1453,6 +1562,10 @@ void ASTExporter<ATDWriter>::VisitImportDecl(const ImportDecl *D) {
 // C++ Declarations
 //===----------------------------------------------------------------------===//
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::UsingDirectiveDeclTupleSize() {
+  return NamedDeclTupleSize() + 1;
+}
 /// \atd
 /// #define using_directive_decl_tuple named_decl_tuple * using_directive_decl_info
 /// type using_directive_decl_info = {
@@ -1480,6 +1593,10 @@ void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(const UsingDirectiveDecl *D
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::NamespaceAliasDeclTupleSize() {
+  return NamedDeclTupleSize() + 1;
+}
 /// \atd
 /// #define namespace_alias_decl named_decl_tuple * namespace_alias_decl_info
 /// type namespace_alias_decl_info = {
@@ -1502,6 +1619,10 @@ void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D
   dumpDeclRef(*D->getNamespace());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXRecordDeclTupleSize() {
+  return RecordDeclTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_record_decl_tuple record_decl_tuple * cxx_record_decl_info
 /// type cxx_record_decl_info = {
@@ -1781,6 +1902,10 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
 //// Obj-C Declarations
 ////===----------------------------------------------------------------------===//
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCIvarDeclTupleSize() {
+  return FieldDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_ivar_decl_tuple field_decl_tuple * obj_c_ivar_decl_info
 /// type obj_c_ivar_decl_info = {
@@ -1821,6 +1946,10 @@ void ASTExporter<ATDWriter>::VisitObjCIvarDecl(const ObjCIvarDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
+  return NamedDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_method_decl_tuple named_decl_tuple * obj_c_method_decl_info
 /// type obj_c_method_decl_info = {
@@ -1862,6 +1991,10 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCCategoryDeclTupleSize() {
+  return ObjCContainerDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_category_decl_tuple obj_c_container_decl_tuple * obj_c_category_decl_info
 /// type obj_c_category_decl_info = {
@@ -1898,6 +2031,10 @@ void ASTExporter<ATDWriter>::VisitObjCCategoryDecl(const ObjCCategoryDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCCategoryImplDeclTupleSize() {
+  return ASTExporter::ObjCImplDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_category_impl_decl_tuple obj_c_impl_decl_tuple * obj_c_category_impl_decl_info
 /// type obj_c_category_impl_decl_info = {
@@ -1922,6 +2059,10 @@ void ASTExporter<ATDWriter>::VisitObjCCategoryImplDecl(const ObjCCategoryImplDec
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCProtocolDeclTupleSize() {
+  return ObjCContainerDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_protocol_decl_tuple obj_c_container_decl_tuple * obj_c_protocol_decl_info
 /// type obj_c_protocol_decl_info = {
@@ -1946,6 +2087,10 @@ void ASTExporter<ATDWriter>::VisitObjCProtocolDecl(const ObjCProtocolDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCInterfaceDeclTupleSize() {
+  return ObjCContainerDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_interface_decl_tuple obj_c_container_decl_tuple * obj_c_interface_decl_info
 /// type obj_c_interface_decl_info = {
@@ -1982,6 +2127,10 @@ void ASTExporter<ATDWriter>::VisitObjCInterfaceDecl(const ObjCInterfaceDecl *D) 
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCImplementationDeclTupleSize() {
+  return ASTExporter::ObjCImplDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_implementation_decl_tuple obj_c_impl_decl_tuple * obj_c_implementation_decl_info
 /// type obj_c_implementation_decl_info = {
@@ -2018,6 +2167,10 @@ void ASTExporter<ATDWriter>::VisitObjCImplementationDecl(const ObjCImplementatio
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCCompatibleAliasDeclTupleSize() {
+  return NamedDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_compatible_alias_decl_tuple named_decl_tuple * obj_c_compatible_alias_decl_info
 /// type obj_c_compatible_alias_decl_info = {
@@ -2036,6 +2189,10 @@ void ASTExporter<ATDWriter>::VisitObjCCompatibleAliasDecl(const ObjCCompatibleAl
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
+  return NamedDeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_property_decl_tuple named_decl_tuple * obj_c_property_decl_info
 /// type obj_c_property_decl_info = {
@@ -2132,6 +2289,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCPropertyImplDeclTupleSize() {
+  return DeclTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_property_impl_decl_tuple decl_tuple * obj_c_property_impl_decl_info
 /// type obj_c_property_impl_decl_info = {
@@ -2163,6 +2324,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyImplDecl(const ObjCPropertyImplDec
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::BlockDeclTupleSize() {
+  return DeclTupleSize() + DeclContextTupleSize() + 1;
+}
 /// \atd
 /// #define block_decl_tuple decl_tuple * decl_context_tuple * block_decl_info
 /// type block_decl_info = {
@@ -3536,6 +3701,7 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
     }
   }
 }
+
 /// \atd
 /// type type_ptr = pointer
 template <class ATDWriter>
@@ -3782,7 +3948,6 @@ void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
   OF.emitTag("decl_ptr");
   dumpPointer(T->getDecl());
 }
-
 
 /// \atd
 /// type c_type = [
