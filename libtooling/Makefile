@@ -76,7 +76,7 @@ test: build/FacebookClangPlugin.dylib
 	     EXTRA_FLAGS="";                                                            \
 	     case "$(SRCFILE_FORMULA)" in                                               \
 	     *.m )                                                                      \
-	       if [ "$(uname)" != "Darwin" ]; then                                      \
+	       if [ "$$(uname)" != "Darwin" ]; then                                     \
 	         printf "[~] %s skipped (non-Darwin architecture detected)\n"           \
 	           "$$(basename $(SRCFILE_FORMULA))";                                   \
 	         continue;                                                              \
