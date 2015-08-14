@@ -96,7 +96,7 @@ struct TupleSizeBase {
   // Stmts
 
 #define STMT(CLASS, PARENT)                                     \
-  virtual int CLASS##TupleSize() {                              \
+  int CLASS##TupleSize() {                                      \
     return static_cast<Impl*>(this)->PARENT##TupleSize();       \
   }
 #define ABSTRACT_STMT(STMT) STMT
@@ -112,6 +112,27 @@ struct TupleSizeBase {
     case Stmt::NoStmtClass: break;
     }
     llvm_unreachable("Stmt that isn't part of StmtNodes.inc!");
+  }
+
+  // Comments
+
+#define COMMENT(CLASS, PARENT)                                  \
+  int CLASS##TupleSize() {                                      \
+    return static_cast<Impl*>(this)->PARENT##TupleSize();       \
+  }
+#define ABSTRACT_COMMENT(COMMENT) COMMENT
+#include <clang/AST/CommentNodes.inc>
+
+  int tupleSizeOfCommentKind(const Comment::CommentKind kind) {
+    switch (kind) {
+#define COMMENT(CLASS, PARENT)     \
+      case Comment::CLASS##Kind:   \
+        return static_cast<Impl*>(this)->CLASS##TupleSize();
+#define ABSTRACT_COMMENT(COMMENT)
+#include <clang/AST/CommentNodes.inc>
+    case Comment::NoCommentKind: break;
+    }
+    llvm_unreachable("Comment that isn't part of CommentNodes.inc!");
   }
 
 };
@@ -210,8 +231,11 @@ public:
   void dumpCXXBaseSpecifier(const CXXBaseSpecifier &Base);
 
 #define DECLARE_VISITOR(NAME) \
-  int NAME##TupleSize(); \
+  int NAME##TupleSize();      \
   void Visit##NAME(const NAME *D);
+#define DECLARE_LOWERCASE_VISITOR(NAME) \
+  int NAME##TupleSize();                \
+  void visit##NAME(const NAME *D);
 
   // Decls
   DECLARE_VISITOR(Decl)
@@ -345,8 +369,8 @@ public:
   void dumpComment(const Comment *C);
 
   // Inline comments.
-  void visitComment(const Comment *C);
-  void visitTextComment(const TextComment *C);
+  DECLARE_LOWERCASE_VISITOR(Comment)
+  DECLARE_LOWERCASE_VISITOR(TextComment)
 //    void visitInlineCommandComment(const InlineCommandComment *C);
 //    void visitHTMLStartTagComment(const HTMLStartTagComment *C);
 //    void visitHTMLEndTagComment(const HTMLEndTagComment *C);
@@ -3729,11 +3753,15 @@ void ASTExporter<ATDWriter>::dumpComment(const Comment *C) {
   }
   VariantScope Scope(OF, std::string(C->getCommentKindName()));
   {
-    TupleScope Scope(OF);
+    TupleScope Scope(OF, ASTExporter::tupleSizeOfCommentKind(C->getCommentKind()));
     ConstCommentVisitor<ASTExporter<ATDWriter>>::visit(C);
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CommentTupleSize() {
+  return 2;
+}
 /// \atd
 /// #define comment_tuple comment_info * comment list
 /// type comment_info = {
@@ -3758,6 +3786,10 @@ void ASTExporter<ATDWriter>::visitComment(const Comment *C) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TextCommentTupleSize() {
+  return CommentTupleSize() + 1;
+}
 /// \atd
 /// #define text_comment_tuple comment_tuple * string
 template <class ATDWriter>

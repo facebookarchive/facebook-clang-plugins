@@ -1,0 +1,476 @@
+["TranslationUnitDecl" , [
+  {
+    "pointer" : "0",
+    "source_range" : [
+      {
+      },
+      {
+      }
+    ],
+    "attributes" : [
+    ]
+  },
+  [
+    ["TypedefDecl" , [
+      {
+        "pointer" : "1",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
+      "NoType",
+      "2",
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "3",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
+      "NoType",
+      "2",
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "4",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
+      "NoType",
+      "2",
+      {
+      }
+    ]],
+    ["FunctionDecl" , [
+      {
+        "pointer" : "5",
+        "source_range" : [
+          {
+            "file" : "tests/comments.c",
+            "line" : 2,
+            "column" : 1
+          },
+          {
+            "line" : 5,
+            "column" : 1
+          }
+        ],
+        "attributes" : [
+        ],
+        "full_comment" : ["FullComment" , [
+          {
+            "parent_pointer" : "6",
+            "source_range" : [
+              {
+                "line" : 1,
+                "column" : 4
+              },
+              {
+                "column" : 24
+              }
+            ]
+          },
+          [
+            ["ParagraphComment" , [
+              {
+                "parent_pointer" : "7",
+                "source_range" : [
+                  {
+                    "column" : 4
+                  },
+                  {
+                    "column" : 24
+                  }
+                ]
+              },
+              [
+                ["TextComment" , [
+                  {
+                    "parent_pointer" : "8",
+                    "source_range" : [
+                      {
+                        "column" : 4
+                      },
+                      {
+                        "column" : 24
+                      }
+                    ]
+                  },
+                  [
+                  ],
+                  "  I'm a long comment "
+                ]]
+              ]
+            ]]
+          ]
+        ]]
+      },
+      {
+        "name" : "foo",
+        "qual_name" : [
+          "foo"
+        ]
+      },
+      {
+        "raw" : "void ()",
+        "type_ptr" : "9"
+      },
+      {
+        "body" : ["CompoundStmt" , [
+          {
+            "pointer" : "10",
+            "source_range" : [
+              {
+                "line" : 2,
+                "column" : 12
+              },
+              {
+                "line" : 5,
+                "column" : 1
+              }
+            ]
+          },
+          [
+          ]
+        ]]
+      }
+    ]]
+  ],
+  {
+  },
+  [
+    ["BuiltinType" , [
+      {
+        "pointer" : "11",
+        "raw" : "void"
+      },
+      "Void"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "12",
+        "raw" : "_Bool"
+      },
+      "Bool"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "13",
+        "raw" : "char"
+      },
+      "Char_S"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "14",
+        "raw" : "signed char"
+      },
+      "SChar"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "15",
+        "raw" : "short"
+      },
+      "Short"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "16",
+        "raw" : "int"
+      },
+      "Int"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "17",
+        "raw" : "long"
+      },
+      "Long"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "18",
+        "raw" : "long long"
+      },
+      "LongLong"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "19",
+        "raw" : "unsigned char"
+      },
+      "UChar"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "20",
+        "raw" : "unsigned short"
+      },
+      "UShort"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "21",
+        "raw" : "unsigned int"
+      },
+      "UInt"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "22",
+        "raw" : "unsigned long"
+      },
+      "ULong"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "23",
+        "raw" : "unsigned long long"
+      },
+      "ULongLong"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "24",
+        "raw" : "float"
+      },
+      "Float"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "25",
+        "raw" : "double"
+      },
+      "Double"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "26",
+        "raw" : "long double"
+      },
+      "LongDouble"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "27",
+        "raw" : "__int128"
+      },
+      "Int128"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "28",
+        "raw" : "unsigned __int128"
+      },
+      "UInt128"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "29",
+        "raw" : "wchar_t"
+      },
+      "WChar_S"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "30",
+        "raw" : "<dependent type>"
+      },
+      "Dependent"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "31",
+        "raw" : "<overloaded function type>"
+      },
+      "Overload"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "32",
+        "raw" : "<bound member function type>"
+      },
+      "BoundMember"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "33",
+        "raw" : "<pseudo-object type>"
+      },
+      "PseudoObject"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "34",
+        "raw" : "<unknown type>"
+      },
+      "UnknownAny"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "35",
+        "raw" : "<ARC unbridged cast type>"
+      },
+      "ARCUnbridgedCast"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "36",
+        "raw" : "<builtin fn type>"
+      },
+      "BuiltinFn"
+    ]],
+    ["ComplexType" , [
+      {
+        "pointer" : "37",
+        "raw" : "_Complex float"
+      }
+    ]],
+    ["ComplexType" , [
+      {
+        "pointer" : "38",
+        "raw" : "_Complex double"
+      }
+    ]],
+    ["ComplexType" , [
+      {
+        "pointer" : "39",
+        "raw" : "_Complex long double"
+      }
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "40",
+        "raw" : "id"
+      },
+      "ObjCId"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "41",
+        "raw" : "Class"
+      },
+      "ObjCClass"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "42",
+        "raw" : "SEL"
+      },
+      "ObjCSel"
+    ]],
+    ["PointerType" , [
+      {
+        "pointer" : "43",
+        "raw" : "void *"
+      },
+      "11"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "44",
+        "raw" : "nullptr_t"
+      },
+      "NullPtr"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : "45",
+        "raw" : "__fp16"
+      },
+      "Half"
+    ]],
+    ["RecordType" , [
+      {
+        "pointer" : "46",
+        "raw" : "struct __va_list_tag"
+      },
+      "47"
+    ]],
+    ["TypedefType" , [
+      {
+        "pointer" : "48",
+        "raw" : "__va_list_tag",
+        "desugared_type" : "46"
+      },
+      {
+        "child_type" : "46",
+        "decl_ptr" : "49"
+      }
+    ]],
+    ["ConstantArrayType" , [
+      {
+        "pointer" : "50",
+        "raw" : "struct __va_list_tag [1]"
+      },
+      "46",
+      1
+    ]],
+    ["ConstantArrayType" , [
+      {
+        "pointer" : "51",
+        "raw" : "__va_list_tag [1]"
+      },
+      "48",
+      1
+    ]],
+    ["FunctionNoProtoType" , [
+      {
+        "pointer" : "9",
+        "raw" : "void ()"
+      },
+      {
+        "return_type" : "11"
+      }
+    ]],
+    ["NoneType" , [
+      {
+        "pointer" : "2",
+        "raw" : "NULL TYPE"
+      }
+    ]]
+  ]
+]]
