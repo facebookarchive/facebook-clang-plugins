@@ -649,6 +649,8 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
       // and output the others as strings, so clients reading the
       // emitted AST will have to parse them.
       const Attr *A = &Att;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
 #define dumpBareDeclRef(X) OS << "?"
 #define dumpStmt(X) OS << "?"
 #define dumpType(X) OS << "?"
@@ -656,6 +658,7 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
 #undef dumpBareDeclRef
 #undef dumpStmt
 #undef dumpType
+#pragma clang diagnostic pop
 
       {
         ArrayScope Scope(OF);
