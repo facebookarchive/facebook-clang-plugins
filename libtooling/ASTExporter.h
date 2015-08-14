@@ -1430,9 +1430,14 @@ void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(const UsingDirectiveDecl *D
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(const NamespaceAliasDecl *D) {
   VisitNamedDecl(D);
+  ObjectScope Scope(OF);
+  OF.emitTag("namespace_loc");
   dumpSourceLocation(D->getNamespaceLoc());
+  OF.emitTag("target_name_loc");
   dumpSourceLocation(D->getTargetNameLoc());
+  OF.emitTag("nested_name_specifier_locs");
   dumpNestedNameSpecifierLoc(D->getQualifierLoc());
+  OF.emitTag("namespace");
   dumpDeclRef(*D->getNamespace());
 }
 

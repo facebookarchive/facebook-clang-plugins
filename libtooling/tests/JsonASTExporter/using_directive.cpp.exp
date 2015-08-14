@@ -253,35 +253,37 @@
         ]
       },
       {
-        "column" : 1
-      },
-      {
-        "column" : 20
-      },
-      [
-        {
-          "kind" : "Namespace",
-          "ref" : {
+        "namespace_loc" : {
+          "column" : 1
+        },
+        "target_name_loc" : {
+          "column" : 20
+        },
+        "nested_name_specifier_locs" : [
+          {
             "kind" : "Namespace",
-            "decl_pointer" : "5",
-            "name" : {
-              "name" : "nsa",
-              "qual_name" : [
-                "nsa"
-              ]
+            "ref" : {
+              "kind" : "Namespace",
+              "decl_pointer" : "5",
+              "name" : {
+                "name" : "nsa",
+                "qual_name" : [
+                  "nsa"
+                ]
+              }
             }
           }
-        }
-      ],
-      {
-        "kind" : "Namespace",
-        "decl_pointer" : "6",
-        "name" : {
-          "name" : "nsb",
-          "qual_name" : [
-            "nsb",
-            "nsa"
-          ]
+        ],
+        "namespace" : {
+          "kind" : "Namespace",
+          "decl_pointer" : "6",
+          "name" : {
+            "name" : "nsb",
+            "qual_name" : [
+              "nsb",
+              "nsa"
+            ]
+          }
         }
       }
     ]],
