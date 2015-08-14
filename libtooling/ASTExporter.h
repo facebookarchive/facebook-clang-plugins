@@ -93,6 +93,27 @@ struct TupleSizeBase {
     llvm_unreachable("Decl that isn't part of DeclNodes.inc!");
   }
 
+  // Stmts
+
+#define STMT(CLASS, PARENT)                                     \
+  virtual int CLASS##TupleSize() {                              \
+    return static_cast<Impl*>(this)->PARENT##TupleSize();       \
+  }
+#define ABSTRACT_STMT(STMT) STMT
+#include <clang/AST/StmtNodes.inc>
+
+  int tupleSizeOfStmtClass(const Stmt::StmtClass stmtClass) {
+    switch (stmtClass) {
+#define STMT(CLASS, PARENT)                                     \
+      case Stmt::CLASS##Class:                                  \
+        return static_cast<Impl*>(this)->CLASS##TupleSize();
+#define ABSTRACT_STMT(STMT)
+#include <clang/AST/StmtNodes.inc>
+    case Stmt::NoStmtClass: break;
+    }
+    llvm_unreachable("Stmt that isn't part of StmtNodes.inc!");
+  }
+
 };
 
 
@@ -265,59 +286,59 @@ public:
   DECLARE_VISITOR(ObjCPropertyImplDecl)
 
   // Stmts.
-  void VisitStmt(const Stmt *Node);
-  void VisitDeclStmt(const DeclStmt *Node);
-  void VisitAttributedStmt(const AttributedStmt *Node);
-  void VisitLabelStmt(const LabelStmt *Node);
-  void VisitGotoStmt(const GotoStmt *Node);
-  void VisitCXXCatchStmt(const CXXCatchStmt *Node);
+  DECLARE_VISITOR(Stmt)
+  DECLARE_VISITOR(DeclStmt)
+  DECLARE_VISITOR(AttributedStmt)
+  DECLARE_VISITOR(LabelStmt)
+  DECLARE_VISITOR(GotoStmt)
+  DECLARE_VISITOR(CXXCatchStmt)
 
   // Exprs
-  void VisitExpr(const Expr *Node);
-  void VisitCastExpr(const CastExpr *Node);
-  void VisitExplicitCastExpr(const ExplicitCastExpr *Node);
-  void VisitDeclRefExpr(const DeclRefExpr *Node);
-  void VisitPredefinedExpr(const PredefinedExpr *Node);
-  void VisitCharacterLiteral(const CharacterLiteral *Node);
-  void VisitIntegerLiteral(const IntegerLiteral *Node);
-  void VisitFloatingLiteral(const FloatingLiteral *Node);
-  void VisitStringLiteral(const StringLiteral *Str);
-//    void VisitInitListExpr(const InitListExpr *ILE);
-  void VisitUnaryOperator(const UnaryOperator *Node);
-  void VisitUnaryExprOrTypeTraitExpr(const UnaryExprOrTypeTraitExpr *Node);
-  void VisitMemberExpr(const MemberExpr *Node);
-  void VisitExtVectorElementExpr(const ExtVectorElementExpr *Node);
-  void VisitBinaryOperator(const BinaryOperator *Node);
-  void VisitCompoundAssignOperator(const CompoundAssignOperator *Node);
-  void VisitAddrLabelExpr(const AddrLabelExpr *Node);
-  void VisitBlockExpr(const BlockExpr *Node);
-  void VisitOpaqueValueExpr(const OpaqueValueExpr *Node);
+  DECLARE_VISITOR(Expr)
+  DECLARE_VISITOR(CastExpr)
+  DECLARE_VISITOR(ExplicitCastExpr)
+  DECLARE_VISITOR(DeclRefExpr)
+  DECLARE_VISITOR(PredefinedExpr)
+  DECLARE_VISITOR(CharacterLiteral)
+  DECLARE_VISITOR(IntegerLiteral)
+  DECLARE_VISITOR(FloatingLiteral)
+  DECLARE_VISITOR(StringLiteral)
+//    DECLARE_VISITOR(InitListExpr)
+  DECLARE_VISITOR(UnaryOperator)
+  DECLARE_VISITOR(UnaryExprOrTypeTraitExpr)
+  DECLARE_VISITOR(MemberExpr)
+  DECLARE_VISITOR(ExtVectorElementExpr)
+  DECLARE_VISITOR(BinaryOperator)
+  DECLARE_VISITOR(CompoundAssignOperator)
+  DECLARE_VISITOR(AddrLabelExpr)
+  DECLARE_VISITOR(BlockExpr)
+  DECLARE_VISITOR(OpaqueValueExpr)
 
   // C++
-  void VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node);
-  void VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *Node);
-  void VisitCXXConstructExpr(const CXXConstructExpr *Node);
-  void VisitCXXBindTemporaryExpr(const CXXBindTemporaryExpr *Node);
-  void VisitMaterializeTemporaryExpr(const MaterializeTemporaryExpr *Node);
-  void VisitExprWithCleanups(const ExprWithCleanups *Node);
-  void VisitOverloadExpr(const OverloadExpr *Node);
-  void VisitUnresolvedLookupExpr(const UnresolvedLookupExpr *Node);
+  DECLARE_VISITOR(CXXNamedCastExpr)
+  DECLARE_VISITOR(CXXBoolLiteralExpr)
+  DECLARE_VISITOR(CXXConstructExpr)
+  DECLARE_VISITOR(CXXBindTemporaryExpr)
+  DECLARE_VISITOR(MaterializeTemporaryExpr)
+  DECLARE_VISITOR(ExprWithCleanups)
+  DECLARE_VISITOR(OverloadExpr)
+  DECLARE_VISITOR(UnresolvedLookupExpr)
   void dumpCXXTemporary(const CXXTemporary *Temporary);
-  void VisitLambdaExpr(const LambdaExpr *Node);
-  void VisitCXXNewExpr(const CXXNewExpr *Node);
-  void VisitCXXDeleteExpr(const CXXDeleteExpr *Node);
+  DECLARE_VISITOR(LambdaExpr)
+  DECLARE_VISITOR(CXXNewExpr)
+  DECLARE_VISITOR(CXXDeleteExpr)
 
   // ObjC
-  void VisitObjCAtCatchStmt(const ObjCAtCatchStmt *Node);
-  void VisitObjCEncodeExpr(const ObjCEncodeExpr *Node);
-  void VisitObjCMessageExpr(const ObjCMessageExpr *Node);
-  void VisitObjCBoxedExpr(const ObjCBoxedExpr *Node);
-  void VisitObjCSelectorExpr(const ObjCSelectorExpr *Node);
-  void VisitObjCProtocolExpr(const ObjCProtocolExpr *Node);
-  void VisitObjCPropertyRefExpr(const ObjCPropertyRefExpr *Node);
-  void VisitObjCSubscriptRefExpr(const ObjCSubscriptRefExpr *Node);
-  void VisitObjCIvarRefExpr(const ObjCIvarRefExpr *Node);
-  void VisitObjCBoolLiteralExpr(const ObjCBoolLiteralExpr *Node);
+  DECLARE_VISITOR(ObjCAtCatchStmt)
+  DECLARE_VISITOR(ObjCEncodeExpr)
+  DECLARE_VISITOR(ObjCMessageExpr)
+  DECLARE_VISITOR(ObjCBoxedExpr)
+  DECLARE_VISITOR(ObjCSelectorExpr)
+  DECLARE_VISITOR(ObjCProtocolExpr)
+  DECLARE_VISITOR(ObjCPropertyRefExpr)
+  DECLARE_VISITOR(ObjCSubscriptRefExpr)
+  DECLARE_VISITOR(ObjCIvarRefExpr)
+  DECLARE_VISITOR(ObjCBoolLiteralExpr)
 
 // Comments.
   const char *getCommandName(unsigned CommandID);
@@ -2428,11 +2449,15 @@ void ASTExporter<ATDWriter>::dumpStmt(const Stmt *S) {
   }
   VariantScope Scope(OF, S->getStmtClassName());
   {
-    TupleScope Scope(OF);
+    TupleScope Scope(OF, ASTExporter::tupleSizeOfStmtClass(S->getStmtClass()));
     ConstStmtVisitor<ASTExporter<ATDWriter>>::Visit(S);
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::StmtTupleSize() {
+  return 2;
+}
 /// \atd
 /// #define stmt_tuple stmt_info * stmt list
 /// type stmt_info = {
@@ -2457,6 +2482,10 @@ void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::DeclStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define decl_stmt_tuple stmt_tuple * decl list
 template <class ATDWriter>
@@ -2468,6 +2497,10 @@ void ASTExporter<ATDWriter>::VisitDeclStmt(const DeclStmt *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AttributedStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define attributed_stmt_tuple stmt_tuple * attribute list
 template <class ATDWriter>
@@ -2479,6 +2512,10 @@ void ASTExporter<ATDWriter>::VisitAttributedStmt(const AttributedStmt *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::LabelStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define label_stmt_tuple stmt_tuple * string
 template <class ATDWriter>
@@ -2487,6 +2524,10 @@ void ASTExporter<ATDWriter>::VisitLabelStmt(const LabelStmt *Node) {
   OF.emitString(Node->getName());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::GotoStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define goto_stmt_tuple stmt_tuple * goto_stmt_info
 /// type goto_stmt_info = {
@@ -2503,6 +2544,10 @@ void ASTExporter<ATDWriter>::VisitGotoStmt(const GotoStmt *Node) {
   dumpPointer(Node->getLabel());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXCatchStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_catch_stmt_tuple stmt_tuple * cxx_catch_stmt_info
 /// type cxx_catch_stmt_info = {
@@ -2526,6 +2571,10 @@ void ASTExporter<ATDWriter>::VisitCXXCatchStmt(const CXXCatchStmt *Node) {
 ////===----------------------------------------------------------------------===//
 //
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ExprTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define expr_tuple stmt_tuple * expr_info
 /// type expr_info = {
@@ -2602,6 +2651,10 @@ void ASTExporter<ATDWriter>::dumpCXXBaseSpecifier(const CXXBaseSpecifier &Base) 
   OF.emitFlag("virtual", IsVirtual);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CastExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// type cast_kind = [
 /// | Dependent
@@ -2680,6 +2733,11 @@ void ASTExporter<ATDWriter>::VisitCastExpr(const CastExpr *Node) {
     }
   }
 }
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ExplicitCastExprTupleSize() {
+  return CastExprTupleSize() + 1;
+}
 /// \atd
 /// #define explicit_cast_expr_tuple cast_expr_tuple * qual_type
 template <class ATDWriter>
@@ -2688,6 +2746,10 @@ void ASTExporter<ATDWriter>::VisitExplicitCastExpr(const ExplicitCastExpr *Node)
   dumpQualType(Node->getTypeAsWritten());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::DeclRefExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define decl_ref_expr_tuple expr_tuple * decl_ref_expr_info
 /// type decl_ref_expr_info = {
@@ -2713,6 +2775,10 @@ void ASTExporter<ATDWriter>::VisitDeclRefExpr(const DeclRefExpr *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::OverloadExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define overload_expr_tuple expr_tuple * overload_expr_info
 /// type overload_expr_info = {
@@ -2739,6 +2805,10 @@ void ASTExporter<ATDWriter>::VisitOverloadExpr(const OverloadExpr *Node) {
   dumpDeclarationName(Node->getName());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::UnresolvedLookupExprTupleSize() {
+  return OverloadExprTupleSize() + 1;
+}
 /// \atd
 /// #define unresolved_lookup_expr_tuple overload_expr_tuple * unresolved_lookup_expr_info
 /// type unresolved_lookup_expr_info = {
@@ -2763,6 +2833,10 @@ void ASTExporter<ATDWriter>::VisitUnresolvedLookupExpr(const UnresolvedLookupExp
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCIvarRefExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_ivar_ref_expr_tuple expr_tuple * obj_c_ivar_ref_expr_info
 /// type obj_c_ivar_ref_expr_info = {
@@ -2784,6 +2858,10 @@ void ASTExporter<ATDWriter>::VisitObjCIvarRefExpr(const ObjCIvarRefExpr *Node) {
   OF.emitFlag("is_free_ivar", IsFreeIvar);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::PredefinedExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define predefined_expr_tuple expr_tuple * predefined_expr_type
 /// type predefined_expr_type = [
@@ -2809,6 +2887,10 @@ void ASTExporter<ATDWriter>::VisitPredefinedExpr(const PredefinedExpr *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CharacterLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define character_literal_tuple expr_tuple * int
 template <class ATDWriter>
@@ -2817,6 +2899,10 @@ void ASTExporter<ATDWriter>::VisitCharacterLiteral(const CharacterLiteral *Node)
   OF.emitInteger(Node->getValue());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::IntegerLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define integer_literal_tuple expr_tuple * integer_literal_info
 /// type integer_literal_info = {
@@ -2838,6 +2924,10 @@ void ASTExporter<ATDWriter>::VisitIntegerLiteral(const IntegerLiteral *Node) {
   OF.emitString(Node->getValue().toString(10, IsSigned));
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FloatingLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define floating_literal_tuple expr_tuple * string
 template <class ATDWriter>
@@ -2848,6 +2938,10 @@ void ASTExporter<ATDWriter>::VisitFloatingLiteral(const FloatingLiteral *Node) {
   OF.emitString(buf.str());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::StringLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define string_literal_tuple expr_tuple * string
 template <class ATDWriter>
@@ -2856,6 +2950,10 @@ void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
   OF.emitString(Str->getBytes());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::UnaryOperatorTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define unary_operator_tuple expr_tuple * unary_operator_info
 /// type unary_operator_info = {
@@ -2903,6 +3001,10 @@ void ASTExporter<ATDWriter>::VisitUnaryOperator(const UnaryOperator *Node) {
   OF.emitFlag("is_postfix", IsPostfix);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define unary_expr_or_type_trait_expr_tuple expr_tuple * unary_expr_or_type_trait_expr_info
 /// type unary_expr_or_type_trait_expr_info = {
@@ -2937,6 +3039,10 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::MemberExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define member_expr_tuple expr_tuple * member_expr_info
 /// type member_expr_info = {
@@ -2959,6 +3065,10 @@ void ASTExporter<ATDWriter>::VisitMemberExpr(const MemberExpr *Node) {
   dumpDeclRef(*memberDecl);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ExtVectorElementExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define ext_vector_element_tuple expr_tuple * string
 template <class ATDWriter>
@@ -2967,6 +3077,10 @@ void ASTExporter<ATDWriter>::VisitExtVectorElementExpr(const ExtVectorElementExp
   OF.emitString(Node->getAccessor().getNameStart());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::BinaryOperatorTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define binary_operator_tuple expr_tuple * binary_operator_info
 /// type binary_operator_info = {
@@ -3048,6 +3162,10 @@ void ASTExporter<ATDWriter>::VisitBinaryOperator(const BinaryOperator *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CompoundAssignOperatorTupleSize() {
+  return BinaryOperatorTupleSize() + 1;
+}
 /// \atd
 /// #define compound_assign_operator_tuple binary_operator_tuple * compound_assign_operator_info
 /// type compound_assign_operator_info = {
@@ -3064,6 +3182,10 @@ void ASTExporter<ATDWriter>::VisitCompoundAssignOperator(const CompoundAssignOpe
   dumpQualType(Node->getComputationResultType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::BlockExprTupleSize() {
+  return ExprTupleSize() + DeclTupleSize();
+}
 /// \atd
 /// #define block_expr_tuple expr_tuple * decl
 template <class ATDWriter>
@@ -3072,6 +3194,10 @@ void ASTExporter<ATDWriter>::VisitBlockExpr(const BlockExpr *Node) {
   dumpDecl(Node->getBlockDecl());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::OpaqueValueExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define opaque_value_expr_tuple expr_tuple * opaque_value_expr_info
 /// type  opaque_value_expr_info = {
@@ -3092,6 +3218,10 @@ void ASTExporter<ATDWriter>::VisitOpaqueValueExpr(const OpaqueValueExpr *Node) {
 
 // GNU extensions.
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AddrLabelExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define addr_label_expr_tuple expr_tuple * addr_label_expr_info
 /// type addr_label_expr_info = {
@@ -3112,6 +3242,10 @@ void ASTExporter<ATDWriter>::VisitAddrLabelExpr(const AddrLabelExpr *Node) {
 //// C++ Expressions
 ////===----------------------------------------------------------------------===//
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXNamedCastExprTupleSize() {
+  return ExplicitCastExprTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_named_cast_expr_tuple explicit_cast_expr_tuple * string
 template <class ATDWriter>
@@ -3120,6 +3254,10 @@ void ASTExporter<ATDWriter>::VisitCXXNamedCastExpr(const CXXNamedCastExpr *Node)
   OF.emitString(Node->getCastName());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXBoolLiteralExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_bool_literal_expr_tuple expr_tuple * int
 template <class ATDWriter>
@@ -3128,6 +3266,10 @@ void ASTExporter<ATDWriter>::VisitCXXBoolLiteralExpr(const CXXBoolLiteralExpr *N
   OF.emitInteger(Node->getValue());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXConstructExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
 /// type cxx_construct_expr_info = {
@@ -3150,6 +3292,10 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node)
   OF.emitFlag("requires_zero_initialization", RequiresZeroInitialization);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXBindTemporaryExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_bind_temporary_expr_tuple expr_tuple * cxx_bind_temporary_expr_info
 /// type cxx_bind_temporary_expr_info = {
@@ -3163,6 +3309,10 @@ void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(const CXXBindTemporaryExp
   dumpCXXTemporary(Node->getTemporary());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::MaterializeTemporaryExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define materialize_temporary_expr_tuple expr_tuple * materialize_temporary_expr_info
 /// type materialize_temporary_expr_info = {
@@ -3180,6 +3330,10 @@ void ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(const MaterializeTemp
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ExprWithCleanupsTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define expr_with_cleanups_tuple expr_tuple * expr_with_cleanups_info
 /// type expr_with_cleanups_info = {
@@ -3210,6 +3364,10 @@ void ASTExporter<ATDWriter>::dumpCXXTemporary(const CXXTemporary *Temporary) {
   dumpPointer(Temporary);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::LambdaExprTupleSize() {
+  return ExprTupleSize() + DeclTupleSize();
+}
 /// \atd
 /// #define lambda_expr_tuple expr_tuple * decl
 template <class ATDWriter>
@@ -3218,6 +3376,10 @@ void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
   dumpDecl(Node->getLambdaClass());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXNewExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_new_expr_tuple expr_tuple * cxx_new_expr_info
 /// type cxx_new_expr_info = {
@@ -3247,6 +3409,10 @@ void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXDeleteExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define cxx_delete_expr_tuple expr_tuple * cxx_delete_expr_info
 /// type cxx_delete_expr_info = {
@@ -3265,6 +3431,10 @@ void ASTExporter<ATDWriter>::VisitCXXDeleteExpr(const CXXDeleteExpr *Node) {
 //// Obj-C Expressions
 ////===----------------------------------------------------------------------===//
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCMessageExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_message_expr_tuple expr_tuple * obj_c_message_expr_info
 /// type obj_c_message_expr_info = {
@@ -3343,6 +3513,10 @@ void ASTExporter<ATDWriter>::dumpSelector(const Selector sel) {
   OF.emitString(sel.getAsString());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCBoxedExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_boxed_expr_tuple expr_tuple * selector
 template <class ATDWriter>
@@ -3351,6 +3525,10 @@ void ASTExporter<ATDWriter>::VisitObjCBoxedExpr(const ObjCBoxedExpr *Node) {
   dumpSelector(Node->getBoxingMethod()->getSelector());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCAtCatchStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_at_catch_stmt_tuple stmt_tuple * obj_c_message_expr_kind
 /// type obj_c_message_expr_kind = [
@@ -3368,6 +3546,10 @@ void ASTExporter<ATDWriter>::VisitObjCAtCatchStmt(const ObjCAtCatchStmt *Node) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCEncodeExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_encode_expr_tuple expr_tuple * qual_type
 template <class ATDWriter>
@@ -3376,6 +3558,10 @@ void ASTExporter<ATDWriter>::VisitObjCEncodeExpr(const ObjCEncodeExpr *Node) {
   dumpQualType(Node->getEncodedType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCSelectorExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_selector_expr_tuple expr_tuple * selector
 template <class ATDWriter>
@@ -3384,6 +3570,10 @@ void ASTExporter<ATDWriter>::VisitObjCSelectorExpr(const ObjCSelectorExpr *Node)
   dumpSelector(Node->getSelector());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCProtocolExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_protocol_expr_tuple expr_tuple * decl_ref
 template <class ATDWriter>
@@ -3392,6 +3582,10 @@ void ASTExporter<ATDWriter>::VisitObjCProtocolExpr(const ObjCProtocolExpr *Node)
   dumpDeclRef(*Node->getProtocol());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCPropertyRefExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_property_ref_expr_tuple expr_tuple * obj_c_property_ref_expr_info
 ///
@@ -3447,6 +3641,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyRefExpr(const ObjCPropertyRefExpr 
   OF.emitFlag("is_messaging_setter", IsMessagingSetter);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCSubscriptRefExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_subscript_ref_expr_tuple expr_tuple * obj_c_subscript_ref_expr_info
 ///
@@ -3482,6 +3680,10 @@ void ASTExporter<ATDWriter>::VisitObjCSubscriptRefExpr(const ObjCSubscriptRefExp
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCBoolLiteralExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_bool_literal_expr_tuple expr_tuple * int
 template <class ATDWriter>
