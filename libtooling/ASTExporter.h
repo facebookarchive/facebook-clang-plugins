@@ -135,6 +135,26 @@ struct TupleSizeBase {
     llvm_unreachable("Comment that isn't part of CommentNodes.inc!");
   }
 
+  // Types
+
+#define TYPE(DERIVED, BASE)                                \
+  int DERIVED##TypeTupleSize() {                           \
+    return static_cast<Impl*>(this)->BASE##TupleSize();    \
+  }
+#define ABSTRACT_TYPE(DERIVED, BASE) TYPE(DERIVED, BASE)
+#include <clang/AST/TypeNodes.def>
+
+  int tupleSizeOfTypeClass(const Type::TypeClass typeClass) {
+    switch (typeClass) {
+#define TYPE(DERIVED, BASE)                                             \
+      case Type::DERIVED:                                               \
+        return static_cast<Impl*>(this)->DERIVED##TypeTupleSize();
+#define ABSTRACT_TYPE(DERIVED, BASE)
+#include <clang/AST/TypeNodes.def>
+    }
+    llvm_unreachable("Type that isn't part of TypeNodes.def!");
+  }
+
 };
 
 
@@ -384,34 +404,39 @@ public:
 //    void visitVerbatimLineComment(const VerbatimLineComment *C);
 
 // Types - no template type handling yet
-  void VisitType(const Type* T);
-  void VisitAdjustedType(const AdjustedType *T);
-  void VisitArrayType(const ArrayType *T);
-  void VisitConstantArrayType(const ConstantArrayType *T);
-//  void VisitDependentSizedArrayType(const DependentSizedArrayType *T);
-//  void VisitIncompleteArrayType(const IncompleteArrayType *T);
-//  void VisitVariableArrayType(const VariableArrayType *T);
-  void VisitAtomicType(const AtomicType *T);
-//  void VisitAttributedType(const AttributedType *T); // getEquivalentType() + getAttrKind -> string
-//  void VisitAutoType(const AutoType *T);
-  void VisitBlockPointerType(const BlockPointerType *T);
-  void VisitBuiltinType(const BuiltinType* T);
-//  void VisitComplexType(const ComplexType *T);
-  void VisitDecltypeType(const DecltypeType *T);
-//  void VisitDependentSizedExtVectorType(const DependentSizedExtVectorType *T);
-  void VisitFunctionType(const FunctionType *T);
-//  void VisitFunctionNoProtoType(const FunctionNoProtoType *T);
-  void VisitFunctionProtoType(const FunctionProtoType *T);
-//  void VisitInjectedClassNameType(const InjectedClassNameType *T);
-  void VisitMemberPointerType(const MemberPointerType *T);
-  void VisitObjCObjectPointerType(const ObjCObjectPointerType *T);
-  void VisitObjCObjectType(const ObjCObjectType *T);
-  void VisitObjCInterfaceType(const ObjCInterfaceType *T);
-  void VisitParenType(const ParenType *T);
-  void VisitPointerType(const PointerType *T);
-  void VisitReferenceType(const ReferenceType *T);
-  void VisitTagType(const TagType *T);
-  void VisitTypedefType(const TypedefType *T);
+  int TypeWithChildInfoTupleSize();
+  DECLARE_VISITOR(Type)
+  DECLARE_VISITOR(AdjustedType)
+  DECLARE_VISITOR(ArrayType)
+  DECLARE_VISITOR(ConstantArrayType)
+//  DECLARE_VISITOR(DependentSizedArrayType)
+//  DECLARE_VISITOR(IncompleteArrayType)
+//  DECLARE_VISITOR(VariableArrayType)
+  DECLARE_VISITOR(AtomicType)
+//  DECLARE_VISITOR(AttributedType) // getEquivalentType() + getAttrKind -> string
+//  DECLARE_VISITOR(AutoType)
+  DECLARE_VISITOR(BlockPointerType)
+  DECLARE_VISITOR(BuiltinType)
+//  DECLARE_VISITOR(ComplexType)
+  DECLARE_VISITOR(DecltypeType)
+//  DECLARE_VISITOR(DependentSizedExtVectorType)
+  DECLARE_VISITOR(FunctionType)
+//  DECLARE_VISITOR(FunctionNoProtoType)
+  DECLARE_VISITOR(FunctionProtoType)
+//  DECLARE_VISITOR(InjectedClassNameType)
+  DECLARE_VISITOR(MemberPointerType)
+  DECLARE_VISITOR(ObjCObjectPointerType)
+  DECLARE_VISITOR(ObjCObjectType)
+  DECLARE_VISITOR(ObjCInterfaceType)
+  DECLARE_VISITOR(ParenType)
+  DECLARE_VISITOR(PointerType)
+  DECLARE_VISITOR(ReferenceType)
+  DECLARE_VISITOR(TagType)
+  DECLARE_VISITOR(TypedefType)
+
+/* #define TYPE(CLASS, PARENT) DECLARE_VISITOR(CLASS##Type) */
+/* #define ABSTRACT_TYPE(CLASS, PARENT) */
+/* #include <clang/AST/TypeNodes.def> */
 };
 
 //===----------------------------------------------------------------------===//
@@ -3926,11 +3951,12 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
   std::string typeClassName = T ? T->getTypeClassName() : "None";
   VariantScope Scope(OF, typeClassName + "Type");
   {
-    TupleScope Scope(OF);
     if (T) {
       // TypeVisitor assumes T is non-null
+      TupleScope Scope(OF, ASTExporter::tupleSizeOfTypeClass(T->getTypeClass()));
       TypeVisitor<ASTExporter<ATDWriter>>::Visit(T);
     } else {
+      TupleScope Scope(OF, 1);
       VisitType(nullptr);
     }
   }
@@ -3944,6 +3970,10 @@ void ASTExporter<ATDWriter>::dumpPointerToType(const QualType &qt) {
   dumpPointer(T);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TypeTupleSize() { return 1; }
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TypeWithChildInfoTupleSize() { return 2; }
 /// \atd
 /// #define type_tuple type_info
 /// type type_info = {
@@ -3973,6 +4003,10 @@ void ASTExporter<ATDWriter>::VisitType(const Type *T) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AdjustedTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define adjusted_type_tuple type_with_child_info
 ///
@@ -3982,6 +4016,10 @@ void ASTExporter<ATDWriter>::VisitAdjustedType(const AdjustedType *T) {
   dumpPointerToType(T->getAdjustedType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ArrayTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define array_type_tuple type_with_child_info
 ///
@@ -3991,6 +4029,10 @@ void ASTExporter<ATDWriter>::VisitArrayType(const ArrayType *T) {
   dumpPointerToType(T->getElementType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ConstantArrayTypeTupleSize() {
+  return ArrayTypeTupleSize() + 1;
+}
 /// \atd
 /// #define constant_array_type_tuple array_type_tuple * int
 ///
@@ -4000,6 +4042,10 @@ void ASTExporter<ATDWriter>::VisitConstantArrayType(const ConstantArrayType *T) 
   OF.emitInteger(T->getSize().getLimitedValue());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AtomicTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define atomic_type_tuple type_with_child_info
 template <class ATDWriter>
@@ -4008,6 +4054,10 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
   dumpPointerToType(T->getValueType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::BlockPointerTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define block_pointer_type_tuple type_with_child_info
 template <class ATDWriter>
@@ -4017,6 +4067,10 @@ void ASTExporter<ATDWriter>::VisitBlockPointerType(const BlockPointerType *T) {
 }
 
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::BuiltinTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
 /// \atd
 /// #define builtin_type_tuple type_tuple * builtin_type_kind
 /// type builtin_type_kind = [
@@ -4035,6 +4089,10 @@ void ASTExporter<ATDWriter>::VisitBuiltinType(const BuiltinType *T) {
   OF.emitSimpleVariant(type_name);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::DecltypeTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define decltype_type_tuple type_with_child_info
 template <class ATDWriter>
@@ -4043,6 +4101,10 @@ void ASTExporter<ATDWriter>::VisitDecltypeType(const DecltypeType *T) {
   dumpPointerToType(T->getUnderlyingType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FunctionTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
 /// \atd
 /// #define function_type_tuple type_tuple * function_type_info
 /// type function_type_info = {
@@ -4057,6 +4119,10 @@ void ASTExporter<ATDWriter>::VisitFunctionType(const FunctionType *T) {
   dumpPointerToType(T->getReturnType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FunctionProtoTypeTupleSize() {
+  return FunctionTypeTupleSize() + 1;
+}
 /// \atd
 /// #define function_proto_type_tuple function_type_tuple * params_type_info
 /// type params_type_info = {
@@ -4079,6 +4145,10 @@ void ASTExporter<ATDWriter>::VisitFunctionProtoType(const FunctionProtoType *T) 
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::MemberPointerTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define member_pointer_type_tuple type_with_child_info
 template <class ATDWriter>
@@ -4087,6 +4157,10 @@ void ASTExporter<ATDWriter>::VisitMemberPointerType(const MemberPointerType *T) 
   dumpPointerToType(T->getPointeeType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCObjectPointerTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define obj_c_object_pointer_type_tuple type_with_child_info
 template <class ATDWriter>
@@ -4095,6 +4169,10 @@ void ASTExporter<ATDWriter>::VisitObjCObjectPointerType(const ObjCObjectPointerT
   dumpPointerToType(T->getPointeeType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCObjectTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_object_type_tuple type_tuple * objc_object_type_info
 /// type objc_object_type_info = {
@@ -4121,6 +4199,10 @@ void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCInterfaceTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
 /// \atd
 /// #define obj_c_interface_type_tuple type_tuple * pointer
 template<class ATDWriter>
@@ -4130,6 +4212,10 @@ void ASTExporter<ATDWriter>::VisitObjCInterfaceType(const ObjCInterfaceType *T) 
   dumpPointer(T->getDecl());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ParenTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define paren_type_tuple type_with_child_info
 ///
@@ -4140,6 +4226,10 @@ void ASTExporter<ATDWriter>::VisitParenType(const ParenType *T) {
   dumpPointerToType(T->getInnerType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::PointerTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define pointer_type_tuple type_with_child_info
 ///
@@ -4149,6 +4239,10 @@ void ASTExporter<ATDWriter>::VisitPointerType(const PointerType *T) {
   dumpPointerToType(T->getPointeeType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ReferenceTypeTupleSize() {
+  return TypeWithChildInfoTupleSize();
+}
 /// \atd
 /// #define reference_type_tuple type_with_child_info
 ///
@@ -4158,6 +4252,10 @@ void ASTExporter<ATDWriter>::VisitReferenceType(const ReferenceType *T) {
   dumpPointerToType(T->getPointeeType());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TagTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
 /// \atd
 /// #define tag_type_tuple type_tuple * pointer
 ///
@@ -4167,6 +4265,10 @@ void ASTExporter<ATDWriter>::VisitTagType(const TagType *T) {
   dumpPointer(T->getDecl());
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TypedefTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
 /// \atd
 /// #define typedef_type_tuple type_tuple * typedef_type_info
 /// type typedef_type_info = {
