@@ -1619,7 +1619,7 @@ int ASTExporter<ATDWriter>::NamespaceAliasDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
 /// \atd
-/// #define namespace_alias_decl named_decl_tuple * namespace_alias_decl_info
+/// #define namespace_alias_decl_tuple named_decl_tuple * namespace_alias_decl_info
 /// type namespace_alias_decl_info = {
 ///   namespace_loc : source_location;
 ///   target_name_loc : source_location;
