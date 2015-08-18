@@ -7,7 +7,7 @@ It contains two kinds of plugins to the [clang compiler](http://clang.llvm.org/)
 
 - analyzer plugins use the internal APIs of [clang analyzer](http://clang-analyzer.llvm.org/) to find bugs and report them;
 
-- frontend plugins process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyzes easier.
+- frontend plugins process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyses easier.
 
 Most of the plugins here have been written with iOS in mind. However, different platforms may be considered in the future.
 
@@ -32,7 +32,7 @@ Structure of the repository
 Quick start
 -----------
 
-The current version of the plugins requires the version 3.6.1 of the clang compiler, re-compiled from the source.
+The current version of the plugins requires the version 3.6.1 of the clang compiler, re-compiled from source.
 
 General instructions to compile clang can be found here: http://clang.llvm.org/get_started.html
 
