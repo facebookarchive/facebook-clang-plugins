@@ -9,7 +9,7 @@ typedef BiniouWriter::TupleScope TupleScope;
 int main(int argc, char **argv) {
   {
     BiniouWriter OF(std::cout);
-    OF.emitInteger(100000);
+    OF.emitInteger(-100000);
   }
   {
     BiniouWriter OF(std::cout);

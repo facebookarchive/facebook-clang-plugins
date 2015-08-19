@@ -611,11 +611,19 @@ namespace ATDWriter {
 
     void writeUvint(size_t x) {
       while (x > 127) {
-        write8(x | 0x100);
-        x >>= 8;
+        write8(x | 128);
+        x >>= 7;
       }
 
       write8((uint8_t) x);
+    }
+
+    void writeSvint(int x) {
+      if (x >= 0) {
+        writeUvint(x * 2);
+      } else {
+        writeUvint(-x * 2 - 1);
+      }
     }
 
     void writeValueTag(uint8_t tag) {
@@ -640,10 +648,9 @@ namespace ATDWriter {
       leaveValue();
     }
 
-    // assume all integers fit in 32 bits
-    void emitInteger(uint32_t val) {
-      writeValueTag(int32_tag);
-      write32(val);
+    void emitInteger(int val) {
+      writeValueTag(svint_tag);
+      writeSvint(val);
       leaveValue();
     }
 
@@ -685,7 +692,7 @@ namespace ATDWriter {
       for (int i = recordMaxSize_.back(); i > 0; --i) {
         emitDummyRecordField();
       }
-      recordMaxSize_.back() = 0; // just in case
+      recordMaxSize_.pop_back();
       leaveContainer();
     }
     void enterTuple(int size) {
@@ -719,6 +726,10 @@ namespace ATDWriter {
     typedef BiniouEmitter<OStream> Emitter;
   public:
     BiniouWriter(OStream &os)
+      : GenWriter<Emitter>(Emitter(os))
+      {}
+
+    BiniouWriter(OStream &os, const ATDWriterOptions opts)
       : GenWriter<Emitter>(Emitter(os))
       {}
   };

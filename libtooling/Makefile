@@ -25,6 +25,11 @@ EXTS+=.json
 PLUGINS+=YojsonASTExporter
 EXTS+=.yjson
 
+# biniou
+BINIOU_PLUGIN=BiniouASTExporter
+PLUGINS+=$(BINIOU_PLUGIN)
+EXTS+=.biniou
+
 all: build/FacebookClangPlugin.dylib build/record_copied_file
 
 # hook to optional external sources

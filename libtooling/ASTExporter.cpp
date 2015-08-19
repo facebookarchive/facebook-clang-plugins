@@ -55,9 +55,13 @@ namespace {
 
 typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter, false>, ASTExporterOptions> JsonExporterASTAction;
 typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<JsonWriter, true>, ASTExporterOptions> YojsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ExporterASTConsumer<ATDWriter::BiniouWriter<raw_ostream>, true>, ASTExporterOptions> BiniouExporterASTAction;
 
 static FrontendPluginRegistry::Add<JsonExporterASTAction>
 X("JsonASTExporter", "Export the AST of source files into ATD-specified Json data");
 
 static FrontendPluginRegistry::Add<YojsonExporterASTAction>
 Y("YojsonASTExporter", "Export the AST of source files into ATD-specified Yojson data");
+
+static FrontendPluginRegistry::Add<BiniouExporterASTAction>
+Z("BiniouASTExporter", "Export the AST of source files into ATD-specified biniou data");
