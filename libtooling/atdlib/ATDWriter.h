@@ -609,7 +609,7 @@ namespace ATDWriter {
       write32(x);
     }
 
-    void writeUvint(size_t x) {
+    void writeUvint(unsigned int x) {
       while (x > 127) {
         write8(x | 128);
         x >>= 7;
