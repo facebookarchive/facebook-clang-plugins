@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   }
   {
     BiniouWriter OF(std::cout);
-    ArrayScope Scope(OF, 3);
+    ArrayScope Scope(OF);
     OF.emitString("Hello, how are you?");
     OF.emitString("I'm well, thank you; and you, how are you?");
     OF.emitString("I'm fine, thank you.");
@@ -34,25 +34,25 @@ int main(int argc, char **argv) {
     BiniouWriter OF(std::cout);
     ArrayScope Scope(OF, 3);
     {
-      ArrayScope Scope(OF, 1);
+      ArrayScope Scope(OF);
       {
         ArrayScope Scope(OF, 1);
         OF.emitInteger(1);
       }
     }
     {
-      ArrayScope Scope(OF, 2);
+      ArrayScope Scope(OF);
       {
         ArrayScope Scope(OF, 0);
       }
       {
-        ArrayScope Scope(OF, 2);
+        ArrayScope Scope(OF);
         OF.emitInteger(2);
         OF.emitInteger(3);
       }
     }
     {
-      ArrayScope Scope(OF, 0);
+      ArrayScope Scope(OF);
     }
   }
   {
@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
   }
   {
     BiniouWriter OF(std::cout);
-    ObjectScope Scope(OF, 2);
+    ObjectScope Scope(OF);
     OF.emitTag("string");
     OF.emitString("multiply");
     OF.emitTag("array");
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
         OF.emitInteger(32);
       }
       {
-        ObjectScope Scope(OF, 2);
+        ObjectScope Scope(OF, 2); // The larger number should not great dummy entries, because higher containers are missing sizes anyway.
         OF.emitTag("integer");
         OF.emitInteger(52);
       }
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
   }
   {
     BiniouWriter OF(std::cout);
-    TupleScope Scope(OF, 2);
+    TupleScope Scope(OF);
     OF.emitSimpleVariant("zero");
     {
       VariantScope Scope(OF, "succ");
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
         {
 	  VariantScope Scope(OF, "eval");
 	  {
-	    TupleScope Scope(OF, 2);
+	    TupleScope Scope(OF);
 	    OF.emitString("f");
 	    OF.emitString("\"3\t4\n\"");
 	  }

@@ -13,6 +13,8 @@
 #include <assert.h>
 #include <iostream>
 #include <vector>
+#include <functional>
+#include <memory>
 
 namespace ATDWriter {
 
@@ -132,7 +134,7 @@ namespace ATDWriter {
     }
 
   public:
-    GenWriter(const ATDEmitter &emitter) : emitter_(emitter)
+    GenWriter(ATDEmitter emitter) : emitter_(emitter)
     {
 #ifdef DEBUG
       containerSizeKind_.push_back(CSKNONE);
@@ -300,7 +302,7 @@ namespace ATDWriter {
   };
 
   // Configure GenWriter for Yojson / Json textual outputs
-  template <class OStream>
+  template <class OStream = std::ostream>
   class JsonEmitter {
 
     const char *QUOTE = "\"";
@@ -498,93 +500,142 @@ namespace ATDWriter {
 
   };
 
+  const uint8_t bool_tag = 0;
+  const uint8_t int8_tag = 1;
+  const uint8_t int16_tag = 2;
+  const uint8_t int32_tag = 3;
+  const uint8_t int64_tag = 4;
+  const uint8_t float64_tag = 12;
+  const uint8_t uvint_tag = 16;
+  const uint8_t svint_tag = 17;
+  const uint8_t string_tag = 18;
+  const uint8_t ARRAY_tag = 19;
+  const uint8_t TUPLE_tag = 20;
+  const uint8_t RECORD_tag = 21;
+  const uint8_t NUM_VARIANT_tag = 22;
+  const uint8_t VARIANT_tag = 23;
+  const uint8_t unit_tag = 24;
+  const uint8_t TABLE_tag = 25;
+  const uint8_t SHARED_tag = 26;
+
+  const int SIZE_NOT_NEEDED = -1;
+
   // Configure GenWriter for Biniou binary output
-  template <class OStream>
+  template <class OStream = std::ostream>
   class BiniouEmitter {
 
   private:
     OStream &os_;
 
-    const uint8_t bool_tag = 0;
-    const uint8_t int8_tag = 1;
-    const uint8_t int16_tag = 2;
-    const uint8_t int32_tag = 3;
-    const uint8_t int64_tag = 4;
-    const uint8_t float64_tag = 12;
-    const uint8_t uvint_tag = 16;
-    const uint8_t svint_tag = 17;
-    const uint8_t string_tag = 18;
-    const uint8_t ARRAY_tag = 19;
-    const uint8_t TUPLE_tag = 20;
-    const uint8_t RECORD_tag = 21;
-    const uint8_t NUM_VARIANT_tag = 22;
-    const uint8_t VARIANT_tag = 23;
-    const uint8_t unit_tag = 24;
-    const uint8_t TABLE_tag = 25;
-    const uint8_t SHARED_tag = 26;
+    // Opened container, writing in progress.
+    struct NonLazyContainer {
+      uint8_t tag;
+      int size;
+      int count;
 
-    // How many elements do we expect at most for the currently opened RECORDs?
-    // Records must remember how many items are supposed to be in the record.
-    // If a record is closed when not all items have been emitted then the
-    // remaining number of dummy items are emitted to make biniou happy.
-    // This is because, thanks to optional fields and fields with default arguments,
-    // it can be hard to precisely estimate how many items of the record are
-    // actually going to be emitted in advance.
-    std::vector<int> recordMaxSize_;
-    // Are we the first element of an array?
-    // This is needed because arrays are monomorphic and only the first element
-    // of the array carries a value tag.
-    bool isFirstInArray_;
-    // Are we currently in a record/an array?
-    std::vector<bool> isCurrentValueInRecord_;
-    std::vector<bool> isCurrentValueInArray_;
+      NonLazyContainer(uint8_t tag, int size) : tag(tag), size(size), count(0) {}
+    };
+
+    typedef std::function<void(OStream &)> lazy_write_t;
+
+    // Opened container, deferred writing (e.g. size of self or a parent container is missing).
+    struct LazyContainer {
+      uint8_t tag;
+      std::vector<lazy_write_t> values;
+
+      int getContainerSize() {
+        int count = values.size();
+        switch (tag) {
+          case ARRAY_tag: return count;
+          case TUPLE_tag: return count;
+          case RECORD_tag: return count / 2;
+          default:
+            return SIZE_NOT_NEEDED;
+        }
+      }
+
+      LazyContainer(uint8_t tag) : tag(tag) {}
+    };
+
+    // The full stack of opened containers is: nonLazyContainers + lazyContainers (in this order).
+    std::vector<NonLazyContainer> nonLazyContainers;
+    std::vector<std::shared_ptr<LazyContainer>> lazyContainers;
 
   public:
-    bool shouldSimpleVariantsBeEmittedAsStrings = false;
+    const bool shouldSimpleVariantsBeEmittedAsStrings = false;
 
     BiniouEmitter(OStream &os)
     : os_(os)
-    {
-      isCurrentValueInRecord_.push_back(false);
-      isCurrentValueInArray_.push_back(false);
-    }
+    { }
 
   private:
-    void enterContainer(uint8_t tag, int size) {
-      writeValueTag(tag);
-      if (size >= 0) {
-        writeUvint(size);
-      }
 
-      bool isRecord = tag == RECORD_tag;
-      isCurrentValueInRecord_.push_back(isRecord);
-      bool isArray = tag == ARRAY_tag;
-      isCurrentValueInArray_.push_back(isArray);
-
-      // extra initialization for some containers
-      if (isArray) {
-        isFirstInArray_ = true;
+    bool isValueTagNeeded() {
+      if (!lazyContainers.empty()) {
+        const LazyContainer &obj = *lazyContainers.back();
+        return obj.tag != ARRAY_tag || obj.values.size() == 0;
       }
-      if (isRecord) {
-        recordMaxSize_.push_back(size);
+      if (!nonLazyContainers.empty()) {
+        const NonLazyContainer &obj = nonLazyContainers.back();
+        return obj.tag != ARRAY_tag || obj.count == 0;
+      }
+      return true;
+    }
+
+    template <class T>
+    void push_write(T write) {
+      if (lazyContainers.empty()) {
+        if (!nonLazyContainers.empty()) {
+          nonLazyContainers.back().count++;
+        }
+        write(os_);
+      } else {
+        lazyContainers.back()->values.emplace_back(std::move(write));
       }
     }
 
-    void leaveValue() {
-      if (isCurrentValueInRecord_.back()) {
-        recordMaxSize_.back() -= 1;
+    void enterContainer(uint8_t tag) {
+      lazyContainers.push_back(std::make_shared<LazyContainer>(tag));
+    }
+
+    void enterContainer(uint8_t tag, int size) {
+      if (lazyContainers.empty()) {
+        bool needTag = isValueTagNeeded();
+        nonLazyContainers.emplace_back(tag, size);
+        writeValueTag(os_, needTag, tag);
+        if (size != SIZE_NOT_NEEDED) {
+          writeUvint(os_, size);
+        }
+      } else {
+        enterContainer(tag);
       }
-      isFirstInArray_ = false;
     }
 
     void leaveContainer() {
-      isCurrentValueInRecord_.pop_back();
-      isCurrentValueInArray_.pop_back();
-      leaveValue();
+      if (lazyContainers.empty()) {
+        nonLazyContainers.pop_back();
+        if (!nonLazyContainers.empty()) {
+          nonLazyContainers.back().count++;
+        }
+      } else {
+        auto me = lazyContainers.back();
+        lazyContainers.pop_back();
+        bool needTag = isValueTagNeeded();
+        push_write([needTag, me] (OStream &os) {
+          writeValueTag(os, needTag, me->tag);
+          int size = me->getContainerSize();
+          if (size != SIZE_NOT_NEEDED) {
+            writeUvint(os, size);
+          }
+          for (auto &&value : me->values) {
+            value(os);
+          }
+        });
+      }
     }
 
     // string hash algorithm from the biniou spec
-    uint32_t biniou_hash(const std::string &str) {
+    static uint32_t biniou_hash(const std::string &str) {
       uint32_t hash = 0;
       for (const char &c : str) {
         hash = 223 * hash + c;
@@ -593,81 +644,86 @@ namespace ATDWriter {
       return hash;
     }
 
-    void write8(uint8_t c) {
-      os_.write((const char *)&c, 1);
+    static void write8(OStream &os, uint8_t c) {
+      os.write((const char *)&c, 1);
     }
 
-    void write32(int32_t x) {
-      write8(x >> 24);
-      write8(x >> 16);
-      write8(x >> 8);
-      write8(x);
+    static void write32(OStream &os, int32_t x) {
+      write8(os, x >> 24);
+      write8(os, x >> 16);
+      write8(os, x >> 8);
+      write8(os, x);
     }
 
-    void write64(int64_t x) {
-      write32(x >> 32);
-      write32(x);
-    }
-
-    void writeUvint(unsigned int x) {
+    static void writeUvint(OStream &os, unsigned int x) {
       while (x > 127) {
-        write8(x | 128);
+        write8(os, x | 128);
         x >>= 7;
       }
 
-      write8((uint8_t) x);
+      write8(os, (uint8_t) x);
     }
 
-    void writeSvint(int x) {
+    static void writeSvint(OStream &os, int x) {
       if (x >= 0) {
-        writeUvint(x * 2);
+        writeUvint(os, x * 2);
       } else {
-        writeUvint(-x * 2 - 1);
+        writeUvint(os, -x * 2 - 1);
       }
     }
 
-    void writeValueTag(uint8_t tag) {
-      if (!isCurrentValueInArray_.back() || isFirstInArray_) {
-        write8(tag);
+    static void writeValueTag(OStream &os, bool needTag, uint8_t tag) {
+      if (needTag) {
+        write8(os, tag);
       }
     }
 
     void emitDummyRecordField() {
       emitTag("!!DUMMY!!");
-      // unit is the smallest value (2 bytes)
-      write8(unit_tag);
-      write8(0);
+      push_write([](OStream &os) {
+        // unit is the smallest value (2 bytes)
+        write8(os, unit_tag);
+        write8(os, 0);
+      });
     }
 
   public:
     void emitEOF() { }
 
     void emitBoolean(bool val) {
-      writeValueTag(bool_tag);
-      write8(val);
-      leaveValue();
+      bool needTag = isValueTagNeeded();
+      push_write([needTag, val](OStream &os) {
+        writeValueTag(os, needTag, bool_tag);
+        write8(os, val);
+      });
     }
 
-    void emitInteger(int val) {
-      writeValueTag(svint_tag);
-      writeSvint(val);
-      leaveValue();
+    void emitInteger(unsigned int val) {
+      bool needTag = isValueTagNeeded();
+      push_write([val, needTag](OStream &os) {
+        writeValueTag(os, needTag, svint_tag);
+        writeSvint(os, val);
+      });
     }
 
     void emitString(const std::string &val) {
-      writeValueTag(string_tag);
-      writeUvint(val.length());
-      for(const char &c: val) {
-        write8(c);
-      }
-      leaveValue();
+      bool needTag = isValueTagNeeded();
+      push_write([val, needTag](OStream &os) {
+        writeValueTag(os, needTag, string_tag);
+        writeUvint(os, val.length());
+        for(const char &c: val) {
+          write8(os, c);
+        }
+      });
     }
 
     void emitTag(const std::string &val) {
       int32_t hash = biniou_hash(val);
       // set first bit of hash
       hash |= 1 << 31;
-      write32(hash);
+      push_write([hash](OStream &os) {
+        write32(os, hash);
+      });
     }
 
     void emitVariantTag(const std::string &val, bool hasArg) {
@@ -676,11 +732,16 @@ namespace ATDWriter {
       if (hasArg) {
         hash |= 1 << 31;
       }
-      write32(hash);
+      push_write([hash](OStream &os) {
+        write32(os, hash);
+      });
     }
 
     void enterArray(int size) {
       enterContainer(ARRAY_tag, size);
+    }
+    void enterArray() {
+      enterContainer(ARRAY_tag);
     }
     void leaveArray() {
       leaveContainer();
@@ -688,21 +749,30 @@ namespace ATDWriter {
     void enterObject(int size) {
       enterContainer(RECORD_tag, size);
     }
+    void enterObject() {
+      enterContainer(RECORD_tag);
+    }
     void leaveObject() {
-      for (int i = recordMaxSize_.back(); i > 0; --i) {
-        emitDummyRecordField();
+      if (lazyContainers.empty()) {
+        const NonLazyContainer &obj = nonLazyContainers.back();
+        // Container's size was already written -> must fill in for missing records.
+        for (int i = obj.count / 2; i < obj.size; i++) {
+          emitDummyRecordField();
+        }
       }
-      recordMaxSize_.pop_back();
       leaveContainer();
     }
     void enterTuple(int size) {
       enterContainer(TUPLE_tag, size);
     }
+    void enterTuple() {
+      enterContainer(TUPLE_tag);
+    }
     void leaveTuple() {
       leaveContainer();
     }
     void enterVariant() {
-      enterContainer(VARIANT_tag, -1);
+      enterContainer(VARIANT_tag, SIZE_NOT_NEEDED);
     }
     void leaveVariant() {
       leaveContainer();
@@ -711,7 +781,7 @@ namespace ATDWriter {
   };
 
   // The full class for JSON and YOJSON writing
-  template <class OStream>
+  template <class OStream = std::ostream>
   class JsonWriter : public GenWriter<JsonEmitter<OStream>> {
     typedef JsonEmitter<OStream> Emitter;
   public:
