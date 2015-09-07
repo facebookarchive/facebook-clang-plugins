@@ -54,6 +54,7 @@ namespace ASTLib {
 
 struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
   bool withPointers = true;
+  bool dumpComments = false;
   ATDWriter::ATDWriterOptions atdWriterOptions = {
     .useYojson = false,
     .prettifyJson = true,
@@ -1169,7 +1170,7 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
       }
     }
 
-    if (Comment) {
+    if (Comment && Options.dumpComments) {
       OF.emitTag("full_comment");
       dumpFullComment(Comment);
     }
