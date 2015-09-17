@@ -4,8 +4,8 @@ set -e
 # Simple installation script for llvm/clang.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLANG_SRC="$SCRIPT_DIR/src/clang-3.6.1.tar.xz"
-CLANG_PATCH="$SCRIPT_DIR/src/attachment-0001.obj"
+CLANG_SRC="$SCRIPT_DIR/src/clang-3.7.0.tar.xz"
+CLANG_PATCH="$SCRIPT_DIR/src/clang_darwin.mk.patch"
 CLANG_PREFIX="$SCRIPT_DIR"
 
 platform=`uname`
@@ -36,8 +36,8 @@ echo "Installing clang..."
 TMP=`mktemp -d /tmp/clang-setup.XXXXXX`
 pushd "$TMP"
 tar xf "$CLANG_SRC"
-# apply patch to add nullability support
-pushd llvm/tools/clang
+# apply patch to compile on Darwin
+pushd llvm/projects/compiler-rt
 patch -p0 -i "$CLANG_PATCH"
 popd
 llvm/configure "${CONFIGURE_ARGS[@]}"

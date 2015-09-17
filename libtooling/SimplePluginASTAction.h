@@ -118,7 +118,7 @@ protected:
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
-    llvm::raw_fd_ostream *OS =
+    llvm::raw_pwrite_stream *OS =
       CI.createOutputFile(Parent::Options->outputFile,
                           Binary,
                           RemoveFileOnSignal,

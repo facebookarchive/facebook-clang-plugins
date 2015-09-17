@@ -1,0 +1,11 @@
+--- make/platform/clang_darwin.mk
++++ make/platform/clang_darwin.mk
+@@ -230,7 +230,7 @@
+ CFLAGS.profile_ios.armv7s := $(CFLAGS) $(IOS_DEPLOYMENT_ARGS)
+ CFLAGS.profile_ios.arm64  := $(CFLAGS) $(IOS6_DEPLOYMENT_ARGS)
+ 
+-SANITIZER_LDFLAGS := -stdlib=libc++ -lc++ -lc++abi
++SANITIZER_LDFLAGS := -lstdc++ -undefined dynamic_lookup
+ 
+ SHARED_LIBRARY.asan_osx_dynamic := 1
+ LDFLAGS.asan_osx_dynamic := $(SANITIZER_LDFLAGS) -install_name @rpath/libclang_rt.asan_osx_dynamic.dylib \

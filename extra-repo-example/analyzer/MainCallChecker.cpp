@@ -51,9 +51,9 @@ void MainCallChecker::checkPreStmt(const CallExpr *CE, CheckerContext &C) const 
                            "call to main",
                            "example bug"));
 
-    BugReport *report = new BugReport(*BT, BT->getName(), N);
+    auto report = llvm::make_unique<BugReport>(*BT, BT->getName(), N);
     report->addRange(Callee->getSourceRange());
-    C.emitReport(report);
+    C.emitReport(std::move(report));
   }
 }
 

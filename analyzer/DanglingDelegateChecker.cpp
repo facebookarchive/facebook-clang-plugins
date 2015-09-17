@@ -291,9 +291,9 @@ namespace DanglingDelegate {
     }
 
     const std::function<void(StringRef)> emitBug([this, decl, &context](StringRef str) {
-      BugReport *report = new BugReport(*_bugType, str, context.getPredecessor());
+      auto report = llvm::make_unique<BugReport>(*_bugType, str, context.getPredecessor());
       report->addRange(decl->getSourceRange());
-      context.emitReport(report);
+      context.emitReport(std::move(report));
     });
     ProgramStateRef state = context.getState();
 
@@ -356,9 +356,9 @@ namespace DanglingDelegate {
     const StringSet &dangerousProperties = ivarFacts._mayStoreSelfInUnsafeProperty;
     const StringSet &clearedProperties = ids->_assignPropertyWasCleared;
     const std::function<void(StringRef)> emitBug([this, &context, &expr](StringRef str) {
-       BugReport *report = new BugReport(*_bugType, str, context.getPredecessor());
+       auto report = llvm::make_unique<BugReport>(*_bugType, str, context.getPredecessor());
        report->addRange(expr.getSourceRange());
-       context.emitReport(report);
+       context.emitReport(std::move(report));
     });
 
     verifyAndReportDangerousProperties(dangerousProperties,

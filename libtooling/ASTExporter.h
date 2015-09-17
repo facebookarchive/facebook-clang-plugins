@@ -1130,7 +1130,10 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
   {
     bool ShouldEmitParentPointer = D->getLexicalDeclContext() != D->getDeclContext();
-    Module *M = D->getOwningModule();
+    Module *M = D->getImportedOwningModule();
+    if (!M) {
+      M = D->getLocalOwningModule();
+    }
     const NamedDecl *ND = dyn_cast<NamedDecl>(D);
     bool IsNDHidden = ND && ND->isHidden();
     bool IsDImplicit = D->isImplicit();
@@ -3062,7 +3065,7 @@ int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
 ///   ?qual_type : qual_type option
 /// } <ocaml field_prefix="uttei_">
 ///
-/// type unary_expr_or_type_trait_kind = [ SizeOf | AlignOf | VecStep ]
+/// type unary_expr_or_type_trait_kind = [ SizeOf | AlignOf | VecStep | OpenMPRequiredSimdAlign ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const UnaryExprOrTypeTraitExpr *Node) {
@@ -3081,6 +3084,9 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     break;
   case UETT_VecStep:
     OF.emitSimpleVariant("VecStep");
+    break;
+  case UETT_OpenMPRequiredSimdAlign:
+    OF.emitSimpleVariant("OpenMPRequiredSimdAlign");
     break;
   }
   if (HasQualType) {
