@@ -414,7 +414,7 @@ public:
 //  DECLARE_VISITOR(IncompleteArrayType)
 //  DECLARE_VISITOR(VariableArrayType)
   DECLARE_VISITOR(AtomicType)
-//  DECLARE_VISITOR(AttributedType) // getEquivalentType() + getAttrKind -> string
+  DECLARE_VISITOR(AttributedType) // getEquivalentType() + getAttrKind -> string
 //  DECLARE_VISITOR(AutoType)
   DECLARE_VISITOR(BlockPointerType)
   DECLARE_VISITOR(BuiltinType)
@@ -435,6 +435,7 @@ public:
   DECLARE_VISITOR(TagType)
   DECLARE_VISITOR(TypedefType)
 
+  void dumpTypeAttr(AttributedType::Kind kind);
 /* #define TYPE(CLASS, PARENT) DECLARE_VISITOR(CLASS##Type) */
 /* #define ABSTRACT_TYPE(CLASS, PARENT) */
 /* #include <clang/AST/TypeNodes.def> */
@@ -4059,6 +4060,139 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
   VisitType(T);
   dumpPointerToType(T->getValueType());
+}
+
+/// \atd
+/// type type_attribute_kind = [
+///   | AddressSpace
+///   | Regparm
+///   | VectorSize
+///   | NeonVectorSize
+///   | NeonPolyVectorSize
+///   | ObjcGc
+///   | ObjcOwnership
+///   | Pcs
+///   | PcsVfp
+///   | Noreturn
+///   | Cdecl
+///   | Fastcall
+///   | Stdcall
+///   | Thiscall
+///   | Pascal
+///   | Vectorcall
+///   | Inteloclbicc
+///   | MsAbi
+///   | SysvAbi
+///   | Ptr32
+///   | Ptr64
+///   | Sptr
+///   | Uptr
+///   | Nonnull
+///   | Nullable
+///   | NullUnspecified
+///   | ObjcKindof
+/// ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
+  switch(kind) {
+    case AttributedType::attr_address_space:
+      OF.emitSimpleVariant("AddressSpace");
+      break;
+    case AttributedType::attr_regparm:
+      OF.emitSimpleVariant("Regparm");
+      break;
+    case AttributedType::attr_vector_size:
+      OF.emitSimpleVariant("VectorSize");
+      break;
+    case AttributedType::attr_neon_vector_type:
+      OF.emitSimpleVariant("NeonVectorSize");
+      break;
+    case AttributedType::attr_neon_polyvector_type:
+      OF.emitSimpleVariant("NeonPolyVectorSize");
+      break;
+    case AttributedType::attr_objc_gc:
+      OF.emitSimpleVariant("ObjcGc");
+      break;
+    case AttributedType::attr_objc_ownership:
+      OF.emitSimpleVariant("ObjcOwnership");
+      break;
+    case AttributedType::attr_pcs:
+      OF.emitSimpleVariant("Pcs");
+      break;
+    case AttributedType::attr_pcs_vfp:
+      OF.emitSimpleVariant("PcsVfp");
+      break;
+    case AttributedType::attr_noreturn:
+      OF.emitSimpleVariant("Noreturn");
+      break;
+    case AttributedType::attr_cdecl:
+      OF.emitSimpleVariant("Cdecl");
+      break;
+    case AttributedType::attr_fastcall:
+      OF.emitSimpleVariant("Fastcall");
+      break;
+    case AttributedType::attr_stdcall:
+      OF.emitSimpleVariant("Stdcall");
+      break;
+    case AttributedType::attr_thiscall:
+      OF.emitSimpleVariant("Thiscall");
+      break;
+    case AttributedType::attr_pascal:
+      OF.emitSimpleVariant("Pascal");
+      break;
+    case AttributedType::attr_vectorcall:
+      OF.emitSimpleVariant("Vectorcall");
+      break;
+    case AttributedType::attr_inteloclbicc:
+      OF.emitSimpleVariant("Inteloclbicc");
+      break;
+    case AttributedType::attr_ms_abi:
+      OF.emitSimpleVariant("MsAbi");
+      break;
+    case AttributedType::attr_sysv_abi:
+      OF.emitSimpleVariant("SysvAbi");
+      break;
+    case AttributedType::attr_ptr32:
+      OF.emitSimpleVariant("Ptr32");
+      break;
+    case AttributedType::attr_ptr64:
+      OF.emitSimpleVariant("Ptr64");
+      break;
+    case AttributedType::attr_sptr:
+      OF.emitSimpleVariant("Sptr");
+      break;
+    case AttributedType::attr_uptr:
+      OF.emitSimpleVariant("Uptr");
+      break;
+    case AttributedType::attr_nonnull:
+      OF.emitSimpleVariant("Nonnull");
+      break;
+    case AttributedType::attr_nullable:
+      OF.emitSimpleVariant("Nullable");
+      break;
+    case AttributedType::attr_null_unspecified:
+      OF.emitSimpleVariant("NullUnspecified");
+      break;
+    case AttributedType::attr_objc_kindof:
+      OF.emitSimpleVariant("ObjcKindof");
+      break;
+    default:
+      llvm_unreachable("unknown case");
+      break;
+  }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AttributedTypeTupleSize() {
+  return TypeTupleSize() + 1;
+}
+
+/// \atd
+/// #define attributed_type_tuple type_tuple * type_attribute_kind
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitAttributedType(const AttributedType *T) {
+  VisitType(T);
+  dumpTypeAttr(T->getAttrKind());
 }
 
 template <class ATDWriter>

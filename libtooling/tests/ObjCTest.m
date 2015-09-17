@@ -20,13 +20,13 @@
 
 @interface MyClass ()
 
-- (void)foo:(NSString *)s;
+- (void)foo:(NSString * __nonnull)s;
 
 @end
 
 @implementation MyClass
 
-- (void)foo:(NSString *)s {
+- (void)foo:(NSString * __nonnull)s {
 
   NSLog(@"%s\n", @encode(int **));
 
