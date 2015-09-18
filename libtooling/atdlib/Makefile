@@ -22,7 +22,7 @@ build/binioutest: tests/binioutest.cpp ATDWriter.h
 
 test: build/jsontest build/binioutest extract_atd_from_cpp.py normalize_names_in_atd.py
 	@$(RUNTEST) tests/jsontest build/jsontest
-	@$(RUNTEST) tests/binioutest tests/binioutest.sh
+	@[ -n "$$SANDCASTLE" ] || $(RUNTEST) tests/binioutest tests/binioutest.sh
 	@$(RUNTEST) tests/extract_test.cpp python extract_atd_from_cpp.py tests/extract_test.cpp
 	@$(RUNTEST) tests/normalize_test.atd python normalize_names_in_atd.py tests/normalize_test.atd
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi

@@ -72,6 +72,9 @@ endif
 
 test: build/FacebookClangPlugin.dylib
 	@for P in $(PLUGINS); do                                                        \
+	   if [ -n "$$SANDCASTLE" ] && [ "$$P" == "BiniouASTExporter" ];                \
+	   then continue;                                                               \
+	   fi;                                                                          \
 	   echo "-- $$P --";                                                            \
 	   export CLANG_FRONTEND_PLUGIN__AST_WITH_POINTERS=0;                           \
 	   rm -rf build/tmp_$$P;                                                        \
