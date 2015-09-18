@@ -1,0 +1,17 @@
+--- include/clang/AST/AttrDump.inc
++++ include/clang/AST/AttrDump.inc
+@@ -544,8 +544,12 @@
+   case attr::ObjCBridgeRelated: {
+     const ObjCBridgeRelatedAttr *SA = cast<ObjCBridgeRelatedAttr>(A);
+     OS << " " << SA->getRelatedClass()->getName();
+-    OS << " " << SA->getClassMethod()->getName();
+-    OS << " " << SA->getInstanceMethod()->getName();
++    if (SA->getClassMethod()) {
++      OS << " " << SA->getClassMethod()->getName();
++    }
++    if (SA->getInstanceMethod()) {
++      OS << " " << SA->getInstanceMethod()->getName();
++    }
+     break;
+   }
+   case attr::ObjCDesignatedInitializer: {
