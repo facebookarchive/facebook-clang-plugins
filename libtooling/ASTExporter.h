@@ -436,6 +436,8 @@ public:
   DECLARE_VISITOR(TypedefType)
 
   void dumpTypeAttr(AttributedType::Kind kind);
+  void dumpObjCLifetimeQual(Qualifiers::ObjCLifetime qual);
+
 /* #define TYPE(CLASS, PARENT) DECLARE_VISITOR(CLASS##Type) */
 /* #define ABSTRACT_TYPE(CLASS, PARENT) */
 /* #include <clang/AST/TypeNodes.def> */
@@ -4182,17 +4184,60 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
   }
 }
 
+///\atd
+/// type objc_lifetime_attr = [
+///   | OCL_None
+///   | OCL_ExplicitNone
+///   | OCL_Strong
+///   | OCL_Weak
+///   | OCL_Autoreleasing
+/// ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpObjCLifetimeQual(Qualifiers::ObjCLifetime qual) {
+  switch(qual) {
+    case Qualifiers::ObjCLifetime::OCL_None:
+      OF.emitSimpleVariant("OCL_None");
+      break;
+    case Qualifiers::ObjCLifetime::OCL_ExplicitNone:
+      OF.emitSimpleVariant("OCL_ExplicitNone");
+      break;
+    case Qualifiers::ObjCLifetime::OCL_Strong:
+      OF.emitSimpleVariant("OCL_Strong");
+      break;
+    case Qualifiers::ObjCLifetime::OCL_Weak:
+      OF.emitSimpleVariant("OCL_Weak");
+      break;
+    case Qualifiers::ObjCLifetime::OCL_Autoreleasing:
+      OF.emitSimpleVariant("OCL_Autoreleasing");
+      break;
+  }
+}
+
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::AttributedTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
 
 /// \atd
-/// #define attributed_type_tuple type_tuple * type_attribute_kind
+/// #define attributed_type_tuple type_tuple * attr_type_info
+/// type attr_type_info = {
+///   attr_kind : type_attribute_kind;
+///   ~lifetime <ocaml default="`OCL_None"> : objc_lifetime_attr
+/// } <ocaml field_prefix="ati_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAttributedType(const AttributedType *T) {
   VisitType(T);
+  Qualifiers quals = QualType(T,0).getQualifiers();
+
+  bool hasLifetimeQual = quals.hasObjCLifetime() &&
+    quals.getObjCLifetime() != Qualifiers::ObjCLifetime::OCL_None;
+  ObjectScope Scope(OF, 1 + hasLifetimeQual);
+  OF.emitTag("attr_kind");
   dumpTypeAttr(T->getAttrKind());
+  if (hasLifetimeQual) {
+    OF.emitTag("lifetime");
+    dumpObjCLifetimeQual(quals.getObjCLifetime());
+  }
 }
 
 template <class ATDWriter>
