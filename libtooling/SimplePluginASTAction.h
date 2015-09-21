@@ -115,6 +115,10 @@ class SimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions>
 
 protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+    if (Parent::Options == nullptr) {
+      Parent::Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
+      Parent::Options->loadValuesFromEnvAndMap(std::unordered_map<std::string, std::string>());
+    }
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
@@ -145,6 +149,10 @@ class NoOpenSimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOp
 
 protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+    if (Parent::Options == nullptr) {
+      Parent::Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
+      Parent::Options->loadValuesFromEnvAndMap(std::unordered_map<std::string, std::string>());
+    }
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
