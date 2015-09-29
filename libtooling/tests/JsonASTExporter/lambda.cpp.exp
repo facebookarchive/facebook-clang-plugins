@@ -105,11 +105,7 @@
           "f"
         ]
       },
-      {
-        "raw" : "class (lambda at tests/lambda.cpp:1:10)",
-        "desugared" : "class (lambda at tests/lambda.cpp:1:10)",
-        "type_ptr" : "6"
-      },
+      "6",
       {
         "init_expr" : ["CXXConstructExpr" , [
           {
@@ -191,10 +187,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "13"
-                                }
+                                "qual_type" : "13"
                               },
                               {
                                 "is_signed" : true,
@@ -208,10 +201,7 @@
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "class (lambda at tests/lambda.cpp:1:10)",
-                      "type_ptr" : "14"
-                    }
+                    "qual_type" : "14"
                   },
                   ["CXXRecordDecl" , [
                     {
@@ -258,10 +248,7 @@
                             "(anonymous class)"
                           ]
                         },
-                        {
-                          "raw" : "int (void) const",
-                          "type_ptr" : "17"
-                        },
+                        "17",
                         {
                           "is_inline" : true,
                           "body" : ["CompoundStmt" , [
@@ -305,10 +292,7 @@
                                     [
                                     ],
                                     {
-                                      "qual_type" : {
-                                        "raw" : "int",
-                                        "type_ptr" : "13"
-                                      }
+                                      "qual_type" : "13"
                                     },
                                     {
                                       "is_signed" : true,
@@ -344,10 +328,7 @@
                             "(anonymous class)"
                           ]
                         },
-                        {
-                          "raw" : "int (*(void) const)(void)",
-                          "type_ptr" : "19"
-                        },
+                        "19",
                         {
                           "is_inline" : true
                         }
@@ -374,10 +355,7 @@
                             "(anonymous class)"
                           ]
                         },
-                        {
-                          "raw" : "int (void)",
-                          "type_ptr" : "21"
-                        },
+                        "21",
                         {
                           "storage_class" : "static",
                           "is_inline" : true
@@ -406,10 +384,7 @@
                             "(anonymous class)"
                           ]
                         },
-                        {
-                          "raw" : "void (void)",
-                          "type_ptr" : "23"
-                        },
+                        "23",
                         {
                           "is_inline" : true
                         }
@@ -436,10 +411,7 @@
                             "(anonymous class)"
                           ]
                         },
-                        {
-                          "raw" : "void (const class (lambda at tests/lambda.cpp:1:10) &)",
-                          "type_ptr" : "25"
-                        },
+                        "25",
                         {
                           "is_inline" : true,
                           "parameters" : [
@@ -463,10 +435,7 @@
                                   ""
                                 ]
                               },
-                              {
-                                "raw" : "const class (lambda at tests/lambda.cpp:1:10) &",
-                                "type_ptr" : "27"
-                              },
+                              "27",
                               {
                               }
                             ]]
@@ -497,10 +466,7 @@
                             "(anonymous class)"
                           ]
                         },
-                        {
-                          "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&) noexcept",
-                          "type_ptr" : "29"
-                        },
+                        "29",
                         {
                           "is_inline" : true,
                           "parameters" : [
@@ -524,10 +490,7 @@
                                   ""
                                 ]
                               },
-                              {
-                                "raw" : "class (lambda at tests/lambda.cpp:1:10) &&",
-                                "type_ptr" : "31"
-                              },
+                              "31",
                               {
                               }
                             ]]
@@ -561,10 +524,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "class (lambda at tests/lambda.cpp:1:10)",
-                  "type_ptr" : "14"
-                },
+                "qual_type" : "14",
                 "value_kind" : "XValue"
               },
               {
@@ -572,17 +532,10 @@
             ]]
           ],
           {
-            "qual_type" : {
-              "raw" : "class (lambda at tests/lambda.cpp:1:10)",
-              "desugared" : "class (lambda at tests/lambda.cpp:1:10)",
-              "type_ptr" : "6"
-            }
+            "qual_type" : "6"
           },
           {
-            "qual_type" : {
-              "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&) noexcept",
-              "type_ptr" : "29"
-            },
+            "qual_type" : "29",
             "is_elidable" : true
           }
         ]]
@@ -633,10 +586,7 @@
               "(anonymous class)"
             ]
           },
-          {
-            "raw" : "int (void) const",
-            "type_ptr" : "17"
-          },
+          "17",
           {
             "is_inline" : true,
             "body" : ["CompoundStmt" , [
@@ -680,10 +630,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "13"
-                        }
+                        "qual_type" : "13"
                       },
                       {
                         "is_signed" : true,
@@ -719,10 +666,7 @@
               "(anonymous class)"
             ]
           },
-          {
-            "raw" : "int (*(void) const)(void)",
-            "type_ptr" : "19"
-          },
+          "19",
           {
             "is_inline" : true
           }
@@ -749,10 +693,7 @@
               "(anonymous class)"
             ]
           },
-          {
-            "raw" : "int (void)",
-            "type_ptr" : "21"
-          },
+          "21",
           {
             "storage_class" : "static",
             "is_inline" : true
@@ -781,10 +722,7 @@
               "(anonymous class)"
             ]
           },
-          {
-            "raw" : "void (void)",
-            "type_ptr" : "23"
-          },
+          "23",
           {
             "is_inline" : true
           }
@@ -811,10 +749,7 @@
               "(anonymous class)"
             ]
           },
-          {
-            "raw" : "void (const class (lambda at tests/lambda.cpp:1:10) &)",
-            "type_ptr" : "25"
-          },
+          "25",
           {
             "is_inline" : true,
             "parameters" : [
@@ -838,10 +773,7 @@
                     ""
                   ]
                 },
-                {
-                  "raw" : "const class (lambda at tests/lambda.cpp:1:10) &",
-                  "type_ptr" : "27"
-                },
+                "27",
                 {
                 }
               ]]
@@ -872,10 +804,7 @@
               "(anonymous class)"
             ]
           },
-          {
-            "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&) noexcept",
-            "type_ptr" : "29"
-          },
+          "29",
           {
             "is_inline" : true,
             "parameters" : [
@@ -899,10 +828,7 @@
                     ""
                   ]
                 },
-                {
-                  "raw" : "class (lambda at tests/lambda.cpp:1:10) &&",
-                  "type_ptr" : "31"
-                },
+                "31",
                 {
                 }
               ]]

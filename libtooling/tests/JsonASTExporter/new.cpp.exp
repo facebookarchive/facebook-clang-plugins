@@ -166,10 +166,7 @@
               "pod"
             ]
           },
-          {
-            "raw" : "int",
-            "type_ptr" : "9"
-          },
+          "9",
           {
           }
         ]],
@@ -198,10 +195,7 @@
               "pod"
             ]
           },
-          {
-            "raw" : "void (void) noexcept",
-            "type_ptr" : "11"
-          },
+          "11",
           {
             "is_inline" : true,
             "body" : ["CompoundStmt" , [
@@ -243,10 +237,7 @@
               "pod"
             ]
           },
-          {
-            "raw" : "void (const struct pod &)",
-            "type_ptr" : "14"
-          },
+          "14",
           {
             "is_inline" : true,
             "parameters" : [
@@ -270,10 +261,7 @@
                     ""
                   ]
                 },
-                {
-                  "raw" : "const struct pod &",
-                  "type_ptr" : "16"
-                },
+                "16",
                 {
                 }
               ]]
@@ -302,10 +290,7 @@
               "pod"
             ]
           },
-          {
-            "raw" : "void (struct pod &&)",
-            "type_ptr" : "18"
-          },
+          "18",
           {
             "is_inline" : true,
             "parameters" : [
@@ -329,10 +314,7 @@
                     ""
                   ]
                 },
-                {
-                  "raw" : "struct pod &&",
-                  "type_ptr" : "20"
-                },
+                "20",
                 {
                 }
               ]]
@@ -362,10 +344,7 @@
               "pod"
             ]
           },
-          {
-            "raw" : "void (void)",
-            "type_ptr" : "22"
-          },
+          "22",
           {
             "is_inline" : true
           }
@@ -463,10 +442,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "int",
-            "type_ptr" : "9"
-          },
+          "9",
           {
           }
         ]],
@@ -492,10 +468,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "int",
-            "type_ptr" : "9"
-          },
+          "9",
           {
           }
         ]],
@@ -521,10 +494,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "struct pod",
-            "type_ptr" : "6"
-          },
+          "6",
           {
           }
         ]],
@@ -552,10 +522,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "void (void)",
-            "type_ptr" : "30"
-          },
+          "30",
           {
             "cxx_ctor_initializers" : [
               {
@@ -569,10 +536,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : {
-                    "raw" : "int",
-                    "type_ptr" : "9"
-                  }
+                  "qual_type" : "9"
                 }],
                 "init_expr" : ["IntegerLiteral" , [
                   {
@@ -589,10 +553,7 @@
                   [
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int",
-                      "type_ptr" : "9"
-                    }
+                    "qual_type" : "9"
                   },
                   {
                     "is_signed" : true,
@@ -612,10 +573,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : {
-                    "raw" : "int",
-                    "type_ptr" : "9"
-                  }
+                  "qual_type" : "9"
                 }],
                 "init_expr" : ["IntegerLiteral" , [
                   {
@@ -632,10 +590,7 @@
                   [
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int",
-                      "type_ptr" : "9"
-                    }
+                    "qual_type" : "9"
                   },
                   {
                     "is_signed" : true,
@@ -655,10 +610,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : {
-                    "raw" : "struct pod",
-                    "type_ptr" : "6"
-                  }
+                  "qual_type" : "6"
                 }],
                 "init_expr" : ["CXXConstructExpr" , [
                   {
@@ -675,16 +627,10 @@
                   [
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct pod",
-                      "type_ptr" : "6"
-                    }
+                    "qual_type" : "6"
                   },
                   {
-                    "qual_type" : {
-                      "raw" : "void (void) noexcept",
-                      "type_ptr" : "11"
-                    }
+                    "qual_type" : "11"
                   }
                 ]]
               }
@@ -730,10 +676,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "void (int, int)",
-            "type_ptr" : "36"
-          },
+          "36",
           {
             "parameters" : [
               ["ParmVarDecl" , [
@@ -758,10 +701,7 @@
                     "a"
                   ]
                 },
-                {
-                  "raw" : "int",
-                  "type_ptr" : "9"
-                },
+                "9",
                 {
                 }
               ]],
@@ -787,10 +727,7 @@
                     "b"
                   ]
                 },
-                {
-                  "raw" : "int",
-                  "type_ptr" : "9"
-                },
+                "9",
                 {
                 }
               ]]
@@ -807,10 +744,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : {
-                    "raw" : "int",
-                    "type_ptr" : "9"
-                  }
+                  "qual_type" : "9"
                 }],
                 "init_expr" : ["ImplicitCastExpr" , [
                   {
@@ -840,10 +774,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        },
+                        "qual_type" : "9",
                         "value_kind" : "LValue"
                       },
                       {
@@ -856,19 +787,13 @@
                               "a"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "int",
-                            "type_ptr" : "9"
-                          }
+                          "qual_type" : "9"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int",
-                      "type_ptr" : "9"
-                    }
+                    "qual_type" : "9"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -888,10 +813,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : {
-                    "raw" : "int",
-                    "type_ptr" : "9"
-                  }
+                  "qual_type" : "9"
                 }],
                 "init_expr" : ["ImplicitCastExpr" , [
                   {
@@ -921,10 +843,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        },
+                        "qual_type" : "9",
                         "value_kind" : "LValue"
                       },
                       {
@@ -937,19 +856,13 @@
                               "b"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "int",
-                            "type_ptr" : "9"
-                          }
+                          "qual_type" : "9"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int",
-                      "type_ptr" : "9"
-                    }
+                    "qual_type" : "9"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -969,10 +882,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : {
-                    "raw" : "struct pod",
-                    "type_ptr" : "6"
-                  }
+                  "qual_type" : "6"
                 }],
                 "init_expr" : ["CXXConstructExpr" , [
                   {
@@ -989,16 +899,10 @@
                   [
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct pod",
-                      "type_ptr" : "6"
-                    }
+                    "qual_type" : "6"
                   },
                   {
-                    "qual_type" : {
-                      "raw" : "void (void) noexcept",
-                      "type_ptr" : "11"
-                    }
+                    "qual_type" : "11"
                   }
                 ]]
               }
@@ -1043,10 +947,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "void (const struct cpplike &)",
-            "type_ptr" : "46"
-          },
+          "46",
           {
             "is_inline" : true,
             "parameters" : [
@@ -1070,10 +971,7 @@
                     ""
                   ]
                 },
-                {
-                  "raw" : "const struct cpplike &",
-                  "type_ptr" : "48"
-                },
+                "48",
                 {
                 }
               ]]
@@ -1102,10 +1000,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "void (struct cpplike &&)",
-            "type_ptr" : "50"
-          },
+          "50",
           {
             "is_inline" : true,
             "parameters" : [
@@ -1129,10 +1024,7 @@
                     ""
                   ]
                 },
-                {
-                  "raw" : "struct cpplike &&",
-                  "type_ptr" : "52"
-                },
+                "52",
                 {
                 }
               ]]
@@ -1162,10 +1054,7 @@
               "cpplike"
             ]
           },
-          {
-            "raw" : "void (void)",
-            "type_ptr" : "54"
-          },
+          "54",
           {
             "is_inline" : true
           }
@@ -1201,10 +1090,7 @@
           "test"
         ]
       },
-      {
-        "raw" : "void (void)",
-        "type_ptr" : "30"
-      },
+      "30",
       {
         "body" : ["CompoundStmt" , [
           {
@@ -1263,10 +1149,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        }
+                        "qual_type" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1276,10 +1159,7 @@
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int *",
-                      "type_ptr" : "60"
-                    }
+                    "qual_type" : "60"
                   },
                   {
                     "initializer_expr" : "59"
@@ -1309,10 +1189,7 @@
                       "i"
                     ]
                   },
-                  {
-                    "raw" : "int *",
-                    "type_ptr" : "62"
-                  },
+                  "62",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -1342,10 +1219,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1355,10 +1229,7 @@
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int *",
-                          "type_ptr" : "60"
-                        }
+                        "qual_type" : "60"
                       },
                       {
                         "initializer_expr" : "59"
@@ -1410,10 +1281,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        }
+                        "qual_type" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1423,10 +1291,7 @@
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int *",
-                      "type_ptr" : "60"
-                    }
+                    "qual_type" : "60"
                   },
                   {
                     "is_array" : true,
@@ -1457,10 +1322,7 @@
                       "i_a"
                     ]
                   },
-                  {
-                    "raw" : "int *",
-                    "type_ptr" : "62"
-                  },
+                  "62",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -1490,10 +1352,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1503,10 +1362,7 @@
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int *",
-                          "type_ptr" : "60"
-                        }
+                        "qual_type" : "60"
                       },
                       {
                         "is_array" : true,
@@ -1559,24 +1415,15 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct pod",
-                          "type_ptr" : "6"
-                        }
+                        "qual_type" : "6"
                       },
                       {
-                        "qual_type" : {
-                          "raw" : "void (void) noexcept",
-                          "type_ptr" : "11"
-                        }
+                        "qual_type" : "11"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct pod *",
-                      "type_ptr" : "70"
-                    }
+                    "qual_type" : "70"
                   },
                   {
                     "initializer_expr" : "69"
@@ -1606,10 +1453,7 @@
                       "p"
                     ]
                   },
-                  {
-                    "raw" : "struct pod *",
-                    "type_ptr" : "72"
-                  },
+                  "72",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -1639,24 +1483,15 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct pod",
-                              "type_ptr" : "6"
-                            }
+                            "qual_type" : "6"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (void) noexcept",
-                              "type_ptr" : "11"
-                            }
+                            "qual_type" : "11"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct pod *",
-                          "type_ptr" : "70"
-                        }
+                        "qual_type" : "70"
                       },
                       {
                         "initializer_expr" : "69"
@@ -1708,10 +1543,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        }
+                        "qual_type" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1734,24 +1566,15 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct pod",
-                          "type_ptr" : "6"
-                        }
+                        "qual_type" : "6"
                       },
                       {
-                        "qual_type" : {
-                          "raw" : "void (void) noexcept",
-                          "type_ptr" : "11"
-                        }
+                        "qual_type" : "11"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct pod *",
-                      "type_ptr" : "70"
-                    }
+                    "qual_type" : "70"
                   },
                   {
                     "is_array" : true,
@@ -1783,10 +1606,7 @@
                       "p_a"
                     ]
                   },
-                  {
-                    "raw" : "struct pod *",
-                    "type_ptr" : "72"
-                  },
+                  "72",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -1816,10 +1636,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1842,24 +1659,15 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct pod",
-                              "type_ptr" : "6"
-                            }
+                            "qual_type" : "6"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (void) noexcept",
-                              "type_ptr" : "11"
-                            }
+                            "qual_type" : "11"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct pod *",
-                          "type_ptr" : "70"
-                        }
+                        "qual_type" : "70"
                       },
                       {
                         "is_array" : true,
@@ -1926,10 +1734,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1952,10 +1757,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1965,24 +1767,15 @@
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike",
-                          "type_ptr" : "24"
-                        }
+                        "qual_type" : "24"
                       },
                       {
-                        "qual_type" : {
-                          "raw" : "void (int, int)",
-                          "type_ptr" : "36"
-                        }
+                        "qual_type" : "36"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct cpplike *",
-                      "type_ptr" : "83"
-                    }
+                    "qual_type" : "83"
                   },
                   {
                     "initializer_expr" : "80"
@@ -2012,10 +1805,7 @@
                       "c"
                     ]
                   },
-                  {
-                    "raw" : "struct cpplike *",
-                    "type_ptr" : "85"
-                  },
+                  "85",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -2058,10 +1848,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -2084,10 +1871,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -2097,24 +1881,15 @@
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike",
-                              "type_ptr" : "24"
-                            }
+                            "qual_type" : "24"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (int, int)",
-                              "type_ptr" : "36"
-                            }
+                            "qual_type" : "36"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike *",
-                          "type_ptr" : "83"
-                        }
+                        "qual_type" : "83"
                       },
                       {
                         "initializer_expr" : "80"
@@ -2166,10 +1941,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        }
+                        "qual_type" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -2192,24 +1964,15 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike",
-                          "type_ptr" : "24"
-                        }
+                        "qual_type" : "24"
                       },
                       {
-                        "qual_type" : {
-                          "raw" : "void (void)",
-                          "type_ptr" : "30"
-                        }
+                        "qual_type" : "30"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct cpplike *",
-                      "type_ptr" : "83"
-                    }
+                    "qual_type" : "83"
                   },
                   {
                     "is_array" : true,
@@ -2241,10 +2004,7 @@
                       "c_a"
                     ]
                   },
-                  {
-                    "raw" : "struct cpplike *",
-                    "type_ptr" : "85"
-                  },
+                  "85",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -2274,10 +2034,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -2300,24 +2057,15 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike",
-                              "type_ptr" : "24"
-                            }
+                            "qual_type" : "24"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (void)",
-                              "type_ptr" : "30"
-                            }
+                            "qual_type" : "30"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike *",
-                          "type_ptr" : "83"
-                        }
+                        "qual_type" : "83"
                       },
                       {
                         "is_array" : true,
@@ -2371,10 +2119,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int *",
-                          "type_ptr" : "62"
-                        },
+                        "qual_type" : "62",
                         "value_kind" : "LValue"
                       },
                       {
@@ -2387,19 +2132,13 @@
                               "i"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "int *",
-                            "type_ptr" : "62"
-                          }
+                          "qual_type" : "62"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int *",
-                      "type_ptr" : "62"
-                    }
+                    "qual_type" : "62"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2409,10 +2148,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "94"
-                }
+                "qual_type" : "94"
               },
               {
               }
@@ -2459,10 +2195,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int *",
-                          "type_ptr" : "62"
-                        },
+                        "qual_type" : "62",
                         "value_kind" : "LValue"
                       },
                       {
@@ -2475,19 +2208,13 @@
                               "i_a"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "int *",
-                            "type_ptr" : "62"
-                          }
+                          "qual_type" : "62"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int *",
-                      "type_ptr" : "62"
-                    }
+                    "qual_type" : "62"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2497,10 +2224,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "94"
-                }
+                "qual_type" : "94"
               },
               {
                 "is_array" : true
@@ -2548,10 +2272,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct pod *",
-                          "type_ptr" : "72"
-                        },
+                        "qual_type" : "72",
                         "value_kind" : "LValue"
                       },
                       {
@@ -2564,19 +2285,13 @@
                               "p"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "struct pod *",
-                            "type_ptr" : "72"
-                          }
+                          "qual_type" : "72"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct pod *",
-                      "type_ptr" : "72"
-                    }
+                    "qual_type" : "72"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2586,10 +2301,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "94"
-                }
+                "qual_type" : "94"
               },
               {
               }
@@ -2636,10 +2348,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct pod *",
-                          "type_ptr" : "72"
-                        },
+                        "qual_type" : "72",
                         "value_kind" : "LValue"
                       },
                       {
@@ -2652,19 +2361,13 @@
                               "p_a"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "struct pod *",
-                            "type_ptr" : "72"
-                          }
+                          "qual_type" : "72"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct pod *",
-                      "type_ptr" : "72"
-                    }
+                    "qual_type" : "72"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2674,10 +2377,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "94"
-                }
+                "qual_type" : "94"
               },
               {
                 "is_array" : true
@@ -2725,10 +2425,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike *",
-                          "type_ptr" : "85"
-                        },
+                        "qual_type" : "85",
                         "value_kind" : "LValue"
                       },
                       {
@@ -2741,19 +2438,13 @@
                               "c"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "struct cpplike *",
-                            "type_ptr" : "85"
-                          }
+                          "qual_type" : "85"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct cpplike *",
-                      "type_ptr" : "85"
-                    }
+                    "qual_type" : "85"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2763,10 +2454,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "94"
-                }
+                "qual_type" : "94"
               },
               {
               }
@@ -2813,10 +2501,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike *",
-                          "type_ptr" : "85"
-                        },
+                        "qual_type" : "85",
                         "value_kind" : "LValue"
                       },
                       {
@@ -2829,19 +2514,13 @@
                               "c_a"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "struct cpplike *",
-                            "type_ptr" : "85"
-                          }
+                          "qual_type" : "85"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct cpplike *",
-                      "type_ptr" : "85"
-                    }
+                    "qual_type" : "85"
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2851,10 +2530,7 @@
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "94"
-                }
+                "qual_type" : "94"
               },
               {
                 "is_array" : true
@@ -2911,10 +2587,7 @@
           "operator new"
         ]
       },
-      {
-        "raw" : "void *(unsigned long)",
-        "type_ptr" : "113"
-      },
+      "113",
       {
         "parameters" : [
           ["ParmVarDecl" , [
@@ -2936,10 +2609,7 @@
                 ""
               ]
             },
-            {
-              "raw" : "unsigned long",
-              "type_ptr" : "115"
-            },
+            "115",
             {
             }
           ]]
@@ -2993,10 +2663,7 @@
           "operator new[]"
         ]
       },
-      {
-        "raw" : "void *(unsigned long)",
-        "type_ptr" : "113"
-      },
+      "113",
       {
         "parameters" : [
           ["ParmVarDecl" , [
@@ -3018,10 +2685,7 @@
                 ""
               ]
             },
-            {
-              "raw" : "unsigned long",
-              "type_ptr" : "115"
-            },
+            "115",
             {
             }
           ]]
@@ -3062,10 +2726,7 @@
           "operator delete"
         ]
       },
-      {
-        "raw" : "void (void *) noexcept",
-        "type_ptr" : "122"
-      },
+      "122",
       {
         "parameters" : [
           ["ParmVarDecl" , [
@@ -3087,10 +2748,7 @@
                 ""
               ]
             },
-            {
-              "raw" : "void *",
-              "type_ptr" : "124"
-            },
+            "124",
             {
             }
           ]]
@@ -3131,10 +2789,7 @@
           "operator delete[]"
         ]
       },
-      {
-        "raw" : "void (void *) noexcept",
-        "type_ptr" : "122"
-      },
+      "122",
       {
         "parameters" : [
           ["ParmVarDecl" , [
@@ -3156,10 +2811,7 @@
                 ""
               ]
             },
-            {
-              "raw" : "void *",
-              "type_ptr" : "124"
-            },
+            "124",
             {
             }
           ]]
@@ -3188,10 +2840,7 @@
           "test_c11"
         ]
       },
-      {
-        "raw" : "void (void)",
-        "type_ptr" : "30"
-      },
+      "30",
       {
         "body" : ["CompoundStmt" , [
           {
@@ -3250,10 +2899,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        }
+                        "qual_type" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -3289,10 +2935,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3315,10 +2958,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3341,10 +2981,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3354,18 +2991,12 @@
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int [4]",
-                          "type_ptr" : "137"
-                        }
+                        "qual_type" : "137"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "int *",
-                      "type_ptr" : "60"
-                    }
+                    "qual_type" : "60"
                   },
                   {
                     "is_array" : true,
@@ -3395,10 +3026,7 @@
                       "i"
                     ]
                   },
-                  {
-                    "raw" : "int *",
-                    "type_ptr" : "62"
-                  },
+                  "62",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -3428,10 +3056,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3467,10 +3092,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3493,10 +3115,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3519,10 +3138,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3532,18 +3148,12 @@
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int [4]",
-                              "type_ptr" : "137"
-                            }
+                            "qual_type" : "137"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int *",
-                          "type_ptr" : "60"
-                        }
+                        "qual_type" : "60"
                       },
                       {
                         "is_array" : true,
@@ -3610,10 +3220,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3636,10 +3243,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3649,24 +3253,15 @@
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike",
-                          "type_ptr" : "24"
-                        }
+                        "qual_type" : "24"
                       },
                       {
-                        "qual_type" : {
-                          "raw" : "void (int, int)",
-                          "type_ptr" : "36"
-                        }
+                        "qual_type" : "36"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct cpplike *",
-                      "type_ptr" : "83"
-                    }
+                    "qual_type" : "83"
                   },
                   {
                     "initializer_expr" : "141"
@@ -3694,10 +3289,7 @@
                       "c"
                     ]
                   },
-                  {
-                    "raw" : "struct cpplike *",
-                    "type_ptr" : "85"
-                  },
+                  "85",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -3740,10 +3332,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3766,10 +3355,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3779,24 +3365,15 @@
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike",
-                              "type_ptr" : "24"
-                            }
+                            "qual_type" : "24"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (int, int)",
-                              "type_ptr" : "36"
-                            }
+                            "qual_type" : "36"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike *",
-                          "type_ptr" : "83"
-                        }
+                        "qual_type" : "83"
                       },
                       {
                         "initializer_expr" : "141"
@@ -3848,10 +3425,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "int",
-                          "type_ptr" : "9"
-                        }
+                        "qual_type" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -3900,10 +3474,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3926,10 +3497,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3939,16 +3507,10 @@
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike",
-                              "type_ptr" : "24"
-                            }
+                            "qual_type" : "24"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (int, int)",
-                              "type_ptr" : "36"
-                            }
+                            "qual_type" : "36"
                           }
                         ]],
                         ["CXXConstructExpr" , [
@@ -3979,10 +3541,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -4005,10 +3564,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -4018,16 +3574,10 @@
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike",
-                              "type_ptr" : "24"
-                            }
+                            "qual_type" : "24"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (int, int)",
-                              "type_ptr" : "36"
-                            }
+                            "qual_type" : "36"
                           }
                         ]],
                         ["CXXConstructExpr" , [
@@ -4058,10 +3608,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -4084,10 +3631,7 @@
                               [
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "int",
-                                  "type_ptr" : "9"
-                                }
+                                "qual_type" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -4097,32 +3641,20 @@
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike",
-                              "type_ptr" : "24"
-                            }
+                            "qual_type" : "24"
                           },
                           {
-                            "qual_type" : {
-                              "raw" : "void (int, int)",
-                              "type_ptr" : "36"
-                            }
+                            "qual_type" : "36"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike [4]",
-                          "type_ptr" : "158"
-                        }
+                        "qual_type" : "158"
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "struct cpplike *",
-                      "type_ptr" : "83"
-                    }
+                    "qual_type" : "83"
                   },
                   {
                     "is_array" : true,
@@ -4152,10 +3684,7 @@
                       "c_a"
                     ]
                   },
-                  {
-                    "raw" : "struct cpplike *",
-                    "type_ptr" : "85"
-                  },
+                  "85",
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
@@ -4185,10 +3714,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "int",
-                              "type_ptr" : "9"
-                            }
+                            "qual_type" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -4237,10 +3763,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : {
-                                      "raw" : "int",
-                                      "type_ptr" : "9"
-                                    }
+                                    "qual_type" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -4263,10 +3786,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : {
-                                      "raw" : "int",
-                                      "type_ptr" : "9"
-                                    }
+                                    "qual_type" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -4276,16 +3796,10 @@
                                 ]]
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "struct cpplike",
-                                  "type_ptr" : "24"
-                                }
+                                "qual_type" : "24"
                               },
                               {
-                                "qual_type" : {
-                                  "raw" : "void (int, int)",
-                                  "type_ptr" : "36"
-                                }
+                                "qual_type" : "36"
                               }
                             ]],
                             ["CXXConstructExpr" , [
@@ -4316,10 +3830,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : {
-                                      "raw" : "int",
-                                      "type_ptr" : "9"
-                                    }
+                                    "qual_type" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -4342,10 +3853,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : {
-                                      "raw" : "int",
-                                      "type_ptr" : "9"
-                                    }
+                                    "qual_type" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -4355,16 +3863,10 @@
                                 ]]
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "struct cpplike",
-                                  "type_ptr" : "24"
-                                }
+                                "qual_type" : "24"
                               },
                               {
-                                "qual_type" : {
-                                  "raw" : "void (int, int)",
-                                  "type_ptr" : "36"
-                                }
+                                "qual_type" : "36"
                               }
                             ]],
                             ["CXXConstructExpr" , [
@@ -4395,10 +3897,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : {
-                                      "raw" : "int",
-                                      "type_ptr" : "9"
-                                    }
+                                    "qual_type" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -4421,10 +3920,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : {
-                                      "raw" : "int",
-                                      "type_ptr" : "9"
-                                    }
+                                    "qual_type" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -4434,32 +3930,20 @@
                                 ]]
                               ],
                               {
-                                "qual_type" : {
-                                  "raw" : "struct cpplike",
-                                  "type_ptr" : "24"
-                                }
+                                "qual_type" : "24"
                               },
                               {
-                                "qual_type" : {
-                                  "raw" : "void (int, int)",
-                                  "type_ptr" : "36"
-                                }
+                                "qual_type" : "36"
                               }
                             ]]
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "struct cpplike [4]",
-                              "type_ptr" : "158"
-                            }
+                            "qual_type" : "158"
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "struct cpplike *",
-                          "type_ptr" : "83"
-                        }
+                        "qual_type" : "83"
                       },
                       {
                         "is_array" : true,

@@ -540,29 +540,9 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
 }
 
 /// \atd
-/// type qual_type = {
-///   raw : string;
-///   ?desugared : string option;
-///   type_ptr : type_ptr
-/// } <ocaml field_prefix="qt_">
+/// type qual_type = type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
-  // TODO - clean it up - remove raw and desugared info type_ptr has this information already
-  bool ShouldEmitDesugared = false;
-  SplitQualType T_split = T.split();
-  if (!T.isNull() && T_split != T.getSplitDesugaredType()) {
-    // If the type is sugared, also dump a (shallow) desugared type.
-    ShouldEmitDesugared = true;
-  }
-  ObjectScope Scope(OF, 2 + ShouldEmitDesugared);
-
-  OF.emitTag("raw");
-  OF.emitString(QualType::getAsString(T_split));
-  if (ShouldEmitDesugared) {
-    OF.emitTag("desugared");
-    OF.emitString(QualType::getAsString(T.getSplitDesugaredType()));
-  }
-  OF.emitTag("type_ptr");
   dumpPointerToType(T);
 }
 

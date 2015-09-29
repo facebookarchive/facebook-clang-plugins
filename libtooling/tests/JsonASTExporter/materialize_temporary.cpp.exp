@@ -105,10 +105,7 @@
           "r"
         ]
       },
-      {
-        "raw" : "const int &",
-        "type_ptr" : "6"
-      },
+      "6",
       {
         "init_expr" : ["MaterializeTemporaryExpr" , [
           {
@@ -151,19 +148,13 @@
                   [
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "double",
-                      "type_ptr" : "10"
-                    }
+                    "qual_type" : "10"
                   },
                   "1"
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "const int",
-                  "type_ptr" : "11"
-                }
+                "qual_type" : "11"
               },
               {
                 "cast_kind" : "FloatingToIntegral",
@@ -173,10 +164,7 @@
             ]]
           ],
           {
-            "qual_type" : {
-              "raw" : "const int",
-              "type_ptr" : "11"
-            },
+            "qual_type" : "11",
             "value_kind" : "LValue"
           },
           {
@@ -189,10 +177,7 @@
                   "r"
                 ]
               },
-              "qual_type" : {
-                "raw" : "const int &",
-                "type_ptr" : "6"
-              }
+              "qual_type" : "6"
             }
           }
         ]]

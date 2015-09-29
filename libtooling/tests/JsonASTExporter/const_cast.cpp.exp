@@ -184,10 +184,7 @@
               "Foo"
             ]
           },
-          {
-            "raw" : "void (void)",
-            "type_ptr" : "10"
-          },
+          "10",
           {
             "body" : ["CompoundStmt" , [
               {
@@ -237,10 +234,7 @@
           "someFunction"
         ]
       },
-      {
-        "raw" : "void (const class Foo &)",
-        "type_ptr" : "13"
-      },
+      "13",
       {
         "parameters" : [
           ["ParmVarDecl" , [
@@ -266,10 +260,7 @@
                 "f"
               ]
             },
-            {
-              "raw" : "const class Foo &",
-              "type_ptr" : "15"
-            },
+            "15",
             {
             }
           ]]
@@ -330,10 +321,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "const class Foo",
-                          "type_ptr" : "6"
-                        },
+                        "qual_type" : "6",
                         "value_kind" : "LValue"
                       },
                       {
@@ -346,19 +334,13 @@
                               "f"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "const class Foo &",
-                            "type_ptr" : "15"
-                          }
+                          "qual_type" : "15"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "class Foo",
-                      "type_ptr" : "6"
-                    },
+                    "qual_type" : "6",
                     "value_kind" : "LValue"
                   },
                   {
@@ -366,10 +348,7 @@
                     "base_path" : [
                     ]
                   },
-                  {
-                    "raw" : "class Foo &",
-                    "type_ptr" : "20"
-                  },
+                  "20",
                   "const_cast"
                 ]]
               ],
@@ -396,10 +375,7 @@
                       "fRef"
                     ]
                   },
-                  {
-                    "raw" : "class Foo &",
-                    "type_ptr" : "20"
-                  },
+                  "20",
                   {
                     "init_expr" : ["CXXConstCastExpr" , [
                       {
@@ -429,10 +405,7 @@
                           [
                           ],
                           {
-                            "qual_type" : {
-                              "raw" : "const class Foo",
-                              "type_ptr" : "6"
-                            },
+                            "qual_type" : "6",
                             "value_kind" : "LValue"
                           },
                           {
@@ -445,19 +418,13 @@
                                   "f"
                                 ]
                               },
-                              "qual_type" : {
-                                "raw" : "const class Foo &",
-                                "type_ptr" : "15"
-                              }
+                              "qual_type" : "15"
                             }
                           }
                         ]]
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "class Foo",
-                          "type_ptr" : "6"
-                        },
+                        "qual_type" : "6",
                         "value_kind" : "LValue"
                       },
                       {
@@ -465,10 +432,7 @@
                         "base_path" : [
                         ]
                       },
-                      {
-                        "raw" : "class Foo &",
-                        "type_ptr" : "20"
-                      },
+                      "20",
                       "const_cast"
                     ]]
                   }
@@ -517,10 +481,7 @@
                       [
                       ],
                       {
-                        "qual_type" : {
-                          "raw" : "class Foo",
-                          "type_ptr" : "6"
-                        },
+                        "qual_type" : "6",
                         "value_kind" : "LValue"
                       },
                       {
@@ -533,19 +494,13 @@
                               "fRef"
                             ]
                           },
-                          "qual_type" : {
-                            "raw" : "class Foo &",
-                            "type_ptr" : "20"
-                          }
+                          "qual_type" : "20"
                         }
                       }
                     ]]
                   ],
                   {
-                    "qual_type" : {
-                      "raw" : "<bound member function type>",
-                      "type_ptr" : "25"
-                    }
+                    "qual_type" : "25"
                   },
                   {
                     "name" : {
@@ -565,19 +520,13 @@
                           "Foo"
                         ]
                       },
-                      "qual_type" : {
-                        "raw" : "void (void)",
-                        "type_ptr" : "10"
-                      }
+                      "qual_type" : "10"
                     }
                   }
                 ]]
               ],
               {
-                "qual_type" : {
-                  "raw" : "void",
-                  "type_ptr" : "26"
-                }
+                "qual_type" : "26"
               }
             ]]
           ]
