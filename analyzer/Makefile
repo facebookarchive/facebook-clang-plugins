@@ -48,7 +48,7 @@ include $(LEVEL)/Makefile.rules
 
 build/FacebookAnalyzerPlugin.dylib: $(OBJS:%=build/%)
 	@mkdir -p build
-	$(CXX) $(LDFLAGS) -o $@  $^ -lz -lpthread -lm
+	$(CXX) $(LDFLAGS_DYLIB) -o $@  $^ -lz -lpthread -lm
 
 CC1_PLUGIN_ARGS=-load $(shell pwd)/build/FacebookAnalyzerPlugin.dylib -analyze $(CHECKERS:%=-analyzer-checker=%)
 PLUGIN_ARGS=$(CC1_PLUGIN_ARGS:%=-Xclang %)

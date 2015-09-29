@@ -23,7 +23,6 @@ CFLAGS?=$(CFLAGS_$(shell uname))
 LDFLAGS?=$(LDFLAGS_$(shell uname))
 
 CFLAGS+=$(CLANG_INCLUDES:%=-I%) -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -fno-common -Woverloaded-virtual -Wcast-qual -fno-strict-aliasing -pedantic -Wno-long-long -Wall -W -Wno-unused-parameter -Wwrite-strings -Wno-uninitialized  -Wno-missing-field-initializers -Wno-vla-extension -Wno-c99-extensions
-LDFLAGS+=-Wl,-rpath -Wl,@executable_path/../lib -Wl,-undefined,dynamic_lookup -Wl,-flat_namespace -Wl,-undefined,suppress -dynamiclib -shared
 
 ifdef DEBUG
 CFLAGS+=-DDEBUG -g
@@ -41,6 +40,25 @@ HEADERS?=
 
 # test runner
 RUNTEST=$(LEVEL)/scripts/run_test.sh
+
+LDFLAGS_DYLIB=$(LDFLAGS)
+LDFLAGS_DYLIB+=-Wl,-rpath -Wl,@executable_path/../lib -Wl,-undefined,dynamic_lookup -Wl,-flat_namespace -Wl,-undefined,suppress -dynamiclib -shared
+
+CLANG_TOOL_LIBS := \
+    -lclangFrontend \
+    -lclangSerialization \
+    -lclangDriver \
+    -lclangTooling \
+    -lclangCodeGen \
+    -lclangParse \
+    -lclangSema \
+    -lclangAnalysis \
+    -lclangRewriteFrontend \
+    -lclangRewrite \
+    -lclangEdit \
+    -lclangAST \
+    -lclangLex \
+    -lclangBasic
 
 # Local Variables:
 # mode: makefile

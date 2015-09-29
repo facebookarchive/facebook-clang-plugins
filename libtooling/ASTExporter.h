@@ -447,8 +447,8 @@ public:
 //  Utilities
 //===----------------------------------------------------------------------===//
 
-std::unordered_map<const void*, int> pointerMap;
-int pointerCounter = 0;
+static std::unordered_map<const void*, int> pointerMap;
+static int pointerCounter = 0;
 
 /// \atd
 /// type pointer = string
@@ -4458,5 +4458,37 @@ void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
 TYPE(None, Type)
 #include <clang/AST/TypeNodes.def>
 /// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_type">
+
+
+template <
+  class ATDWriter=JsonWriter,
+  bool ForceYojson=false
+>
+class ExporterASTConsumer : public ASTConsumer {
+private:
+  ASTExporterOptions Options;
+  raw_ostream &OS;
+
+public:
+  ExporterASTConsumer(const CompilerInstance &CI,
+                      std::unique_ptr<ASTExporterOptions> &&Opts,
+                      raw_ostream &OS)
+  : Options(std::move(*Opts)), OS(OS)
+  {
+    if (ForceYojson) {
+      this->Options.atdWriterOptions.useYojson = true;
+    }
+  }
+
+  virtual void HandleTranslationUnit(ASTContext &Context) {
+    TranslationUnitDecl *D = Context.getTranslationUnitDecl();
+    ASTExporter<ATDWriter> P(OS, Context, Options);
+    P.dumpDecl(D);
+  }
+};
+
+typedef ASTPluginLib::SimplePluginASTAction<ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, false>, ASTLib::ASTExporterOptions> JsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, true>, ASTLib::ASTExporterOptions> YojsonExporterASTAction;
+typedef ASTPluginLib::SimplePluginASTAction<ASTLib::ExporterASTConsumer<ATDWriter::BiniouWriter<llvm::raw_ostream>, true>, ASTLib::ASTExporterOptions> BiniouExporterASTAction;
 
 } // end of namespace ASTLib

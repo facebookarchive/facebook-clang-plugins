@@ -19,6 +19,7 @@
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/CompilerInstance.h>
 #include <clang/Frontend/FrontendAction.h>
+#include <clang/Tooling/Tooling.h>
 
 #include "FileServices.h"
 #include "FileUtils.h"
@@ -88,6 +89,7 @@ class SimplePluginASTActionBase : public clang::PluginASTAction {
 protected:
   std::unique_ptr<PluginASTOptions> Options;
 
+  // Called when FrontendPluginRegistry is used.
   virtual bool ParseArgs(const clang::CompilerInstance &CI,
                          const std::vector<std::string> &args_) {
     std::vector<std::string> args = args_;
@@ -100,6 +102,27 @@ protected:
     return true;
   }
 
+  SimplePluginASTActionBase() {}
+
+  // Alternate constructor to pass an optional sequence "KEY=VALUE,.."
+  // expected to be use with SimpleFrontendActionFactory below.
+  explicit SimplePluginASTActionBase(const std::vector<std::string> &args) {
+    Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
+    Options->loadValuesFromEnvAndMap(PluginASTOptions::makeMap(args));
+  }
+
+};
+
+template <class SimpleASTAction>
+class SimpleFrontendActionFactory : public clang::tooling::FrontendActionFactory {
+  std::vector<std::string> args_;
+
+ public:
+  explicit SimpleFrontendActionFactory(std::vector<std::string> args) : args_(args) {}
+
+  clang::FrontendAction *create() override {
+    return new SimpleASTAction(args_);
+  }
 };
 
 template <
@@ -113,16 +136,24 @@ template <
 class SimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions> {
   typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
-protected:
+ public:
+  SimplePluginASTAction() {}
+
+  explicit SimplePluginASTAction(const std::vector<std::string> &args)
+      : SimplePluginASTActionBase<PluginASTOptions>(args) {}
+
+ protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
     if (Parent::Options == nullptr) {
       Parent::Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
-      Parent::Options->loadValuesFromEnvAndMap(std::unordered_map<std::string, std::string>());
+      Parent::Options->loadValuesFromEnvAndMap(
+        std::unordered_map<std::string, std::string>());
     }
+
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
-    llvm::raw_pwrite_stream *OS =
+    auto *OS =
       CI.createOutputFile(Parent::Options->outputFile,
                           Binary,
                           RemoveFileOnSignal,
@@ -147,12 +178,20 @@ template <
 class NoOpenSimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions> {
   typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
+ public:
+  NoOpenSimplePluginASTAction() {}
+
+  explicit NoOpenSimplePluginASTAction(const std::vector<std::string> &args)
+      : SimplePluginASTActionBase<PluginASTOptions>(args) {}
+
 protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
     if (Parent::Options == nullptr) {
       Parent::Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
-      Parent::Options->loadValuesFromEnvAndMap(std::unordered_map<std::string, std::string>());
+      Parent::Options->loadValuesFromEnvAndMap(
+        std::unordered_map<std::string, std::string>());
     }
+
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 

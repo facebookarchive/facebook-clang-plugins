@@ -44,10 +44,17 @@ CLANG_FRONTEND=$(CLANG) -fsyntax-only -Xpreprocessor -detailed-preprocessing-rec
 
 build/FacebookClangPlugin.dylib: $(OBJS:%=build/%) $(HEADERS)
 	@mkdir -p build
-	$(CXX) $(LDFLAGS) -o $@ $(OBJS:%=build/%) -lz -lpthread -lm
+	$(CXX) $(LDFLAGS_DYLIB) -o $@ $(OBJS:%=build/%) -lz -lpthread -lm
 
 build/record_copied_file: build/record_copied_file.o build/FileServices.o $(HEADERS)
+	@mkdir -p build
 	$(CXX) $(CFLAGS) -o $@ build/record_copied_file.o build/FileServices.o
+
+# Experimental tool. This requires clang static libraries.
+AST_EXPORTER_OBJS=ast_exporter_bin.o SimplePluginASTAction.o FileUtils.o FileServices.o AttrParameterVectorStream.o
+build/ast_exporter_bin: $(AST_EXPORTER_OBJS:%=build/%) $(HEADERS)
+	@mkdir -p build
+	$(CXX) $(LDFLAGS) $(LLVM_CXXFLAGS) $(CLANG_TOOL_LIBS) $(LLVM_LDFLAGS) -lz -lpthread -lm -o $@ $(AST_EXPORTER_OBJS:%=build/%)
 
 TEST_DIRS=tests
 ifneq "$(EXTRA_DIR)" ""
