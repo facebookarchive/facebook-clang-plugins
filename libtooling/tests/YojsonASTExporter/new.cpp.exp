@@ -536,7 +536,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : "9"
+                  "type_ptr" : "9"
                 }>,
                 "init_expr" : <"IntegerLiteral" : (
                   {
@@ -553,7 +553,7 @@
                   [
                   ],
                   {
-                    "qual_type" : "9"
+                    "type_ptr" : "9"
                   },
                   {
                     "is_signed" : true,
@@ -573,7 +573,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : "9"
+                  "type_ptr" : "9"
                 }>,
                 "init_expr" : <"IntegerLiteral" : (
                   {
@@ -590,7 +590,7 @@
                   [
                   ],
                   {
-                    "qual_type" : "9"
+                    "type_ptr" : "9"
                   },
                   {
                     "is_signed" : true,
@@ -610,7 +610,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : "6"
+                  "type_ptr" : "6"
                 }>,
                 "init_expr" : <"CXXConstructExpr" : (
                   {
@@ -627,10 +627,10 @@
                   [
                   ],
                   {
-                    "qual_type" : "6"
+                    "type_ptr" : "6"
                   },
                   {
-                    "qual_type" : "11"
+                    "type_ptr" : "11"
                   }
                 )>
               }
@@ -744,7 +744,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : "9"
+                  "type_ptr" : "9"
                 }>,
                 "init_expr" : <"ImplicitCastExpr" : (
                   {
@@ -774,7 +774,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9",
+                        "type_ptr" : "9",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -787,13 +787,13 @@
                               "a"
                             ]
                           },
-                          "qual_type" : "9"
+                          "type_ptr" : "9"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "9"
+                    "type_ptr" : "9"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -813,7 +813,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : "9"
+                  "type_ptr" : "9"
                 }>,
                 "init_expr" : <"ImplicitCastExpr" : (
                   {
@@ -843,7 +843,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9",
+                        "type_ptr" : "9",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -856,13 +856,13 @@
                               "b"
                             ]
                           },
-                          "qual_type" : "9"
+                          "type_ptr" : "9"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "9"
+                    "type_ptr" : "9"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -882,7 +882,7 @@
                       "cpplike"
                     ]
                   },
-                  "qual_type" : "6"
+                  "type_ptr" : "6"
                 }>,
                 "init_expr" : <"CXXConstructExpr" : (
                   {
@@ -899,10 +899,10 @@
                   [
                   ],
                   {
-                    "qual_type" : "6"
+                    "type_ptr" : "6"
                   },
                   {
-                    "qual_type" : "11"
+                    "type_ptr" : "11"
                   }
                 )>
               }
@@ -1149,7 +1149,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9"
+                        "type_ptr" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1159,7 +1159,7 @@
                     )>
                   ],
                   {
-                    "qual_type" : "60"
+                    "type_ptr" : "60"
                   },
                   {
                     "initializer_expr" : "59"
@@ -1219,7 +1219,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1229,7 +1229,7 @@
                         )>
                       ],
                       {
-                        "qual_type" : "60"
+                        "type_ptr" : "60"
                       },
                       {
                         "initializer_expr" : "59"
@@ -1281,7 +1281,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9"
+                        "type_ptr" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1291,7 +1291,7 @@
                     )>
                   ],
                   {
-                    "qual_type" : "60"
+                    "type_ptr" : "60"
                   },
                   {
                     "is_array" : true,
@@ -1352,7 +1352,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1362,7 +1362,7 @@
                         )>
                       ],
                       {
-                        "qual_type" : "60"
+                        "type_ptr" : "60"
                       },
                       {
                         "is_array" : true,
@@ -1415,15 +1415,15 @@
                       [
                       ],
                       {
-                        "qual_type" : "6"
+                        "type_ptr" : "6"
                       },
                       {
-                        "qual_type" : "11"
+                        "type_ptr" : "11"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "70"
+                    "type_ptr" : "70"
                   },
                   {
                     "initializer_expr" : "69"
@@ -1483,15 +1483,15 @@
                           [
                           ],
                           {
-                            "qual_type" : "6"
+                            "type_ptr" : "6"
                           },
                           {
-                            "qual_type" : "11"
+                            "type_ptr" : "11"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "70"
+                        "type_ptr" : "70"
                       },
                       {
                         "initializer_expr" : "69"
@@ -1543,7 +1543,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9"
+                        "type_ptr" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1566,15 +1566,15 @@
                       [
                       ],
                       {
-                        "qual_type" : "6"
+                        "type_ptr" : "6"
                       },
                       {
-                        "qual_type" : "11"
+                        "type_ptr" : "11"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "70"
+                    "type_ptr" : "70"
                   },
                   {
                     "is_array" : true,
@@ -1636,7 +1636,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1659,15 +1659,15 @@
                           [
                           ],
                           {
-                            "qual_type" : "6"
+                            "type_ptr" : "6"
                           },
                           {
-                            "qual_type" : "11"
+                            "type_ptr" : "11"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "70"
+                        "type_ptr" : "70"
                       },
                       {
                         "is_array" : true,
@@ -1734,7 +1734,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1757,7 +1757,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -1767,15 +1767,15 @@
                         )>
                       ],
                       {
-                        "qual_type" : "24"
+                        "type_ptr" : "24"
                       },
                       {
-                        "qual_type" : "36"
+                        "type_ptr" : "36"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "83"
+                    "type_ptr" : "83"
                   },
                   {
                     "initializer_expr" : "80"
@@ -1848,7 +1848,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -1871,7 +1871,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -1881,15 +1881,15 @@
                             )>
                           ],
                           {
-                            "qual_type" : "24"
+                            "type_ptr" : "24"
                           },
                           {
-                            "qual_type" : "36"
+                            "type_ptr" : "36"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "83"
+                        "type_ptr" : "83"
                       },
                       {
                         "initializer_expr" : "80"
@@ -1941,7 +1941,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9"
+                        "type_ptr" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -1964,15 +1964,15 @@
                       [
                       ],
                       {
-                        "qual_type" : "24"
+                        "type_ptr" : "24"
                       },
                       {
-                        "qual_type" : "30"
+                        "type_ptr" : "30"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "83"
+                    "type_ptr" : "83"
                   },
                   {
                     "is_array" : true,
@@ -2034,7 +2034,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -2057,15 +2057,15 @@
                           [
                           ],
                           {
-                            "qual_type" : "24"
+                            "type_ptr" : "24"
                           },
                           {
-                            "qual_type" : "30"
+                            "type_ptr" : "30"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "83"
+                        "type_ptr" : "83"
                       },
                       {
                         "is_array" : true,
@@ -2119,7 +2119,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "62",
+                        "type_ptr" : "62",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2132,13 +2132,13 @@
                               "i"
                             ]
                           },
-                          "qual_type" : "62"
+                          "type_ptr" : "62"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "62"
+                    "type_ptr" : "62"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -2148,7 +2148,7 @@
                 )>
               ],
               {
-                "qual_type" : "94"
+                "type_ptr" : "94"
               },
               {
               }
@@ -2195,7 +2195,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "62",
+                        "type_ptr" : "62",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2208,13 +2208,13 @@
                               "i_a"
                             ]
                           },
-                          "qual_type" : "62"
+                          "type_ptr" : "62"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "62"
+                    "type_ptr" : "62"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -2224,7 +2224,7 @@
                 )>
               ],
               {
-                "qual_type" : "94"
+                "type_ptr" : "94"
               },
               {
                 "is_array" : true
@@ -2272,7 +2272,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "72",
+                        "type_ptr" : "72",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2285,13 +2285,13 @@
                               "p"
                             ]
                           },
-                          "qual_type" : "72"
+                          "type_ptr" : "72"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "72"
+                    "type_ptr" : "72"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -2301,7 +2301,7 @@
                 )>
               ],
               {
-                "qual_type" : "94"
+                "type_ptr" : "94"
               },
               {
               }
@@ -2348,7 +2348,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "72",
+                        "type_ptr" : "72",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2361,13 +2361,13 @@
                               "p_a"
                             ]
                           },
-                          "qual_type" : "72"
+                          "type_ptr" : "72"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "72"
+                    "type_ptr" : "72"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -2377,7 +2377,7 @@
                 )>
               ],
               {
-                "qual_type" : "94"
+                "type_ptr" : "94"
               },
               {
                 "is_array" : true
@@ -2425,7 +2425,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "85",
+                        "type_ptr" : "85",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2438,13 +2438,13 @@
                               "c"
                             ]
                           },
-                          "qual_type" : "85"
+                          "type_ptr" : "85"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "85"
+                    "type_ptr" : "85"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -2454,7 +2454,7 @@
                 )>
               ],
               {
-                "qual_type" : "94"
+                "type_ptr" : "94"
               },
               {
               }
@@ -2501,7 +2501,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "85",
+                        "type_ptr" : "85",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2514,13 +2514,13 @@
                               "c_a"
                             ]
                           },
-                          "qual_type" : "85"
+                          "type_ptr" : "85"
                         }
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "85"
+                    "type_ptr" : "85"
                   },
                   {
                     "cast_kind" : <"LValueToRValue">,
@@ -2530,7 +2530,7 @@
                 )>
               ],
               {
-                "qual_type" : "94"
+                "type_ptr" : "94"
               },
               {
                 "is_array" : true
@@ -2899,7 +2899,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9"
+                        "type_ptr" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -2935,7 +2935,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -2958,7 +2958,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -2981,7 +2981,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -2991,12 +2991,12 @@
                         )>
                       ],
                       {
-                        "qual_type" : "137"
+                        "type_ptr" : "137"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "60"
+                    "type_ptr" : "60"
                   },
                   {
                     "is_array" : true,
@@ -3056,7 +3056,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3092,7 +3092,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3115,7 +3115,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3138,7 +3138,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3148,12 +3148,12 @@
                             )>
                           ],
                           {
-                            "qual_type" : "137"
+                            "type_ptr" : "137"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "60"
+                        "type_ptr" : "60"
                       },
                       {
                         "is_array" : true,
@@ -3220,7 +3220,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3243,7 +3243,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3253,15 +3253,15 @@
                         )>
                       ],
                       {
-                        "qual_type" : "24"
+                        "type_ptr" : "24"
                       },
                       {
-                        "qual_type" : "36"
+                        "type_ptr" : "36"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "83"
+                    "type_ptr" : "83"
                   },
                   {
                     "initializer_expr" : "141"
@@ -3332,7 +3332,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3355,7 +3355,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3365,15 +3365,15 @@
                             )>
                           ],
                           {
-                            "qual_type" : "24"
+                            "type_ptr" : "24"
                           },
                           {
-                            "qual_type" : "36"
+                            "type_ptr" : "36"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "83"
+                        "type_ptr" : "83"
                       },
                       {
                         "initializer_expr" : "141"
@@ -3425,7 +3425,7 @@
                       [
                       ],
                       {
-                        "qual_type" : "9"
+                        "type_ptr" : "9"
                       },
                       {
                         "is_signed" : true,
@@ -3474,7 +3474,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3497,7 +3497,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3507,10 +3507,10 @@
                             )>
                           ],
                           {
-                            "qual_type" : "24"
+                            "type_ptr" : "24"
                           },
                           {
-                            "qual_type" : "36"
+                            "type_ptr" : "36"
                           }
                         )>,
                         <"CXXConstructExpr" : (
@@ -3541,7 +3541,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3564,7 +3564,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3574,10 +3574,10 @@
                             )>
                           ],
                           {
-                            "qual_type" : "24"
+                            "type_ptr" : "24"
                           },
                           {
-                            "qual_type" : "36"
+                            "type_ptr" : "36"
                           }
                         )>,
                         <"CXXConstructExpr" : (
@@ -3608,7 +3608,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3631,7 +3631,7 @@
                               [
                               ],
                               {
-                                "qual_type" : "9"
+                                "type_ptr" : "9"
                               },
                               {
                                 "is_signed" : true,
@@ -3641,20 +3641,20 @@
                             )>
                           ],
                           {
-                            "qual_type" : "24"
+                            "type_ptr" : "24"
                           },
                           {
-                            "qual_type" : "36"
+                            "type_ptr" : "36"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "158"
+                        "type_ptr" : "158"
                       }
                     )>
                   ],
                   {
-                    "qual_type" : "83"
+                    "type_ptr" : "83"
                   },
                   {
                     "is_array" : true,
@@ -3714,7 +3714,7 @@
                           [
                           ],
                           {
-                            "qual_type" : "9"
+                            "type_ptr" : "9"
                           },
                           {
                             "is_signed" : true,
@@ -3763,7 +3763,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : "9"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -3786,7 +3786,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : "9"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -3796,10 +3796,10 @@
                                 )>
                               ],
                               {
-                                "qual_type" : "24"
+                                "type_ptr" : "24"
                               },
                               {
-                                "qual_type" : "36"
+                                "type_ptr" : "36"
                               }
                             )>,
                             <"CXXConstructExpr" : (
@@ -3830,7 +3830,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : "9"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -3853,7 +3853,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : "9"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -3863,10 +3863,10 @@
                                 )>
                               ],
                               {
-                                "qual_type" : "24"
+                                "type_ptr" : "24"
                               },
                               {
-                                "qual_type" : "36"
+                                "type_ptr" : "36"
                               }
                             )>,
                             <"CXXConstructExpr" : (
@@ -3897,7 +3897,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : "9"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -3920,7 +3920,7 @@
                                   [
                                   ],
                                   {
-                                    "qual_type" : "9"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "is_signed" : true,
@@ -3930,20 +3930,20 @@
                                 )>
                               ],
                               {
-                                "qual_type" : "24"
+                                "type_ptr" : "24"
                               },
                               {
-                                "qual_type" : "36"
+                                "type_ptr" : "36"
                               }
                             )>
                           ],
                           {
-                            "qual_type" : "158"
+                            "type_ptr" : "158"
                           }
                         )>
                       ],
                       {
-                        "qual_type" : "83"
+                        "type_ptr" : "83"
                       },
                       {
                         "is_array" : true,

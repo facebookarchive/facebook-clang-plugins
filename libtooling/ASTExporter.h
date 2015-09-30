@@ -539,8 +539,6 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
   }
 }
 
-/// \atd
-/// type qual_type = type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
   dumpPointerToType(T);
@@ -587,7 +585,7 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl& decl) {
 ///   decl_pointer : pointer;
 ///   ?name : named_decl_info option;
 ///   ~is_hidden : bool;
-///   ?qual_type : qual_type option
+///   ?type_ptr : type_ptr option
 /// } <ocaml field_prefix="dr_">
 ///
 /// type decl_kind = [
@@ -612,7 +610,7 @@ void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
     OF.emitFlag("is_hidden", IsHidden);
   }
   if (VD) {
-    OF.emitTag("qual_type");
+    OF.emitTag("type_ptr");
     dumpQualType(VD->getType());
   }
 }
@@ -848,8 +846,8 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
 /// } <ocaml field_prefix="xci_">
 /// type cxx_ctor_initializer_subject = [
 ///   Member of decl_ref
-/// | Delegating of qual_type
-/// | BaseClass of (qual_type * bool)
+/// | Delegating of type_ptr
+/// | BaseClass of (type_ptr * bool)
 /// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(const CXXCtorInitializer &Init) {
@@ -1256,7 +1254,7 @@ int ASTExporter<ATDWriter>::ValueDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
 /// \atd
-/// #define value_decl_tuple named_decl_tuple * qual_type
+/// #define value_decl_tuple named_decl_tuple * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitValueDecl(const ValueDecl *D) {
   VisitNamedDecl(D);
@@ -2011,7 +2009,7 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 /// #define obj_c_method_decl_tuple named_decl_tuple * obj_c_method_decl_info
 /// type obj_c_method_decl_info = {
 ///   ~is_instance_method : bool;
-///   result_type : qual_type;
+///   result_type : type_ptr;
 ///   ~parameters : decl list;
 ///   ~is_variadic : bool;
 ///   ?body : stmt option;
@@ -2254,7 +2252,7 @@ int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
 /// #define obj_c_property_decl_tuple named_decl_tuple * obj_c_property_decl_info
 /// type obj_c_property_decl_info = {
 ///   ?class_interface : decl_ref option;
-///   qual_type : qual_type;
+///   type_ptr : type_ptr;
 ///   ~property_control <ocaml default="`None"> : obj_c_property_control;
 ///   ~property_attributes : property_attribute list
 /// } <ocaml field_prefix="opdi_">
@@ -2284,7 +2282,7 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   // NOTE: class_interface is always None
   ObjectScope Scope(OF, 1 + HasPropertyControl + HasPropertyAttributes); // not covered by tests
 
-  OF.emitTag("qual_type");
+  OF.emitTag("type_ptr");
   dumpQualType(D->getType());
 
   if (HasPropertyControl) {
@@ -2614,7 +2612,7 @@ int ASTExporter<ATDWriter>::ExprTupleSize() {
 /// \atd
 /// #define expr_tuple stmt_tuple * expr_info
 /// type expr_info = {
-///   qual_type : qual_type;
+///   type_ptr : type_ptr;
 ///   ~value_kind <ocaml default="`RValue"> : value_kind;
 ///   ~object_kind <ocaml default="`Ordinary"> : object_kind;
 /// } <ocaml field_prefix="ei_">
@@ -2632,7 +2630,7 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
   bool HasNonDefaultObjectKind = OK != OK_Ordinary;
   ObjectScope Scope(OF, 1 + HasNonDefaultValueKind + HasNonDefaultObjectKind);
 
-  OF.emitTag("qual_type");
+  OF.emitTag("type_ptr");
   dumpQualType(Node->getType());
 
   if (HasNonDefaultValueKind) {
@@ -2775,7 +2773,7 @@ int ASTExporter<ATDWriter>::ExplicitCastExprTupleSize() {
   return CastExprTupleSize() + 1;
 }
 /// \atd
-/// #define explicit_cast_expr_tuple cast_expr_tuple * qual_type
+/// #define explicit_cast_expr_tuple cast_expr_tuple * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExplicitCastExpr(const ExplicitCastExpr *Node) {
   VisitCastExpr(Node);
@@ -3045,7 +3043,7 @@ int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
 /// #define unary_expr_or_type_trait_expr_tuple expr_tuple * unary_expr_or_type_trait_expr_info
 /// type unary_expr_or_type_trait_expr_info = {
 ///   kind : unary_expr_or_type_trait_kind;
-///   ?qual_type : qual_type option
+///   ?type_ptr : type_ptr option
 /// } <ocaml field_prefix="uttei_">
 ///
 /// type unary_expr_or_type_trait_kind = [ SizeOf | AlignOf | VecStep | OpenMPRequiredSimdAlign ]
@@ -3073,7 +3071,7 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     break;
   }
   if (HasQualType) {
-    OF.emitTag("qual_type");
+    OF.emitTag("type_ptr");
     dumpQualType(Node->getArgumentType());
   }
 }
@@ -3208,8 +3206,8 @@ int ASTExporter<ATDWriter>::CompoundAssignOperatorTupleSize() {
 /// \atd
 /// #define compound_assign_operator_tuple binary_operator_tuple * compound_assign_operator_info
 /// type compound_assign_operator_info = {
-///   lhs_type : qual_type;
-///   result_type : qual_type;
+///   lhs_type : type_ptr;
+///   result_type : type_ptr;
 /// } <ocaml field_prefix="caoi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCompoundAssignOperator(const CompoundAssignOperator *Node) {
@@ -3312,7 +3310,7 @@ int ASTExporter<ATDWriter>::CXXConstructExprTupleSize() {
 /// \atd
 /// #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
 /// type cxx_construct_expr_info = {
-///   qual_type : qual_type;
+///   type_ptr : type_ptr;
 ///   ~is_elidable : bool;
 ///   ~requires_zero_initialization : bool;
 /// } <ocaml field_prefix="xcei_">
@@ -3324,7 +3322,7 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(const CXXConstructExpr *Node)
   bool RequiresZeroInitialization = Node->requiresZeroInitialization();
   ObjectScope Scope(OF, 1 + IsElidable + RequiresZeroInitialization);
 
-  OF.emitTag("qual_type");
+  OF.emitTag("type_ptr");
   CXXConstructorDecl *Ctor = Node->getConstructor();
   dumpQualType(Ctor->getType());
   OF.emitFlag("is_elidable", IsElidable);
@@ -3483,7 +3481,7 @@ int ASTExporter<ATDWriter>::ObjCMessageExprTupleSize() {
 ///   ~receiver_kind <ocaml default="`Instance"> : receiver_kind
 /// } <ocaml field_prefix="omei_">
 ///
-/// type receiver_kind = [ Instance | Class of qual_type | SuperInstance | SuperClass ]
+/// type receiver_kind = [ Instance | Class of type_ptr | SuperInstance | SuperClass ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
   VisitExpr(Node);
@@ -3590,7 +3588,7 @@ int ASTExporter<ATDWriter>::ObjCEncodeExprTupleSize() {
   return ExprTupleSize() + 1;
 }
 /// \atd
-/// #define obj_c_encode_expr_tuple expr_tuple * qual_type
+/// #define obj_c_encode_expr_tuple expr_tuple * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCEncodeExpr(const ObjCEncodeExpr *Node) {
   VisitExpr(Node);
