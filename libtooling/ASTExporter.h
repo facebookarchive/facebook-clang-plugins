@@ -1246,7 +1246,7 @@ void ASTExporter<ATDWriter>::VisitTypeDecl(const TypeDecl *D) {
   VisitNamedDecl(D);
   const Type* T = D->getTypeForDecl();
   dumpTypeOld(T);
-  dumpPointer(T);
+  dumpPointerToType(QualType(T,0));
 }
 
 template <class ATDWriter>
@@ -3951,7 +3951,9 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
 }
 
 /// \atd
-/// type type_ptr = pointer
+/// type type_ptr = pointer wrap <ocaml t="Clang_ast_types.t_ptr"
+///                              wrap="Clang_ast_types.pointer_to_type_ptr"
+///                              unwrap="Clang_ast_types.type_ptr_to_pointer">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpPointerToType(const QualType &qt) {
   const Type *T = qt.getTypePtrOrNull();

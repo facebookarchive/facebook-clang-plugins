@@ -90,7 +90,7 @@ build/process_test: build/process.cmx build/process_test.cmx
 build/utils_test: build/process.cmx build/utils.cmx build/utils_test.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-CLANG_AST_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j process utils yojson_utils)
+CLANG_AST_LIBS=$(patsubst %,build/%.cmx,clang_ast_types clang_ast_t clang_ast_j process utils yojson_utils)
 
 build/yojson_utils_test: $(CLANG_AST_LIBS) build/yojson_utils_test.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
@@ -102,7 +102,7 @@ build/clang_ast_proj_test: $(CLANG_AST_LIBS) build/clang_ast_proj.cmx build/clan
 build/clang_ast_converter: $(CLANG_AST_LIBS) build/clang_ast_converter.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-CLANG_AST_PROJ_LIBS=$(patsubst %,build/%.cmx,clang_ast_t clang_ast_j clang_ast_proj clang_ast_visit clang_ast_v clang_ast_main)
+CLANG_AST_PROJ_LIBS=$(patsubst %,build/%.cmx,clang_ast_types clang_ast_t clang_ast_j clang_ast_proj clang_ast_visit clang_ast_v clang_ast_main)
 
 # example of AST visitor
 build/clang_ast_named_decl_printer: $(CLANG_AST_PROJ_LIBS) build/clang_ast_named_decl_printer.cmx
