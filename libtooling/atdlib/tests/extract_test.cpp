@@ -15,3 +15,6 @@ int main() {
 /// \atd bar
 
 /// still there
+
+/// some long line cut with \
+///   bla

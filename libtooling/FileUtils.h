@@ -17,20 +17,27 @@
 
 namespace FileUtils {
 
-  /**
-   * Simplify away "." and ".." elements.
-   * If pathToNormalize is a relative path, it will be pre-pended with currentWorkingDirectory unless currentWorkingDirectory == "".
-   */
-  std::string makeAbsolutePath(const std::string &currentWorkingDirectory, std::string pathToNormalize);
+/**
+ * Simplify away "." and ".." elements.
+ * If pathToNormalize is a relative path, it will be pre-pended with
+ * currentWorkingDirectory unless currentWorkingDirectory == "".
+ */
+std::string makeAbsolutePath(const std::string &currentWorkingDirectory,
+                             std::string pathToNormalize);
 
-  /**
-   * Try to delete a prefix "repoRoot/" from the given absolute path. Return the same path otherwise.
-   */
-  std::string makeRelativePath(const std::string &repoRoot, const std::string &path, bool keepExternalPaths);
+/**
+ * Try to delete a prefix "repoRoot/" from the given absolute path. Return the
+ * same path otherwise.
+ */
+std::string makeRelativePath(const std::string &repoRoot,
+                             const std::string &path,
+                             bool keepExternalPaths);
 
-  /**
-   * Determine if a declaration should be traversed.
-   */
-  bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService, const std::string &BasePath, const clang::SourceManager &SM,const clang::Decl &Decl);
-
+/**
+ * Determine if a declaration should be traversed.
+ */
+bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService,
+                            const std::string &BasePath,
+                            const clang::SourceManager &SM,
+                            const clang::Decl &Decl);
 }

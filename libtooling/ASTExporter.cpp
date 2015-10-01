@@ -3,7 +3,8 @@
  * Copyright (c) 2003-2014 University of Illinois at Urbana-Champaign.
  * All rights reserved.
  *
- * This file is distributed under the University of Illinois Open Source License.
+ * This file is distributed under the University of Illinois Open Source
+ * License.
  * See LLVM-LICENSE for details.
  *
  */
@@ -19,11 +20,14 @@
 // ASTExporter Plugin
 //===----------------------------------------------------------------------===//
 
-static clang::FrontendPluginRegistry::Add<ASTLib::JsonExporterASTAction>
-X("JsonASTExporter", "Export the AST of source files into ATD-specified Json data");
+static clang::FrontendPluginRegistry::Add<ASTLib::JsonExporterASTAction> X(
+    "JsonASTExporter",
+    "Export the AST of source files into ATD-specified Json data");
 
-static clang::FrontendPluginRegistry::Add<ASTLib::YojsonExporterASTAction>
-Y("YojsonASTExporter", "Export the AST of source files into ATD-specified Yojson data");
+static clang::FrontendPluginRegistry::Add<ASTLib::YojsonExporterASTAction> Y(
+    "YojsonASTExporter",
+    "Export the AST of source files into ATD-specified Yojson data");
 
-static clang::FrontendPluginRegistry::Add<ASTLib::BiniouExporterASTAction>
-Z("BiniouASTExporter", "Export the AST of source files into ATD-specified biniou data");
+static clang::FrontendPluginRegistry::Add<ASTLib::BiniouExporterASTAction> Z(
+    "BiniouASTExporter",
+    "Export the AST of source files into ATD-specified biniou data");

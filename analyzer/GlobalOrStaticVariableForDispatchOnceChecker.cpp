@@ -25,55 +25,58 @@
 using namespace clang;
 using namespace ento;
 
-class GlobalOrStaticVariableForDispatchOnceChecker : public Checker<
-                                      check::ASTDecl<VarDecl>,
-                                      check::ASTDecl<ObjCIvarDecl>,
-                                      check::ASTDecl<ObjCPropertyDecl> > {
+class GlobalOrStaticVariableForDispatchOnceChecker
+    : public Checker<check::ASTDecl<VarDecl>,
+                     check::ASTDecl<ObjCIvarDecl>,
+                     check::ASTDecl<ObjCPropertyDecl>> {
 
-private:
+ private:
   static bool isDispatchOnceType(const TypeSourceInfo *typeSourceInfo) {
     return typeSourceInfo &&
-      (typeSourceInfo->getType().getAsString() == "dispatch_once_t");
+           (typeSourceInfo->getType().getAsString() == "dispatch_once_t");
   }
 
   void emitReport(const Decl *D, BugReporter &BR) const {
     PathDiagnosticLocation L =
-      	PathDiagnosticLocation::create(D, BR.getSourceManager());
-    BR.EmitBasicReport(D,
-                       this,
-                       "Non-Global/Static variable for dispatch_once_t",
-                       "Coding style issue (Facebook)",
-                       "Please consider using a global or "
-                       "static variable for dispatch_once_t to avoid unexpected behavior",
-                       L);
+        PathDiagnosticLocation::create(D, BR.getSourceManager());
+    BR.EmitBasicReport(
+        D,
+        this,
+        "Non-Global/Static variable for dispatch_once_t",
+        "Coding style issue (Facebook)",
+        "Please consider using a global or "
+        "static variable for dispatch_once_t to avoid unexpected behavior",
+        L);
   }
 
-public:
-  void checkASTDecl(const VarDecl *D, AnalysisManager& mgr,
+ public:
+  void checkASTDecl(const VarDecl *D,
+                    AnalysisManager &mgr,
                     BugReporter &BR) const {
-    if (D && isDispatchOnceType(D->getTypeSourceInfo())
-	      && !D->hasGlobalStorage() && !D->isStaticLocal()) {
-  	  this->emitReport(D, BR); 
-	  }
+    if (D && isDispatchOnceType(D->getTypeSourceInfo()) &&
+        !D->hasGlobalStorage() && !D->isStaticLocal()) {
+      this->emitReport(D, BR);
+    }
   }
 
-  void checkASTDecl(const ObjCIvarDecl *D, AnalysisManager& mgr,
-                    BugReporter &BR) const {
-    if (D && isDispatchOnceType(D->getTypeSourceInfo())) {
-  	  this->emitReport(D, BR);
-	  }
-  }
-
-  void checkASTDecl(const ObjCPropertyDecl *D, AnalysisManager& mgr,
+  void checkASTDecl(const ObjCIvarDecl *D,
+                    AnalysisManager &mgr,
                     BugReporter &BR) const {
     if (D && isDispatchOnceType(D->getTypeSourceInfo())) {
-  	  this->emitReport(D, BR);
-	  }
+      this->emitReport(D, BR);
+    }
   }
 
+  void checkASTDecl(const ObjCPropertyDecl *D,
+                    AnalysisManager &mgr,
+                    BugReporter &BR) const {
+    if (D && isDispatchOnceType(D->getTypeSourceInfo())) {
+      this->emitReport(D, BR);
+    }
+  }
 };
 
-
-REGISTER_CHECKER_IN_PLUGIN(GlobalOrStaticVariableForDispatchOnceChecker,
-                           "facebook.GlobalOrStaticVariableForDispatchOnceChecker",
-                           "Check for non static/global vars in dispatch_once_t")
+REGISTER_CHECKER_IN_PLUGIN(
+    GlobalOrStaticVariableForDispatchOnceChecker,
+    "facebook.GlobalOrStaticVariableForDispatchOnceChecker",
+    "Check for non static/global vars in dispatch_once_t")

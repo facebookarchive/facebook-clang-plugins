@@ -9,7 +9,8 @@
  */
 
 /**
- * Command line tool to populate the database of FileServices::TranslationService
+ * Command line tool to populate the database of
+ * FileServices::TranslationService
  */
 
 #include "FileServices.h"

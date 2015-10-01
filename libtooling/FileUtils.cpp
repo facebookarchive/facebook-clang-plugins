@@ -17,94 +17,104 @@
 
 namespace FileUtils {
 
-  /**
-   * Simplify away "." and ".." elements.
-   * If pathToNormalize is a relative path, it will be pre-pended with currentWorkingDirectory unless currentWorkingDirectory == "".
-   */
-  std::string makeAbsolutePath(const std::string &currentWorkingDirectory, std::string path) {
-    llvm::SmallVector<char, 16> result;
-    std::vector<std::string> elements;
-    int skip = 0;
+/**
+ * Simplify away "." and ".." elements.
+ * If pathToNormalize is a relative path, it will be pre-pended with
+ * currentWorkingDirectory unless currentWorkingDirectory == "".
+ */
+std::string makeAbsolutePath(const std::string &currentWorkingDirectory,
+                             std::string path) {
+  llvm::SmallVector<char, 16> result;
+  std::vector<std::string> elements;
+  int skip = 0;
 
-    if (llvm::sys::path::is_relative(path)) {
-      // Prepend currentWorkingDirectory to path (unless currentWorkingDirectory is empty).
-      llvm::SmallVector<char, 16> vec(currentWorkingDirectory.begin(), currentWorkingDirectory.end());
-      llvm::sys::path::append(vec, path);
-      path = std::string(vec.begin(), vec.end());
-    } else {
-      // Else copy the separator to maintain an absolute path.
-      result.append(1, path.front());
+  if (llvm::sys::path::is_relative(path)) {
+    // Prepend currentWorkingDirectory to path (unless currentWorkingDirectory
+    // is empty).
+    llvm::SmallVector<char, 16> vec(currentWorkingDirectory.begin(),
+                                    currentWorkingDirectory.end());
+    llvm::sys::path::append(vec, path);
+    path = std::string(vec.begin(), vec.end());
+  } else {
+    // Else copy the separator to maintain an absolute path.
+    result.append(1, path.front());
+  }
+
+  elements.push_back(llvm::sys::path::filename(path));
+
+  while (llvm::sys::path::has_parent_path(path)) {
+    path = llvm::sys::path::parent_path(path);
+    const std::string &element(llvm::sys::path::filename(path));
+    if (element == ".") {
+      continue;
     }
-
-    elements.push_back(llvm::sys::path::filename(path));
-
-    while (llvm::sys::path::has_parent_path(path)) {
-      path = llvm::sys::path::parent_path(path);
-      const std::string &element(llvm::sys::path::filename(path));
-      if (element == ".") {
-        continue;
-      }
-      if (element == "..") {
-        skip++;
-        continue;
-      }
-      if (skip > 0) {
-        skip--;
-        continue;
-      }
-      elements.push_back(element);
+    if (element == "..") {
+      skip++;
+      continue;
     }
-    while (skip > 0) {
-      elements.push_back("..");
+    if (skip > 0) {
       skip--;
+      continue;
     }
-
-    for (auto I = elements.rbegin(), E = elements.rend(); I != E; I++) {
-      llvm::sys::path::append(result, *I);
-    }
-    return std::string(result.begin(), result.end());
+    elements.push_back(element);
+  }
+  while (skip > 0) {
+    elements.push_back("..");
+    skip--;
   }
 
-  std::string makeRelativePath(const std::string &repoRoot, const std::string &path, bool keepExternalPaths) {
-    if (llvm::StringRef(path).startswith(repoRoot + "/")) {
-      return path.substr(repoRoot.size() + 1);
-    } else {
-      return keepExternalPaths ? path : "";
-    }
+  for (auto I = elements.rbegin(), E = elements.rend(); I != E; I++) {
+    llvm::sys::path::append(result, *I);
   }
+  return std::string(result.begin(), result.end());
+}
 
-  bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService, const std::string &BasePath, const clang::SourceManager &SM, const clang::Decl &Decl) {
-    // For now we only work at the top level, below a TranslationUnitDecl.
-    const clang::DeclContext *DC = Decl.getDeclContext();
-    if (!DC || !clang::isa<clang::TranslationUnitDecl>(*DC)) {
-      return true;
-    }
-    // Skip only NamedDecl's. Avoid in particular LinkageSpec's which can have misleading locations.
-    if (!clang::isa<clang::NamedDecl>(Decl)) {
-      return true;
-    }
-    // Do not skip Namespace, ClassTemplate/Specialization, Using, UsingShadow, CXXRecord declarations.
-    // (CXXRecord mostly because they can contain UsingShadow declarations.)
-    if (clang::isa<clang::NamespaceDecl>(Decl)
-        || clang::isa<clang::ClassTemplateDecl>(Decl)
-        || clang::isa<clang::ClassTemplateSpecializationDecl>(Decl)
-        || clang::isa<clang::FunctionTemplateDecl>(Decl)
-        || clang::isa<clang::UsingDecl>(Decl)
-        || clang::isa<clang::UsingShadowDecl>(Decl)
-        || clang::isa<clang::CXXRecordDecl>(Decl)
-        ) {
-      return true;
-    }
-    clang::SourceLocation SpellingLoc = SM.getSpellingLoc(Decl.getLocation());
-    clang::PresumedLoc PLoc = SM.getPresumedLoc(SpellingLoc);
-    if (PLoc.isInvalid()) {
-      return true;
-    }
-    if (llvm::StringRef(PLoc.getFilename()).endswith(".h")) {
-      return DedupService.verifyKey(FileUtils::makeAbsolutePath(BasePath, PLoc.getFilename()));
-    } else {
-      return true;
-    }
+std::string makeRelativePath(const std::string &repoRoot,
+                             const std::string &path,
+                             bool keepExternalPaths) {
+  if (llvm::StringRef(path).startswith(repoRoot + "/")) {
+    return path.substr(repoRoot.size() + 1);
+  } else {
+    return keepExternalPaths ? path : "";
   }
+}
 
+bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService,
+                            const std::string &BasePath,
+                            const clang::SourceManager &SM,
+                            const clang::Decl &Decl) {
+  // For now we only work at the top level, below a TranslationUnitDecl.
+  const clang::DeclContext *DC = Decl.getDeclContext();
+  if (!DC || !clang::isa<clang::TranslationUnitDecl>(*DC)) {
+    return true;
+  }
+  // Skip only NamedDecl's. Avoid in particular LinkageSpec's which can have
+  // misleading locations.
+  if (!clang::isa<clang::NamedDecl>(Decl)) {
+    return true;
+  }
+  // Do not skip Namespace, ClassTemplate/Specialization, Using, UsingShadow,
+  // CXXRecord declarations.
+  // (CXXRecord mostly because they can contain UsingShadow declarations.)
+  if (clang::isa<clang::NamespaceDecl>(Decl) ||
+      clang::isa<clang::ClassTemplateDecl>(Decl) ||
+      clang::isa<clang::ClassTemplateSpecializationDecl>(Decl) ||
+      clang::isa<clang::FunctionTemplateDecl>(Decl) ||
+      clang::isa<clang::UsingDecl>(Decl) ||
+      clang::isa<clang::UsingShadowDecl>(Decl) ||
+      clang::isa<clang::CXXRecordDecl>(Decl)) {
+    return true;
+  }
+  clang::SourceLocation SpellingLoc = SM.getSpellingLoc(Decl.getLocation());
+  clang::PresumedLoc PLoc = SM.getPresumedLoc(SpellingLoc);
+  if (PLoc.isInvalid()) {
+    return true;
+  }
+  if (llvm::StringRef(PLoc.getFilename()).endswith(".h")) {
+    return DedupService.verifyKey(
+        FileUtils::makeAbsolutePath(BasePath, PLoc.getFilename()));
+  } else {
+    return true;
+  }
+}
 }

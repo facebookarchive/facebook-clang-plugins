@@ -21,114 +21,123 @@ using namespace ento;
 
 namespace DanglingDelegate {
 
-  void FactFinder::ObjCImplFacts::ivarMayStoreSelfInUnsafeProperty(const clang::ObjCIvarDecl *ivarDecl, const std::string &propName) {
-    struct IvarFacts &ivarFacts = _ivarFactsMap[ivarDecl];
-    ivarFacts._mayStoreSelfInUnsafeProperty.insert(propName);
+void FactFinder::ObjCImplFacts::ivarMayStoreSelfInUnsafeProperty(
+    const clang::ObjCIvarDecl *ivarDecl, const std::string &propName) {
+  struct IvarFacts &ivarFacts = _ivarFactsMap[ivarDecl];
+  ivarFacts._mayStoreSelfInUnsafeProperty.insert(propName);
+}
+
+void FactFinder::ObjCImplFacts::ivarMayTargetSelf(
+    const clang::ObjCIvarDecl *ivarDecl) {
+  struct IvarFacts &ivarFacts = _ivarFactsMap[ivarDecl];
+  ivarFacts._mayTargetSelf = true;
+}
+
+void FactFinder::ObjCImplFacts::ivarMayObserveSelf(
+    const clang::ObjCIvarDecl *ivarDecl) {
+  struct IvarFacts &ivarFacts = _ivarFactsMap[ivarDecl];
+  ivarFacts._mayObserveSelf = true;
+}
+
+void FactFinder::ObjCImplFacts::sharedObjectMayObserveSelfInMethod(
+    std::string objectName, const std::string &methodName) {
+  struct SharedObserverFacts &shareObserverFacts =
+      _sharedObserverFactsMap[objectName];
+  shareObserverFacts._mayAddObserverToSelfInObjCMethod.insert(methodName);
+}
+
+// pre-process method declarations to detect pseudo-init methods and dealloc
+void FactFinder::VisitMethodDecl() {
+
+  // needs to be lowercase
+  static std::string pseudoInitPrefixes[] = {"_init",
+                                             "setup",
+                                             "_setup",
+                                             "load",
+                                             "_load",
+                                             "viewdidload",
+                                             "_viewdidload"};
+
+  assert(_methDecl);
+  StringRef methName = _methDecl->getNameAsString();
+  if (_methDecl->getMethodFamily() == OMF_init) {
+    _facts._pseudoInitMethods.insert(methName);
+    return;
   }
 
-  void FactFinder::ObjCImplFacts::ivarMayTargetSelf(const clang::ObjCIvarDecl *ivarDecl) {
-    struct IvarFacts &ivarFacts = _ivarFactsMap[ivarDecl];
-    ivarFacts._mayTargetSelf = true;
+  if (methName == "dealloc") {
+    _facts._hasDealloc = true;
   }
 
-  void FactFinder::ObjCImplFacts::ivarMayObserveSelf(const clang::ObjCIvarDecl *ivarDecl) {
-    struct IvarFacts &ivarFacts = _ivarFactsMap[ivarDecl];
-    ivarFacts._mayObserveSelf = true;
-  }
-
-  void FactFinder::ObjCImplFacts::sharedObjectMayObserveSelfInMethod(std::string objectName, const std::string &methodName) {
-    struct SharedObserverFacts &shareObserverFacts = _sharedObserverFactsMap[objectName];
-    shareObserverFacts._mayAddObserverToSelfInObjCMethod.insert(methodName);
-  }
-
-  // pre-process method declarations to detect pseudo-init methods and dealloc
-  void FactFinder::VisitMethodDecl() {
-
-    // needs to be lowercase
-    static std::string pseudoInitPrefixes[] = {
-      "_init",
-      "setup",
-      "_setup",
-      "load",
-      "_load",
-      "viewdidload",
-      "_viewdidload"
-    };
-
-    assert(_methDecl);
-    StringRef methName = _methDecl->getNameAsString();
-    if (_methDecl->getMethodFamily() == OMF_init) {
+  for (unsigned i = 0;
+       i < sizeof(pseudoInitPrefixes) / sizeof(pseudoInitPrefixes[0]);
+       i++) {
+    if (methName.startswith_lower(pseudoInitPrefixes[i])) {
       _facts._pseudoInitMethods.insert(methName);
       return;
     }
+  }
+}
 
-    if (methName == "dealloc") {
-      _facts._hasDealloc = true;
-    }
-
-    for(unsigned i = 0; i < sizeof(pseudoInitPrefixes)/sizeof(pseudoInitPrefixes[0]); i++) {
-      if (methName.startswith_lower(pseudoInitPrefixes[i])) {
-        _facts._pseudoInitMethods.insert(methName);
-        return;
-      }
+void FactFinder::VisitChildren(const Stmt *stmt) {
+  assert(stmt);
+  for (auto it = stmt->child_begin(), end = stmt->child_end(); it != end;
+       ++it) {
+    if (const Stmt *child = *it) {
+      Visit(child);
     }
   }
+}
 
-  void FactFinder::VisitChildren(const Stmt *stmt) {
-    assert(stmt);
-    for (auto it = stmt->child_begin(), end = stmt->child_end(); it != end; ++it) {
-      if (const Stmt *child = *it) {
-        Visit(child);
-      }
-    }
+// try to detect creation of unsafe references to self in the general
+// (non-setter) case
+void FactFinder::VisitObjCMessageExpr(const ObjCMessageExpr *expr) {
+
+  const Expr *receiver = expr->getInstanceReceiver();
+  if (!receiver) {
+    VisitChildren(expr);
+    return;
   }
 
-  // try to detect creation of unsafe references to self in the general (non-setter) case
-  void FactFinder::VisitObjCMessageExpr(const ObjCMessageExpr *expr) {
+  // we expect self to be the first argument in all cases
+  if (!isObjCSelfExpr(getArgOfObjCMessageExpr(*expr, 0))) {
+    VisitChildren(expr);
+    return;
+  }
 
-    const Expr *receiver = expr->getInstanceReceiver();
-    if (!receiver) {
-      VisitChildren(expr);
-      return;
-    }
+  StringRef selectorStr = expr->getSelector().getAsString();
 
-    // we expect self to be the first argument in all cases
-    if (!isObjCSelfExpr(getArgOfObjCMessageExpr(*expr, 0))) {
-      VisitChildren(expr);
-      return;
-    }
+  // CASE 1: is the receiver an ivar?
+  const ObjCIvarDecl *ivarDecl = matchIvarLValueExpression(*receiver);
+  if (ivarDecl) {
 
-    StringRef selectorStr = expr->getSelector().getAsString();
-
-    // CASE 1: is the receiver an ivar?
-    const ObjCIvarDecl *ivarDecl = matchIvarLValueExpression(*receiver);
-    if (ivarDecl) {
-
-      // try to find an assign property we may be storing self into
-      const ObjCPropertyDecl *propDecl = matchObjCMessageWithPropertySetter(*expr);
-      if (propDecl && propDecl->getSetterKind() == ObjCPropertyDecl::Assign) {
-        _facts.ivarMayStoreSelfInUnsafeProperty(ivarDecl, propDecl->getNameAsString());
-      } else if (selectorStr.startswith("addTarget:")) {
-        _facts.ivarMayTargetSelf(ivarDecl);
-      } else if (selectorStr.startswith("addObserver:")) {
-        _facts.ivarMayObserveSelf(ivarDecl);
-      }
-      
-      VisitChildren(expr);
-      return;
-    }
-
-    // CASE 2: is the receiver an interesting "observable singleton object"?
-    std::string receiverObjectName = matchObservableSingletonObject(*receiver);
-    if (receiverObjectName != "") {
-      
-      if (selectorStr.startswith("addObserver:")) {
-        _facts.sharedObjectMayObserveSelfInMethod(receiverObjectName, _methDecl->getNameAsString());
-      }
-      
+    // try to find an assign property we may be storing self into
+    const ObjCPropertyDecl *propDecl =
+        matchObjCMessageWithPropertySetter(*expr);
+    if (propDecl && propDecl->getSetterKind() == ObjCPropertyDecl::Assign) {
+      _facts.ivarMayStoreSelfInUnsafeProperty(ivarDecl,
+                                              propDecl->getNameAsString());
+    } else if (selectorStr.startswith("addTarget:")) {
+      _facts.ivarMayTargetSelf(ivarDecl);
+    } else if (selectorStr.startswith("addObserver:")) {
+      _facts.ivarMayObserveSelf(ivarDecl);
     }
 
     VisitChildren(expr);
+    return;
   }
+
+  // CASE 2: is the receiver an interesting "observable singleton object"?
+  std::string receiverObjectName = matchObservableSingletonObject(*receiver);
+  if (receiverObjectName != "") {
+
+    if (selectorStr.startswith("addObserver:")) {
+      _facts.sharedObjectMayObserveSelfInMethod(receiverObjectName,
+                                                _methDecl->getNameAsString());
+    }
+  }
+
+  VisitChildren(expr);
+}
 
 } // end of namespace

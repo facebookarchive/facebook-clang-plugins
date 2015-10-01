@@ -39,7 +39,8 @@ struct PluginASTOptionsBase {
    */
   std::string basePath;
 
-  /* Configure a second pass on file paths to make them relative to the repo root. */
+  /* Configure a second pass on file paths to make them relative to the repo
+   * root. */
   std::string repoRoot;
   /* Whether file paths not under the repo root should be kept or blanked. */
   bool keepExternalPaths = false;
@@ -49,30 +50,39 @@ struct PluginASTOptionsBase {
   /* Deduplication service: whether certain files should be visited once. */
   std::unique_ptr<FileServices::DeduplicationService> deduplicationService;
 
-  /* Translation service: whether certain copied source files should be translated back to the original name. */
+  /* Translation service: whether certain copied source files should be
+   * translated back to the original name. */
   std::unique_ptr<FileServices::TranslationService> translationService;
 
   typedef std::unordered_map<std::string, std::string> argmap_t;
 
   static argmap_t makeMap(const std::vector<std::string> &args);
 
-private:
+ private:
   /* cache for normalizeSourcePath */
-  std::unique_ptr<std::unordered_map<const char *, std::string>> normalizationCache;
+  std::unique_ptr<std::unordered_map<const char *, std::string>>
+      normalizationCache;
 
-protected:
+ protected:
   static const std::string envPrefix;
 
-  static bool loadString(const argmap_t &map, const char *key, std::string &val);
+  static bool loadString(const argmap_t &map,
+                         const char *key,
+                         std::string &val);
 
   static bool loadBool(const argmap_t &map, const char *key, bool &val);
 
   static bool loadInt(const argmap_t &map, const char *key, long &val);
 
-  static bool loadUnsignedInt(const argmap_t &map, const char *key, unsigned long &val);
+  static bool loadUnsignedInt(const argmap_t &map,
+                              const char *key,
+                              unsigned long &val);
 
-public:
-  PluginASTOptionsBase() { normalizationCache.reset(new std::unordered_map<const char *, std::string>()); };
+ public:
+  PluginASTOptionsBase() {
+    normalizationCache.reset(
+        new std::unordered_map<const char *, std::string>());
+  };
 
   void loadValuesFromEnvAndMap(const argmap_t map);
 
@@ -81,12 +91,11 @@ public:
   void setObjectFile(const std::string &path);
 
   const std::string &normalizeSourcePath(const char *path) const;
-
 };
 
 template <class PluginASTOptions = PluginASTOptionsBase>
 class SimplePluginASTActionBase : public clang::PluginASTAction {
-protected:
+ protected:
   std::unique_ptr<PluginASTOptions> Options;
 
   // Called when FrontendPluginRegistry is used.
@@ -110,30 +119,30 @@ protected:
     Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
     Options->loadValuesFromEnvAndMap(PluginASTOptions::makeMap(args));
   }
-
 };
 
 template <class SimpleASTAction>
-class SimpleFrontendActionFactory : public clang::tooling::FrontendActionFactory {
+class SimpleFrontendActionFactory
+    : public clang::tooling::FrontendActionFactory {
   std::vector<std::string> args_;
 
  public:
-  explicit SimpleFrontendActionFactory(std::vector<std::string> args) : args_(args) {}
+  explicit SimpleFrontendActionFactory(std::vector<std::string> args)
+      : args_(args) {}
 
   clang::FrontendAction *create() override {
     return new SimpleASTAction(args_);
   }
 };
 
-template <
-  class T,
-  class PluginASTOptions = PluginASTOptionsBase,
-  bool Binary = 0,
-  bool RemoveFileOnSignal = 1,
-  bool UseTemporary = 1,
-  bool CreateMissingDirectories = 0
->
-class SimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions> {
+template <class T,
+          class PluginASTOptions = PluginASTOptionsBase,
+          bool Binary = 0,
+          bool RemoveFileOnSignal = 1,
+          bool UseTemporary = 1,
+          bool CreateMissingDirectories = 0>
+class SimplePluginASTAction
+    : public SimplePluginASTActionBase<PluginASTOptions> {
   typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
  public:
@@ -143,39 +152,38 @@ class SimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions>
       : SimplePluginASTActionBase<PluginASTOptions>(args) {}
 
  protected:
-  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
+      clang::CompilerInstance &CI, llvm::StringRef inputFile) {
     if (Parent::Options == nullptr) {
-      Parent::Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
+      Parent::Options =
+          std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
       Parent::Options->loadValuesFromEnvAndMap(
-        std::unordered_map<std::string, std::string>());
+          std::unordered_map<std::string, std::string>());
     }
 
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
-    auto *OS =
-      CI.createOutputFile(Parent::Options->outputFile,
-                          Binary,
-                          RemoveFileOnSignal,
-                          "",
-                          "",
-                          UseTemporary,
-                          CreateMissingDirectories);
+    auto *OS = CI.createOutputFile(Parent::Options->outputFile,
+                                   Binary,
+                                   RemoveFileOnSignal,
+                                   "",
+                                   "",
+                                   UseTemporary,
+                                   CreateMissingDirectories);
 
     if (!OS) {
       return nullptr;
     }
 
-    return std::unique_ptr<
-    clang::ASTConsumer>(new T(CI, std::move(Parent::Options), *OS));
+    return std::unique_ptr<clang::ASTConsumer>(
+        new T(CI, std::move(Parent::Options), *OS));
   }
 };
 
-template <
-  class T,
-  class PluginASTOptions = PluginASTOptionsBase
->
-class NoOpenSimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOptions> {
+template <class T, class PluginASTOptions = PluginASTOptionsBase>
+class NoOpenSimplePluginASTAction
+    : public SimplePluginASTActionBase<PluginASTOptions> {
   typedef SimplePluginASTActionBase<PluginASTOptions> Parent;
 
  public:
@@ -184,20 +192,22 @@ class NoOpenSimplePluginASTAction : public SimplePluginASTActionBase<PluginASTOp
   explicit NoOpenSimplePluginASTAction(const std::vector<std::string> &args)
       : SimplePluginASTActionBase<PluginASTOptions>(args) {}
 
-protected:
-  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+ protected:
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
+      clang::CompilerInstance &CI, llvm::StringRef inputFile) {
     if (Parent::Options == nullptr) {
-      Parent::Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
+      Parent::Options =
+          std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
       Parent::Options->loadValuesFromEnvAndMap(
-        std::unordered_map<std::string, std::string>());
+          std::unordered_map<std::string, std::string>());
     }
 
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
     std::string outputFile = Parent::Options->outputFile;
-    return std::unique_ptr<clang::ASTConsumer>(new T(CI, std::move(Parent::Options), outputFile));
+    return std::unique_ptr<clang::ASTConsumer>(
+        new T(CI, std::move(Parent::Options), outputFile));
   }
 };
-
 }

@@ -14,24 +14,27 @@
 
 namespace ASTLib {
 
-  AttrParameterVectorStream &AttrParameterVectorStream::operator<<(const std::string &str) {
-    // hack to get rid of spurious leading " "s
-    if (str != " ") {
-      Content.push_back(str);
-    }
-    return *this;
+AttrParameterVectorStream &AttrParameterVectorStream::operator<<(
+    const std::string &str) {
+  // hack to get rid of spurious leading " "s
+  if (str != " ") {
+    Content.push_back(str);
   }
+  return *this;
+}
 
-  AttrParameterVectorStream &AttrParameterVectorStream::operator<<(const unsigned int x) {
-    return operator<<(std::to_string(x));
-  }
+AttrParameterVectorStream &AttrParameterVectorStream::operator<<(
+    const unsigned int x) {
+  return operator<<(std::to_string(x));
+}
 
-  AttrParameterVectorStream &AttrParameterVectorStream::operator<<(const clang::VersionTuple &verTup) {
-    return operator<<(verTup.getAsString());
-  }
+AttrParameterVectorStream &AttrParameterVectorStream::operator<<(
+    const clang::VersionTuple &verTup) {
+  return operator<<(verTup.getAsString());
+}
 
-  const std::vector<std::string> &AttrParameterVectorStream::getContent() {
-    return Content;
-  }
+const std::vector<std::string> &AttrParameterVectorStream::getContent() {
+  return Content;
+}
 
 } // end of namespace ASTLib

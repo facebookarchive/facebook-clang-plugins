@@ -18,10 +18,10 @@ namespace ASTLib {
 
 class AttrParameterVectorStream {
 
-private:
+ private:
   std::vector<std::string> Content;
 
-public:
+ public:
   AttrParameterVectorStream() {}
 
   AttrParameterVectorStream &operator<<(const std::string &str);
@@ -29,7 +29,6 @@ public:
   AttrParameterVectorStream &operator<<(const clang::VersionTuple &verTup);
 
   const std::vector<std::string> &getContent();
-
 };
 
 } // end of namespace ASTLib

@@ -9,7 +9,8 @@
  */
 
 /**
- * Defines a checker to detect a common misuse of -[NSInvocation getArgument:atIndex:] and -[NSInvocation getReturnValue:] under ARC.
+ * Defines a checker to detect a common misuse of -[NSInvocation
+ * getArgument:atIndex:] and -[NSInvocation getReturnValue:] under ARC.
  */
 
 #include "PluginMainRegistry.h"
@@ -30,10 +31,11 @@ namespace {
 class WalkAST : public ConstStmtVisitor<WalkAST> {
   const CheckerBase &Checker;
   BugReporter &BR;
-  AnalysisDeclContext* AC;
+  AnalysisDeclContext *AC;
 
-public:
-  WalkAST(const CheckerBase &Checker, BugReporter &br, AnalysisDeclContext* ac) : Checker(Checker), BR(br), AC(ac) {}
+ public:
+  WalkAST(const CheckerBase &Checker, BugReporter &br, AnalysisDeclContext *ac)
+      : Checker(Checker), BR(br), AC(ac) {}
 
   // Statement visitor methods.
   void VisitChildren(const Stmt *S);
@@ -55,7 +57,7 @@ void WalkAST::VisitObjCMessageExpr(const ObjCMessageExpr *ME) {
 
     if (receiverClassName == "NSInvocation" &&
         (sel.getAsString() == "getArgument:atIndex:" ||
-        sel.getAsString() == "getReturnValue:")) {
+         sel.getAsString() == "getReturnValue:")) {
 
       const Expr *Arg = ME->getArg(0);
       if (!Arg) {
@@ -78,22 +80,24 @@ void WalkAST::VisitObjCMessageExpr(const ObjCMessageExpr *ME) {
       const AttributedType *AttrType = T->getAs<AttributedType>();
       bool passed = false;
       if (AttrType) {
-        Qualifiers::ObjCLifetime argLifetime = AttrType->getModifiedType().getObjCLifetime();
-        passed = argLifetime == Qualifiers::OCL_None || argLifetime == Qualifiers::OCL_ExplicitNone;
+        Qualifiers::ObjCLifetime argLifetime =
+            AttrType->getModifiedType().getObjCLifetime();
+        passed = argLifetime == Qualifiers::OCL_None ||
+                 argLifetime == Qualifiers::OCL_ExplicitNone;
       }
 
       if (!passed) {
         SmallString<64> BufName, Buf;
         llvm::raw_svector_ostream OsName(BufName), Os(Buf);
 
-        OsName << "Invalid use of '" << receiverClassName << "'" ;        
-        Os << "In ARC mode, the first argument to '-["
-           << receiverClassName
+        OsName << "Invalid use of '" << receiverClassName << "'";
+        Os << "In ARC mode, the first argument to '-[" << receiverClassName
            << " " << sel.getAsString()
-           << "]' must be declared with __unsafe_unretained to avoid over-release.";
+           << "]' must be declared with __unsafe_unretained to avoid "
+              "over-release.";
 
         PathDiagnosticLocation MELoc =
-        PathDiagnosticLocation::createBegin(ME, BR.getSourceManager(), AC);
+            PathDiagnosticLocation::createBegin(ME, BR.getSourceManager(), AC);
         BR.EmitBasicReport(AC->getDecl(),
                            &Checker,
                            OsName.str(),
@@ -107,16 +111,18 @@ void WalkAST::VisitObjCMessageExpr(const ObjCMessageExpr *ME) {
 }
 
 void WalkAST::VisitChildren(const Stmt *S) {
-  for (Stmt::const_child_iterator I = S->child_begin(), E = S->child_end(); I!=E; ++I)
+  for (Stmt::const_child_iterator I = S->child_begin(), E = S->child_end();
+       I != E;
+       ++I)
     if (const Stmt *child = *I)
       Visit(child);
 }
 
 namespace {
 class ObjCARCQualifierChecker : public Checker<check::ASTCodeBody> {
-public:
-
-  void checkASTCodeBody(const Decl *D, AnalysisManager& Mgr,
+ public:
+  void checkASTCodeBody(const Decl *D,
+                        AnalysisManager &Mgr,
                         BugReporter &BR) const {
 
     if (D->getASTContext().getLangOpts().ObjCAutoRefCount) {
@@ -128,5 +134,5 @@ public:
 }
 
 REGISTER_CHECKER_IN_PLUGIN(ObjCARCQualifierChecker,
-         "facebook.ObjCARCQualifierChecker",
-         "checker for missing ARC qualifiers.")
+                           "facebook.ObjCARCQualifierChecker",
+                           "checker for missing ARC qualifiers.")
