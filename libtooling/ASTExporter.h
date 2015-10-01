@@ -3951,7 +3951,7 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
 }
 
 /// \atd
-/// type type_ptr = pointer wrap <ocaml t="Clang_ast_types.t_ptr"
+/// type type_ptr = string wrap <ocaml t="Clang_ast_types.t_ptr"
 ///                              wrap="Clang_ast_types.pointer_to_type_ptr"
 ///                              unwrap="Clang_ast_types.type_ptr_to_pointer">
 template <class ATDWriter>
