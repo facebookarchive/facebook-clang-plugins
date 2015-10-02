@@ -3517,7 +3517,7 @@ int ASTExporter<ATDWriter>::CXXConstructExprTupleSize() {
 /// \atd
 /// #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
 /// type cxx_construct_expr_info = {
-///   type_ptr : type_ptr;
+///   decl_ptr : pointer;
 ///   ~is_elidable : bool;
 ///   ~requires_zero_initialization : bool;
 /// } <ocaml field_prefix="xcei_">
@@ -3530,9 +3530,8 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(
   bool RequiresZeroInitialization = Node->requiresZeroInitialization();
   ObjectScope Scope(OF, 1 + IsElidable + RequiresZeroInitialization);
 
-  OF.emitTag("type_ptr");
-  CXXConstructorDecl *Ctor = Node->getConstructor();
-  dumpQualType(Ctor->getType());
+  OF.emitTag("decl_ptr");
+  dumpPointer(Node->getConstructor());
   OF.emitFlag("is_elidable", IsElidable);
   OF.emitFlag("requires_zero_initialization", RequiresZeroInitialization);
 }
