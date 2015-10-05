@@ -4,10 +4,12 @@ set -e
 # Simple installation script for llvm/clang.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_PATH="$SCRIPT_DIR"/$(basename "${BASH_SOURCE[0]}")
 CLANG_SRC="$SCRIPT_DIR/src/clang-3.7.0.tar.xz"
 COMPILER_RT_PATCH="$SCRIPT_DIR/src/clang_darwin.mk.patch"
 CLANG_PATCH="$SCRIPT_DIR/src/AttrDump.inc.patch"
 CLANG_PREFIX="$SCRIPT_DIR"
+CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
 
 platform=`uname`
 
@@ -20,6 +22,7 @@ if [ $platform == 'Darwin' ]; then
         --enable-optimized
         --enable-bindings=none
     )
+    SHA256SUM="shasum -a 256 -p"
 elif [ $platform == 'Linux' ]; then
     CONFIGURE_ARGS=(
         --prefix="$CLANG_PREFIX"
@@ -28,8 +31,20 @@ elif [ $platform == 'Linux' ]; then
         --enable-optimized
         --enable-bindings=none
     )
+    SHA256SUM="sha256sum"
 else
     echo "Clang setup: platform $platform is currently not supported by this script"; exit 1
+fi
+
+set +e
+$SHA256SUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null
+SHA_RESULT=$?
+set -e
+
+if [ "$SHA_RESULT" == "0" ]; then
+    echo "Clang is already installed according to $CLANG_INSTALLED_VERSION_FILE"
+    echo "Nothing to do, exiting."
+    exit 0
 fi
 
 # start the installation
@@ -54,3 +69,6 @@ patch -p0 -i "$CLANG_PATCH"
 popd
 
 rm -rf "$TMP"
+
+# remember that we installed this version
+$SHA256SUM "$CLANG_SRC" "$SCRIPT_PATH" > "$CLANG_INSTALLED_VERSION_FILE"
