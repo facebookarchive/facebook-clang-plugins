@@ -51,7 +51,13 @@ fi
 echo "Installing clang..."
 TMP=`mktemp -d /tmp/clang-setup.XXXXXX`
 pushd "$TMP"
-tar xf "$CLANG_SRC"
+
+if tar --version | grep -q 'GNU'; then
+    # GNU tar is too verbose if the tarball was created on MacOS
+    QUIET_TAR="--warning=no-unknown-keyword"
+fi
+tar --extract $QUIET_TAR --file "$CLANG_SRC"
+
 # apply patch to compile on Darwin
 pushd llvm/projects/compiler-rt
 patch -p0 -i "$COMPILER_RT_PATCH"
