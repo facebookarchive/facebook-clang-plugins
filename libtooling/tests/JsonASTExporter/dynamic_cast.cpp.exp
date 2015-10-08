@@ -170,7 +170,6 @@
           },
           "9",
           {
-            "is_virtual" : true,
             "body" : ["CompoundStmt" , [
               {
                 "pointer" : "10",
@@ -186,6 +185,9 @@
               [
               ]
             ]]
+          },
+          {
+            "is_virtual" : true
           }
         ]],
         ["CXXMethodDecl" , [
@@ -239,6 +241,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]],
         ["CXXMethodDecl" , [
@@ -291,6 +295,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]],
         ["CXXDestructorDecl" , [
@@ -318,6 +324,8 @@
           "20",
           {
             "is_inline" : true
+          },
+          {
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -362,6 +370,8 @@
               [
               ]
             ]]
+          },
+          {
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -415,6 +425,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -468,6 +480,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]]
       ],
@@ -587,6 +601,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]],
         ["CXXMethodDecl" , [
@@ -639,6 +655,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]],
         ["CXXDestructorDecl" , [
@@ -666,6 +684,8 @@
           "42",
           {
             "is_inline" : true
+          },
+          {
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -695,6 +715,23 @@
           "22",
           {
             "is_inline" : true,
+            "body" : ["CompoundStmt" , [
+              {
+                "pointer" : "44",
+                "source_range" : [
+                  {
+                    "column" : 10
+                  },
+                  {
+                    "column" : 10
+                  }
+                ]
+              },
+              [
+              ]
+            ]]
+          },
+          {
             "cxx_ctor_initializers" : [
               {
                 "subject" : ["BaseClass" , [
@@ -703,7 +740,7 @@
                 ]],
                 "init_expr" : ["CXXConstructExpr" , [
                   {
-                    "pointer" : "44",
+                    "pointer" : "45",
                     "source_range" : [
                       {
                         "column" : 10
@@ -723,22 +760,7 @@
                   }
                 ]]
               }
-            ],
-            "body" : ["CompoundStmt" , [
-              {
-                "pointer" : "45",
-                "source_range" : [
-                  {
-                    "column" : 10
-                  },
-                  {
-                    "column" : 10
-                  }
-                ]
-              },
-              [
-              ]
-            ]]
+            ]
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -792,6 +814,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -845,6 +869,8 @@
                 }
               ]]
             ]
+          },
+          {
           }
         ]]
       ],

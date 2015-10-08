@@ -295,6 +295,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(UsingDirectiveDecl)
   DECLARE_VISITOR(NamespaceAliasDecl)
   DECLARE_VISITOR(CXXRecordDecl)
+  DECLARE_VISITOR(CXXMethodDecl)
   //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
   //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
   //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
@@ -1450,13 +1451,11 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 /// type function_decl_info = {
 ///   ?storage_class : string option;
 ///   ~is_inline : bool;
-///   ~is_virtual : bool;
 ///   ~is_module_private : bool;
 ///   ~is_pure : bool;
 ///   ~is_delete_as_written : bool;
 ///   ~decls_in_prototype_scope : decl list;
 ///   ~parameters : decl list;
-///   ~cxx_ctor_initializers : cxx_ctor_initializer list;
 ///   ?body : stmt option
 /// } <ocaml field_prefix="fdi_">
 template <class ATDWriter>
@@ -1467,18 +1466,14 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
   bool IsInlineSpecified = D->isInlineSpecified();
-  bool IsVirtualAsWritten = D->isVirtualAsWritten();
   bool IsModulePrivate = D->isModulePrivate();
   bool IsPure = D->isPure();
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
-  const CXXConstructorDecl *C = dyn_cast<CXXConstructorDecl>(D);
-  bool HasCtorInitializers = C && C->init_begin() != C->init_end();
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
-  int size = 2 + HasStorageClass + IsInlineSpecified + IsVirtualAsWritten +
-             IsModulePrivate + IsPure + IsDeletedAsWritten +
-             HasCtorInitializers + HasDeclarationBody;
+  int size = 2 + HasStorageClass + IsInlineSpecified + IsModulePrivate +
+             IsPure + IsDeletedAsWritten + HasDeclarationBody;
   ObjectScope Scope(OF, size);
 
   if (HasStorageClass) {
@@ -1487,7 +1482,6 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   }
 
   OF.emitFlag("is_inline", IsInlineSpecified);
-  OF.emitFlag("is_virtual", IsVirtualAsWritten);
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_pure", IsPure);
   OF.emitFlag("is_delete_as_written", IsDeletedAsWritten);
@@ -1534,14 +1528,6 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
       for (; I != E; ++I) {
         dumpDecl(*I);
       }
-    }
-  }
-
-  if (HasCtorInitializers) {
-    OF.emitTag("cxx_ctor_initializers");
-    ArrayScope Scope(OF, std::distance(C->init_begin(), C->init_end()));
-    for (auto I : C->inits()) {
-      dumpCXXCtorInitializer(*I);
     }
   }
 
@@ -1794,6 +1780,35 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   OF.emitFlag("is_c_like", IsCLike);
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXMethodDeclTupleSize() {
+  return FunctionDeclTupleSize() + 1;
+}
+/// \atd
+/// #define cxx_method_decl_tuple function_decl_tuple * cxx_method_decl_info
+/// type cxx_method_decl_info = {
+///   ~is_virtual : bool;
+///   ~is_static : bool;
+///   ~cxx_ctor_initializers : cxx_ctor_initializer list;
+/// } <ocaml field_prefix="xmdi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXMethodDecl(const CXXMethodDecl *D) {
+  VisitFunctionDecl(D);
+  bool IsVirtual = D->isVirtual();
+  bool IsStatic = D->isStatic();
+  const CXXConstructorDecl *C = dyn_cast<CXXConstructorDecl>(D);
+  bool HasCtorInitializers = C && C->init_begin() != C->init_end();
+  ObjectScope Scope(OF, IsVirtual + IsStatic + HasCtorInitializers);
+  OF.emitFlag("is_virtual", IsVirtual);
+  OF.emitFlag("is_static", IsStatic);
+  if (HasCtorInitializers) {
+    OF.emitTag("cxx_ctor_initializers");
+    ArrayScope Scope(OF, std::distance(C->init_begin(), C->init_end()));
+    for (auto I : C->inits()) {
+      dumpCXXCtorInitializer(*I);
+    }
+  }
+}
 // template <class ATDWriter>
 // void ASTExporter<ATDWriter>::VisitTypeAliasDecl(const TypeAliasDecl *D) {
 //  dumpName(D);
