@@ -36,12 +36,7 @@ else
     echo "Clang setup: platform $platform is currently not supported by this script"; exit 1
 fi
 
-set +e
-$SHA256SUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null
-SHA_RESULT=$?
-set -e
-
-if [ "$SHA_RESULT" == "0" ]; then
+if $SHA256SUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null; then
     echo "Clang is already installed according to $CLANG_INSTALLED_VERSION_FILE"
     echo "Nothing to do, exiting."
     exit 0
