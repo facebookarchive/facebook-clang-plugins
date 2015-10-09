@@ -9,7 +9,7 @@ It contains two kinds of plugins to the [clang compiler](http://clang.llvm.org/)
 
 - frontend plugins process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyses easier.
 
-Most of the plugins here have been written with iOS in mind. However different platforms may be considered in the future.
+Most of the plugins here have been written with iOS in mind. However, different platforms may be considered in the future.
 
 Pre-release notes
 -----------------
@@ -24,7 +24,7 @@ Structure of the repository
 
 - [`libtooling`](https://github.com/facebook/facebook-clang-plugins/tree/master/libtooling) : frontend plugins (currently a clang-to-json AST exporter),
 
-- [`clang-ocaml`](https://github.com/facebook/facebook-clang-plugins/tree/master/clang-ocaml) : ocaml libraries to process the Json output of frontend plugins,
+- [`clang-ocaml`](https://github.com/facebook/facebook-clang-plugins/tree/master/clang-ocaml) : ocaml libraries to process the JSON output of frontend plugins,
 
 - [`extra-repo-example`](https://github.com/facebook/facebook-clang-plugins/tree/master/extra-repo-example) : example of external repository where to add plugins and piggyback on the build system.
 
