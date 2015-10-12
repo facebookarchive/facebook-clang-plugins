@@ -1588,6 +1588,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 ///   ?storage_class : string option;
 ///   ~tls_kind <ocaml default="`Tls_none">: tls_kind;
 ///   ~is_global : bool;
+///   ~is_static_local : bool;
 ///   ~is_module_private : bool;
 ///   ~is_nrvo_variable : bool;
 ///   ?init_expr : stmt option;
@@ -1600,14 +1601,15 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
 
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
-  bool IsGlobal = D->hasGlobalStorage();
+  bool IsGlobal = D->hasGlobalStorage(); // including static function variables
+  bool IsStaticLocal = D->isStaticLocal(); // static function variables
   bool IsModulePrivate = D->isModulePrivate();
   bool IsNRVOVariable = D->isNRVOVariable();
   bool HasInit = D->hasInit();
   // suboptimal: tls_kind is not taken into account accurately
   ObjectScope Scope(OF,
-                    1 + HasStorageClass + IsGlobal + IsModulePrivate +
-                        IsNRVOVariable + HasInit);
+                    1 + HasStorageClass + IsGlobal + IsStaticLocal +
+                        IsModulePrivate + IsNRVOVariable + HasInit);
 
   if (HasStorageClass) {
     OF.emitTag("storage_class");
@@ -1628,6 +1630,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   }
 
   OF.emitFlag("is_global", IsGlobal);
+  OF.emitFlag("is_static_local", IsStaticLocal);
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_nrvo_variable", IsNRVOVariable);
   if (HasInit) {
