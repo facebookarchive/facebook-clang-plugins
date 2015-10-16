@@ -19,8 +19,8 @@ LDFLAGS_Darwin+=-stdlib=libc++
 CFLAGS_Linux+=-std=c++11 -fPIC
 LDFLAGS_Linux+=
 
-CFLAGS?=$(CFLAGS_$(shell uname))
-LDFLAGS?=$(LDFLAGS_$(shell uname))
+CFLAGS+=$(CFLAGS_$(shell uname))
+LDFLAGS+=$(LDFLAGS_$(shell uname))
 
 CFLAGS+=$(CLANG_INCLUDES:%=-I%) -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -fno-common -Woverloaded-virtual -Wcast-qual -fno-strict-aliasing -pedantic -Wno-long-long -Wall -W -Wno-unused-parameter -Wwrite-strings -Wno-uninitialized  -Wno-missing-field-initializers -Wno-vla-extension -Wno-c99-extensions
 
