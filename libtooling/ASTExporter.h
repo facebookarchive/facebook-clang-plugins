@@ -2487,10 +2487,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyImplDecl(
 
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::BlockDeclTupleSize() {
-  return DeclTupleSize() + DeclContextTupleSize() + 1;
+  return DeclTupleSize() + 1;
 }
 /// \atd
-/// #define block_decl_tuple decl_tuple * decl_context_tuple * block_decl_info
+/// #define block_decl_tuple decl_tuple * block_decl_info
 /// type block_decl_info = {
 ///   ~parameters : decl list;
 ///   ~is_variadic : bool;
@@ -2508,7 +2508,7 @@ int ASTExporter<ATDWriter>::BlockDeclTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
   VisitDecl(D);
-  VisitDeclContext(D);
+  // We purposedly do not call VisitDeclContext(D).
 
   ObjCMethodDecl::param_const_iterator PCII = D->param_begin(),
                                        PCIE = D->param_end();
