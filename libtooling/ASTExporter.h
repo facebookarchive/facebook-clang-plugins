@@ -871,6 +871,7 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
 /// \atd
 /// type cxx_ctor_initializer = {
 ///   subject : cxx_ctor_initializer_subject;
+///   source_range : source_range; 
 ///   ?init_expr : stmt option
 /// } <ocaml field_prefix="xci_">
 /// type cxx_ctor_initializer_subject = [
@@ -882,7 +883,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
     const CXXCtorInitializer &Init) {
   const Expr *E = Init.getInit();
-  ObjectScope Scope(OF, 1 + (bool)E);
+  ObjectScope Scope(OF, 2 + (bool)E);
 
   OF.emitTag("subject");
   const FieldDecl *FD = Init.getAnyMember();
@@ -900,6 +901,8 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
       OF.emitBoolean(Init.isBaseVirtual());
     }
   }
+  OF.emitTag("source_range");
+  dumpSourceRange(Init.getSourceRange());
   if (E) {
     OF.emitTag("init_expr");
     dumpStmt(E);
