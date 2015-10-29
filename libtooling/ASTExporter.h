@@ -871,7 +871,7 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
 /// \atd
 /// type cxx_ctor_initializer = {
 ///   subject : cxx_ctor_initializer_subject;
-///   source_range : source_range; 
+///   source_range : source_range;
 ///   ?init_expr : stmt option
 /// } <ocaml field_prefix="xci_">
 /// type cxx_ctor_initializer_subject = [
@@ -2247,6 +2247,7 @@ int ASTExporter<ATDWriter>::ObjCInterfaceDeclTupleSize() {
 ///   ?super : decl_ref option;
 ///   ?implementation : decl_ref option;
 ///   ~protocols : decl_ref list;
+///   ~known_categories : decl_ref list;
 /// } <ocaml field_prefix="otdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCInterfaceDecl(
@@ -2255,10 +2256,16 @@ void ASTExporter<ATDWriter>::VisitObjCInterfaceDecl(
 
   const ObjCInterfaceDecl *SC = D->getSuperClass();
   const ObjCImplementationDecl *Impl = D->getImplementation();
-  ObjCInterfaceDecl::protocol_iterator I = D->protocol_begin(),
-                                       E = D->protocol_end();
-  bool HasProtocols = I != E;
-  ObjectScope Scope(OF, 0 + (bool)SC + (bool)Impl + HasProtocols);
+  ObjCInterfaceDecl::protocol_iterator IP = D->protocol_begin(),
+                                       EP = D->protocol_end();
+  bool HasProtocols = IP != EP;
+
+  ObjCInterfaceDecl::known_categories_iterator IC = D->known_categories_begin(),
+                                               EC = D->known_categories_end();
+
+  bool HasKnownCategories = IC != EC;
+  ObjectScope Scope(
+      OF, 0 + (bool)SC + (bool)Impl + HasProtocols + HasKnownCategories);
 
   if (SC) {
     OF.emitTag("super");
@@ -2270,10 +2277,18 @@ void ASTExporter<ATDWriter>::VisitObjCInterfaceDecl(
   }
   if (HasProtocols) {
     OF.emitTag("protocols");
-    ArrayScope Scope(OF, std::distance(I, E));
-    for (; I != E; ++I) {
-      assert(*I);
-      dumpDeclRef(**I);
+    ArrayScope Scope(OF, std::distance(IP, EP));
+    for (; IP != EP; ++IP) {
+      assert(*IP);
+      dumpDeclRef(**IP);
+    }
+  }
+  if (HasKnownCategories) {
+    OF.emitTag("known_categories");
+    ArrayScope Scope(OF, std::distance(IC, EC));
+    for (; IC != EC; ++IC) {
+      assert(*IC);
+      dumpDeclRef(**IC);
     }
   }
 }
