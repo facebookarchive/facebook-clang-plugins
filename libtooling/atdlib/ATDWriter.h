@@ -361,6 +361,12 @@ class JsonEmitter {
       case '\b':
         os_ << "\\b";
         break;
+      case '\f':
+        os_ << "\\f";
+        break;
+      case '\r':
+        os_ << "\\r";
+        break;
       default:
         os_ << x;
         break;
