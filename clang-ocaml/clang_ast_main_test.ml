@@ -10,14 +10,14 @@
 
 exception PointerMismatch
 
-let validate_ptr key_ptr node = 
+let validate_ptr key_ptr node =
   let node_ptr = Clang_ast_main.get_ptr_from_node node in
   if node_ptr != key_ptr then raise PointerMismatch
 
 let validate_decl_ptr key_ptr decl =
   validate_ptr key_ptr (`DeclNode decl)
 
-let validate_stmt_ptr key_ptr stmt = 
+let validate_stmt_ptr key_ptr stmt =
   validate_ptr key_ptr (`StmtNode stmt)
 
 let validate_type_ptr key_ptr c_type =
@@ -33,7 +33,7 @@ let print_decl path decl =
   print_node path (Clang_ast_proj.get_decl_kind_string decl)
 
 let print_stmt path stmt =
-  print_node path (Clang_ast_proj.get_stmt_kind_string stmt) 
+  print_node path (Clang_ast_proj.get_stmt_kind_string stmt)
 
 
 let print_map_size map =
@@ -60,7 +60,7 @@ let main =
     for i = 1 to Array.length v - 1 do
       check_decl_cache_from_file v.(i);
     done
-  with 
+  with
   | PointerMismatch ->
     prerr_string "Pointer in cache doesn't match";
     exit 1

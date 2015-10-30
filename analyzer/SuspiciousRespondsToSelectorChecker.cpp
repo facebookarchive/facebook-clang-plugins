@@ -173,7 +173,7 @@ void WalkAST::reportWarning(const ObjCMessageExpr &msgExpr,
   ;
   os << " responds to selector " << sel1;
   os << " and subsequently selector " << sel2;
-  os << " is used. The selector name might have been mispelled.";
+  os << " is used. The selector name might have been misspelled.";
   os.flush();
   auto bugStr = os.str();
 

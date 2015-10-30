@@ -572,22 +572,22 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &decl) {
   {
     std::string qualName = decl.getQualifiedNameAsString();
     // split name with :: and reverse the list
-    std::vector<std::string> splitted;
+    std::vector<std::string> split;
     std::string token = "::";
     std::string::size_type firstChar = 0;
     std::string::size_type lastChar = qualName.find(token, firstChar);
     while (lastChar != std::string::npos) {
 
-      splitted.push_back(qualName.substr(firstChar, lastChar - firstChar));
+      split.push_back(qualName.substr(firstChar, lastChar - firstChar));
       firstChar = lastChar + token.length();
       lastChar = qualName.find(token, firstChar);
     }
-    splitted.push_back(qualName.substr(firstChar));
+    split.push_back(qualName.substr(firstChar));
 
-    ArrayScope aScope(OF, splitted.size());
+    ArrayScope aScope(OF, split.size());
     // dump list in reverse
-    for (int i = splitted.size() - 1; i >= 0; i--) {
-      OF.emitString(splitted[i]);
+    for (int i = split.size() - 1; i >= 0; i--) {
+      OF.emitString(split[i]);
     }
   }
 }

@@ -38,7 +38,7 @@ let get_ptr_from_node node =
 		let type_info = Clang_ast_proj.get_type_tuple c_type in
 		type_info.Clang_ast_t.ti_pointer
 
-let get_val_from_node node = 
+let get_val_from_node node =
 	match node with
 	| `DeclNode decl -> decl
 	| `StmtNode stmt -> stmt
@@ -50,13 +50,13 @@ let add_node_to_cache node cache =
 	cache := PointerMap.add key value !cache
 
 let add_decl_to_cache path decl =
-	add_node_to_cache (`DeclNode decl) declMap 
+	add_node_to_cache (`DeclNode decl) declMap
 
 let add_stmt_to_cache path stmt =
-	add_node_to_cache (`StmtNode stmt) stmtMap 
+	add_node_to_cache (`StmtNode stmt) stmtMap
 
-let add_type_to_cache path c_type = 
-	add_node_to_cache (`TypeNode c_type) typeMap 
+let add_type_to_cache path c_type =
+	add_node_to_cache (`TypeNode c_type) typeMap
 
 let reset_cache () =
 	declMap := PointerMap.empty;
