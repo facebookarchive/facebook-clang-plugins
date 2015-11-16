@@ -563,32 +563,71 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
 ///   qual_name : string list
 /// } <ocaml field_prefix="ni_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpName(const NamedDecl &decl) {
+void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
   // dump name
   ObjectScope oScope(OF, 2);
   OF.emitTag("name");
-  OF.emitString(decl.getNameAsString());
+  OF.emitString(Decl.getNameAsString());
+
+  // implementation is inspired by NamedDecl::printQualifiedName
+  // but with better handling for anonymous structs,unions and namespaces
   OF.emitTag("qual_name");
-  {
-    std::string qualName = decl.getQualifiedNameAsString();
-    // split name with :: and reverse the list
-    std::vector<std::string> split;
-    std::string token = "::";
-    std::string::size_type firstChar = 0;
-    std::string::size_type lastChar = qualName.find(token, firstChar);
-    while (lastChar != std::string::npos) {
+  const DeclContext *Ctx = Decl.getDeclContext();
+  SmallVector<const NamedDecl *, 8> Contexts;
+  SmallVector<std::string, 8> Quals;
+  Contexts.push_back(&Decl);
 
-      split.push_back(qualName.substr(firstChar, lastChar - firstChar));
-      firstChar = lastChar + token.length();
-      lastChar = qualName.find(token, firstChar);
-    }
-    split.push_back(qualName.substr(firstChar));
+  // TODO add qual names for structs defined inside function
+  if (Ctx->isFunctionOrMethod()) {
+    // don't dump full qualifier for variables declared
+    // inside a function/method/block
+    Ctx = nullptr;
+  }
 
-    ArrayScope aScope(OF, split.size());
-    // dump list in reverse
-    for (int i = split.size() - 1; i >= 0; i--) {
-      OF.emitString(split[i]);
+  while (Ctx && isa<NamedDecl>(Ctx)) {
+    Contexts.push_back(cast<NamedDecl>(Ctx));
+    Ctx = Ctx->getParent();
+  }
+
+  for (const NamedDecl *D : Contexts) {
+    if (const auto *ND = dyn_cast<NamespaceDecl>(D)) {
+      if (ND->isAnonymousNamespace()) {
+        PresumedLoc PLoc = SM.getPresumedLoc(ND->getLocation());
+        std::string file = "invalid_loc";
+        if (PLoc.isValid()) {
+          file = PLoc.getFilename();
+        }
+        Quals.push_back("anonymous_namespace_" + file);
+      } else {
+        Quals.push_back(ND->getNameAsString());
+      }
+    } else if (const auto *RD = dyn_cast<RecordDecl>(D)) {
+      // Logic similar to TypePrinter::printTag, add full location
+      // information to the name as a fallback
+      if (RD->getIdentifier()) {
+        Quals.push_back(RD->getNameAsString());
+      } else if (TypedefNameDecl *Typedef = RD->getTypedefNameForAnonDecl()) {
+        Quals.push_back(Typedef->getNameAsString());
+      } else {
+        PresumedLoc PLoc = SM.getPresumedLoc(RD->getLocation());
+        std::string loc = "invalid_loc";
+        if (PLoc.isValid()) {
+          char buf[30];
+          snprintf(buf, 30, ":%d:%d", PLoc.getLine(), PLoc.getColumn());
+          std::string loc_in_file = buf;
+          loc = PLoc.getFilename() + loc_in_file;
+        }
+        Quals.push_back("anonymous_record_in_" + loc);
+      }
+    } else {
+      Quals.push_back(D->getNameAsString());
     }
+  }
+
+  ArrayScope aScope(OF, Quals.size());
+  // dump list in reverse
+  for (const auto &name : Quals) {
+    OF.emitString(name);
   }
 }
 

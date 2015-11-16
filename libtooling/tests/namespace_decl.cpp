@@ -4,3 +4,7 @@ namespace Q {
   namespace V { // extension-namespace-definition for V
   }
 }
+
+namespace { // anonymous namespace
+
+}
