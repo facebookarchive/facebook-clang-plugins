@@ -3663,7 +3663,6 @@ int ASTExporter<ATDWriter>::ExprWithCleanupsTupleSize() {
 /// #define expr_with_cleanups_tuple expr_tuple * expr_with_cleanups_info
 /// type expr_with_cleanups_info = {
 ///  ~decl_refs : decl_ref list;
-///  sub_expr : stmt;
 /// } <ocaml field_prefix="ewci_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExprWithCleanups(
@@ -3671,7 +3670,7 @@ void ASTExporter<ATDWriter>::VisitExprWithCleanups(
   VisitExpr(Node);
 
   bool HasDeclRefs = Node->getNumObjects() > 0;
-  ObjectScope Scope(OF, 1 + HasDeclRefs);
+  ObjectScope Scope(OF, 0 + HasDeclRefs);
 
   if (HasDeclRefs) {
     OF.emitTag("decl_refs");
@@ -3679,8 +3678,6 @@ void ASTExporter<ATDWriter>::VisitExprWithCleanups(
     for (unsigned i = 0, e = Node->getNumObjects(); i != e; ++i)
       dumpDeclRef(*Node->getObject(i));
   }
-  OF.emitTag("sub_expr");
-  dumpStmt(Node->getSubExpr());
 }
 
 /// \atd
