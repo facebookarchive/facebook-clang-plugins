@@ -246,6 +246,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpAttr(const Attr &A);
   void dumpSelector(const Selector sel);
   void dumpName(const NamedDecl &decl);
+  bool alwaysEmitParent(const Decl *D);
 
   // C++ Utilities
   void dumpAccessSpecifier(AccessSpecifier AS);
@@ -1145,6 +1146,13 @@ void ASTExporter<ATDWriter>::dumpNestedNameSpecifierLoc(
 //  }
 //}
 
+template <class ATDWriter>
+bool ASTExporter<ATDWriter>::alwaysEmitParent(const Decl *D) {
+  if (isa<ObjCMethodDecl>(D) || isa<CXXMethodDecl>(D)) {
+    return true;
+  }
+  return false;
+}
 //===----------------------------------------------------------------------===//
 //  Decl dumping methods.
 //===----------------------------------------------------------------------===//
@@ -1191,6 +1199,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
   {
     bool ShouldEmitParentPointer =
+        alwaysEmitParent(D) ||
         D->getLexicalDeclContext() != D->getDeclContext();
     Module *M = D->getImportedOwningModule();
     if (!M) {
