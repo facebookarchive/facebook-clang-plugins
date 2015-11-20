@@ -602,24 +602,25 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
       } else {
         Quals.push_back(ND->getNameAsString());
       }
-    } else if (const auto *RD = dyn_cast<RecordDecl>(D)) {
-      // Logic similar to TypePrinter::printTag, add full location
-      // information to the name as a fallback
-      if (RD->getIdentifier()) {
-        Quals.push_back(RD->getNameAsString());
-      } else if (TypedefNameDecl *Typedef = RD->getTypedefNameForAnonDecl()) {
-        Quals.push_back(Typedef->getNameAsString());
-      } else {
-        PresumedLoc PLoc = SM.getPresumedLoc(RD->getLocation());
-        std::string loc = "invalid_loc";
-        if (PLoc.isValid()) {
-          char buf[30];
-          snprintf(buf, 30, ":%d:%d", PLoc.getLine(), PLoc.getColumn());
-          std::string loc_in_file = buf;
-          loc = PLoc.getFilename() + loc_in_file;
-        }
-        Quals.push_back("anonymous_record_in_" + loc);
-      }
+    } else if (const auto *TD = dyn_cast<TagDecl>(D)) {
+      // use clang's TypePrinter to do the right thing
+      // with anonymous structs/template parameters etc.
+
+      // configure what to print
+      LangOptions LO;
+      PrintingPolicy Policy(LO);
+      // print tag types
+      Policy.SuppressTag = false;
+      // don't print fully qualified names - we do it ourselves
+      Policy.SuppressScope = true;
+      // print locations of anonymous tags
+      Policy.AnonymousTagLocations = true;
+      // don't add 'struct' inside a name regardless of language
+      Policy.SuppressTagKeyword = true;
+      Policy.LangOpts.CPlusPlus = true;
+
+      QualType qt(TD->getTypeForDecl(), 0);
+      Quals.push_back(qt.getAsString(Policy));
     } else {
       Quals.push_back(D->getNameAsString());
     }
