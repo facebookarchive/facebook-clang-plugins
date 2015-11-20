@@ -297,6 +297,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(NamespaceAliasDecl)
   DECLARE_VISITOR(CXXRecordDecl)
   DECLARE_VISITOR(CXXMethodDecl)
+  DECLARE_VISITOR(ClassTemplateDecl)
   //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
   //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
   //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
@@ -306,7 +307,6 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   //                                         bool DumpExplicitInst,
   //                                         bool DumpRefOnly);
   //    void VisitFunctionTemplateDecl(const FunctionTemplateDecl *D);
-  //    void VisitClassTemplateDecl(const ClassTemplateDecl *D);
   //    void VisitClassTemplateSpecializationDecl(
   //        const ClassTemplateSpecializationDecl *D);
   //    void VisitClassTemplatePartialSpecializationDecl(
@@ -1864,6 +1864,47 @@ void ASTExporter<ATDWriter>::VisitCXXMethodDecl(const CXXMethodDecl *D) {
     }
   }
 }
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ClassTemplateDeclTupleSize() {
+  return ASTExporter<ATDWriter>::RedeclarableTemplateDeclTupleSize() + 1;
+}
+/// \atd
+/// #define class_template_decl_tuple redeclarable_template_decl_tuple * class_template_decl_info
+/// type class_template_decl_info = {
+///   ~specializations : decl list;
+/// } <ocaml field_prefix="ctdi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitClassTemplateDecl(const ClassTemplateDecl *D) {
+  ASTExporter<ATDWriter>::VisitRedeclarableTemplateDecl(D);
+  std::vector<const ClassTemplateSpecializationDecl *> DeclsToDump;
+  if (D == D->getCanonicalDecl()) {
+    // dump specializations once
+    for (const auto* spec : D->specializations()) {
+      switch (spec->getTemplateSpecializationKind()) {
+      case TSK_Undeclared:
+      case TSK_ImplicitInstantiation:
+        DeclsToDump.push_back(spec);
+        break;
+      case TSK_ExplicitSpecialization:
+      case TSK_ExplicitInstantiationDeclaration:
+      case TSK_ExplicitInstantiationDefinition:
+        // these specializations will be dumped elsewhere
+        break;
+      }
+    }
+  }
+  bool ShouldDumpSpecializations = !DeclsToDump.empty();
+  ObjectScope Scope(OF, 0 + ShouldDumpSpecializations);
+  if (ShouldDumpSpecializations) {
+    OF.emitTag("specializations");
+    ArrayScope aScope(OF, DeclsToDump.size());
+    for (const auto* spec : DeclsToDump) {
+      dumpDecl(spec);
+    }
+  }
+}
+
 // template <class ATDWriter>
 // void ASTExporter<ATDWriter>::VisitTypeAliasDecl(const TypeAliasDecl *D) {
 //  dumpName(D);
