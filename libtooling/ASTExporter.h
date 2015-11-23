@@ -2728,8 +2728,8 @@ void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
   }
   {
     ArrayScope Scope(OF, std::distance(S->child_begin(), S->child_end()));
-    for (Stmt::const_child_range CI = S->children(); CI; ++CI) {
-      dumpStmt(*CI);
+    for (const Stmt* CI : S->children()) {
+      dumpStmt(CI);
     }
   }
 }
@@ -3250,6 +3250,7 @@ int ASTExporter<ATDWriter>::UnaryOperatorTupleSize() {
 /// | Real
 /// | Imag
 /// | Extension
+/// | Coawait
 /// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryOperator(const UnaryOperator *Node) {
@@ -3298,6 +3299,9 @@ void ASTExporter<ATDWriter>::VisitUnaryOperator(const UnaryOperator *Node) {
     break;
   case UO_Extension:
     OF.emitSimpleVariant("Extension");
+    break;
+  case UO_Coawait:
+    OF.emitSimpleVariant("Coawait");
     break;
   }
   OF.emitFlag("is_postfix", IsPostfix);

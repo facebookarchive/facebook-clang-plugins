@@ -5,8 +5,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_PATH="$SCRIPT_DIR"/$(basename "${BASH_SOURCE[0]}")
-CLANG_SRC="$SCRIPT_DIR/src/clang-3.7.0.tar.xz"
-COMPILER_RT_PATCH="$SCRIPT_DIR/src/clang_darwin.mk.patch"
+CLANG_SRC="$SCRIPT_DIR/src/clang-snapshot-20-11-15.tar.xz"
 CLANG_PATCH="$SCRIPT_DIR/src/AttrDump.inc.patch"
 CLANG_PREFIX="$SCRIPT_DIR"
 CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
@@ -53,10 +52,6 @@ if tar --version | grep -q 'GNU'; then
 fi
 tar --extract $QUIET_TAR --file "$CLANG_SRC"
 
-# apply patch to compile on Darwin
-pushd llvm/projects/compiler-rt
-patch -p0 -i "$COMPILER_RT_PATCH"
-popd
 llvm/configure "${CONFIGURE_ARGS[@]}"
 
 make -j 8 && make install

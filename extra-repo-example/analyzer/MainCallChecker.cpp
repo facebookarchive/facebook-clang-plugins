@@ -42,7 +42,7 @@ void MainCallChecker::checkPreStmt(const CallExpr *CE, CheckerContext &C) const 
     return;
 
   if (II->isStr("main")) {
-    ExplodedNode *N = C.generateSink();
+    ExplodedNode *N = C.generateSink(state, C.getPredecessor());
     if (!N)
       return;
 
