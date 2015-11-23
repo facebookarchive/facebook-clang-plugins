@@ -73,6 +73,30 @@
         ]
       },
       {
+        "name" : "__builtin_ms_va_list",
+        "qual_name" : [
+          "__builtin_ms_va_list"
+        ]
+      },
+      "NoType",
+      "2",
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : "5",
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
         "name" : "__builtin_va_list",
         "qual_name" : [
           "__builtin_va_list"
@@ -85,7 +109,7 @@
     ]],
     ["VarDecl" , [
       {
-        "pointer" : "5",
+        "pointer" : "6",
         "source_range" : [
           {
             "file" : "tests/lambda.cpp",
@@ -105,12 +129,12 @@
           "f"
         ]
       },
-      "6",
+      "7",
       {
         "is_global" : true,
         "init_expr" : ["CXXConstructExpr" , [
           {
-            "pointer" : "7",
+            "pointer" : "8",
             "source_range" : [
               {
                 "column" : 10
@@ -123,7 +147,7 @@
           [
             ["MaterializeTemporaryExpr" , [
               {
-                "pointer" : "8",
+                "pointer" : "9",
                 "source_range" : [
                   {
                     "column" : 10
@@ -136,7 +160,7 @@
               [
                 ["LambdaExpr" , [
                   {
-                    "pointer" : "9",
+                    "pointer" : "10",
                     "source_range" : [
                       {
                         "column" : 10
@@ -149,7 +173,7 @@
                   [
                     ["CompoundStmt" , [
                       {
-                        "pointer" : "10",
+                        "pointer" : "11",
                         "source_range" : [
                           {
                             "column" : 14
@@ -162,7 +186,7 @@
                       [
                         ["ReturnStmt" , [
                           {
-                            "pointer" : "11",
+                            "pointer" : "12",
                             "source_range" : [
                               {
                                 "column" : 15
@@ -175,7 +199,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "12",
+                                "pointer" : "13",
                                 "source_range" : [
                                   {
                                     "column" : 22
@@ -188,7 +212,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "13"
+                                "type_ptr" : "14"
                               },
                               {
                                 "is_signed" : true,
@@ -202,11 +226,11 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : "14"
+                    "type_ptr" : "15"
                   },
                   ["CXXRecordDecl" , [
                     {
-                      "pointer" : "15",
+                      "pointer" : "16",
                       "source_range" : [
                         {
                           "column" : 10
@@ -226,12 +250,12 @@
                       ]
                     },
                     ["Type" , "class (lambda at tests/lambda.cpp:1:10)"],
-                    "14",
+                    "15",
                     [
                       ["CXXMethodDecl" , [
                         {
-                          "pointer" : "16",
-                          "parent_pointer" : "15",
+                          "pointer" : "17",
+                          "parent_pointer" : "16",
                           "source_range" : [
                             {
                               "column" : 13
@@ -250,12 +274,12 @@
                             "(lambda at tests/lambda.cpp:1:10)"
                           ]
                         },
-                        "17",
+                        "18",
                         {
                           "is_inline" : true,
                           "body" : ["CompoundStmt" , [
                             {
-                              "pointer" : "10",
+                              "pointer" : "11",
                               "source_range" : [
                                 {
                                   "column" : 14
@@ -268,7 +292,7 @@
                             [
                               ["ReturnStmt" , [
                                 {
-                                  "pointer" : "11",
+                                  "pointer" : "12",
                                   "source_range" : [
                                     {
                                       "column" : 15
@@ -281,7 +305,7 @@
                                 [
                                   ["IntegerLiteral" , [
                                     {
-                                      "pointer" : "12",
+                                      "pointer" : "13",
                                       "source_range" : [
                                         {
                                           "column" : 22
@@ -294,7 +318,7 @@
                                     [
                                     ],
                                     {
-                                      "type_ptr" : "13"
+                                      "type_ptr" : "14"
                                     },
                                     {
                                       "is_signed" : true,
@@ -312,8 +336,8 @@
                       ]],
                       ["CXXConversionDecl" , [
                         {
-                          "pointer" : "18",
-                          "parent_pointer" : "15",
+                          "pointer" : "19",
+                          "parent_pointer" : "16",
                           "source_range" : [
                             {
                               "column" : 10
@@ -333,7 +357,7 @@
                             "(lambda at tests/lambda.cpp:1:10)"
                           ]
                         },
-                        "19",
+                        "20",
                         {
                           "is_inline" : true
                         },
@@ -342,8 +366,8 @@
                       ]],
                       ["CXXMethodDecl" , [
                         {
-                          "pointer" : "20",
-                          "parent_pointer" : "15",
+                          "pointer" : "21",
+                          "parent_pointer" : "16",
                           "source_range" : [
                             {
                               "column" : 10
@@ -363,7 +387,7 @@
                             "(lambda at tests/lambda.cpp:1:10)"
                           ]
                         },
-                        "21",
+                        "22",
                         {
                           "storage_class" : "static",
                           "is_inline" : true
@@ -374,8 +398,8 @@
                       ]],
                       ["CXXDestructorDecl" , [
                         {
-                          "pointer" : "22",
-                          "parent_pointer" : "15",
+                          "pointer" : "23",
+                          "parent_pointer" : "16",
                           "source_range" : [
                             {
                               "column" : 10
@@ -396,7 +420,7 @@
                             "(lambda at tests/lambda.cpp:1:10)"
                           ]
                         },
-                        "23",
+                        "24",
                         {
                           "is_inline" : true
                         },
@@ -405,8 +429,8 @@
                       ]],
                       ["CXXConstructorDecl" , [
                         {
-                          "pointer" : "24",
-                          "parent_pointer" : "15",
+                          "pointer" : "25",
+                          "parent_pointer" : "16",
                           "source_range" : [
                             {
                               "column" : 10
@@ -426,13 +450,13 @@
                             "(lambda at tests/lambda.cpp:1:10)"
                           ]
                         },
-                        "25",
+                        "26",
                         {
                           "is_inline" : true,
                           "parameters" : [
                             ["ParmVarDecl" , [
                               {
-                                "pointer" : "26",
+                                "pointer" : "27",
                                 "source_range" : [
                                   {
                                     "column" : 10
@@ -450,7 +474,7 @@
                                   ""
                                 ]
                               },
-                              "27",
+                              "28",
                               {
                               }
                             ]]
@@ -461,8 +485,8 @@
                       ]],
                       ["CXXConstructorDecl" , [
                         {
-                          "pointer" : "28",
-                          "parent_pointer" : "15",
+                          "pointer" : "29",
+                          "parent_pointer" : "16",
                           "source_range" : [
                             {
                               "column" : 10
@@ -484,13 +508,13 @@
                             "(lambda at tests/lambda.cpp:1:10)"
                           ]
                         },
-                        "29",
+                        "30",
                         {
                           "is_inline" : true,
                           "parameters" : [
                             ["ParmVarDecl" , [
                               {
-                                "pointer" : "30",
+                                "pointer" : "31",
                                 "source_range" : [
                                   {
                                     "column" : 10
@@ -508,14 +532,14 @@
                                   ""
                                 ]
                               },
-                              "31",
+                              "32",
                               {
                               }
                             ]]
                           ],
                           "body" : ["CompoundStmt" , [
                             {
-                              "pointer" : "32",
+                              "pointer" : "33",
                               "source_range" : [
                                 {
                                   "column" : 10
@@ -544,7 +568,7 @@
                 ]]
               ],
               {
-                "type_ptr" : "14",
+                "type_ptr" : "15",
                 "value_kind" : "XValue"
               },
               {
@@ -552,12 +576,12 @@
             ]]
           ],
           {
-            "type_ptr" : "6"
+            "type_ptr" : "7"
           },
           {
             "decl_ref" : {
               "kind" : "CXXConstructor",
-              "decl_pointer" : "28",
+              "decl_pointer" : "29",
               "name" : {
                 "name" : "",
                 "qual_name" : [
@@ -565,7 +589,7 @@
                   "(lambda at tests/lambda.cpp:1:10)"
                 ]
               },
-              "type_ptr" : "29"
+              "type_ptr" : "30"
             },
             "is_elidable" : true
           }
@@ -574,7 +598,7 @@
     ]],
     ["CXXRecordDecl" , [
       {
-        "pointer" : "15",
+        "pointer" : "16",
         "source_range" : [
           {
             "column" : 10
@@ -594,12 +618,12 @@
         ]
       },
       ["Type" , "class (lambda at tests/lambda.cpp:1:10)"],
-      "14",
+      "15",
       [
         ["CXXMethodDecl" , [
           {
-            "pointer" : "16",
-            "parent_pointer" : "15",
+            "pointer" : "17",
+            "parent_pointer" : "16",
             "source_range" : [
               {
                 "column" : 13
@@ -618,12 +642,12 @@
               "(lambda at tests/lambda.cpp:1:10)"
             ]
           },
-          "17",
+          "18",
           {
             "is_inline" : true,
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "10",
+                "pointer" : "11",
                 "source_range" : [
                   {
                     "column" : 14
@@ -636,7 +660,7 @@
               [
                 ["ReturnStmt" , [
                   {
-                    "pointer" : "11",
+                    "pointer" : "12",
                     "source_range" : [
                       {
                         "column" : 15
@@ -649,7 +673,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "12",
+                        "pointer" : "13",
                         "source_range" : [
                           {
                             "column" : 22
@@ -662,7 +686,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "13"
+                        "type_ptr" : "14"
                       },
                       {
                         "is_signed" : true,
@@ -680,8 +704,8 @@
         ]],
         ["CXXConversionDecl" , [
           {
-            "pointer" : "18",
-            "parent_pointer" : "15",
+            "pointer" : "19",
+            "parent_pointer" : "16",
             "source_range" : [
               {
                 "column" : 10
@@ -701,7 +725,7 @@
               "(lambda at tests/lambda.cpp:1:10)"
             ]
           },
-          "19",
+          "20",
           {
             "is_inline" : true
           },
@@ -710,8 +734,8 @@
         ]],
         ["CXXMethodDecl" , [
           {
-            "pointer" : "20",
-            "parent_pointer" : "15",
+            "pointer" : "21",
+            "parent_pointer" : "16",
             "source_range" : [
               {
                 "column" : 10
@@ -731,7 +755,7 @@
               "(lambda at tests/lambda.cpp:1:10)"
             ]
           },
-          "21",
+          "22",
           {
             "storage_class" : "static",
             "is_inline" : true
@@ -742,8 +766,8 @@
         ]],
         ["CXXDestructorDecl" , [
           {
-            "pointer" : "22",
-            "parent_pointer" : "15",
+            "pointer" : "23",
+            "parent_pointer" : "16",
             "source_range" : [
               {
                 "column" : 10
@@ -764,7 +788,7 @@
               "(lambda at tests/lambda.cpp:1:10)"
             ]
           },
-          "23",
+          "24",
           {
             "is_inline" : true
           },
@@ -773,8 +797,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "24",
-            "parent_pointer" : "15",
+            "pointer" : "25",
+            "parent_pointer" : "16",
             "source_range" : [
               {
                 "column" : 10
@@ -794,13 +818,13 @@
               "(lambda at tests/lambda.cpp:1:10)"
             ]
           },
-          "25",
+          "26",
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "26",
+                  "pointer" : "27",
                   "source_range" : [
                     {
                       "column" : 10
@@ -818,7 +842,7 @@
                     ""
                   ]
                 },
-                "27",
+                "28",
                 {
                 }
               ]]
@@ -829,8 +853,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "28",
-            "parent_pointer" : "15",
+            "pointer" : "29",
+            "parent_pointer" : "16",
             "source_range" : [
               {
                 "column" : 10
@@ -852,13 +876,13 @@
               "(lambda at tests/lambda.cpp:1:10)"
             ]
           },
-          "29",
+          "30",
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "30",
+                  "pointer" : "31",
                   "source_range" : [
                     {
                       "column" : 10
@@ -876,14 +900,14 @@
                     ""
                   ]
                 },
-                "31",
+                "32",
                 {
                 }
               ]]
             ],
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "32",
+                "pointer" : "33",
                 "source_range" : [
                   {
                     "column" : 10
@@ -915,372 +939,366 @@
   [
     ["BuiltinType" , [
       {
-        "pointer" : "33",
+        "pointer" : "34",
         "raw" : "void"
       },
       "Void"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "34",
+        "pointer" : "35",
         "raw" : "_Bool"
       },
       "Bool"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "35",
+        "pointer" : "36",
         "raw" : "char"
       },
       "Char_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "36",
+        "pointer" : "37",
         "raw" : "signed char"
       },
       "SChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "37",
+        "pointer" : "38",
         "raw" : "short"
       },
       "Short"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "13",
+        "pointer" : "14",
         "raw" : "int"
       },
       "Int"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "38",
+        "pointer" : "39",
         "raw" : "long"
       },
       "Long"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "39",
+        "pointer" : "40",
         "raw" : "long long"
       },
       "LongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "40",
+        "pointer" : "41",
         "raw" : "unsigned char"
       },
       "UChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "41",
+        "pointer" : "42",
         "raw" : "unsigned short"
       },
       "UShort"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "42",
+        "pointer" : "43",
         "raw" : "unsigned int"
       },
       "UInt"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "43",
+        "pointer" : "44",
         "raw" : "unsigned long"
       },
       "ULong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "44",
+        "pointer" : "45",
         "raw" : "unsigned long long"
       },
       "ULongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "45",
+        "pointer" : "46",
         "raw" : "float"
       },
       "Float"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "46",
+        "pointer" : "47",
         "raw" : "double"
       },
       "Double"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "47",
+        "pointer" : "48",
         "raw" : "long double"
       },
       "LongDouble"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "48",
+        "pointer" : "49",
         "raw" : "__int128"
       },
       "Int128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "49",
+        "pointer" : "50",
         "raw" : "unsigned __int128"
       },
       "UInt128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "50",
+        "pointer" : "51",
         "raw" : "wchar_t"
       },
       "WChar_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "51",
+        "pointer" : "52",
         "raw" : "char16_t"
       },
       "Char16"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "52",
+        "pointer" : "53",
         "raw" : "char32_t"
       },
       "Char32"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "53",
+        "pointer" : "54",
         "raw" : "<dependent type>"
       },
       "Dependent"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "54",
+        "pointer" : "55",
         "raw" : "<overloaded function type>"
       },
       "Overload"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "55",
+        "pointer" : "56",
         "raw" : "<bound member function type>"
       },
       "BoundMember"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "56",
+        "pointer" : "57",
         "raw" : "<pseudo-object type>"
       },
       "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "57",
+        "pointer" : "58",
         "raw" : "<unknown type>"
       },
       "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "58",
+        "pointer" : "59",
         "raw" : "<ARC unbridged cast type>"
       },
       "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "59",
+        "pointer" : "60",
         "raw" : "<builtin fn type>"
       },
       "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "60",
+        "pointer" : "61",
         "raw" : "_Complex float"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "61",
+        "pointer" : "62",
         "raw" : "_Complex double"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "62",
+        "pointer" : "63",
         "raw" : "_Complex long double"
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "63",
+        "pointer" : "64",
         "raw" : "id"
       },
       "ObjCId"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "64",
+        "pointer" : "65",
         "raw" : "Class"
       },
       "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "65",
+        "pointer" : "66",
         "raw" : "SEL"
       },
       "ObjCSel"
     ]],
     ["PointerType" , [
       {
-        "pointer" : "66",
+        "pointer" : "67",
         "raw" : "void *"
       },
-      "33"
+      "34"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "67",
+        "pointer" : "68",
         "raw" : "nullptr_t"
       },
       "NullPtr"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "68",
+        "pointer" : "69",
         "raw" : "__fp16"
       },
       "Half"
     ]],
+    ["PointerType" , [
+      {
+        "pointer" : "70",
+        "raw" : "char *"
+      },
+      "36"
+    ]],
     ["RecordType" , [
       {
-        "pointer" : "69",
+        "pointer" : "71",
         "raw" : "struct __va_list_tag"
       },
-      "70"
-    ]],
-    ["TypedefType" , [
-      {
-        "pointer" : "71",
-        "raw" : "__va_list_tag",
-        "desugared_type" : "69"
-      },
-      {
-        "child_type" : "69",
-        "decl_ptr" : "72"
-      }
+      "72"
     ]],
     ["ConstantArrayType" , [
       {
         "pointer" : "73",
         "raw" : "struct __va_list_tag [1]"
       },
-      "69",
-      1
-    ]],
-    ["ConstantArrayType" , [
-      {
-        "pointer" : "74",
-        "raw" : "__va_list_tag [1]"
-      },
       "71",
       1
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "75",
+        "pointer" : "74",
         "raw" : "<dependent type> (void) const"
       },
       {
-        "return_type" : "53"
+        "return_type" : "54"
       },
       {
       }
     ]],
     ["RecordType" , [
       {
-        "pointer" : "14",
+        "pointer" : "15",
         "raw" : "class (lambda at tests/lambda.cpp:1:10)"
       },
-      "15"
+      "16"
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "17",
+        "pointer" : "18",
         "raw" : "int (void) const"
       },
       {
-        "return_type" : "13"
+        "return_type" : "14"
       },
       {
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "21",
+        "pointer" : "22",
         "raw" : "int (void)"
       },
       {
-        "return_type" : "13"
+        "return_type" : "14"
       },
       {
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "76",
+        "pointer" : "75",
         "raw" : "int (*)(void)"
       },
-      "21"
+      "22"
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "19",
+        "pointer" : "20",
         "raw" : "int (*(void) const)(void)"
       },
       {
-        "return_type" : "76"
+        "return_type" : "75"
       },
       {
       }
     ]],
     ["FunctionProtoType" , [
+      {
+        "pointer" : "76",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "34"
+      },
+      {
+      }
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "24",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "34"
+      },
+      {
+      }
+    ]],
+    ["TemplateTypeParmType" , [
       {
         "pointer" : "77",
-        "raw" : "void (void)"
-      },
-      {
-        "return_type" : "33"
-      },
-      {
-      }
-    ]],
-    ["FunctionProtoType" , [
-      {
-        "pointer" : "23",
-        "raw" : "void (void)"
-      },
-      {
-        "return_type" : "33"
-      },
-      {
+        "raw" : "type-parameter-0-0"
       }
     ]],
     ["TemplateTypeParmType" , [
@@ -1289,60 +1307,68 @@
         "raw" : "type-parameter-0-0"
       }
     ]],
-    ["TemplateTypeParmType" , [
-      {
-        "pointer" : "79",
-        "raw" : "type-parameter-0-0"
-      }
-    ]],
     ["AutoType" , [
       {
-        "pointer" : "6",
+        "pointer" : "7",
         "raw" : "class (lambda at tests/lambda.cpp:1:10)",
-        "desugared_type" : "14"
+        "desugared_type" : "15"
       }
     ]],
     ["LValueReferenceType" , [
       {
-        "pointer" : "27",
+        "pointer" : "28",
         "raw" : "const class (lambda at tests/lambda.cpp:1:10) &"
       },
-      "14"
+      "15"
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "80",
+        "pointer" : "79",
         "raw" : "void (const class (lambda at tests/lambda.cpp:1:10) &)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "34"
       },
       {
         "params_type" : [
-          "27"
+          "28"
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "25",
+        "pointer" : "26",
         "raw" : "void (const class (lambda at tests/lambda.cpp:1:10) &)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "34"
       },
       {
         "params_type" : [
-          "27"
+          "28"
         ]
       }
     ]],
     ["RValueReferenceType" , [
       {
-        "pointer" : "31",
+        "pointer" : "32",
         "raw" : "class (lambda at tests/lambda.cpp:1:10) &&"
       },
-      "14"
+      "15"
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "80",
+        "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&)"
+      },
+      {
+        "return_type" : "34"
+      },
+      {
+        "params_type" : [
+          "32"
+        ]
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -1350,39 +1376,25 @@
         "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&)"
       },
       {
-        "return_type" : "33"
+        "return_type" : "34"
       },
       {
         "params_type" : [
-          "31"
+          "32"
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "82",
-        "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&)"
-      },
-      {
-        "return_type" : "33"
-      },
-      {
-        "params_type" : [
-          "31"
-        ]
-      }
-    ]],
-    ["FunctionProtoType" , [
-      {
-        "pointer" : "29",
+        "pointer" : "30",
         "raw" : "void (class (lambda at tests/lambda.cpp:1:10) &&) noexcept"
       },
       {
-        "return_type" : "33"
+        "return_type" : "34"
       },
       {
         "params_type" : [
-          "31"
+          "32"
         ]
       }
     ]],

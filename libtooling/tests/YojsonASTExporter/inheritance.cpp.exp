@@ -73,6 +73,30 @@
         ]
       },
       {
+        "name" : "__builtin_ms_va_list",
+        "qual_name" : [
+          "__builtin_ms_va_list"
+        ]
+      },
+      <"NoType">,
+      "2",
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : "5",
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
         "name" : "__builtin_va_list",
         "qual_name" : [
           "__builtin_va_list"
@@ -85,7 +109,7 @@
     )>,
     <"FunctionDecl" : (
       {
-        "pointer" : "5",
+        "pointer" : "6",
         "source_range" : (
           {
             "file" : "tests/inheritance.cpp",
@@ -107,13 +131,13 @@
           "sqrt"
         ]
       },
-      "6",
+      "7",
       {
         "storage_class" : "extern",
         "parameters" : [
           <"ParmVarDecl" : (
             {
-              "pointer" : "7",
+              "pointer" : "8",
               "source_range" : (
                 {
                   "column" : 20
@@ -131,7 +155,7 @@
                 ""
               ]
             },
-            "8",
+            "9",
             {
             }
           )>
@@ -140,7 +164,7 @@
     )>,
     <"FunctionDecl" : (
       {
-        "pointer" : "9",
+        "pointer" : "10",
         "source_range" : (
           {
             "line" : 2,
@@ -161,13 +185,13 @@
           "pow"
         ]
       },
-      "10",
+      "11",
       {
         "storage_class" : "extern",
         "parameters" : [
           <"ParmVarDecl" : (
             {
-              "pointer" : "11",
+              "pointer" : "12",
               "source_range" : (
                 {
                   "column" : 19
@@ -185,13 +209,13 @@
                 ""
               ]
             },
-            "8",
+            "9",
             {
             }
           )>,
           <"ParmVarDecl" : (
             {
-              "pointer" : "12",
+              "pointer" : "13",
               "source_range" : (
                 {
                   "column" : 27
@@ -209,7 +233,7 @@
                 ""
               ]
             },
-            "8",
+            "9",
             {
             }
           )>
@@ -218,7 +242,7 @@
     )>,
     <"CXXRecordDecl" : (
       {
-        "pointer" : "13",
+        "pointer" : "14",
         "source_range" : (
           {
             "line" : 4,
@@ -240,11 +264,11 @@
         ]
       },
       <"Type" : "class Form">,
-      "14",
+      "15",
       [
         <"CXXRecordDecl" : (
           {
-            "pointer" : "15",
+            "pointer" : "16",
             "source_range" : (
               {
                 "line" : 4,
@@ -266,7 +290,7 @@
             ]
           },
           <"Type" : "class Form">,
-          "14",
+          "15",
           [
           ],
           {
@@ -278,7 +302,7 @@
         )>,
         <"AccessSpecDecl" : (
           {
-            "pointer" : "16",
+            "pointer" : "17",
             "source_range" : (
               {
                 "line" : 5,
@@ -294,7 +318,7 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : "17",
+            "pointer" : "18",
             "source_range" : (
               {
                 "line" : 6,
@@ -315,13 +339,13 @@
               "Form"
             ]
           },
-          "8",
+          "9",
           {
           }
         )>,
         <"AccessSpecDecl" : (
           {
-            "pointer" : "18",
+            "pointer" : "19",
             "source_range" : (
               {
                 "line" : 8,
@@ -337,7 +361,7 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : "19",
+            "pointer" : "20",
             "source_range" : (
               {
                 "line" : 9,
@@ -358,14 +382,14 @@
               "Form"
             ]
           },
-          "20",
+          "21",
           {
           }
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : "21",
-            "parent_pointer" : "13",
+            "pointer" : "22",
+            "parent_pointer" : "14",
             "source_range" : (
               {
                 "line" : 11,
@@ -388,11 +412,11 @@
               "Form"
             ]
           },
-          "22",
+          "23",
           {
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "23",
+                "pointer" : "24",
                 "source_range" : (
                   {
                     "line" : 11,
@@ -407,7 +431,7 @@
               [
                 <"ReturnStmt" : (
                   {
-                    "pointer" : "24",
+                    "pointer" : "25",
                     "source_range" : (
                       {
                         "line" : 12,
@@ -421,7 +445,7 @@
                   [
                     <"ImplicitCastExpr" : (
                       {
-                        "pointer" : "25",
+                        "pointer" : "26",
                         "source_range" : (
                           {
                             "column" : 12
@@ -434,7 +458,7 @@
                       [
                         <"MemberExpr" : (
                           {
-                            "pointer" : "26",
+                            "pointer" : "27",
                             "source_range" : (
                               {
                                 "column" : 12
@@ -447,7 +471,7 @@
                           [
                             <"CXXThisExpr" : (
                               {
-                                "pointer" : "27",
+                                "pointer" : "28",
                                 "source_range" : (
                                   {
                                     "column" : 12
@@ -460,12 +484,12 @@
                               [
                               ],
                               {
-                                "type_ptr" : "28"
+                                "type_ptr" : "29"
                               }
                             )>
                           ],
                           {
-                            "type_ptr" : "8",
+                            "type_ptr" : "9",
                             "value_kind" : <"LValue">
                           },
                           {
@@ -479,7 +503,7 @@
                             },
                             "decl_ref" : {
                               "kind" : <"Field">,
-                              "decl_pointer" : "17",
+                              "decl_pointer" : "18",
                               "name" : {
                                 "name" : "area",
                                 "qual_name" : [
@@ -487,13 +511,13 @@
                                   "Form"
                                 ]
                               },
-                              "type_ptr" : "8"
+                              "type_ptr" : "9"
                             }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : "8"
+                        "type_ptr" : "9"
                       },
                       {
                         "cast_kind" : <"LValueToRValue">,
@@ -511,8 +535,8 @@
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : "29",
-            "parent_pointer" : "13",
+            "pointer" : "30",
+            "parent_pointer" : "14",
             "source_range" : (
               {
                 "line" : 15,
@@ -535,12 +559,12 @@
               "Form"
             ]
           },
-          "30",
+          "31",
           {
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "31",
+                  "pointer" : "32",
                   "source_range" : (
                     {
                       "line" : 15,
@@ -561,14 +585,14 @@
                     "area"
                   ]
                 },
-                "8",
+                "9",
                 {
                 }
               )>
             ],
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "32",
+                "pointer" : "33",
                 "source_range" : (
                   {
                     "column" : 28
@@ -582,7 +606,7 @@
               [
                 <"BinaryOperator" : (
                   {
-                    "pointer" : "33",
+                    "pointer" : "34",
                     "source_range" : (
                       {
                         "line" : 16,
@@ -596,7 +620,7 @@
                   [
                     <"MemberExpr" : (
                       {
-                        "pointer" : "34",
+                        "pointer" : "35",
                         "source_range" : (
                           {
                             "column" : 5
@@ -609,7 +633,7 @@
                       [
                         <"CXXThisExpr" : (
                           {
-                            "pointer" : "35",
+                            "pointer" : "36",
                             "source_range" : (
                               {
                                 "column" : 5
@@ -622,12 +646,12 @@
                           [
                           ],
                           {
-                            "type_ptr" : "28"
+                            "type_ptr" : "29"
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : "8",
+                        "type_ptr" : "9",
                         "value_kind" : <"LValue">
                       },
                       {
@@ -641,7 +665,7 @@
                         },
                         "decl_ref" : {
                           "kind" : <"Field">,
-                          "decl_pointer" : "17",
+                          "decl_pointer" : "18",
                           "name" : {
                             "name" : "area",
                             "qual_name" : [
@@ -649,13 +673,13 @@
                               "Form"
                             ]
                           },
-                          "type_ptr" : "8"
+                          "type_ptr" : "9"
                         }
                       }
                     )>,
                     <"ImplicitCastExpr" : (
                       {
-                        "pointer" : "36",
+                        "pointer" : "37",
                         "source_range" : (
                           {
                             "column" : 18
@@ -668,7 +692,7 @@
                       [
                         <"DeclRefExpr" : (
                           {
-                            "pointer" : "37",
+                            "pointer" : "38",
                             "source_range" : (
                               {
                                 "column" : 18
@@ -681,26 +705,26 @@
                           [
                           ],
                           {
-                            "type_ptr" : "8",
+                            "type_ptr" : "9",
                             "value_kind" : <"LValue">
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"ParmVar">,
-                              "decl_pointer" : "31",
+                              "decl_pointer" : "32",
                               "name" : {
                                 "name" : "area",
                                 "qual_name" : [
                                   "area"
                                 ]
                               },
-                              "type_ptr" : "8"
+                              "type_ptr" : "9"
                             }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : "8"
+                        "type_ptr" : "9"
                       },
                       {
                         "cast_kind" : <"LValueToRValue">,
@@ -710,7 +734,7 @@
                     )>
                   ],
                   {
-                    "type_ptr" : "8",
+                    "type_ptr" : "9",
                     "value_kind" : <"LValue">
                   },
                   {
@@ -734,7 +758,7 @@
     )>,
     <"CXXRecordDecl" : (
       {
-        "pointer" : "38",
+        "pointer" : "39",
         "source_range" : (
           {
             "line" : 21,
@@ -755,11 +779,11 @@
         ]
       },
       <"Type" : "class Circle">,
-      "39",
+      "40",
       [
         <"CXXRecordDecl" : (
           {
-            "pointer" : "40",
+            "pointer" : "41",
             "source_range" : (
               {
                 "line" : 21,
@@ -781,7 +805,7 @@
             ]
           },
           <"Type" : "class Circle">,
-          "39",
+          "40",
           [
           ],
           {
@@ -793,7 +817,7 @@
         )>,
         <"AccessSpecDecl" : (
           {
-            "pointer" : "41",
+            "pointer" : "42",
             "source_range" : (
               {
                 "line" : 22,
@@ -809,8 +833,8 @@
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : "42",
-            "parent_pointer" : "38",
+            "pointer" : "43",
+            "parent_pointer" : "39",
             "source_range" : (
               {
                 "line" : 23,
@@ -831,11 +855,11 @@
               "Circle"
             ]
           },
-          "22",
+          "23",
           {
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "43",
+                "pointer" : "44",
                 "source_range" : (
                   {
                     "line" : 23,
@@ -850,7 +874,7 @@
               [
                 <"DeclStmt" : (
                   {
-                    "pointer" : "44",
+                    "pointer" : "45",
                     "source_range" : (
                       {
                         "line" : 24,
@@ -866,7 +890,7 @@
                   [
                     <"VarDecl" : (
                       {
-                        "pointer" : "45",
+                        "pointer" : "46",
                         "source_range" : (
                           {
                             "column" : 5
@@ -886,7 +910,7 @@
                           "a"
                         ]
                       },
-                      "8",
+                      "9",
                       {
                       }
                     )>
@@ -894,7 +918,7 @@
                 )>,
                 <"BinaryOperator" : (
                   {
-                    "pointer" : "46",
+                    "pointer" : "47",
                     "source_range" : (
                       {
                         "line" : 25,
@@ -908,7 +932,7 @@
                   [
                     <"DeclRefExpr" : (
                       {
-                        "pointer" : "47",
+                        "pointer" : "48",
                         "source_range" : (
                           {
                             "column" : 5
@@ -921,26 +945,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "8",
+                        "type_ptr" : "9",
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : "45",
+                          "decl_pointer" : "46",
                           "name" : {
                             "name" : "a",
                             "qual_name" : [
                               "a"
                             ]
                           },
-                          "type_ptr" : "8"
+                          "type_ptr" : "9"
                         }
                       }
                     )>,
                     <"CXXMemberCallExpr" : (
                       {
-                        "pointer" : "48",
+                        "pointer" : "49",
                         "source_range" : (
                           {
                             "column" : 9
@@ -953,7 +977,7 @@
                       [
                         <"MemberExpr" : (
                           {
-                            "pointer" : "49",
+                            "pointer" : "50",
                             "source_range" : (
                               {
                                 "column" : 9
@@ -966,7 +990,7 @@
                           [
                             <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "50",
+                                "pointer" : "51",
                                 "source_range" : (
                                   {
                                     "column" : 9
@@ -979,7 +1003,7 @@
                               [
                                 <"CXXThisExpr" : (
                                   {
-                                    "pointer" : "51",
+                                    "pointer" : "52",
                                     "source_range" : (
                                       {
                                         "column" : 9
@@ -992,12 +1016,12 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "52"
+                                    "type_ptr" : "53"
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : "28"
+                                "type_ptr" : "29"
                               },
                               {
                                 "cast_kind" : <"UncheckedDerivedToBase">,
@@ -1010,7 +1034,7 @@
                             )>
                           ],
                           {
-                            "type_ptr" : "53"
+                            "type_ptr" : "54"
                           },
                           {
                             "is_arrow" : true,
@@ -1023,7 +1047,7 @@
                             },
                             "decl_ref" : {
                               "kind" : <"CXXMethod">,
-                              "decl_pointer" : "21",
+                              "decl_pointer" : "22",
                               "name" : {
                                 "name" : "getArea",
                                 "qual_name" : [
@@ -1031,18 +1055,18 @@
                                   "Form"
                                 ]
                               },
-                              "type_ptr" : "22"
+                              "type_ptr" : "23"
                             }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : "8"
+                        "type_ptr" : "9"
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : "8",
+                    "type_ptr" : "9",
                     "value_kind" : <"LValue">
                   },
                   {
@@ -1051,7 +1075,7 @@
                 )>,
                 <"ReturnStmt" : (
                   {
-                    "pointer" : "54",
+                    "pointer" : "55",
                     "source_range" : (
                       {
                         "line" : 26,
@@ -1065,7 +1089,7 @@
                   [
                     <"CallExpr" : (
                       {
-                        "pointer" : "55",
+                        "pointer" : "56",
                         "source_range" : (
                           {
                             "column" : 12
@@ -1078,7 +1102,7 @@
                       [
                         <"ImplicitCastExpr" : (
                           {
-                            "pointer" : "56",
+                            "pointer" : "57",
                             "source_range" : (
                               {
                                 "column" : 12
@@ -1091,7 +1115,7 @@
                           [
                             <"DeclRefExpr" : (
                               {
-                                "pointer" : "57",
+                                "pointer" : "58",
                                 "source_range" : (
                                   {
                                     "column" : 12
@@ -1104,26 +1128,26 @@
                               [
                               ],
                               {
-                                "type_ptr" : "6",
+                                "type_ptr" : "7",
                                 "value_kind" : <"LValue">
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : <"Function">,
-                                  "decl_pointer" : "5",
+                                  "decl_pointer" : "6",
                                   "name" : {
                                     "name" : "sqrt",
                                     "qual_name" : [
                                       "sqrt"
                                     ]
                                   },
-                                  "type_ptr" : "6"
+                                  "type_ptr" : "7"
                                 }
                               }
                             )>
                           ],
                           {
-                            "type_ptr" : "58"
+                            "type_ptr" : "59"
                           },
                           {
                             "cast_kind" : <"FunctionToPointerDecay">,
@@ -1133,7 +1157,7 @@
                         )>,
                         <"BinaryOperator" : (
                           {
-                            "pointer" : "59",
+                            "pointer" : "60",
                             "source_range" : (
                               {
                                 "column" : 17
@@ -1146,7 +1170,7 @@
                           [
                             <"BinaryOperator" : (
                               {
-                                "pointer" : "60",
+                                "pointer" : "61",
                                 "source_range" : (
                                   {
                                     "column" : 17
@@ -1159,7 +1183,7 @@
                               [
                                 <"ImplicitCastExpr" : (
                                   {
-                                    "pointer" : "61",
+                                    "pointer" : "62",
                                     "source_range" : (
                                       {
                                         "column" : 17
@@ -1172,7 +1196,7 @@
                                   [
                                     <"DeclRefExpr" : (
                                       {
-                                        "pointer" : "62",
+                                        "pointer" : "63",
                                         "source_range" : (
                                           {
                                             "column" : 17
@@ -1185,26 +1209,26 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "8",
+                                        "type_ptr" : "9",
                                         "value_kind" : <"LValue">
                                       },
                                       {
                                         "decl_ref" : {
                                           "kind" : <"Var">,
-                                          "decl_pointer" : "45",
+                                          "decl_pointer" : "46",
                                           "name" : {
                                             "name" : "a",
                                             "qual_name" : [
                                               "a"
                                             ]
                                           },
-                                          "type_ptr" : "8"
+                                          "type_ptr" : "9"
                                         }
                                       }
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : "8"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "cast_kind" : <"LValueToRValue">,
@@ -1214,7 +1238,7 @@
                                 )>,
                                 <"ImplicitCastExpr" : (
                                   {
-                                    "pointer" : "63",
+                                    "pointer" : "64",
                                     "source_range" : (
                                       {
                                         "column" : 21
@@ -1227,7 +1251,7 @@
                                   [
                                     <"IntegerLiteral" : (
                                       {
-                                        "pointer" : "64",
+                                        "pointer" : "65",
                                         "source_range" : (
                                           {
                                             "column" : 21
@@ -1240,7 +1264,7 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "20"
+                                        "type_ptr" : "21"
                                       },
                                       {
                                         "is_signed" : true,
@@ -1250,7 +1274,7 @@
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : "8"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "cast_kind" : <"IntegralToFloating">,
@@ -1260,7 +1284,7 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : "8"
+                                "type_ptr" : "9"
                               },
                               {
                                 "kind" : <"Div">
@@ -1268,7 +1292,7 @@
                             )>,
                             <"FloatingLiteral" : (
                               {
-                                "pointer" : "65",
+                                "pointer" : "66",
                                 "source_range" : (
                                   {
                                     "column" : 25
@@ -1281,13 +1305,13 @@
                               [
                               ],
                               {
-                                "type_ptr" : "8"
+                                "type_ptr" : "9"
                               },
                               "3.1400000000000001"
                             )>
                           ],
                           {
-                            "type_ptr" : "8"
+                            "type_ptr" : "9"
                           },
                           {
                             "kind" : <"Mul">
@@ -1295,7 +1319,7 @@
                         )>
                       ],
                       {
-                        "type_ptr" : "8"
+                        "type_ptr" : "9"
                       }
                     )>
                   ]
@@ -1308,8 +1332,8 @@
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : "66",
-            "parent_pointer" : "38",
+            "pointer" : "67",
+            "parent_pointer" : "39",
             "source_range" : (
               {
                 "line" : 29,
@@ -1330,12 +1354,12 @@
               "Circle"
             ]
           },
-          "30",
+          "31",
           {
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "67",
+                  "pointer" : "68",
                   "source_range" : (
                     {
                       "line" : 29,
@@ -1356,14 +1380,14 @@
                     "diameter"
                   ]
                 },
-                "8",
+                "9",
                 {
                 }
               )>
             ],
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "68",
+                "pointer" : "69",
                 "source_range" : (
                   {
                     "column" : 34
@@ -1377,7 +1401,7 @@
               [
                 <"CXXMemberCallExpr" : (
                   {
-                    "pointer" : "69",
+                    "pointer" : "70",
                     "source_range" : (
                       {
                         "line" : 30,
@@ -1391,7 +1415,7 @@
                   [
                     <"MemberExpr" : (
                       {
-                        "pointer" : "70",
+                        "pointer" : "71",
                         "source_range" : (
                           {
                             "column" : 5
@@ -1404,7 +1428,7 @@
                       [
                         <"ImplicitCastExpr" : (
                           {
-                            "pointer" : "71",
+                            "pointer" : "72",
                             "source_range" : (
                               {
                                 "column" : 5
@@ -1417,7 +1441,7 @@
                           [
                             <"CXXThisExpr" : (
                               {
-                                "pointer" : "72",
+                                "pointer" : "73",
                                 "source_range" : (
                                   {
                                     "column" : 5
@@ -1430,12 +1454,12 @@
                               [
                               ],
                               {
-                                "type_ptr" : "52"
+                                "type_ptr" : "53"
                               }
                             )>
                           ],
                           {
-                            "type_ptr" : "28"
+                            "type_ptr" : "29"
                           },
                           {
                             "cast_kind" : <"UncheckedDerivedToBase">,
@@ -1448,7 +1472,7 @@
                         )>
                       ],
                       {
-                        "type_ptr" : "53"
+                        "type_ptr" : "54"
                       },
                       {
                         "is_arrow" : true,
@@ -1461,7 +1485,7 @@
                         },
                         "decl_ref" : {
                           "kind" : <"CXXMethod">,
-                          "decl_pointer" : "29",
+                          "decl_pointer" : "30",
                           "name" : {
                             "name" : "setArea",
                             "qual_name" : [
@@ -1469,13 +1493,13 @@
                               "Form"
                             ]
                           },
-                          "type_ptr" : "30"
+                          "type_ptr" : "31"
                         }
                       }
                     )>,
                     <"BinaryOperator" : (
                       {
-                        "pointer" : "73",
+                        "pointer" : "74",
                         "source_range" : (
                           {
                             "column" : 14
@@ -1488,7 +1512,7 @@
                       [
                         <"CallExpr" : (
                           {
-                            "pointer" : "74",
+                            "pointer" : "75",
                             "source_range" : (
                               {
                                 "column" : 14
@@ -1501,7 +1525,7 @@
                           [
                             <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "75",
+                                "pointer" : "76",
                                 "source_range" : (
                                   {
                                     "column" : 14
@@ -1514,7 +1538,7 @@
                               [
                                 <"DeclRefExpr" : (
                                   {
-                                    "pointer" : "76",
+                                    "pointer" : "77",
                                     "source_range" : (
                                       {
                                         "column" : 14
@@ -1527,26 +1551,26 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10",
+                                    "type_ptr" : "11",
                                     "value_kind" : <"LValue">
                                   },
                                   {
                                     "decl_ref" : {
                                       "kind" : <"Function">,
-                                      "decl_pointer" : "9",
+                                      "decl_pointer" : "10",
                                       "name" : {
                                         "name" : "pow",
                                         "qual_name" : [
                                           "pow"
                                         ]
                                       },
-                                      "type_ptr" : "10"
+                                      "type_ptr" : "11"
                                     }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : "77"
+                                "type_ptr" : "78"
                               },
                               {
                                 "cast_kind" : <"FunctionToPointerDecay">,
@@ -1556,7 +1580,7 @@
                             )>,
                             <"BinaryOperator" : (
                               {
-                                "pointer" : "78",
+                                "pointer" : "79",
                                 "source_range" : (
                                   {
                                     "column" : 18
@@ -1569,7 +1593,7 @@
                               [
                                 <"ImplicitCastExpr" : (
                                   {
-                                    "pointer" : "79",
+                                    "pointer" : "80",
                                     "source_range" : (
                                       {
                                         "column" : 18
@@ -1582,7 +1606,7 @@
                                   [
                                     <"DeclRefExpr" : (
                                       {
-                                        "pointer" : "80",
+                                        "pointer" : "81",
                                         "source_range" : (
                                           {
                                             "column" : 18
@@ -1595,26 +1619,26 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "8",
+                                        "type_ptr" : "9",
                                         "value_kind" : <"LValue">
                                       },
                                       {
                                         "decl_ref" : {
                                           "kind" : <"ParmVar">,
-                                          "decl_pointer" : "67",
+                                          "decl_pointer" : "68",
                                           "name" : {
                                             "name" : "diameter",
                                             "qual_name" : [
                                               "diameter"
                                             ]
                                           },
-                                          "type_ptr" : "8"
+                                          "type_ptr" : "9"
                                         }
                                       }
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : "8"
+                                    "type_ptr" : "9"
                                   },
                                   {
                                     "cast_kind" : <"LValueToRValue">,
@@ -1624,7 +1648,7 @@
                                 )>,
                                 <"FloatingLiteral" : (
                                   {
-                                    "pointer" : "81",
+                                    "pointer" : "82",
                                     "source_range" : (
                                       {
                                         "column" : 29
@@ -1637,13 +1661,13 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "8"
+                                    "type_ptr" : "9"
                                   },
                                   "0.5"
                                 )>
                               ],
                               {
-                                "type_ptr" : "8"
+                                "type_ptr" : "9"
                               },
                               {
                                 "kind" : <"Mul">
@@ -1651,7 +1675,7 @@
                             )>,
                             <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "82",
+                                "pointer" : "83",
                                 "source_range" : (
                                   {
                                     "column" : 34
@@ -1664,7 +1688,7 @@
                               [
                                 <"IntegerLiteral" : (
                                   {
-                                    "pointer" : "83",
+                                    "pointer" : "84",
                                     "source_range" : (
                                       {
                                         "column" : 34
@@ -1677,7 +1701,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "20"
+                                    "type_ptr" : "21"
                                   },
                                   {
                                     "is_signed" : true,
@@ -1687,7 +1711,7 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : "8"
+                                "type_ptr" : "9"
                               },
                               {
                                 "cast_kind" : <"IntegralToFloating">,
@@ -1697,12 +1721,12 @@
                             )>
                           ],
                           {
-                            "type_ptr" : "8"
+                            "type_ptr" : "9"
                           }
                         )>,
                         <"FloatingLiteral" : (
                           {
-                            "pointer" : "84",
+                            "pointer" : "85",
                             "source_range" : (
                               {
                                 "column" : 39
@@ -1715,13 +1739,13 @@
                           [
                           ],
                           {
-                            "type_ptr" : "8"
+                            "type_ptr" : "9"
                           },
                           "3.1400000000000001"
                         )>
                       ],
                       {
-                        "type_ptr" : "8"
+                        "type_ptr" : "9"
                       },
                       {
                         "kind" : <"Mul">
@@ -1729,7 +1753,7 @@
                     )>
                   ],
                   {
-                    "type_ptr" : "85"
+                    "type_ptr" : "86"
                   }
                 )>
               ]
@@ -1740,8 +1764,8 @@
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : "86",
-            "parent_pointer" : "38",
+            "pointer" : "87",
+            "parent_pointer" : "39",
             "source_range" : (
               {
                 "line" : 33,
@@ -1762,11 +1786,11 @@
               "Circle"
             ]
           },
-          "87",
+          "88",
           {
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : "88",
+                "pointer" : "89",
                 "source_range" : (
                   {
                     "line" : 33,
@@ -1781,7 +1805,7 @@
               [
                 <"ReturnStmt" : (
                   {
-                    "pointer" : "89",
+                    "pointer" : "90",
                     "source_range" : (
                       {
                         "line" : 34,
@@ -1795,7 +1819,7 @@
                   [
                     <"ParenExpr" : (
                       {
-                        "pointer" : "90",
+                        "pointer" : "91",
                         "source_range" : (
                           {
                             "column" : 12
@@ -1808,7 +1832,7 @@
                       [
                         <"BinaryOperator" : (
                           {
-                            "pointer" : "91",
+                            "pointer" : "92",
                             "source_range" : (
                               {
                                 "column" : 13
@@ -1821,7 +1845,7 @@
                           [
                             <"ImplicitCastExpr" : (
                               {
-                                "pointer" : "92",
+                                "pointer" : "93",
                                 "source_range" : (
                                   {
                                     "column" : 13
@@ -1834,7 +1858,7 @@
                               [
                                 <"MemberExpr" : (
                                   {
-                                    "pointer" : "93",
+                                    "pointer" : "94",
                                     "source_range" : (
                                       {
                                         "column" : 13
@@ -1847,7 +1871,7 @@
                                   [
                                     <"ImplicitCastExpr" : (
                                       {
-                                        "pointer" : "94",
+                                        "pointer" : "95",
                                         "source_range" : (
                                           {
                                             "column" : 13
@@ -1860,7 +1884,7 @@
                                       [
                                         <"CXXThisExpr" : (
                                           {
-                                            "pointer" : "95",
+                                            "pointer" : "96",
                                             "source_range" : (
                                               {
                                                 "column" : 13
@@ -1873,12 +1897,12 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : "52"
+                                            "type_ptr" : "53"
                                           }
                                         )>
                                       ],
                                       {
-                                        "type_ptr" : "28"
+                                        "type_ptr" : "29"
                                       },
                                       {
                                         "cast_kind" : <"UncheckedDerivedToBase">,
@@ -1891,7 +1915,7 @@
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : "20",
+                                    "type_ptr" : "21",
                                     "value_kind" : <"LValue">
                                   },
                                   {
@@ -1905,7 +1929,7 @@
                                     },
                                     "decl_ref" : {
                                       "kind" : <"Field">,
-                                      "decl_pointer" : "19",
+                                      "decl_pointer" : "20",
                                       "name" : {
                                         "name" : "color",
                                         "qual_name" : [
@@ -1913,13 +1937,13 @@
                                           "Form"
                                         ]
                                       },
-                                      "type_ptr" : "20"
+                                      "type_ptr" : "21"
                                     }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : "20"
+                                "type_ptr" : "21"
                               },
                               {
                                 "cast_kind" : <"LValueToRValue">,
@@ -1929,7 +1953,7 @@
                             )>,
                             <"IntegerLiteral" : (
                               {
-                                "pointer" : "96",
+                                "pointer" : "97",
                                 "source_range" : (
                                   {
                                     "column" : 21
@@ -1942,7 +1966,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "20"
+                                "type_ptr" : "21"
                               },
                               {
                                 "is_signed" : true,
@@ -1952,7 +1976,7 @@
                             )>
                           ],
                           {
-                            "type_ptr" : "97"
+                            "type_ptr" : "98"
                           },
                           {
                             "kind" : <"GT">
@@ -1960,7 +1984,7 @@
                         )>
                       ],
                       {
-                        "type_ptr" : "97"
+                        "type_ptr" : "98"
                       }
                     )>
                   ]
@@ -1979,7 +2003,7 @@
       },
       {
         "bases" : [
-          "14"
+          "15"
         ]
       }
     )>
@@ -1989,400 +2013,388 @@
   [
     <"BuiltinType" : (
       {
-        "pointer" : "85",
+        "pointer" : "86",
         "raw" : "void"
       },
       <"Void">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "97",
+        "pointer" : "98",
         "raw" : "_Bool"
       },
       <"Bool">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "98",
+        "pointer" : "99",
         "raw" : "char"
       },
       <"Char_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "99",
+        "pointer" : "100",
         "raw" : "signed char"
       },
       <"SChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "100",
+        "pointer" : "101",
         "raw" : "short"
       },
       <"Short">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "20",
+        "pointer" : "21",
         "raw" : "int"
       },
       <"Int">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "101",
+        "pointer" : "102",
         "raw" : "long"
       },
       <"Long">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "102",
+        "pointer" : "103",
         "raw" : "long long"
       },
       <"LongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "103",
+        "pointer" : "104",
         "raw" : "unsigned char"
       },
       <"UChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "104",
+        "pointer" : "105",
         "raw" : "unsigned short"
       },
       <"UShort">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "105",
+        "pointer" : "106",
         "raw" : "unsigned int"
       },
       <"UInt">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "106",
+        "pointer" : "107",
         "raw" : "unsigned long"
       },
       <"ULong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "107",
+        "pointer" : "108",
         "raw" : "unsigned long long"
       },
       <"ULongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "108",
+        "pointer" : "109",
         "raw" : "float"
       },
       <"Float">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "8",
+        "pointer" : "9",
         "raw" : "double"
       },
       <"Double">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "109",
+        "pointer" : "110",
         "raw" : "long double"
       },
       <"LongDouble">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "110",
+        "pointer" : "111",
         "raw" : "__int128"
       },
       <"Int128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "111",
+        "pointer" : "112",
         "raw" : "unsigned __int128"
       },
       <"UInt128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "112",
+        "pointer" : "113",
         "raw" : "wchar_t"
       },
       <"WChar_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "113",
+        "pointer" : "114",
         "raw" : "char16_t"
       },
       <"Char16">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "114",
+        "pointer" : "115",
         "raw" : "char32_t"
       },
       <"Char32">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "115",
+        "pointer" : "116",
         "raw" : "<dependent type>"
       },
       <"Dependent">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "116",
+        "pointer" : "117",
         "raw" : "<overloaded function type>"
       },
       <"Overload">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "53",
+        "pointer" : "54",
         "raw" : "<bound member function type>"
       },
       <"BoundMember">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "117",
+        "pointer" : "118",
         "raw" : "<pseudo-object type>"
       },
       <"PseudoObject">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "118",
+        "pointer" : "119",
         "raw" : "<unknown type>"
       },
       <"UnknownAny">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "119",
+        "pointer" : "120",
         "raw" : "<ARC unbridged cast type>"
       },
       <"ARCUnbridgedCast">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "120",
+        "pointer" : "121",
         "raw" : "<builtin fn type>"
       },
       <"BuiltinFn">
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "121",
+        "pointer" : "122",
         "raw" : "_Complex float"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "122",
+        "pointer" : "123",
         "raw" : "_Complex double"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : "123",
+        "pointer" : "124",
         "raw" : "_Complex long double"
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "124",
+        "pointer" : "125",
         "raw" : "id"
       },
       <"ObjCId">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "125",
+        "pointer" : "126",
         "raw" : "Class"
       },
       <"ObjCClass">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "126",
+        "pointer" : "127",
         "raw" : "SEL"
       },
       <"ObjCSel">
     )>,
     <"PointerType" : (
       {
-        "pointer" : "127",
+        "pointer" : "128",
         "raw" : "void *"
       },
-      "85"
+      "86"
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "128",
+        "pointer" : "129",
         "raw" : "nullptr_t"
       },
       <"NullPtr">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "129",
+        "pointer" : "130",
         "raw" : "__fp16"
       },
       <"Half">
     )>,
+    <"PointerType" : (
+      {
+        "pointer" : "131",
+        "raw" : "char *"
+      },
+      "99"
+    )>,
     <"RecordType" : (
       {
-        "pointer" : "130",
+        "pointer" : "132",
         "raw" : "struct __va_list_tag"
       },
-      "131"
-    )>,
-    <"TypedefType" : (
-      {
-        "pointer" : "132",
-        "raw" : "__va_list_tag",
-        "desugared_type" : "130"
-      },
-      {
-        "child_type" : "130",
-        "decl_ptr" : "133"
-      }
+      "133"
     )>,
     <"ConstantArrayType" : (
       {
         "pointer" : "134",
         "raw" : "struct __va_list_tag [1]"
       },
-      "130",
-      1
-    )>,
-    <"ConstantArrayType" : (
-      {
-        "pointer" : "135",
-        "raw" : "__va_list_tag [1]"
-      },
       "132",
       1
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "6",
+        "pointer" : "7",
         "raw" : "double (double)"
       },
       {
-        "return_type" : "8"
+        "return_type" : "9"
       },
       {
         "params_type" : [
-          "8"
+          "9"
         ]
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "10",
+        "pointer" : "11",
         "raw" : "double (double, double)"
       },
       {
-        "return_type" : "8"
+        "return_type" : "9"
       },
       {
         "params_type" : [
-          "8",
-          "8"
+          "9",
+          "9"
         ]
       }
     )>,
     <"RecordType" : (
       {
-        "pointer" : "14",
+        "pointer" : "15",
         "raw" : "class Form"
-      },
-      "13"
-    )>,
-    <"PointerType" : (
-      {
-        "pointer" : "28",
-        "raw" : "class Form *"
       },
       "14"
     )>,
+    <"PointerType" : (
+      {
+        "pointer" : "29",
+        "raw" : "class Form *"
+      },
+      "15"
+    )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "22",
+        "pointer" : "23",
         "raw" : "double (void)"
       },
       {
-        "return_type" : "8"
+        "return_type" : "9"
       },
       {
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "30",
+        "pointer" : "31",
         "raw" : "void (double)"
       },
       {
-        "return_type" : "85"
+        "return_type" : "86"
       },
       {
         "params_type" : [
-          "8"
+          "9"
         ]
       }
     )>,
     <"RecordType" : (
       {
-        "pointer" : "39",
+        "pointer" : "40",
         "raw" : "class Circle"
-      },
-      "38"
-    )>,
-    <"PointerType" : (
-      {
-        "pointer" : "52",
-        "raw" : "class Circle *"
       },
       "39"
     )>,
+    <"PointerType" : (
+      {
+        "pointer" : "53",
+        "raw" : "class Circle *"
+      },
+      "40"
+    )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : "87",
+        "pointer" : "88",
         "raw" : "_Bool (void)"
       },
       {
-        "return_type" : "97"
+        "return_type" : "98"
       },
       {
       }
     )>,
     <"PointerType" : (
       {
-        "pointer" : "58",
+        "pointer" : "59",
         "raw" : "double (*)(double)"
       },
-      "6"
+      "7"
     )>,
     <"PointerType" : (
       {
-        "pointer" : "77",
+        "pointer" : "78",
         "raw" : "double (*)(double, double)"
       },
-      "10"
+      "11"
     )>,
     <"NoneType" : (
       {
