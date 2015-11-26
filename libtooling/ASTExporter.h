@@ -29,28 +29,28 @@
 
 #pragma once
 
-#include <clang/AST/ASTContext.h>
 #include <clang/AST/ASTConsumer.h>
+#include <clang/AST/ASTContext.h>
 #include <clang/AST/Attr.h>
 #include <clang/AST/CommentVisitor.h>
 #include <clang/AST/DeclCXX.h>
 #include <clang/AST/DeclLookups.h>
 #include <clang/AST/DeclObjC.h>
 #include <clang/AST/DeclVisitor.h>
+#include <clang/AST/RecursiveASTVisitor.h>
 #include <clang/AST/StmtVisitor.h>
 #include <clang/AST/TypeVisitor.h>
 #include <clang/Basic/Module.h>
 #include <clang/Basic/SourceManager.h>
-#include <clang/Frontend/FrontendPluginRegistry.h>
-#include <clang/AST/RecursiveASTVisitor.h>
 #include <clang/Frontend/CompilerInstance.h>
 #include <clang/Frontend/FrontendDiagnostic.h>
+#include <clang/Frontend/FrontendPluginRegistry.h>
 
 #include <llvm/Support/raw_ostream.h>
 
-#include "atdlib/ATDWriter.h"
 #include "AttrParameterVectorStream.h"
 #include "SimplePluginASTAction.h"
+#include "atdlib/ATDWriter.h"
 
 //===----------------------------------------------------------------------===//
 // ASTExporter Visitor
@@ -298,6 +298,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(CXXRecordDecl)
   DECLARE_VISITOR(CXXMethodDecl)
   DECLARE_VISITOR(ClassTemplateDecl)
+  DECLARE_VISITOR(FunctionTemplateDecl)
   //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
   //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
   //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
@@ -621,6 +622,20 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
 
       QualType qt(TD->getTypeForDecl(), 0);
       Quals.push_back(qt.getAsString(Policy));
+    } else if (const auto *FD = dyn_cast<FunctionDecl>(D)) {
+      std::string template_str = "";
+      // add instantiated template arguments for readability
+      if (const TemplateArgumentList *TemplateArgs =
+              FD->getTemplateSpecializationArgs()) {
+        LangOptions LO;
+        PrintingPolicy Policy(LO);
+        SmallString<256> Buf;
+        llvm::raw_svector_ostream StrOS(Buf);
+        TemplateSpecializationType::PrintTemplateArgumentList(
+            StrOS, TemplateArgs->data(), TemplateArgs->size(), Policy);
+        template_str = StrOS.str();
+      }
+      Quals.push_back(D->getNameAsString() + template_str);
     } else {
       Quals.push_back(D->getNameAsString());
     }
@@ -1869,18 +1884,20 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ClassTemplateDeclTupleSize() {
   return ASTExporter<ATDWriter>::RedeclarableTemplateDeclTupleSize() + 1;
 }
+
 /// \atd
-/// #define class_template_decl_tuple redeclarable_template_decl_tuple * class_template_decl_info
-/// type class_template_decl_info = {
+/// #define class_template_decl_tuple redeclarable_template_decl_tuple * template_decl_info
+/// type template_decl_info = {
 ///   ~specializations : decl list;
-/// } <ocaml field_prefix="ctdi_">
+/// } <ocaml field_prefix="tdi_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitClassTemplateDecl(const ClassTemplateDecl *D) {
+void ASTExporter<ATDWriter>::VisitClassTemplateDecl(
+    const ClassTemplateDecl *D) {
   ASTExporter<ATDWriter>::VisitRedeclarableTemplateDecl(D);
   std::vector<const ClassTemplateSpecializationDecl *> DeclsToDump;
   if (D == D->getCanonicalDecl()) {
     // dump specializations once
-    for (const auto* spec : D->specializations()) {
+    for (const auto *spec : D->specializations()) {
       switch (spec->getTemplateSpecializationKind()) {
       case TSK_Undeclared:
       case TSK_ImplicitInstantiation:
@@ -1899,7 +1916,45 @@ void ASTExporter<ATDWriter>::VisitClassTemplateDecl(const ClassTemplateDecl *D) 
   if (ShouldDumpSpecializations) {
     OF.emitTag("specializations");
     ArrayScope aScope(OF, DeclsToDump.size());
-    for (const auto* spec : DeclsToDump) {
+    for (const auto *spec : DeclsToDump) {
+      dumpDecl(spec);
+    }
+  }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FunctionTemplateDeclTupleSize() {
+  return ASTExporter<ATDWriter>::RedeclarableTemplateDeclTupleSize() + 1;
+}
+/// \atd
+/// #define function_template_decl_tuple redeclarable_template_decl_tuple * template_decl_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitFunctionTemplateDecl(
+    const FunctionTemplateDecl *D) {
+  ASTExporter<ATDWriter>::VisitRedeclarableTemplateDecl(D);
+  std::vector<const FunctionDecl *> DeclsToDump;
+  if (D == D->getCanonicalDecl()) {
+    // dump specializations once
+    for (const auto *spec : D->specializations()) {
+      switch (spec->getTemplateSpecializationKind()) {
+      case TSK_Undeclared:
+      case TSK_ImplicitInstantiation:
+      case TSK_ExplicitInstantiationDefinition:
+      case TSK_ExplicitInstantiationDeclaration:
+        DeclsToDump.push_back(spec);
+        break;
+      case TSK_ExplicitSpecialization:
+        // these specializations will be dumped when they are defined
+        break;
+      }
+    }
+  }
+  bool ShouldDumpSpecializations = !DeclsToDump.empty();
+  ObjectScope Scope(OF, 0 + ShouldDumpSpecializations);
+  if (ShouldDumpSpecializations) {
+    OF.emitTag("specializations");
+    ArrayScope aScope(OF, DeclsToDump.size());
+    for (const auto *spec : DeclsToDump) {
       dumpDecl(spec);
     }
   }
@@ -2728,7 +2783,7 @@ void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
   }
   {
     ArrayScope Scope(OF, std::distance(S->child_begin(), S->child_end()));
-    for (const Stmt* CI : S->children()) {
+    for (const Stmt *CI : S->children()) {
       dumpStmt(CI);
     }
   }
