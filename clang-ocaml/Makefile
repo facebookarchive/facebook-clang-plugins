@@ -133,7 +133,7 @@ record-test-outputs:
 -include .depend
 
 .depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_v.mli build/clang_ast_v.ml
-	ocamldep -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
+	ocamldep -native -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
 
 clean:
 	rm -rf tests/*.out build
