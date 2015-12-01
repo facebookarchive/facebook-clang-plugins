@@ -136,4 +136,4 @@ record-test-outputs:
 	ocamldep -native -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
 
 clean:
-	rm -rf tests/*.out build
+	rm -rf tests/*.out build .depend
