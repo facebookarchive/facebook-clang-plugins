@@ -246,6 +246,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpAttr(const Attr &A);
   void dumpSelector(const Selector sel);
   void dumpName(const NamedDecl &decl);
+  PrintingPolicy getPrintingPolicy();
   bool alwaysEmitParent(const Decl *D);
 
   // C++ Utilities
@@ -559,6 +560,23 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
   dumpPointerToType(T);
 }
 
+template <class ATDWriter>
+PrintingPolicy ASTExporter<ATDWriter>::getPrintingPolicy() {
+  // configure what to print
+  LangOptions LO;
+  PrintingPolicy Policy(LO);
+  // print tag types
+  Policy.SuppressTag = false;
+  // don't print fully qualified names - we do it ourselves
+  Policy.SuppressScope = true;
+  // print locations of anonymous tags
+  Policy.AnonymousTagLocations = true;
+  // don't add 'struct' inside a name regardless of language
+  Policy.SuppressTagKeyword = true;
+  Policy.LangOpts.CPlusPlus = true;
+  return Policy;
+}
+
 /// \atd
 /// type named_decl_info = {
 ///   name : string;
@@ -607,32 +625,20 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
       // use clang's TypePrinter to do the right thing
       // with anonymous structs/template parameters etc.
 
-      // configure what to print
-      LangOptions LO;
-      PrintingPolicy Policy(LO);
-      // print tag types
-      Policy.SuppressTag = false;
-      // don't print fully qualified names - we do it ourselves
-      Policy.SuppressScope = true;
-      // print locations of anonymous tags
-      Policy.AnonymousTagLocations = true;
-      // don't add 'struct' inside a name regardless of language
-      Policy.SuppressTagKeyword = true;
-      Policy.LangOpts.CPlusPlus = true;
-
       QualType qt(TD->getTypeForDecl(), 0);
-      Quals.push_back(qt.getAsString(Policy));
+      Quals.push_back(qt.getAsString(getPrintingPolicy()));
     } else if (const auto *FD = dyn_cast<FunctionDecl>(D)) {
       std::string template_str = "";
       // add instantiated template arguments for readability
       if (const TemplateArgumentList *TemplateArgs =
               FD->getTemplateSpecializationArgs()) {
-        LangOptions LO;
-        PrintingPolicy Policy(LO);
         SmallString<256> Buf;
         llvm::raw_svector_ostream StrOS(Buf);
         TemplateSpecializationType::PrintTemplateArgumentList(
-            StrOS, TemplateArgs->data(), TemplateArgs->size(), Policy);
+            StrOS,
+            TemplateArgs->data(),
+            TemplateArgs->size(),
+            getPrintingPolicy());
         template_str = StrOS.str();
       }
       Quals.push_back(D->getNameAsString() + template_str);
