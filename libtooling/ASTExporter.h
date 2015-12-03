@@ -2272,8 +2272,9 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   bool HasParameters = I != E;
   bool IsVariadic = D->isVariadic();
   const Stmt *Body = D->getBody();
-  ObjectScope Scope(
-      OF, 1 + IsInstanceMethod + (bool)PropertyDecl + HasParameters + IsVariadic + (bool)Body);
+  ObjectScope Scope(OF,
+                    1 + IsInstanceMethod + (bool)PropertyDecl + HasParameters +
+                        IsVariadic + (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
@@ -2281,9 +2282,11 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   if (PropertyDecl) {
     OF.emitTag("property_decl");
     std::string variantName = "";
-    if (D->getCanonicalDecl() == PropertyDecl->getGetterMethodDecl()->getCanonicalDecl()) {
+    if (D->getCanonicalDecl() ==
+        PropertyDecl->getGetterMethodDecl()->getCanonicalDecl()) {
       variantName = "Getter";
-    } else if (D->getCanonicalDecl() == PropertyDecl->getSetterMethodDecl()->getCanonicalDecl()) {
+    } else if (D->getCanonicalDecl() ==
+               PropertyDecl->getSetterMethodDecl()->getCanonicalDecl()) {
       variantName = "Setter";
     } else {
       assert(false);
@@ -2532,7 +2535,6 @@ int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
 /// \atd
 /// #define obj_c_property_decl_tuple named_decl_tuple * obj_c_property_decl_info
 /// type obj_c_property_decl_info = {
-///   ?class_interface : decl_ref option;
 ///   type_ptr : type_ptr;
 ///   ?getter_method : decl_ref option;
 ///   ?setter_method : decl_ref option;
@@ -2565,10 +2567,9 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
 
   ObjCMethodDecl *Getter = D->getGetterMethodDecl();
   ObjCMethodDecl *Setter = D->getSetterMethodDecl();
-  // NOTE: class_interface is always None
-  ObjectScope Scope(
-      OF,
-      1 + (bool)Getter + (bool)Setter + HasPropertyControl + HasPropertyAttributes); // not covered by tests
+  ObjectScope Scope(OF,
+                    1 + (bool)Getter + (bool)Setter + HasPropertyControl +
+                        HasPropertyAttributes); // not covered by tests
 
   OF.emitTag("type_ptr");
   dumpQualType(D->getType());
