@@ -2253,45 +2253,33 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 /// type obj_c_method_decl_info = {
 ///   ~is_instance_method : bool;
 ///   result_type : type_ptr;
-///   ?property_decl : property_accessor_info option;
+///   ~is_property_accessor : bool;
+///   ?property_decl : decl_ref option;
 ///   ~parameters : decl list;
 ///   ~is_variadic : bool;
 ///   ?body : stmt option;
 /// } <ocaml field_prefix="omdi_">
-/// type property_accessor_info = [
-///   Getter of decl_ref
-/// | Setter of decl_ref
-/// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   VisitNamedDecl(D);
   // We purposedly do not call VisitDeclContext(D).
   bool IsInstanceMethod = D->isInstanceMethod();
+  bool IsPropertyAccessor = D->isPropertyAccessor();
   const ObjCPropertyDecl *PropertyDecl = D->findPropertyDecl();
   ObjCMethodDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
   bool HasParameters = I != E;
   bool IsVariadic = D->isVariadic();
   const Stmt *Body = D->getBody();
   ObjectScope Scope(OF,
-                    1 + IsInstanceMethod + (bool)PropertyDecl + HasParameters +
+                    1 + IsInstanceMethod + IsPropertyAccessor + (bool)PropertyDecl + HasParameters +
                         IsVariadic + (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
   dumpQualType(D->getReturnType());
+  OF.emitFlag("is_property_accessor", IsPropertyAccessor);
   if (PropertyDecl) {
     OF.emitTag("property_decl");
-    std::string variantName = "";
-    if (D->getCanonicalDecl() ==
-        PropertyDecl->getGetterMethodDecl()->getCanonicalDecl()) {
-      variantName = "Getter";
-    } else if (D->getCanonicalDecl() ==
-               PropertyDecl->getSetterMethodDecl()->getCanonicalDecl()) {
-      variantName = "Setter";
-    } else {
-      assert(false);
-    }
-    VariantScope vScope(OF, variantName);
     dumpDeclRef(*PropertyDecl);
   }
   if (HasParameters) {
