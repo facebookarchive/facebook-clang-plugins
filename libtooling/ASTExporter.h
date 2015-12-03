@@ -2253,27 +2253,44 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 /// type obj_c_method_decl_info = {
 ///   ~is_instance_method : bool;
 ///   result_type : type_ptr;
+///   ?property_decl : property_accessor_info option;
 ///   ~parameters : decl list;
 ///   ~is_variadic : bool;
 ///   ?body : stmt option;
 /// } <ocaml field_prefix="omdi_">
+/// type property_accessor_info = [
+///   Getter of decl_ref
+/// | Setter of decl_ref
+/// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   VisitNamedDecl(D);
   // We purposedly do not call VisitDeclContext(D).
-
   bool IsInstanceMethod = D->isInstanceMethod();
+  const ObjCPropertyDecl *PropertyDecl = D->findPropertyDecl();
   ObjCMethodDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
   bool HasParameters = I != E;
   bool IsVariadic = D->isVariadic();
   const Stmt *Body = D->getBody();
   ObjectScope Scope(
-      OF, 1 + IsInstanceMethod + HasParameters + IsVariadic + (bool)Body);
+      OF, 1 + IsInstanceMethod + (bool)PropertyDecl + HasParameters + IsVariadic + (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
   dumpQualType(D->getReturnType());
-
+  if (PropertyDecl) {
+    OF.emitTag("property_decl");
+    std::string variantName = "";
+    if (D->getCanonicalDecl() == PropertyDecl->getGetterMethodDecl()->getCanonicalDecl()) {
+      variantName = "Getter";
+    } else if (D->getCanonicalDecl() == PropertyDecl->getSetterMethodDecl()->getCanonicalDecl()) {
+      variantName = "Setter";
+    } else {
+      assert(false);
+    }
+    VariantScope vScope(OF, variantName);
+    dumpDeclRef(*PropertyDecl);
+  }
   if (HasParameters) {
     OF.emitTag("parameters");
     ArrayScope Scope(OF, std::distance(I, E));
@@ -2517,6 +2534,8 @@ int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
 /// type obj_c_property_decl_info = {
 ///   ?class_interface : decl_ref option;
 ///   type_ptr : type_ptr;
+///   ?getter_method : decl_ref option;
+///   ?setter_method : decl_ref option;
 ///   ~property_control <ocaml default="`None"> : obj_c_property_control;
 ///   ~property_attributes : property_attribute list
 /// } <ocaml field_prefix="opdi_">
@@ -2532,8 +2551,8 @@ int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
 /// | Weak
 /// | Strong
 /// | Unsafe_unretained
-/// | Getter of decl_ref
-/// | Setter of decl_ref
+/// | ExplicitGetter
+/// | ExplicitSetter
 /// ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
@@ -2543,13 +2562,25 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   bool HasPropertyControl = PC != ObjCPropertyDecl::None;
   ObjCPropertyDecl::PropertyAttributeKind Attrs = D->getPropertyAttributes();
   bool HasPropertyAttributes = Attrs != ObjCPropertyDecl::OBJC_PR_noattr;
+
+  ObjCMethodDecl *Getter = D->getGetterMethodDecl();
+  ObjCMethodDecl *Setter = D->getSetterMethodDecl();
   // NOTE: class_interface is always None
   ObjectScope Scope(
       OF,
-      1 + HasPropertyControl + HasPropertyAttributes); // not covered by tests
+      1 + (bool)Getter + (bool)Setter + HasPropertyControl + HasPropertyAttributes); // not covered by tests
 
   OF.emitTag("type_ptr");
   dumpQualType(D->getType());
+
+  if (Getter) {
+    OF.emitTag("getter_method");
+    dumpDeclRef(*Getter);
+  }
+  if (Setter) {
+    OF.emitTag("setter_method");
+    dumpDeclRef(*Setter);
+  }
 
   if (HasPropertyControl) {
     OF.emitTag("property_control");
@@ -2604,12 +2635,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
     if (unsafeUnretained)
       OF.emitSimpleVariant("Unsafe_unretained");
     if (getter) {
-      VariantScope Scope(OF, "Getter");
-      dumpDeclRef(*D->getGetterMethodDecl());
+      OF.emitSimpleVariant("ExplicitGetter");
     }
     if (setter) {
-      VariantScope Scope(OF, "Setter");
-      dumpDeclRef(*D->getSetterMethodDecl());
+      OF.emitSimpleVariant("ExplicitSetter");
     }
   }
 }

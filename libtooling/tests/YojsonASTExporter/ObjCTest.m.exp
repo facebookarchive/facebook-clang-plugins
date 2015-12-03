@@ -256,6 +256,28 @@
           },
           {
             "type_ptr" : "15",
+            "getter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "16",
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyProtocol"
+                ]
+              }
+            },
+            "setter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "17",
+              "name" : {
+                "name" : "setStr:",
+                "qual_name" : [
+                  "setStr:",
+                  "MyProtocol"
+                ]
+              }
+            },
             "property_attributes" : [
               <"Readwrite">,
               <"Copy">,
@@ -288,7 +310,18 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : "15"
+            "result_type" : "15",
+            "property_decl" : <"Getter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "14",
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyProtocol"
+                ]
+              }
+            }>
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -317,6 +350,17 @@
           {
             "is_instance_method" : true,
             "result_type" : "18",
+            "property_decl" : <"Setter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "14",
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyProtocol"
+                ]
+              }
+            }>,
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -426,6 +470,28 @@
           },
           {
             "type_ptr" : "15",
+            "getter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "23",
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyClass"
+                ]
+              }
+            },
+            "setter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "24",
+              "name" : {
+                "name" : "setStr:",
+                "qual_name" : [
+                  "setStr:",
+                  "MyClass"
+                ]
+              }
+            },
             "property_attributes" : [
               <"Readwrite">,
               <"Copy">,
@@ -435,7 +501,7 @@
         )>,
         <"ObjCPropertyDecl" : (
           {
-            "pointer" : "23",
+            "pointer" : "25",
             "source_range" : (
               {
                 "line" : 15,
@@ -456,7 +522,29 @@
             ]
           },
           {
-            "type_ptr" : "24",
+            "type_ptr" : "26",
+            "getter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "27",
+              "name" : {
+                "name" : "x",
+                "qual_name" : [
+                  "x",
+                  "MyClass"
+                ]
+              }
+            },
+            "setter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "28",
+              "name" : {
+                "name" : "setX:",
+                "qual_name" : [
+                  "setX:",
+                  "MyClass"
+                ]
+              }
+            },
             "property_attributes" : [
               <"Assign">,
               <"Readwrite">,
@@ -467,7 +555,7 @@
         )>,
         <"ObjCPropertyDecl" : (
           {
-            "pointer" : "25",
+            "pointer" : "29",
             "source_range" : (
               {
                 "line" : 16,
@@ -488,7 +576,29 @@
             ]
           },
           {
-            "type_ptr" : "26",
+            "type_ptr" : "30",
+            "getter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "31",
+              "name" : {
+                "name" : "y",
+                "qual_name" : [
+                  "y",
+                  "MyClass"
+                ]
+              }
+            },
+            "setter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "32",
+              "name" : {
+                "name" : "setY:",
+                "qual_name" : [
+                  "setY:",
+                  "MyClass"
+                ]
+              }
+            },
             "property_attributes" : [
               <"Assign">,
               <"Readwrite">,
@@ -499,7 +609,7 @@
         )>,
         <"ObjCPropertyDecl" : (
           {
-            "pointer" : "27",
+            "pointer" : "33",
             "source_range" : (
               {
                 "line" : 17,
@@ -520,7 +630,29 @@
             ]
           },
           {
-            "type_ptr" : "28",
+            "type_ptr" : "34",
+            "getter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "35",
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "MyClass"
+                ]
+              }
+            },
+            "setter_method" : {
+              "kind" : <"ObjCMethod">,
+              "decl_pointer" : "36",
+              "name" : {
+                "name" : "setDelegate:",
+                "qual_name" : [
+                  "setDelegate:",
+                  "MyClass"
+                ]
+              }
+            },
             "property_attributes" : [
               <"Assign">,
               <"Readwrite">,
@@ -531,7 +663,7 @@
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "29",
+            "pointer" : "23",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -555,12 +687,23 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : "15"
+            "result_type" : "15",
+            "property_decl" : <"Getter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "22",
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyClass"
+                ]
+              }
+            }>
           }
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "30",
+            "pointer" : "24",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -584,10 +727,21 @@
           {
             "is_instance_method" : true,
             "result_type" : "18",
+            "property_decl" : <"Setter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "22",
+              "name" : {
+                "name" : "str",
+                "qual_name" : [
+                  "str",
+                  "MyClass"
+                ]
+              }
+            }>,
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "31",
+                  "pointer" : "37",
                   "source_range" : (
                     {
                       "column" : 39
@@ -614,7 +768,7 @@
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "32",
+            "pointer" : "27",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -638,12 +792,23 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : "24"
+            "result_type" : "26",
+            "property_decl" : <"Getter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "25",
+              "name" : {
+                "name" : "x",
+                "qual_name" : [
+                  "x",
+                  "MyClass"
+                ]
+              }
+            }>
           }
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "33",
+            "pointer" : "28",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -667,10 +832,21 @@
           {
             "is_instance_method" : true,
             "result_type" : "18",
+            "property_decl" : <"Setter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "25",
+              "name" : {
+                "name" : "x",
+                "qual_name" : [
+                  "x",
+                  "MyClass"
+                ]
+              }
+            }>,
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "34",
+                  "pointer" : "38",
                   "source_range" : (
                     {
                       "column" : 37
@@ -688,7 +864,7 @@
                     "x"
                   ]
                 },
-                "24",
+                "26",
                 {
                 }
               )>
@@ -697,7 +873,7 @@
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "35",
+            "pointer" : "31",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -721,12 +897,23 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : "26"
+            "result_type" : "30",
+            "property_decl" : <"Getter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "29",
+              "name" : {
+                "name" : "y",
+                "qual_name" : [
+                  "y",
+                  "MyClass"
+                ]
+              }
+            }>
           }
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "36",
+            "pointer" : "32",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -750,10 +937,21 @@
           {
             "is_instance_method" : true,
             "result_type" : "18",
+            "property_decl" : <"Setter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "29",
+              "name" : {
+                "name" : "y",
+                "qual_name" : [
+                  "y",
+                  "MyClass"
+                ]
+              }
+            }>,
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : "37",
+                  "pointer" : "39",
                   "source_range" : (
                     {
                       "column" : 35
@@ -771,7 +969,7 @@
                     "y"
                   ]
                 },
-                "26",
+                "30",
                 {
                 }
               )>
@@ -780,7 +978,7 @@
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "38",
+            "pointer" : "35",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -804,12 +1002,23 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : "28"
+            "result_type" : "34",
+            "property_decl" : <"Getter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "33",
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "MyClass"
+                ]
+              }
+            }>
           }
         )>,
         <"ObjCMethodDecl" : (
           {
-            "pointer" : "39",
+            "pointer" : "36",
             "parent_pointer" : "21",
             "source_range" : (
               {
@@ -833,6 +1042,17 @@
           {
             "is_instance_method" : true,
             "result_type" : "18",
+            "property_decl" : <"Setter" : {
+              "kind" : <"ObjCProperty">,
+              "decl_pointer" : "33",
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "MyClass"
+                ]
+              }
+            }>,
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -854,7 +1074,7 @@
                     "delegate"
                   ]
                 },
-                "28",
+                "34",
                 {
                 }
               )>
@@ -2508,7 +2728,7 @@
                                         },
                                         {
                                           "selector" : "setStr:",
-                                          "decl_pointer" : "30"
+                                          "decl_pointer" : "24"
                                         }
                                       )>
                                     ],
@@ -3376,7 +3596,7 @@
                                             },
                                             {
                                               "selector" : "setStr:",
-                                              "decl_pointer" : "30"
+                                              "decl_pointer" : "24"
                                             }
                                           )>
                                         ],
@@ -3603,7 +3823,7 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : "26"
+                                            "type_ptr" : "30"
                                           },
                                           {
                                             "is_signed" : true,
@@ -3720,7 +3940,7 @@
                                               [
                                               ],
                                               {
-                                                "type_ptr" : "26"
+                                                "type_ptr" : "30"
                                               },
                                               {
                                                 "is_signed" : true,
@@ -3999,7 +4219,7 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "26"
+                                        "type_ptr" : "30"
                                       },
                                       {
                                         "source_expr" : <"IntegerLiteral" : (
@@ -4017,7 +4237,7 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : "26"
+                                            "type_ptr" : "30"
                                           },
                                           {
                                             "is_signed" : true,
@@ -4126,7 +4346,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "26"
+                                    "type_ptr" : "30"
                                   },
                                   {
                                     "source_expr" : <"IntegerLiteral" : (
@@ -4144,7 +4364,7 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "26"
+                                        "type_ptr" : "30"
                                       },
                                       {
                                         "is_signed" : true,
@@ -4270,7 +4490,7 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : "26"
+                                            "type_ptr" : "30"
                                           },
                                           {
                                             "source_expr" : <"IntegerLiteral" : (
@@ -4288,7 +4508,7 @@
                                               [
                                               ],
                                               {
-                                                "type_ptr" : "26"
+                                                "type_ptr" : "30"
                                               },
                                               {
                                                 "is_signed" : true,
@@ -4456,7 +4676,7 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : "26"
+                                            "type_ptr" : "30"
                                           },
                                           {
                                             "is_signed" : true,
@@ -4626,7 +4846,7 @@
                                               [
                                               ],
                                               {
-                                                "type_ptr" : "26"
+                                                "type_ptr" : "30"
                                               },
                                               {
                                                 "is_signed" : true,
@@ -5476,14 +5696,14 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : "24"
+                                "type_ptr" : "26"
                               },
                               {
                                 "cast_kind" : <"BitCast">,
                                 "base_path" : [
                                 ]
                               },
-                              "24"
+                              "26"
                             )>
                           ],
                           {
@@ -6195,7 +6415,7 @@
               "MyClass"
             ]
           },
-          "24",
+          "26",
           {
           },
           {
@@ -6220,7 +6440,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
-              "decl_pointer" : "23",
+              "decl_pointer" : "25",
               "name" : {
                 "name" : "x",
                 "qual_name" : [
@@ -6239,7 +6459,7 @@
                   "MyClass"
                 ]
               },
-              "type_ptr" : "24"
+              "type_ptr" : "26"
             }
           }
         )>,
@@ -6265,7 +6485,7 @@
               "MyClass"
             ]
           },
-          "26",
+          "30",
           {
           },
           {
@@ -6290,7 +6510,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
-              "decl_pointer" : "25",
+              "decl_pointer" : "29",
               "name" : {
                 "name" : "y",
                 "qual_name" : [
@@ -6309,7 +6529,7 @@
                   "MyClass"
                 ]
               },
-              "type_ptr" : "26"
+              "type_ptr" : "30"
             }
           }
         )>,
@@ -6335,7 +6555,7 @@
               "MyClass"
             ]
           },
-          "28",
+          "34",
           {
           },
           {
@@ -6360,7 +6580,7 @@
             "implementation" : <"Synthesize">,
             "property_decl" : {
               "kind" : <"ObjCProperty">,
-              "decl_pointer" : "27",
+              "decl_pointer" : "33",
               "name" : {
                 "name" : "delegate",
                 "qual_name" : [
@@ -6379,7 +6599,7 @@
                   "MyClass"
                 ]
               },
-              "type_ptr" : "28"
+              "type_ptr" : "34"
             }
           }
         )>
@@ -6725,7 +6945,7 @@
                           {
                             "kind" : <"PropertyRef" : {
                               "kind" : <"ObjCProperty">,
-                              "decl_pointer" : "23",
+                              "decl_pointer" : "25",
                               "name" : {
                                 "name" : "x",
                                 "qual_name" : [
@@ -6754,7 +6974,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "24"
+                            "type_ptr" : "26"
                           },
                           {
                             "source_expr" : <"ParenExpr" : (
@@ -6798,7 +7018,7 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "26"
+                                        "type_ptr" : "30"
                                       },
                                       {
                                         "is_signed" : true,
@@ -6808,25 +7028,25 @@
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : "24"
+                                    "type_ptr" : "26"
                                   },
                                   {
                                     "cast_kind" : <"NullToPointer">,
                                     "base_path" : [
                                     ]
                                   },
-                                  "24"
+                                  "26"
                                 )>
                               ],
                               {
-                                "type_ptr" : "24"
+                                "type_ptr" : "26"
                               }
                             )>
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : "24"
+                        "type_ptr" : "26"
                       },
                       {
                         "kind" : <"Assign">
@@ -6926,7 +7146,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "24"
+                        "type_ptr" : "26"
                       },
                       {
                         "source_expr" : <"ParenExpr" : (
@@ -6970,7 +7190,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "26"
+                                    "type_ptr" : "30"
                                   },
                                   {
                                     "is_signed" : true,
@@ -6980,18 +7200,18 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : "24"
+                                "type_ptr" : "26"
                               },
                               {
                                 "cast_kind" : <"NullToPointer">,
                                 "base_path" : [
                                 ]
                               },
-                              "24"
+                              "26"
                             )>
                           ],
                           {
-                            "type_ptr" : "24"
+                            "type_ptr" : "26"
                           }
                         )>
                       }
@@ -7103,7 +7323,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "24"
+                            "type_ptr" : "26"
                           },
                           {
                             "source_expr" : <"ParenExpr" : (
@@ -7147,7 +7367,7 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "26"
+                                        "type_ptr" : "30"
                                       },
                                       {
                                         "is_signed" : true,
@@ -7157,18 +7377,18 @@
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : "24"
+                                    "type_ptr" : "26"
                                   },
                                   {
                                     "cast_kind" : <"NullToPointer">,
                                     "base_path" : [
                                     ]
                                   },
-                                  "24"
+                                  "26"
                                 )>
                               ],
                               {
-                                "type_ptr" : "24"
+                                "type_ptr" : "26"
                               }
                             )>
                           }
@@ -7179,12 +7399,12 @@
                       },
                       {
                         "selector" : "setX:",
-                        "decl_pointer" : "33"
+                        "decl_pointer" : "28"
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : "24"
+                    "type_ptr" : "26"
                   }
                 )>,
                 <"PseudoObjectExpr" : (
@@ -7312,7 +7532,7 @@
                           {
                             "kind" : <"PropertyRef" : {
                               "kind" : <"ObjCProperty">,
-                              "decl_pointer" : "25",
+                              "decl_pointer" : "29",
                               "name" : {
                                 "name" : "y",
                                 "qual_name" : [
@@ -7339,7 +7559,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "26"
+                            "type_ptr" : "30"
                           },
                           {
                             "source_expr" : <"IntegerLiteral" : (
@@ -7357,7 +7577,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "26"
+                                "type_ptr" : "30"
                               },
                               {
                                 "is_signed" : true,
@@ -7369,7 +7589,7 @@
                         )>
                       ],
                       {
-                        "type_ptr" : "26"
+                        "type_ptr" : "30"
                       },
                       {
                         "kind" : <"Assign">
@@ -7465,7 +7685,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "26"
+                        "type_ptr" : "30"
                       },
                       {
                         "source_expr" : <"IntegerLiteral" : (
@@ -7483,7 +7703,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "26"
+                            "type_ptr" : "30"
                           },
                           {
                             "is_signed" : true,
@@ -7596,7 +7816,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "26"
+                            "type_ptr" : "30"
                           },
                           {
                             "source_expr" : <"IntegerLiteral" : (
@@ -7614,7 +7834,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "26"
+                                "type_ptr" : "30"
                               },
                               {
                                 "is_signed" : true,
@@ -7630,12 +7850,12 @@
                       },
                       {
                         "selector" : "setY:",
-                        "decl_pointer" : "36"
+                        "decl_pointer" : "32"
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : "26"
+                    "type_ptr" : "30"
                   }
                 )>,
                 <"PseudoObjectExpr" : (
@@ -7770,7 +7990,7 @@
                           {
                             "kind" : <"PropertyRef" : {
                               "kind" : <"ObjCProperty">,
-                              "decl_pointer" : "27",
+                              "decl_pointer" : "33",
                               "name" : {
                                 "name" : "delegate",
                                 "qual_name" : [
@@ -7843,7 +8063,7 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : "26"
+                                        "type_ptr" : "30"
                                       },
                                       {
                                         "is_signed" : true,
@@ -8015,7 +8235,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "26"
+                                    "type_ptr" : "30"
                                   },
                                   {
                                     "is_signed" : true,
@@ -8056,7 +8276,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "28"
+                        "type_ptr" : "34"
                       },
                       {
                         "source_expr" : <"ImplicitCastExpr" : (
@@ -8131,7 +8351,7 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : "26"
+                                            "type_ptr" : "30"
                                           },
                                           {
                                             "is_signed" : true,
@@ -8159,7 +8379,7 @@
                             )>
                           ],
                           {
-                            "type_ptr" : "28"
+                            "type_ptr" : "34"
                           },
                           {
                             "cast_kind" : <"BitCast">,
@@ -8276,7 +8496,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "28"
+                            "type_ptr" : "34"
                           },
                           {
                             "source_expr" : <"ImplicitCastExpr" : (
@@ -8351,7 +8571,7 @@
                                               [
                                               ],
                                               {
-                                                "type_ptr" : "26"
+                                                "type_ptr" : "30"
                                               },
                                               {
                                                 "is_signed" : true,
@@ -8379,7 +8599,7 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : "28"
+                                "type_ptr" : "34"
                               },
                               {
                                 "cast_kind" : <"BitCast">,
@@ -8395,12 +8615,12 @@
                       },
                       {
                         "selector" : "setDelegate:",
-                        "decl_pointer" : "39"
+                        "decl_pointer" : "36"
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : "28"
+                    "type_ptr" : "34"
                   }
                 )>
               ]
@@ -8480,7 +8700,7 @@
                 "argc"
               ]
             },
-            "26",
+            "30",
             {
             }
           )>,
@@ -8800,7 +9020,7 @@
                   [
                   ],
                   {
-                    "type_ptr" : "26"
+                    "type_ptr" : "30"
                   },
                   {
                     "is_signed" : true,
@@ -8855,7 +9075,7 @@
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : "26",
+        "pointer" : "30",
         "raw" : "int"
       },
       <"Int">
@@ -9041,7 +9261,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : "24",
+        "pointer" : "26",
         "raw" : "void *"
       },
       "18"
@@ -9172,10 +9392,10 @@
       {
         "pointer" : "77",
         "raw" : "BOOL",
-        "desugared_type" : "26"
+        "desugared_type" : "30"
       },
       {
-        "child_type" : "26",
+        "child_type" : "30",
         "decl_ptr" : "332"
       }
     )>,
@@ -9363,7 +9583,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : "28",
+        "pointer" : "34",
         "raw" : "NSObject<SomeProtocol> *"
       },
       "353"
@@ -9398,7 +9618,7 @@
         "pointer" : "354",
         "raw" : "int *"
       },
-      "26"
+      "30"
     )>,
     <"PointerType" : (
       {
@@ -9565,11 +9785,11 @@
         "raw" : "int (int, char **)"
       },
       {
-        "return_type" : "26"
+        "return_type" : "30"
       },
       {
         "params_type" : [
-          "26",
+          "30",
           "267"
         ]
       }
