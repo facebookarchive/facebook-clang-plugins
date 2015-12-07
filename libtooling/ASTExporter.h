@@ -2265,7 +2265,12 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   // We purposedly do not call VisitDeclContext(D).
   bool IsInstanceMethod = D->isInstanceMethod();
   bool IsPropertyAccessor = D->isPropertyAccessor();
-  const ObjCPropertyDecl *PropertyDecl = D->findPropertyDecl();
+  const ObjCPropertyDecl *PropertyDecl = nullptr;
+  std::string selectorName = D->getSelector().getAsString();
+  // work around bug in clang
+  if (selectorName != ".cxx_construct" && selectorName != ".cxx_destruct") {
+    PropertyDecl = D->findPropertyDecl();
+  }
   ObjCMethodDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
   bool HasParameters = I != E;
   bool IsVariadic = D->isVariadic();
