@@ -29,8 +29,22 @@ let print_node path kind_str =
   prerr_string (kind_str);
   prerr_newline ()
 
+let sloc_to_str sloc =
+  let opt_to_str to_str_f v = match v with Some x -> to_str_f x | None -> "None" in
+  let file_str = opt_to_str (fun f -> f) sloc.Clang_ast_t.sl_file in
+  let line_str = opt_to_str string_of_int sloc.Clang_ast_t.sl_line in
+  let column_str = opt_to_str string_of_int sloc.Clang_ast_t.sl_column in
+  file_str ^ ":" ^ line_str ^ ":" ^ column_str
+
+let src_range_to_str range =
+  let first, last = range in
+  (sloc_to_str first) ^ " " ^ (sloc_to_str last)
+
 let print_decl path decl =
-  print_node path (Clang_ast_proj.get_decl_kind_string decl)
+  let kind_str = Clang_ast_proj.get_decl_kind_string decl in
+  let decl_info = Clang_ast_proj.get_decl_tuple decl in
+  let src_str = src_range_to_str decl_info.Clang_ast_t.di_source_range in
+  print_node path (kind_str ^ " " ^ src_str)
 
 let print_stmt path stmt =
   print_node path (Clang_ast_proj.get_stmt_kind_string stmt)

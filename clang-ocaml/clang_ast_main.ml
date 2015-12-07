@@ -20,10 +20,11 @@ let typeMap = ref PointerMap.empty
 
 let empty_v = Clang_ast_visit.empty_visitor
 (* This function is not thread-safe *)
-let visit_ast ?(visit_decl=empty_v) ?(visit_stmt=empty_v) ?(visit_type=empty_v) top_decl =
+let visit_ast ?(visit_decl=empty_v) ?(visit_stmt=empty_v) ?(visit_type=empty_v) ?(visit_src_loc=empty_v) top_decl =
 	Clang_ast_visit.decl_visitor := visit_decl;
 	Clang_ast_visit.stmt_visitor := visit_stmt;
 	Clang_ast_visit.type_visitor := visit_type;
+	Clang_ast_visit.source_location_visitor := visit_src_loc;
 	ignore (Clang_ast_v.validate_decl [] top_decl) (* visit *)
 
 let get_ptr_from_node node =
@@ -58,17 +59,41 @@ let add_stmt_to_cache path stmt =
 let add_type_to_cache path c_type =
 	add_node_to_cache (`TypeNode c_type) typeMap
 
+let previous_sloc = { Clang_ast_t.sl_file = None; sl_line = None; sl_column = None }
+
+let get_sloc current previous =
+   match current with
+    | None -> previous
+    | Some _ -> current
+
+let mutate_sloc sloc file line column =
+  let open Clang_ast_t in
+  sloc.sl_file <- file;
+  sloc.sl_line <- line;
+  sloc.sl_column <- column
+
+let reset_sloc sloc = mutate_sloc sloc None None None
+
+let complete_source_location path source_loc =
+  let open Clang_ast_t in
+  let file = get_sloc source_loc.sl_file previous_sloc.sl_file in
+  let line = get_sloc source_loc.sl_line previous_sloc.sl_line in
+  let column = get_sloc source_loc.sl_column previous_sloc.sl_column in
+  mutate_sloc source_loc file line column;
+  mutate_sloc previous_sloc file line column
+
 let reset_cache () =
 	declMap := PointerMap.empty;
 	stmtMap := PointerMap.empty;
-	typeMap := PointerMap.empty
+	typeMap := PointerMap.empty;
+	reset_sloc previous_sloc
 
 (* This function is not thread-safe *)
 let index_node_pointers top_decl =
 	(* just in case *)
 	reset_cache ();
 	(* populate cache *)
-	visit_ast ~visit_decl:add_decl_to_cache ~visit_stmt:add_stmt_to_cache ~visit_type:add_type_to_cache top_decl;
+	visit_ast ~visit_decl:add_decl_to_cache ~visit_stmt:add_stmt_to_cache ~visit_type:add_type_to_cache ~visit_src_loc:complete_source_location top_decl;
 	let result = !declMap, !stmtMap, !typeMap in
 	reset_cache ();
 	result

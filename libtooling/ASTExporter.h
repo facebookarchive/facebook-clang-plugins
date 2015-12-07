@@ -490,10 +490,10 @@ void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
 
 /// \atd
 /// type source_location = {
-///   ?file : string option;
-///   ?line : int option;
-///   ?column : int option;
-/// } <ocaml field_prefix="sl_">
+///   ?file <ocaml mutable> : string option;
+///   ?line <ocaml mutable> : int option;
+///   ?column <ocaml mutable> : int option;
+/// } <ocaml field_prefix="sl_" validator="Clang_ast_visit.visit_source_loc">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
   SourceLocation ExpLoc =
