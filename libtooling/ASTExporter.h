@@ -61,6 +61,7 @@ namespace ASTLib {
 struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
   bool withPointers = true;
   bool dumpComments = false;
+  bool useMacroExpansionLocation = true;
   ATDWriter::ATDWriterOptions atdWriterOptions = {
       .useYojson = false, .prettifyJson = true,
   };
@@ -495,7 +496,9 @@ void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
 /// } <ocaml field_prefix="sl_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
-  SourceLocation SpellingLoc = SM.getSpellingLoc(Loc);
+  SourceLocation ExpLoc =
+      Options.useMacroExpansionLocation ? SM.getExpansionLoc(Loc) : Loc;
+  SourceLocation SpellingLoc = SM.getSpellingLoc(ExpLoc);
 
   // The general format we print out is filename:line:col, but we drop pieces
   // that haven't changed since the last loc printed.
@@ -2276,8 +2279,9 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   bool IsVariadic = D->isVariadic();
   const Stmt *Body = D->getBody();
   ObjectScope Scope(OF,
-                    1 + IsInstanceMethod + IsPropertyAccessor + (bool)PropertyDecl + HasParameters +
-                        IsVariadic + (bool)Body);
+                    1 + IsInstanceMethod + IsPropertyAccessor +
+                        (bool)PropertyDecl + HasParameters + IsVariadic +
+                        (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
