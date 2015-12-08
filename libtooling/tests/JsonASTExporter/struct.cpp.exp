@@ -229,12 +229,412 @@
         "is_c_like" : true
       }
     ]],
-    ["VarDecl" , [
+    ["FunctionDecl" , [
       {
         "pointer" : "12",
         "source_range" : [
           {
             "line" : 5,
+            "column" : 1
+          },
+          {
+            "line" : 8,
+            "column" : 1
+          }
+        ],
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "fun",
+        "qual_name" : [
+          "fun"
+        ]
+      },
+      "13",
+      {
+        "body" : ["CompoundStmt" , [
+          {
+            "pointer" : "14",
+            "source_range" : [
+              {
+                "line" : 5,
+                "column" : 12
+              },
+              {
+                "line" : 8,
+                "column" : 1
+              }
+            ]
+          },
+          [
+            ["DeclStmt" , [
+              {
+                "pointer" : "15",
+                "source_range" : [
+                  {
+                    "line" : 6,
+                    "column" : 3
+                  },
+                  {
+                    "column" : 15
+                  }
+                ]
+              },
+              [
+              ],
+              [
+                ["CXXRecordDecl" , [
+                  {
+                    "pointer" : "16",
+                    "source_range" : [
+                      {
+                        "column" : 3
+                      },
+                      {
+                        "column" : 14
+                      }
+                    ],
+                    "is_this_declaration_referenced" : true,
+                    "attributes" : [
+                    ]
+                  },
+                  {
+                    "name" : "X",
+                    "qual_name" : [
+                      "X",
+                      "fun"
+                    ]
+                  },
+                  ["Type" , "struct X"],
+                  "17",
+                  [
+                    ["CXXRecordDecl" , [
+                      {
+                        "pointer" : "18",
+                        "source_range" : [
+                          {
+                            "column" : 3
+                          },
+                          {
+                            "column" : 10
+                          }
+                        ],
+                        "is_implicit" : true,
+                        "attributes" : [
+                        ]
+                      },
+                      {
+                        "name" : "X",
+                        "qual_name" : [
+                          "X",
+                          "X",
+                          "fun"
+                        ]
+                      },
+                      ["Type" , "struct X"],
+                      "17",
+                      [
+                      ],
+                      {
+                      },
+                      {
+                      },
+                      {
+                      }
+                    ]],
+                    ["CXXConstructorDecl" , [
+                      {
+                        "pointer" : "19",
+                        "parent_pointer" : "16",
+                        "source_range" : [
+                          {
+                            "column" : 10
+                          },
+                          {
+                            "column" : 10
+                          }
+                        ],
+                        "is_implicit" : true,
+                        "is_used" : true,
+                        "is_this_declaration_referenced" : true,
+                        "attributes" : [
+                        ]
+                      },
+                      {
+                        "name" : "X",
+                        "qual_name" : [
+                          "X",
+                          "X",
+                          "fun"
+                        ]
+                      },
+                      "20",
+                      {
+                        "is_inline" : true,
+                        "body" : ["CompoundStmt" , [
+                          {
+                            "pointer" : "21",
+                            "source_range" : [
+                              {
+                                "column" : 10
+                              },
+                              {
+                                "column" : 10
+                              }
+                            ]
+                          },
+                          [
+                          ]
+                        ]]
+                      },
+                      {
+                      }
+                    ]],
+                    ["CXXConstructorDecl" , [
+                      {
+                        "pointer" : "22",
+                        "parent_pointer" : "16",
+                        "source_range" : [
+                          {
+                            "column" : 10
+                          },
+                          {
+                            "column" : 10
+                          }
+                        ],
+                        "is_implicit" : true,
+                        "attributes" : [
+                        ]
+                      },
+                      {
+                        "name" : "X",
+                        "qual_name" : [
+                          "X",
+                          "X",
+                          "fun"
+                        ]
+                      },
+                      "23",
+                      {
+                        "is_inline" : true,
+                        "parameters" : [
+                          ["ParmVarDecl" , [
+                            {
+                              "pointer" : "24",
+                              "source_range" : [
+                                {
+                                  "column" : 10
+                                },
+                                {
+                                  "column" : 10
+                                }
+                              ],
+                              "attributes" : [
+                              ]
+                            },
+                            {
+                              "name" : "",
+                              "qual_name" : [
+                                ""
+                              ]
+                            },
+                            "25",
+                            {
+                            }
+                          ]]
+                        ]
+                      },
+                      {
+                      }
+                    ]],
+                    ["CXXConstructorDecl" , [
+                      {
+                        "pointer" : "26",
+                        "parent_pointer" : "16",
+                        "source_range" : [
+                          {
+                            "column" : 10
+                          },
+                          {
+                            "column" : 10
+                          }
+                        ],
+                        "is_implicit" : true,
+                        "attributes" : [
+                        ]
+                      },
+                      {
+                        "name" : "X",
+                        "qual_name" : [
+                          "X",
+                          "X",
+                          "fun"
+                        ]
+                      },
+                      "27",
+                      {
+                        "is_inline" : true,
+                        "parameters" : [
+                          ["ParmVarDecl" , [
+                            {
+                              "pointer" : "28",
+                              "source_range" : [
+                                {
+                                  "column" : 10
+                                },
+                                {
+                                  "column" : 10
+                                }
+                              ],
+                              "attributes" : [
+                              ]
+                            },
+                            {
+                              "name" : "",
+                              "qual_name" : [
+                                ""
+                              ]
+                            },
+                            "29",
+                            {
+                            }
+                          ]]
+                        ]
+                      },
+                      {
+                      }
+                    ]]
+                  ],
+                  {
+                  },
+                  {
+                    "is_complete_definition" : true
+                  },
+                  {
+                    "is_c_like" : true
+                  }
+                ]]
+              ]
+            ]],
+            ["DeclStmt" , [
+              {
+                "pointer" : "30",
+                "source_range" : [
+                  {
+                    "line" : 7,
+                    "column" : 3
+                  },
+                  {
+                    "column" : 6
+                  }
+                ]
+              },
+              [
+                ["CXXConstructExpr" , [
+                  {
+                    "pointer" : "31",
+                    "source_range" : [
+                      {
+                        "column" : 5
+                      },
+                      {
+                        "column" : 5
+                      }
+                    ]
+                  },
+                  [
+                  ],
+                  {
+                    "type_ptr" : "17"
+                  },
+                  {
+                    "decl_ref" : {
+                      "kind" : "CXXConstructor",
+                      "decl_pointer" : "19",
+                      "name" : {
+                        "name" : "X",
+                        "qual_name" : [
+                          "X",
+                          "X",
+                          "fun"
+                        ]
+                      },
+                      "type_ptr" : "20"
+                    }
+                  }
+                ]]
+              ],
+              [
+                ["VarDecl" , [
+                  {
+                    "pointer" : "32",
+                    "source_range" : [
+                      {
+                        "column" : 3
+                      },
+                      {
+                        "column" : 5
+                      }
+                    ],
+                    "attributes" : [
+                    ]
+                  },
+                  {
+                    "name" : "x",
+                    "qual_name" : [
+                      "x"
+                    ]
+                  },
+                  "17",
+                  {
+                    "init_expr" : ["CXXConstructExpr" , [
+                      {
+                        "pointer" : "31",
+                        "source_range" : [
+                          {
+                            "column" : 5
+                          },
+                          {
+                            "column" : 5
+                          }
+                        ]
+                      },
+                      [
+                      ],
+                      {
+                        "type_ptr" : "17"
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : "CXXConstructor",
+                          "decl_pointer" : "19",
+                          "name" : {
+                            "name" : "X",
+                            "qual_name" : [
+                              "X",
+                              "X",
+                              "fun"
+                            ]
+                          },
+                          "type_ptr" : "20"
+                        }
+                      }
+                    ]]
+                  }
+                ]]
+              ]
+            ]]
+          ]
+        ]]
+      }
+    ]],
+    ["VarDecl" , [
+      {
+        "pointer" : "33",
+        "source_range" : [
+          {
+            "line" : 10,
             "column" : 1
           },
           {
@@ -255,7 +655,7 @@
         "is_global" : true,
         "init_expr" : ["InitListExpr" , [
           {
-            "pointer" : "13",
+            "pointer" : "34",
             "source_range" : [
               {
                 "column" : 15
@@ -268,7 +668,7 @@
           [
             ["FloatingLiteral" , [
               {
-                "pointer" : "14",
+                "pointer" : "35",
                 "source_range" : [
                   {
                     "column" : 17
@@ -287,7 +687,7 @@
             ]],
             ["FloatingLiteral" , [
               {
-                "pointer" : "15",
+                "pointer" : "36",
                 "source_range" : [
                   {
                     "column" : 22
@@ -317,98 +717,98 @@
   [
     ["BuiltinType" , [
       {
-        "pointer" : "16",
+        "pointer" : "37",
         "raw" : "void"
       },
       "Void"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "17",
+        "pointer" : "38",
         "raw" : "_Bool"
       },
       "Bool"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "18",
+        "pointer" : "39",
         "raw" : "char"
       },
       "Char_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "19",
+        "pointer" : "40",
         "raw" : "signed char"
       },
       "SChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "20",
+        "pointer" : "41",
         "raw" : "short"
       },
       "Short"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "21",
+        "pointer" : "42",
         "raw" : "int"
       },
       "Int"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "22",
+        "pointer" : "43",
         "raw" : "long"
       },
       "Long"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "23",
+        "pointer" : "44",
         "raw" : "long long"
       },
       "LongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "24",
+        "pointer" : "45",
         "raw" : "unsigned char"
       },
       "UChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "25",
+        "pointer" : "46",
         "raw" : "unsigned short"
       },
       "UShort"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "26",
+        "pointer" : "47",
         "raw" : "unsigned int"
       },
       "UInt"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "27",
+        "pointer" : "48",
         "raw" : "unsigned long"
       },
       "ULong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "28",
+        "pointer" : "49",
         "raw" : "unsigned long long"
       },
       "ULongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "29",
+        "pointer" : "50",
         "raw" : "float"
       },
       "Float"
@@ -422,175 +822,175 @@
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "30",
+        "pointer" : "51",
         "raw" : "long double"
       },
       "LongDouble"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "31",
+        "pointer" : "52",
         "raw" : "__int128"
       },
       "Int128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "32",
+        "pointer" : "53",
         "raw" : "unsigned __int128"
       },
       "UInt128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "33",
+        "pointer" : "54",
         "raw" : "wchar_t"
       },
       "WChar_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "34",
+        "pointer" : "55",
         "raw" : "char16_t"
       },
       "Char16"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "35",
+        "pointer" : "56",
         "raw" : "char32_t"
       },
       "Char32"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "36",
+        "pointer" : "57",
         "raw" : "<dependent type>"
       },
       "Dependent"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "37",
+        "pointer" : "58",
         "raw" : "<overloaded function type>"
       },
       "Overload"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "38",
+        "pointer" : "59",
         "raw" : "<bound member function type>"
       },
       "BoundMember"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "39",
+        "pointer" : "60",
         "raw" : "<pseudo-object type>"
       },
       "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "40",
+        "pointer" : "61",
         "raw" : "<unknown type>"
       },
       "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "41",
+        "pointer" : "62",
         "raw" : "<ARC unbridged cast type>"
       },
       "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "42",
+        "pointer" : "63",
         "raw" : "<builtin fn type>"
       },
       "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "43",
+        "pointer" : "64",
         "raw" : "_Complex float"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "44",
+        "pointer" : "65",
         "raw" : "_Complex double"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "45",
+        "pointer" : "66",
         "raw" : "_Complex long double"
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "46",
+        "pointer" : "67",
         "raw" : "id"
       },
       "ObjCId"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "47",
+        "pointer" : "68",
         "raw" : "Class"
       },
       "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "48",
+        "pointer" : "69",
         "raw" : "SEL"
       },
       "ObjCSel"
     ]],
     ["PointerType" , [
       {
-        "pointer" : "49",
+        "pointer" : "70",
         "raw" : "void *"
       },
-      "16"
+      "37"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "50",
+        "pointer" : "71",
         "raw" : "nullptr_t"
       },
       "NullPtr"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "51",
+        "pointer" : "72",
         "raw" : "__fp16"
       },
       "Half"
     ]],
     ["PointerType" , [
       {
-        "pointer" : "52",
+        "pointer" : "73",
         "raw" : "char *"
       },
-      "18"
+      "39"
     ]],
     ["RecordType" , [
       {
-        "pointer" : "53",
+        "pointer" : "74",
         "raw" : "struct __va_list_tag"
       },
-      "54"
+      "75"
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "55",
+        "pointer" : "76",
         "raw" : "struct __va_list_tag [1]"
       },
-      "53",
+      "74",
       1
     ]],
     ["RecordType" , [
@@ -599,6 +999,116 @@
         "raw" : "struct Point"
       },
       "6"
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "13",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+      }
+    ]],
+    ["RecordType" , [
+      {
+        "pointer" : "17",
+        "raw" : "struct X"
+      },
+      "16"
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "77",
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+      }
+    ]],
+    ["LValueReferenceType" , [
+      {
+        "pointer" : "25",
+        "raw" : "const struct X &"
+      },
+      "17"
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "78",
+        "raw" : "void (const struct X &)"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+        "params_type" : [
+          "25"
+        ]
+      }
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "23",
+        "raw" : "void (const struct X &)"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+        "params_type" : [
+          "25"
+        ]
+      }
+    ]],
+    ["RValueReferenceType" , [
+      {
+        "pointer" : "29",
+        "raw" : "struct X &&"
+      },
+      "17"
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "79",
+        "raw" : "void (struct X &&)"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+        "params_type" : [
+          "29"
+        ]
+      }
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "27",
+        "raw" : "void (struct X &&)"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+        "params_type" : [
+          "29"
+        ]
+      }
+    ]],
+    ["FunctionProtoType" , [
+      {
+        "pointer" : "20",
+        "raw" : "void (void) noexcept"
+      },
+      {
+        "return_type" : "37"
+      },
+      {
+      }
     ]],
     ["NoneType" , [
       {

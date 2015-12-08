@@ -600,10 +600,10 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
   SmallVector<std::string, 8> Quals;
   Contexts.push_back(&Decl);
 
-  // TODO add qual names for structs defined inside function
-  if (Ctx->isFunctionOrMethod()) {
-    // don't dump full qualifier for variables declared
-    // inside a function/method/block
+  // Don't dump full qualifier for variables declared
+  // inside a function/method/block
+  // For structs defined inside functions, dump fully qualified name
+  if (Ctx->isFunctionOrMethod() && !isa<TagDecl>(&Decl)) {
     Ctx = nullptr;
   }
 
