@@ -2535,6 +2535,7 @@ int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
 ///   type_ptr : type_ptr;
 ///   ?getter_method : decl_ref option;
 ///   ?setter_method : decl_ref option;
+///   ?ivar_decl : decl_ref option;
 ///   ~property_control <ocaml default="`None"> : obj_c_property_control;
 ///   ~property_attributes : property_attribute list
 /// } <ocaml field_prefix="opdi_">
@@ -2564,8 +2565,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
 
   ObjCMethodDecl *Getter = D->getGetterMethodDecl();
   ObjCMethodDecl *Setter = D->getSetterMethodDecl();
+  ObjCIvarDecl *Ivar = D->getPropertyIvarDecl();
   ObjectScope Scope(OF,
-                    1 + (bool)Getter + (bool)Setter + HasPropertyControl +
+                    1 + (bool)Getter + (bool)Setter + (bool)Ivar +
+                        HasPropertyControl +
                         HasPropertyAttributes); // not covered by tests
 
   OF.emitTag("type_ptr");
@@ -2578,6 +2581,10 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   if (Setter) {
     OF.emitTag("setter_method");
     dumpDeclRef(*Setter);
+  }
+  if (Ivar) {
+    OF.emitTag("ivar_decl");
+    dumpDeclRef(*Ivar);
   }
 
   if (HasPropertyControl) {
