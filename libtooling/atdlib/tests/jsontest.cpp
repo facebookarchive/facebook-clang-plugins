@@ -22,6 +22,10 @@ int main(int argc, char **argv) {
   }
   {
     JsonWriter OF(std::cout, yojsonWriterOptions);
+    OF.emitInteger(-100000);
+  }
+  {
+    JsonWriter OF(std::cout, yojsonWriterOptions);
     OF.emitString("Hello");
   }
   {

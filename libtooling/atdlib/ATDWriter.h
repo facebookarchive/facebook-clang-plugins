@@ -152,7 +152,7 @@ class GenWriter {
     emitValue();
     emitter_.emitBoolean(val);
   }
-  void emitInteger(int val) {
+  void emitInteger(int64_t val) {
     emitValue();
     emitter_.emitInteger(val);
   }
@@ -411,7 +411,7 @@ class JsonEmitter {
     nextElementNeedsNewLine_ = true;
     previousElementIsVariantTag_ = false;
   }
-  void emitInteger(unsigned val) {
+  void emitInteger(int64_t val) {
     tab();
     os_ << val;
     previousElementNeedsComma_ = true;
@@ -628,7 +628,7 @@ class BiniouEmitter {
     write8(os, x);
   }
 
-  static void writeUvint(OStream &os, unsigned int x) {
+  static void writeUvint(OStream &os, uint64_t x) {
     while (x > 127) {
       write8(os, x | 128);
       x >>= 7;
@@ -637,11 +637,15 @@ class BiniouEmitter {
     write8(os, (uint8_t)x);
   }
 
-  static void writeSvint(OStream &os, int x) {
+  static void writeSvint(OStream &os, int64_t x) {
     if (x >= 0) {
-      writeUvint(os, x * 2);
+      uint64_t t = x;
+      t = t * 2;
+      writeUvint(os, t);
     } else {
-      writeUvint(os, -x * 2 - 1);
+      uint64_t t = -x;
+      t = t * 2 - 1;
+      writeUvint(os, t);
     }
   }
 
@@ -671,7 +675,7 @@ class BiniouEmitter {
     });
   }
 
-  void emitInteger(unsigned int val) {
+  void emitInteger(int64_t val) {
     bool needTag = isValueTagNeeded();
     push_write([val, needTag](OStream &os) {
       writeValueTag(os, needTag, svint_tag);

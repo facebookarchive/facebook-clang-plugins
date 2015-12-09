@@ -13,6 +13,16 @@ int main(int argc, char **argv) {
   }
   {
     BiniouWriter OF(std::cout);
+    int64_t min_ocaml = -4611686018427387904;
+    OF.emitInteger(min_ocaml);
+  }
+  {
+    BiniouWriter OF(std::cout);
+    int64_t max_ocaml = 4611686018427387903;
+    OF.emitInteger(max_ocaml);
+  }
+  {
+    BiniouWriter OF(std::cout);
     OF.emitString("Hello");
   }
   {
