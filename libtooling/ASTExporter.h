@@ -2259,6 +2259,7 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 ///   ~is_property_accessor : bool;
 ///   ?property_decl : decl_ref option;
 ///   ~parameters : decl list;
+///   ~implicit_parameters : decl list;
 ///   ~is_variadic : bool;
 ///   ?body : stmt option;
 /// } <ocaml field_prefix="omdi_">
@@ -2276,12 +2277,20 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   }
   ObjCMethodDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
   bool HasParameters = I != E;
+  std::vector<ImplicitParamDecl *> ImplicitParams;
+  if (D->getSelfDecl()) {
+    ImplicitParams.push_back(D->getSelfDecl());
+  }
+  if (D->getCmdDecl()) {
+    ImplicitParams.push_back(D->getCmdDecl());
+  }
+  bool HasImplicitParameters = !ImplicitParams.empty();
   bool IsVariadic = D->isVariadic();
   const Stmt *Body = D->getBody();
   ObjectScope Scope(OF,
                     1 + IsInstanceMethod + IsPropertyAccessor +
-                        (bool)PropertyDecl + HasParameters + IsVariadic +
-                        (bool)Body);
+                        (bool)PropertyDecl + HasParameters +
+                        HasImplicitParameters + IsVariadic + (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
@@ -2296,6 +2305,14 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
     ArrayScope Scope(OF, std::distance(I, E));
     for (; I != E; ++I) {
       dumpDecl(*I);
+    }
+  }
+
+  if (HasImplicitParameters) {
+    OF.emitTag("implicit_parameters");
+    ArrayScope Scope(OF, ImplicitParams.size());
+    for (const ImplicitParamDecl *P : ImplicitParams) {
+      dumpDecl(P);
     }
   }
 
