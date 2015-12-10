@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Simple installation script for llvm/clang.
 
@@ -11,40 +10,102 @@ CLANG_PATCH="$SCRIPT_DIR/src/AttrDump.inc.patch"
 CLANG_PREFIX="$SCRIPT_DIR"
 CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
 
+SHA256SUM="shasum -a 256 -p"
+
+usage () {
+    echo "Usage: $0 [-chr]"
+    echo
+    echo " options:"
+    echo "    -c,--only-check-install    check if recompiling clang is needed"
+    echo "    -h,--help                  show this message"
+    echo "    -r,--only-record-install   do not install clang but pretend we did"
+}
+
+check_installed () {
+    pushd "$SCRIPT_DIR" > /dev/null
+    $SHA256SUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null
+    local result=$?
+    popd > /dev/null
+    return $result
+}
+
+record_installed () {
+    pushd "$SCRIPT_DIR" > /dev/null
+    $SHA256SUM "$CLANG_RELATIVE_SRC" "$SCRIPT_RELATIVE_PATH" > "$CLANG_INSTALLED_VERSION_FILE"
+    popd > /dev/null
+}
+
+ONLY_CHECK=
+ONLY_RECORD=
+
+while [[ $# > 0 ]]; do
+    opt_key="$1"
+    case $opt_key in
+        -c|--only-check-install)
+            ONLY_CHECK=yes
+            shift
+            continue
+            ;;
+        -r|--only-record-install)
+            ONLY_RECORD=yes
+            shift
+            continue
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 2
+    esac
+    shift
+done
+
 platform=`uname`
 
-if [ $platform == 'Darwin' ]; then
-    CONFIGURE_ARGS=(
-        --prefix="$CLANG_PREFIX"
-        --enable-libcpp
-        --enable-cxx11
-        --disable-assertions
-        --enable-optimized
-        --enable-bindings=none
-    )
-    SHA256SUM="shasum -a 256 -p"
-elif [ $platform == 'Linux' ]; then
-    CONFIGURE_ARGS=(
-        --prefix="$CLANG_PREFIX"
-        --enable-cxx11
-        --disable-assertions
-        --enable-optimized
-        --enable-bindings=none
-    )
-    SHA256SUM="sha256sum"
-else
-    echo "Clang setup: platform $platform is currently not supported by this script"; exit 1
+case $platform in
+    Darwin)
+        CONFIGURE_ARGS=(
+            --prefix="$CLANG_PREFIX"
+            --enable-libcpp
+            --enable-cxx11
+            --disable-assertions
+            --enable-optimized
+            --enable-bindings=none
+        );;
+    *)
+        CONFIGURE_ARGS=(
+            --prefix="$CLANG_PREFIX"
+            --enable-cxx11
+            --disable-assertions
+            --enable-optimized
+            --enable-bindings=none
+        )
+esac
+
+if [ "$ONLY_RECORD" = "yes" ]; then
+    record_installed
+    exit 0
 fi
 
-pushd "$SCRIPT_DIR"
-if $SHA256SUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null; then
+check_installed
+already_installed=$?
+
+if [ "$ONLY_CHECK" = "yes" ]; then
+    # trick to always exit with 0 or 1
+    [ $already_installed -eq 0 ]
+    exit $?
+fi
+
+if [ $already_installed -eq 0 ]; then
     echo "Clang is already installed according to $CLANG_INSTALLED_VERSION_FILE"
     echo "Nothing to do, exiting."
     exit 0
 fi
-popd
 
 # start the installation
+set -e
 echo "Installing clang..."
 TMP=`mktemp -d /tmp/clang-setup.XXXXXX`
 pushd "$TMP"
@@ -69,7 +130,4 @@ popd
 
 rm -rf "$TMP"
 
-pushd "$SCRIPT_DIR"
-# remember that we installed this version
-$SHA256SUM "$CLANG_RELATIVE_SRC" "$SCRIPT_RELATIVE_PATH" > "$CLANG_INSTALLED_VERSION_FILE"
-popd
+record_installed
