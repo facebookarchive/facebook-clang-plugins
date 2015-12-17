@@ -596,7 +596,7 @@ class BiniouEmitter {
       auto me = lazyContainers.back();
       lazyContainers.pop_back();
       bool needTag = isValueTagNeeded();
-      push_write([needTag, me](OStream &os) {
+      push_write([needTag, me, this](OStream &os) {
         writeValueTag(os, needTag, me->tag);
         int size = me->getContainerSize();
         if (size != SIZE_NOT_NEEDED) {
@@ -657,7 +657,7 @@ class BiniouEmitter {
 
   void emitDummyRecordField() {
     emitTag("!!DUMMY!!");
-    push_write([](OStream &os) {
+    push_write([this](OStream &os) {
       // unit is the smallest value (2 bytes)
       write8(os, unit_tag);
       write8(os, 0);
@@ -669,7 +669,7 @@ class BiniouEmitter {
 
   void emitBoolean(bool val) {
     bool needTag = isValueTagNeeded();
-    push_write([needTag, val](OStream &os) {
+    push_write([needTag, val, this](OStream &os) {
       writeValueTag(os, needTag, bool_tag);
       write8(os, val);
     });
@@ -677,7 +677,7 @@ class BiniouEmitter {
 
   void emitInteger(int64_t val) {
     bool needTag = isValueTagNeeded();
-    push_write([val, needTag](OStream &os) {
+    push_write([val, needTag, this](OStream &os) {
       writeValueTag(os, needTag, svint_tag);
       writeSvint(os, val);
     });
@@ -685,7 +685,7 @@ class BiniouEmitter {
 
   void emitString(const std::string &val) {
     bool needTag = isValueTagNeeded();
-    push_write([val, needTag](OStream &os) {
+    push_write([val, needTag, this](OStream &os) {
       writeValueTag(os, needTag, string_tag);
       writeUvint(os, val.length());
       for (const char &c : val) {
@@ -698,7 +698,7 @@ class BiniouEmitter {
     int32_t hash = biniou_hash(val);
     // set first bit of hash
     hash |= 1 << 31;
-    push_write([hash](OStream &os) { write32(os, hash); });
+    push_write([hash, this](OStream &os) { write32(os, hash); });
   }
 
   void emitVariantTag(const std::string &val, bool hasArg) {
@@ -707,7 +707,7 @@ class BiniouEmitter {
     if (hasArg) {
       hash |= 1 << 31;
     }
-    push_write([hash](OStream &os) { write32(os, hash); });
+    push_write([hash, this](OStream &os) { write32(os, hash); });
   }
 
   void enterArray(int size) { enterContainer(ARRAY_tag, size); }
