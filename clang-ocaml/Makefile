@@ -53,7 +53,7 @@ build/%.cmi:build/%.mli
 # clang AST
 build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.h
 	@mkdir -p build
-	@make -C $(LIBTOOLING) build/ASTExporter.h.p
+	@$(MAKE) -C $(LIBTOOLING) build/ASTExporter.h.p
 	python $(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.h.p | python $(ATDLIB)/normalize_names_in_atd.py > $@
 
 build/ast_inline.atd: build/ast_inline.atd.p
@@ -112,7 +112,7 @@ build/clang_ast_main_test: $(CLANG_AST_PROJ_LIBS) build/clang_ast_main_test.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
 test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_proj_test clang_ast_converter clang_ast_named_decl_printer clang_ast_main_test)
-	@make -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
+	@$(MAKE) -C $(LIBTOOLING) $(PRINTER_TEST_FILES:%=build/ast_samples/%.yjson) $(TEST_FILES:%=build/ast_samples/%.yjson.gz) $(CONVERTER_TEST_FILE:%=build/ast_samples/%.yjson)
 	@export LIMIT=100; \
 	 $(RUNTEST) tests/process_test build/process_test; \
 	 $(RUNTEST) tests/utils_test build/utils_test; \
@@ -126,13 +126,13 @@ test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_p
 
 record-test-outputs:
 	@rm -f tests/*.out
-	@make DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
+	@$(MAKE) DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
 	@for F in tests/*.out; do cp $$F $${F%.out}.exp; done
 	@rm -f tests/*.out
 
 -include .depend
 
-.depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_v.mli build/clang_ast_v.ml
+.depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_v.mli build/clang_ast_v.ml build/clang_ast_proj.mli build/clang_ast_proj.ml
 	ocamldep -native -I build $^ | sed -e 's/\([a-zA-Z0-9_]*\.cm.\)/build\/\1/g' | sed -e 's/build\/build\//build\//g' > .depend
 
 clean:

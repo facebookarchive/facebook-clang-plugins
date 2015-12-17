@@ -89,7 +89,7 @@ dump-test-ast:
 # Testing equality of outputs is a little fragile but this makes it easy to (re)generate the .exp files
 # Cheaters won't have a chance in phabricator anyway ;-)
 record-test-outputs:
-	@make DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
+	@$(MAKE) DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
 	@for F in $(OUT_TEST_FILES); do cp $$F $${F%.out}.exp; done
 	@rm -f $(OUT_TEST_FILES)
 

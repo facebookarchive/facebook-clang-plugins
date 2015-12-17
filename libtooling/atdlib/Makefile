@@ -29,7 +29,7 @@ test: build/jsontest build/binioutest extract_atd_from_cpp.py normalize_names_in
 
 record-test-outputs:
 	@rm -f tests/*.out
-	@make DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
+	@$(MAKE) DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
 	@for F in tests/*.out; do cp $$F $${F%.out}.exp; done
 	@rm -f tests/*.out
 

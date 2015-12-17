@@ -21,19 +21,19 @@ CMAKE_SETTINGS+=-D CMAKE_CXX_FLAGS="$(CFLAGS)"
 CMAKE_SETTINGS+=-D CMAKE_SHARED_LINKER_FLAGS="$(LDFLAGS)"
 
 all:
-	make -C analyzer all
-	make -C libtooling/atdlib all
-	make -C libtooling all
+	$(MAKE) -C analyzer all
+	$(MAKE) -C libtooling/atdlib all
+	$(MAKE) -C libtooling all
 
 test: all
-	make -C analyzer test
-	make -C libtooling/atdlib test
-	make -C libtooling test
+	$(MAKE) -C analyzer test
+	$(MAKE) -C libtooling/atdlib test
+	$(MAKE) -C libtooling test
 
 clean:
-	make -C analyzer clean
-	make -C libtooling/atdlib clean
-	make -C libtooling clean
+	$(MAKE) -C analyzer clean
+	$(MAKE) -C libtooling/atdlib clean
+	$(MAKE) -C libtooling clean
 	rm -rf xcode *~
 
 xcode: CMakeLists.txt libtooling/CMakeLists.txt analyzer/CMakeLists.txt

@@ -115,7 +115,7 @@ test: build/FacebookClangPlugin.dylib
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f $(OUT_TEST_FILES); fi
 
 record-test-outputs:
-	@make DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
+	@$(MAKE) DEBUG=1 KEEP_TEST_OUTPUTS=1 test || true
 	@for F in $(OUT_TEST_FILES); do cp $$F $${F%.out}.exp; done
 	@rm -f $(OUT_TEST_FILES)
 
