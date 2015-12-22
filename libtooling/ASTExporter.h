@@ -3914,15 +3914,19 @@ int ASTExporter<ATDWriter>::CXXDeleteExprTupleSize() {
 /// #define cxx_delete_expr_tuple expr_tuple * cxx_delete_expr_info
 /// type cxx_delete_expr_info = {
 ///   ~is_array : bool;
+///   destroyed_type : type_ptr;
 /// } <ocaml field_prefix="xdei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXDeleteExpr(const CXXDeleteExpr *Node) {
   VisitExpr(Node);
 
   bool IsArray = Node->isArrayForm();
-  ObjectScope Scope(OF, 0 + IsArray);
+  ObjectScope Scope(OF, 1 + IsArray);
 
   OF.emitFlag("is_array", IsArray);
+
+  OF.emitTag("destroyed_type");
+  dumpQualType(Node->getDestroyedType());
 }
 ////===----------------------------------------------------------------------===//
 //// Obj-C Expressions
