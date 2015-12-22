@@ -522,6 +522,18 @@
         "is_complete_definition" : true
       },
       {
+        "destructor" : {
+          "kind" : <"CXXDestructor">,
+          "decl_pointer" : "20",
+          "name" : {
+            "name" : "~A",
+            "qual_name" : [
+              "~A",
+              "A"
+            ]
+          },
+          "type_ptr" : "21"
+        }
       }
     )>,
     <"CXXRecordDecl" : (
@@ -936,7 +948,19 @@
       {
         "bases" : [
           "7"
-        ]
+        ],
+        "destructor" : {
+          "kind" : <"CXXDestructor">,
+          "decl_pointer" : "42",
+          "name" : {
+            "name" : "~B",
+            "qual_name" : [
+              "~B",
+              "B"
+            ]
+          },
+          "type_ptr" : "43"
+        }
       }
     )>,
     <"CXXRecordDecl" : (

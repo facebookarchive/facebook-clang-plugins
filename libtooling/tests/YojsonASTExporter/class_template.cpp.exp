@@ -1091,7 +1091,19 @@
         "is_complete_definition" : true
       },
       {
-        "is_c_like" : true
+        "is_c_like" : true,
+        "destructor" : {
+          "kind" : <"CXXDestructor">,
+          "decl_pointer" : "31",
+          "name" : {
+            "name" : "~S",
+            "qual_name" : [
+              "~S",
+              "S<int>"
+            ]
+          },
+          "type_ptr" : "32"
+        }
       }
     )>,
     <"FunctionDecl" : (

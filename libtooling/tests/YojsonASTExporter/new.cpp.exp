@@ -392,7 +392,19 @@
         "is_complete_definition" : true
       },
       {
-        "is_c_like" : true
+        "is_c_like" : true,
+        "destructor" : {
+          "kind" : <"CXXDestructor">,
+          "decl_pointer" : "22",
+          "name" : {
+            "name" : "~pod",
+            "qual_name" : [
+              "~pod",
+              "pod"
+            ]
+          },
+          "type_ptr" : "23"
+        }
       }
     )>,
     <"CXXRecordDecl" : (
@@ -1187,6 +1199,18 @@
         "is_complete_definition" : true
       },
       {
+        "destructor" : {
+          "kind" : <"CXXDestructor">,
+          "decl_pointer" : "54",
+          "name" : {
+            "name" : "~cpplike",
+            "qual_name" : [
+              "~cpplike",
+              "cpplike"
+            ]
+          },
+          "type_ptr" : "55"
+        }
       }
     )>,
     <"FunctionDecl" : (
