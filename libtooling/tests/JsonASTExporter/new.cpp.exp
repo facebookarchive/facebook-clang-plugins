@@ -1,6 +1,6 @@
 ["TranslationUnitDecl" , [
   {
-    "pointer" : "0",
+    "pointer" : 1,
     "source_range" : [
       {
       },
@@ -13,7 +13,7 @@
   [
     ["TypedefDecl" , [
       {
-        "pointer" : "1",
+        "pointer" : 2,
         "source_range" : [
           {
           },
@@ -31,13 +31,13 @@
         ]
       },
       "NoType",
-      "2",
+      3,
       {
       }
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : "3",
+        "pointer" : 4,
         "source_range" : [
           {
           },
@@ -55,13 +55,13 @@
         ]
       },
       "NoType",
-      "2",
+      3,
       {
       }
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : "4",
+        "pointer" : 5,
         "source_range" : [
           {
           },
@@ -79,13 +79,13 @@
         ]
       },
       "NoType",
-      "2",
+      3,
       {
       }
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : "5",
+        "pointer" : 6,
         "source_range" : [
           {
           },
@@ -103,13 +103,13 @@
         ]
       },
       "NoType",
-      "2",
+      3,
       {
       }
     ]],
     ["CXXRecordDecl" , [
       {
-        "pointer" : "6",
+        "pointer" : 7,
         "source_range" : [
           {
             "file" : "tests/new.cpp",
@@ -132,11 +132,11 @@
         ]
       },
       ["Type" , "struct pod"],
-      "7",
+      8,
       [
         ["CXXRecordDecl" , [
           {
-            "pointer" : "8",
+            "pointer" : 9,
             "source_range" : [
               {
                 "line" : 1,
@@ -158,7 +158,7 @@
             ]
           },
           ["Type" , "struct pod"],
-          "7",
+          8,
           [
           ],
           {
@@ -170,7 +170,7 @@
         ]],
         ["FieldDecl" , [
           {
-            "pointer" : "9",
+            "pointer" : 10,
             "source_range" : [
               {
                 "line" : 2,
@@ -190,14 +190,14 @@
               "pod"
             ]
           },
-          "10",
+          11,
           {
           }
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "11",
-            "parent_pointer" : "6",
+            "pointer" : 12,
+            "parent_pointer" : 7,
             "source_range" : [
               {
                 "line" : 1,
@@ -220,12 +220,12 @@
               "pod"
             ]
           },
-          "12",
+          13,
           {
             "is_inline" : true,
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "13",
+                "pointer" : 14,
                 "source_range" : [
                   {
                     "column" : 8
@@ -244,8 +244,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "14",
-            "parent_pointer" : "6",
+            "pointer" : 15,
+            "parent_pointer" : 7,
             "source_range" : [
               {
                 "column" : 8
@@ -265,13 +265,13 @@
               "pod"
             ]
           },
-          "15",
+          16,
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "16",
+                  "pointer" : 17,
                   "source_range" : [
                     {
                       "column" : 8
@@ -289,7 +289,7 @@
                     ""
                   ]
                 },
-                "17",
+                18,
                 {
                 }
               ]]
@@ -300,8 +300,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "18",
-            "parent_pointer" : "6",
+            "pointer" : 19,
+            "parent_pointer" : 7,
             "source_range" : [
               {
                 "column" : 8
@@ -321,13 +321,13 @@
               "pod"
             ]
           },
-          "19",
+          20,
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "20",
+                  "pointer" : 21,
                   "source_range" : [
                     {
                       "column" : 8
@@ -345,7 +345,7 @@
                     ""
                   ]
                 },
-                "21",
+                22,
                 {
                 }
               ]]
@@ -356,8 +356,8 @@
         ]],
         ["CXXDestructorDecl" , [
           {
-            "pointer" : "22",
-            "parent_pointer" : "6",
+            "pointer" : 23,
+            "parent_pointer" : 7,
             "source_range" : [
               {
                 "column" : 8
@@ -378,7 +378,7 @@
               "pod"
             ]
           },
-          "23",
+          24,
           {
             "is_inline" : true
           },
@@ -395,7 +395,7 @@
         "is_c_like" : true,
         "destructor" : {
           "kind" : "CXXDestructor",
-          "decl_pointer" : "22",
+          "decl_pointer" : 23,
           "name" : {
             "name" : "~pod",
             "qual_name" : [
@@ -403,13 +403,13 @@
               "pod"
             ]
           },
-          "type_ptr" : "23"
+          "type_ptr" : 24
         }
       }
     ]],
     ["CXXRecordDecl" , [
       {
-        "pointer" : "24",
+        "pointer" : 25,
         "source_range" : [
           {
             "line" : 5,
@@ -431,11 +431,11 @@
         ]
       },
       ["Type" , "struct cpplike"],
-      "25",
+      26,
       [
         ["CXXRecordDecl" , [
           {
-            "pointer" : "26",
+            "pointer" : 27,
             "source_range" : [
               {
                 "line" : 5,
@@ -458,7 +458,7 @@
             ]
           },
           ["Type" , "struct cpplike"],
-          "25",
+          26,
           [
           ],
           {
@@ -470,7 +470,7 @@
         ]],
         ["FieldDecl" , [
           {
-            "pointer" : "27",
+            "pointer" : 28,
             "source_range" : [
               {
                 "line" : 6,
@@ -490,13 +490,13 @@
               "cpplike"
             ]
           },
-          "10",
+          11,
           {
           }
         ]],
         ["FieldDecl" , [
           {
-            "pointer" : "28",
+            "pointer" : 29,
             "source_range" : [
               {
                 "line" : 7,
@@ -516,13 +516,13 @@
               "cpplike"
             ]
           },
-          "10",
+          11,
           {
           }
         ]],
         ["FieldDecl" , [
           {
-            "pointer" : "29",
+            "pointer" : 30,
             "source_range" : [
               {
                 "line" : 8,
@@ -542,14 +542,14 @@
               "cpplike"
             ]
           },
-          "7",
+          8,
           {
           }
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "30",
-            "parent_pointer" : "24",
+            "pointer" : 31,
+            "parent_pointer" : 25,
             "source_range" : [
               {
                 "line" : 9,
@@ -571,11 +571,11 @@
               "cpplike"
             ]
           },
-          "31",
+          32,
           {
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "32",
+                "pointer" : 33,
                 "source_range" : [
                   {
                     "column" : 27
@@ -594,7 +594,7 @@
               {
                 "subject" : ["Member" , {
                   "kind" : "Field",
-                  "decl_pointer" : "27",
+                  "decl_pointer" : 28,
                   "name" : {
                     "name" : "a",
                     "qual_name" : [
@@ -602,7 +602,7 @@
                       "cpplike"
                     ]
                   },
-                  "type_ptr" : "10"
+                  "type_ptr" : 11
                 }],
                 "source_range" : [
                   {
@@ -614,7 +614,7 @@
                 ],
                 "init_expr" : ["IntegerLiteral" , [
                   {
-                    "pointer" : "33",
+                    "pointer" : 34,
                     "source_range" : [
                       {
                         "column" : 17
@@ -627,7 +627,7 @@
                   [
                   ],
                   {
-                    "type_ptr" : "10"
+                    "type_ptr" : 11
                   },
                   {
                     "is_signed" : true,
@@ -639,7 +639,7 @@
               {
                 "subject" : ["Member" , {
                   "kind" : "Field",
-                  "decl_pointer" : "28",
+                  "decl_pointer" : 29,
                   "name" : {
                     "name" : "b",
                     "qual_name" : [
@@ -647,7 +647,7 @@
                       "cpplike"
                     ]
                   },
-                  "type_ptr" : "10"
+                  "type_ptr" : 11
                 }],
                 "source_range" : [
                   {
@@ -659,7 +659,7 @@
                 ],
                 "init_expr" : ["IntegerLiteral" , [
                   {
-                    "pointer" : "34",
+                    "pointer" : 35,
                     "source_range" : [
                       {
                         "column" : 24
@@ -672,7 +672,7 @@
                   [
                   ],
                   {
-                    "type_ptr" : "10"
+                    "type_ptr" : 11
                   },
                   {
                     "is_signed" : true,
@@ -684,7 +684,7 @@
               {
                 "subject" : ["Member" , {
                   "kind" : "Field",
-                  "decl_pointer" : "29",
+                  "decl_pointer" : 30,
                   "name" : {
                     "name" : "c",
                     "qual_name" : [
@@ -692,7 +692,7 @@
                       "cpplike"
                     ]
                   },
-                  "type_ptr" : "7"
+                  "type_ptr" : 8
                 }],
                 "source_range" : [
                   {
@@ -704,7 +704,7 @@
                 ],
                 "init_expr" : ["CXXConstructExpr" , [
                   {
-                    "pointer" : "35",
+                    "pointer" : 36,
                     "source_range" : [
                       {
                         "column" : 3
@@ -717,12 +717,12 @@
                   [
                   ],
                   {
-                    "type_ptr" : "7"
+                    "type_ptr" : 8
                   },
                   {
                     "decl_ref" : {
                       "kind" : "CXXConstructor",
-                      "decl_pointer" : "11",
+                      "decl_pointer" : 12,
                       "name" : {
                         "name" : "pod",
                         "qual_name" : [
@@ -730,7 +730,7 @@
                           "pod"
                         ]
                       },
-                      "type_ptr" : "12"
+                      "type_ptr" : 13
                     }
                   }
                 ]]
@@ -740,8 +740,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "36",
-            "parent_pointer" : "24",
+            "pointer" : 37,
+            "parent_pointer" : 25,
             "source_range" : [
               {
                 "line" : 10,
@@ -763,12 +763,12 @@
               "cpplike"
             ]
           },
-          "37",
+          38,
           {
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "38",
+                  "pointer" : 39,
                   "source_range" : [
                     {
                       "column" : 11
@@ -788,13 +788,13 @@
                     "a"
                   ]
                 },
-                "10",
+                11,
                 {
                 }
               ]],
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "39",
+                  "pointer" : 40,
                   "source_range" : [
                     {
                       "column" : 18
@@ -814,14 +814,14 @@
                     "b"
                   ]
                 },
-                "10",
+                11,
                 {
                 }
               ]]
             ],
             "body" : ["CompoundStmt" , [
               {
-                "pointer" : "40",
+                "pointer" : 41,
                 "source_range" : [
                   {
                     "column" : 38
@@ -840,7 +840,7 @@
               {
                 "subject" : ["Member" , {
                   "kind" : "Field",
-                  "decl_pointer" : "27",
+                  "decl_pointer" : 28,
                   "name" : {
                     "name" : "a",
                     "qual_name" : [
@@ -848,7 +848,7 @@
                       "cpplike"
                     ]
                   },
-                  "type_ptr" : "10"
+                  "type_ptr" : 11
                 }],
                 "source_range" : [
                   {
@@ -860,7 +860,7 @@
                 ],
                 "init_expr" : ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "41",
+                    "pointer" : 42,
                     "source_range" : [
                       {
                         "column" : 29
@@ -873,7 +873,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "42",
+                        "pointer" : 43,
                         "source_range" : [
                           {
                             "column" : 29
@@ -886,26 +886,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10",
+                        "type_ptr" : 11,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "ParmVar",
-                          "decl_pointer" : "38",
+                          "decl_pointer" : 39,
                           "name" : {
                             "name" : "a",
                             "qual_name" : [
                               "a"
                             ]
                           },
-                          "type_ptr" : "10"
+                          "type_ptr" : 11
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "10"
+                    "type_ptr" : 11
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -917,7 +917,7 @@
               {
                 "subject" : ["Member" , {
                   "kind" : "Field",
-                  "decl_pointer" : "28",
+                  "decl_pointer" : 29,
                   "name" : {
                     "name" : "b",
                     "qual_name" : [
@@ -925,7 +925,7 @@
                       "cpplike"
                     ]
                   },
-                  "type_ptr" : "10"
+                  "type_ptr" : 11
                 }],
                 "source_range" : [
                   {
@@ -937,7 +937,7 @@
                 ],
                 "init_expr" : ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "43",
+                    "pointer" : 44,
                     "source_range" : [
                       {
                         "column" : 35
@@ -950,7 +950,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "44",
+                        "pointer" : 45,
                         "source_range" : [
                           {
                             "column" : 35
@@ -963,26 +963,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10",
+                        "type_ptr" : 11,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "ParmVar",
-                          "decl_pointer" : "39",
+                          "decl_pointer" : 40,
                           "name" : {
                             "name" : "b",
                             "qual_name" : [
                               "b"
                             ]
                           },
-                          "type_ptr" : "10"
+                          "type_ptr" : 11
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "10"
+                    "type_ptr" : 11
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -994,7 +994,7 @@
               {
                 "subject" : ["Member" , {
                   "kind" : "Field",
-                  "decl_pointer" : "29",
+                  "decl_pointer" : 30,
                   "name" : {
                     "name" : "c",
                     "qual_name" : [
@@ -1002,7 +1002,7 @@
                       "cpplike"
                     ]
                   },
-                  "type_ptr" : "7"
+                  "type_ptr" : 8
                 }],
                 "source_range" : [
                   {
@@ -1014,7 +1014,7 @@
                 ],
                 "init_expr" : ["CXXConstructExpr" , [
                   {
-                    "pointer" : "45",
+                    "pointer" : 46,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1027,12 +1027,12 @@
                   [
                   ],
                   {
-                    "type_ptr" : "7"
+                    "type_ptr" : 8
                   },
                   {
                     "decl_ref" : {
                       "kind" : "CXXConstructor",
-                      "decl_pointer" : "11",
+                      "decl_pointer" : 12,
                       "name" : {
                         "name" : "pod",
                         "qual_name" : [
@@ -1040,7 +1040,7 @@
                           "pod"
                         ]
                       },
-                      "type_ptr" : "12"
+                      "type_ptr" : 13
                     }
                   }
                 ]]
@@ -1050,8 +1050,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "46",
-            "parent_pointer" : "24",
+            "pointer" : 47,
+            "parent_pointer" : 25,
             "source_range" : [
               {
                 "line" : 5,
@@ -1072,13 +1072,13 @@
               "cpplike"
             ]
           },
-          "47",
+          48,
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "48",
+                  "pointer" : 49,
                   "source_range" : [
                     {
                       "column" : 8
@@ -1096,7 +1096,7 @@
                     ""
                   ]
                 },
-                "49",
+                50,
                 {
                 }
               ]]
@@ -1107,8 +1107,8 @@
         ]],
         ["CXXConstructorDecl" , [
           {
-            "pointer" : "50",
-            "parent_pointer" : "24",
+            "pointer" : 51,
+            "parent_pointer" : 25,
             "source_range" : [
               {
                 "column" : 8
@@ -1128,13 +1128,13 @@
               "cpplike"
             ]
           },
-          "51",
+          52,
           {
             "is_inline" : true,
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : "52",
+                  "pointer" : 53,
                   "source_range" : [
                     {
                       "column" : 8
@@ -1152,7 +1152,7 @@
                     ""
                   ]
                 },
-                "53",
+                54,
                 {
                 }
               ]]
@@ -1163,8 +1163,8 @@
         ]],
         ["CXXDestructorDecl" , [
           {
-            "pointer" : "54",
-            "parent_pointer" : "24",
+            "pointer" : 55,
+            "parent_pointer" : 25,
             "source_range" : [
               {
                 "column" : 8
@@ -1185,7 +1185,7 @@
               "cpplike"
             ]
           },
-          "55",
+          56,
           {
             "is_inline" : true
           },
@@ -1201,7 +1201,7 @@
       {
         "destructor" : {
           "kind" : "CXXDestructor",
-          "decl_pointer" : "54",
+          "decl_pointer" : 55,
           "name" : {
             "name" : "~cpplike",
             "qual_name" : [
@@ -1209,13 +1209,13 @@
               "cpplike"
             ]
           },
-          "type_ptr" : "55"
+          "type_ptr" : 56
         }
       }
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "56",
+        "pointer" : 57,
         "source_range" : [
           {
             "line" : 13,
@@ -1235,11 +1235,11 @@
           "test"
         ]
       },
-      "31",
+      32,
       {
         "body" : ["CompoundStmt" , [
           {
-            "pointer" : "57",
+            "pointer" : 58,
             "source_range" : [
               {
                 "line" : 13,
@@ -1254,7 +1254,7 @@
           [
             ["DeclStmt" , [
               {
-                "pointer" : "58",
+                "pointer" : 59,
                 "source_range" : [
                   {
                     "line" : 14,
@@ -1268,7 +1268,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "59",
+                    "pointer" : 60,
                     "source_range" : [
                       {
                         "column" : 13
@@ -1281,7 +1281,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "60",
+                        "pointer" : 61,
                         "source_range" : [
                           {
                             "column" : 21
@@ -1294,7 +1294,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10"
+                        "type_ptr" : 11
                       },
                       {
                         "is_signed" : true,
@@ -1304,17 +1304,17 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : "61"
+                    "type_ptr" : 62
                   },
                   {
-                    "initializer_expr" : "60"
+                    "initializer_expr" : 61
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "62",
+                    "pointer" : 63,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1334,11 +1334,11 @@
                       "i"
                     ]
                   },
-                  "63",
+                  64,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "59",
+                        "pointer" : 60,
                         "source_range" : [
                           {
                             "column" : 13
@@ -1351,7 +1351,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "60",
+                            "pointer" : 61,
                             "source_range" : [
                               {
                                 "column" : 21
@@ -1364,7 +1364,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -1374,10 +1374,10 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : "61"
+                        "type_ptr" : 62
                       },
                       {
-                        "initializer_expr" : "60"
+                        "initializer_expr" : 61
                       }
                     ]]
                   }
@@ -1386,7 +1386,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "64",
+                "pointer" : 65,
                 "source_range" : [
                   {
                     "line" : 15,
@@ -1400,7 +1400,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "65",
+                    "pointer" : 66,
                     "source_range" : [
                       {
                         "column" : 15
@@ -1413,7 +1413,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "66",
+                        "pointer" : 67,
                         "source_range" : [
                           {
                             "column" : 23
@@ -1426,7 +1426,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10"
+                        "type_ptr" : 11
                       },
                       {
                         "is_signed" : true,
@@ -1436,18 +1436,18 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : "61"
+                    "type_ptr" : 62
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : "66"
+                    "array_size_expr" : 67
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "67",
+                    "pointer" : 68,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1467,11 +1467,11 @@
                       "i_a"
                     ]
                   },
-                  "63",
+                  64,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "65",
+                        "pointer" : 66,
                         "source_range" : [
                           {
                             "column" : 15
@@ -1484,7 +1484,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "66",
+                            "pointer" : 67,
                             "source_range" : [
                               {
                                 "column" : 23
@@ -1497,7 +1497,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -1507,11 +1507,11 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : "61"
+                        "type_ptr" : 62
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : "66"
+                        "array_size_expr" : 67
                       }
                     ]]
                   }
@@ -1520,7 +1520,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "68",
+                "pointer" : 69,
                 "source_range" : [
                   {
                     "line" : 17,
@@ -1534,7 +1534,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "69",
+                    "pointer" : 70,
                     "source_range" : [
                       {
                         "column" : 13
@@ -1547,7 +1547,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : "70",
+                        "pointer" : 71,
                         "source_range" : [
                           {
                             "column" : 17
@@ -1560,12 +1560,12 @@
                       [
                       ],
                       {
-                        "type_ptr" : "7"
+                        "type_ptr" : 8
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : "11",
+                          "decl_pointer" : 12,
                           "name" : {
                             "name" : "pod",
                             "qual_name" : [
@@ -1573,23 +1573,23 @@
                               "pod"
                             ]
                           },
-                          "type_ptr" : "12"
+                          "type_ptr" : 13
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "71"
+                    "type_ptr" : 72
                   },
                   {
-                    "initializer_expr" : "70"
+                    "initializer_expr" : 71
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "72",
+                    "pointer" : 73,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1609,11 +1609,11 @@
                       "p"
                     ]
                   },
-                  "73",
+                  74,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "69",
+                        "pointer" : 70,
                         "source_range" : [
                           {
                             "column" : 13
@@ -1626,7 +1626,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "70",
+                            "pointer" : 71,
                             "source_range" : [
                               {
                                 "column" : 17
@@ -1639,12 +1639,12 @@
                           [
                           ],
                           {
-                            "type_ptr" : "7"
+                            "type_ptr" : 8
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "11",
+                              "decl_pointer" : 12,
                               "name" : {
                                 "name" : "pod",
                                 "qual_name" : [
@@ -1652,16 +1652,16 @@
                                   "pod"
                                 ]
                               },
-                              "type_ptr" : "12"
+                              "type_ptr" : 13
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "71"
+                        "type_ptr" : 72
                       },
                       {
-                        "initializer_expr" : "70"
+                        "initializer_expr" : 71
                       }
                     ]]
                   }
@@ -1670,7 +1670,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "74",
+                "pointer" : 75,
                 "source_range" : [
                   {
                     "line" : 18,
@@ -1684,7 +1684,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "75",
+                    "pointer" : 76,
                     "source_range" : [
                       {
                         "column" : 15
@@ -1697,7 +1697,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "76",
+                        "pointer" : 77,
                         "source_range" : [
                           {
                             "column" : 23
@@ -1710,7 +1710,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10"
+                        "type_ptr" : 11
                       },
                       {
                         "is_signed" : true,
@@ -1720,7 +1720,7 @@
                     ]],
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : "77",
+                        "pointer" : 78,
                         "source_range" : [
                           {
                             "column" : 19
@@ -1733,12 +1733,12 @@
                       [
                       ],
                       {
-                        "type_ptr" : "7"
+                        "type_ptr" : 8
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : "11",
+                          "decl_pointer" : 12,
                           "name" : {
                             "name" : "pod",
                             "qual_name" : [
@@ -1746,25 +1746,25 @@
                               "pod"
                             ]
                           },
-                          "type_ptr" : "12"
+                          "type_ptr" : 13
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "71"
+                    "type_ptr" : 72
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : "76",
-                    "initializer_expr" : "77"
+                    "array_size_expr" : 77,
+                    "initializer_expr" : 78
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "78",
+                    "pointer" : 79,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1784,11 +1784,11 @@
                       "p_a"
                     ]
                   },
-                  "73",
+                  74,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "75",
+                        "pointer" : 76,
                         "source_range" : [
                           {
                             "column" : 15
@@ -1801,7 +1801,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "76",
+                            "pointer" : 77,
                             "source_range" : [
                               {
                                 "column" : 23
@@ -1814,7 +1814,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -1824,7 +1824,7 @@
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "77",
+                            "pointer" : 78,
                             "source_range" : [
                               {
                                 "column" : 19
@@ -1837,12 +1837,12 @@
                           [
                           ],
                           {
-                            "type_ptr" : "7"
+                            "type_ptr" : 8
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "11",
+                              "decl_pointer" : 12,
                               "name" : {
                                 "name" : "pod",
                                 "qual_name" : [
@@ -1850,18 +1850,18 @@
                                   "pod"
                                 ]
                               },
-                              "type_ptr" : "12"
+                              "type_ptr" : 13
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "71"
+                        "type_ptr" : 72
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : "76",
-                        "initializer_expr" : "77"
+                        "array_size_expr" : 77,
+                        "initializer_expr" : 78
                       }
                     ]]
                   }
@@ -1870,7 +1870,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "79",
+                "pointer" : 80,
                 "source_range" : [
                   {
                     "line" : 20,
@@ -1884,7 +1884,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "80",
+                    "pointer" : 81,
                     "source_range" : [
                       {
                         "column" : 13
@@ -1897,7 +1897,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : "81",
+                        "pointer" : 82,
                         "source_range" : [
                           {
                             "column" : 17
@@ -1910,7 +1910,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "82",
+                            "pointer" : 83,
                             "source_range" : [
                               {
                                 "column" : 25
@@ -1923,7 +1923,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -1933,7 +1933,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "83",
+                            "pointer" : 84,
                             "source_range" : [
                               {
                                 "column" : 28
@@ -1946,7 +1946,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -1956,12 +1956,12 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : "25"
+                        "type_ptr" : 26
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : "36",
+                          "decl_pointer" : 37,
                           "name" : {
                             "name" : "cpplike",
                             "qual_name" : [
@@ -1969,23 +1969,23 @@
                               "cpplike"
                             ]
                           },
-                          "type_ptr" : "37"
+                          "type_ptr" : 38
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "84"
+                    "type_ptr" : 85
                   },
                   {
-                    "initializer_expr" : "81"
+                    "initializer_expr" : 82
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "85",
+                    "pointer" : 86,
                     "source_range" : [
                       {
                         "column" : 3
@@ -2005,11 +2005,11 @@
                       "c"
                     ]
                   },
-                  "86",
+                  87,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "80",
+                        "pointer" : 81,
                         "source_range" : [
                           {
                             "column" : 13
@@ -2022,7 +2022,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "81",
+                            "pointer" : 82,
                             "source_range" : [
                               {
                                 "column" : 17
@@ -2035,7 +2035,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "82",
+                                "pointer" : 83,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -2048,7 +2048,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -2058,7 +2058,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "83",
+                                "pointer" : 84,
                                 "source_range" : [
                                   {
                                     "column" : 28
@@ -2071,7 +2071,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -2081,12 +2081,12 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : "25"
+                            "type_ptr" : 26
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "36",
+                              "decl_pointer" : 37,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -2094,16 +2094,16 @@
                                   "cpplike"
                                 ]
                               },
-                              "type_ptr" : "37"
+                              "type_ptr" : 38
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "84"
+                        "type_ptr" : 85
                       },
                       {
-                        "initializer_expr" : "81"
+                        "initializer_expr" : 82
                       }
                     ]]
                   }
@@ -2112,7 +2112,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "87",
+                "pointer" : 88,
                 "source_range" : [
                   {
                     "line" : 21,
@@ -2126,7 +2126,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "88",
+                    "pointer" : 89,
                     "source_range" : [
                       {
                         "column" : 15
@@ -2139,7 +2139,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "89",
+                        "pointer" : 90,
                         "source_range" : [
                           {
                             "column" : 27
@@ -2152,7 +2152,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10"
+                        "type_ptr" : 11
                       },
                       {
                         "is_signed" : true,
@@ -2162,7 +2162,7 @@
                     ]],
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : "90",
+                        "pointer" : 91,
                         "source_range" : [
                           {
                             "column" : 19
@@ -2175,12 +2175,12 @@
                       [
                       ],
                       {
-                        "type_ptr" : "25"
+                        "type_ptr" : 26
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : "30",
+                          "decl_pointer" : 31,
                           "name" : {
                             "name" : "cpplike",
                             "qual_name" : [
@@ -2188,25 +2188,25 @@
                               "cpplike"
                             ]
                           },
-                          "type_ptr" : "31"
+                          "type_ptr" : 32
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "84"
+                    "type_ptr" : 85
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : "89",
-                    "initializer_expr" : "90"
+                    "array_size_expr" : 90,
+                    "initializer_expr" : 91
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "91",
+                    "pointer" : 92,
                     "source_range" : [
                       {
                         "column" : 3
@@ -2226,11 +2226,11 @@
                       "c_a"
                     ]
                   },
-                  "86",
+                  87,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "88",
+                        "pointer" : 89,
                         "source_range" : [
                           {
                             "column" : 15
@@ -2243,7 +2243,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "89",
+                            "pointer" : 90,
                             "source_range" : [
                               {
                                 "column" : 27
@@ -2256,7 +2256,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -2266,7 +2266,7 @@
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "90",
+                            "pointer" : 91,
                             "source_range" : [
                               {
                                 "column" : 19
@@ -2279,12 +2279,12 @@
                           [
                           ],
                           {
-                            "type_ptr" : "25"
+                            "type_ptr" : 26
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "30",
+                              "decl_pointer" : 31,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -2292,18 +2292,18 @@
                                   "cpplike"
                                 ]
                               },
-                              "type_ptr" : "31"
+                              "type_ptr" : 32
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "84"
+                        "type_ptr" : 85
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : "89",
-                        "initializer_expr" : "90"
+                        "array_size_expr" : 90,
+                        "initializer_expr" : 91
                       }
                     ]]
                   }
@@ -2312,7 +2312,7 @@
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : "92",
+                "pointer" : 93,
                 "source_range" : [
                   {
                     "line" : 23,
@@ -2326,7 +2326,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "93",
+                    "pointer" : 94,
                     "source_range" : [
                       {
                         "column" : 10
@@ -2339,7 +2339,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "94",
+                        "pointer" : 95,
                         "source_range" : [
                           {
                             "column" : 10
@@ -2352,26 +2352,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "63",
+                        "type_ptr" : 64,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : "62",
+                          "decl_pointer" : 63,
                           "name" : {
                             "name" : "i",
                             "qual_name" : [
                               "i"
                             ]
                           },
-                          "type_ptr" : "63"
+                          "type_ptr" : 64
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "63"
+                    "type_ptr" : 64
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2381,15 +2381,15 @@
                 ]]
               ],
               {
-                "type_ptr" : "95"
+                "type_ptr" : 96
               },
               {
-                "destroyed_type" : "96"
+                "destroyed_type" : 97
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : "97",
+                "pointer" : 98,
                 "source_range" : [
                   {
                     "line" : 24,
@@ -2403,7 +2403,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "98",
+                    "pointer" : 99,
                     "source_range" : [
                       {
                         "column" : 12
@@ -2416,7 +2416,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "99",
+                        "pointer" : 100,
                         "source_range" : [
                           {
                             "column" : 12
@@ -2429,26 +2429,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "63",
+                        "type_ptr" : 64,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : "67",
+                          "decl_pointer" : 68,
                           "name" : {
                             "name" : "i_a",
                             "qual_name" : [
                               "i_a"
                             ]
                           },
-                          "type_ptr" : "63"
+                          "type_ptr" : 64
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "63"
+                    "type_ptr" : 64
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2458,16 +2458,16 @@
                 ]]
               ],
               {
-                "type_ptr" : "95"
+                "type_ptr" : 96
               },
               {
                 "is_array" : true,
-                "destroyed_type" : "96"
+                "destroyed_type" : 97
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : "100",
+                "pointer" : 101,
                 "source_range" : [
                   {
                     "line" : 25,
@@ -2481,7 +2481,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "101",
+                    "pointer" : 102,
                     "source_range" : [
                       {
                         "column" : 10
@@ -2494,7 +2494,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "102",
+                        "pointer" : 103,
                         "source_range" : [
                           {
                             "column" : 10
@@ -2507,26 +2507,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "73",
+                        "type_ptr" : 74,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : "72",
+                          "decl_pointer" : 73,
                           "name" : {
                             "name" : "p",
                             "qual_name" : [
                               "p"
                             ]
                           },
-                          "type_ptr" : "73"
+                          "type_ptr" : 74
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "73"
+                    "type_ptr" : 74
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2536,15 +2536,15 @@
                 ]]
               ],
               {
-                "type_ptr" : "95"
+                "type_ptr" : 96
               },
               {
-                "destroyed_type" : "103"
+                "destroyed_type" : 104
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : "104",
+                "pointer" : 105,
                 "source_range" : [
                   {
                     "line" : 26,
@@ -2558,7 +2558,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "105",
+                    "pointer" : 106,
                     "source_range" : [
                       {
                         "column" : 12
@@ -2571,7 +2571,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "106",
+                        "pointer" : 107,
                         "source_range" : [
                           {
                             "column" : 12
@@ -2584,26 +2584,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "73",
+                        "type_ptr" : 74,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : "78",
+                          "decl_pointer" : 79,
                           "name" : {
                             "name" : "p_a",
                             "qual_name" : [
                               "p_a"
                             ]
                           },
-                          "type_ptr" : "73"
+                          "type_ptr" : 74
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "73"
+                    "type_ptr" : 74
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2613,16 +2613,16 @@
                 ]]
               ],
               {
-                "type_ptr" : "95"
+                "type_ptr" : 96
               },
               {
                 "is_array" : true,
-                "destroyed_type" : "103"
+                "destroyed_type" : 104
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : "107",
+                "pointer" : 108,
                 "source_range" : [
                   {
                     "line" : 27,
@@ -2636,7 +2636,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "108",
+                    "pointer" : 109,
                     "source_range" : [
                       {
                         "column" : 10
@@ -2649,7 +2649,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "109",
+                        "pointer" : 110,
                         "source_range" : [
                           {
                             "column" : 10
@@ -2662,26 +2662,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "86",
+                        "type_ptr" : 87,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : "85",
+                          "decl_pointer" : 86,
                           "name" : {
                             "name" : "c",
                             "qual_name" : [
                               "c"
                             ]
                           },
-                          "type_ptr" : "86"
+                          "type_ptr" : 87
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "86"
+                    "type_ptr" : 87
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2691,15 +2691,15 @@
                 ]]
               ],
               {
-                "type_ptr" : "95"
+                "type_ptr" : 96
               },
               {
-                "destroyed_type" : "110"
+                "destroyed_type" : 111
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : "111",
+                "pointer" : 112,
                 "source_range" : [
                   {
                     "line" : 28,
@@ -2713,7 +2713,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : "112",
+                    "pointer" : 113,
                     "source_range" : [
                       {
                         "column" : 12
@@ -2726,7 +2726,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : "113",
+                        "pointer" : 114,
                         "source_range" : [
                           {
                             "column" : 12
@@ -2739,26 +2739,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : "86",
+                        "type_ptr" : 87,
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : "91",
+                          "decl_pointer" : 92,
                           "name" : {
                             "name" : "c_a",
                             "qual_name" : [
                               "c_a"
                             ]
                           },
-                          "type_ptr" : "86"
+                          "type_ptr" : 87
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "86"
+                    "type_ptr" : 87
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -2768,11 +2768,11 @@
                 ]]
               ],
               {
-                "type_ptr" : "95"
+                "type_ptr" : 96
               },
               {
                 "is_array" : true,
-                "destroyed_type" : "110"
+                "destroyed_type" : 111
               }
             ]]
           ]
@@ -2781,7 +2781,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "114",
+        "pointer" : 115,
         "source_range" : [
           {
           },
@@ -2793,7 +2793,7 @@
         "is_this_declaration_referenced" : true,
         "attributes" : [
           ["VisibilityAttr" , {
-            "pointer" : "115",
+            "pointer" : 116,
             "source_range" : [
               {
               },
@@ -2806,7 +2806,7 @@
             "is_implicit" : true
           }],
           ["RestrictAttr" , {
-            "pointer" : "116",
+            "pointer" : 117,
             "source_range" : [
               {
               },
@@ -2826,12 +2826,12 @@
           "operator new"
         ]
       },
-      "117",
+      118,
       {
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : "118",
+              "pointer" : 119,
               "source_range" : [
                 {
                 },
@@ -2848,7 +2848,7 @@
                 ""
               ]
             },
-            "119",
+            120,
             {
             }
           ]]
@@ -2857,7 +2857,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "120",
+        "pointer" : 121,
         "source_range" : [
           {
           },
@@ -2869,7 +2869,7 @@
         "is_this_declaration_referenced" : true,
         "attributes" : [
           ["VisibilityAttr" , {
-            "pointer" : "121",
+            "pointer" : 122,
             "source_range" : [
               {
               },
@@ -2882,7 +2882,7 @@
             "is_implicit" : true
           }],
           ["RestrictAttr" , {
-            "pointer" : "122",
+            "pointer" : 123,
             "source_range" : [
               {
               },
@@ -2902,12 +2902,12 @@
           "operator new[]"
         ]
       },
-      "117",
+      118,
       {
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : "123",
+              "pointer" : 124,
               "source_range" : [
                 {
                 },
@@ -2924,7 +2924,7 @@
                 ""
               ]
             },
-            "119",
+            120,
             {
             }
           ]]
@@ -2933,7 +2933,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "124",
+        "pointer" : 125,
         "source_range" : [
           {
           },
@@ -2945,7 +2945,7 @@
         "is_this_declaration_referenced" : true,
         "attributes" : [
           ["VisibilityAttr" , {
-            "pointer" : "125",
+            "pointer" : 126,
             "source_range" : [
               {
               },
@@ -2965,12 +2965,12 @@
           "operator delete"
         ]
       },
-      "126",
+      127,
       {
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : "127",
+              "pointer" : 128,
               "source_range" : [
                 {
                 },
@@ -2987,7 +2987,7 @@
                 ""
               ]
             },
-            "128",
+            129,
             {
             }
           ]]
@@ -2996,7 +2996,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "129",
+        "pointer" : 130,
         "source_range" : [
           {
           },
@@ -3008,7 +3008,7 @@
         "is_this_declaration_referenced" : true,
         "attributes" : [
           ["VisibilityAttr" , {
-            "pointer" : "130",
+            "pointer" : 131,
             "source_range" : [
               {
               },
@@ -3028,12 +3028,12 @@
           "operator delete[]"
         ]
       },
-      "126",
+      127,
       {
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : "131",
+              "pointer" : 132,
               "source_range" : [
                 {
                 },
@@ -3050,7 +3050,7 @@
                 ""
               ]
             },
-            "128",
+            129,
             {
             }
           ]]
@@ -3059,7 +3059,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : "132",
+        "pointer" : 133,
         "source_range" : [
           {
             "line" : 32,
@@ -3079,11 +3079,11 @@
           "test_c11"
         ]
       },
-      "31",
+      32,
       {
         "body" : ["CompoundStmt" , [
           {
-            "pointer" : "133",
+            "pointer" : 134,
             "source_range" : [
               {
                 "line" : 32,
@@ -3098,7 +3098,7 @@
           [
             ["DeclStmt" , [
               {
-                "pointer" : "134",
+                "pointer" : 135,
                 "source_range" : [
                   {
                     "line" : 33,
@@ -3112,7 +3112,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "135",
+                    "pointer" : 136,
                     "source_range" : [
                       {
                         "column" : 13
@@ -3125,7 +3125,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "136",
+                        "pointer" : 137,
                         "source_range" : [
                           {
                             "column" : 21
@@ -3138,7 +3138,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10"
+                        "type_ptr" : 11
                       },
                       {
                         "is_signed" : true,
@@ -3148,7 +3148,7 @@
                     ]],
                     ["InitListExpr" , [
                       {
-                        "pointer" : "137",
+                        "pointer" : 138,
                         "source_range" : [
                           {
                             "column" : 24
@@ -3161,7 +3161,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "138",
+                            "pointer" : 139,
                             "source_range" : [
                               {
                                 "column" : 25
@@ -3174,7 +3174,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -3184,7 +3184,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "139",
+                            "pointer" : 140,
                             "source_range" : [
                               {
                                 "column" : 27
@@ -3197,7 +3197,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -3207,7 +3207,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "140",
+                            "pointer" : 141,
                             "source_range" : [
                               {
                                 "column" : 29
@@ -3220,7 +3220,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -3230,24 +3230,24 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : "141"
+                        "type_ptr" : 142
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "61"
+                    "type_ptr" : 62
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : "136",
-                    "initializer_expr" : "137"
+                    "array_size_expr" : 137,
+                    "initializer_expr" : 138
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "142",
+                    "pointer" : 143,
                     "source_range" : [
                       {
                         "column" : 3
@@ -3265,11 +3265,11 @@
                       "i"
                     ]
                   },
-                  "63",
+                  64,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "135",
+                        "pointer" : 136,
                         "source_range" : [
                           {
                             "column" : 13
@@ -3282,7 +3282,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "136",
+                            "pointer" : 137,
                             "source_range" : [
                               {
                                 "column" : 21
@@ -3295,7 +3295,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -3305,7 +3305,7 @@
                         ]],
                         ["InitListExpr" , [
                           {
-                            "pointer" : "137",
+                            "pointer" : 138,
                             "source_range" : [
                               {
                                 "column" : 24
@@ -3318,7 +3318,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "138",
+                                "pointer" : 139,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -3331,7 +3331,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3341,7 +3341,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "139",
+                                "pointer" : 140,
                                 "source_range" : [
                                   {
                                     "column" : 27
@@ -3354,7 +3354,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3364,7 +3364,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "140",
+                                "pointer" : 141,
                                 "source_range" : [
                                   {
                                     "column" : 29
@@ -3377,7 +3377,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3387,17 +3387,17 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : "141"
+                            "type_ptr" : 142
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "61"
+                        "type_ptr" : 62
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : "136",
-                        "initializer_expr" : "137"
+                        "array_size_expr" : 137,
+                        "initializer_expr" : 138
                       }
                     ]]
                   }
@@ -3406,7 +3406,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "143",
+                "pointer" : 144,
                 "source_range" : [
                   {
                     "line" : 34,
@@ -3420,7 +3420,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "144",
+                    "pointer" : 145,
                     "source_range" : [
                       {
                         "column" : 13
@@ -3433,7 +3433,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : "145",
+                        "pointer" : 146,
                         "source_range" : [
                           {
                             "column" : 17
@@ -3446,7 +3446,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "146",
+                            "pointer" : 147,
                             "source_range" : [
                               {
                                 "column" : 26
@@ -3459,7 +3459,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -3469,7 +3469,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "147",
+                            "pointer" : 148,
                             "source_range" : [
                               {
                                 "column" : 28
@@ -3482,7 +3482,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -3492,12 +3492,12 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : "25"
+                        "type_ptr" : 26
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : "36",
+                          "decl_pointer" : 37,
                           "name" : {
                             "name" : "cpplike",
                             "qual_name" : [
@@ -3505,23 +3505,23 @@
                               "cpplike"
                             ]
                           },
-                          "type_ptr" : "37"
+                          "type_ptr" : 38
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "84"
+                    "type_ptr" : 85
                   },
                   {
-                    "initializer_expr" : "145"
+                    "initializer_expr" : 146
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "148",
+                    "pointer" : 149,
                     "source_range" : [
                       {
                         "column" : 3
@@ -3539,11 +3539,11 @@
                       "c"
                     ]
                   },
-                  "86",
+                  87,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "144",
+                        "pointer" : 145,
                         "source_range" : [
                           {
                             "column" : 13
@@ -3556,7 +3556,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "145",
+                            "pointer" : 146,
                             "source_range" : [
                               {
                                 "column" : 17
@@ -3569,7 +3569,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "146",
+                                "pointer" : 147,
                                 "source_range" : [
                                   {
                                     "column" : 26
@@ -3582,7 +3582,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3592,7 +3592,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "147",
+                                "pointer" : 148,
                                 "source_range" : [
                                   {
                                     "column" : 28
@@ -3605,7 +3605,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3615,12 +3615,12 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : "25"
+                            "type_ptr" : 26
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "36",
+                              "decl_pointer" : 37,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -3628,16 +3628,16 @@
                                   "cpplike"
                                 ]
                               },
-                              "type_ptr" : "37"
+                              "type_ptr" : 38
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "84"
+                        "type_ptr" : 85
                       },
                       {
-                        "initializer_expr" : "145"
+                        "initializer_expr" : 146
                       }
                     ]]
                   }
@@ -3646,7 +3646,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : "149",
+                "pointer" : 150,
                 "source_range" : [
                   {
                     "line" : 35,
@@ -3660,7 +3660,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : "150",
+                    "pointer" : 151,
                     "source_range" : [
                       {
                         "column" : 15
@@ -3673,7 +3673,7 @@
                   [
                     ["IntegerLiteral" , [
                       {
-                        "pointer" : "151",
+                        "pointer" : 152,
                         "source_range" : [
                           {
                             "column" : 27
@@ -3686,7 +3686,7 @@
                       [
                       ],
                       {
-                        "type_ptr" : "10"
+                        "type_ptr" : 11
                       },
                       {
                         "is_signed" : true,
@@ -3696,7 +3696,7 @@
                     ]],
                     ["InitListExpr" , [
                       {
-                        "pointer" : "152",
+                        "pointer" : 153,
                         "source_range" : [
                           {
                             "column" : 30
@@ -3709,7 +3709,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "153",
+                            "pointer" : 154,
                             "source_range" : [
                               {
                                 "column" : 31
@@ -3722,7 +3722,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "154",
+                                "pointer" : 155,
                                 "source_range" : [
                                   {
                                     "column" : 32
@@ -3735,7 +3735,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3745,7 +3745,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "155",
+                                "pointer" : 156,
                                 "source_range" : [
                                   {
                                     "column" : 34
@@ -3758,7 +3758,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3768,12 +3768,12 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : "25"
+                            "type_ptr" : 26
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "36",
+                              "decl_pointer" : 37,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -3781,13 +3781,13 @@
                                   "cpplike"
                                 ]
                               },
-                              "type_ptr" : "37"
+                              "type_ptr" : 38
                             }
                           }
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "156",
+                            "pointer" : 157,
                             "source_range" : [
                               {
                                 "column" : 38
@@ -3800,7 +3800,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "157",
+                                "pointer" : 158,
                                 "source_range" : [
                                   {
                                     "column" : 39
@@ -3813,7 +3813,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3823,7 +3823,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "158",
+                                "pointer" : 159,
                                 "source_range" : [
                                   {
                                     "column" : 41
@@ -3836,7 +3836,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3846,12 +3846,12 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : "25"
+                            "type_ptr" : 26
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "36",
+                              "decl_pointer" : 37,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -3859,13 +3859,13 @@
                                   "cpplike"
                                 ]
                               },
-                              "type_ptr" : "37"
+                              "type_ptr" : 38
                             }
                           }
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : "159",
+                            "pointer" : 160,
                             "source_range" : [
                               {
                                 "column" : 45
@@ -3878,7 +3878,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "160",
+                                "pointer" : 161,
                                 "source_range" : [
                                   {
                                     "column" : 46
@@ -3891,7 +3891,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3901,7 +3901,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : "161",
+                                "pointer" : 162,
                                 "source_range" : [
                                   {
                                     "column" : 48
@@ -3914,7 +3914,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : "10"
+                                "type_ptr" : 11
                               },
                               {
                                 "is_signed" : true,
@@ -3924,12 +3924,12 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : "25"
+                            "type_ptr" : 26
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : "36",
+                              "decl_pointer" : 37,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -3937,30 +3937,30 @@
                                   "cpplike"
                                 ]
                               },
-                              "type_ptr" : "37"
+                              "type_ptr" : 38
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "162"
+                        "type_ptr" : 163
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : "84"
+                    "type_ptr" : 85
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : "151",
-                    "initializer_expr" : "152"
+                    "array_size_expr" : 152,
+                    "initializer_expr" : 153
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : "163",
+                    "pointer" : 164,
                     "source_range" : [
                       {
                         "column" : 3
@@ -3978,11 +3978,11 @@
                       "c_a"
                     ]
                   },
-                  "86",
+                  87,
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : "150",
+                        "pointer" : 151,
                         "source_range" : [
                           {
                             "column" : 15
@@ -3995,7 +3995,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : "151",
+                            "pointer" : 152,
                             "source_range" : [
                               {
                                 "column" : 27
@@ -4008,7 +4008,7 @@
                           [
                           ],
                           {
-                            "type_ptr" : "10"
+                            "type_ptr" : 11
                           },
                           {
                             "is_signed" : true,
@@ -4018,7 +4018,7 @@
                         ]],
                         ["InitListExpr" , [
                           {
-                            "pointer" : "152",
+                            "pointer" : 153,
                             "source_range" : [
                               {
                                 "column" : 30
@@ -4031,7 +4031,7 @@
                           [
                             ["CXXConstructExpr" , [
                               {
-                                "pointer" : "153",
+                                "pointer" : 154,
                                 "source_range" : [
                                   {
                                     "column" : 31
@@ -4044,7 +4044,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : "154",
+                                    "pointer" : 155,
                                     "source_range" : [
                                       {
                                         "column" : 32
@@ -4057,7 +4057,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10"
+                                    "type_ptr" : 11
                                   },
                                   {
                                     "is_signed" : true,
@@ -4067,7 +4067,7 @@
                                 ]],
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : "155",
+                                    "pointer" : 156,
                                     "source_range" : [
                                       {
                                         "column" : 34
@@ -4080,7 +4080,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10"
+                                    "type_ptr" : 11
                                   },
                                   {
                                     "is_signed" : true,
@@ -4090,12 +4090,12 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : "25"
+                                "type_ptr" : 26
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : "CXXConstructor",
-                                  "decl_pointer" : "36",
+                                  "decl_pointer" : 37,
                                   "name" : {
                                     "name" : "cpplike",
                                     "qual_name" : [
@@ -4103,13 +4103,13 @@
                                       "cpplike"
                                     ]
                                   },
-                                  "type_ptr" : "37"
+                                  "type_ptr" : 38
                                 }
                               }
                             ]],
                             ["CXXConstructExpr" , [
                               {
-                                "pointer" : "156",
+                                "pointer" : 157,
                                 "source_range" : [
                                   {
                                     "column" : 38
@@ -4122,7 +4122,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : "157",
+                                    "pointer" : 158,
                                     "source_range" : [
                                       {
                                         "column" : 39
@@ -4135,7 +4135,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10"
+                                    "type_ptr" : 11
                                   },
                                   {
                                     "is_signed" : true,
@@ -4145,7 +4145,7 @@
                                 ]],
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : "158",
+                                    "pointer" : 159,
                                     "source_range" : [
                                       {
                                         "column" : 41
@@ -4158,7 +4158,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10"
+                                    "type_ptr" : 11
                                   },
                                   {
                                     "is_signed" : true,
@@ -4168,12 +4168,12 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : "25"
+                                "type_ptr" : 26
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : "CXXConstructor",
-                                  "decl_pointer" : "36",
+                                  "decl_pointer" : 37,
                                   "name" : {
                                     "name" : "cpplike",
                                     "qual_name" : [
@@ -4181,13 +4181,13 @@
                                       "cpplike"
                                     ]
                                   },
-                                  "type_ptr" : "37"
+                                  "type_ptr" : 38
                                 }
                               }
                             ]],
                             ["CXXConstructExpr" , [
                               {
-                                "pointer" : "159",
+                                "pointer" : 160,
                                 "source_range" : [
                                   {
                                     "column" : 45
@@ -4200,7 +4200,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : "160",
+                                    "pointer" : 161,
                                     "source_range" : [
                                       {
                                         "column" : 46
@@ -4213,7 +4213,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10"
+                                    "type_ptr" : 11
                                   },
                                   {
                                     "is_signed" : true,
@@ -4223,7 +4223,7 @@
                                 ]],
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : "161",
+                                    "pointer" : 162,
                                     "source_range" : [
                                       {
                                         "column" : 48
@@ -4236,7 +4236,7 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : "10"
+                                    "type_ptr" : 11
                                   },
                                   {
                                     "is_signed" : true,
@@ -4246,12 +4246,12 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : "25"
+                                "type_ptr" : 26
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : "CXXConstructor",
-                                  "decl_pointer" : "36",
+                                  "decl_pointer" : 37,
                                   "name" : {
                                     "name" : "cpplike",
                                     "qual_name" : [
@@ -4259,23 +4259,23 @@
                                       "cpplike"
                                     ]
                                   },
-                                  "type_ptr" : "37"
+                                  "type_ptr" : 38
                                 }
                               }
                             ]]
                           ],
                           {
-                            "type_ptr" : "162"
+                            "type_ptr" : 163
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : "84"
+                        "type_ptr" : 85
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : "151",
-                        "initializer_expr" : "152"
+                        "array_size_expr" : 152,
+                        "initializer_expr" : 153
                       }
                     ]]
                   }
@@ -4292,767 +4292,767 @@
   [
     ["BuiltinType" , [
       {
-        "pointer" : "95",
+        "pointer" : 96,
         "raw" : "void"
       },
       "Void"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "164",
+        "pointer" : 165,
         "raw" : "_Bool"
       },
       "Bool"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "165",
+        "pointer" : 166,
         "raw" : "char"
       },
       "Char_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "166",
+        "pointer" : 167,
         "raw" : "signed char"
       },
       "SChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "167",
+        "pointer" : 168,
         "raw" : "short"
       },
       "Short"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "10",
+        "pointer" : 11,
         "raw" : "int"
       },
       "Int"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "168",
+        "pointer" : 169,
         "raw" : "long"
       },
       "Long"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "169",
+        "pointer" : 170,
         "raw" : "long long"
       },
       "LongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "170",
+        "pointer" : 171,
         "raw" : "unsigned char"
       },
       "UChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "171",
+        "pointer" : 172,
         "raw" : "unsigned short"
       },
       "UShort"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "172",
+        "pointer" : 173,
         "raw" : "unsigned int"
       },
       "UInt"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "119",
+        "pointer" : 120,
         "raw" : "unsigned long"
       },
       "ULong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "173",
+        "pointer" : 174,
         "raw" : "unsigned long long"
       },
       "ULongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "174",
+        "pointer" : 175,
         "raw" : "float"
       },
       "Float"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "175",
+        "pointer" : 176,
         "raw" : "double"
       },
       "Double"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "176",
+        "pointer" : 177,
         "raw" : "long double"
       },
       "LongDouble"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "177",
+        "pointer" : 178,
         "raw" : "__int128"
       },
       "Int128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "178",
+        "pointer" : 179,
         "raw" : "unsigned __int128"
       },
       "UInt128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "179",
+        "pointer" : 180,
         "raw" : "wchar_t"
       },
       "WChar_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "180",
+        "pointer" : 181,
         "raw" : "char16_t"
       },
       "Char16"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "181",
+        "pointer" : 182,
         "raw" : "char32_t"
       },
       "Char32"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "182",
+        "pointer" : 183,
         "raw" : "<dependent type>"
       },
       "Dependent"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "183",
+        "pointer" : 184,
         "raw" : "<overloaded function type>"
       },
       "Overload"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "184",
+        "pointer" : 185,
         "raw" : "<bound member function type>"
       },
       "BoundMember"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "185",
+        "pointer" : 186,
         "raw" : "<pseudo-object type>"
       },
       "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "186",
+        "pointer" : 187,
         "raw" : "<unknown type>"
       },
       "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "187",
+        "pointer" : 188,
         "raw" : "<ARC unbridged cast type>"
       },
       "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "188",
+        "pointer" : 189,
         "raw" : "<builtin fn type>"
       },
       "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "189",
+        "pointer" : 190,
         "raw" : "_Complex float"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "190",
+        "pointer" : 191,
         "raw" : "_Complex double"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : "191",
+        "pointer" : 192,
         "raw" : "_Complex long double"
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "192",
+        "pointer" : 193,
         "raw" : "id"
       },
       "ObjCId"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "193",
+        "pointer" : 194,
         "raw" : "Class"
       },
       "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "194",
+        "pointer" : 195,
         "raw" : "SEL"
       },
       "ObjCSel"
     ]],
     ["PointerType" , [
       {
-        "pointer" : "128",
+        "pointer" : 129,
         "raw" : "void *"
       },
-      "95"
+      96
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "195",
+        "pointer" : 196,
         "raw" : "nullptr_t"
       },
       "NullPtr"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : "196",
+        "pointer" : 197,
         "raw" : "__fp16"
       },
       "Half"
     ]],
     ["PointerType" , [
       {
-        "pointer" : "197",
+        "pointer" : 198,
         "raw" : "char *"
       },
-      "165"
+      166
     ]],
     ["RecordType" , [
       {
-        "pointer" : "198",
+        "pointer" : 199,
         "raw" : "struct __va_list_tag"
       },
-      "199"
+      200
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "200",
+        "pointer" : 201,
         "raw" : "struct __va_list_tag [1]"
       },
-      "198",
+      199,
       1
     ]],
     ["RecordType" , [
       {
-        "pointer" : "7",
+        "pointer" : 8,
         "raw" : "struct pod"
       },
-      "6"
+      7
     ]],
     ["RecordType" , [
       {
-        "pointer" : "25",
+        "pointer" : 26,
         "raw" : "struct cpplike"
       },
-      "24"
+      25
     ]],
     ["PointerType" , [
       {
-        "pointer" : "84",
+        "pointer" : 85,
         "raw" : "struct cpplike *"
       },
-      "25"
+      26
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "31",
+        "pointer" : 32,
         "raw" : "void (void)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "37",
+        "pointer" : 38,
         "raw" : "void (int, int)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "10",
-          "10"
+          11,
+          11
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "201",
+        "pointer" : 202,
         "raw" : "void (void)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
       }
     ]],
     ["LValueReferenceType" , [
       {
-        "pointer" : "17",
+        "pointer" : 18,
         "raw" : "const struct pod &"
       },
-      "7"
+      8
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "202",
+        "pointer" : 203,
         "raw" : "void (const struct pod &)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "17"
+          18
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "15",
+        "pointer" : 16,
         "raw" : "void (const struct pod &)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "17"
+          18
         ]
       }
     ]],
     ["RValueReferenceType" , [
       {
-        "pointer" : "21",
+        "pointer" : 22,
         "raw" : "struct pod &&"
       },
-      "7"
+      8
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "203",
+        "pointer" : 204,
         "raw" : "void (struct pod &&)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "21"
+          22
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "19",
+        "pointer" : 20,
         "raw" : "void (struct pod &&)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "21"
+          22
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "12",
+        "pointer" : 13,
         "raw" : "void (void) noexcept"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "204",
+        "pointer" : 205,
         "raw" : "auto *"
       },
-      "205"
+      206
     ]],
     ["PointerType" , [
       {
-        "pointer" : "61",
+        "pointer" : 62,
         "raw" : "int *"
       },
-      "10"
+      11
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "117",
+        "pointer" : 118,
         "raw" : "void *(unsigned long)"
       },
       {
-        "return_type" : "128"
+        "return_type" : 129
       },
       {
         "params_type" : [
-          "119"
+          120
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "206",
+        "pointer" : 207,
         "raw" : "void (void *)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "128"
+          129
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "126",
+        "pointer" : 127,
         "raw" : "void (void *) noexcept"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "128"
+          129
         ]
       }
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "207",
+        "pointer" : 208,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "208",
+        "pointer" : 209,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "209",
+        "pointer" : 210,
         "raw" : "type-parameter-0-0 *"
       },
-      "207"
+      208
     ]],
     ["PointerType" , [
       {
-        "pointer" : "210",
+        "pointer" : 211,
         "raw" : "type-parameter-0-0 *"
       },
-      "208"
+      209
     ]],
     ["AutoType" , [
       {
-        "pointer" : "96",
+        "pointer" : 97,
         "raw" : "int",
-        "desugared_type" : "10"
+        "desugared_type" : 11
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "63",
+        "pointer" : 64,
         "raw" : "int *"
       },
-      "96"
+      97
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "211",
+        "pointer" : 212,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "212",
+        "pointer" : 213,
         "raw" : "type-parameter-0-0 *"
       },
-      "211"
+      212
     ]],
     ["PointerType" , [
       {
-        "pointer" : "71",
+        "pointer" : 72,
         "raw" : "struct pod *"
       },
-      "7"
+      8
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "213",
+        "pointer" : 214,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "214",
+        "pointer" : 215,
         "raw" : "type-parameter-0-0 *"
       },
-      "213"
+      214
     ]],
     ["AutoType" , [
       {
-        "pointer" : "103",
+        "pointer" : 104,
         "raw" : "struct pod",
-        "desugared_type" : "7"
+        "desugared_type" : 8
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "73",
+        "pointer" : 74,
         "raw" : "struct pod *"
       },
-      "103"
+      104
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "23",
+        "pointer" : 24,
         "raw" : "void (void)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
       }
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "215",
+        "pointer" : 216,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "216",
+        "pointer" : 217,
         "raw" : "type-parameter-0-0 *"
       },
-      "215"
+      216
     ]],
     ["LValueReferenceType" , [
       {
-        "pointer" : "49",
+        "pointer" : 50,
         "raw" : "const struct cpplike &"
       },
-      "25"
+      26
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "217",
+        "pointer" : 218,
         "raw" : "void (const struct cpplike &)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "49"
+          50
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "47",
+        "pointer" : 48,
         "raw" : "void (const struct cpplike &)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "49"
+          50
         ]
       }
     ]],
     ["RValueReferenceType" , [
       {
-        "pointer" : "53",
+        "pointer" : 54,
         "raw" : "struct cpplike &&"
       },
-      "25"
+      26
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "218",
+        "pointer" : 219,
         "raw" : "void (struct cpplike &&)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "53"
+          54
         ]
       }
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "51",
+        "pointer" : 52,
         "raw" : "void (struct cpplike &&)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
         "params_type" : [
-          "53"
+          54
         ]
       }
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "219",
+        "pointer" : 220,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "220",
+        "pointer" : 221,
         "raw" : "type-parameter-0-0 *"
       },
-      "219"
+      220
     ]],
     ["AutoType" , [
       {
-        "pointer" : "110",
+        "pointer" : 111,
         "raw" : "struct cpplike",
-        "desugared_type" : "25"
+        "desugared_type" : 26
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "86",
+        "pointer" : 87,
         "raw" : "struct cpplike *"
       },
-      "110"
+      111
     ]],
     ["FunctionProtoType" , [
       {
-        "pointer" : "55",
+        "pointer" : 56,
         "raw" : "void (void)"
       },
       {
-        "return_type" : "95"
+        "return_type" : 96
       },
       {
       }
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "221",
+        "pointer" : 222,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "222",
+        "pointer" : 223,
         "raw" : "type-parameter-0-0 *"
       },
-      "221"
+      222
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "141",
+        "pointer" : 142,
         "raw" : "int [4]"
       },
-      "10",
+      11,
       4
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "223",
+        "pointer" : 224,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "224",
+        "pointer" : 225,
         "raw" : "type-parameter-0-0 *"
       },
-      "223"
+      224
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "225",
+        "pointer" : 226,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "226",
+        "pointer" : 227,
         "raw" : "type-parameter-0-0 *"
       },
-      "225"
+      226
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : "162",
+        "pointer" : 163,
         "raw" : "struct cpplike [4]"
       },
-      "25",
+      26,
       4
     ]],
     ["TemplateTypeParmType" , [
       {
-        "pointer" : "227",
+        "pointer" : 228,
         "raw" : "type-parameter-0-0"
       }
     ]],
     ["PointerType" , [
       {
-        "pointer" : "228",
+        "pointer" : 229,
         "raw" : "type-parameter-0-0 *"
       },
-      "227"
+      228
     ]],
     ["NoneType" , [
       {
-        "pointer" : "2",
+        "pointer" : 3,
         "raw" : "NULL TYPE"
       }
     ]]

@@ -463,24 +463,16 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 //===----------------------------------------------------------------------===//
 
 std::unordered_map<const void *, int> pointerMap;
-int pointerCounter = 0;
+int pointerCounter = 1;
 
 /// \atd
-/// type pointer = string
+/// type pointer = int
 template <class ATDWriter>
 void writePointer(ATDWriter &OF, bool withPointers, const void *Ptr) {
-  if (withPointers) {
-    char str[20];
-    snprintf(str, 20, "%p", Ptr);
-    OF.emitString(str);
-  } else {
-    char str[20];
-    if (pointerMap.find(Ptr) == pointerMap.end()) {
-      pointerMap[Ptr] = pointerCounter++;
-    }
-    snprintf(str, 20, "%d", pointerMap[Ptr]);
-    OF.emitString(str);
+  if (pointerMap.find(Ptr) == pointerMap.end()) {
+    pointerMap[Ptr] = pointerCounter++;
   }
+  OF.emitInteger(pointerMap[Ptr]);
 }
 
 template <class ATDWriter>
@@ -1841,8 +1833,9 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   bool HasVBases = vBases.size() > 0;
   bool HasNonVBases = nonVBases.size() > 0;
   bool IsCLike = D->isCLike();
-  const CXXDestructorDecl * DestructorDecl = D->getDestructor();
-  ObjectScope Scope(OF, 0 + HasNonVBases + HasVBases + IsCLike + (bool)DestructorDecl);
+  const CXXDestructorDecl *DestructorDecl = D->getDestructor();
+  ObjectScope Scope(
+      OF, 0 + HasNonVBases + HasVBases + IsCLike + (bool)DestructorDecl);
 
   if (HasNonVBases) {
     OF.emitTag("bases");
@@ -4430,7 +4423,7 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
 }
 
 /// \atd
-/// type type_ptr = string wrap <ocaml t="Clang_ast_types.t_ptr"
+/// type type_ptr = int wrap <ocaml t="Clang_ast_types.t_ptr"
 ///                              wrap="Clang_ast_types.pointer_to_type_ptr"
 ///                              unwrap="Clang_ast_types.type_ptr_to_pointer">
 template <class ATDWriter>

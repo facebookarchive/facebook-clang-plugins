@@ -9,8 +9,8 @@
  *)
 
 module PointerOrd = struct
-    type t = Clang_ast_t.pointer
-    let compare = String.compare
+    type t = int
+    let compare (i: int) (j: int) = i - j
   end
 module PointerMap = Map.Make(PointerOrd)
 

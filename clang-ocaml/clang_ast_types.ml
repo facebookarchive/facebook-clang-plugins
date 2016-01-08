@@ -12,7 +12,7 @@
 (* Replace this file to get different implementation *)
 
 (* Type pointers *)
-type t_ptr = [ | `TPtr of string ]
+type t_ptr = [ | `TPtr of int ]
 
 let pointer_to_type_ptr raw = `TPtr raw
 

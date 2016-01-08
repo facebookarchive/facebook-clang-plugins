@@ -22,7 +22,7 @@ let source_location ?file ?line ?column () =
 let empty_source_location = source_location ()
 
 let decl_info start stop = {
-  di_pointer = "";
+  di_pointer = 0;
   di_parent_pointer = None;
   di_previous_decl = `None;
   di_source_range = (start, stop) ;
