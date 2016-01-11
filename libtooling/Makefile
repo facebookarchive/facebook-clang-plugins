@@ -79,7 +79,7 @@ endif
 
 test: build/FacebookClangPlugin.dylib
 	@for P in $(PLUGINS); do                                                        \
-	   if [ -n "$$SANDCASTLE" ] && [ "$$P" == "BiniouASTExporter" ];                \
+	   if [ "$$P" == "BiniouASTExporter" ] && ! which -s bdump;                     \
 	   then continue;                                                               \
 	   fi;                                                                          \
 	   echo "-- $$P --";                                                            \
