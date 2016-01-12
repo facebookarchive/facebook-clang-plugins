@@ -6,12 +6,12 @@
 # of patent rights can be found in the PATENTS file in the same directory.
 
 build/%.o: %.cpp $(HEADERS)
-	@mkdir -p build
+	@mkdir -p $$(dirname $@)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 ifneq "$(EXTRA_DIR)" ""
 build/%.o: $(EXTRA_DIR)/%.cpp $(HEADERS) $(EXTRA_HEADERS:%=$(EXTRA_DIR)/%)
-	@mkdir -p build
+	@mkdir -p $$(dirname $@)
 	$(CXX) $(CFLAGS) -I . -c $< -o $@
 endif
 
