@@ -387,6 +387,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(LambdaExpr)
   DECLARE_VISITOR(CXXNewExpr)
   DECLARE_VISITOR(CXXDeleteExpr)
+  DECLARE_VISITOR(CXXDefaultArgExpr)
 
   // ObjC
   DECLARE_VISITOR(ObjCAtCatchStmt)
@@ -3921,6 +3922,29 @@ void ASTExporter<ATDWriter>::VisitCXXDeleteExpr(const CXXDeleteExpr *Node) {
   OF.emitTag("destroyed_type");
   dumpQualType(Node->getDestroyedType());
 }
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXDefaultArgExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
+/// \atd
+/// #define cxx_default_arg_expr_tuple expr_tuple * cxx_default_arg_expr_info
+/// type cxx_default_arg_expr_info = {
+///   ?init_expr : stmt option;
+/// } <ocaml field_prefix="xdaei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXDefaultArgExpr(
+    const CXXDefaultArgExpr *Node) {
+  VisitExpr(Node);
+
+  const Expr *InitExpr = Node->getExpr();
+  ObjectScope Scope(OF, 0 + (bool)InitExpr);
+  if (InitExpr) {
+    OF.emitTag("init_expr");
+    dumpStmt(InitExpr);
+  }
+}
+
 ////===----------------------------------------------------------------------===//
 //// Obj-C Expressions
 ////===----------------------------------------------------------------------===//
