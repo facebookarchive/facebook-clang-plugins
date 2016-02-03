@@ -1661,6 +1661,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 ///   ~is_module_private : bool;
 ///   ~is_nrvo_variable : bool;
 ///   ?init_expr : stmt option;
+///   ?parm_index_in_function : int option;
 /// } <ocaml field_prefix="vdi_">
 ///
 /// type tls_kind = [ Tls_none | Tls_static | Tls_dynamic ]
@@ -1675,10 +1676,13 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool IsModulePrivate = D->isModulePrivate();
   bool IsNRVOVariable = D->isNRVOVariable();
   bool HasInit = D->hasInit();
+  const ParmVarDecl *ParmDecl = dyn_cast<ParmVarDecl>(D);
+  bool HasParmIndex = (bool)ParmDecl;
   // suboptimal: tls_kind is not taken into account accurately
   ObjectScope Scope(OF,
                     1 + HasStorageClass + IsGlobal + IsStaticLocal +
-                        IsModulePrivate + IsNRVOVariable + HasInit);
+                        IsModulePrivate + IsNRVOVariable + HasInit +
+                        HasParmIndex);
 
   if (HasStorageClass) {
     OF.emitTag("storage_class");
@@ -1705,6 +1709,10 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   if (HasInit) {
     OF.emitTag("init_expr");
     dumpStmt(D->getInit());
+  }
+  if (HasParmIndex) {
+    OF.emitTag("parm_index_in_function");
+    OF.emitInteger(ParmDecl->getFunctionScopeIndex());
   }
 }
 
