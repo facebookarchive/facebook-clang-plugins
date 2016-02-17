@@ -3478,6 +3478,7 @@ int ASTExporter<ATDWriter>::MemberExprTupleSize() {
 /// #define member_expr_tuple expr_tuple * member_expr_info
 /// type member_expr_info = {
 ///   ~is_arrow : bool;
+///   ~performs_virtual_dispatch : bool;
 ///   name : named_decl_info;
 ///   decl_ref : decl_ref
 /// } <ocaml field_prefix="mei_">
@@ -3486,9 +3487,14 @@ void ASTExporter<ATDWriter>::VisitMemberExpr(const MemberExpr *Node) {
   VisitExpr(Node);
 
   bool IsArrow = Node->isArrow();
-  ObjectScope Scope(OF, 2 + IsArrow);
+  LangOptions LO;
+  // ignore real lang options - it will get it wrong when compiling
+  // with -fapple-kext flag
+  bool PerformsVirtualDispatch = Node->performsVirtualDispatch(LO);
+  ObjectScope Scope(OF, 2 + IsArrow + PerformsVirtualDispatch);
 
   OF.emitFlag("is_arrow", IsArrow);
+  OF.emitFlag("performs_virtual_dispatch", PerformsVirtualDispatch);
   OF.emitTag("name");
   ValueDecl *memberDecl = Node->getMemberDecl();
   dumpName(*memberDecl);
