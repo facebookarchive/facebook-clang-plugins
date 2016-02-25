@@ -5,12 +5,12 @@
 # LICENSE file in the root directory of this source tree. An additional grant
 # of patent rights can be found in the PATENTS file in the same directory.
 
-build/%.o: %.cpp $(HEADERS)
+build/%.o: %.cpp $(HEADERS) $(CLANG)
 	@mkdir -p $$(dirname $@)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 ifneq "$(EXTRA_DIR)" ""
-build/%.o: $(EXTRA_DIR)/%.cpp $(HEADERS) $(EXTRA_HEADERS:%=$(EXTRA_DIR)/%)
+build/%.o: $(EXTRA_DIR)/%.cpp $(HEADERS) $(CLANG) $(EXTRA_HEADERS:%=$(EXTRA_DIR)/%)
 	@mkdir -p $$(dirname $@)
 	$(CXX) $(CFLAGS) -I . -c $< -o $@
 endif
