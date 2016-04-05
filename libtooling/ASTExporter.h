@@ -1815,6 +1815,7 @@ int ASTExporter<ATDWriter>::CXXRecordDeclTupleSize() {
 ///   ~vbases : type_ptr list;
 ///   ~is_c_like : bool;
 ///   ?destructor : decl_ref option;
+///   ?lambda_call_operator : decl_ref option;
 /// } <ocaml field_prefix="xrdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
@@ -1844,8 +1845,9 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   bool HasNonVBases = nonVBases.size() > 0;
   bool IsCLike = D->isCLike();
   const CXXDestructorDecl *DestructorDecl = D->getDestructor();
+  const CXXMethodDecl *LambdaCallOperator = D->getLambdaCallOperator();
   ObjectScope Scope(
-      OF, 0 + HasNonVBases + HasVBases + IsCLike + (bool)DestructorDecl);
+      OF, 0 + HasNonVBases + HasVBases + IsCLike + (bool)DestructorDecl + (bool)LambdaCallOperator);
 
   if (HasNonVBases) {
     OF.emitTag("bases");
@@ -1866,6 +1868,11 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   if (DestructorDecl) {
     OF.emitTag("destructor");
     dumpDeclRef(*DestructorDecl);
+  }
+
+  if (LambdaCallOperator) {
+    OF.emitTag("lambda_call_operator");
+    dumpDeclRef(*LambdaCallOperator);
   }
 }
 
