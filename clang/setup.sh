@@ -118,7 +118,8 @@ tar --extract $QUIET_TAR --file "$CLANG_SRC"
 
 llvm/configure "${CONFIGURE_ARGS[@]}"
 
-make -j 8 && make install
+JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
+make -j $JOBS && make install
 cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
 strip -x "$CLANG_PREFIX/bin/clang"
 popd
