@@ -1526,6 +1526,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 ///   ~is_delete_as_written : bool;
 ///   ~decls_in_prototype_scope : decl list;
 ///   ~parameters : decl list;
+///   ?decl_ptr_with_body : pointer option;
 ///   ?body : stmt option
 /// } <ocaml field_prefix="fdi_">
 template <class ATDWriter>
@@ -1539,11 +1540,19 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool IsModulePrivate = D->isModulePrivate();
   bool IsPure = D->isPure();
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
+  const FunctionDecl *DeclWithBody = D;
+  // FunctionDecl::hasBody() will set DeclWithBody pointer to decl that
+  // has body. If there is no body in all decls of that function,
+  // then we need to set DeclWithBody to nullptr manually
+  if (!D->hasBody(DeclWithBody)) {
+    DeclWithBody = nullptr;
+  }
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
   int size = 2 + HasStorageClass + IsInlineSpecified + IsModulePrivate +
-             IsPure + IsDeletedAsWritten + HasDeclarationBody;
+             IsPure + IsDeletedAsWritten + HasDeclarationBody +
+             (bool)DeclWithBody;
   ObjectScope Scope(OF, size);
 
   if (HasStorageClass) {
@@ -1599,6 +1608,11 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
         dumpDecl(*I);
       }
     }
+  }
+
+  if (DeclWithBody) {
+    OF.emitTag("decl_ptr_with_body");
+    dumpPointer(DeclWithBody);
   }
 
   if (HasDeclarationBody) {
@@ -1846,8 +1860,9 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   bool IsCLike = D->isCLike();
   const CXXDestructorDecl *DestructorDecl = D->getDestructor();
   const CXXMethodDecl *LambdaCallOperator = D->getLambdaCallOperator();
-  ObjectScope Scope(
-      OF, 0 + HasNonVBases + HasVBases + IsCLike + (bool)DestructorDecl + (bool)LambdaCallOperator);
+  ObjectScope Scope(OF,
+                    0 + HasNonVBases + HasVBases + IsCLike +
+                        (bool)DestructorDecl + (bool)LambdaCallOperator);
 
   if (HasNonVBases) {
     OF.emitTag("bases");
@@ -5037,13 +5052,16 @@ class ExporterASTConsumer : public ASTConsumer {
 
 typedef ASTPluginLib::SimplePluginASTAction<
     ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, false>,
-    ASTLib::ASTExporterOptions> JsonExporterASTAction;
+    ASTLib::ASTExporterOptions>
+    JsonExporterASTAction;
 typedef ASTPluginLib::SimplePluginASTAction<
     ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, true>,
-    ASTLib::ASTExporterOptions> YojsonExporterASTAction;
+    ASTLib::ASTExporterOptions>
+    YojsonExporterASTAction;
 typedef ASTPluginLib::SimplePluginASTAction<
     ASTLib::ExporterASTConsumer<ATDWriter::BiniouWriter<llvm::raw_ostream>,
                                 true>,
-    ASTLib::ASTExporterOptions> BiniouExporterASTAction;
+    ASTLib::ASTExporterOptions>
+    BiniouExporterASTAction;
 
 } // end of namespace ASTLib
