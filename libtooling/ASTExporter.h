@@ -1675,6 +1675,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 ///   ~is_static_local : bool;
 ///   ~is_module_private : bool;
 ///   ~is_nrvo_variable : bool;
+///   ~is_const_expr : bool;
 ///   ?init_expr : stmt option;
 ///   ?parm_index_in_function : int option;
 /// } <ocaml field_prefix="vdi_">
@@ -1690,14 +1691,15 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool IsStaticLocal = D->isStaticLocal(); // static function variables
   bool IsModulePrivate = D->isModulePrivate();
   bool IsNRVOVariable = D->isNRVOVariable();
+  bool IsConstExpr = D->isConstexpr();
   bool HasInit = D->hasInit();
   const ParmVarDecl *ParmDecl = dyn_cast<ParmVarDecl>(D);
   bool HasParmIndex = (bool)ParmDecl;
   // suboptimal: tls_kind is not taken into account accurately
   ObjectScope Scope(OF,
                     1 + HasStorageClass + IsGlobal + IsStaticLocal +
-                        IsModulePrivate + IsNRVOVariable + HasInit +
-                        HasParmIndex);
+                        IsModulePrivate + IsNRVOVariable + IsConstExpr +
+                        HasInit + HasParmIndex);
 
   if (HasStorageClass) {
     OF.emitTag("storage_class");
@@ -1721,6 +1723,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   OF.emitFlag("is_static_local", IsStaticLocal);
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_nrvo_variable", IsNRVOVariable);
+  OF.emitFlag("is_const_expr", IsConstExpr);
   if (HasInit) {
     OF.emitTag("init_expr");
     dumpStmt(D->getInit());

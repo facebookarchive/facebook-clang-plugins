@@ -7,3 +7,5 @@ void someFunction( const Foo& f )  {
   Foo &fRef = const_cast<Foo&>(f);
   fRef.func();   // okay
 }
+
+constexpr int i = 1;
