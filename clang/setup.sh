@@ -128,6 +128,10 @@ cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
 strip -x "$CLANG_PREFIX/bin/clang"
 popd
 
-rm -rf "$TMP"
+if [ -n "$CLANG_TMP_DIR" ]; then
+    rm -rf "$TMP/*"
+else
+    rm -rf "$TMP"
+fi
 
 record_installed
