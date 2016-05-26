@@ -125,7 +125,8 @@ llvm/configure "${CONFIGURE_ARGS[@]}"
 JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
 make -j $JOBS && make install
 cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
-strip -x "$CLANG_PREFIX/bin/clang"
+strip -x "$CLANG_PREFIX"/bin/*
+find "$CLANG_PREFIX"/lib -type f \( -name '*.so' -o -name '*.a' \) -exec strip -x \{\} \+
 popd
 
 if [ -n "$CLANG_TMP_DIR" ]; then
