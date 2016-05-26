@@ -1,0 +1,609 @@
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : 1,
+    "source_range" : (
+      {
+      },
+      {
+      }
+    ),
+    "attributes" : [
+    ]
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : 2,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 4,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 5,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 6,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 7,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"ObjCInterfaceDecl" : (
+      {
+        "pointer" : 8,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
+      [
+      ],
+      {
+      },
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 9,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__builtin_ms_va_list",
+        "qual_name" : [
+          "__builtin_ms_va_list"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 10,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true,
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"FunctionTemplateDecl" : (
+      {
+        "pointer" : 11,
+        "source_range" : (
+          {
+            "file" : "tests/objcpp_template_unboxing.mm",
+            "line" : 1,
+            "column" : 1
+          },
+          {
+            "line" : 4,
+            "column" : 1
+          }
+        ),
+        "attributes" : [
+        ]
+      },
+      {
+        "name" : "box",
+        "qual_name" : [
+          "box"
+        ]
+      },
+      {
+      }
+    )>
+  ],
+  {
+  },
+  [
+    <"BuiltinType" : (
+      {
+        "pointer" : 12,
+        "raw" : "void"
+      },
+      <"Void">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 13,
+        "raw" : "_Bool"
+      },
+      <"Bool">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 14,
+        "raw" : "char"
+      },
+      <"Char_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 15,
+        "raw" : "signed char"
+      },
+      <"SChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 16,
+        "raw" : "short"
+      },
+      <"Short">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 17,
+        "raw" : "int"
+      },
+      <"Int">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 18,
+        "raw" : "long"
+      },
+      <"Long">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 19,
+        "raw" : "long long"
+      },
+      <"LongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 20,
+        "raw" : "unsigned char"
+      },
+      <"UChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 21,
+        "raw" : "unsigned short"
+      },
+      <"UShort">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 22,
+        "raw" : "unsigned int"
+      },
+      <"UInt">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 23,
+        "raw" : "unsigned long"
+      },
+      <"ULong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 24,
+        "raw" : "unsigned long long"
+      },
+      <"ULongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 25,
+        "raw" : "float"
+      },
+      <"Float">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 26,
+        "raw" : "double"
+      },
+      <"Double">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 27,
+        "raw" : "long double"
+      },
+      <"LongDouble">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 28,
+        "raw" : "__int128"
+      },
+      <"Int128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 29,
+        "raw" : "unsigned __int128"
+      },
+      <"UInt128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 30,
+        "raw" : "wchar_t"
+      },
+      <"WChar_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 31,
+        "raw" : "char16_t"
+      },
+      <"Char16">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 32,
+        "raw" : "char32_t"
+      },
+      <"Char32">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 33,
+        "raw" : "<dependent type>"
+      },
+      <"Dependent">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 34,
+        "raw" : "<overloaded function type>"
+      },
+      <"Overload">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 35,
+        "raw" : "<bound member function type>"
+      },
+      <"BoundMember">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 36,
+        "raw" : "<pseudo-object type>"
+      },
+      <"PseudoObject">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 37,
+        "raw" : "<unknown type>"
+      },
+      <"UnknownAny">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 38,
+        "raw" : "<ARC unbridged cast type>"
+      },
+      <"ARCUnbridgedCast">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 39,
+        "raw" : "<builtin fn type>"
+      },
+      <"BuiltinFn">
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 40,
+        "raw" : "_Complex float"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 41,
+        "raw" : "_Complex double"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 42,
+        "raw" : "_Complex long double"
+      }
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 43,
+        "raw" : "id"
+      },
+      <"ObjCId">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 44,
+        "raw" : "Class"
+      },
+      <"ObjCClass">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 45,
+        "raw" : "SEL"
+      },
+      <"ObjCSel">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 46,
+        "raw" : "void *"
+      },
+      12
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 47,
+        "raw" : "nullptr_t"
+      },
+      <"NullPtr">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 48,
+        "raw" : "__fp16"
+      },
+      <"Half">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 49,
+        "raw" : "SEL *"
+      },
+      45
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : 50,
+        "raw" : "id"
+      },
+      {
+        "base_type" : 43
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : 51,
+        "raw" : "id"
+      },
+      50
+    )>,
+    <"ObjCObjectType" : (
+      {
+        "pointer" : 52,
+        "raw" : "Class"
+      },
+      {
+        "base_type" : 44
+      }
+    )>,
+    <"ObjCObjectPointerType" : (
+      {
+        "pointer" : 53,
+        "raw" : "Class"
+      },
+      52
+    )>,
+    <"ObjCInterfaceType" : (
+      {
+        "pointer" : 54,
+        "raw" : "Protocol"
+      },
+      8
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 55,
+        "raw" : "char *"
+      },
+      14
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : 56,
+        "raw" : "struct __va_list_tag"
+      },
+      57
+    )>,
+    <"ConstantArrayType" : (
+      {
+        "pointer" : 58,
+        "raw" : "struct __va_list_tag [1]"
+      },
+      56,
+      1
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 59,
+        "raw" : "type-parameter-0-0"
+      }
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 60,
+        "raw" : "T"
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 61,
+        "raw" : "void *(type-parameter-0-0)"
+      },
+      {
+        "return_type" : 46
+      },
+      {
+        "params_type" : [
+          59
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 62,
+        "raw" : "void *(T)"
+      },
+      {
+        "return_type" : 46
+      },
+      {
+        "params_type" : [
+          60
+        ]
+      }
+    )>,
+    <"NoneType" : (
+      {
+        "pointer" : 3,
+        "raw" : "NULL TYPE"
+      }
+    )>
+  ]
+)>

@@ -124,7 +124,7 @@ clean:
 
 # -- AST samples for specific end-to-end tests --
 
-REGULAR_SOURCES=$(wildcard tests/*.m) $(wildcard tests/*.c) $(wildcard tests/*.cpp)
+REGULAR_SOURCES=$(wildcard tests/*.m) $(wildcard tests/*.c) $(wildcard tests/*.cpp) $(wildcard tests/*.mm)
 AST_SAMPLE_FILES=ASTExporter.cpp $(REGULAR_SOURCES:tests/%=%)
 all_ast_samples: $(AST_SAMPLE_FILES:%=build/ast_samples/%.json.gz) $(AST_SAMPLE_FILES:%=build/ast_samples/%.yjson.gz)
 
@@ -146,6 +146,10 @@ build/ast_samples/%.c.yjson: tests/%.c build/FacebookClangPlugin.dylib
 build/ast_samples/%.m.yjson: tests/%.m build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
 	@$(CLANG_FRONTEND) $(YJ_DUMPER_ARGS) $@ -c $<
+
+build/ast_samples/%.mm.yjson: tests/%.mm build/FacebookClangPlugin.dylib
+	@mkdir -p build/ast_samples
+	@$(CLANG_FRONTEND) --std=c++11 $(YJ_DUMPER_ARGS) $@ -c $<
 
 # dump sample files in Yojson using ASTExporter.cpp
 J_DUMPER_ARGS=-Xclang -plugin -Xclang JsonASTExporter -Xclang -plugin-arg-JsonASTExporter -Xclang

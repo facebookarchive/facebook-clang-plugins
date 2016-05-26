@@ -4094,11 +4094,19 @@ int ASTExporter<ATDWriter>::ObjCBoxedExprTupleSize() {
   return ExprTupleSize() + 1;
 }
 /// \atd
-/// #define obj_c_boxed_expr_tuple expr_tuple * selector
+/// #define obj_c_boxed_expr_tuple expr_tuple * objc_boxed_expr_info
+/// type objc_boxed_expr_info = {
+///   ?boxing_method : selector option;
+/// }  <ocaml field_prefix="obei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCBoxedExpr(const ObjCBoxedExpr *Node) {
   VisitExpr(Node);
-  dumpSelector(Node->getBoxingMethod()->getSelector());
+  ObjCMethodDecl* boxingMethod = Node->getBoxingMethod();
+  ObjectScope Scope(OF, 0 + (bool) boxingMethod);
+  if (boxingMethod) {
+    OF.emitTag("boxing_method");
+    dumpSelector(boxingMethod->getSelector());
+  }
 }
 
 template <class ATDWriter>
