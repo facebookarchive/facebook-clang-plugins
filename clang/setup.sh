@@ -64,25 +64,24 @@ done
 
 platform=`uname`
 
-case $platform in
-    Darwin)
-        CONFIGURE_ARGS=(
-            --prefix="$CLANG_PREFIX"
-            --enable-libcpp
-            --enable-cxx11
-            --disable-assertions
-            --enable-optimized
-            --enable-bindings=none
-        );;
-    *)
-        CONFIGURE_ARGS=(
-            --prefix="$CLANG_PREFIX"
-            --enable-cxx11
-            --disable-assertions
-            --enable-optimized
-            --enable-bindings=none
-        )
-esac
+CMAKE_ARGS=(
+  -DCMAKE_INSTALL_PREFIX="$CLANG_PREFIX"
+  -DCMAKE_BUILD_TYPE=Release
+  -DLLVM_ENABLE_ASSERTIONS=Off
+  -DLLVM_ENABLE_EH=On
+  -DLLVM_ENABLE_RTTI=On
+)
+
+if [ "$platform" = "Darwin" ]; then
+    CMAKE_ARGS+=(
+      -DLLVM_ENABLE_LIBCXX=On
+      -DCMAKE_SHARED_LINKER_FLAGS="$CMAKE_SHARED_LINKER_FLAGS"
+    )
+else
+    CMAKE_ARGS+=(
+      -DCMAKE_SHARED_LINKER_FLAGS="-lstdc++ $CMAKE_SHARED_LINKER_FLAGS"
+    )
+fi
 
 if [ "$ONLY_RECORD" = "yes" ]; then
     record_installed
@@ -120,14 +119,20 @@ if tar --version | grep -q 'GNU'; then
 fi
 tar --extract $QUIET_TAR --file "$CLANG_SRC"
 
-llvm/configure "${CONFIGURE_ARGS[@]}"
+mkdir build
+pushd build
+cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
 
 JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
-make -j $JOBS && make install
-cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
+
+make -j $JOBS && make -j $JOBS install
+
+set +e
 strip -x "$CLANG_PREFIX"/bin/*
-find "$CLANG_PREFIX"/lib -type f \( -name '*.so' -o -name '*.a' \) -exec strip -x \{\} \+
-popd
+find "$CLANG_PREFIX"/lib -type f \( -name '*.so.*' -o -name '*.a' \) -exec strip -x \{\} \+
+set -e
+popd # build
+popd # $TMP
 
 if [ -n "$CLANG_TMP_DIR" ]; then
     rm -rf "$TMP/*"
