@@ -51,6 +51,7 @@
 #include "AttrParameterVectorStream.h"
 #include "SimplePluginASTAction.h"
 #include "atdlib/ATDWriter.h"
+#include "NamePrinter.h"
 
 //===----------------------------------------------------------------------===//
 // ASTExporter Visitor
@@ -205,6 +206,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   std::vector<const Type *> types;
 
+  NamePrinter<ATDWriter> NamePrint;
+
  public:
   ASTExporter(raw_ostream &OS,
               ASTContext &Context,
@@ -220,7 +223,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
             Comment::NoCommentKind, SourceLocation(), SourceLocation())),
         LastLocFilename(""),
         LastLocLine(~0U),
-        FC(0) {
+        FC(0),
+        NamePrint(SM, OF) {
     /* this should work because ASTContext will hold on to these for longer */
     for (const Type *t : Context.getTypes()) {
       types.push_back(t);
@@ -247,7 +251,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpAttr(const Attr &A);
   void dumpSelector(const Selector sel);
   void dumpName(const NamedDecl &decl);
-  PrintingPolicy getPrintingPolicy();
+
   bool alwaysEmitParent(const Decl *D);
 
   // C++ Utilities
@@ -557,23 +561,6 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
   dumpPointerToType(T);
 }
 
-template <class ATDWriter>
-PrintingPolicy ASTExporter<ATDWriter>::getPrintingPolicy() {
-  // configure what to print
-  LangOptions LO;
-  PrintingPolicy Policy(LO);
-  // print tag types
-  Policy.SuppressTag = false;
-  // don't print fully qualified names - we do it ourselves
-  Policy.SuppressScope = true;
-  // print locations of anonymous tags
-  Policy.AnonymousTagLocations = true;
-  // don't add 'struct' inside a name regardless of language
-  Policy.SuppressTagKeyword = true;
-  Policy.LangOpts.CPlusPlus = true;
-  return Policy;
-}
-
 /// \atd
 /// type named_decl_info = {
 ///   name : string;
@@ -586,69 +573,8 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
   OF.emitTag("name");
   OF.emitString(Decl.getNameAsString());
 
-  // implementation is inspired by NamedDecl::printQualifiedName
-  // but with better handling for anonymous structs,unions and namespaces
   OF.emitTag("qual_name");
-  const DeclContext *Ctx = Decl.getDeclContext();
-  SmallVector<const NamedDecl *, 8> Contexts;
-  SmallVector<std::string, 8> Quals;
-  Contexts.push_back(&Decl);
-
-  // Don't dump full qualifier for variables declared
-  // inside a function/method/block
-  // For structs defined inside functions, dump fully qualified name
-  if (Ctx->isFunctionOrMethod() && !isa<TagDecl>(&Decl)) {
-    Ctx = nullptr;
-  }
-
-  while (Ctx && isa<NamedDecl>(Ctx)) {
-    Contexts.push_back(cast<NamedDecl>(Ctx));
-    Ctx = Ctx->getParent();
-  }
-
-  for (const NamedDecl *D : Contexts) {
-    if (const auto *ND = dyn_cast<NamespaceDecl>(D)) {
-      if (ND->isAnonymousNamespace()) {
-        PresumedLoc PLoc = SM.getPresumedLoc(ND->getLocation());
-        std::string file = "invalid_loc";
-        if (PLoc.isValid()) {
-          file = PLoc.getFilename();
-        }
-        Quals.push_back("anonymous_namespace_" + file);
-      } else {
-        Quals.push_back(ND->getNameAsString());
-      }
-    } else if (const auto *TD = dyn_cast<TagDecl>(D)) {
-      // use clang's TypePrinter to do the right thing
-      // with anonymous structs/template parameters etc.
-
-      QualType qt(TD->getTypeForDecl(), 0);
-      Quals.push_back(qt.getAsString(getPrintingPolicy()));
-    } else if (const auto *FD = dyn_cast<FunctionDecl>(D)) {
-      std::string template_str = "";
-      // add instantiated template arguments for readability
-      if (const TemplateArgumentList *TemplateArgs =
-              FD->getTemplateSpecializationArgs()) {
-        SmallString<256> Buf;
-        llvm::raw_svector_ostream StrOS(Buf);
-        TemplateSpecializationType::PrintTemplateArgumentList(
-            StrOS,
-            TemplateArgs->data(),
-            TemplateArgs->size(),
-            getPrintingPolicy());
-        template_str = StrOS.str();
-      }
-      Quals.push_back(D->getNameAsString() + template_str);
-    } else {
-      Quals.push_back(D->getNameAsString());
-    }
-  }
-
-  ArrayScope aScope(OF, Quals.size());
-  // dump list in reverse
-  for (const auto &name : Quals) {
-    OF.emitString(name);
-  }
+  NamePrint.printDeclName(Decl);
 }
 
 /// \atd
@@ -4101,8 +4027,8 @@ int ASTExporter<ATDWriter>::ObjCBoxedExprTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCBoxedExpr(const ObjCBoxedExpr *Node) {
   VisitExpr(Node);
-  ObjCMethodDecl* boxingMethod = Node->getBoxingMethod();
-  ObjectScope Scope(OF, 0 + (bool) boxingMethod);
+  ObjCMethodDecl *boxingMethod = Node->getBoxingMethod();
+  ObjectScope Scope(OF, 0 + (bool)boxingMethod);
   if (boxingMethod) {
     OF.emitTag("boxing_method");
     dumpSelector(boxingMethod->getSelector());

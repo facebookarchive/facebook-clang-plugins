@@ -1,0 +1,131 @@
+/**
+ * Copyright (c) 2016, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+#pragma once
+#include <clang/AST/DeclVisitor.h>
+#include <clang/Basic/SourceManager.h>
+
+#include "atdlib/ATDWriter.h"
+namespace ASTLib {
+
+using namespace clang;
+template <class ATDWriter>
+class NamePrinter : public ConstDeclVisitor<NamePrinter<ATDWriter>> {
+  typedef typename ATDWriter::ObjectScope ObjectScope;
+  typedef typename ATDWriter::ArrayScope ArrayScope;
+  typedef typename ATDWriter::TupleScope TupleScope;
+  typedef typename ATDWriter::VariantScope VariantScope;
+
+  PrintingPolicy getPrintingPolicy();
+  const SourceManager &SM;
+  ATDWriter &OF;
+
+ public:
+  NamePrinter(const SourceManager &SM, ATDWriter &OF) : SM(SM), OF(OF) {}
+
+  // implementation is inspired by NamedDecl::printQualifiedName
+  // but with better handling for anonymous structs,unions and namespaces
+  void printDeclName(const NamedDecl &D);
+
+  void VisitNamedDecl(const NamedDecl *D);
+  void VisitNamespaceDecl(const NamespaceDecl *ND);
+  void VisitTagDecl(const TagDecl *TD);
+  void VisitFunctionDecl(const FunctionDecl *FD);
+};
+
+template <class ATDWriter>
+void NamePrinter<ATDWriter>::printDeclName(const NamedDecl &D) {
+  const DeclContext *Ctx = D.getDeclContext();
+  SmallVector<const NamedDecl *, 8> Contexts;
+  Contexts.push_back(&D);
+
+  // Don't dump full qualifier for variables declared
+  // inside a function/method/block
+  // For structs defined inside functions, dump fully qualified name
+  if (Ctx->isFunctionOrMethod() && !isa<TagDecl>(&D)) {
+    Ctx = nullptr;
+  }
+
+  while (Ctx && isa<NamedDecl>(Ctx)) {
+    Contexts.push_back(cast<NamedDecl>(Ctx));
+    Ctx = Ctx->getParent();
+  }
+
+  ArrayScope aScope(OF, Contexts.size());
+  // dump list in reverse
+  for (const Decl *Ctx : Contexts) {
+    ConstDeclVisitor<NamePrinter<ATDWriter>>::Visit(Ctx);
+  }
+}
+
+template <class ATDWriter>
+void NamePrinter<ATDWriter>::VisitNamedDecl(const NamedDecl *D) {
+  OF.emitString(D->getNameAsString());
+}
+
+template <class ATDWriter>
+void NamePrinter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *ND) {
+  if (ND->isAnonymousNamespace()) {
+    PresumedLoc PLoc = SM.getPresumedLoc(ND->getLocation());
+    std::string file = "invalid_loc";
+    if (PLoc.isValid()) {
+      file = PLoc.getFilename();
+    }
+    OF.emitString("anonymous_namespace_" + file);
+  } else {
+    // for non-anonymous namespaces, fallback to normal behavior
+    VisitNamedDecl(ND);
+  }
+}
+
+template <class ATDWriter>
+void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *TD) {
+  // use clang's TypePrinter to do the right thing
+  // with anonymous structs/template parameters etc.
+  QualType qt(TD->getTypeForDecl(), 0);
+  OF.emitString(qt.getAsString(getPrintingPolicy()));
+}
+
+template <class ATDWriter>
+void NamePrinter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *FD) {
+  std::string template_str = "";
+  // add instantiated template arguments for readability
+  if (const TemplateArgumentList *TemplateArgs =
+          FD->getTemplateSpecializationArgs()) {
+    SmallString<256> Buf;
+    llvm::raw_svector_ostream StrOS(Buf);
+    TemplateSpecializationType::PrintTemplateArgumentList(
+        StrOS,
+        TemplateArgs->data(),
+        TemplateArgs->size(),
+        getPrintingPolicy());
+    template_str = StrOS.str();
+  }
+  OF.emitString(FD->getNameAsString() + template_str);
+}
+
+template <class ATDWriter>
+PrintingPolicy NamePrinter<ATDWriter>::getPrintingPolicy() {
+  // configure what to print
+  LangOptions LO;
+  PrintingPolicy Policy(LO);
+  // print tag types
+  Policy.SuppressTag = false;
+  // don't print fully qualified names - we do it ourselves
+  Policy.SuppressScope = true;
+  // print locations of anonymous tags
+  Policy.AnonymousTagLocations = true;
+  // don't add 'struct' inside a name regardless of language
+  Policy.SuppressTagKeyword = true;
+  Policy.LangOpts.CPlusPlus = true;
+  return Policy;
+}
+
+} // end of namespace ASTLib
