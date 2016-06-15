@@ -86,11 +86,46 @@ void NamePrinter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *ND) {
 }
 
 template <class ATDWriter>
-void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *TD) {
-  // use clang's TypePrinter to do the right thing
-  // with anonymous structs/template parameters etc.
-  QualType qt(TD->getTypeForDecl(), 0);
-  OF.emitString(qt.getAsString(getPrintingPolicy()));
+void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
+  // heavily inspired by clang's TypePrinter::printTag() function
+  SmallString<64> Buf;
+  llvm::raw_svector_ostream StrOS(Buf);
+  if (const IdentifierInfo *II = D->getIdentifier()) {
+    StrOS << II->getName();
+  } else if (TypedefNameDecl *Typedef = D->getTypedefNameForAnonDecl()) {
+    StrOS << Typedef->getIdentifier()->getName();
+  } else {
+    StrOS << "(";
+    if (isa<CXXRecordDecl>(D) && cast<CXXRecordDecl>(D)->isLambda()) {
+      StrOS << "lambda";
+    } else {
+      StrOS << "anonymous " << D->getKindName();
+    }
+    PresumedLoc PLoc = SM.getPresumedLoc(D->getLocation());
+    if (PLoc.isValid()) {
+      StrOS << " at " << PLoc.getFilename() << ':' << PLoc.getLine() << ':'
+            << PLoc.getColumn();
+    }
+    StrOS << ")";
+  }
+  if (const ClassTemplateSpecializationDecl *Spec =
+          dyn_cast<ClassTemplateSpecializationDecl>(D)) {
+    const TemplateArgument *Args;
+    unsigned NumArgs;
+    if (const TypeSourceInfo *TAW = Spec->getTypeAsWritten()) {
+      const TemplateSpecializationType *TST =
+          cast<TemplateSpecializationType>(TAW->getType());
+      Args = TST->getArgs();
+      NumArgs = TST->getNumArgs();
+    } else {
+      const TemplateArgumentList &TemplateArgs = Spec->getTemplateArgs();
+      Args = TemplateArgs.data();
+      NumArgs = TemplateArgs.size();
+    }
+    TemplateSpecializationType::PrintTemplateArgumentList(
+        StrOS, Args, NumArgs, getPrintingPolicy());
+  }
+  OF.emitString(StrOS.str());
 }
 
 template <class ATDWriter>
@@ -102,10 +137,7 @@ void NamePrinter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *FD) {
     SmallString<256> Buf;
     llvm::raw_svector_ostream StrOS(Buf);
     TemplateSpecializationType::PrintTemplateArgumentList(
-        StrOS,
-        TemplateArgs->data(),
-        TemplateArgs->size(),
-        getPrintingPolicy());
+        StrOS, TemplateArgs->data(), TemplateArgs->size(), getPrintingPolicy());
     template_str = StrOS.str();
   }
   OF.emitString(FD->getNameAsString() + template_str);
