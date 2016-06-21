@@ -23,9 +23,13 @@ class NamePrinter : public ConstDeclVisitor<NamePrinter<ATDWriter>> {
   typedef typename ATDWriter::TupleScope TupleScope;
   typedef typename ATDWriter::VariantScope VariantScope;
 
-  PrintingPolicy getPrintingPolicy();
   const SourceManager &SM;
   ATDWriter &OF;
+
+  PrintingPolicy getPrintingPolicy();
+  void printTemplateArgList(llvm::raw_ostream &OS,
+                            const TemplateArgument *Args,
+                            unsigned NumArgs);
 
  public:
   NamePrinter(const SourceManager &SM, ATDWriter &OF) : SM(SM), OF(OF) {}
@@ -39,6 +43,36 @@ class NamePrinter : public ConstDeclVisitor<NamePrinter<ATDWriter>> {
   void VisitTagDecl(const TagDecl *TD);
   void VisitFunctionDecl(const FunctionDecl *FD);
 };
+
+// 64 bits fnv-1a
+const uint64_t FNV64_hash_start = 14695981039346656037ULL;
+const uint64_t FNV64_prime = 1099511628211ULL;
+uint64_t fnv64Hash(const char *s, int n) {
+  uint64_t hash = FNV64_hash_start;
+  for (int i = 0; i < n; ++i) {
+    hash ^= s[i];
+    hash *= FNV64_prime;
+  }
+  return hash;
+}
+
+const int templateLengthThreshold = 40;
+template <class ATDWriter>
+void NamePrinter<ATDWriter>::printTemplateArgList(llvm::raw_ostream &OS,
+                                                  const TemplateArgument *Args,
+                                                  unsigned NumArgs) {
+  SmallString<64> Buf;
+  llvm::raw_svector_ostream tmpOS(Buf);
+  TemplateSpecializationType::PrintTemplateArgumentList(
+      tmpOS, Args, NumArgs, getPrintingPolicy());
+  if (tmpOS.str().size() > templateLengthThreshold) {
+    OS << "<";
+    OS.write_hex(fnv64Hash(tmpOS.str().data(), tmpOS.str().size()));
+    OS << ">";
+  } else {
+    OS << tmpOS.str();
+  }
+}
 
 template <class ATDWriter>
 void NamePrinter<ATDWriter>::printDeclName(const NamedDecl &D) {
@@ -122,8 +156,7 @@ void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
       Args = TemplateArgs.data();
       NumArgs = TemplateArgs.size();
     }
-    TemplateSpecializationType::PrintTemplateArgumentList(
-        StrOS, Args, NumArgs, getPrintingPolicy());
+    printTemplateArgList(StrOS, Args, NumArgs);
   }
   OF.emitString(StrOS.str());
 }
@@ -134,10 +167,9 @@ void NamePrinter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *FD) {
   // add instantiated template arguments for readability
   if (const TemplateArgumentList *TemplateArgs =
           FD->getTemplateSpecializationArgs()) {
-    SmallString<256> Buf;
+    SmallString<64> Buf;
     llvm::raw_svector_ostream StrOS(Buf);
-    TemplateSpecializationType::PrintTemplateArgumentList(
-        StrOS, TemplateArgs->data(), TemplateArgs->size(), getPrintingPolicy());
+    printTemplateArgList(StrOS, TemplateArgs->data(), TemplateArgs->size());
     template_str = StrOS.str();
   }
   OF.emitString(FD->getNameAsString() + template_str);
