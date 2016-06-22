@@ -393,6 +393,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(CXXDeleteExpr)
   DECLARE_VISITOR(CXXDefaultArgExpr)
   DECLARE_VISITOR(CXXDefaultInitExpr)
+  DECLARE_VISITOR(TypeTraitExpr)
 
   // ObjC
   DECLARE_VISITOR(ObjCAtCatchStmt)
@@ -3928,6 +3929,24 @@ void ASTExporter<ATDWriter>::VisitCXXDefaultInitExpr(
     OF.emitTag("init_expr");
     dumpStmt(InitExpr);
   }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::TypeTraitExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
+/// \atd
+/// #define type_trait_expr_tuple expr_tuple * type_trait_info
+/// type type_trait_info = {
+///   ~value : bool;
+/// } <ocaml field_prefix="xtti_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitTypeTraitExpr(
+    const TypeTraitExpr *Node) {
+  VisitExpr(Node);
+  bool value = Node->getValue();
+  ObjectScope Scope(OF, 0 + value);
+  OF.emitFlag("value", value);
 }
 
 ////===----------------------------------------------------------------------===//
