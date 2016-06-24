@@ -78,7 +78,7 @@ TEST_FILES=ASTExporter.cpp Hello.m ObjCTest.m c_attributes.c bind_temporary.cpp 
 c_cast.cpp const_cast.cpp dynamic_cast.cpp expr_with_cleanups.cpp inheritance.cpp \
 lambda.cpp materialize_temporary.cpp namespace_decl.cpp new.cpp struct.cpp this.cpp \
 unresolved_lookup.cpp using_directive.cpp class_template.cpp function_template.cpp \
-objcpp_template_unboxing.mm type_trait.cpp
+objcpp_template_unboxing.mm type_trait.cpp no_except_expr.cpp
 
 PRINTER_TEST_FILES=ObjCTest.m
 CONVERTER_TEST_FILE=Hello.m

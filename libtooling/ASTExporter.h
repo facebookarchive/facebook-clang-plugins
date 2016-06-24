@@ -394,6 +394,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(CXXDefaultArgExpr)
   DECLARE_VISITOR(CXXDefaultInitExpr)
   DECLARE_VISITOR(TypeTraitExpr)
+  DECLARE_VISITOR(CXXNoexceptExpr)
 
   // ObjC
   DECLARE_VISITOR(ObjCAtCatchStmt)
@@ -3943,6 +3944,24 @@ int ASTExporter<ATDWriter>::TypeTraitExprTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypeTraitExpr(
     const TypeTraitExpr *Node) {
+  VisitExpr(Node);
+  bool value = Node->getValue();
+  ObjectScope Scope(OF, 0 + value);
+  OF.emitFlag("value", value);
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXNoexceptExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
+/// \atd
+/// #define cxx_noexcept_expr_tuple expr_tuple * cxx_noexcept_expr_info
+/// type cxx_noexcept_expr_info = {
+///   ~value : bool;
+/// } <ocaml field_prefix="xnee_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXNoexceptExpr(
+    const CXXNoexceptExpr *Node) {
   VisitExpr(Node);
   bool value = Node->getValue();
   ObjectScope Scope(OF, 0 + value);
