@@ -238,6 +238,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpFullComment(const FullComment *C);
   void dumpType(const Type *T);
   void dumpPointerToType(const QualType &qt);
+  void dumpClassLambdaCapture(const LambdaCapture *C);
 
   // Utilities
   void dumpPointer(const void *Ptr);
@@ -3827,11 +3828,87 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::LambdaExprTupleSize() {
   return ExprTupleSize() + DeclTupleSize();
 }
+
 /// \atd
-/// #define lambda_expr_tuple expr_tuple * decl
+/// type lambda_capture_info = {
+///   capture_kind : lambda_capture_kind;
+///   ~capture_this : bool;
+///   ~capture_variable : bool;
+///   ~capture_VLAtype : bool;
+///   ?captured_var : decl_ref option;
+///   ~is_implicit : bool;
+///   location : source_range;
+///   ~is_pack_expansion: bool;
+/// } <ocaml field_prefix="lci_">
+/// type lambda_capture_kind = [
+///         | LCK_This
+///         | LCK_ByCopy
+///         | LCK_ByRef
+///         | LCK_VLAType]
+
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
+
+  LambdaCaptureKind CK = C->getCaptureKind();
+  bool CapturesThis = C->capturesThis();
+  bool CapturesVariable = C->capturesVariable();
+  bool CapturesVLAType = C->capturesVLAType();
+  VarDecl *decl = C->getCapturedVar();
+  bool IsImplicit = C->isImplicit();
+  SourceRange source_range = C->getLocation();
+  bool IsPackExpansion = C->isPackExpansion();
+  ObjectScope Scope(OF,
+                    2 + CapturesThis + CapturesVariable + CapturesVLAType +
+                        (bool)decl + IsImplicit + IsPackExpansion);
+  OF.emitTag("capture_kind");
+  switch (CK) {
+  case LCK_This:
+    OF.emitSimpleVariant("LCK_This");
+    break;
+  case LCK_ByCopy:
+    OF.emitSimpleVariant("LCK_ByCopy");
+    break;
+  case LCK_ByRef:
+    OF.emitSimpleVariant("LCK_ByRef");
+    break;
+  case LCK_VLAType:
+    OF.emitSimpleVariant("LCK_VLAType");
+    break;
+  };
+  OF.emitFlag("capture_this", CapturesThis);
+  OF.emitFlag("capture_variable", CapturesVariable);
+  OF.emitFlag("capture_VLAtype", CapturesVLAType);
+  if (decl) {
+    OF.emitTag("captured_var");
+    dumpDeclRef(*decl);
+  }
+  OF.emitFlag("is_implicit", IsImplicit);
+  OF.emitTag("location");
+  dumpSourceRange(source_range);
+  OF.emitFlag("is_pack_expansion", IsPackExpansion);
+}
+
+/// \atd
+/// #define lambda_expr_tuple expr_tuple * lambda_expr_info
+/// type lambda_expr_info = {
+///   ~captures: lambda_capture_info list;
+///   lambda_decl: decl;
+/// } <ocaml field_prefix="lei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
   VisitExpr(Node);
+
+  LambdaExpr::capture_iterator I = Node->capture_begin(),
+                               E = Node->capture_end();
+  ObjectScope Scope(OF, 1 + (I != E));
+  if (I != E) {
+    OF.emitTag("captures");
+    ArrayScope Scope(OF, std::distance(I, E));
+    for (; I != E; ++I) {
+      dumpClassLambdaCapture(I);
+    }
+  }
+  OF.emitTag("lambda_decl");
   dumpDecl(Node->getLambdaClass());
 }
 
