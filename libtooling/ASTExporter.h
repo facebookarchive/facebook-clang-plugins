@@ -49,9 +49,9 @@
 #include <llvm/Support/raw_ostream.h>
 
 #include "AttrParameterVectorStream.h"
+#include "NamePrinter.h"
 #include "SimplePluginASTAction.h"
 #include "atdlib/ATDWriter.h"
-#include "NamePrinter.h"
 
 //===----------------------------------------------------------------------===//
 // ASTExporter Visitor
@@ -180,10 +180,9 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   typedef typename ATDWriter::VariantScope VariantScope;
   ATDWriter OF;
 
-  const ASTExporterOptions &Options;
+  const ASTContext &Context;
 
-  const CommandTraits &Traits;
-  const SourceManager &SM;
+  const ASTExporterOptions &Options;
 
   // Encoding of NULL pointers into suitable empty nodes
   // This is a hack but using option types in children lists would make the Json
@@ -204,8 +203,6 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   /// The \c FullComment parent of the comment being dumped.
   const FullComment *FC;
 
-  std::vector<const Type *> types;
-
   NamePrinter<ATDWriter> NamePrint;
 
  public:
@@ -213,9 +210,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
               ASTContext &Context,
               const ASTExporterOptions &Opts)
       : OF(OS, Opts.atdWriterOptions),
+        Context(Context),
         Options(Opts),
-        Traits(Context.getCommentCommandTraits()),
-        SM(Context.getSourceManager()),
         NullPtrStmt(new (Context) NullStmt(SourceLocation())),
         NullPtrDecl(EmptyDecl::Create(
             Context, Context.getTranslationUnitDecl(), SourceLocation())),
@@ -224,14 +220,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
         LastLocFilename(""),
         LastLocLine(~0U),
         FC(0),
-        NamePrint(SM, OF) {
-    /* this should work because ASTContext will hold on to these for longer */
-    for (const Type *t : Context.getTypes()) {
-      types.push_back(t);
-    }
-    // Just in case, add NoneType to dumped types
-    types.push_back(nullptr);
-  }
+        NamePrint(Context.getSourceManager(), OF) {}
 
   void dumpDecl(const Decl *D);
   void dumpStmt(const Stmt *S);
@@ -497,6 +486,7 @@ void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
 /// } <ocaml field_prefix="sl_" validator="Clang_ast_visit.visit_source_loc">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
+  const SourceManager &SM = Context.getSourceManager();
   SourceLocation ExpLoc =
       Options.useMacroExpansionLocation ? SM.getExpansionLoc(Loc) : Loc;
   SourceLocation SpellingLoc = SM.getSpellingLoc(ExpLoc);
@@ -1313,10 +1303,13 @@ void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(
     const TranslationUnitDecl *D) {
   VisitDecl(D);
   VisitDeclContext(D);
-  ArrayScope Scope(OF, types.size());
+  const auto &types = Context.getTypes();
+  ArrayScope Scope(OF, types.size() + 1); // + 1 for nullptr
   for (const Type *type : types) {
     dumpType(type);
   }
+  // Just in case, add NoneType to dumped types
+  dumpType(nullptr);
 }
 
 template <class ATDWriter>
@@ -4019,8 +4012,7 @@ int ASTExporter<ATDWriter>::TypeTraitExprTupleSize() {
 ///   ~value : bool;
 /// } <ocaml field_prefix="xtti_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitTypeTraitExpr(
-    const TypeTraitExpr *Node) {
+void ASTExporter<ATDWriter>::VisitTypeTraitExpr(const TypeTraitExpr *Node) {
   VisitExpr(Node);
   bool value = Node->getValue();
   ObjectScope Scope(OF, 0 + value);
@@ -4037,8 +4029,7 @@ int ASTExporter<ATDWriter>::CXXNoexceptExprTupleSize() {
 ///   ~value : bool;
 /// } <ocaml field_prefix="xnee_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitCXXNoexceptExpr(
-    const CXXNoexceptExpr *Node) {
+void ASTExporter<ATDWriter>::VisitCXXNoexceptExpr(const CXXNoexceptExpr *Node) {
   VisitExpr(Node);
   bool value = Node->getValue();
   ObjectScope Scope(OF, 0 + value);
@@ -4339,7 +4330,7 @@ void ASTExporter<ATDWriter>::VisitObjCBoolLiteralExpr(
 
 template <class ATDWriter>
 const char *ASTExporter<ATDWriter>::getCommandName(unsigned CommandID) {
-  return Traits.getCommandInfo(CommandID)->Name;
+  return Context.getCommentCommandTraits().getCommandInfo(CommandID)->Name;
 }
 
 template <class ATDWriter>
