@@ -28,6 +28,7 @@
  */
 
 #pragma once
+#include <memory>
 
 #include <clang/AST/ASTConsumer.h>
 #include <clang/AST/ASTContext.h>
@@ -37,6 +38,7 @@
 #include <clang/AST/DeclLookups.h>
 #include <clang/AST/DeclObjC.h>
 #include <clang/AST/DeclVisitor.h>
+#include <clang/AST/Mangle.h>
 #include <clang/AST/RecursiveASTVisitor.h>
 #include <clang/AST/StmtVisitor.h>
 #include <clang/AST/TypeVisitor.h>
@@ -184,6 +186,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   const ASTExporterOptions &Options;
 
+  std::unique_ptr<MangleContext> Mangler;
+
   // Encoding of NULL pointers into suitable empty nodes
   // This is a hack but using option types in children lists would make the Json
   // terribly verbose.
@@ -212,6 +216,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
       : OF(OS, Opts.atdWriterOptions),
         Context(Context),
         Options(Opts),
+        Mangler(
+            ItaniumMangleContext::create(Context, Context.getDiagnostics())),
         NullPtrStmt(new (Context) NullStmt(SourceLocation())),
         NullPtrDecl(EmptyDecl::Create(
             Context, Context.getTranslationUnitDecl(), SourceLocation())),
@@ -557,7 +563,7 @@ void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
 /// \atd
 /// type named_decl_info = {
 ///   name : string;
-///   qual_name : string list
+///   qual_name : string list;
 /// } <ocaml field_prefix="ni_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
@@ -1441,6 +1447,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 /// \atd
 /// #define function_decl_tuple declarator_decl_tuple * function_decl_info
 /// type function_decl_info = {
+///   ?mangled_name : string option;
 ///   ?storage_class : string option;
 ///   ~is_inline : bool;
 ///   ~is_module_private : bool;
@@ -1456,6 +1463,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
   // We purposedly do not call VisitDeclContext(D).
 
+  bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
   bool IsInlineSpecified = D->isInlineSpecified();
@@ -1472,10 +1480,18 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
-  int size = 2 + HasStorageClass + IsInlineSpecified + IsModulePrivate +
-             IsPure + IsDeletedAsWritten + HasDeclarationBody +
-             (bool)DeclWithBody;
+  int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
+             IsModulePrivate + IsPure + IsDeletedAsWritten +
+             HasDeclarationBody + (bool)DeclWithBody;
   ObjectScope Scope(OF, size);
+
+  if (ShouldMangleName) {
+    OF.emitTag("mangled_name");
+    std::string mangled;
+    llvm::raw_string_ostream StrOS(mangled);
+    Mangler->mangleName(D, StrOS);
+    OF.emitString(StrOS.str());
+  }
 
   if (HasStorageClass) {
     OF.emitTag("storage_class");
