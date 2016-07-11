@@ -63,8 +63,8 @@ C_TEST_FILES=${TEST_DIRS:%=%/*.c}
 CXX_TEST_FILES=${TEST_DIRS:%=%/*.cpp}
 ifdef IOSFLAGS
 IOS_TEST_FILES=${TEST_DIRS:%=%/*.m} ${TEST_DIRS:%=%/*.mm}
-IOS_ARC_TEST_FILES=${TEST_DIRS:%=%_arc/*.m} ${TEST_DIRS:%=%/*.mm}
-IOS_NOINLINE_TEST_FILES=${TEST_DIRS:%=%_noinline/*.m} ${TEST_DIRS:%=%/*.mm}
+IOS_ARC_TEST_FILES=${TEST_DIRS:%=%_arc/*.m} ${TEST_DIRS:%=%_arc/*.mm}
+IOS_NOINLINE_TEST_FILES=${TEST_DIRS:%=%_noinline/*.m} ${TEST_DIRS:%=%_noinline/*.mm}
 else
 IOS_TEST_FILES=
 IOS_ARC_TEST_FILES=
