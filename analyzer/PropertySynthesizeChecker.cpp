@@ -201,11 +201,10 @@ class PropertySynthesizeChecker
       return;
     }
 
-    string defaultName =
-        propImplDecl->getPropertyDecl()
-            ->getDefaultSynthIvarName(propImplDecl->getASTContext())
-            ->getName();
-    string varName = propImplDecl->getPropertyIvarDecl()->getNameAsString();
+    ASTContext &ctx = propImplDecl->getASTContext();
+    string defaultName = propDecl->getDefaultSynthIvarName(ctx)->getName();
+    const ObjCIvarDecl *propIvarDecl = propImplDecl->getPropertyIvarDecl();
+    string varName = propIvarDecl->getNameAsString();
 
     if (defaultName != varName ||
         isInheritedFromProtocol(propImplDecl, interfaceDecl)) {
@@ -218,21 +217,31 @@ class PropertySynthesizeChecker
     bool hasLocalSetterAndGetters =
         hasUserDefinedGetter(propDecl, implDecl) &&
         (isReadOnly || hasUserDefinedSetter(propDecl, implDecl));
-    // Auto-synthesis is deactivated when no setter/getter missing
-    // or if one the super classes is tagged with
-    // __attribute__((objc_requires_property_definitions))
-    if (!hasLocalSetterAndGetters &&
-        !interfaceDecl->isObjCRequiresPropertyDefs()) {
-      PathDiagnosticLocation L =
-          PathDiagnosticLocation::create(propImplDecl, BR.getSourceManager());
-      BR.EmitBasicReport(propImplDecl,
-                         this,
-                         "Useless synthesized variable",
-                         "Coding style issue (Facebook)",
-                         "The @synthesize statement for property " + propName +
-                             " appears to be useless.",
-                         L);
+    if (hasLocalSetterAndGetters ||
+        interfaceDecl->isObjCRequiresPropertyDefs()) {
+      // Auto-synthesis is deactivated when no setter/getter missing
+      // or if one the super classes is tagged with
+      // __attribute__((objc_requires_property_definitions))
+      return;
     }
+    const QualType propQualType = propDecl->getType();
+    std::string propType = propQualType.getDesugaredType(ctx).getAsString();
+    std::string ivarType = propIvarDecl->getUsageType(propQualType)
+      .getDesugaredType(ctx).getAsString();
+    if (propType != ivarType) {
+      // The @synthesize seems useful when types between
+      // the property and the ivar differ
+      return;
+    }
+    PathDiagnosticLocation L =
+        PathDiagnosticLocation::create(propImplDecl, BR.getSourceManager());
+    BR.EmitBasicReport(propImplDecl,
+                       this,
+                       "Useless synthesized variable",
+                       "Coding style issue (Facebook)",
+                       "The @synthesize statement for property " + propName +
+                           " appears to be useless.",
+                       L);
   }
 
  public:

@@ -147,6 +147,12 @@ void PluginASTOptionsBase::setObjectFile(const std::string &path) {
   }
 }
 
+/**
+ * Expects an immutable string on the heap as an argument
+ * (e.g. a path extracted from a node in the AST)
+ * Do not pass pointers to stack variables to this function.
+ * (e.g. a .str() call on a StringRef)
+ */
 const std::string &PluginASTOptionsBase::normalizeSourcePath(
     const char *path) const {
   auto I = normalizationCache->find(path);

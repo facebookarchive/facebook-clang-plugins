@@ -43,9 +43,10 @@ class GlobalOrStaticVariableForDispatchOnceChecker
         D,
         this,
         "Non-Global/Static variable for dispatch_once_t",
-        "Coding style issue (Facebook)",
-        "Please consider using a global or "
-        "static variable for dispatch_once_t to avoid unexpected behavior",
+        "Semantic error (Facebook)",
+        "Using an instance variable or local variable as the predicate passed to "
+        "dispatch_once/dispatch_once_f causes undefined behavior. "
+        "Please use a statically allocated dispatch_once_t instead",
         L);
   }
 
