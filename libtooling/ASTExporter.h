@@ -1463,7 +1463,9 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
   // We purposedly do not call VisitDeclContext(D).
 
-  bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
+  // FIXME: use mangling when necessary. For now it's turned off due to
+  // clang crashes
+  bool ShouldMangleName = false && Mangler->shouldMangleDeclName(D);
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
   bool IsInlineSpecified = D->isInlineSpecified();
