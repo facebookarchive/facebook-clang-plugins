@@ -17,6 +17,7 @@ module PointerMap = Map.Make(PointerOrd)
 let declMap = ref PointerMap.empty
 let stmtMap = ref PointerMap.empty
 let typeMap = ref PointerMap.empty
+let ivarToPropertyMap = ref PointerMap.empty
 
 let empty_v = Clang_ast_visit.empty_visitor
 (* This function is not thread-safe *)
@@ -50,8 +51,17 @@ let add_node_to_cache node cache =
 	let value = get_val_from_node node in
 	cache := PointerMap.add key value !cache
 
-let add_decl_to_cache path decl =
-	add_node_to_cache (`DeclNode decl) declMap
+let process_decl path decl =
+	add_node_to_cache (`DeclNode decl) declMap;
+  match decl with
+  | Clang_ast_t.ObjCPropertyDecl (_, _, obj_c_property_decl_info) ->
+      (match obj_c_property_decl_info.Clang_ast_t.opdi_ivar_decl with
+        | Some decl_ref ->
+          let ivar_pointer = decl_ref.Clang_ast_t.dr_decl_pointer in
+          ivarToPropertyMap :=
+            PointerMap.add ivar_pointer decl !ivarToPropertyMap
+         | None -> ())
+  | _ -> ()
 
 let add_stmt_to_cache path stmt =
 	add_node_to_cache (`StmtNode stmt) stmtMap
@@ -86,6 +96,7 @@ let reset_cache () =
 	declMap := PointerMap.empty;
 	stmtMap := PointerMap.empty;
 	typeMap := PointerMap.empty;
+  ivarToPropertyMap := PointerMap.empty;
 	reset_sloc previous_sloc
 
 (* This function is not thread-safe *)
@@ -93,7 +104,7 @@ let index_node_pointers top_decl =
 	(* just in case *)
 	reset_cache ();
 	(* populate cache *)
-	visit_ast ~visit_decl:add_decl_to_cache ~visit_stmt:add_stmt_to_cache ~visit_type:add_type_to_cache ~visit_src_loc:complete_source_location top_decl;
-	let result = !declMap, !stmtMap, !typeMap in
+	visit_ast ~visit_decl:process_decl ~visit_stmt:add_stmt_to_cache ~visit_type:add_type_to_cache ~visit_src_loc:complete_source_location top_decl;
+	let result = !declMap, !stmtMap, !typeMap, !ivarToPropertyMap in
 	reset_cache ();
 	result
