@@ -1136,7 +1136,7 @@ int ASTExporter<ATDWriter>::DeclTupleSize() {
 ///   ~is_used : bool;
 ///   ~is_this_declaration_referenced : bool;
 ///   ~is_invalid_decl : bool;
-///   attributes : attribute list;
+///   ~attributes : attribute list;
 ///   ?full_comment : comment option
 /// } <ocaml field_prefix="di_">
 template <class ATDWriter>
@@ -1155,11 +1155,12 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     bool IsDUsed = D->isUsed();
     bool IsDReferenced = D->isThisDeclarationReferenced();
     bool IsDInvalid = D->isInvalidDecl();
+    bool HasAttributes = D->hasAttrs();
     const FullComment *Comment =
         D->getASTContext().getLocalCommentForDeclUncached(D);
-    int maxSize = 4 + ShouldEmitParentPointer + (bool)M + IsNDHidden +
+    int maxSize = 3 + ShouldEmitParentPointer + (bool)M + IsNDHidden +
                   IsDImplicit + IsDUsed + IsDReferenced + IsDInvalid +
-                  (bool)Comment;
+                  HasAttributes + (bool)Comment;
     ObjectScope Scope(OF, maxSize);
 
     OF.emitTag("pointer");
@@ -1182,8 +1183,8 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     OF.emitFlag("is_this_declaration_referenced", IsDReferenced);
     OF.emitFlag("is_invalid_decl", IsDInvalid);
 
-    OF.emitTag("attributes");
-    {
+    if (HasAttributes) {
+      OF.emitTag("attributes");
       ArrayScope ArrayAttr(OF, D->getAttrs().size());
       for (auto I : D->attrs()) {
         dumpAttr(*I);
@@ -3864,7 +3865,7 @@ void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
   bool CapturesThis = C->capturesThis();
   bool CapturesVariable = C->capturesVariable();
   bool CapturesVLAType = C->capturesVLAType();
-  VarDecl *decl = C->getCapturedVar();
+  VarDecl *decl = C->capturesVariable() ? C->getCapturedVar() : nullptr;
   bool IsImplicit = C->isImplicit();
   SourceRange source_range = C->getLocation();
   bool IsPackExpansion = C->isPackExpansion();
@@ -4032,7 +4033,8 @@ int ASTExporter<ATDWriter>::TypeTraitExprTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypeTraitExpr(const TypeTraitExpr *Node) {
   VisitExpr(Node);
-  bool value = Node->getValue();
+  // FIXME: don't dump false when value is dependent
+  bool value = Node->isValueDependent() ? false : Node->getValue();
   ObjectScope Scope(OF, 0 + value);
   OF.emitFlag("value", value);
 }
@@ -4691,7 +4693,9 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
 ///   | Nullable
 ///   | NullUnspecified
 ///   | ObjcKindof
+///   | ObjcInsertUnsafeUnretained
 /// ]
+
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
   switch (kind) {
@@ -4775,6 +4779,9 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
     break;
   case AttributedType::attr_objc_kindof:
     OF.emitSimpleVariant("ObjcKindof");
+    break;
+  case AttributedType::attr_objc_inert_unsafe_unretained:
+    OF.emitSimpleVariant("ObjcInsertUnsafeUnretained");
     break;
   default:
     llvm_unreachable("unknown case");

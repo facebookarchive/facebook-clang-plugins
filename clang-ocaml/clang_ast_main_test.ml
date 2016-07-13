@@ -57,7 +57,7 @@ let print_map_size map =
 
 let check_decl_cache_from_file fname =
   let ast = Ag_util.Json.from_file Clang_ast_j.read_decl fname in
-  let decl_cache, stmt_cache, type_cache = Clang_ast_main.index_node_pointers ast in
+  let decl_cache, stmt_cache, type_cache, _ = Clang_ast_main.index_node_pointers ast in
   print_map_size decl_cache;
   print_map_size stmt_cache;
   print_map_size type_cache;
