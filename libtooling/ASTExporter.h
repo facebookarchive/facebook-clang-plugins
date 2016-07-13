@@ -1464,9 +1464,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
   // We purposedly do not call VisitDeclContext(D).
 
-  // FIXME: use mangling when necessary. For now it's turned off due to
-  // clang crashes
-  bool ShouldMangleName = false && Mangler->shouldMangleDeclName(D);
+  bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
   bool IsInlineSpecified = D->isInlineSpecified();
@@ -1492,7 +1490,13 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     OF.emitTag("mangled_name");
     std::string mangled;
     llvm::raw_string_ostream StrOS(mangled);
-    Mangler->mangleName(D, StrOS);
+    if (const auto *CD = dyn_cast<CXXConstructorDecl>(D)) {
+      Mangler->mangleCXXCtor(CD, Ctor_Complete, StrOS);
+    } else if (const auto *DD = dyn_cast<CXXDestructorDecl>(D)) {
+      Mangler->mangleCXXDtor(DD, Dtor_Deleting, StrOS);
+    } else {
+      Mangler->mangleName(D, StrOS);
+    }
     OF.emitString(StrOS.str());
   }
 
