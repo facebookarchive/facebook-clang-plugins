@@ -1849,6 +1849,7 @@ int ASTExporter<ATDWriter>::CXXMethodDeclTupleSize() {
 ///   ~is_virtual : bool;
 ///   ~is_static : bool;
 ///   ~cxx_ctor_initializers : cxx_ctor_initializer list;
+///   ~overriden_methods : decl_ref list;
 /// } <ocaml field_prefix="xmdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXMethodDecl(const CXXMethodDecl *D) {
@@ -1857,7 +1858,10 @@ void ASTExporter<ATDWriter>::VisitCXXMethodDecl(const CXXMethodDecl *D) {
   bool IsStatic = D->isStatic();
   const CXXConstructorDecl *C = dyn_cast<CXXConstructorDecl>(D);
   bool HasCtorInitializers = C && C->init_begin() != C->init_end();
-  ObjectScope Scope(OF, IsVirtual + IsStatic + HasCtorInitializers);
+  auto OB = D->begin_overridden_methods();
+  auto OE = D->end_overridden_methods();
+  ObjectScope Scope(OF,
+                    IsVirtual + IsStatic + HasCtorInitializers + (OB != OE));
   OF.emitFlag("is_virtual", IsVirtual);
   OF.emitFlag("is_static", IsStatic);
   if (HasCtorInitializers) {
@@ -1865,6 +1869,13 @@ void ASTExporter<ATDWriter>::VisitCXXMethodDecl(const CXXMethodDecl *D) {
     ArrayScope Scope(OF, std::distance(C->init_begin(), C->init_end()));
     for (auto I : C->inits()) {
       dumpCXXCtorInitializer(*I);
+    }
+  }
+  if (OB != OE) {
+    OF.emitTag("overriden_methods");
+    ArrayScope Scope(OF, std::distance(OB, OE));
+    for (; OB != OE; ++OB) {
+      dumpDeclRef(**OB);
     }
   }
 }

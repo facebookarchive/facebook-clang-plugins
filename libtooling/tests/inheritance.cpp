@@ -7,6 +7,7 @@ private:
 
 public:
   int color;
+  virtual void vmethod() {}
 
   double getArea(){
     return this->area;
@@ -20,6 +21,7 @@ public:
 
 class Circle : public Form {
 public:
+  void vmethod() override {}
   double getRatio() {
     double a;
     a = getArea();
