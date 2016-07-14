@@ -115,6 +115,7 @@ void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
 
   loadBool(map, "PREPEND_CURRENT_DIR", needBasePath);
   loadString(map, "MAKE_RELATIVE_TO", repoRoot);
+  loadString(map, "STRIP_ISYSROOT", iSysRoot);
   loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
   loadBool(map, "RESOLVE_SYMLINKS", resolveSymlinks);
 
@@ -164,25 +165,32 @@ const std::string &PluginASTOptionsBase::normalizeSourcePath(
     result = path;
     return result;
   }
-  std::string absPath = FileUtils::makeAbsolutePath(basePath, path);
-  const std::string &realPath =
-      translationService != nullptr
-          ? translationService->findOriginalFile(absPath)
-          : absPath;
-  if (repoRoot == "") {
-    result = realPath;
+  const std::string &absPath = FileUtils::makeAbsolutePath(basePath, path);
+  // optimize the default settings
+  if (translationService == nullptr && !resolveSymlinks && repoRoot == "") {
+    result = absPath;
+    return result;
+  }
+  std::string realPath;
+  if (translationService != nullptr) {
+    realPath = translationService->findOriginalFile(absPath);
   } else {
-    if (resolveSymlinks) {
-      // if absPath is a symlink, resolve it
-      char buf[1024];
-      int len = readlink(realPath.c_str(), buf, sizeof(buf) - 1);
-      if (len != -1) {
-        buf[len] = '\0';
-        result = FileUtils::makeRelativePath(repoRoot, buf, keepExternalPaths);
-        return result;
-      }
+    realPath = absPath;
+  }
+  if (resolveSymlinks) {
+    // if realPath is a symlink, resolve it
+    char buf[2048];
+    int len = readlink(realPath.c_str(), buf, sizeof(buf) - 1);
+    if (len != -1) {
+      buf[len] = '\0';
+      realPath = buf;
     }
-    result = FileUtils::makeRelativePath(repoRoot, realPath, keepExternalPaths);
+  }
+  // By convention, relative paths are only activated when repoRoot != "".
+  if (repoRoot != "") {
+    result = FileUtils::makeRelativePath(repoRoot, iSysRoot, keepExternalPaths, realPath);
+  } else {
+    result = realPath;
   }
   return result;
 }

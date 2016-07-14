@@ -70,13 +70,20 @@ std::string makeAbsolutePath(const std::string &currentWorkingDirectory,
 }
 
 std::string makeRelativePath(const std::string &repoRoot,
-                             const std::string &path,
-                             bool keepExternalPaths) {
-  if (llvm::StringRef(path).startswith(repoRoot + "/")) {
+                             const std::string &sysRoot,
+                             bool keepExternalPaths,
+                             const std::string &path) {
+  if (repoRoot != "" && llvm::StringRef(path).startswith(repoRoot + "/")) {
     return path.substr(repoRoot.size() + 1);
-  } else {
-    return keepExternalPaths ? path : "";
   }
+  if (sysRoot != "" && llvm::StringRef(path).startswith(sysRoot + "/")) {
+    // Intentionally keep the heading "/" in this case.
+    return path.substr(sysRoot.size());
+  }
+  if (keepExternalPaths) {
+    return path;
+  }
+  return "";
 }
 
 bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService,

@@ -23,15 +23,17 @@ namespace FileUtils {
  * currentWorkingDirectory unless currentWorkingDirectory == "".
  */
 std::string makeAbsolutePath(const std::string &currentWorkingDirectory,
-                             std::string pathToNormalize);
+                             std::string path);
 
 /**
- * Try to delete a prefix "repoRoot/" from the given absolute path. Return the
- * same path otherwise.
+ * Try to delete a prefix "repoRoot/" OR "sysRoot" from the given absolute path.
+ * If no rule applies AND keepExternalPaths is true, return the same path,
+ * otherwise return the empty string.
  */
 std::string makeRelativePath(const std::string &repoRoot,
-                             const std::string &path,
-                             bool keepExternalPaths);
+                             const std::string &sysRoot,
+                             bool keepExternalPaths,
+                             const std::string &path);
 
 /**
  * Determine if a declaration should be traversed.

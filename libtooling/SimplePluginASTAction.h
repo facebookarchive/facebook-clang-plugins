@@ -42,6 +42,10 @@ struct PluginASTOptionsBase {
   /* Configure a second pass on file paths to make them relative to the repo
    * root. */
   std::string repoRoot;
+  /* Configure a third pass on (absolute) file paths to blank the system root:
+   *    /path/to/sysroot/usr/lib/foo.h --> /usr/lib/foo.h
+   */
+  std::string iSysRoot;
   /* Whether file paths not under the repo root should be kept or blanked. */
   bool keepExternalPaths = false;
   /* Resolve symlinks to their real path. */
