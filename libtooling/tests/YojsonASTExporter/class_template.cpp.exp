@@ -420,14 +420,17 @@
             },
             {
               "is_c_like" : true
-            }
+            },
+            [
+              <"Type" : 26>
+            ]
           )>
         ]
       }
     )>,
     <"ClassTemplateSpecializationDecl" : (
       {
-        "pointer" : 26,
+        "pointer" : 27,
         "source_range" : (
           {
             "line" : 6,
@@ -446,7 +449,7 @@
         ]
       },
       <"Type" : "struct S<int>">,
-      27,
+      26,
       [
         <"CXXRecordDecl" : (
           {
@@ -470,7 +473,7 @@
             ]
           },
           <"Type" : "struct S<int>">,
-          27,
+          26,
           [
           ],
           {
@@ -508,7 +511,7 @@
         <"CXXConstructorDecl" : (
           {
             "pointer" : 17,
-            "parent_pointer" : 26,
+            "parent_pointer" : 27,
             "source_range" : (
               {
                 "line" : 7,
@@ -556,7 +559,7 @@
         <"CXXDestructorDecl" : (
           {
             "pointer" : 32,
-            "parent_pointer" : 26,
+            "parent_pointer" : 27,
             "source_range" : (
               {
                 "column" : 8
@@ -585,7 +588,7 @@
         <"CXXConstructorDecl" : (
           {
             "pointer" : 34,
-            "parent_pointer" : 26,
+            "parent_pointer" : 27,
             "source_range" : (
               {
                 "column" : 8
@@ -639,7 +642,7 @@
         <"CXXConstructorDecl" : (
           {
             "pointer" : 38,
-            "parent_pointer" : 26,
+            "parent_pointer" : 27,
             "source_range" : (
               {
                 "column" : 8
@@ -693,7 +696,7 @@
         <"CXXMethodDecl" : (
           {
             "pointer" : 42,
-            "parent_pointer" : 26,
+            "parent_pointer" : 27,
             "source_range" : (
               {
                 "column" : 8
@@ -872,7 +875,7 @@
                               [
                               ],
                               {
-                                "type_ptr" : 27,
+                                "type_ptr" : 26,
                                 "value_kind" : <"LValue">
                               },
                               {
@@ -982,7 +985,7 @@
                         )>
                       ],
                       {
-                        "type_ptr" : 27,
+                        "type_ptr" : 26,
                         "value_kind" : <"LValue">
                       },
                       {
@@ -1000,7 +1003,7 @@
         <"CXXMethodDecl" : (
           {
             "pointer" : 56,
-            "parent_pointer" : 26,
+            "parent_pointer" : 27,
             "source_range" : (
               {
                 "column" : 8
@@ -1070,7 +1073,10 @@
           },
           "type_ptr" : 33
         }
-      }
+      },
+      [
+        <"Type" : 30>
+      ]
     )>,
     <"FunctionDecl" : (
       {
@@ -1434,7 +1440,7 @@
                     )>
                   ],
                   {
-                    "type_ptr" : 27,
+                    "type_ptr" : 26,
                     "value_kind" : <"LValue">
                   },
                   {
@@ -1445,7 +1451,7 @@
                 )>
               ],
               {
-                "type_ptr" : 27,
+                "type_ptr" : 26,
                 "value_kind" : <"LValue">
               }
             )>
@@ -1767,23 +1773,23 @@
     )>,
     <"RecordType" : (
       {
-        "pointer" : 27,
+        "pointer" : 26,
         "raw" : "struct S<int>"
       },
-      26
+      27
     )>,
     <"TemplateSpecializationType" : (
       {
         "pointer" : 122,
         "raw" : "S<int>",
-        "desugared_type" : 27
+        "desugared_type" : 26
       }
     )>,
     <"TemplateSpecializationType" : (
       {
         "pointer" : 62,
         "raw" : "S<int>",
-        "desugared_type" : 27
+        "desugared_type" : 26
       }
     )>,
     <"FunctionProtoType" : (
@@ -1796,7 +1802,7 @@
       },
       {
         "params_type" : [
-          27
+          26
         ]
       }
     )>,
@@ -1818,7 +1824,7 @@
       {
         "pointer" : 124,
         "raw" : "S<int>",
-        "desugared_type" : 27
+        "desugared_type" : 26
       }
     )>,
     <"RecordType" : (
@@ -1839,7 +1845,7 @@
       {
         "pointer" : 12,
         "raw" : "struct S<int>",
-        "desugared_type" : 27
+        "desugared_type" : 26
       }
     )>,
     <"FunctionProtoType" : (
@@ -1898,7 +1904,7 @@
         "pointer" : 37,
         "raw" : "const struct S<int> &"
       },
-      27
+      26
     )>,
     <"FunctionProtoType" : (
       {
@@ -1933,7 +1939,7 @@
         "pointer" : 41,
         "raw" : "struct S<int> &&"
       },
-      27
+      26
     )>,
     <"FunctionProtoType" : (
       {
@@ -2042,7 +2048,7 @@
         "pointer" : 132,
         "raw" : "struct S<int> &"
       },
-      27
+      26
     )>,
     <"FunctionProtoType" : (
       {
@@ -2105,7 +2111,7 @@
         "pointer" : 49,
         "raw" : "struct S<int> *"
       },
-      27
+      26
     )>,
     <"FunctionProtoType" : (
       {
