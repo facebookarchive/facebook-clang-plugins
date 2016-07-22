@@ -57,10 +57,10 @@ build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.h
 	python $(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.h.p | python $(ATDLIB)/normalize_names_in_atd.py > $@
 
 build/ast_inline.atd: build/ast_inline.atd.p
-	$(ATD_CPP) $< > $@
+	$(ATD_CPP) $< > $@ || rm $@
 
 build/clang_ast.atd: build/ast_inline.atd
-	$(ATDCAT) $< > $@
+	$(ATDCAT) $< > $@ || rm $@
 
 build/ast_inline.atd.inc: build/ast_inline.atd.p
 	cat $< | grep '^#' > $@
@@ -69,7 +69,7 @@ build/ast_inline.pat.inc: build/ast_inline.atd.inc
 	cat $< | sed 's/*/,/g; s/ list/_list/g' > $@
 
 build/clang_ast_proj.mli: clang_ast_proj.mli.p build/ast_inline.atd.inc
-	cat $< | $(ATD_CPP) -include build/ast_inline.atd.inc > $@
+	cat $< | $(ATD_CPP) -include build/ast_inline.atd.inc > $@ || rm $@
 
 build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
 	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o - | python $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
