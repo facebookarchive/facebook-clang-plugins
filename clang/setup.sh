@@ -38,7 +38,7 @@ record_installed () {
 ONLY_CHECK=
 ONLY_RECORD=
 
-while [[ $# > 0 ]]; do
+while [[ $# -gt 0 ]]; do
     opt_key="$1"
     case $opt_key in
         -c|--only-check-install)
