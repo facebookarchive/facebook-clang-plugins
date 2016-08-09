@@ -191,7 +191,9 @@
               "Foo"
             ]
           },
-          12,
+          {
+            "type_ptr" : 12
+          },
           {
             "mangled_name" : "_ZN3Foo4funcEv",
             "decl_ptr_with_body" : 11,
@@ -243,7 +245,9 @@
           "someFunction"
         ]
       },
-      15,
+      {
+        "type_ptr" : 15
+      },
       {
         "mangled_name" : "_Z12someFunctionRK3Foo",
         "parameters" : [
@@ -268,7 +272,9 @@
                 "f"
               ]
             },
-            17,
+            {
+              "type_ptr" : 17
+            },
             {
               "parm_index_in_function" : 0
             }
@@ -383,7 +389,9 @@
                       "fRef"
                     ]
                   },
-                  22,
+                  {
+                    "type_ptr" : 22
+                  },
                   {
                     "init_expr" : ["CXXConstCastExpr" , [
                       {
@@ -561,7 +569,10 @@
           "i"
         ]
       },
-      30,
+      {
+        "type_ptr" : 30,
+        "is_const" : true
+      },
       {
         "is_global" : true,
         "is_const_expr" : true,

@@ -239,7 +239,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpPointer(const void *Ptr);
   void dumpSourceRange(SourceRange R);
   void dumpSourceLocation(SourceLocation Loc);
-  void dumpQualType(QualType T);
+  void dumpQualType(const QualType &qt);
   void dumpTypeOld(const Type *T);
   void dumpDeclRef(const Decl &Node);
   bool hasNodes(const DeclContext *DC);
@@ -557,9 +557,18 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
   }
 }
 
+/// \atd
+/// type qual_type = {
+///   type_ptr : type_ptr;
+///   ~is_const : bool;
+/// }
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpQualType(QualType T) {
-  dumpPointerToType(T);
+void ASTExporter<ATDWriter>::dumpQualType(const QualType &qt) {
+  bool IsConst = qt.isConstQualified();
+  ObjectScope oScope(OF, 1 + IsConst);
+  OF.emitTag("type_ptr");
+  dumpPointerToType(qt);
+  OF.emitFlag("is_const", IsConst);
 }
 
 /// \atd
@@ -610,7 +619,7 @@ void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
   }
   if (VD) {
     OF.emitTag("type_ptr");
-    dumpQualType(VD->getType());
+    dumpPointerToType(VD->getType());
   }
 }
 
@@ -878,12 +887,12 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
     dumpDeclRef(*FD);
   } else if (Init.isDelegatingInitializer()) {
     VariantScope Scope(OF, "Delegating");
-    dumpQualType(Init.getTypeSourceInfo()->getType());
+    dumpPointerToType(Init.getTypeSourceInfo()->getType());
   } else {
     VariantScope Scope(OF, "BaseClass");
     {
       TupleScope Scope(OF, 2);
-      dumpQualType(Init.getTypeSourceInfo()->getType());
+      dumpPointerToType(Init.getTypeSourceInfo()->getType());
       OF.emitBoolean(Init.isBaseVirtual());
     }
   }
@@ -1294,7 +1303,7 @@ int ASTExporter<ATDWriter>::ValueDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
 /// \atd
-/// #define value_decl_tuple named_decl_tuple * type_ptr
+/// #define value_decl_tuple named_decl_tuple * qual_type
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitValueDecl(const ValueDecl *D) {
   VisitNamedDecl(D);
@@ -1865,7 +1874,7 @@ void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
     break;
   case TemplateArgument::Type: {
     VariantScope Scope(OF, "Type");
-    dumpQualType(Arg.getAsType());
+    dumpPointerToType(Arg.getAsType());
     break;
   }
   case TemplateArgument::Declaration:
@@ -2359,7 +2368,7 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
-  dumpQualType(D->getReturnType());
+  dumpPointerToType(D->getReturnType());
   OF.emitFlag("is_property_accessor", IsPropertyAccessor);
   if (PropertyDecl) {
     OF.emitTag("property_decl");
@@ -2654,7 +2663,7 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
                         HasPropertyAttributes); // not covered by tests
 
   OF.emitTag("type_ptr");
-  dumpQualType(D->getType());
+  dumpPointerToType(D->getType());
 
   if (Getter) {
     OF.emitTag("getter_method");
@@ -3027,7 +3036,7 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
   ObjectScope Scope(OF, 1 + HasNonDefaultValueKind + HasNonDefaultObjectKind);
 
   OF.emitTag("type_ptr");
-  dumpQualType(Node->getType());
+  dumpPointerToType(Node->getType());
 
   if (HasNonDefaultValueKind) {
     OF.emitTag("value_kind");
@@ -3176,7 +3185,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExplicitCastExpr(
     const ExplicitCastExpr *Node) {
   VisitCastExpr(Node);
-  dumpQualType(Node->getTypeAsWritten());
+  dumpPointerToType(Node->getTypeAsWritten());
 }
 
 template <class ATDWriter>
@@ -3502,8 +3511,8 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const UnaryExprOrTypeTraitExpr *Node) {
   VisitExpr(Node);
 
-  bool HasQualType = Node->isArgumentType();
-  ObjectScope Scope(OF, 1 + HasQualType); // not covered by tests
+  bool HasType = Node->isArgumentType();
+  ObjectScope Scope(OF, 1 + HasType); // not covered by tests
 
   OF.emitTag("kind");
   switch (Node->getKind()) {
@@ -3520,9 +3529,9 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     OF.emitSimpleVariant("OpenMPRequiredSimdAlign");
     break;
   }
-  if (HasQualType) {
+  if (HasType) {
     OF.emitTag("type_ptr");
-    dumpQualType(Node->getArgumentType());
+    dumpPointerToType(Node->getArgumentType());
   }
 }
 
@@ -3736,9 +3745,9 @@ void ASTExporter<ATDWriter>::VisitCompoundAssignOperator(
   VisitBinaryOperator(Node);
   ObjectScope Scope(OF, 2); // not covered by tests
   OF.emitTag("lhs_type");
-  dumpQualType(Node->getComputationLHSType());
+  dumpPointerToType(Node->getComputationLHSType());
   OF.emitTag("result_type");
-  dumpQualType(Node->getComputationResultType());
+  dumpPointerToType(Node->getComputationResultType());
 }
 
 template <class ATDWriter>
@@ -4066,7 +4075,7 @@ void ASTExporter<ATDWriter>::VisitCXXDeleteExpr(const CXXDeleteExpr *Node) {
   OF.emitFlag("is_array", IsArray);
 
   OF.emitTag("destroyed_type");
-  dumpQualType(Node->getDestroyedType());
+  dumpPointerToType(Node->getDestroyedType());
 }
 
 template <class ATDWriter>
@@ -4208,7 +4217,7 @@ void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
     switch (RK) {
     case ObjCMessageExpr::Class: {
       VariantScope Scope(OF, "Class");
-      dumpQualType(Node->getClassReceiver());
+      dumpPointerToType(Node->getClassReceiver());
     } break;
     case ObjCMessageExpr::SuperInstance:
       OF.emitSimpleVariant("SuperInstance");
@@ -4280,7 +4289,7 @@ int ASTExporter<ATDWriter>::ObjCEncodeExprTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCEncodeExpr(const ObjCEncodeExpr *Node) {
   VisitExpr(Node);
-  dumpQualType(Node->getEncodedType());
+  dumpPointerToType(Node->getEncodedType());
 }
 
 template <class ATDWriter>
