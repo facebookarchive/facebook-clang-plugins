@@ -129,33 +129,22 @@ void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
   } else if (TypedefNameDecl *Typedef = D->getTypedefNameForAnonDecl()) {
     StrOS << Typedef->getIdentifier()->getName();
   } else {
-    StrOS << "(";
     if (isa<CXXRecordDecl>(D) && cast<CXXRecordDecl>(D)->isLambda()) {
       StrOS << "lambda";
     } else {
-      StrOS << "anonymous " << D->getKindName();
+      StrOS << "anonymous_" << D->getKindName();
     }
     PresumedLoc PLoc = SM.getPresumedLoc(D->getLocation());
     if (PLoc.isValid()) {
-      StrOS << " at " << PLoc.getFilename() << ':' << PLoc.getLine() << ':'
+      StrOS << "_" << PLoc.getFilename() << ':' << PLoc.getLine() << ':'
             << PLoc.getColumn();
     }
-    StrOS << ")";
   }
   if (const ClassTemplateSpecializationDecl *Spec =
           dyn_cast<ClassTemplateSpecializationDecl>(D)) {
-    const TemplateArgument *Args;
-    unsigned NumArgs;
-    if (const TypeSourceInfo *TAW = Spec->getTypeAsWritten()) {
-      const TemplateSpecializationType *TST =
-          cast<TemplateSpecializationType>(TAW->getType());
-      Args = TST->getArgs();
-      NumArgs = TST->getNumArgs();
-    } else {
-      const TemplateArgumentList &TemplateArgs = Spec->getTemplateArgs();
-      Args = TemplateArgs.data();
-      NumArgs = TemplateArgs.size();
-    }
+    const TemplateArgumentList &TemplateArgs = Spec->getTemplateArgs();
+    const TemplateArgument *Args = TemplateArgs.data();
+    unsigned NumArgs = TemplateArgs.size();
     printTemplateArgList(StrOS, Args, NumArgs);
   }
   OF.emitString(StrOS.str());
