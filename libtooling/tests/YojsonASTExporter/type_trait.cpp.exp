@@ -1012,7 +1012,9 @@
         "pointer" : 76,
         "raw" : "void *"
       },
-      43
+      {
+        "type_ptr" : 43
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -1033,7 +1035,9 @@
         "pointer" : 79,
         "raw" : "char *"
       },
-      44
+      {
+        "type_ptr" : 44
+      }
     )>,
     <"RecordType" : (
       {
@@ -1062,7 +1066,9 @@
         "pointer" : 83,
         "raw" : "struct X *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -1080,14 +1086,19 @@
         "pointer" : 84,
         "raw" : "struct X &"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 16,
         "raw" : "const struct X &"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -1122,7 +1133,9 @@
         "pointer" : 20,
         "raw" : "struct X &&"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -1191,7 +1204,9 @@
         "pointer" : 38,
         "raw" : "_Bool (*)(void)"
       },
-      25
+      {
+        "type_ptr" : 25
+      }
     )>,
     <"SubstTemplateTypeParmType" : (
       {

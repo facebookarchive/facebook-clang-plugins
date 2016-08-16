@@ -3228,7 +3228,9 @@
         "pointer" : 144,
         "raw" : "void *"
       },
-      111
+      {
+        "type_ptr" : 111
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -3249,7 +3251,9 @@
         "pointer" : 147,
         "raw" : "char *"
       },
-      113
+      {
+        "type_ptr" : 113
+      }
     )>,
     <"RecordType" : (
       {
@@ -3278,7 +3282,9 @@
         "pointer" : 151,
         "raw" : "class X *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3299,7 +3305,10 @@
         "pointer" : 18,
         "raw" : "const class X &"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3320,7 +3329,9 @@
         "pointer" : 152,
         "raw" : "class X &"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3370,7 +3381,9 @@
         "pointer" : 154,
         "raw" : "class Y *"
       },
-      25
+      {
+        "type_ptr" : 25
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3427,14 +3440,19 @@
         "pointer" : 58,
         "raw" : "class X (*)(class X)"
       },
-      37
+      {
+        "type_ptr" : 37
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 34,
         "raw" : "const class Y &"
       },
-      25
+      {
+        "type_ptr" : 25,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3469,7 +3487,9 @@
         "pointer" : 80,
         "raw" : "class Y (*)(class Y)"
       },
-      40
+      {
+        "type_ptr" : 40
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3490,7 +3510,9 @@
         "pointer" : 97,
         "raw" : "class X &(*)(const class X &)"
       },
-      20
+      {
+        "type_ptr" : 20
+      }
     )>,
     <"NoneType" : (
       {

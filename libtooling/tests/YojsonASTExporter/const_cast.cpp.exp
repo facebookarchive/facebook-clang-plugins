@@ -845,7 +845,9 @@
         "pointer" : 63,
         "raw" : "void *"
       },
-      28
+      {
+        "type_ptr" : 28
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -866,7 +868,9 @@
         "pointer" : 66,
         "raw" : "char *"
       },
-      33
+      {
+        "type_ptr" : 33
+      }
     )>,
     <"RecordType" : (
       {
@@ -895,7 +899,9 @@
         "pointer" : 70,
         "raw" : "class Foo *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -913,7 +919,10 @@
         "pointer" : 17,
         "raw" : "const class Foo &"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -934,14 +943,19 @@
         "pointer" : 22,
         "raw" : "class Foo &"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 71,
         "raw" : "const class Foo *"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     )>,
     <"NoneType" : (
       {

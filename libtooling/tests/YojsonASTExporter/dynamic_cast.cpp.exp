@@ -3086,7 +3086,9 @@
         "pointer" : 143,
         "raw" : "void *"
       },
-      109
+      {
+        "type_ptr" : 109
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -3107,7 +3109,9 @@
         "pointer" : 146,
         "raw" : "char *"
       },
-      111
+      {
+        "type_ptr" : 111
+      }
     )>,
     <"RecordType" : (
       {
@@ -3136,7 +3140,9 @@
         "pointer" : 70,
         "raw" : "struct A *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3154,14 +3160,19 @@
         "pointer" : 93,
         "raw" : "struct A &"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 16,
         "raw" : "const struct A &"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3196,7 +3207,9 @@
         "pointer" : 20,
         "raw" : "struct A &&"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3249,14 +3262,19 @@
         "pointer" : 100,
         "raw" : "struct B &"
       },
-      33
+      {
+        "type_ptr" : 33
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 38,
         "raw" : "const struct B &"
       },
-      33
+      {
+        "type_ptr" : 33,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3291,7 +3309,9 @@
         "pointer" : 42,
         "raw" : "struct B &&"
       },
-      33
+      {
+        "type_ptr" : 33
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3489,21 +3509,27 @@
         "pointer" : 69,
         "raw" : "struct B *"
       },
-      33
+      {
+        "type_ptr" : 33
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 86,
         "raw" : "struct C *"
       },
-      55
+      {
+        "type_ptr" : 55
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 107,
         "raw" : "struct C &"
       },
-      55
+      {
+        "type_ptr" : 55
+      }
     )>,
     <"NoneType" : (
       {

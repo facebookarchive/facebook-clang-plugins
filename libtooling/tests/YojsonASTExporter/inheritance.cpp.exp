@@ -2688,7 +2688,9 @@
         "pointer" : 155,
         "raw" : "void *"
       },
-      103
+      {
+        "type_ptr" : 103
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -2709,7 +2711,9 @@
         "pointer" : 158,
         "raw" : "char *"
       },
-      126
+      {
+        "type_ptr" : 126
+      }
     )>,
     <"RecordType" : (
       {
@@ -2767,7 +2771,9 @@
         "pointer" : 33,
         "raw" : "class Form *"
       },
-      16
+      {
+        "type_ptr" : 16
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -2810,14 +2816,19 @@
         "pointer" : 162,
         "raw" : "class Form &"
       },
-      16
+      {
+        "type_ptr" : 16
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 46,
         "raw" : "const class Form &"
       },
-      16
+      {
+        "type_ptr" : 16,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -2852,7 +2863,9 @@
         "pointer" : 50,
         "raw" : "class Form &&"
       },
-      16
+      {
+        "type_ptr" : 16
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -2905,7 +2918,9 @@
         "pointer" : 70,
         "raw" : "class Circle *"
       },
-      54
+      {
+        "type_ptr" : 54
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -2923,14 +2938,19 @@
         "pointer" : 165,
         "raw" : "class Circle &"
       },
-      54
+      {
+        "type_ptr" : 54
+      }
     )>,
     <"LValueReferenceType" : (
       {
         "pointer" : 119,
         "raw" : "const class Circle &"
       },
-      54
+      {
+        "type_ptr" : 54,
+        "is_const" : true
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -2965,7 +2985,9 @@
         "pointer" : 123,
         "raw" : "class Circle &&"
       },
-      54
+      {
+        "type_ptr" : 54
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -3011,14 +3033,18 @@
         "pointer" : 76,
         "raw" : "double (*)(double)"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 95,
         "raw" : "double (*)(double, double)"
       },
-      12
+      {
+        "type_ptr" : 12
+      }
     )>,
     <"NoneType" : (
       {

@@ -1743,7 +1743,9 @@
         "pointer" : 110,
         "raw" : "void *"
       },
-      77
+      {
+        "type_ptr" : 77
+      }
     ]],
     ["BuiltinType" , [
       {
@@ -1764,7 +1766,9 @@
         "pointer" : 113,
         "raw" : "char *"
       },
-      79
+      {
+        "type_ptr" : 79
+      }
     ]],
     ["RecordType" , [
       {
@@ -1937,14 +1941,20 @@
         "pointer" : 21,
         "raw" : "const struct S<struct S<int> > &"
       },
-      9
+      {
+        "type_ptr" : 9,
+        "is_const" : true
+      }
     ]],
     ["LValueReferenceType" , [
       {
         "pointer" : 37,
         "raw" : "const struct S<int> &"
       },
-      26
+      {
+        "type_ptr" : 26,
+        "is_const" : true
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -1979,7 +1989,9 @@
         "pointer" : 41,
         "raw" : "struct S<int> &&"
       },
-      26
+      {
+        "type_ptr" : 26
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -2042,7 +2054,9 @@
         "pointer" : 25,
         "raw" : "struct S<struct S<int> > &&"
       },
-      9
+      {
+        "type_ptr" : 9
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -2088,7 +2102,9 @@
         "pointer" : 132,
         "raw" : "struct S<int> &"
       },
-      26
+      {
+        "type_ptr" : 26
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -2151,7 +2167,9 @@
         "pointer" : 49,
         "raw" : "struct S<int> *"
       },
-      26
+      {
+        "type_ptr" : 26
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -2172,14 +2190,18 @@
         "pointer" : 135,
         "raw" : "struct S<int> &(*)(const struct S<int> &)"
       },
-      133
+      {
+        "type_ptr" : 133
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 72,
         "raw" : "struct S<int> &(*)(const struct S<int> &)"
       },
-      71
+      {
+        "type_ptr" : 71
+      }
     ]],
     ["NoneType" , [
       {

@@ -442,7 +442,9 @@
         "pointer" : 46,
         "raw" : "void *"
       },
-      14
+      {
+        "type_ptr" : 14
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -463,7 +465,9 @@
         "pointer" : 49,
         "raw" : "char *"
       },
-      16
+      {
+        "type_ptr" : 16
+      }
     )>,
     <"RecordType" : (
       {
@@ -485,7 +489,10 @@
         "pointer" : 8,
         "raw" : "const int &"
       },
-      13
+      {
+        "type_ptr" : 13,
+        "is_const" : true
+      }
     )>,
     <"NoneType" : (
       {

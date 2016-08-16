@@ -9693,7 +9693,9 @@
         "pointer" : 28,
         "raw" : "void *"
       },
-      19
+      {
+        "type_ptr" : 19
+      }
     ]],
     ["BuiltinType" , [
       {
@@ -9714,7 +9716,9 @@
         "pointer" : 339,
         "raw" : "SEL *"
       },
-      336
+      {
+        "type_ptr" : 336
+      }
     ]],
     ["ObjCObjectType" , [
       {
@@ -9730,7 +9734,9 @@
         "pointer" : 341,
         "raw" : "id"
       },
-      340
+      {
+        "type_ptr" : 340
+      }
     ]],
     ["ObjCObjectType" , [
       {
@@ -9746,7 +9752,9 @@
         "pointer" : 343,
         "raw" : "Class"
       },
-      342
+      {
+        "type_ptr" : 342
+      }
     ]],
     ["ObjCInterfaceType" , [
       {
@@ -9760,7 +9768,9 @@
         "pointer" : 88,
         "raw" : "char *"
       },
-      309
+      {
+        "type_ptr" : 309
+      }
     ]],
     ["RecordType" , [
       {
@@ -9844,7 +9854,9 @@
         "pointer" : 113,
         "raw" : "Protocol *"
       },
-      344
+      {
+        "type_ptr" : 344
+      }
     ]],
     ["ObjCInterfaceType" , [
       {
@@ -9897,14 +9909,20 @@
         "pointer" : 361,
         "raw" : "const id *"
       },
-      341
+      {
+        "type_ptr" : 341,
+        "is_const" : true
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 362,
         "raw" : "const id *"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     ]],
     ["DecayedType" , [
       {
@@ -9926,14 +9944,18 @@
         "pointer" : 366,
         "raw" : "id *"
       },
-      341
+      {
+        "type_ptr" : 341
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 367,
         "raw" : "id *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     ]],
     ["ObjCInterfaceType" , [
       {
@@ -9947,7 +9969,9 @@
         "pointer" : 16,
         "raw" : "NSString *"
       },
-      354
+      {
+        "type_ptr" : 354
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -10015,7 +10039,9 @@
         "pointer" : 38,
         "raw" : "NSObject<SomeProtocol> *"
       },
-      372
+      {
+        "type_ptr" : 372
+      }
     ]],
     ["AttributedType" , [
       {
@@ -10032,7 +10058,9 @@
         "pointer" : 43,
         "raw" : "MyClass *"
       },
-      295
+      {
+        "type_ptr" : 295
+      }
     ]],
     ["ConstantArrayType" , [
       {
@@ -10047,28 +10075,36 @@
         "pointer" : 373,
         "raw" : "int *"
       },
-      33
+      {
+        "type_ptr" : 33
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 87,
         "raw" : "int **"
       },
-      373
+      {
+        "type_ptr" : 373
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 374,
         "raw" : "void (*)(id, ...)"
       },
-      371
+      {
+        "type_ptr" : 371
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 80,
         "raw" : "void (*)(id, ...)"
       },
-      78
+      {
+        "type_ptr" : 78
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -10146,21 +10182,27 @@
         "pointer" : 149,
         "raw" : "NSArray *"
       },
-      364
+      {
+        "type_ptr" : 364
+      }
     ]],
     ["ObjCObjectPointerType" , [
       {
         "pointer" : 148,
         "raw" : "NSNumber *"
       },
-      352
+      {
+        "type_ptr" : 352
+      }
     ]],
     ["ObjCObjectPointerType" , [
       {
         "pointer" : 175,
         "raw" : "NSDictionary *"
       },
-      357
+      {
+        "type_ptr" : 357
+      }
     ]],
     ["ConstantArrayType" , [
       {
@@ -10175,7 +10217,9 @@
         "pointer" : 215,
         "raw" : "NSException *"
       },
-      368
+      {
+        "type_ptr" : 368
+      }
     ]],
     ["ConstantArrayType" , [
       {
@@ -10206,7 +10250,9 @@
         "pointer" : 286,
         "raw" : "char **"
       },
-      88
+      {
+        "type_ptr" : 88
+      }
     ]],
     ["FunctionProtoType" , [
       {

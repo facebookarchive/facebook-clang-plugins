@@ -575,7 +575,9 @@
         "pointer" : 55,
         "raw" : "void *"
       },
-      21
+      {
+        "type_ptr" : 21
+      }
     ]],
     ["BuiltinType" , [
       {
@@ -596,7 +598,9 @@
         "pointer" : 58,
         "raw" : "char *"
       },
-      24
+      {
+        "type_ptr" : 24
+      }
     ]],
     ["RecordType" , [
       {
@@ -651,21 +655,27 @@
         "pointer" : 63,
         "raw" : "char **"
       },
-      58
+      {
+        "type_ptr" : 58
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 64,
         "raw" : "void (*)(void)"
       },
-      62
+      {
+        "type_ptr" : 62
+      }
     ]],
     ["PointerType" , [
       {
         "pointer" : 20,
         "raw" : "void (*)(void) noexcept"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     ]],
     ["NoneType" , [
       {

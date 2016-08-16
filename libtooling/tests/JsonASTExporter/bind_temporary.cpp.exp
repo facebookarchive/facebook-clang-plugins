@@ -934,7 +934,9 @@
         "pointer" : 65,
         "raw" : "void *"
       },
-      31
+      {
+        "type_ptr" : 31
+      }
     ]],
     ["BuiltinType" , [
       {
@@ -955,7 +957,9 @@
         "pointer" : 68,
         "raw" : "char *"
       },
-      33
+      {
+        "type_ptr" : 33
+      }
     ]],
     ["RecordType" , [
       {
@@ -984,7 +988,9 @@
         "pointer" : 72,
         "raw" : "struct S *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     ]],
     ["FunctionProtoType" , [
       {
@@ -1024,7 +1030,10 @@
         "pointer" : 20,
         "raw" : "const struct S &"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     ]],
     ["FunctionProtoType" , [
       {

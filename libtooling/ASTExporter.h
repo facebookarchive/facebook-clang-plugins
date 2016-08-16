@@ -4689,6 +4689,7 @@ int ASTExporter<ATDWriter>::TypeWithChildInfoTupleSize() {
 ///   ?desugared_type : type_ptr option;
 /// } <ocaml field_prefix="ti_">
 /// #define type_with_child_info type_info * type_ptr
+/// #define qual_type_with_child_info type_info * qual_type
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitType(const Type *T) {
   // NOTE: T can (and will) be null here!!
@@ -4700,7 +4701,6 @@ void ASTExporter<ATDWriter>::VisitType(const Type *T) {
   dumpPointer(T);
 
   OF.emitTag("raw");
-
   QualType qt(T, 0);
   OF.emitString(qt.getAsString());
 
@@ -5059,12 +5059,12 @@ int ASTExporter<ATDWriter>::ObjCObjectPointerTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
 /// \atd
-/// #define obj_c_object_pointer_type_tuple type_with_child_info
+/// #define obj_c_object_pointer_type_tuple qual_type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCObjectPointerType(
     const ObjCObjectPointerType *T) {
   VisitType(T);
-  dumpPointerToType(T->getPointeeType());
+  dumpQualType(T->getPointeeType());
 }
 
 template <class ATDWriter>
@@ -5131,12 +5131,12 @@ int ASTExporter<ATDWriter>::PointerTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
 /// \atd
-/// #define pointer_type_tuple type_with_child_info
+/// #define pointer_type_tuple qual_type_with_child_info
 ///
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitPointerType(const PointerType *T) {
   VisitType(T);
-  dumpPointerToType(T->getPointeeType());
+  dumpQualType(T->getPointeeType());
 }
 
 template <class ATDWriter>
@@ -5144,12 +5144,12 @@ int ASTExporter<ATDWriter>::ReferenceTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
 /// \atd
-/// #define reference_type_tuple type_with_child_info
+/// #define reference_type_tuple qual_type_with_child_info
 ///
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitReferenceType(const ReferenceType *T) {
   VisitType(T);
-  dumpPointerToType(T->getPointeeType());
+  dumpQualType(T->getPointeeType());
 }
 
 template <class ATDWriter>

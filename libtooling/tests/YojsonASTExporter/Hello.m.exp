@@ -2592,7 +2592,9 @@
         "pointer" : 144,
         "raw" : "void *"
       },
-      63
+      {
+        "type_ptr" : 63
+      }
     )>,
     <"BuiltinType" : (
       {
@@ -2613,7 +2615,9 @@
         "pointer" : 147,
         "raw" : "SEL *"
       },
-      143
+      {
+        "type_ptr" : 143
+      }
     )>,
     <"ObjCObjectType" : (
       {
@@ -2629,7 +2633,9 @@
         "pointer" : 149,
         "raw" : "id"
       },
-      148
+      {
+        "type_ptr" : 148
+      }
     )>,
     <"ObjCObjectType" : (
       {
@@ -2645,7 +2651,9 @@
         "pointer" : 151,
         "raw" : "Class"
       },
-      150
+      {
+        "type_ptr" : 150
+      }
     )>,
     <"ObjCInterfaceType" : (
       {
@@ -2659,7 +2667,9 @@
         "pointer" : 153,
         "raw" : "char *"
       },
-      116
+      {
+        "type_ptr" : 116
+      }
     )>,
     <"RecordType" : (
       {
@@ -2743,7 +2753,9 @@
         "pointer" : 29,
         "raw" : "Protocol *"
       },
-      152
+      {
+        "type_ptr" : 152
+      }
     )>,
     <"ObjCInterfaceType" : (
       {
@@ -2796,14 +2808,20 @@
         "pointer" : 164,
         "raw" : "const id *"
       },
-      149
+      {
+        "type_ptr" : 149,
+        "is_const" : true
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 165,
         "raw" : "const id *"
       },
-      8
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
     )>,
     <"DecayedType" : (
       {
@@ -2825,14 +2843,18 @@
         "pointer" : 167,
         "raw" : "id *"
       },
-      149
+      {
+        "type_ptr" : 149
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 47,
         "raw" : "id *"
       },
-      8
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"ObjCInterfaceType" : (
       {
@@ -2846,7 +2868,9 @@
         "pointer" : 60,
         "raw" : "NSString *"
       },
-      160
+      {
+        "type_ptr" : 160
+      }
     )>,
     <"FunctionProtoType" : (
       {
@@ -2902,7 +2926,9 @@
         "pointer" : 69,
         "raw" : "Hello *"
       },
-      110
+      {
+        "type_ptr" : 110
+      }
     )>,
     <"ConstantArrayType" : (
       {
@@ -2917,14 +2943,18 @@
         "pointer" : 171,
         "raw" : "void (*)(id, ...)"
       },
-      170
+      {
+        "type_ptr" : 170
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 82,
         "raw" : "void (*)(id, ...)"
       },
-      55
+      {
+        "type_ptr" : 55
+      }
     )>,
     <"IncompleteArrayType" : (
       {
@@ -2938,7 +2968,9 @@
         "pointer" : 173,
         "raw" : "char **"
       },
-      153
+      {
+        "type_ptr" : 153
+      }
     )>,
     <"DecayedType" : (
       {
