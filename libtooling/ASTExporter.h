@@ -561,7 +561,7 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
 /// type qual_type = {
 ///   type_ptr : type_ptr;
 ///   ~is_const : bool;
-/// }
+/// } <ocaml field_prefix="qt_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(const QualType &qt) {
   bool IsConst = qt.isConstQualified();
