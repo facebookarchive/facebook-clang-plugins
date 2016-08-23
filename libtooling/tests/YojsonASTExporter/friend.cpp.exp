@@ -1,0 +1,1106 @@
+<"TranslationUnitDecl" : (
+  {
+    "pointer" : 1,
+    "source_range" : (
+      {
+      },
+      {
+      }
+    )
+  },
+  [
+    <"TypedefDecl" : (
+      {
+        "pointer" : 2,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true
+      },
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 4,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true
+      },
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 5,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true
+      },
+      {
+        "name" : "__builtin_ms_va_list",
+        "qual_name" : [
+          "__builtin_ms_va_list"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 6,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true
+      },
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"ClassTemplateDecl" : (
+      {
+        "pointer" : 7,
+        "source_range" : (
+          {
+            "file" : "tests/friend.cpp",
+            "line" : 2,
+            "column" : 1
+          },
+          {
+            "line" : 3,
+            "column" : 22
+          }
+        )
+      },
+      {
+        "name" : "AnotherClass",
+        "qual_name" : [
+          "AnotherClass"
+        ]
+      },
+      {
+        "specializations" : [
+          <"ClassTemplateSpecializationDecl" : (
+            {
+              "pointer" : 8,
+              "source_range" : (
+                {
+                  "line" : 2,
+                  "column" : 1
+                },
+                {
+                  "line" : 3,
+                  "column" : 22
+                }
+              )
+            },
+            {
+              "name" : "AnotherClass",
+              "qual_name" : [
+                "AnotherClass<int *>"
+              ]
+            },
+            <"Type" : "struct AnotherClass<int *>">,
+            9,
+            [
+            ],
+            {
+            },
+            {
+            },
+            {
+            },
+            [
+              <"Type" : 10>
+            ]
+          )>
+        ]
+      }
+    )>,
+    <"ClassTemplateDecl" : (
+      {
+        "pointer" : 11,
+        "source_range" : (
+          {
+            "line" : 5,
+            "column" : 1
+          },
+          {
+            "line" : 10,
+            "column" : 1
+          }
+        )
+      },
+      {
+        "name" : "Y",
+        "qual_name" : [
+          "Y"
+        ]
+      },
+      {
+        "specializations" : [
+          <"ClassTemplateSpecializationDecl" : (
+            {
+              "pointer" : 12,
+              "source_range" : (
+                {
+                  "line" : 5,
+                  "column" : 1
+                },
+                {
+                  "line" : 10,
+                  "column" : 1
+                }
+              )
+            },
+            {
+              "name" : "Y",
+              "qual_name" : [
+                "Y<int>"
+              ]
+            },
+            <"Type" : "struct Y<int>">,
+            13,
+            [
+              <"CXXRecordDecl" : (
+                {
+                  "pointer" : 14,
+                  "source_range" : (
+                    {
+                      "line" : 6,
+                      "column" : 1
+                    },
+                    {
+                      "column" : 8
+                    }
+                  ),
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "Y",
+                  "qual_name" : [
+                    "Y",
+                    "Y<int>"
+                  ]
+                },
+                <"Type" : "struct Y<int>">,
+                13,
+                [
+                ],
+                {
+                },
+                {
+                },
+                {
+                }
+              )>,
+              <"FriendDecl" : (
+                {
+                  "pointer" : 15,
+                  "source_range" : (
+                    {
+                      "line" : 7,
+                      "column" : 3
+                    },
+                    {
+                      "column" : 32
+                    }
+                  )
+                },
+                <"Type" : 16>
+              )>,
+              <"FriendDecl" : (
+                {
+                  "pointer" : 17,
+                  "source_range" : (
+                    {
+                      "line" : 8,
+                      "column" : 3
+                    },
+                    {
+                      "line" : 9,
+                      "column" : 16
+                    }
+                  )
+                },
+                <"Decl" : <"ClassTemplateDecl" : (
+                  {
+                    "pointer" : 18,
+                    "parent_pointer" : 1,
+                    "source_range" : (
+                      {
+                        "line" : 8,
+                        "column" : 3
+                      },
+                      {
+                        "line" : 9,
+                        "column" : 16
+                      }
+                    )
+                  },
+                  {
+                    "name" : "AnotherClass",
+                    "qual_name" : [
+                      "AnotherClass"
+                    ]
+                  },
+                  {
+                  }
+                )>>
+              )>,
+              <"CXXConstructorDecl" : (
+                {
+                  "pointer" : 19,
+                  "parent_pointer" : 12,
+                  "source_range" : (
+                    {
+                      "line" : 6,
+                      "column" : 8
+                    },
+                    {
+                      "column" : 8
+                    }
+                  ),
+                  "is_implicit" : true,
+                  "is_used" : true,
+                  "is_this_declaration_referenced" : true
+                },
+                {
+                  "name" : "Y",
+                  "qual_name" : [
+                    "Y",
+                    "Y<int>"
+                  ]
+                },
+                {
+                  "type_ptr" : 20
+                },
+                {
+                  "mangled_name" : "_ZN1YIiEC1Ev",
+                  "is_inline" : true,
+                  "decl_ptr_with_body" : 19,
+                  "body" : <"CompoundStmt" : (
+                    {
+                      "pointer" : 21,
+                      "source_range" : (
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      )
+                    },
+                    [
+                    ]
+                  )>
+                },
+                {
+                }
+              )>,
+              <"CXXConstructorDecl" : (
+                {
+                  "pointer" : 22,
+                  "parent_pointer" : 12,
+                  "source_range" : (
+                    {
+                      "column" : 8
+                    },
+                    {
+                      "column" : 8
+                    }
+                  ),
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "Y",
+                  "qual_name" : [
+                    "Y",
+                    "Y<int>"
+                  ]
+                },
+                {
+                  "type_ptr" : 23
+                },
+                {
+                  "mangled_name" : "_ZN1YIiEC1ERKS0_",
+                  "is_inline" : true,
+                  "parameters" : [
+                    <"ParmVarDecl" : (
+                      {
+                        "pointer" : 24,
+                        "source_range" : (
+                          {
+                            "column" : 8
+                          },
+                          {
+                            "column" : 8
+                          }
+                        )
+                      },
+                      {
+                        "name" : "",
+                        "qual_name" : [
+                          ""
+                        ]
+                      },
+                      {
+                        "type_ptr" : 25
+                      },
+                      {
+                        "parm_index_in_function" : 0
+                      }
+                    )>
+                  ]
+                },
+                {
+                }
+              )>,
+              <"CXXConstructorDecl" : (
+                {
+                  "pointer" : 26,
+                  "parent_pointer" : 12,
+                  "source_range" : (
+                    {
+                      "column" : 8
+                    },
+                    {
+                      "column" : 8
+                    }
+                  ),
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "Y",
+                  "qual_name" : [
+                    "Y",
+                    "Y<int>"
+                  ]
+                },
+                {
+                  "type_ptr" : 27
+                },
+                {
+                  "mangled_name" : "_ZN1YIiEC1EOS0_",
+                  "is_inline" : true,
+                  "parameters" : [
+                    <"ParmVarDecl" : (
+                      {
+                        "pointer" : 28,
+                        "source_range" : (
+                          {
+                            "column" : 8
+                          },
+                          {
+                            "column" : 8
+                          }
+                        )
+                      },
+                      {
+                        "name" : "",
+                        "qual_name" : [
+                          ""
+                        ]
+                      },
+                      {
+                        "type_ptr" : 29
+                      },
+                      {
+                        "parm_index_in_function" : 0
+                      }
+                    )>
+                  ]
+                },
+                {
+                }
+              )>
+            ],
+            {
+            },
+            {
+              "is_complete_definition" : true
+            },
+            {
+            },
+            [
+              <"Type" : 30>
+            ]
+          )>
+        ]
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : 31,
+        "source_range" : (
+          {
+            "line" : 12,
+            "column" : 1
+          },
+          {
+            "column" : 8
+          }
+        )
+      },
+      {
+        "name" : "y1",
+        "qual_name" : [
+          "y1"
+        ]
+      },
+      {
+        "type_ptr" : 32
+      },
+      {
+        "is_global" : true,
+        "init_expr" : <"CXXConstructExpr" : (
+          {
+            "pointer" : 33,
+            "source_range" : (
+              {
+                "column" : 8
+              },
+              {
+                "column" : 8
+              }
+            )
+          },
+          [
+          ],
+          {
+            "type_ptr" : 32
+          },
+          {
+            "decl_ref" : {
+              "kind" : <"CXXConstructor">,
+              "decl_pointer" : 19,
+              "name" : {
+                "name" : "Y",
+                "qual_name" : [
+                  "Y",
+                  "Y<int>"
+                ]
+              },
+              "type_ptr" : 20
+            }
+          }
+        )>
+      }
+    )>
+  ],
+  {
+  },
+  [
+    <"BuiltinType" : (
+      {
+        "pointer" : 34,
+        "raw" : "void"
+      },
+      <"Void">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 35,
+        "raw" : "_Bool"
+      },
+      <"Bool">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 36,
+        "raw" : "char"
+      },
+      <"Char_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 37,
+        "raw" : "signed char"
+      },
+      <"SChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 38,
+        "raw" : "short"
+      },
+      <"Short">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 30,
+        "raw" : "int"
+      },
+      <"Int">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 39,
+        "raw" : "long"
+      },
+      <"Long">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 40,
+        "raw" : "long long"
+      },
+      <"LongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 41,
+        "raw" : "unsigned char"
+      },
+      <"UChar">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 42,
+        "raw" : "unsigned short"
+      },
+      <"UShort">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 43,
+        "raw" : "unsigned int"
+      },
+      <"UInt">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 44,
+        "raw" : "unsigned long"
+      },
+      <"ULong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 45,
+        "raw" : "unsigned long long"
+      },
+      <"ULongLong">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 46,
+        "raw" : "float"
+      },
+      <"Float">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 47,
+        "raw" : "double"
+      },
+      <"Double">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 48,
+        "raw" : "long double"
+      },
+      <"LongDouble">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 49,
+        "raw" : "__int128"
+      },
+      <"Int128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 50,
+        "raw" : "unsigned __int128"
+      },
+      <"UInt128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 51,
+        "raw" : "wchar_t"
+      },
+      <"WChar_S">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 52,
+        "raw" : "char16_t"
+      },
+      <"Char16">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 53,
+        "raw" : "char32_t"
+      },
+      <"Char32">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 54,
+        "raw" : "<dependent type>"
+      },
+      <"Dependent">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 55,
+        "raw" : "<overloaded function type>"
+      },
+      <"Overload">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 56,
+        "raw" : "<bound member function type>"
+      },
+      <"BoundMember">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 57,
+        "raw" : "<pseudo-object type>"
+      },
+      <"PseudoObject">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 58,
+        "raw" : "<unknown type>"
+      },
+      <"UnknownAny">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 59,
+        "raw" : "<ARC unbridged cast type>"
+      },
+      <"ARCUnbridgedCast">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 60,
+        "raw" : "<builtin fn type>"
+      },
+      <"BuiltinFn">
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 61,
+        "raw" : "_Complex float"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 62,
+        "raw" : "_Complex double"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 63,
+        "raw" : "_Complex long double"
+      }
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 64,
+        "raw" : "id"
+      },
+      <"ObjCId">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 65,
+        "raw" : "Class"
+      },
+      <"ObjCClass">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 66,
+        "raw" : "SEL"
+      },
+      <"ObjCSel">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 67,
+        "raw" : "void *"
+      },
+      {
+        "type_ptr" : 34
+      }
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 68,
+        "raw" : "nullptr_t"
+      },
+      <"NullPtr">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 69,
+        "raw" : "__fp16"
+      },
+      <"Half">
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 70,
+        "raw" : "char *"
+      },
+      {
+        "type_ptr" : 36
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : 71,
+        "raw" : "struct __va_list_tag"
+      },
+      72
+    )>,
+    <"ConstantArrayType" : (
+      {
+        "pointer" : 73,
+        "raw" : "struct __va_list_tag [1]"
+      },
+      71,
+      1
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 74,
+        "raw" : "type-parameter-0-0"
+      }
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 75,
+        "raw" : "T"
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 76,
+        "raw" : "AnotherClass<type-parameter-0-0>"
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 77,
+        "raw" : "AnotherClass<T>"
+      }
+    )>,
+    <"InjectedClassNameType" : (
+      {
+        "pointer" : 78,
+        "raw" : "AnotherClass<T>"
+      }
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 79,
+        "raw" : "T"
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 80,
+        "raw" : "Y<type-parameter-0-0>"
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 81,
+        "raw" : "Y<T>"
+      }
+    )>,
+    <"InjectedClassNameType" : (
+      {
+        "pointer" : 82,
+        "raw" : "Y<T>"
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 83,
+        "raw" : "type-parameter-0-0 *"
+      },
+      {
+        "type_ptr" : 74
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 84,
+        "raw" : "T *"
+      },
+      {
+        "type_ptr" : 79
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 85,
+        "raw" : "AnotherClass<type-parameter-0-0 *>"
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 86,
+        "raw" : "AnotherClass<type-parameter-0-0 *>"
+      }
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 87,
+        "raw" : "AnotherClass<T *>"
+      }
+    )>,
+    <"ElaboratedType" : (
+      {
+        "pointer" : 88,
+        "raw" : "class AnotherClass<T *>",
+        "desugared_type" : 87
+      }
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 89,
+        "raw" : "type-parameter-1-0"
+      }
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 90,
+        "raw" : "Z"
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : 13,
+        "raw" : "struct Y<int>"
+      },
+      12
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 32,
+        "raw" : "Y<int>",
+        "desugared_type" : 13
+      }
+    )>,
+    <"SubstTemplateTypeParmType" : (
+      {
+        "pointer" : 91,
+        "raw" : "int",
+        "desugared_type" : 30
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 10,
+        "raw" : "int *"
+      },
+      {
+        "type_ptr" : 30
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 92,
+        "raw" : "int *"
+      },
+      {
+        "type_ptr" : 91
+      }
+    )>,
+    <"RecordType" : (
+      {
+        "pointer" : 9,
+        "raw" : "struct AnotherClass<int *>"
+      },
+      8
+    )>,
+    <"TemplateSpecializationType" : (
+      {
+        "pointer" : 93,
+        "raw" : "AnotherClass<int *>",
+        "desugared_type" : 9
+      }
+    )>,
+    <"ElaboratedType" : (
+      {
+        "pointer" : 16,
+        "raw" : "class AnotherClass<int *>",
+        "desugared_type" : 9
+      }
+    )>,
+    <"TemplateTypeParmType" : (
+      {
+        "pointer" : 94,
+        "raw" : "Z"
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 95,
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 96,
+        "raw" : "void (void)"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+      }
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : 25,
+        "raw" : "const struct Y<int> &"
+      },
+      {
+        "type_ptr" : 13,
+        "is_const" : true
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 97,
+        "raw" : "void (const struct Y<int> &)"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+        "params_type" : [
+          25
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 23,
+        "raw" : "void (const struct Y<int> &)"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+        "params_type" : [
+          25
+        ]
+      }
+    )>,
+    <"RValueReferenceType" : (
+      {
+        "pointer" : 29,
+        "raw" : "struct Y<int> &&"
+      },
+      {
+        "type_ptr" : 13
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 98,
+        "raw" : "void (struct Y<int> &&)"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+        "params_type" : [
+          29
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 27,
+        "raw" : "void (struct Y<int> &&)"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+        "params_type" : [
+          29
+        ]
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 20,
+        "raw" : "void (void) noexcept"
+      },
+      {
+        "return_type" : 34
+      },
+      {
+      }
+    )>,
+    <"NoneType" : (
+      {
+        "pointer" : 3,
+        "raw" : "NULL TYPE"
+      }
+    )>
+  ]
+)>

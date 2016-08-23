@@ -303,6 +303,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(CXXMethodDecl)
   DECLARE_VISITOR(ClassTemplateDecl)
   DECLARE_VISITOR(FunctionTemplateDecl)
+  DECLARE_VISITOR(FriendDecl)
+
   //    void VisitTypeAliasDecl(const TypeAliasDecl *D);
   //    void VisitTypeAliasTemplateDecl(const TypeAliasTemplateDecl *D);
   //    void VisitStaticAssertDecl(const StaticAssertDecl *D);
@@ -333,7 +335,6 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   //    void VisitUsingShadowDecl(const UsingShadowDecl *D);
   //    void VisitLinkageSpecDecl(const LinkageSpecDecl *D);
   //    void VisitAccessSpecDecl(const AccessSpecDecl *D);
-  //    void VisitFriendDecl(const FriendDecl *D);
   //
   //    // ObjC Decls
   DECLARE_VISITOR(ObjCIvarDecl)
@@ -2043,6 +2044,25 @@ void ASTExporter<ATDWriter>::VisitFunctionTemplateDecl(
   }
 }
 
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FriendDeclTupleSize() {
+  return DeclTupleSize() + 1;
+}
+/// \atd
+/// #define friend_decl_tuple decl_tuple * friend_info
+/// type friend_info = [ Type of type_ptr | Decl of decl ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitFriendDecl(const FriendDecl *D) {
+  VisitDecl(D);
+  if (TypeSourceInfo *T = D->getFriendType()) {
+    VariantScope Scope(OF, "Type");
+    dumpPointerToType(T->getType());
+  } else {
+    VariantScope Scope(OF, "Decl");
+    dumpDecl(D->getFriendDecl());
+  }
+}
+
 // template <class ATDWriter>
 // void ASTExporter<ATDWriter>::VisitTypeAliasDecl(const TypeAliasDecl *D) {
 //  dumpName(D);
@@ -2264,13 +2284,7 @@ void ASTExporter<ATDWriter>::VisitFunctionTemplateDecl(
 //  dumpAccessSpecifier(D->getAccess());
 //}
 //
-// template <class ATDWriter>
-// void ASTExporter<ATDWriter>::VisitFriendDecl(const FriendDecl *D) {
-//  if (TypeSourceInfo *T = D->getFriendType())
-//    dumpQualType(T->getType());
-//  else
-//    dumpDecl(D->getFriendDecl());
-//}
+
 //
 ////===----------------------------------------------------------------------===//
 //// Obj-C Declarations
