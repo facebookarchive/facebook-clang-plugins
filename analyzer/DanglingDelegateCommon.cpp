@@ -102,7 +102,7 @@ const ObjCPropertyDecl *matchObjCMessageWithPropertyGetter(
 
   StringRef propName = expr.getSelector().getAsString();
   IdentifierInfo &ii = intDecl->getASTContext().Idents.get(propName);
-  return intDecl->FindPropertyDeclaration(&ii);
+    return intDecl->FindPropertyDeclaration(&ii, ObjCPropertyQueryKind::OBJC_PR_query_unknown);
 }
 
 const ObjCPropertyDecl *matchObjCMessageWithPropertySetter(
@@ -126,7 +126,7 @@ const ObjCPropertyDecl *matchObjCMessageWithPropertySetter(
     return NULL;
   }
   IdentifierInfo &II = intDecl->getASTContext().Idents.get(propName);
-  return intDecl->FindPropertyDeclaration(&II);
+  return intDecl->FindPropertyDeclaration(&II, ObjCPropertyQueryKind::OBJC_PR_query_unknown);
 }
 
 // matches expressions _x and self.x

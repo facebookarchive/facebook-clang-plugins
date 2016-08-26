@@ -65,6 +65,28 @@
         "is_implicit" : true
       },
       {
+        "name" : "__NSConstantString",
+        "qual_name" : [
+          "__NSConstantString"
+        ]
+      },
+      "NoType",
+      3,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 6,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
         "name" : "__builtin_ms_va_list",
         "qual_name" : [
           "__builtin_ms_va_list"
@@ -77,7 +99,7 @@
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : 6,
+        "pointer" : 7,
         "source_range" : [
           {
           },
@@ -99,7 +121,7 @@
     ]],
     ["NamespaceDecl" , [
       {
-        "pointer" : 7,
+        "pointer" : 8,
         "source_range" : [
           {
             "file" : "tests/using_directive.cpp",
@@ -121,7 +143,7 @@
       [
         ["NamespaceDecl" , [
           {
-            "pointer" : 8,
+            "pointer" : 9,
             "source_range" : [
               {
                 "line" : 2,
@@ -143,7 +165,7 @@
           [
             ["VarDecl" , [
               {
-                "pointer" : 9,
+                "pointer" : 10,
                 "source_range" : [
                   {
                     "line" : 3,
@@ -165,7 +187,7 @@
                 ]
               },
               {
-                "type_ptr" : 10
+                "type_ptr" : 11
               },
               {
                 "is_global" : true
@@ -185,7 +207,7 @@
     ]],
     ["UsingDirectiveDecl" , [
       {
-        "pointer" : 11,
+        "pointer" : 12,
         "source_range" : [
           {
             "line" : 6,
@@ -214,7 +236,7 @@
             "kind" : "Namespace",
             "ref" : {
               "kind" : "Namespace",
-              "decl_pointer" : 7,
+              "decl_pointer" : 8,
               "name" : {
                 "name" : "nsa",
                 "qual_name" : [
@@ -226,7 +248,7 @@
         ],
         "nominated_namespace" : {
           "kind" : "Namespace",
-          "decl_pointer" : 8,
+          "decl_pointer" : 9,
           "name" : {
             "name" : "nsb",
             "qual_name" : [
@@ -239,7 +261,7 @@
     ]],
     ["NamespaceAliasDecl" , [
       {
-        "pointer" : 12,
+        "pointer" : 13,
         "source_range" : [
           {
             "line" : 7,
@@ -268,7 +290,7 @@
             "kind" : "Namespace",
             "ref" : {
               "kind" : "Namespace",
-              "decl_pointer" : 7,
+              "decl_pointer" : 8,
               "name" : {
                 "name" : "nsa",
                 "qual_name" : [
@@ -280,7 +302,7 @@
         ],
         "namespace" : {
           "kind" : "Namespace",
-          "decl_pointer" : 8,
+          "decl_pointer" : 9,
           "name" : {
             "name" : "nsb",
             "qual_name" : [
@@ -293,7 +315,7 @@
     ]],
     ["VarDecl" , [
       {
-        "pointer" : 13,
+        "pointer" : 14,
         "source_range" : [
           {
             "line" : 8,
@@ -311,13 +333,13 @@
         ]
       },
       {
-        "type_ptr" : 10
+        "type_ptr" : 11
       },
       {
         "is_global" : true,
         "init_expr" : ["ImplicitCastExpr" , [
           {
-            "pointer" : 14,
+            "pointer" : 15,
             "source_range" : [
               {
                 "column" : 9
@@ -330,7 +352,7 @@
           [
             ["DeclRefExpr" , [
               {
-                "pointer" : 15,
+                "pointer" : 16,
                 "source_range" : [
                   {
                     "column" : 9
@@ -343,13 +365,13 @@
               [
               ],
               {
-                "type_ptr" : 10,
+                "type_ptr" : 11,
                 "value_kind" : "LValue"
               },
               {
                 "decl_ref" : {
                   "kind" : "Var",
-                  "decl_pointer" : 9,
+                  "decl_pointer" : 10,
                   "name" : {
                     "name" : "a",
                     "qual_name" : [
@@ -358,13 +380,13 @@
                       "nsa"
                     ]
                   },
-                  "type_ptr" : 10
+                  "type_ptr" : 11
                 }
               }
             ]]
           ],
           {
-            "type_ptr" : 10
+            "type_ptr" : 11
           },
           {
             "cast_kind" : "LValueToRValue",
@@ -380,284 +402,324 @@
   [
     ["BuiltinType" , [
       {
-        "pointer" : 16,
+        "pointer" : 17,
         "raw" : "void"
       },
       "Void"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 17,
+        "pointer" : 18,
         "raw" : "_Bool"
       },
       "Bool"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 18,
+        "pointer" : 19,
         "raw" : "char"
       },
       "Char_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 19,
+        "pointer" : 20,
         "raw" : "signed char"
       },
       "SChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 20,
+        "pointer" : 21,
         "raw" : "short"
       },
       "Short"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 10,
+        "pointer" : 11,
         "raw" : "int"
       },
       "Int"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 21,
+        "pointer" : 22,
         "raw" : "long"
       },
       "Long"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 22,
+        "pointer" : 23,
         "raw" : "long long"
       },
       "LongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 23,
+        "pointer" : 24,
         "raw" : "unsigned char"
       },
       "UChar"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 24,
+        "pointer" : 25,
         "raw" : "unsigned short"
       },
       "UShort"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 25,
+        "pointer" : 26,
         "raw" : "unsigned int"
       },
       "UInt"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 26,
+        "pointer" : 27,
         "raw" : "unsigned long"
       },
       "ULong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 27,
+        "pointer" : 28,
         "raw" : "unsigned long long"
       },
       "ULongLong"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 28,
+        "pointer" : 29,
         "raw" : "float"
       },
       "Float"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 29,
+        "pointer" : 30,
         "raw" : "double"
       },
       "Double"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 30,
+        "pointer" : 31,
         "raw" : "long double"
       },
       "LongDouble"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 31,
+        "pointer" : 32,
+        "raw" : "__float128"
+      },
+      "Float128"
+    ]],
+    ["BuiltinType" , [
+      {
+        "pointer" : 33,
         "raw" : "__int128"
       },
       "Int128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 32,
+        "pointer" : 34,
         "raw" : "unsigned __int128"
       },
       "UInt128"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 33,
+        "pointer" : 35,
         "raw" : "wchar_t"
       },
       "WChar_S"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 34,
+        "pointer" : 36,
         "raw" : "char16_t"
       },
       "Char16"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 35,
+        "pointer" : 37,
         "raw" : "char32_t"
       },
       "Char32"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 36,
+        "pointer" : 38,
         "raw" : "<dependent type>"
       },
       "Dependent"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 37,
+        "pointer" : 39,
         "raw" : "<overloaded function type>"
       },
       "Overload"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 38,
+        "pointer" : 40,
         "raw" : "<bound member function type>"
       },
       "BoundMember"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 39,
+        "pointer" : 41,
         "raw" : "<pseudo-object type>"
       },
       "PseudoObject"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 40,
+        "pointer" : 42,
         "raw" : "<unknown type>"
       },
       "UnknownAny"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 41,
+        "pointer" : 43,
         "raw" : "<ARC unbridged cast type>"
       },
       "ARCUnbridgedCast"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 42,
+        "pointer" : 44,
         "raw" : "<builtin fn type>"
       },
       "BuiltinFn"
     ]],
     ["ComplexType" , [
       {
-        "pointer" : 43,
+        "pointer" : 45,
         "raw" : "_Complex float"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : 44,
+        "pointer" : 46,
         "raw" : "_Complex double"
       }
     ]],
     ["ComplexType" , [
       {
-        "pointer" : 45,
+        "pointer" : 47,
         "raw" : "_Complex long double"
+      }
+    ]],
+    ["ComplexType" , [
+      {
+        "pointer" : 48,
+        "raw" : "_Complex __float128"
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 46,
+        "pointer" : 49,
         "raw" : "id"
       },
       "ObjCId"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 47,
+        "pointer" : 50,
         "raw" : "Class"
       },
       "ObjCClass"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 48,
+        "pointer" : 51,
         "raw" : "SEL"
       },
       "ObjCSel"
     ]],
     ["PointerType" , [
       {
-        "pointer" : 49,
+        "pointer" : 52,
         "raw" : "void *"
       },
       {
-        "type_ptr" : 16
+        "type_ptr" : 17
       }
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 50,
+        "pointer" : 53,
         "raw" : "nullptr_t"
       },
       "NullPtr"
     ]],
     ["BuiltinType" , [
       {
-        "pointer" : 51,
+        "pointer" : 54,
         "raw" : "__fp16"
       },
       "Half"
     ]],
+    ["RecordType" , [
+      {
+        "pointer" : 55,
+        "raw" : "struct __NSConstantString_tag"
+      },
+      56
+    ]],
     ["PointerType" , [
       {
-        "pointer" : 52,
+        "pointer" : 57,
+        "raw" : "const int *"
+      },
+      {
+        "type_ptr" : 11,
+        "is_const" : true
+      }
+    ]],
+    ["PointerType" , [
+      {
+        "pointer" : 58,
+        "raw" : "const char *"
+      },
+      {
+        "type_ptr" : 19,
+        "is_const" : true
+      }
+    ]],
+    ["PointerType" , [
+      {
+        "pointer" : 59,
         "raw" : "char *"
       },
       {
-        "type_ptr" : 18
+        "type_ptr" : 19
       }
     ]],
     ["RecordType" , [
       {
-        "pointer" : 53,
+        "pointer" : 60,
         "raw" : "struct __va_list_tag"
       },
-      54
+      61
     ]],
     ["ConstantArrayType" , [
       {
-        "pointer" : 55,
+        "pointer" : 62,
         "raw" : "struct __va_list_tag [1]"
       },
-      53,
+      60,
       1
     ]],
     ["NoneType" , [

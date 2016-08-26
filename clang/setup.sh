@@ -4,7 +4,7 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_RELATIVE_PATH="$(basename "${BASH_SOURCE[0]}")"
-CLANG_RELATIVE_SRC="src/clang-3.8.tar.xz"
+CLANG_RELATIVE_SRC="src/clang-4.0.tar.xz"
 CLANG_SRC="$SCRIPT_DIR/$CLANG_RELATIVE_SRC"
 CLANG_PATCH="$SCRIPT_DIR/src/AttrDump.inc.patch"
 CLANG_PREFIX="$SCRIPT_DIR/install"

@@ -11,10 +11,10 @@
 #pragma once
 
 #include <functional>
-#include <string>
-#include <unordered_map>
 #include <memory>
 #include <stdlib.h>
+#include <string>
+#include <unordered_map>
 
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/CompilerInstance.h>
@@ -168,20 +168,21 @@ class SimplePluginASTAction
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
-    auto *OS = CI.createOutputFile(Parent::Options->outputFile,
-                                   Binary,
-                                   RemoveFileOnSignal,
-                                   "",
-                                   "",
-                                   UseTemporary,
-                                   CreateMissingDirectories);
+    std::unique_ptr<llvm::raw_ostream> OS =
+        CI.createOutputFile(Parent::Options->outputFile,
+                            Binary,
+                            RemoveFileOnSignal,
+                            "",
+                            "",
+                            UseTemporary,
+                            CreateMissingDirectories);
 
     if (!OS) {
       return nullptr;
     }
 
     return std::unique_ptr<clang::ASTConsumer>(
-        new T(CI, std::move(Parent::Options), *OS));
+        new T(CI, std::move(Parent::Options), std::move(OS)));
   }
 };
 

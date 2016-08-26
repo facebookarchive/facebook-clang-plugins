@@ -8,10 +8,10 @@
  *
  */
 
-#include <clang/Frontend/FrontendPluginRegistry.h>
 #include <clang/AST/AST.h>
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/CompilerInstance.h>
+#include <clang/Frontend/FrontendPluginRegistry.h>
 #include <llvm/Support/raw_ostream.h>
 
 #include "SimplePluginASTAction.h"
@@ -21,38 +21,43 @@ using namespace clang;
 namespace {
 
 class PrintDeclarationsConsumer : public ASTConsumer {
-private:
-  llvm::raw_ostream &OS;
+ private:
+  std::unique_ptr<llvm::raw_ostream> OS;
 
-public:
-  PrintDeclarationsConsumer(const CompilerInstance &CI,
-                            std::unique_ptr<ASTPluginLib::PluginASTOptionsBase> &&Options,
-                            raw_ostream &OS) : OS(OS) {}
+ public:
+  PrintDeclarationsConsumer(
+      const CompilerInstance &CI,
+      std::unique_ptr<ASTPluginLib::PluginASTOptionsBase> &&Options,
+      std::unique_ptr<raw_ostream> OS)
+      : OS(std::move(OS)) {}
 
   virtual bool HandleTopLevelDecl(DeclGroupRef DG) {
     for (DeclGroupRef::iterator i = DG.begin(), e = DG.end(); i != e; ++i) {
       const Decl *D = *i;
-      OS << D->getDeclKindName();
+      *OS << D->getDeclKindName();
       if (const ObjCCategoryDecl *CD = dyn_cast<ObjCCategoryDecl>(D)) {
-        OS << " " << CD->getClassInterface()->getName() << "(" << CD->getNameAsString() << ")";
-      } else if (const ObjCCategoryImplDecl *CD = dyn_cast<ObjCCategoryImplDecl>(D)) {
-        OS << " " << CD->getClassInterface()->getName() << "(" << CD->getNameAsString() << ")";
+        *OS << " " << CD->getClassInterface()->getName() << "("
+            << CD->getNameAsString() << ")";
+      } else if (const ObjCCategoryImplDecl *CD =
+                     dyn_cast<ObjCCategoryImplDecl>(D)) {
+        *OS << " " << CD->getClassInterface()->getName() << "("
+            << CD->getNameAsString() << ")";
       } else if (const NamedDecl *ND = dyn_cast<NamedDecl>(D)) {
         std::string name = ND->getNameAsString();
         if (name != "") {
-          OS << " " << name;
+          *OS << " " << name;
         }
       }
-      OS << "\n";
+      *OS << "\n";
     }
 
     return true;
   }
 };
 
-  typedef ASTPluginLib::SimplePluginASTAction<PrintDeclarationsConsumer> PrintTopDeclarations;
-
+typedef ASTPluginLib::SimplePluginASTAction<PrintDeclarationsConsumer>
+    PrintTopDeclarations;
 }
 
-static FrontendPluginRegistry::Add<PrintTopDeclarations>
-X("PrintTopDeclarations", "Print top-level declarations");
+static FrontendPluginRegistry::Add<PrintTopDeclarations> X(
+    "PrintTopDeclarations", "Print top-level declarations");

@@ -2823,7 +2823,8 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
   bool HasParameters = PCII != PCIE;
   bool IsVariadic = D->isVariadic();
   bool CapturesCXXThis = D->capturesCXXThis();
-  BlockDecl::capture_iterator CII = D->capture_begin(), CIE = D->capture_end();
+  BlockDecl::capture_const_iterator CII = D->capture_begin(),
+                                    CIE = D->capture_end();
   bool HasCapturedVariables = CII != CIE;
   const Stmt *Body = D->getBody();
   int size = 0 + HasParameters + IsVariadic + CapturesCXXThis +
@@ -3968,7 +3969,8 @@ int ASTExporter<ATDWriter>::LambdaExprTupleSize() {
 ///         | LCK_This
 ///         | LCK_ByCopy
 ///         | LCK_ByRef
-///         | LCK_VLAType]
+///         | LCK_VLAType
+///         | LCK_StarThis]
 
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
@@ -3997,6 +3999,9 @@ void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
     break;
   case LCK_VLAType:
     OF.emitSimpleVariant("LCK_VLAType");
+    break;
+  case LCK_StarThis:
+    OF.emitSimpleVariant("LCK_StarThis");
     break;
   };
   OF.emitFlag("capture_this", CapturesThis);
@@ -5211,13 +5216,13 @@ template <class ATDWriter = JsonWriter, bool ForceYojson = false>
 class ExporterASTConsumer : public ASTConsumer {
  private:
   ASTExporterOptions Options;
-  raw_ostream &OS;
+  std::unique_ptr<raw_ostream> OS;
 
  public:
   ExporterASTConsumer(const CompilerInstance &CI,
                       std::unique_ptr<ASTExporterOptions> &&Opts,
-                      raw_ostream &OS)
-      : Options(std::move(*Opts)), OS(OS) {
+                      std::unique_ptr<raw_ostream> OS)
+      : Options(std::move(*Opts)), OS(std::move(OS)) {
     if (ForceYojson) {
       this->Options.atdWriterOptions.useYojson = true;
     }
@@ -5225,7 +5230,7 @@ class ExporterASTConsumer : public ASTConsumer {
 
   virtual void HandleTranslationUnit(ASTContext &Context) {
     TranslationUnitDecl *D = Context.getTranslationUnitDecl();
-    ASTExporter<ATDWriter> P(OS, Context, Options);
+    ASTExporter<ATDWriter> P(*OS, Context, Options);
     P.dumpDecl(D);
   }
 };

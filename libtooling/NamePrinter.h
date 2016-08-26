@@ -28,8 +28,7 @@ class NamePrinter : public ConstDeclVisitor<NamePrinter<ATDWriter>> {
 
   PrintingPolicy getPrintingPolicy();
   void printTemplateArgList(llvm::raw_ostream &OS,
-                            const TemplateArgument *Args,
-                            unsigned NumArgs);
+                            const ArrayRef<TemplateArgument> Args);
 
  public:
   NamePrinter(const SourceManager &SM, ATDWriter &OF) : SM(SM), OF(OF) {}
@@ -58,13 +57,12 @@ uint64_t fnv64Hash(const char *s, int n) {
 
 const int templateLengthThreshold = 40;
 template <class ATDWriter>
-void NamePrinter<ATDWriter>::printTemplateArgList(llvm::raw_ostream &OS,
-                                                  const TemplateArgument *Args,
-                                                  unsigned NumArgs) {
+void NamePrinter<ATDWriter>::printTemplateArgList(
+    llvm::raw_ostream &OS, const ArrayRef<TemplateArgument> Args) {
   SmallString<64> Buf;
   llvm::raw_svector_ostream tmpOS(Buf);
   TemplateSpecializationType::PrintTemplateArgumentList(
-      tmpOS, Args, NumArgs, getPrintingPolicy());
+      tmpOS, Args, getPrintingPolicy());
   if (tmpOS.str().size() > templateLengthThreshold) {
     OS << "<";
     OS.write_hex(fnv64Hash(tmpOS.str().data(), tmpOS.str().size()));
@@ -142,10 +140,10 @@ void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
   }
   if (const ClassTemplateSpecializationDecl *Spec =
           dyn_cast<ClassTemplateSpecializationDecl>(D)) {
+    ArrayRef<TemplateArgument> Args;
     const TemplateArgumentList &TemplateArgs = Spec->getTemplateArgs();
-    const TemplateArgument *Args = TemplateArgs.data();
-    unsigned NumArgs = TemplateArgs.size();
-    printTemplateArgList(StrOS, Args, NumArgs);
+    Args = TemplateArgs.asArray();
+    printTemplateArgList(StrOS, Args);
   }
   OF.emitString(StrOS.str());
 }
@@ -158,7 +156,7 @@ void NamePrinter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *FD) {
           FD->getTemplateSpecializationArgs()) {
     SmallString<64> Buf;
     llvm::raw_svector_ostream StrOS(Buf);
-    printTemplateArgList(StrOS, TemplateArgs->data(), TemplateArgs->size());
+    printTemplateArgList(StrOS, TemplateArgs->asArray());
     template_str = StrOS.str();
   }
   OF.emitString(FD->getNameAsString() + template_str);
@@ -170,14 +168,14 @@ PrintingPolicy NamePrinter<ATDWriter>::getPrintingPolicy() {
   LangOptions LO;
   PrintingPolicy Policy(LO);
   // print tag types
-  Policy.SuppressTag = false;
+  Policy.IncludeTagDefinition = false;
   // don't print fully qualified names - we do it ourselves
   Policy.SuppressScope = true;
   // print locations of anonymous tags
   Policy.AnonymousTagLocations = true;
   // don't add 'struct' inside a name regardless of language
   Policy.SuppressTagKeyword = true;
-  Policy.LangOpts.CPlusPlus = true;
+
   return Policy;
 }
 

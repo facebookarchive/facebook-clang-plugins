@@ -65,6 +65,28 @@
         "is_implicit" : true
       },
       {
+        "name" : "__NSConstantString",
+        "qual_name" : [
+          "__NSConstantString"
+        ]
+      },
+      <"NoType">,
+      3,
+      {
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 6,
+        "source_range" : (
+          {
+          },
+          {
+          }
+        ),
+        "is_implicit" : true
+      },
+      {
         "name" : "__builtin_ms_va_list",
         "qual_name" : [
           "__builtin_ms_va_list"
@@ -77,7 +99,7 @@
     )>,
     <"TypedefDecl" : (
       {
-        "pointer" : 6,
+        "pointer" : 7,
         "source_range" : (
           {
           },
@@ -99,7 +121,7 @@
     )>,
     <"CXXRecordDecl" : (
       {
-        "pointer" : 7,
+        "pointer" : 8,
         "source_range" : (
           {
             "file" : "tests/struct.cpp",
@@ -120,11 +142,11 @@
         ]
       },
       <"Type" : "struct Point">,
-      8,
+      9,
       [
         <"CXXRecordDecl" : (
           {
-            "pointer" : 9,
+            "pointer" : 10,
             "source_range" : (
               {
                 "line" : 1,
@@ -144,7 +166,7 @@
             ]
           },
           <"Type" : "struct Point">,
-          8,
+          9,
           [
           ],
           {
@@ -156,7 +178,7 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : 10,
+            "pointer" : 11,
             "source_range" : (
               {
                 "line" : 2,
@@ -175,14 +197,14 @@
             ]
           },
           {
-            "type_ptr" : 11
+            "type_ptr" : 12
           },
           {
           }
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : 12,
+            "pointer" : 13,
             "source_range" : (
               {
                 "column" : 4
@@ -200,7 +222,7 @@
             ]
           },
           {
-            "type_ptr" : 11
+            "type_ptr" : 12
           },
           {
           }
@@ -217,7 +239,7 @@
     )>,
     <"FunctionDecl" : (
       {
-        "pointer" : 13,
+        "pointer" : 14,
         "source_range" : (
           {
             "line" : 5,
@@ -236,14 +258,14 @@
         ]
       },
       {
-        "type_ptr" : 14
+        "type_ptr" : 15
       },
       {
         "mangled_name" : "_Z3funv",
-        "decl_ptr_with_body" : 13,
+        "decl_ptr_with_body" : 14,
         "body" : <"CompoundStmt" : (
           {
-            "pointer" : 15,
+            "pointer" : 16,
             "source_range" : (
               {
                 "line" : 5,
@@ -258,7 +280,7 @@
           [
             <"DeclStmt" : (
               {
-                "pointer" : 16,
+                "pointer" : 17,
                 "source_range" : (
                   {
                     "line" : 6,
@@ -274,7 +296,7 @@
               [
                 <"CXXRecordDecl" : (
                   {
-                    "pointer" : 17,
+                    "pointer" : 18,
                     "source_range" : (
                       {
                         "column" : 3
@@ -293,11 +315,11 @@
                     ]
                   },
                   <"Type" : "struct X">,
-                  18,
+                  19,
                   [
                     <"CXXRecordDecl" : (
                       {
-                        "pointer" : 19,
+                        "pointer" : 20,
                         "source_range" : (
                           {
                             "column" : 3
@@ -317,7 +339,7 @@
                         ]
                       },
                       <"Type" : "struct X">,
-                      18,
+                      19,
                       [
                       ],
                       {
@@ -329,8 +351,8 @@
                     )>,
                     <"CXXConstructorDecl" : (
                       {
-                        "pointer" : 20,
-                        "parent_pointer" : 17,
+                        "pointer" : 21,
+                        "parent_pointer" : 18,
                         "source_range" : (
                           {
                             "column" : 10
@@ -352,15 +374,15 @@
                         ]
                       },
                       {
-                        "type_ptr" : 21
+                        "type_ptr" : 22
                       },
                       {
                         "mangled_name" : "_ZZ3funvEN1XC1Ev",
                         "is_inline" : true,
-                        "decl_ptr_with_body" : 20,
+                        "decl_ptr_with_body" : 21,
                         "body" : <"CompoundStmt" : (
                           {
-                            "pointer" : 22,
+                            "pointer" : 23,
                             "source_range" : (
                               {
                                 "column" : 10
@@ -379,8 +401,8 @@
                     )>,
                     <"CXXConstructorDecl" : (
                       {
-                        "pointer" : 23,
-                        "parent_pointer" : 17,
+                        "pointer" : 24,
+                        "parent_pointer" : 18,
                         "source_range" : (
                           {
                             "column" : 10
@@ -400,7 +422,7 @@
                         ]
                       },
                       {
-                        "type_ptr" : 24
+                        "type_ptr" : 25
                       },
                       {
                         "mangled_name" : "_ZZ3funvEN1XC1ERKS_",
@@ -408,7 +430,7 @@
                         "parameters" : [
                           <"ParmVarDecl" : (
                             {
-                              "pointer" : 25,
+                              "pointer" : 26,
                               "source_range" : (
                                 {
                                   "column" : 10
@@ -425,7 +447,7 @@
                               ]
                             },
                             {
-                              "type_ptr" : 26
+                              "type_ptr" : 27
                             },
                             {
                               "parm_index_in_function" : 0
@@ -438,8 +460,8 @@
                     )>,
                     <"CXXConstructorDecl" : (
                       {
-                        "pointer" : 27,
-                        "parent_pointer" : 17,
+                        "pointer" : 28,
+                        "parent_pointer" : 18,
                         "source_range" : (
                           {
                             "column" : 10
@@ -459,7 +481,7 @@
                         ]
                       },
                       {
-                        "type_ptr" : 28
+                        "type_ptr" : 29
                       },
                       {
                         "mangled_name" : "_ZZ3funvEN1XC1EOS_",
@@ -467,7 +489,7 @@
                         "parameters" : [
                           <"ParmVarDecl" : (
                             {
-                              "pointer" : 29,
+                              "pointer" : 30,
                               "source_range" : (
                                 {
                                   "column" : 10
@@ -484,7 +506,7 @@
                               ]
                             },
                             {
-                              "type_ptr" : 30
+                              "type_ptr" : 31
                             },
                             {
                               "parm_index_in_function" : 0
@@ -509,7 +531,7 @@
             )>,
             <"DeclStmt" : (
               {
-                "pointer" : 31,
+                "pointer" : 32,
                 "source_range" : (
                   {
                     "line" : 7,
@@ -523,7 +545,7 @@
               [
                 <"CXXConstructExpr" : (
                   {
-                    "pointer" : 32,
+                    "pointer" : 33,
                     "source_range" : (
                       {
                         "column" : 5
@@ -536,12 +558,12 @@
                   [
                   ],
                   {
-                    "type_ptr" : 18
+                    "type_ptr" : 19
                   },
                   {
                     "decl_ref" : {
                       "kind" : <"CXXConstructor">,
-                      "decl_pointer" : 20,
+                      "decl_pointer" : 21,
                       "name" : {
                         "name" : "X",
                         "qual_name" : [
@@ -550,7 +572,7 @@
                           "fun"
                         ]
                       },
-                      "type_ptr" : 21
+                      "type_ptr" : 22
                     }
                   }
                 )>
@@ -558,7 +580,7 @@
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 33,
+                    "pointer" : 34,
                     "source_range" : (
                       {
                         "column" : 3
@@ -575,12 +597,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 18
+                    "type_ptr" : 19
                   },
                   {
                     "init_expr" : <"CXXConstructExpr" : (
                       {
-                        "pointer" : 32,
+                        "pointer" : 33,
                         "source_range" : (
                           {
                             "column" : 5
@@ -593,12 +615,12 @@
                       [
                       ],
                       {
-                        "type_ptr" : 18
+                        "type_ptr" : 19
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"CXXConstructor">,
-                          "decl_pointer" : 20,
+                          "decl_pointer" : 21,
                           "name" : {
                             "name" : "X",
                             "qual_name" : [
@@ -607,7 +629,7 @@
                               "fun"
                             ]
                           },
-                          "type_ptr" : 21
+                          "type_ptr" : 22
                         }
                       }
                     )>
@@ -621,7 +643,7 @@
     )>,
     <"VarDecl" : (
       {
-        "pointer" : 34,
+        "pointer" : 35,
         "source_range" : (
           {
             "line" : 10,
@@ -639,13 +661,13 @@
         ]
       },
       {
-        "type_ptr" : 8
+        "type_ptr" : 9
       },
       {
         "is_global" : true,
         "init_expr" : <"InitListExpr" : (
           {
-            "pointer" : 35,
+            "pointer" : 36,
             "source_range" : (
               {
                 "column" : 15
@@ -658,7 +680,7 @@
           [
             <"FloatingLiteral" : (
               {
-                "pointer" : 36,
+                "pointer" : 37,
                 "source_range" : (
                   {
                     "column" : 17
@@ -671,13 +693,13 @@
               [
               ],
               {
-                "type_ptr" : 11
+                "type_ptr" : 12
               },
               "3"
             )>,
             <"FloatingLiteral" : (
               {
-                "pointer" : 37,
+                "pointer" : 38,
                 "source_range" : (
                   {
                     "column" : 22
@@ -690,13 +712,13 @@
               [
               ],
               {
-                "type_ptr" : 11
+                "type_ptr" : 12
               },
               "4"
             )>
           ],
           {
-            "type_ptr" : 8
+            "type_ptr" : 9
           }
         )>
       }
@@ -707,404 +729,444 @@
   [
     <"BuiltinType" : (
       {
-        "pointer" : 38,
+        "pointer" : 39,
         "raw" : "void"
       },
       <"Void">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 39,
+        "pointer" : 40,
         "raw" : "_Bool"
       },
       <"Bool">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 40,
+        "pointer" : 41,
         "raw" : "char"
       },
       <"Char_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 41,
+        "pointer" : 42,
         "raw" : "signed char"
       },
       <"SChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 42,
+        "pointer" : 43,
         "raw" : "short"
       },
       <"Short">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 43,
+        "pointer" : 44,
         "raw" : "int"
       },
       <"Int">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 44,
+        "pointer" : 45,
         "raw" : "long"
       },
       <"Long">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 45,
+        "pointer" : 46,
         "raw" : "long long"
       },
       <"LongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 46,
+        "pointer" : 47,
         "raw" : "unsigned char"
       },
       <"UChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 47,
+        "pointer" : 48,
         "raw" : "unsigned short"
       },
       <"UShort">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 48,
+        "pointer" : 49,
         "raw" : "unsigned int"
       },
       <"UInt">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 49,
+        "pointer" : 50,
         "raw" : "unsigned long"
       },
       <"ULong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 50,
+        "pointer" : 51,
         "raw" : "unsigned long long"
       },
       <"ULongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 51,
+        "pointer" : 52,
         "raw" : "float"
       },
       <"Float">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 11,
+        "pointer" : 12,
         "raw" : "double"
       },
       <"Double">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 52,
+        "pointer" : 53,
         "raw" : "long double"
       },
       <"LongDouble">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 53,
+        "pointer" : 54,
+        "raw" : "__float128"
+      },
+      <"Float128">
+    )>,
+    <"BuiltinType" : (
+      {
+        "pointer" : 55,
         "raw" : "__int128"
       },
       <"Int128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 54,
+        "pointer" : 56,
         "raw" : "unsigned __int128"
       },
       <"UInt128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 55,
+        "pointer" : 57,
         "raw" : "wchar_t"
       },
       <"WChar_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 56,
+        "pointer" : 58,
         "raw" : "char16_t"
       },
       <"Char16">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 57,
+        "pointer" : 59,
         "raw" : "char32_t"
       },
       <"Char32">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 58,
+        "pointer" : 60,
         "raw" : "<dependent type>"
       },
       <"Dependent">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 59,
+        "pointer" : 61,
         "raw" : "<overloaded function type>"
       },
       <"Overload">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 60,
+        "pointer" : 62,
         "raw" : "<bound member function type>"
       },
       <"BoundMember">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 61,
+        "pointer" : 63,
         "raw" : "<pseudo-object type>"
       },
       <"PseudoObject">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 62,
+        "pointer" : 64,
         "raw" : "<unknown type>"
       },
       <"UnknownAny">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 63,
+        "pointer" : 65,
         "raw" : "<ARC unbridged cast type>"
       },
       <"ARCUnbridgedCast">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 64,
+        "pointer" : 66,
         "raw" : "<builtin fn type>"
       },
       <"BuiltinFn">
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 65,
+        "pointer" : 67,
         "raw" : "_Complex float"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 66,
+        "pointer" : 68,
         "raw" : "_Complex double"
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 67,
+        "pointer" : 69,
         "raw" : "_Complex long double"
+      }
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 70,
+        "raw" : "_Complex __float128"
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 68,
+        "pointer" : 71,
         "raw" : "id"
       },
       <"ObjCId">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 69,
+        "pointer" : 72,
         "raw" : "Class"
       },
       <"ObjCClass">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 70,
+        "pointer" : 73,
         "raw" : "SEL"
       },
       <"ObjCSel">
     )>,
     <"PointerType" : (
       {
-        "pointer" : 71,
+        "pointer" : 74,
         "raw" : "void *"
       },
       {
-        "type_ptr" : 38
+        "type_ptr" : 39
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 72,
+        "pointer" : 75,
         "raw" : "nullptr_t"
       },
       <"NullPtr">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 73,
+        "pointer" : 76,
         "raw" : "__fp16"
       },
       <"Half">
     )>,
+    <"RecordType" : (
+      {
+        "pointer" : 77,
+        "raw" : "struct __NSConstantString_tag"
+      },
+      78
+    )>,
     <"PointerType" : (
       {
-        "pointer" : 74,
+        "pointer" : 79,
+        "raw" : "const int *"
+      },
+      {
+        "type_ptr" : 44,
+        "is_const" : true
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 80,
+        "raw" : "const char *"
+      },
+      {
+        "type_ptr" : 41,
+        "is_const" : true
+      }
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 81,
         "raw" : "char *"
       },
       {
-        "type_ptr" : 40
+        "type_ptr" : 41
       }
     )>,
     <"RecordType" : (
       {
-        "pointer" : 75,
+        "pointer" : 82,
         "raw" : "struct __va_list_tag"
       },
-      76
+      83
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 77,
+        "pointer" : 84,
         "raw" : "struct __va_list_tag [1]"
       },
-      75,
+      82,
       1
     )>,
     <"RecordType" : (
       {
-        "pointer" : 8,
+        "pointer" : 9,
         "raw" : "struct Point"
       },
-      7
+      8
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 14,
+        "pointer" : 15,
         "raw" : "void (void)"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
       }
     )>,
     <"RecordType" : (
       {
-        "pointer" : 18,
+        "pointer" : 19,
         "raw" : "struct X"
       },
-      17
+      18
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 78,
+        "pointer" : 85,
         "raw" : "void (void)"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
       }
     )>,
     <"LValueReferenceType" : (
       {
-        "pointer" : 26,
+        "pointer" : 27,
         "raw" : "const struct X &"
       },
       {
-        "type_ptr" : 18,
+        "type_ptr" : 19,
         "is_const" : true
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 79,
+        "pointer" : 86,
         "raw" : "void (const struct X &)"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
         "params_type" : [
-          26
+          27
         ]
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 24,
+        "pointer" : 25,
         "raw" : "void (const struct X &)"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
         "params_type" : [
-          26
+          27
         ]
       }
     )>,
     <"RValueReferenceType" : (
       {
-        "pointer" : 30,
+        "pointer" : 31,
         "raw" : "struct X &&"
       },
       {
-        "type_ptr" : 18
+        "type_ptr" : 19
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 80,
+        "pointer" : 87,
         "raw" : "void (struct X &&)"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
         "params_type" : [
-          30
+          31
         ]
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 28,
+        "pointer" : 29,
         "raw" : "void (struct X &&)"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
         "params_type" : [
-          30
+          31
         ]
       }
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 21,
+        "pointer" : 22,
         "raw" : "void (void) noexcept"
       },
       {
-        "return_type" : 38
+        "return_type" : 39
       },
       {
       }
