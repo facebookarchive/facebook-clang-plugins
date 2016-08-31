@@ -1944,7 +1944,10 @@
                             "type_ptr" : 85,
                             "value_kind" : <"LValue">
                           },
-                          88
+                          {
+                            "type_ptr" : 88,
+                            "raw" : "int **"
+                          }
                         )>
                       ],
                       {
@@ -9491,242 +9494,207 @@
   [
     <"BuiltinType" : (
       {
-        "pointer" : 20,
-        "raw" : "void"
+        "pointer" : 20
       },
       <"Void">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 309,
-        "raw" : "_Bool"
+        "pointer" : 309
       },
       <"Bool">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 310,
-        "raw" : "char"
+        "pointer" : 310
       },
       <"Char_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 311,
-        "raw" : "signed char"
+        "pointer" : 311
       },
       <"SChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 312,
-        "raw" : "short"
+        "pointer" : 312
       },
       <"Short">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 34,
-        "raw" : "int"
+        "pointer" : 34
       },
       <"Int">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 313,
-        "raw" : "long"
+        "pointer" : 313
       },
       <"Long">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 314,
-        "raw" : "long long"
+        "pointer" : 314
       },
       <"LongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 315,
-        "raw" : "unsigned char"
+        "pointer" : 315
       },
       <"UChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 316,
-        "raw" : "unsigned short"
+        "pointer" : 316
       },
       <"UShort">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 317,
-        "raw" : "unsigned int"
+        "pointer" : 317
       },
       <"UInt">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 318,
-        "raw" : "unsigned long"
+        "pointer" : 318
       },
       <"ULong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 319,
-        "raw" : "unsigned long long"
+        "pointer" : 319
       },
       <"ULongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 320,
-        "raw" : "float"
+        "pointer" : 320
       },
       <"Float">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 321,
-        "raw" : "double"
+        "pointer" : 321
       },
       <"Double">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 322,
-        "raw" : "long double"
+        "pointer" : 322
       },
       <"LongDouble">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 323,
-        "raw" : "__float128"
+        "pointer" : 323
       },
       <"Float128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 324,
-        "raw" : "__int128"
+        "pointer" : 324
       },
       <"Int128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 325,
-        "raw" : "unsigned __int128"
+        "pointer" : 325
       },
       <"UInt128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 326,
-        "raw" : "wchar_t"
+        "pointer" : 326
       },
       <"WChar_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 327,
-        "raw" : "<dependent type>"
+        "pointer" : 327
       },
       <"Dependent">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 328,
-        "raw" : "<overloaded function type>"
+        "pointer" : 328
       },
       <"Overload">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 329,
-        "raw" : "<bound member function type>"
+        "pointer" : 329
       },
       <"BoundMember">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 128,
-        "raw" : "<pseudo-object type>"
+        "pointer" : 128
       },
       <"PseudoObject">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 330,
-        "raw" : "<unknown type>"
+        "pointer" : 330
       },
       <"UnknownAny">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 331,
-        "raw" : "<ARC unbridged cast type>"
+        "pointer" : 331
       },
       <"ARCUnbridgedCast">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 332,
-        "raw" : "<builtin fn type>"
+        "pointer" : 332
       },
       <"BuiltinFn">
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 333,
-        "raw" : "_Complex float"
+        "pointer" : 333
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 334,
-        "raw" : "_Complex double"
+        "pointer" : 334
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 335,
-        "raw" : "_Complex long double"
+        "pointer" : 335
       }
     )>,
     <"ComplexType" : (
       {
-        "pointer" : 336,
-        "raw" : "_Complex __float128"
+        "pointer" : 336
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 337,
-        "raw" : "id"
+        "pointer" : 337
       },
       <"ObjCId">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 338,
-        "raw" : "Class"
+        "pointer" : 338
       },
       <"ObjCClass">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 339,
-        "raw" : "SEL"
+        "pointer" : 339
       },
       <"ObjCSel">
     )>,
     <"PointerType" : (
       {
-        "pointer" : 29,
-        "raw" : "void *"
+        "pointer" : 29
       },
       {
         "type_ptr" : 20
@@ -9734,22 +9702,19 @@
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 340,
-        "raw" : "nullptr_t"
+        "pointer" : 340
       },
       <"NullPtr">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 341,
-        "raw" : "__fp16"
+        "pointer" : 341
       },
       <"Half">
     )>,
     <"PointerType" : (
       {
-        "pointer" : 342,
-        "raw" : "SEL *"
+        "pointer" : 342
       },
       {
         "type_ptr" : 339
@@ -9757,8 +9722,7 @@
     )>,
     <"ObjCObjectType" : (
       {
-        "pointer" : 343,
-        "raw" : "id"
+        "pointer" : 343
       },
       {
         "base_type" : 337
@@ -9766,8 +9730,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 344,
-        "raw" : "id"
+        "pointer" : 344
       },
       {
         "type_ptr" : 343
@@ -9775,8 +9738,7 @@
     )>,
     <"ObjCObjectType" : (
       {
-        "pointer" : 345,
-        "raw" : "Class"
+        "pointer" : 345
       },
       {
         "base_type" : 338
@@ -9784,8 +9746,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 346,
-        "raw" : "Class"
+        "pointer" : 346
       },
       {
         "type_ptr" : 345
@@ -9793,22 +9754,19 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 347,
-        "raw" : "Protocol"
+        "pointer" : 347
       },
       11
     )>,
     <"RecordType" : (
       {
-        "pointer" : 348,
-        "raw" : "struct __NSConstantString_tag"
+        "pointer" : 348
       },
       349
     )>,
     <"PointerType" : (
       {
-        "pointer" : 350,
-        "raw" : "const int *"
+        "pointer" : 350
       },
       {
         "type_ptr" : 34,
@@ -9817,8 +9775,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 351,
-        "raw" : "const char *"
+        "pointer" : 351
       },
       {
         "type_ptr" : 310,
@@ -9827,8 +9784,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 89,
-        "raw" : "char *"
+        "pointer" : 89
       },
       {
         "type_ptr" : 310
@@ -9836,30 +9792,26 @@
     )>,
     <"RecordType" : (
       {
-        "pointer" : 352,
-        "raw" : "struct __va_list_tag"
+        "pointer" : 352
       },
       353
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 354,
-        "raw" : "struct __va_list_tag [1]"
+        "pointer" : 354
       },
       352,
       1
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 355,
-        "raw" : "NSObject"
+        "pointer" : 355
       },
       64
     )>,
     <"TypedefType" : (
       {
         "pointer" : 8,
-        "raw" : "id",
         "desugared_type" : 344
       },
       {
@@ -9870,7 +9822,6 @@
     <"TypedefType" : (
       {
         "pointer" : 356,
-        "raw" : "instancetype",
         "desugared_type" : 344
       },
       {
@@ -9881,7 +9832,6 @@
     <"TypedefType" : (
       {
         "pointer" : 10,
-        "raw" : "Class",
         "desugared_type" : 346
       },
       {
@@ -9892,7 +9842,6 @@
     <"TypedefType" : (
       {
         "pointer" : 100,
-        "raw" : "BOOL",
         "desugared_type" : 34
       },
       {
@@ -9903,7 +9852,6 @@
     <"TypedefType" : (
       {
         "pointer" : 6,
-        "raw" : "SEL",
         "desugared_type" : 342
       },
       {
@@ -9913,8 +9861,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 114,
-        "raw" : "Protocol *"
+        "pointer" : 114
       },
       {
         "type_ptr" : 347
@@ -9922,22 +9869,19 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 359,
-        "raw" : "NSNumber"
+        "pointer" : 359
       },
       360
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 361,
-        "raw" : "NSString"
+        "pointer" : 361
       },
       362
     )>,
     <"TypedefType" : (
       {
         "pointer" : 138,
-        "raw" : "NSUInteger",
         "desugared_type" : 317
       },
       {
@@ -9947,29 +9891,25 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 364,
-        "raw" : "NSDictionary"
+        "pointer" : 364
       },
       365
     )>,
     <"IncompleteArrayType" : (
       {
-        "pointer" : 366,
-        "raw" : "id []"
+        "pointer" : 366
       },
       344
     )>,
     <"IncompleteArrayType" : (
       {
-        "pointer" : 367,
-        "raw" : "const id []"
+        "pointer" : 367
       },
       8
     )>,
     <"PointerType" : (
       {
-        "pointer" : 368,
-        "raw" : "const id *"
+        "pointer" : 368
       },
       {
         "type_ptr" : 344,
@@ -9978,8 +9918,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 369,
-        "raw" : "const id *"
+        "pointer" : 369
       },
       {
         "type_ptr" : 8,
@@ -9989,22 +9928,19 @@
     <"DecayedType" : (
       {
         "pointer" : 370,
-        "raw" : "const id *",
         "desugared_type" : 369
       },
       369
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 371,
-        "raw" : "NSArray"
+        "pointer" : 371
       },
       372
     )>,
     <"PointerType" : (
       {
-        "pointer" : 373,
-        "raw" : "id *"
+        "pointer" : 373
       },
       {
         "type_ptr" : 344
@@ -10012,8 +9948,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 374,
-        "raw" : "id *"
+        "pointer" : 374
       },
       {
         "type_ptr" : 8
@@ -10021,15 +9956,13 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 375,
-        "raw" : "NSException"
+        "pointer" : 375
       },
       376
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 17,
-        "raw" : "NSString *"
+        "pointer" : 17
       },
       {
         "type_ptr" : 361
@@ -10037,8 +9970,7 @@
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 377,
-        "raw" : "void (NSString *, ...)"
+        "pointer" : 377
       },
       {
         "return_type" : 20
@@ -10051,8 +9983,7 @@
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 378,
-        "raw" : "void (id, ...)"
+        "pointer" : 378
       },
       {
         "return_type" : 20
@@ -10065,8 +9996,7 @@
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 79,
-        "raw" : "void (id, ...)"
+        "pointer" : 79
       },
       {
         "return_type" : 20
@@ -10079,15 +10009,13 @@
     )>,
     <"ObjCInterfaceType" : (
       {
-        "pointer" : 296,
-        "raw" : "MyClass"
+        "pointer" : 296
       },
       23
     )>,
     <"ObjCObjectType" : (
       {
-        "pointer" : 379,
-        "raw" : "NSObject<SomeProtocol>"
+        "pointer" : 379
       },
       {
         "base_type" : 355,
@@ -10098,8 +10026,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 39,
-        "raw" : "NSObject<SomeProtocol> *"
+        "pointer" : 39
       },
       {
         "type_ptr" : 379
@@ -10108,7 +10035,6 @@
     <"AttributedType" : (
       {
         "pointer" : 70,
-        "raw" : "NSString * _Nonnull",
         "desugared_type" : 17
       },
       {
@@ -10117,8 +10043,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 44,
-        "raw" : "MyClass *"
+        "pointer" : 44
       },
       {
         "type_ptr" : 296
@@ -10126,16 +10051,14 @@
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 85,
-        "raw" : "char [4]"
+        "pointer" : 85
       },
       310,
       4
     )>,
     <"PointerType" : (
       {
-        "pointer" : 380,
-        "raw" : "int *"
+        "pointer" : 380
       },
       {
         "type_ptr" : 34
@@ -10143,8 +10066,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 88,
-        "raw" : "int **"
+        "pointer" : 88
       },
       {
         "type_ptr" : 380
@@ -10152,8 +10074,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 381,
-        "raw" : "void (*)(id, ...)"
+        "pointer" : 381
       },
       {
         "type_ptr" : 378
@@ -10161,8 +10082,7 @@
     )>,
     <"PointerType" : (
       {
-        "pointer" : 81,
-        "raw" : "void (*)(id, ...)"
+        "pointer" : 81
       },
       {
         "type_ptr" : 79
@@ -10170,8 +10090,7 @@
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 382,
-        "raw" : "unsigned int (NSString *)"
+        "pointer" : 382
       },
       {
         "return_type" : 317
@@ -10184,8 +10103,7 @@
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 383,
-        "raw" : "NSUInteger (NSString *)"
+        "pointer" : 383
       },
       {
         "return_type" : 138
@@ -10199,29 +10117,25 @@
     <"ParenType" : (
       {
         "pointer" : 384,
-        "raw" : "NSUInteger (NSString *)",
         "desugared_type" : 383
       },
       383
     )>,
     <"BlockPointerType" : (
       {
-        "pointer" : 385,
-        "raw" : "unsigned int (^)(NSString *)"
+        "pointer" : 385
       },
       382
     )>,
     <"BlockPointerType" : (
       {
-        "pointer" : 141,
-        "raw" : "NSUInteger (^)(NSString *)"
+        "pointer" : 141
       },
       384
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 386,
-        "raw" : "<dependent type> (NSString *)"
+        "pointer" : 386
       },
       {
         "return_type" : 327
@@ -10234,15 +10148,13 @@
     )>,
     <"BlockPointerType" : (
       {
-        "pointer" : 118,
-        "raw" : "NSUInteger (^)(NSString *)"
+        "pointer" : 118
       },
       383
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 150,
-        "raw" : "NSArray *"
+        "pointer" : 150
       },
       {
         "type_ptr" : 371
@@ -10250,8 +10162,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 149,
-        "raw" : "NSNumber *"
+        "pointer" : 149
       },
       {
         "type_ptr" : 359
@@ -10259,8 +10170,7 @@
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 176,
-        "raw" : "NSDictionary *"
+        "pointer" : 176
       },
       {
         "type_ptr" : 364
@@ -10268,16 +10178,14 @@
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 192,
-        "raw" : "char [10]"
+        "pointer" : 192
       },
       310,
       10
     )>,
     <"ObjCObjectPointerType" : (
       {
-        "pointer" : 216,
-        "raw" : "NSException *"
+        "pointer" : 216
       },
       {
         "type_ptr" : 375
@@ -10285,32 +10193,28 @@
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 213,
-        "raw" : "char [14]"
+        "pointer" : 213
       },
       310,
       14
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 226,
-        "raw" : "char [8]"
+        "pointer" : 226
       },
       310,
       8
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 237,
-        "raw" : "char [7]"
+        "pointer" : 237
       },
       310,
       7
     )>,
     <"PointerType" : (
       {
-        "pointer" : 287,
-        "raw" : "char **"
+        "pointer" : 287
       },
       {
         "type_ptr" : 89
@@ -10318,8 +10222,7 @@
     )>,
     <"FunctionProtoType" : (
       {
-        "pointer" : 284,
-        "raw" : "int (int, char **)"
+        "pointer" : 284
       },
       {
         "return_type" : 34
@@ -10333,16 +10236,14 @@
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 301,
-        "raw" : "char [6]"
+        "pointer" : 301
       },
       310,
       6
     )>,
     <"NoneType" : (
       {
-        "pointer" : 3,
-        "raw" : "NULL TYPE"
+        "pointer" : 3
       }
     )>
   ]

@@ -4304,11 +4304,19 @@ int ASTExporter<ATDWriter>::ObjCEncodeExprTupleSize() {
   return ExprTupleSize() + 1;
 }
 /// \atd
-/// #define obj_c_encode_expr_tuple expr_tuple * type_ptr
+/// #define obj_c_encode_expr_tuple expr_tuple * objc_encode_expr_info
+/// type objc_encode_expr_info = {
+///   type_ptr : type_ptr;
+///   raw : string;
+/// } <ocaml field_prefix="oeei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCEncodeExpr(const ObjCEncodeExpr *Node) {
   VisitExpr(Node);
+  ObjectScope Scope(OF, 2);
+  OF.emitTag("type_ptr");
   dumpPointerToType(Node->getEncodedType());
+  OF.emitTag("raw");
+  OF.emitString(Node->getEncodedType().getAsString());
 }
 
 template <class ATDWriter>
@@ -4704,7 +4712,6 @@ int ASTExporter<ATDWriter>::TypeWithChildInfoTupleSize() {
 /// #define type_tuple type_info
 /// type type_info = {
 ///   pointer : pointer;
-///   raw : string;
 ///   ?desugared_type : type_ptr option;
 /// } <ocaml field_prefix="ti_">
 /// #define type_with_child_info type_info * type_ptr
@@ -4714,14 +4721,10 @@ void ASTExporter<ATDWriter>::VisitType(const Type *T) {
   // NOTE: T can (and will) be null here!!
 
   bool HasDesugaredType = T && T->getUnqualifiedDesugaredType() != T;
-  ObjectScope Scope(OF, 2 + HasDesugaredType);
+  ObjectScope Scope(OF, 1 + HasDesugaredType);
 
   OF.emitTag("pointer");
   dumpPointer(T);
-
-  OF.emitTag("raw");
-  QualType qt(T, 0);
-  OF.emitString(qt.getAsString());
 
   if (HasDesugaredType) {
     OF.emitTag("desugared_type");
