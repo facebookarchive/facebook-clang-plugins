@@ -46,6 +46,7 @@ LDFLAGS_DYLIB+=-Wl,-rpath -Wl,@executable_path/../lib -Wl,-undefined,dynamic_loo
 
 CLANG_TOOL_LIBS := \
     -lclangFrontend \
+    -lclangIndex \
     -lclangSerialization \
     -lclangDriver \
     -lclangTooling \
