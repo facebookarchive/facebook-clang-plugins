@@ -210,9 +210,10 @@ class NoOpenSimplePluginASTAction
     Parent::Options->inputFile = inputFile;
     Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
 
-    std::string outputFile = Parent::Options->outputFile;
+    std::unique_ptr<std::string> outputFile = std::unique_ptr<std::string>(
+        new std::string(Parent::Options->outputFile));
     return std::unique_ptr<clang::ASTConsumer>(
-        new T(CI, std::move(Parent::Options), outputFile));
+        new T(CI, std::move(Parent::Options), std::move(outputFile)));
   }
 };
 }
