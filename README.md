@@ -36,42 +36,14 @@ The current version of the plugins requires the version 3.6.1 of the clang compi
 
 General instructions to compile clang can be found here: http://clang.llvm.org/get_started.html
 
-(a) Compiling clang from the included sources and script
-
 To compile and use the required version of clang, please run ./clang/setup.sh.
 Using this script should make the variable CLANG_PREFIX unnecessary to compile the plugin.
-
-(b) Manual steps
-
-We have tested the following git checkouts under Mac OS:
-- `llvm` http://llvm.org/git/llvm.git 66ad281fb93b92858f443915f7811b16c131d3eb
-- `llvm/tools/clang` http://llvm.org/git/clang.git 9fd69610a42900694945c75448efd04373359dff
-   with Apple's patch for nullability annotations: http://lists.cs.uiuc.edu/pipermail/cfe-dev/2015-March/041798.html
-- `llvm/projects/compiler-rt` http://llvm.org/git/compiler-rt.git 55a3690916df972339fe877e077a2f27c7117211
-- `llvm/projects/libcxx` http://llvm.org/git/libcxx.git 3da9473a817576c6a94c3f8e0842f3210b0e8aa9
-
-Typically, compilation is made from a directory next to `llvm` along the following lines:
-```
-# from $HOME/git or equivalent
-export CLANG_PREFIX=/usr/local
-mkdir -p llvm-build
-cd llvm-build
-../llvm/configure --prefix="$CLANG_PREFIX" --enable-libcpp --enable-cxx11 --disable-assertions --enable-optimized
-make -j 8 && make install
-cp Release/bin/clang "$CLANG_PREFIX/bin/clang"
-strip -x "$CLANG_PREFIX/bin/clang"
-```
 
 Caveat:
 - Because of the nature of C++, clang and the plugins need to be compiled with the exact same C++ libraries.
 - Also, the default stripping command of clang in release mode breaks plugins.
 
-Once the target compiler is installed, the following should run the unit tests:
-```
-export CLANG_PREFIX=/usr/local #should be the same as above
-export CLANG_PLUGINS_EXTRA_REPO=extra-repo-example
-make test
-```
+Once the target compiler is installed, `make test` should run the unit tests.
 
 Ocaml users may also run:
 ```
