@@ -83,6 +83,17 @@ else
     )
 fi
 
+if [ -n "$CMAKE_C_FLAGS" ]; then
+  CMAKE_ARGS+=(
+    -DCMAKE_C_FLAGS="$CMAKE_C_FLAGS"
+  )
+fi
+if [ -n "$CMAKE_CXX_FLAGS" ]; then
+  CMAKE_ARGS+=(
+    -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS"
+  )
+fi
+
 if [ "$ONLY_RECORD" = "yes" ]; then
     record_installed
     exit 0
@@ -121,6 +132,8 @@ tar --extract $QUIET_TAR --file "$CLANG_SRC"
 
 mkdir build
 pushd build
+
+
 cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
 
 JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
