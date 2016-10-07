@@ -32,7 +32,7 @@ Structure of the repository
 Quick start
 -----------
 
-The current version of the plugins requires the version 3.6.1 of the clang compiler, re-compiled from source.
+The current version of the plugins requires recent version of the clang compiler, re-compiled from source. Clang source which is used by this project can be found in `clang/src/`
 
 General instructions to compile clang can be found here: http://clang.llvm.org/get_started.html
 
