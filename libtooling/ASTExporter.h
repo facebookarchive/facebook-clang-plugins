@@ -476,6 +476,10 @@ int pointerCounter = 1;
 /// type pointer = int
 template <class ATDWriter>
 void writePointer(ATDWriter &OF, bool withPointers, const void *Ptr) {
+  if (!Ptr) {
+    OF.emitInteger(0);
+    return;
+  }
   if (pointerMap.find(Ptr) == pointerMap.end()) {
     pointerMap[Ptr] = pointerCounter++;
   }

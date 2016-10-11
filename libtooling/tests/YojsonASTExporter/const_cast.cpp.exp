@@ -27,13 +27,13 @@
         ]
       },
       <"NoType">,
-      3,
+      0,
       {
       }
     )>,
     <"TypedefDecl" : (
       {
-        "pointer" : 4,
+        "pointer" : 3,
         "source_range" : (
           {
           },
@@ -49,13 +49,13 @@
         ]
       },
       <"NoType">,
-      3,
+      0,
       {
       }
     )>,
     <"TypedefDecl" : (
       {
-        "pointer" : 5,
+        "pointer" : 4,
         "source_range" : (
           {
           },
@@ -71,13 +71,13 @@
         ]
       },
       <"NoType">,
-      3,
+      0,
       {
       }
     )>,
     <"TypedefDecl" : (
       {
-        "pointer" : 6,
+        "pointer" : 5,
         "source_range" : (
           {
           },
@@ -93,13 +93,13 @@
         ]
       },
       <"NoType">,
-      3,
+      0,
       {
       }
     )>,
     <"TypedefDecl" : (
       {
-        "pointer" : 7,
+        "pointer" : 6,
         "source_range" : (
           {
           },
@@ -115,13 +115,13 @@
         ]
       },
       <"NoType">,
-      3,
+      0,
       {
       }
     )>,
     <"CXXRecordDecl" : (
       {
-        "pointer" : 8,
+        "pointer" : 7,
         "source_range" : (
           {
             "file" : "tests/const_cast.cpp",
@@ -142,11 +142,11 @@
         ]
       },
       <"Type" : "class Foo">,
-      9,
+      8,
       [
         <"CXXRecordDecl" : (
           {
-            "pointer" : 10,
+            "pointer" : 9,
             "source_range" : (
               {
                 "line" : 1,
@@ -166,7 +166,7 @@
             ]
           },
           <"Type" : "class Foo">,
-          9,
+          8,
           [
           ],
           {
@@ -178,7 +178,7 @@
         )>,
         <"AccessSpecDecl" : (
           {
-            "pointer" : 11,
+            "pointer" : 10,
             "source_range" : (
               {
                 "line" : 2,
@@ -192,8 +192,8 @@
         )>,
         <"CXXMethodDecl" : (
           {
-            "pointer" : 12,
-            "parent_pointer" : 8,
+            "pointer" : 11,
+            "parent_pointer" : 7,
             "source_range" : (
               {
                 "line" : 3,
@@ -214,14 +214,14 @@
             ]
           },
           {
-            "type_ptr" : 13
+            "type_ptr" : 12
           },
           {
             "mangled_name" : "_ZN3Foo4funcEv",
-            "decl_ptr_with_body" : 12,
+            "decl_ptr_with_body" : 11,
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : 14,
+                "pointer" : 13,
                 "source_range" : (
                   {
                     "column" : 15
@@ -249,7 +249,7 @@
     )>,
     <"FunctionDecl" : (
       {
-        "pointer" : 15,
+        "pointer" : 14,
         "source_range" : (
           {
             "line" : 6,
@@ -268,14 +268,14 @@
         ]
       },
       {
-        "type_ptr" : 16
+        "type_ptr" : 15
       },
       {
         "mangled_name" : "_Z12someFunctionRK3Foo",
         "parameters" : [
           <"ParmVarDecl" : (
             {
-              "pointer" : 17,
+              "pointer" : 16,
               "source_range" : (
                 {
                   "line" : 6,
@@ -295,17 +295,17 @@
               ]
             },
             {
-              "type_ptr" : 18
+              "type_ptr" : 17
             },
             {
               "parm_index_in_function" : 0
             }
           )>
         ],
-        "decl_ptr_with_body" : 15,
+        "decl_ptr_with_body" : 14,
         "body" : <"CompoundStmt" : (
           {
-            "pointer" : 19,
+            "pointer" : 18,
             "source_range" : (
               {
                 "column" : 36
@@ -319,7 +319,7 @@
           [
             <"DeclStmt" : (
               {
-                "pointer" : 20,
+                "pointer" : 19,
                 "source_range" : (
                   {
                     "line" : 7,
@@ -333,7 +333,7 @@
               [
                 <"CXXConstCastExpr" : (
                   {
-                    "pointer" : 21,
+                    "pointer" : 20,
                     "source_range" : (
                       {
                         "column" : 15
@@ -346,7 +346,7 @@
                   [
                     <"DeclRefExpr" : (
                       {
-                        "pointer" : 22,
+                        "pointer" : 21,
                         "source_range" : (
                           {
                             "column" : 32
@@ -359,26 +359,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : 9,
+                        "type_ptr" : 8,
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"ParmVar">,
-                          "decl_pointer" : 17,
+                          "decl_pointer" : 16,
                           "name" : {
                             "name" : "f",
                             "qual_name" : [
                               "f"
                             ]
                           },
-                          "type_ptr" : 18
+                          "type_ptr" : 17
                         }
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : 9,
+                    "type_ptr" : 8,
                     "value_kind" : <"LValue">
                   },
                   {
@@ -386,14 +386,14 @@
                     "base_path" : [
                     ]
                   },
-                  23,
+                  22,
                   "const_cast"
                 )>
               ],
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 24,
+                    "pointer" : 23,
                     "source_range" : (
                       {
                         "column" : 3
@@ -412,12 +412,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 23
+                    "type_ptr" : 22
                   },
                   {
                     "init_expr" : <"CXXConstCastExpr" : (
                       {
-                        "pointer" : 21,
+                        "pointer" : 20,
                         "source_range" : (
                           {
                             "column" : 15
@@ -430,7 +430,7 @@
                       [
                         <"DeclRefExpr" : (
                           {
-                            "pointer" : 22,
+                            "pointer" : 21,
                             "source_range" : (
                               {
                                 "column" : 32
@@ -443,26 +443,26 @@
                           [
                           ],
                           {
-                            "type_ptr" : 9,
+                            "type_ptr" : 8,
                             "value_kind" : <"LValue">
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"ParmVar">,
-                              "decl_pointer" : 17,
+                              "decl_pointer" : 16,
                               "name" : {
                                 "name" : "f",
                                 "qual_name" : [
                                   "f"
                                 ]
                               },
-                              "type_ptr" : 18
+                              "type_ptr" : 17
                             }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : 9,
+                        "type_ptr" : 8,
                         "value_kind" : <"LValue">
                       },
                       {
@@ -470,7 +470,7 @@
                         "base_path" : [
                         ]
                       },
-                      23,
+                      22,
                       "const_cast"
                     )>
                   }
@@ -479,7 +479,7 @@
             )>,
             <"CXXMemberCallExpr" : (
               {
-                "pointer" : 25,
+                "pointer" : 24,
                 "source_range" : (
                   {
                     "line" : 8,
@@ -493,7 +493,7 @@
               [
                 <"MemberExpr" : (
                   {
-                    "pointer" : 26,
+                    "pointer" : 25,
                     "source_range" : (
                       {
                         "column" : 3
@@ -506,7 +506,7 @@
                   [
                     <"DeclRefExpr" : (
                       {
-                        "pointer" : 27,
+                        "pointer" : 26,
                         "source_range" : (
                           {
                             "column" : 3
@@ -519,26 +519,26 @@
                       [
                       ],
                       {
-                        "type_ptr" : 9,
+                        "type_ptr" : 8,
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : 24,
+                          "decl_pointer" : 23,
                           "name" : {
                             "name" : "fRef",
                             "qual_name" : [
                               "fRef"
                             ]
                           },
-                          "type_ptr" : 23
+                          "type_ptr" : 22
                         }
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : 28
+                    "type_ptr" : 27
                   },
                   {
                     "performs_virtual_dispatch" : true,
@@ -551,7 +551,7 @@
                     },
                     "decl_ref" : {
                       "kind" : <"CXXMethod">,
-                      "decl_pointer" : 12,
+                      "decl_pointer" : 11,
                       "name" : {
                         "name" : "func",
                         "qual_name" : [
@@ -559,13 +559,13 @@
                           "Foo"
                         ]
                       },
-                      "type_ptr" : 13
+                      "type_ptr" : 12
                     }
                   }
                 )>
               ],
               {
-                "type_ptr" : 29
+                "type_ptr" : 28
               }
             )>
           ]
@@ -574,7 +574,7 @@
     )>,
     <"VarDecl" : (
       {
-        "pointer" : 30,
+        "pointer" : 29,
         "source_range" : (
           {
             "line" : 11,
@@ -592,7 +592,7 @@
         ]
       },
       {
-        "type_ptr" : 31,
+        "type_ptr" : 30,
         "is_const" : true
       },
       {
@@ -600,7 +600,7 @@
         "is_const_expr" : true,
         "init_expr" : <"IntegerLiteral" : (
           {
-            "pointer" : 32,
+            "pointer" : 31,
             "source_range" : (
               {
                 "column" : 19
@@ -613,7 +613,7 @@
           [
           ],
           {
-            "type_ptr" : 31
+            "type_ptr" : 30
           },
           {
             "is_signed" : true,
@@ -629,177 +629,182 @@
   [
     <"BuiltinType" : (
       {
-        "pointer" : 29
+        "pointer" : 28
       },
       <"Void">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 33
+        "pointer" : 32
       },
       <"Bool">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 34
+        "pointer" : 33
       },
       <"Char_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 35
+        "pointer" : 34
       },
       <"SChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 36
+        "pointer" : 35
       },
       <"Short">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 31
+        "pointer" : 30
       },
       <"Int">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 37
+        "pointer" : 36
       },
       <"Long">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 38
+        "pointer" : 37
       },
       <"LongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 39
+        "pointer" : 38
       },
       <"UChar">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 40
+        "pointer" : 39
       },
       <"UShort">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 41
+        "pointer" : 40
       },
       <"UInt">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 42
+        "pointer" : 41
       },
       <"ULong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 43
+        "pointer" : 42
       },
       <"ULongLong">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 44
+        "pointer" : 43
       },
       <"Float">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 45
+        "pointer" : 44
       },
       <"Double">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 46
+        "pointer" : 45
       },
       <"LongDouble">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 47
+        "pointer" : 46
       },
       <"Float128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 48
+        "pointer" : 47
       },
       <"Int128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 49
+        "pointer" : 48
       },
       <"UInt128">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 50
+        "pointer" : 49
       },
       <"WChar_S">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 51
+        "pointer" : 50
       },
       <"Char16">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 52
+        "pointer" : 51
       },
       <"Char32">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 53
+        "pointer" : 52
       },
       <"Dependent">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 54
+        "pointer" : 53
       },
       <"Overload">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 28
+        "pointer" : 27
       },
       <"BoundMember">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 55
+        "pointer" : 54
       },
       <"PseudoObject">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 56
+        "pointer" : 55
       },
       <"UnknownAny">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 57
+        "pointer" : 56
       },
       <"ARCUnbridgedCast">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 58
+        "pointer" : 57
       },
       <"BuiltinFn">
+    )>,
+    <"ComplexType" : (
+      {
+        "pointer" : 58
+      }
     )>,
     <"ComplexType" : (
       {
@@ -816,61 +821,65 @@
         "pointer" : 61
       }
     )>,
-    <"ComplexType" : (
-      {
-        "pointer" : 62
-      }
-    )>,
     <"BuiltinType" : (
       {
-        "pointer" : 63
+        "pointer" : 62
       },
       <"ObjCId">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 64
+        "pointer" : 63
       },
       <"ObjCClass">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 65
+        "pointer" : 64
       },
       <"ObjCSel">
     )>,
     <"PointerType" : (
       {
-        "pointer" : 66
+        "pointer" : 65
       },
       {
-        "type_ptr" : 29
+        "type_ptr" : 28
       }
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 67
+        "pointer" : 66
       },
       <"NullPtr">
     )>,
     <"BuiltinType" : (
       {
-        "pointer" : 68
+        "pointer" : 67
       },
       <"Half">
     )>,
     <"RecordType" : (
       {
-        "pointer" : 69
+        "pointer" : 68
       },
-      70
+      69
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 70
+      },
+      {
+        "type_ptr" : 30,
+        "is_const" : true
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 71
       },
       {
-        "type_ptr" : 31,
+        "type_ptr" : 33,
         "is_const" : true
       }
     )>,
@@ -879,97 +888,88 @@
         "pointer" : 72
       },
       {
-        "type_ptr" : 34,
-        "is_const" : true
-      }
-    )>,
-    <"PointerType" : (
-      {
-        "pointer" : 73
-      },
-      {
-        "type_ptr" : 34
+        "type_ptr" : 33
       }
     )>,
     <"RecordType" : (
       {
-        "pointer" : 74
+        "pointer" : 73
       },
-      75
+      74
     )>,
     <"ConstantArrayType" : (
       {
-        "pointer" : 76
+        "pointer" : 75
       },
-      74,
+      73,
       1
     )>,
     <"RecordType" : (
       {
-        "pointer" : 9
+        "pointer" : 8
       },
-      8
+      7
+    )>,
+    <"PointerType" : (
+      {
+        "pointer" : 76
+      },
+      {
+        "type_ptr" : 8
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 12
+      },
+      {
+        "return_type" : 28
+      },
+      {
+      }
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : 17
+      },
+      {
+        "type_ptr" : 8,
+        "is_const" : true
+      }
+    )>,
+    <"FunctionProtoType" : (
+      {
+        "pointer" : 15
+      },
+      {
+        "return_type" : 28
+      },
+      {
+        "params_type" : [
+          17
+        ]
+      }
+    )>,
+    <"LValueReferenceType" : (
+      {
+        "pointer" : 22
+      },
+      {
+        "type_ptr" : 8
+      }
     )>,
     <"PointerType" : (
       {
         "pointer" : 77
       },
       {
-        "type_ptr" : 9
-      }
-    )>,
-    <"FunctionProtoType" : (
-      {
-        "pointer" : 13
-      },
-      {
-        "return_type" : 29
-      },
-      {
-      }
-    )>,
-    <"LValueReferenceType" : (
-      {
-        "pointer" : 18
-      },
-      {
-        "type_ptr" : 9,
-        "is_const" : true
-      }
-    )>,
-    <"FunctionProtoType" : (
-      {
-        "pointer" : 16
-      },
-      {
-        "return_type" : 29
-      },
-      {
-        "params_type" : [
-          18
-        ]
-      }
-    )>,
-    <"LValueReferenceType" : (
-      {
-        "pointer" : 23
-      },
-      {
-        "type_ptr" : 9
-      }
-    )>,
-    <"PointerType" : (
-      {
-        "pointer" : 78
-      },
-      {
-        "type_ptr" : 9,
+        "type_ptr" : 8,
         "is_const" : true
       }
     )>,
     <"NoneType" : (
       {
-        "pointer" : 3
+        "pointer" : 0
       }
     )>
   ]
