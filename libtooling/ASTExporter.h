@@ -182,7 +182,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   typedef typename ATDWriter::VariantScope VariantScope;
   ATDWriter OF;
 
-  const ASTContext &Context;
+  ASTContext &Context;
 
   const ASTExporterOptions &Options;
 
@@ -656,6 +656,14 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
               *I)) {
         declsToDump.push_back(I);
       }
+    }
+    /* Some typedefs are not part of AST. 'instancetype' is one of them.
+    Export it nevertheless as part of TranslationUnitDecl context. */
+    // getObjCInstanceType() should return null type when 'instancetype' is not
+    // known yet - it doesn't work this way due to bug in clang, but keep
+    // the check for when the bug is fixed.
+    if (isa<TranslationUnitDecl>(DC) && Context.getObjCInstanceType().getTypePtrOrNull()) {
+      declsToDump.push_back(Context.getObjCInstanceTypeDecl());
     }
     ArrayScope Scope(OF, declsToDump.size());
     for (auto I : declsToDump) {
