@@ -1488,11 +1488,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
   // We purposedly do not call VisitDeclContext(D).
 
-  // clang crashes on mangling CXXConversionDecl (t12456301), eg
-  // template<typename T>
-  // void foo<T>::bar(){std::function<void*()> toto = [](){return nullptr;};}
-  bool ShouldMangleName =
-      Mangler->shouldMangleDeclName(D) && !isa<CXXConversionDecl>(D);
+  bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
   bool IsInlineSpecified = D->isInlineSpecified();
