@@ -123,6 +123,33 @@ class SimplePluginASTActionBase : public clang::PluginASTAction {
     Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
     Options->loadValuesFromEnvAndMap(PluginASTOptions::makeMap(args));
   }
+
+  bool SetFileOptions(clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
+    // When running clang tool on more than one source file, CreateASTConsumer
+    // will be ran for each of them separately. Hence, Inputs.size() = 1.
+    clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
+
+    switch (inputFile.getKind()) {
+    case clang::IK_None:
+    case clang::IK_Asm:
+    case clang::IK_LLVM_IR:
+      // We can't do anything with these - they may trigger errors when running
+      // clang frontend
+      return false;
+    default:
+      // run the consumer for IK_AST and all others
+      break;
+    }
+    if (Options == nullptr) {
+      Options = std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
+      Options->loadValuesFromEnvAndMap(
+          std::unordered_map<std::string, std::string>());
+    }
+    Options->inputFile = inputFile;
+    Options->setObjectFile(CI.getFrontendOpts().OutputFile);
+    // success
+    return true;
+  }
 };
 
 template <class SimpleASTAction>
@@ -158,31 +185,9 @@ class SimplePluginASTAction
  protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
       clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
-    clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
-    /* when running clang tool on more than one source file, CreateASTConsumer
-       will be ran for each of them separately. Hence, Inputs.size() = 1 */
-    switch (inputFile.getKind()) {
-    case clang::IK_None:
-    case clang::IK_Asm:
-    case clang::IK_LLVM_IR:
-      // We can't do anything with these - they may trigger errors when running
-      // clang frontend
+    if (!Parent::SetFileOptions(CI, inputFilename)) {
       return nullptr;
-    case clang::IK_AST: // ??
-    default:
-      // run the consumer for IK_AST and all others
-      break;
     }
-    if (Parent::Options == nullptr) {
-      Parent::Options =
-          std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
-      Parent::Options->loadValuesFromEnvAndMap(
-          std::unordered_map<std::string, std::string>());
-    }
-
-    Parent::Options->inputFile = inputFile;
-    Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
-
     std::unique_ptr<llvm::raw_ostream> OS =
         CI.createOutputFile(Parent::Options->outputFile,
                             Binary,
@@ -191,11 +196,9 @@ class SimplePluginASTAction
                             "",
                             UseTemporary,
                             CreateMissingDirectories);
-
     if (!OS) {
       return nullptr;
     }
-
     return std::unique_ptr<clang::ASTConsumer>(
         new T(CI, std::move(Parent::Options), std::move(OS)));
   }
@@ -215,31 +218,9 @@ class NoOpenSimplePluginASTAction
  protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
       clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
-    clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
-    /* when running clang tool on more than one source file, CreateASTConsumer
-       will be ran for each of them separately. Hence, Inputs.size() = 1 */
-    switch (inputFile.getKind()) {
-    case clang::IK_None:
-    case clang::IK_Asm:
-    case clang::IK_LLVM_IR:
-      // We can't do anything with these - they may trigger errors when running
-      // clang frontend
+    if (!Parent::SetFileOptions(CI, inputFilename)) {
       return nullptr;
-    case clang::IK_AST: // ??
-    default:
-      // run the consumer for IK_AST and all others
-      break;
     }
-    if (Parent::Options == nullptr) {
-      Parent::Options =
-          std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
-      Parent::Options->loadValuesFromEnvAndMap(
-          std::unordered_map<std::string, std::string>());
-    }
-
-    Parent::Options->inputFile = inputFile;
-    Parent::Options->setObjectFile(CI.getFrontendOpts().OutputFile);
-
     std::unique_ptr<std::string> outputFile = std::unique_ptr<std::string>(
         new std::string(Parent::Options->outputFile));
     return std::unique_ptr<clang::ASTConsumer>(
