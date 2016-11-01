@@ -30,7 +30,7 @@ BINIOU_PLUGIN=BiniouASTExporter
 PLUGINS+=$(BINIOU_PLUGIN)
 EXTS+=.biniou
 
-all: build/FacebookClangPlugin.dylib build/record_copied_file
+all: build/FacebookClangPlugin.dylib build/ast_exporter_bin build/record_copied_file
 
 # hook to optional external sources
 include $(LEVEL)/Makefile.extra
@@ -54,7 +54,7 @@ build/record_copied_file: build/record_copied_file.o build/FileServices.o $(HEAD
 AST_EXPORTER_OBJS=ast_exporter_bin.o SimplePluginASTAction.o FileUtils.o FileServices.o AttrParameterVectorStream.o
 build/ast_exporter_bin: $(AST_EXPORTER_OBJS:%=build/%) $(HEADERS)
 	@mkdir -p build
-	$(CXX) $(LDFLAGS) $(LLVM_CXXFLAGS) $(CLANG_TOOL_LIBS) $(LLVM_LDFLAGS) -lz -lpthread -lm -o $@ $(AST_EXPORTER_OBJS:%=build/%)
+	$(CXX) -o $@ $(AST_EXPORTER_OBJS:%=build/%) $(LDFLAGS) $(LLVM_CXXFLAGS) $(CLANG_TOOL_LIBS) $(LLVM_LDFLAGS) -lz -lpthread -lm 
 
 TEST_DIRS=tests
 ifneq "$(EXTRA_DIR)" ""
