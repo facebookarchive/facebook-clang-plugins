@@ -28,7 +28,7 @@ namespace ASTPluginLib {
 
 struct PluginASTOptionsBase {
   // source file being parsed
-  std::string inputFile;
+  clang::FrontendInputFile inputFile;
   // output file for the plugin
   std::string outputFile;
   // object file produced by the usual frontend (possibly empty)
@@ -157,7 +157,8 @@ class SimplePluginASTAction
 
  protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
-      clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+      clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
+    clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
     if (Parent::Options == nullptr) {
       Parent::Options =
           std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
@@ -199,7 +200,8 @@ class NoOpenSimplePluginASTAction
 
  protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
-      clang::CompilerInstance &CI, llvm::StringRef inputFile) {
+      clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
+    clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
     if (Parent::Options == nullptr) {
       Parent::Options =
           std::unique_ptr<PluginASTOptions>(new PluginASTOptions());

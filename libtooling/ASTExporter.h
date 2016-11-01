@@ -247,6 +247,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpAttr(const Attr &A);
   void dumpSelector(const Selector sel);
   void dumpName(const NamedDecl &decl);
+  void dumpInputKind(const InputKind kind);
 
   bool alwaysEmitParent(const Decl *D);
 
@@ -662,7 +663,8 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
     // getObjCInstanceType() should return null type when 'instancetype' is not
     // known yet - it doesn't work this way due to bug in clang, but keep
     // the check for when the bug is fixed.
-    if (isa<TranslationUnitDecl>(DC) && Context.getObjCInstanceType().getTypePtrOrNull()) {
+    if (isa<TranslationUnitDecl>(DC) &&
+        Context.getObjCInstanceType().getTypePtrOrNull()) {
       declsToDump.push_back(Context.getObjCInstanceTypeDecl());
     }
     ArrayScope Scope(OF, declsToDump.size());
@@ -1328,14 +1330,98 @@ int ASTExporter<ATDWriter>::TranslationUnitDeclTupleSize() {
   return DeclTupleSize() + DeclContextTupleSize() + 1;
 }
 /// \atd
-/// #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * c_type list
+/// type input_kind = [
+///   IK_None
+/// | IK_Asm
+/// | IK_C
+/// | IK_CXX
+/// | IK_ObjC
+/// | IK_ObjCXX
+/// | IK_PreprocessedC
+/// | IK_PreprocessedCXX
+/// | IK_PreprocessedObjC
+/// | IK_PreprocessedObjCXX
+/// | IK_OpenCL
+/// | IK_CUDA
+/// | IK_PreprocessedCuda
+/// | IK_RenderScript
+/// | IK_AST
+/// | IK_LLVM_IR
+/// ]
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
+  switch (kind) {
+  case IK_None:
+    OF.emitSimpleVariant("IK_None");
+    break;
+  case IK_Asm:
+    OF.emitSimpleVariant("IK_Asm");
+    break;
+  case IK_C:
+    OF.emitSimpleVariant("IK_C");
+    break;
+  case IK_CXX:
+    OF.emitSimpleVariant("IK_CXX");
+    break;
+  case IK_ObjC:
+    OF.emitSimpleVariant("IK_ObjC");
+    break;
+  case IK_ObjCXX:
+    OF.emitSimpleVariant("IK_ObjCXX");
+    break;
+  case IK_PreprocessedC:
+    OF.emitSimpleVariant("IK_PreprocessedC");
+    break;
+  case IK_PreprocessedCXX:
+    OF.emitSimpleVariant("IK_PreprocessedCXX");
+    break;
+  case IK_PreprocessedObjC:
+    OF.emitSimpleVariant("IK_PreprocessedObjC");
+    break;
+  case IK_PreprocessedObjCXX:
+    OF.emitSimpleVariant("IK_PreprocessedObjCXX");
+    break;
+  case IK_OpenCL:
+    OF.emitSimpleVariant("IK_OpenCL");
+    break;
+  case IK_CUDA:
+    OF.emitSimpleVariant("IK_CUDA");
+    break;
+  case IK_PreprocessedCuda:
+    OF.emitSimpleVariant("IK_PreprocessedCuda");
+    break;
+  case IK_RenderScript:
+    OF.emitSimpleVariant("IK_RenderScript");
+    break;
+  case IK_AST:
+    OF.emitSimpleVariant("IK_AST");
+    break;
+  case IK_LLVM_IR:
+    OF.emitSimpleVariant("IK_LLVM_IR");
+    break;
+  }
+}
+/// \atd
+/// #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * translation_unit_decl_info
+/// type  translation_unit_decl_info = {
+///   input_path : string;
+///   input_kind : input_kind;
+///   types : c_type list;
+/// } <ocaml field_prefix="tudi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(
     const TranslationUnitDecl *D) {
   VisitDecl(D);
   VisitDeclContext(D);
+
+  ObjectScope Scope(OF, 3);
+  OF.emitTag("input_path");
+  OF.emitString(Options.inputFile.getFile());
+  OF.emitTag("input_kind");
+  dumpInputKind(Options.inputFile.getKind());
+  OF.emitTag("types");
   const auto &types = Context.getTypes();
-  ArrayScope Scope(OF, types.size() + 1); // + 1 for nullptr
+  ArrayScope aScope(OF, types.size() + 1); // + 1 for nullptr
   for (const Type *type : types) {
     dumpType(type);
   }
