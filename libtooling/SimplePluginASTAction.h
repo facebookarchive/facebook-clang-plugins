@@ -159,6 +159,20 @@ class SimplePluginASTAction
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
       clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
     clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
+    /* when running clang tool on more than one source file, CreateASTConsumer
+       will be ran for each of them separately. Hence, Inputs.size() = 1 */
+    switch (inputFile.getKind()) {
+    case clang::IK_None:
+    case clang::IK_Asm:
+    case clang::IK_LLVM_IR:
+      // We can't do anything with these - they may trigger errors when running
+      // clang frontend
+      return nullptr;
+    case clang::IK_AST: // ??
+    default:
+      // run the consumer for IK_AST and all others
+      break;
+    }
     if (Parent::Options == nullptr) {
       Parent::Options =
           std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
@@ -202,6 +216,20 @@ class NoOpenSimplePluginASTAction
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
       clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
     clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
+    /* when running clang tool on more than one source file, CreateASTConsumer
+       will be ran for each of them separately. Hence, Inputs.size() = 1 */
+    switch (inputFile.getKind()) {
+    case clang::IK_None:
+    case clang::IK_Asm:
+    case clang::IK_LLVM_IR:
+      // We can't do anything with these - they may trigger errors when running
+      // clang frontend
+      return nullptr;
+    case clang::IK_AST: // ??
+    default:
+      // run the consumer for IK_AST and all others
+      break;
+    }
     if (Parent::Options == nullptr) {
       Parent::Options =
           std::unique_ptr<PluginASTOptions>(new PluginASTOptions());
