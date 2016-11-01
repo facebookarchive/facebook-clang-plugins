@@ -1406,6 +1406,7 @@ void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
 /// type  translation_unit_decl_info = {
 ///   input_path : string;
 ///   input_kind : input_kind;
+///   ~arc_enabled : bool;
 ///   types : c_type list;
 /// } <ocaml field_prefix="tudi_">
 template <class ATDWriter>
@@ -1413,12 +1414,13 @@ void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(
     const TranslationUnitDecl *D) {
   VisitDecl(D);
   VisitDeclContext(D);
-
-  ObjectScope Scope(OF, 3);
+  bool IsARCEnabled = Context.getLangOpts().ObjCAutoRefCount;
+  ObjectScope Scope(OF, 3 + IsARCEnabled);
   OF.emitTag("input_path");
   OF.emitString(Options.inputFile.getFile());
   OF.emitTag("input_kind");
   dumpInputKind(Options.inputFile.getKind());
+  OF.emitFlag("arc_enabled", IsARCEnabled);
   OF.emitTag("types");
   const auto &types = Context.getTypes();
   ArrayScope aScope(OF, types.size() + 1); // + 1 for nullptr
