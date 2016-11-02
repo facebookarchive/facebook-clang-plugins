@@ -1417,7 +1417,8 @@ void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(
   bool IsARCEnabled = Context.getLangOpts().ObjCAutoRefCount;
   ObjectScope Scope(OF, 3 + IsARCEnabled);
   OF.emitTag("input_path");
-  OF.emitString(Options.inputFile.getFile());
+  OF.emitString(
+      Options.normalizeSourcePath(Options.inputFile.getFile().str().c_str()));
   OF.emitTag("input_kind");
   dumpInputKind(Options.inputFile.getKind());
   OF.emitFlag("arc_enabled", IsARCEnabled);
