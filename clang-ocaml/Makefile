@@ -57,10 +57,13 @@ build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.h
 	python $(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.h.p | python $(ATDLIB)/normalize_names_in_atd.py > $@
 
 build/ast_inline.atd: build/ast_inline.atd.p
-	$(ATD_CPP) $< > $@ || rm $@
+	$(ATD_CPP) $< > $@
 
 build/clang_ast.atd: build/ast_inline.atd
-	$(ATDCAT) $< > $@ || rm $@
+	# $(ATDCAT) returns 0 even if it fails - look at the output file to
+	# determine whether it failed or not. Then remove the result file as
+	# make misteriously doesn't do that by itself
+	$(ATDCAT) $< > $@ && ([ -s $@ ] || (rm $@; exit 1))
 
 build/ast_inline.atd.inc: build/ast_inline.atd.p
 	cat $< | grep '^#' > $@
@@ -69,7 +72,7 @@ build/ast_inline.pat.inc: build/ast_inline.atd.inc
 	cat $< | sed 's/*/,/g; s/ list/_list/g' > $@
 
 build/clang_ast_proj.mli: clang_ast_proj.mli.p build/ast_inline.atd.inc
-	cat $< | $(ATD_CPP) -include build/ast_inline.atd.inc > $@ || rm $@
+	cat $< | $(ATD_CPP) -include build/ast_inline.atd.inc > $@
 
 build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
 	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o - | python $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
@@ -109,7 +112,7 @@ CLANG_AST_PROJ_LIBS=$(patsubst %,build/%.cmx,clang_ast_types clang_ast_t clang_a
 build/clang_ast_named_decl_printer: $(CLANG_AST_PROJ_LIBS) build/clang_ast_named_decl_printer.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
-build/clang_ast_main_test: $(CLANG_AST_PROJ_LIBS) build/clang_ast_main_test.cmx 
+build/clang_ast_main_test: $(CLANG_AST_PROJ_LIBS) build/clang_ast_main_test.cmx
 	$(OCAMLOPT) -linkpkg -o $@ $^
 
 test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_proj_test clang_ast_converter clang_ast_named_decl_printer clang_ast_main_test)
