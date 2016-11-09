@@ -116,6 +116,7 @@ void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
   loadBool(map, "PREPEND_CURRENT_DIR", needBasePath);
   loadString(map, "MAKE_RELATIVE_TO", repoRoot);
   loadString(map, "STRIP_ISYSROOT", iSysRoot);
+  loadBool(map, "ALLOW_SIBLINGS_TO_REPO_ROOT", allowSiblingsToRepoRoot);
   loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
   loadBool(map, "RESOLVE_SYMLINKS", resolveSymlinks);
 
@@ -188,7 +189,7 @@ const std::string &PluginASTOptionsBase::normalizeSourcePath(
   }
   // By convention, relative paths are only activated when repoRoot != "".
   if (repoRoot != "") {
-    result = FileUtils::makeRelativePath(repoRoot, iSysRoot, keepExternalPaths, realPath);
+    result = FileUtils::makeRelativePath(repoRoot, iSysRoot, keepExternalPaths, allowSiblingsToRepoRoot, realPath);
   } else {
     result = realPath;
   }

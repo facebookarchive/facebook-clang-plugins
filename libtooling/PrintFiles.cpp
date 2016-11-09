@@ -26,7 +26,9 @@ class PrintFilesConsumer : public ASTConsumer {
       const CompilerInstance &CI,
       std::unique_ptr<ASTPluginLib::PluginASTOptionsBase> &&Options,
       std::unique_ptr<std::string> outputFile) {
-    std::cout << "Input file: " << Options->inputFile.getFile().str() << "\n";
+    std::cout << "Input file: "
+              << Options->normalizeSourcePath(Options->inputFile.getFile().str().c_str())
+              << "\n";
     std::cout << "Input file kind: " << Options->inputFile.getKind() << "\n";
     if (outputFile) {
       std::cout << "Output file: " << *outputFile << "\n";

@@ -46,7 +46,14 @@ struct PluginASTOptionsBase {
    *    /path/to/sysroot/usr/lib/foo.h --> /usr/lib/foo.h
    */
   std::string iSysRoot;
-  /* Whether file paths not under the repo root should be kept or blanked. */
+  /* Configure a fourth pass on (absolute) file paths to detect siblings to
+   * the repo root. If the repo root is /some/path, /some/other_path will be
+   * rewritten ../other_path
+   */
+  bool allowSiblingsToRepoRoot = false;
+  /* Whether file paths that could not be normalized by any of the rules above
+   * should be kept or blanked.
+   */
   bool keepExternalPaths = false;
   /* Resolve symlinks to their real path. */
   bool resolveSymlinks = false;

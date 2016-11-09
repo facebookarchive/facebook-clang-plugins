@@ -33,6 +33,7 @@ std::string makeAbsolutePath(const std::string &currentWorkingDirectory,
 std::string makeRelativePath(const std::string &repoRoot,
                              const std::string &sysRoot,
                              bool keepExternalPaths,
+                             bool allowSiblingsToRoot,
                              const std::string &path);
 
 /**

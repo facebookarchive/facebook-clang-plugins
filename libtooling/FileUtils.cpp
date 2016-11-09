@@ -72,9 +72,18 @@ std::string makeAbsolutePath(const std::string &currentWorkingDirectory,
 std::string makeRelativePath(const std::string &repoRoot,
                              const std::string &sysRoot,
                              bool keepExternalPaths,
+                             bool allowSiblingsToRepoRoot,
                              const std::string &path) {
-  if (repoRoot != "" && llvm::StringRef(path).startswith(repoRoot + "/")) {
-    return path.substr(repoRoot.size() + 1);
+  if (repoRoot != "") {
+    if (llvm::StringRef(path).startswith(repoRoot + "/")) {
+      return path.substr(repoRoot.size() + 1);
+    }
+    if (allowSiblingsToRepoRoot) {
+      std::string parentOfRoot = llvm::sys::path::parent_path(repoRoot);
+      if (llvm::StringRef(path).startswith(parentOfRoot + "/")) {
+        return "../" + path.substr(parentOfRoot.size() + 1);
+      }
+    }
   }
   if (sysRoot != "" && llvm::StringRef(path).startswith(sysRoot + "/")) {
     // Intentionally keep the heading "/" in this case.
