@@ -1,20 +1,19 @@
-/// \atd
-/// type x = {
-///   foo : int
-/// }
-///
+//@atd type x = {
+//@atd   foo : int
+//@atd }
+//@atd
 // main
 int main() {
 }
 
-/// \atd type x = {
-///}
+//@atd type x = {
+//@atd}
 // bla
 
-/// \atd foo
-/// \atd bar
+//@atd foo
+//@atd bar
 
-/// still there
+//@atd still there
 
-/// some long line cut with \
-///   bla
+//@atd some long line cut with \
+//@atd   bla

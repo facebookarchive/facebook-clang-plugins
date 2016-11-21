@@ -15,7 +15,7 @@
  * while conforming to the inlined ATD specifications.
  *
  * /!\
- * '\atd' block comments are meant to be extracted and processed to generate ATD
+ * '//@atd' comments are meant to be extracted and processed to generate ATD
  * specifications for the Json dumper.
  * Do not modify ATD comments without modifying the Json emission accordingly
  * (and conversely).
@@ -199,12 +199,12 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   const Decl *const NullPtrDecl;
   const Comment *const NullPtrComment;
 
-  /// Keep track of the last location we print out so that we can
-  /// print out deltas from then on out.
+  // Keep track of the last location we print out so that we can
+  // print out deltas from then on out.
   const char *LastLocFilename;
   unsigned LastLocLine;
 
-  /// The \c FullComment parent of the comment being dumped.
+  // The \c FullComment parent of the comment being dumped.
   const FullComment *FC;
 
   NamePrinter<ATDWriter> NamePrint;
@@ -473,8 +473,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 std::unordered_map<const void *, int> pointerMap;
 int pointerCounter = 1;
 
-/// \atd
-/// type pointer = int
+//@atd type pointer = int
 template <class ATDWriter>
 void writePointer(ATDWriter &OF, bool withPointers, const void *Ptr) {
   if (!Ptr) {
@@ -492,12 +491,11 @@ void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
   writePointer(OF, Options.withPointers, Ptr);
 }
 
-/// \atd
-/// type source_location = {
-///   ?file <ocaml mutable> : string option;
-///   ?line <ocaml mutable> : int option;
-///   ?column <ocaml mutable> : int option;
-/// } <ocaml field_prefix="sl_" validator="Clang_ast_visit.visit_source_loc">
+//@atd type source_location = {
+//@atd   ?file <ocaml mutable> : string option;
+//@atd   ?line <ocaml mutable> : int option;
+//@atd   ?column <ocaml mutable> : int option;
+//@atd } <ocaml field_prefix="sl_" validator="Clang_ast_visit.visit_source_loc">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
   const SourceManager &SM = Context.getSourceManager();
@@ -540,8 +538,7 @@ void ASTExporter<ATDWriter>::dumpSourceLocation(SourceLocation Loc) {
   // TODO: lastLocColumn
 }
 
-/// \atd
-/// type source_range = (source_location * source_location)
+//@atd type source_range = (source_location * source_location)
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSourceRange(SourceRange R) {
   TupleScope Scope(OF, 2);
@@ -550,8 +547,7 @@ void ASTExporter<ATDWriter>::dumpSourceRange(SourceRange R) {
 }
 
 // TODO: really dump types as trees
-/// \atd
-/// type opt_type = [Type of string | NoType]
+//@atd type opt_type = [Type of string | NoType]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
   if (!T) {
@@ -563,11 +559,10 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
   }
 }
 
-/// \atd
-/// type qual_type = {
-///   type_ptr : type_ptr;
-///   ~is_const : bool;
-/// } <ocaml field_prefix="qt_">
+//@atd type qual_type = {
+//@atd   type_ptr : type_ptr;
+//@atd   ~is_const : bool;
+//@atd } <ocaml field_prefix="qt_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(const QualType &qt) {
   bool IsConst = qt.isConstQualified();
@@ -577,11 +572,10 @@ void ASTExporter<ATDWriter>::dumpQualType(const QualType &qt) {
   OF.emitFlag("is_const", IsConst);
 }
 
-/// \atd
-/// type named_decl_info = {
-///   name : string;
-///   qual_name : string list;
-/// } <ocaml field_prefix="ni_">
+//@atd type named_decl_info = {
+//@atd   name : string;
+//@atd   qual_name : string list;
+//@atd } <ocaml field_prefix="ni_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
   // dump name
@@ -593,20 +587,18 @@ void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
   NamePrint.printDeclName(Decl);
 }
 
-/// \atd
-/// type decl_ref = {
-///   kind : decl_kind;
-///   decl_pointer : pointer;
-///   ?name : named_decl_info option;
-///   ~is_hidden : bool;
-///   ?type_ptr : type_ptr option
-/// } <ocaml field_prefix="dr_">
-///
-/// type decl_kind = [
-#define DECL(DERIVED, BASE) /// | DERIVED
+//@atd type decl_ref = {
+//@atd   kind : decl_kind;
+//@atd   decl_pointer : pointer;
+//@atd   ?name : named_decl_info option;
+//@atd   ~is_hidden : bool;
+//@atd   ?type_ptr : type_ptr option
+//@atd } <ocaml field_prefix="dr_">
+//@atd type decl_kind = [
+#define DECL(DERIVED, BASE) //@atd | DERIVED
 #define ABSTRACT_DECL(DECL) DECL
 #include <clang/AST/DeclNodes.inc>
-/// ]
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpDeclRef(const Decl &D) {
   const NamedDecl *ND = dyn_cast<NamedDecl>(&D);
@@ -633,12 +625,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::DeclContextTupleSize() {
   return 2;
 }
-/// \atd
-/// #define decl_context_tuple decl list * decl_context_info
-/// type decl_context_info = {
-///   ~has_external_lexical_storage : bool;
-///   ~has_external_visible_storage : bool
-/// } <ocaml field_prefix="dci_">
+//@atd #define decl_context_tuple decl list * decl_context_info
+//@atd type decl_context_info = {
+//@atd   ~has_external_lexical_storage : bool;
+//@atd   ~has_external_visible_storage : bool
+//@atd } <ocaml field_prefix="dci_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   if (!DC) {
@@ -684,18 +675,16 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   }
 }
 
-/// \atd
-/// type lookups = {
-///   decl_ref : decl_ref;
-///   ?primary_context_pointer : pointer option;
-///   lookups : lookup list;
-///   ~has_undeserialized_decls : bool;
-/// } <ocaml field_prefix="lups_">
-///
-/// type lookup = {
-///   decl_name : string;
-///   decl_refs : decl_ref list;
-/// } <ocaml field_prefix="lup_">
+//@atd type lookups = {
+//@atd   decl_ref : decl_ref;
+//@atd   ?primary_context_pointer : pointer option;
+//@atd   lookups : lookup list;
+//@atd   ~has_undeserialized_decls : bool;
+//@atd } <ocaml field_prefix="lups_">
+//@atd type lookup = {
+//@atd   decl_name : string;
+//@atd   decl_refs : decl_ref list;
+//@atd } <ocaml field_prefix="lup_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpLookups(const DeclContext &DC) {
   ObjectScope Scope(OF, 4); // not covered by tests
@@ -738,18 +727,17 @@ void ASTExporter<ATDWriter>::dumpLookups(const DeclContext &DC) {
   OF.emitFlag("has_undeserialized_decls", HasUndeserializedLookups);
 }
 
-/// \atd
-/// type attribute = [
-#define ATTR(X) ///   | X@@Attr of attribute_info
+//@atd type attribute = [
+#define ATTR(X) //@atd   | X@@Attr of attribute_info
 #include <clang/Basic/AttrList.inc>
-/// ] <ocaml repr="classic">
-/// type attribute_info = {
-///   pointer : pointer;
-///   source_range : source_range;
-///   parameters : string list;
-///   ~is_inherited : bool;
-///   ~is_implicit : bool
-/// } <ocaml field_prefix="ai_">
+//@atd ] <ocaml repr="classic">
+//@atd type attribute_info = {
+//@atd   pointer : pointer;
+//@atd   source_range : source_range;
+//@atd   parameters : string list;
+//@atd   ~is_inherited : bool;
+//@atd   ~is_implicit : bool
+//@atd } <ocaml field_prefix="ai_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
   std::string tag;
@@ -805,12 +793,11 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
   }
 }
 
-/// \atd
-/// type previous_decl = [
-/// | None
-/// | First of pointer
-/// | Previous of pointer
-/// ]
+//@atd type previous_decl = [
+//@atd | None
+//@atd | First of pointer
+//@atd | Previous of pointer
+//@atd ]
 template <class ATDWriter>
 static void dumpPreviousDeclImpl(ATDWriter &OF, bool withPointers, ...) {}
 
@@ -858,8 +845,7 @@ static void dumpPreviousDeclOptionallyWithTag(ATDWriter &OF,
 //  C++ Utilities
 //===----------------------------------------------------------------------===//
 
-/// \atd
-/// type access_specifier = [ None | Public | Protected | Private ]
+//@atd type access_specifier = [ None | Public | Protected | Private ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
   switch (AS) {
@@ -878,17 +864,16 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
   }
 }
 
-/// \atd
-/// type cxx_ctor_initializer = {
-///   subject : cxx_ctor_initializer_subject;
-///   source_range : source_range;
-///   ?init_expr : stmt option
-/// } <ocaml field_prefix="xci_">
-/// type cxx_ctor_initializer_subject = [
-///   Member of decl_ref
-/// | Delegating of type_ptr
-/// | BaseClass of (type_ptr * bool)
-/// ]
+//@atd type cxx_ctor_initializer = {
+//@atd   subject : cxx_ctor_initializer_subject;
+//@atd   source_range : source_range;
+//@atd   ?init_expr : stmt option
+//@atd } <ocaml field_prefix="xci_">
+//@atd type cxx_ctor_initializer_subject = [
+//@atd   Member of decl_ref
+//@atd | Delegating of type_ptr
+//@atd | BaseClass of (type_ptr * bool)
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
     const CXXCtorInitializer &Init) {
@@ -919,23 +904,22 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
   }
 }
 
-/// \atd
-/// type declaration_name = {
-///   kind : declaration_name_kind;
-///   name : string;
-/// }  <ocaml field_prefix="dn_">
-/// type declaration_name_kind = [
-///   Identifier
-/// | ObjCZeroArgSelector
-/// | ObjCOneArgSelector
-/// | ObjCMultiArgSelector
-/// | CXXConstructorName
-/// | CXXDestructorName
-/// | CXXConversionFunctionName
-/// | CXXOperatorName
-/// | CXXLiteralOperatorName
-/// | CXXUsingDirective
-/// ]
+//@atd type declaration_name = {
+//@atd   kind : declaration_name_kind;
+//@atd   name : string;
+//@atd }  <ocaml field_prefix="dn_">
+//@atd type declaration_name_kind = [
+//@atd   Identifier
+//@atd | ObjCZeroArgSelector
+//@atd | ObjCOneArgSelector
+//@atd | ObjCMultiArgSelector
+//@atd | CXXConstructorName
+//@atd | CXXDestructorName
+//@atd | CXXConversionFunctionName
+//@atd | CXXOperatorName
+//@atd | CXXLiteralOperatorName
+//@atd | CXXUsingDirective
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
   ObjectScope Scope(OF, 2); // not covered by tests
@@ -975,20 +959,19 @@ void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
   OF.emitTag("name");
   OF.emitString(Name.getAsString());
 }
-/// \atd
-/// type nested_name_specifier_loc = {
-///   kind : specifier_kind;
-///   ?ref : decl_ref option;
-/// } <ocaml field_prefix="nnsl_">
-/// type specifier_kind = [
-///    Identifier
-///  | Namespace
-///  | NamespaceAlias
-///  | TypeSpec
-///  | TypeSpecWithTemplate
-///  | Global
-///  | Super
-/// ]
+//@atd type nested_name_specifier_loc = {
+//@atd   kind : specifier_kind;
+//@atd   ?ref : decl_ref option;
+//@atd } <ocaml field_prefix="nnsl_">
+//@atd type specifier_kind = [
+//@atd    Identifier
+//@atd  | Namespace
+//@atd  | NamespaceAlias
+//@atd  | TypeSpec
+//@atd  | TypeSpecWithTemplate
+//@atd  | Global
+//@atd  | Super
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpNestedNameSpecifierLoc(
     NestedNameSpecifierLoc NNS) {
@@ -1127,11 +1110,9 @@ bool ASTExporter<ATDWriter>::alwaysEmitParent(const Decl *D) {
 //  Decl dumping methods.
 //===----------------------------------------------------------------------===//
 
-/// \atd
-#define DECL(DERIVED, BASE) /// #define @DERIVED@_decl_tuple @BASE@_tuple
+#define DECL(DERIVED, BASE) //@atd #define @DERIVED@_decl_tuple @BASE@_tuple
 #define ABSTRACT_DECL(DECL) DECL
 #include <clang/AST/DeclNodes.inc>
-///
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpDecl(const Decl *D) {
   if (!D) {
@@ -1149,22 +1130,21 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::DeclTupleSize() {
   return 1;
 }
-/// \atd
-/// #define decl_tuple decl_info
-/// type decl_info = {
-///   pointer : pointer;
-///   ?parent_pointer : pointer option;
-///   ~previous_decl <ocaml default="`None"> : previous_decl;
-///   source_range : source_range;
-///   ?owning_module : string option;
-///   ~is_hidden : bool;
-///   ~is_implicit : bool;
-///   ~is_used : bool;
-///   ~is_this_declaration_referenced : bool;
-///   ~is_invalid_decl : bool;
-///   ~attributes : attribute list;
-///   ?full_comment : comment option
-/// } <ocaml field_prefix="di_">
+//@atd #define decl_tuple decl_info
+//@atd type decl_info = {
+//@atd   pointer : pointer;
+//@atd   ?parent_pointer : pointer option;
+//@atd   ~previous_decl <ocaml default="`None"> : previous_decl;
+//@atd   source_range : source_range;
+//@atd   ?owning_module : string option;
+//@atd   ~is_hidden : bool;
+//@atd   ~is_implicit : bool;
+//@atd   ~is_used : bool;
+//@atd   ~is_this_declaration_referenced : bool;
+//@atd   ~is_invalid_decl : bool;
+//@atd   ~attributes : attribute list;
+//@atd   ?full_comment : comment option
+//@atd } <ocaml field_prefix="di_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
   {
@@ -1228,8 +1208,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CapturedDeclTupleSize() {
   return DeclTupleSize() + DeclContextTupleSize();
 }
-/// \atd
-/// #define captured_decl_tuple decl_tuple * decl_context_tuple
+//@atd #define captured_decl_tuple decl_tuple * decl_context_tuple
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCapturedDecl(const CapturedDecl *D) {
   VisitDecl(D);
@@ -1240,8 +1219,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::LinkageSpecDeclTupleSize() {
   return DeclTupleSize() + DeclContextTupleSize();
 }
-/// \atd
-/// #define linkage_spec_decl_tuple decl_tuple * decl_context_tuple
+//@atd #define linkage_spec_decl_tuple decl_tuple * decl_context_tuple
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitLinkageSpecDecl(const LinkageSpecDecl *D) {
   VisitDecl(D);
@@ -1252,12 +1230,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::NamespaceDeclTupleSize() {
   return NamedDeclTupleSize() + DeclContextTupleSize() + 1;
 }
-/// \atd
-/// #define namespace_decl_tuple named_decl_tuple * decl_context_tuple * namespace_decl_info
-/// type namespace_decl_info = {
-///   ~is_inline : bool;
-///   ?original_namespace : decl_ref option;
-/// } <ocaml field_prefix="ndi_">
+//@atd #define namespace_decl_tuple named_decl_tuple * decl_context_tuple * namespace_decl_info
+//@atd type namespace_decl_info = {
+//@atd   ~is_inline : bool;
+//@atd   ?original_namespace : decl_ref option;
+//@atd } <ocaml field_prefix="ndi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *D) {
   VisitNamedDecl(D);
@@ -1278,8 +1255,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCContainerDeclTupleSize() {
   return NamedDeclTupleSize() + DeclContextTupleSize();
 }
-/// \atd
-/// #define obj_c_container_decl_tuple named_decl_tuple * decl_context_tuple
+//@atd #define obj_c_container_decl_tuple named_decl_tuple * decl_context_tuple
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCContainerDecl(
     const ObjCContainerDecl *D) {
@@ -1291,8 +1267,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TagDeclTupleSize() {
   return TypeDeclTupleSize() + DeclContextTupleSize();
 }
-/// \atd
-/// #define tag_decl_tuple type_decl_tuple * decl_context_tuple
+//@atd #define tag_decl_tuple type_decl_tuple * decl_context_tuple
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
   VisitTypeDecl(D);
@@ -1303,8 +1278,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TypeDeclTupleSize() {
   return NamedDeclTupleSize() + 1 + 1;
 }
-/// \atd
-/// #define type_decl_tuple named_decl_tuple * opt_type * type_ptr
+//@atd #define type_decl_tuple named_decl_tuple * opt_type * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypeDecl(const TypeDecl *D) {
   VisitNamedDecl(D);
@@ -1317,8 +1291,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ValueDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
-/// \atd
-/// #define value_decl_tuple named_decl_tuple * qual_type
+//@atd #define value_decl_tuple named_decl_tuple * qual_type
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitValueDecl(const ValueDecl *D) {
   VisitNamedDecl(D);
@@ -1329,25 +1302,24 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TranslationUnitDeclTupleSize() {
   return DeclTupleSize() + DeclContextTupleSize() + 1;
 }
-/// \atd
-/// type input_kind = [
-///   IK_None
-/// | IK_Asm
-/// | IK_C
-/// | IK_CXX
-/// | IK_ObjC
-/// | IK_ObjCXX
-/// | IK_PreprocessedC
-/// | IK_PreprocessedCXX
-/// | IK_PreprocessedObjC
-/// | IK_PreprocessedObjCXX
-/// | IK_OpenCL
-/// | IK_CUDA
-/// | IK_PreprocessedCuda
-/// | IK_RenderScript
-/// | IK_AST
-/// | IK_LLVM_IR
-/// ]
+//@atd type input_kind = [
+//@atd   IK_None
+//@atd | IK_Asm
+//@atd | IK_C
+//@atd | IK_CXX
+//@atd | IK_ObjC
+//@atd | IK_ObjCXX
+//@atd | IK_PreprocessedC
+//@atd | IK_PreprocessedCXX
+//@atd | IK_PreprocessedObjC
+//@atd | IK_PreprocessedObjCXX
+//@atd | IK_OpenCL
+//@atd | IK_CUDA
+//@atd | IK_PreprocessedCuda
+//@atd | IK_RenderScript
+//@atd | IK_AST
+//@atd | IK_LLVM_IR
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
   switch (kind) {
@@ -1401,14 +1373,13 @@ void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
     break;
   }
 }
-/// \atd
-/// #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * translation_unit_decl_info
-/// type  translation_unit_decl_info = {
-///   input_path : string;
-///   input_kind : input_kind;
-///   ~arc_enabled : bool;
-///   types : c_type list;
-/// } <ocaml field_prefix="tudi_">
+//@atd #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * translation_unit_decl_info
+//@atd type  translation_unit_decl_info = {
+//@atd   input_path : string;
+//@atd   input_kind : input_kind;
+//@atd   ~arc_enabled : bool;
+//@atd   types : c_type list;
+//@atd } <ocaml field_prefix="tudi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(
     const TranslationUnitDecl *D) {
@@ -1436,8 +1407,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::NamedDeclTupleSize() {
   return DeclTupleSize() + 1;
 }
-/// \atd
-/// #define named_decl_tuple decl_tuple * named_decl_info
+//@atd #define named_decl_tuple decl_tuple * named_decl_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamedDecl(const NamedDecl *D) {
   VisitDecl(D);
@@ -1448,11 +1418,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TypedefDeclTupleSize() {
   return ASTExporter::TypedefNameDeclTupleSize() + 1;
 }
-/// \atd
-/// #define typedef_decl_tuple typedef_name_decl_tuple * typedef_decl_info
-/// type typedef_decl_info = {
-///   ~is_module_private : bool
-/// } <ocaml field_prefix="tdi_">
+//@atd #define typedef_decl_tuple typedef_name_decl_tuple * typedef_decl_info
+//@atd type typedef_decl_info = {
+//@atd   ~is_module_private : bool
+//@atd } <ocaml field_prefix="tdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypedefDecl(const TypedefDecl *D) {
   ASTExporter<ATDWriter>::VisitTypedefNameDecl(D);
@@ -1467,13 +1436,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::EnumDeclTupleSize() {
   return TagDeclTupleSize() + 1;
 }
-/// \atd
-/// #define enum_decl_tuple tag_decl_tuple * enum_decl_info
-/// type enum_decl_info = {
-///   ?scope : enum_decl_scope option;
-///   ~is_module_private : bool
-/// } <ocaml field_prefix="edi_">
-/// type enum_decl_scope = [Class | Struct]
+//@atd #define enum_decl_tuple tag_decl_tuple * enum_decl_info
+//@atd type enum_decl_info = {
+//@atd   ?scope : enum_decl_scope option;
+//@atd   ~is_module_private : bool
+//@atd } <ocaml field_prefix="edi_">
+//@atd type enum_decl_scope = [Class | Struct]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitEnumDecl(const EnumDecl *D) {
   VisitTagDecl(D);
@@ -1496,12 +1464,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::RecordDeclTupleSize() {
   return TagDeclTupleSize() + 1;
 }
-/// \atd
-/// #define record_decl_tuple tag_decl_tuple * record_decl_info
-/// type record_decl_info = {
-///   ~is_module_private : bool;
-///   ~is_complete_definition : bool
-/// } <ocaml field_prefix="rdi_">
+//@atd #define record_decl_tuple tag_decl_tuple * record_decl_info
+//@atd type record_decl_info = {
+//@atd   ~is_module_private : bool;
+//@atd   ~is_complete_definition : bool
+//@atd } <ocaml field_prefix="rdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitRecordDecl(const RecordDecl *D) {
   VisitTagDecl(D);
@@ -1518,11 +1485,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::EnumConstantDeclTupleSize() {
   return ValueDeclTupleSize() + 1;
 }
-/// \atd
-/// #define enum_constant_decl_tuple value_decl_tuple * enum_constant_decl_info
-/// type enum_constant_decl_info = {
-///   ?init_expr : stmt option
-/// } <ocaml field_prefix="ecdi_">
+//@atd #define enum_constant_decl_tuple value_decl_tuple * enum_constant_decl_info
+//@atd type enum_constant_decl_info = {
+//@atd   ?init_expr : stmt option
+//@atd } <ocaml field_prefix="ecdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitEnumConstantDecl(const EnumConstantDecl *D) {
   VisitValueDecl(D);
@@ -1540,8 +1506,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::IndirectFieldDeclTupleSize() {
   return ValueDeclTupleSize() + 1;
 }
-/// \atd
-/// #define indirect_field_decl_tuple value_decl_tuple * decl_ref list
+//@atd #define indirect_field_decl_tuple value_decl_tuple * decl_ref list
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitIndirectFieldDecl(
     const IndirectFieldDecl *D) {
@@ -1558,20 +1523,19 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
   return ASTExporter::DeclaratorDeclTupleSize() + 1;
 }
-/// \atd
-/// #define function_decl_tuple declarator_decl_tuple * function_decl_info
-/// type function_decl_info = {
-///   ?mangled_name : string option;
-///   ?storage_class : string option;
-///   ~is_inline : bool;
-///   ~is_module_private : bool;
-///   ~is_pure : bool;
-///   ~is_delete_as_written : bool;
-///   ~decls_in_prototype_scope : decl list;
-///   ~parameters : decl list;
-///   ?decl_ptr_with_body : pointer option;
-///   ?body : stmt option
-/// } <ocaml field_prefix="fdi_">
+//@atd #define function_decl_tuple declarator_decl_tuple * function_decl_info
+//@atd type function_decl_info = {
+//@atd   ?mangled_name : string option;
+//@atd   ?storage_class : string option;
+//@atd   ~is_inline : bool;
+//@atd   ~is_module_private : bool;
+//@atd   ~is_pure : bool;
+//@atd   ~is_delete_as_written : bool;
+//@atd   ~decls_in_prototype_scope : decl list;
+//@atd   ~parameters : decl list;
+//@atd   ?decl_ptr_with_body : pointer option;
+//@atd   ?body : stmt option
+//@atd } <ocaml field_prefix="fdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
@@ -1686,14 +1650,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FieldDeclTupleSize() {
   return ASTExporter::DeclaratorDeclTupleSize() + 1;
 }
-/// \atd
-/// #define field_decl_tuple declarator_decl_tuple * field_decl_info
-/// type field_decl_info = {
-///   ~is_mutable : bool;
-///   ~is_module_private : bool;
-///   ?init_expr : stmt option;
-///   ?bit_width_expr : stmt option
-/// } <ocaml field_prefix="fldi_">
+//@atd #define field_decl_tuple declarator_decl_tuple * field_decl_info
+//@atd type field_decl_info = {
+//@atd   ~is_mutable : bool;
+//@atd   ~is_module_private : bool;
+//@atd   ?init_expr : stmt option;
+//@atd   ?bit_width_expr : stmt option
+//@atd } <ocaml field_prefix="fldi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFieldDecl(const FieldDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
@@ -1724,21 +1687,19 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::VarDeclTupleSize() {
   return ASTExporter::DeclaratorDeclTupleSize() + 1;
 }
-/// \atd
-/// #define var_decl_tuple declarator_decl_tuple * var_decl_info
-/// type var_decl_info = {
-///   ?storage_class : string option;
-///   ~tls_kind <ocaml default="`Tls_none">: tls_kind;
-///   ~is_global : bool;
-///   ~is_static_local : bool;
-///   ~is_module_private : bool;
-///   ~is_nrvo_variable : bool;
-///   ~is_const_expr : bool;
-///   ?init_expr : stmt option;
-///   ?parm_index_in_function : int option;
-/// } <ocaml field_prefix="vdi_">
-///
-/// type tls_kind = [ Tls_none | Tls_static | Tls_dynamic ]
+//@atd #define var_decl_tuple declarator_decl_tuple * var_decl_info
+//@atd type var_decl_info = {
+//@atd   ?storage_class : string option;
+//@atd   ~tls_kind <ocaml default="`Tls_none">: tls_kind;
+//@atd   ~is_global : bool;
+//@atd   ~is_static_local : bool;
+//@atd   ~is_module_private : bool;
+//@atd   ~is_nrvo_variable : bool;
+//@atd   ~is_const_expr : bool;
+//@atd   ?init_expr : stmt option;
+//@atd   ?parm_index_in_function : int option;
+//@atd } <ocaml field_prefix="vdi_">
+//@atd type tls_kind = [ Tls_none | Tls_static | Tls_dynamic ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
@@ -1796,8 +1757,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FileScopeAsmDeclTupleSize() {
   return DeclTupleSize() + 1;
 }
-/// \atd
-/// #define file_scope_asm_decl_tuple decl_tuple * string
+//@atd #define file_scope_asm_decl_tuple decl_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFileScopeAsmDecl(const FileScopeAsmDecl *D) {
   VisitDecl(D);
@@ -1808,8 +1768,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ImportDeclTupleSize() {
   return DeclTupleSize() + 1;
 }
-/// \atd
-/// #define import_decl_tuple decl_tuple * string
+//@atd #define import_decl_tuple decl_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitImportDecl(const ImportDecl *D) {
   VisitDecl(D);
@@ -1824,14 +1783,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::UsingDirectiveDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
-/// \atd
-/// #define using_directive_decl_tuple named_decl_tuple * using_directive_decl_info
-/// type using_directive_decl_info = {
-///   using_location : source_location;
-///   namespace_key_location : source_location;
-///   nested_name_specifier_locs : nested_name_specifier_loc list;
-///   ?nominated_namespace : decl_ref option;
-/// } <ocaml field_prefix="uddi_">
+//@atd #define using_directive_decl_tuple named_decl_tuple * using_directive_decl_info
+//@atd type using_directive_decl_info = {
+//@atd   using_location : source_location;
+//@atd   namespace_key_location : source_location;
+//@atd   nested_name_specifier_locs : nested_name_specifier_loc list;
+//@atd   ?nominated_namespace : decl_ref option;
+//@atd } <ocaml field_prefix="uddi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUsingDirectiveDecl(
     const UsingDirectiveDecl *D) {
@@ -1856,14 +1814,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::NamespaceAliasDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
-/// \atd
-/// #define namespace_alias_decl_tuple named_decl_tuple * namespace_alias_decl_info
-/// type namespace_alias_decl_info = {
-///   namespace_loc : source_location;
-///   target_name_loc : source_location;
-///   nested_name_specifier_locs : nested_name_specifier_loc list;
-///   namespace : decl_ref;
-/// } <ocaml field_prefix="nadi_">
+//@atd #define namespace_alias_decl_tuple named_decl_tuple * namespace_alias_decl_info
+//@atd type namespace_alias_decl_info = {
+//@atd   namespace_loc : source_location;
+//@atd   target_name_loc : source_location;
+//@atd   nested_name_specifier_locs : nested_name_specifier_loc list;
+//@atd   namespace : decl_ref;
+//@atd } <ocaml field_prefix="nadi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(
     const NamespaceAliasDecl *D) {
@@ -1883,15 +1840,14 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXRecordDeclTupleSize() {
   return RecordDeclTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_record_decl_tuple record_decl_tuple * cxx_record_decl_info
-/// type cxx_record_decl_info = {
-///   ~bases : type_ptr list;
-///   ~vbases : type_ptr list;
-///   ~is_pod : bool;
-///   ?destructor : decl_ref option;
-///   ?lambda_call_operator : decl_ref option;
-/// } <ocaml field_prefix="xrdi_">
+//@atd #define cxx_record_decl_tuple record_decl_tuple * cxx_record_decl_info
+//@atd type cxx_record_decl_info = {
+//@atd   ~bases : type_ptr list;
+//@atd   ~vbases : type_ptr list;
+//@atd   ~is_pod : bool;
+//@atd   ?destructor : decl_ref option;
+//@atd   ?lambda_call_operator : decl_ref option;
+//@atd } <ocaml field_prefix="xrdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   VisitRecordDecl(D);
@@ -1952,18 +1908,17 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   }
 }
 
-/// \atd
-/// type template_instantiation_arg_info = [
-///   | Null
-///   | Type of type_ptr
-///   | Declaration
-///   | NullPtr
-///   | Integral
-///   | Template
-///   | TemplateExpansion
-///   | Expression
-///   | Pack
-/// ]
+//@atd type template_instantiation_arg_info = [
+//@atd   | Null
+//@atd   | Type of type_ptr
+//@atd   | Declaration
+//@atd   | NullPtr
+//@atd   | Integral
+//@atd   | Template
+//@atd   | TemplateExpansion
+//@atd   | Expression
+//@atd   | Pack
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
   switch (Arg.getKind()) {
@@ -2007,8 +1962,7 @@ int ASTExporter<ATDWriter>::ClassTemplateSpecializationDeclTupleSize() {
   return CXXRecordDeclTupleSize() + 1;
 }
 
-/// \atd
-/// #define class_template_specialization_decl_tuple cxx_record_decl_tuple * template_instantiation_arg_info list
+//@atd #define class_template_specialization_decl_tuple cxx_record_decl_tuple * template_instantiation_arg_info list
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
     const ClassTemplateSpecializationDecl *D) {
@@ -2024,14 +1978,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXMethodDeclTupleSize() {
   return FunctionDeclTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_method_decl_tuple function_decl_tuple * cxx_method_decl_info
-/// type cxx_method_decl_info = {
-///   ~is_virtual : bool;
-///   ~is_static : bool;
-///   ~cxx_ctor_initializers : cxx_ctor_initializer list;
-///   ~overriden_methods : decl_ref list;
-/// } <ocaml field_prefix="xmdi_">
+//@atd #define cxx_method_decl_tuple function_decl_tuple * cxx_method_decl_info
+//@atd type cxx_method_decl_info = {
+//@atd   ~is_virtual : bool;
+//@atd   ~is_static : bool;
+//@atd   ~cxx_ctor_initializers : cxx_ctor_initializer list;
+//@atd   ~overriden_methods : decl_ref list;
+//@atd } <ocaml field_prefix="xmdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXMethodDecl(const CXXMethodDecl *D) {
   VisitFunctionDecl(D);
@@ -2066,11 +2019,10 @@ int ASTExporter<ATDWriter>::ClassTemplateDeclTupleSize() {
   return ASTExporter<ATDWriter>::RedeclarableTemplateDeclTupleSize() + 1;
 }
 
-/// \atd
-/// #define class_template_decl_tuple redeclarable_template_decl_tuple * template_decl_info
-/// type template_decl_info = {
-///   ~specializations : decl list;
-/// } <ocaml field_prefix="tdi_">
+//@atd #define class_template_decl_tuple redeclarable_template_decl_tuple * template_decl_info
+//@atd type template_decl_info = {
+//@atd   ~specializations : decl list;
+//@atd } <ocaml field_prefix="tdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitClassTemplateDecl(
     const ClassTemplateDecl *D) {
@@ -2107,8 +2059,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FunctionTemplateDeclTupleSize() {
   return ASTExporter<ATDWriter>::RedeclarableTemplateDeclTupleSize() + 1;
 }
-/// \atd
-/// #define function_template_decl_tuple redeclarable_template_decl_tuple * template_decl_info
+//@atd #define function_template_decl_tuple redeclarable_template_decl_tuple * template_decl_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFunctionTemplateDecl(
     const FunctionTemplateDecl *D) {
@@ -2145,9 +2096,8 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FriendDeclTupleSize() {
   return DeclTupleSize() + 1;
 }
-/// \atd
-/// #define friend_decl_tuple decl_tuple * friend_info
-/// type friend_info = [ Type of type_ptr | Decl of decl ]
+//@atd #define friend_decl_tuple decl_tuple * friend_info
+//@atd type friend_info = [ Type of type_ptr | Decl of decl ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFriendDecl(const FriendDecl *D) {
   VisitDecl(D);
@@ -2391,14 +2341,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCIvarDeclTupleSize() {
   return FieldDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_ivar_decl_tuple field_decl_tuple * obj_c_ivar_decl_info
-/// type obj_c_ivar_decl_info = {
-///   ~is_synthesize : bool;
-///   ~access_control <ocaml default="`None"> : obj_c_access_control;
-/// } <ocaml field_prefix="ovdi_">
-/// type obj_c_access_control = [ None | Private | Protected | Public | Package
-/// ]
+//@atd #define obj_c_ivar_decl_tuple field_decl_tuple * obj_c_ivar_decl_info
+//@atd type obj_c_ivar_decl_info = {
+//@atd   ~is_synthesize : bool;
+//@atd   ~access_control <ocaml default="`None"> : obj_c_access_control;
+//@atd } <ocaml field_prefix="ovdi_">
+//@atd type obj_c_access_control = [ None | Private | Protected | Public | Package
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCIvarDecl(const ObjCIvarDecl *D) {
   VisitFieldDecl(D);
@@ -2436,18 +2385,17 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_method_decl_tuple named_decl_tuple * obj_c_method_decl_info
-/// type obj_c_method_decl_info = {
-///   ~is_instance_method : bool;
-///   result_type : type_ptr;
-///   ~is_property_accessor : bool;
-///   ?property_decl : decl_ref option;
-///   ~parameters : decl list;
-///   ~implicit_parameters : decl list;
-///   ~is_variadic : bool;
-///   ?body : stmt option;
-/// } <ocaml field_prefix="omdi_">
+//@atd #define obj_c_method_decl_tuple named_decl_tuple * obj_c_method_decl_info
+//@atd type obj_c_method_decl_info = {
+//@atd   ~is_instance_method : bool;
+//@atd   result_type : type_ptr;
+//@atd   ~is_property_accessor : bool;
+//@atd   ?property_decl : decl_ref option;
+//@atd   ~parameters : decl list;
+//@atd   ~implicit_parameters : decl list;
+//@atd   ~is_variadic : bool;
+//@atd   ?body : stmt option;
+//@atd } <ocaml field_prefix="omdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   VisitNamedDecl(D);
@@ -2513,13 +2461,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCCategoryDeclTupleSize() {
   return ObjCContainerDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_category_decl_tuple obj_c_container_decl_tuple * obj_c_category_decl_info
-/// type obj_c_category_decl_info = {
-///   ?class_interface : decl_ref option;
-///   ?implementation : decl_ref option;
-///   ~protocols : decl_ref list;
-/// } <ocaml field_prefix="odi_">
+//@atd #define obj_c_category_decl_tuple obj_c_container_decl_tuple * obj_c_category_decl_info
+//@atd type obj_c_category_decl_info = {
+//@atd   ?class_interface : decl_ref option;
+//@atd   ?implementation : decl_ref option;
+//@atd   ~protocols : decl_ref list;
+//@atd } <ocaml field_prefix="odi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCCategoryDecl(const ObjCCategoryDecl *D) {
   VisitObjCContainerDecl(D);
@@ -2554,12 +2501,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCCategoryImplDeclTupleSize() {
   return ASTExporter::ObjCImplDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_category_impl_decl_tuple obj_c_impl_decl_tuple * obj_c_category_impl_decl_info
-/// type obj_c_category_impl_decl_info = {
-///   ?class_interface : decl_ref option;
-///   ?category_decl : decl_ref option;
-/// } <ocaml field_prefix="ocidi_">
+//@atd #define obj_c_category_impl_decl_tuple obj_c_impl_decl_tuple * obj_c_category_impl_decl_info
+//@atd type obj_c_category_impl_decl_info = {
+//@atd   ?class_interface : decl_ref option;
+//@atd   ?category_decl : decl_ref option;
+//@atd } <ocaml field_prefix="ocidi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCCategoryImplDecl(
     const ObjCCategoryImplDecl *D) {
@@ -2583,11 +2529,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCProtocolDeclTupleSize() {
   return ObjCContainerDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_protocol_decl_tuple obj_c_container_decl_tuple * obj_c_protocol_decl_info
-/// type obj_c_protocol_decl_info = {
-///   ~protocols : decl_ref list;
-/// } <ocaml field_prefix="opcdi_">
+//@atd #define obj_c_protocol_decl_tuple obj_c_container_decl_tuple * obj_c_protocol_decl_info
+//@atd type obj_c_protocol_decl_info = {
+//@atd   ~protocols : decl_ref list;
+//@atd } <ocaml field_prefix="opcdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCProtocolDecl(const ObjCProtocolDecl *D) {
   ASTExporter<ATDWriter>::VisitObjCContainerDecl(D);
@@ -2611,14 +2556,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCInterfaceDeclTupleSize() {
   return ObjCContainerDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_interface_decl_tuple obj_c_container_decl_tuple * obj_c_interface_decl_info
-/// type obj_c_interface_decl_info = {
-///   ?super : decl_ref option;
-///   ?implementation : decl_ref option;
-///   ~protocols : decl_ref list;
-///   ~known_categories : decl_ref list;
-/// } <ocaml field_prefix="otdi_">
+//@atd #define obj_c_interface_decl_tuple obj_c_container_decl_tuple * obj_c_interface_decl_info
+//@atd type obj_c_interface_decl_info = {
+//@atd   ?super : decl_ref option;
+//@atd   ?implementation : decl_ref option;
+//@atd   ~protocols : decl_ref list;
+//@atd   ~known_categories : decl_ref list;
+//@atd } <ocaml field_prefix="otdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCInterfaceDecl(
     const ObjCInterfaceDecl *D) {
@@ -2667,13 +2611,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCImplementationDeclTupleSize() {
   return ASTExporter::ObjCImplDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_implementation_decl_tuple obj_c_impl_decl_tuple * obj_c_implementation_decl_info
-/// type obj_c_implementation_decl_info = {
-///   ?super : decl_ref option;
-///   ?class_interface : decl_ref option;
-///   ~ivar_initializers : cxx_ctor_initializer list;
-/// } <ocaml field_prefix="oidi_">
+//@atd #define obj_c_implementation_decl_tuple obj_c_impl_decl_tuple * obj_c_implementation_decl_info
+//@atd type obj_c_implementation_decl_info = {
+//@atd   ?super : decl_ref option;
+//@atd   ?class_interface : decl_ref option;
+//@atd   ~ivar_initializers : cxx_ctor_initializer list;
+//@atd } <ocaml field_prefix="oidi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCImplementationDecl(
     const ObjCImplementationDecl *D) {
@@ -2708,11 +2651,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCCompatibleAliasDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_compatible_alias_decl_tuple named_decl_tuple * obj_c_compatible_alias_decl_info
-/// type obj_c_compatible_alias_decl_info = {
-///   ?class_interface : decl_ref option;
-/// } <ocaml field_prefix="ocadi_">
+//@atd #define obj_c_compatible_alias_decl_tuple named_decl_tuple * obj_c_compatible_alias_decl_info
+//@atd type obj_c_compatible_alias_decl_info = {
+//@atd   ?class_interface : decl_ref option;
+//@atd } <ocaml field_prefix="ocadi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCCompatibleAliasDecl(
     const ObjCCompatibleAliasDecl *D) {
@@ -2731,31 +2673,30 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCPropertyDeclTupleSize() {
   return NamedDeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_property_decl_tuple named_decl_tuple * obj_c_property_decl_info
-/// type obj_c_property_decl_info = {
-///   type_ptr : type_ptr;
-///   ?getter_method : decl_ref option;
-///   ?setter_method : decl_ref option;
-///   ?ivar_decl : decl_ref option;
-///   ~property_control <ocaml default="`None"> : obj_c_property_control;
-///   ~property_attributes : property_attribute list
-/// } <ocaml field_prefix="opdi_">
-/// type obj_c_property_control = [ None | Required | Optional ]
-/// type property_attribute = [
-///   Readonly
-/// | Assign
-/// | Readwrite
-/// | Retain
-/// | Copy
-/// | Nonatomic
-/// | Atomic
-/// | Weak
-/// | Strong
-/// | Unsafe_unretained
-/// | ExplicitGetter
-/// | ExplicitSetter
-/// ]
+//@atd #define obj_c_property_decl_tuple named_decl_tuple * obj_c_property_decl_info
+//@atd type obj_c_property_decl_info = {
+//@atd   type_ptr : type_ptr;
+//@atd   ?getter_method : decl_ref option;
+//@atd   ?setter_method : decl_ref option;
+//@atd   ?ivar_decl : decl_ref option;
+//@atd   ~property_control <ocaml default="`None"> : obj_c_property_control;
+//@atd   ~property_attributes : property_attribute list
+//@atd } <ocaml field_prefix="opdi_">
+//@atd type obj_c_property_control = [ None | Required | Optional ]
+//@atd type property_attribute = [
+//@atd   Readonly
+//@atd | Assign
+//@atd | Readwrite
+//@atd | Retain
+//@atd | Copy
+//@atd | Nonatomic
+//@atd | Atomic
+//@atd | Weak
+//@atd | Strong
+//@atd | Unsafe_unretained
+//@atd | ExplicitGetter
+//@atd | ExplicitSetter
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
   VisitNamedDecl(D);
@@ -2854,14 +2795,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCPropertyImplDeclTupleSize() {
   return DeclTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_property_impl_decl_tuple decl_tuple * obj_c_property_impl_decl_info
-/// type obj_c_property_impl_decl_info = {
-///   implementation : property_implementation;
-///   ?property_decl : decl_ref option;
-///   ?ivar_decl : decl_ref option;
-/// } <ocaml field_prefix="opidi_">
-/// type property_implementation = [ Synthesize | Dynamic ]
+//@atd #define obj_c_property_impl_decl_tuple decl_tuple * obj_c_property_impl_decl_info
+//@atd type obj_c_property_impl_decl_info = {
+//@atd   implementation : property_implementation;
+//@atd   ?property_decl : decl_ref option;
+//@atd   ?ivar_decl : decl_ref option;
+//@atd } <ocaml field_prefix="opidi_">
+//@atd type property_implementation = [ Synthesize | Dynamic ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCPropertyImplDecl(
     const ObjCPropertyImplDecl *D) {
@@ -2894,22 +2834,20 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::BlockDeclTupleSize() {
   return DeclTupleSize() + 1;
 }
-/// \atd
-/// #define block_decl_tuple decl_tuple * block_decl_info
-/// type block_decl_info = {
-///   ~parameters : decl list;
-///   ~is_variadic : bool;
-///   ~captures_cxx_this : bool;
-///   ~captured_variables : block_captured_variable list;
-///   ?body : stmt option;
-/// } <ocaml field_prefix="bdi_">
-///
-/// type block_captured_variable = {
-///    ~is_by_ref : bool;
-///    ~is_nested : bool;
-///    ?variable : decl_ref option;
-///    ?copy_expr : stmt option
-/// } <ocaml field_prefix="bcv_">
+//@atd #define block_decl_tuple decl_tuple * block_decl_info
+//@atd type block_decl_info = {
+//@atd   ~parameters : decl list;
+//@atd   ~is_variadic : bool;
+//@atd   ~captures_cxx_this : bool;
+//@atd   ~captured_variables : block_captured_variable list;
+//@atd   ?body : stmt option;
+//@atd } <ocaml field_prefix="bdi_">
+//@atd type block_captured_variable = {
+//@atd    ~is_by_ref : bool;
+//@atd    ~is_nested : bool;
+//@atd    ?variable : decl_ref option;
+//@atd    ?copy_expr : stmt option
+//@atd } <ocaml field_prefix="bcv_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
   VisitDecl(D);
@@ -2973,12 +2911,11 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
 }
 
 // main variant for declarations
-/// \atd
-/// type decl = [
-#define DECL(DERIVED, BASE) ///   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
+//@atd type decl = [
+#define DECL(DERIVED, BASE) //@atd   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
 #define ABSTRACT_DECL(DECL)
 #include <clang/AST/DeclNodes.inc>
-/// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_decl">
+//@atd ] <ocaml repr="classic" validator="Clang_ast_visit.visit_decl">
 
 //===----------------------------------------------------------------------===//
 //  Stmt dumping methods.
@@ -2986,8 +2923,7 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
 
 // Default aliases for generating variant components
 // The main variant is defined at the end of section.
-/// \atd
-#define STMT(CLASS, PARENT) ///   #define @CLASS@_tuple @PARENT@_tuple
+#define STMT(CLASS, PARENT) //@atd   #define @CLASS@_tuple @PARENT@_tuple
 #define ABSTRACT_STMT(STMT) STMT
 #include <clang/AST/StmtNodes.inc>
 //
@@ -3008,12 +2944,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::StmtTupleSize() {
   return 2;
 }
-/// \atd
-/// #define stmt_tuple stmt_info * stmt list
-/// type stmt_info = {
-///   pointer : pointer;
-///   source_range : source_range;
-/// } <ocaml field_prefix="si_">
+//@atd #define stmt_tuple stmt_info * stmt list
+//@atd type stmt_info = {
+//@atd   pointer : pointer;
+//@atd   source_range : source_range;
+//@atd } <ocaml field_prefix="si_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitStmt(const Stmt *S) {
   {
@@ -3036,8 +2971,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::DeclStmtTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define decl_stmt_tuple stmt_tuple * decl list
+//@atd #define decl_stmt_tuple stmt_tuple * decl list
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclStmt(const DeclStmt *Node) {
   VisitStmt(Node);
@@ -3051,8 +2985,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::AttributedStmtTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define attributed_stmt_tuple stmt_tuple * attribute list
+//@atd #define attributed_stmt_tuple stmt_tuple * attribute list
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAttributedStmt(const AttributedStmt *Node) {
   VisitStmt(Node);
@@ -3066,8 +2999,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::LabelStmtTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define label_stmt_tuple stmt_tuple * string
+//@atd #define label_stmt_tuple stmt_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitLabelStmt(const LabelStmt *Node) {
   VisitStmt(Node);
@@ -3078,12 +3010,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::GotoStmtTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define goto_stmt_tuple stmt_tuple * goto_stmt_info
-/// type goto_stmt_info = {
-///   label : string;
-///   pointer : pointer
-/// } <ocaml field_prefix="gsi_">
+//@atd #define goto_stmt_tuple stmt_tuple * goto_stmt_info
+//@atd type goto_stmt_info = {
+//@atd   label : string;
+//@atd   pointer : pointer
+//@atd } <ocaml field_prefix="gsi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitGotoStmt(const GotoStmt *Node) {
   VisitStmt(Node);
@@ -3098,11 +3029,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXCatchStmtTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_catch_stmt_tuple stmt_tuple * cxx_catch_stmt_info
-/// type cxx_catch_stmt_info = {
-///   ?variable : decl option
-/// } <ocaml field_prefix="xcsi_">
+//@atd #define cxx_catch_stmt_tuple stmt_tuple * cxx_catch_stmt_info
+//@atd type cxx_catch_stmt_info = {
+//@atd   ?variable : decl option
+//@atd } <ocaml field_prefix="xcsi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXCatchStmt(const CXXCatchStmt *Node) {
   VisitStmt(Node);
@@ -3125,18 +3055,15 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ExprTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define expr_tuple stmt_tuple * expr_info
-/// type expr_info = {
-///   type_ptr : type_ptr;
-///   ~value_kind <ocaml default="`RValue"> : value_kind;
-///   ~object_kind <ocaml default="`Ordinary"> : object_kind;
-/// } <ocaml field_prefix="ei_">
-///
-/// type value_kind = [ RValue | LValue | XValue ]
-/// type object_kind = [ Ordinary | BitField | ObjCProperty | ObjCSubscript |
-/// VectorComponent ]
-///
+//@atd #define expr_tuple stmt_tuple * expr_info
+//@atd type expr_info = {
+//@atd   type_ptr : type_ptr;
+//@atd   ~value_kind <ocaml default="`RValue"> : value_kind;
+//@atd   ~object_kind <ocaml default="`Ordinary"> : object_kind;
+//@atd } <ocaml field_prefix="ei_">
+//@atd type value_kind = [ RValue | LValue | XValue ]
+//@atd type object_kind = [ Ordinary | BitField | ObjCProperty | ObjCSubscript |
+//@atd VectorComponent ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
   VisitStmt(Node);
@@ -3186,11 +3113,10 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
   }
 }
 
-/// \atd
-/// type cxx_base_specifier = {
-///   name : string;
-///   ~virtual : bool;
-/// } <ocaml field_prefix="xbs_">
+//@atd type cxx_base_specifier = {
+//@atd   name : string;
+//@atd   ~virtual : bool;
+//@atd } <ocaml field_prefix="xbs_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXBaseSpecifier(
     const CXXBaseSpecifier &Base) {
@@ -3208,69 +3134,67 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CastExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// type cast_kind = [
-/// | Dependent
-/// | BitCast
-/// | LValueBitCast
-/// | LValueToRValue
-/// | NoOp
-/// | BaseToDerived
-/// | DerivedToBase
-/// | UncheckedDerivedToBase
-/// | Dynamic
-/// | ToUnion
-/// | ArrayToPointerDecay
-/// | FunctionToPointerDecay
-/// | NullToPointer
-/// | NullToMemberPointer
-/// | BaseToDerivedMemberPointer
-/// | DerivedToBaseMemberPointer
-/// | MemberPointerToBoolean
-/// | ReinterpretMemberPointer
-/// | UserDefinedConversion
-/// | ConstructorConversion
-/// | IntegralToPointer
-/// | PointerToIntegral
-/// | PointerToBoolean
-/// | ToVoid
-/// | VectorSplat
-/// | IntegralCast
-/// | IntegralToBoolean
-/// | IntegralToFloating
-/// | FloatingToIntegral
-/// | FloatingToBoolean
-/// | FloatingCast
-/// | CPointerToObjCPointerCast
-/// | BlockPointerToObjCPointerCast
-/// | AnyPointerToBlockPointerCast
-/// | ObjCObjectLValueCast
-/// | FloatingRealToComplex
-/// | FloatingComplexToReal
-/// | FloatingComplexToBoolean
-/// | FloatingComplexCast
-/// | FloatingComplexToIntegralComplex
-/// | IntegralRealToComplex
-/// | IntegralComplexToReal
-/// | IntegralComplexToBoolean
-/// | IntegralComplexCast
-/// | IntegralComplexToFloatingComplex
-/// | ARCProduceObject
-/// | ARCConsumeObject
-/// | ARCReclaimReturnedObject
-/// | ARCExtendBlockObject
-/// | AtomicToNonAtomic
-/// | NonAtomicToAtomic
-/// | CopyAndAutoreleaseBlockObject
-/// | BuiltinFnToFnPtr
-/// | ZeroToOCLEvent
-/// ]
-///
-/// #define cast_expr_tuple expr_tuple * cast_expr_info
-/// type cast_expr_info = {
-///   cast_kind : cast_kind;
-///   base_path : cxx_base_specifier list;
-/// } <ocaml field_prefix="cei_">
+//@atd type cast_kind = [
+//@atd | Dependent
+//@atd | BitCast
+//@atd | LValueBitCast
+//@atd | LValueToRValue
+//@atd | NoOp
+//@atd | BaseToDerived
+//@atd | DerivedToBase
+//@atd | UncheckedDerivedToBase
+//@atd | Dynamic
+//@atd | ToUnion
+//@atd | ArrayToPointerDecay
+//@atd | FunctionToPointerDecay
+//@atd | NullToPointer
+//@atd | NullToMemberPointer
+//@atd | BaseToDerivedMemberPointer
+//@atd | DerivedToBaseMemberPointer
+//@atd | MemberPointerToBoolean
+//@atd | ReinterpretMemberPointer
+//@atd | UserDefinedConversion
+//@atd | ConstructorConversion
+//@atd | IntegralToPointer
+//@atd | PointerToIntegral
+//@atd | PointerToBoolean
+//@atd | ToVoid
+//@atd | VectorSplat
+//@atd | IntegralCast
+//@atd | IntegralToBoolean
+//@atd | IntegralToFloating
+//@atd | FloatingToIntegral
+//@atd | FloatingToBoolean
+//@atd | FloatingCast
+//@atd | CPointerToObjCPointerCast
+//@atd | BlockPointerToObjCPointerCast
+//@atd | AnyPointerToBlockPointerCast
+//@atd | ObjCObjectLValueCast
+//@atd | FloatingRealToComplex
+//@atd | FloatingComplexToReal
+//@atd | FloatingComplexToBoolean
+//@atd | FloatingComplexCast
+//@atd | FloatingComplexToIntegralComplex
+//@atd | IntegralRealToComplex
+//@atd | IntegralComplexToReal
+//@atd | IntegralComplexToBoolean
+//@atd | IntegralComplexCast
+//@atd | IntegralComplexToFloatingComplex
+//@atd | ARCProduceObject
+//@atd | ARCConsumeObject
+//@atd | ARCReclaimReturnedObject
+//@atd | ARCExtendBlockObject
+//@atd | AtomicToNonAtomic
+//@atd | NonAtomicToAtomic
+//@atd | CopyAndAutoreleaseBlockObject
+//@atd | BuiltinFnToFnPtr
+//@atd | ZeroToOCLEvent
+//@atd ]
+//@atd #define cast_expr_tuple expr_tuple * cast_expr_info
+//@atd type cast_expr_info = {
+//@atd   cast_kind : cast_kind;
+//@atd   base_path : cxx_base_specifier list;
+//@atd } <ocaml field_prefix="cei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCastExpr(const CastExpr *Node) {
   VisitExpr(Node);
@@ -3291,8 +3215,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ExplicitCastExprTupleSize() {
   return CastExprTupleSize() + 1;
 }
-/// \atd
-/// #define explicit_cast_expr_tuple cast_expr_tuple * type_ptr
+//@atd #define explicit_cast_expr_tuple cast_expr_tuple * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExplicitCastExpr(
     const ExplicitCastExpr *Node) {
@@ -3304,12 +3227,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::DeclRefExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define decl_ref_expr_tuple expr_tuple * decl_ref_expr_info
-/// type decl_ref_expr_info = {
-///   ?decl_ref : decl_ref option;
-///   ?found_decl_ref : decl_ref option
-/// } <ocaml field_prefix="drti_">
+//@atd #define decl_ref_expr_tuple expr_tuple * decl_ref_expr_info
+//@atd type decl_ref_expr_info = {
+//@atd   ?decl_ref : decl_ref option;
+//@atd   ?found_decl_ref : decl_ref option
+//@atd } <ocaml field_prefix="drti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclRefExpr(const DeclRefExpr *Node) {
   VisitExpr(Node);
@@ -3333,12 +3255,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::OverloadExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define overload_expr_tuple expr_tuple * overload_expr_info
-/// type overload_expr_info = {
-///   ~decls : decl_ref list;
-///   name : declaration_name;
-/// } <ocaml field_prefix="oei_">
+//@atd #define overload_expr_tuple expr_tuple * overload_expr_info
+//@atd type overload_expr_info = {
+//@atd   ~decls : decl_ref list;
+//@atd   name : declaration_name;
+//@atd } <ocaml field_prefix="oei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitOverloadExpr(const OverloadExpr *Node) {
   VisitExpr(Node);
@@ -3365,13 +3286,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::UnresolvedLookupExprTupleSize() {
   return OverloadExprTupleSize() + 1;
 }
-/// \atd
-/// #define unresolved_lookup_expr_tuple overload_expr_tuple * unresolved_lookup_expr_info
-/// type unresolved_lookup_expr_info = {
-///   ~requires_ADL : bool;
-///   ~is_overloaded : bool;
-///   ?naming_class : decl_ref option;
-/// } <ocaml field_prefix="ulei_">
+//@atd #define unresolved_lookup_expr_tuple overload_expr_tuple * unresolved_lookup_expr_info
+//@atd type unresolved_lookup_expr_info = {
+//@atd   ~requires_ADL : bool;
+//@atd   ~is_overloaded : bool;
+//@atd   ?naming_class : decl_ref option;
+//@atd } <ocaml field_prefix="ulei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnresolvedLookupExpr(
     const UnresolvedLookupExpr *Node) {
@@ -3396,13 +3316,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCIvarRefExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_ivar_ref_expr_tuple expr_tuple * obj_c_ivar_ref_expr_info
-/// type obj_c_ivar_ref_expr_info = {
-///   decl_ref : decl_ref;
-///   pointer : pointer;
-///   ~is_free_ivar : bool
-/// } <ocaml field_prefix="ovrei_">
+//@atd #define obj_c_ivar_ref_expr_tuple expr_tuple * obj_c_ivar_ref_expr_info
+//@atd type obj_c_ivar_ref_expr_info = {
+//@atd   decl_ref : decl_ref;
+//@atd   pointer : pointer;
+//@atd   ~is_free_ivar : bool
+//@atd } <ocaml field_prefix="ovrei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCIvarRefExpr(const ObjCIvarRefExpr *Node) {
   VisitExpr(Node);
@@ -3421,17 +3340,16 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::PredefinedExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define predefined_expr_tuple expr_tuple * predefined_expr_type
-/// type predefined_expr_type = [
-/// | Func
-/// | Function
-/// | LFunction
-/// | FuncDName
-/// | FuncSig
-/// | PrettyFunction
-/// | PrettyFunctionNoVirtual
-/// ]
+//@atd #define predefined_expr_tuple expr_tuple * predefined_expr_type
+//@atd type predefined_expr_type = [
+//@atd | Func
+//@atd | Function
+//@atd | LFunction
+//@atd | FuncDName
+//@atd | FuncSig
+//@atd | PrettyFunction
+//@atd | PrettyFunctionNoVirtual
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitPredefinedExpr(const PredefinedExpr *Node) {
   VisitExpr(Node);
@@ -3464,8 +3382,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CharacterLiteralTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define character_literal_tuple expr_tuple * int
+//@atd #define character_literal_tuple expr_tuple * int
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCharacterLiteral(
     const CharacterLiteral *Node) {
@@ -3477,13 +3394,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::IntegerLiteralTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define integer_literal_tuple expr_tuple * integer_literal_info
-/// type integer_literal_info = {
-///   ~is_signed : bool;
-///   bitwidth : int;
-///   value : string;
-/// } <ocaml field_prefix="ili_">
+//@atd #define integer_literal_tuple expr_tuple * integer_literal_info
+//@atd type integer_literal_info = {
+//@atd   ~is_signed : bool;
+//@atd   bitwidth : int;
+//@atd   value : string;
+//@atd } <ocaml field_prefix="ili_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitIntegerLiteral(const IntegerLiteral *Node) {
   VisitExpr(Node);
@@ -3502,8 +3418,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FloatingLiteralTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define floating_literal_tuple expr_tuple * string
+//@atd #define floating_literal_tuple expr_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFloatingLiteral(const FloatingLiteral *Node) {
   VisitExpr(Node);
@@ -3516,8 +3431,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::StringLiteralTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define string_literal_tuple expr_tuple * string
+//@atd #define string_literal_tuple expr_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
   VisitExpr(Str);
@@ -3528,28 +3442,27 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::UnaryOperatorTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define unary_operator_tuple expr_tuple * unary_operator_info
-/// type unary_operator_info = {
-///   kind : unary_operator_kind;
-///   ~is_postfix : bool;
-/// } <ocaml field_prefix="uoi_">
-/// type unary_operator_kind = [
-///   PostInc
-/// | PostDec
-/// | PreInc
-/// | PreDec
-/// | AddrOf
-/// | Deref
-/// | Plus
-/// | Minus
-/// | Not
-/// | LNot
-/// | Real
-/// | Imag
-/// | Extension
-/// | Coawait
-/// ]
+//@atd #define unary_operator_tuple expr_tuple * unary_operator_info
+//@atd type unary_operator_info = {
+//@atd   kind : unary_operator_kind;
+//@atd   ~is_postfix : bool;
+//@atd } <ocaml field_prefix="uoi_">
+//@atd type unary_operator_kind = [
+//@atd   PostInc
+//@atd | PostDec
+//@atd | PreInc
+//@atd | PreDec
+//@atd | AddrOf
+//@atd | Deref
+//@atd | Plus
+//@atd | Minus
+//@atd | Not
+//@atd | LNot
+//@atd | Real
+//@atd | Imag
+//@atd | Extension
+//@atd | Coawait
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryOperator(const UnaryOperator *Node) {
   VisitExpr(Node);
@@ -3609,15 +3522,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define unary_expr_or_type_trait_expr_tuple expr_tuple * unary_expr_or_type_trait_expr_info
-/// type unary_expr_or_type_trait_expr_info = {
-///   kind : unary_expr_or_type_trait_kind;
-///   ?type_ptr : type_ptr option
-/// } <ocaml field_prefix="uttei_">
-///
-/// type unary_expr_or_type_trait_kind = [ SizeOf | AlignOf | VecStep |
-/// OpenMPRequiredSimdAlign ]
+//@atd #define unary_expr_or_type_trait_expr_tuple expr_tuple * unary_expr_or_type_trait_expr_info
+//@atd type unary_expr_or_type_trait_expr_info = {
+//@atd   kind : unary_expr_or_type_trait_kind;
+//@atd   ?type_ptr : type_ptr option
+//@atd } <ocaml field_prefix="uttei_">
+//@atd type unary_expr_or_type_trait_kind = [ SizeOf | AlignOf | VecStep |
+//@atd OpenMPRequiredSimdAlign ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const UnaryExprOrTypeTraitExpr *Node) {
@@ -3651,14 +3562,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::MemberExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define member_expr_tuple expr_tuple * member_expr_info
-/// type member_expr_info = {
-///   ~is_arrow : bool;
-///   ~performs_virtual_dispatch : bool;
-///   name : named_decl_info;
-///   decl_ref : decl_ref
-/// } <ocaml field_prefix="mei_">
+//@atd #define member_expr_tuple expr_tuple * member_expr_info
+//@atd type member_expr_info = {
+//@atd   ~is_arrow : bool;
+//@atd   ~performs_virtual_dispatch : bool;
+//@atd   name : named_decl_info;
+//@atd   decl_ref : decl_ref
+//@atd } <ocaml field_prefix="mei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitMemberExpr(const MemberExpr *Node) {
   VisitExpr(Node);
@@ -3683,8 +3593,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ExtVectorElementExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define ext_vector_element_tuple expr_tuple * string
+//@atd #define ext_vector_element_tuple expr_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExtVectorElementExpr(
     const ExtVectorElementExpr *Node) {
@@ -3696,46 +3605,44 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::BinaryOperatorTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define binary_operator_tuple expr_tuple * binary_operator_info
-/// type binary_operator_info = {
-///   kind : binary_operator_kind
-/// } <ocaml field_prefix="boi_">
-///
-/// type binary_operator_kind = [
-///   PtrMemD |
-///   PtrMemI |
-///   Mul |
-///   Div |
-///   Rem |
-///   Add |
-///   Sub |
-///   Shl |
-///   Shr |
-///   LT |
-///   GT |
-///   LE |
-///   GE |
-///   EQ |
-///   NE |
-///   And |
-///   Xor |
-///   Or |
-///   LAnd |
-///   LOr |
-///   Assign |
-///   MulAssign |
-///   DivAssign |
-///   RemAssign |
-///   AddAssign |
-///   SubAssign |
-///   ShlAssign |
-///   ShrAssign |
-///   AndAssign |
-///   XorAssign |
-///   OrAssign |
-///   Comma
-/// ]
+//@atd #define binary_operator_tuple expr_tuple * binary_operator_info
+//@atd type binary_operator_info = {
+//@atd   kind : binary_operator_kind
+//@atd } <ocaml field_prefix="boi_">
+//@atd type binary_operator_kind = [
+//@atd   PtrMemD |
+//@atd   PtrMemI |
+//@atd   Mul |
+//@atd   Div |
+//@atd   Rem |
+//@atd   Add |
+//@atd   Sub |
+//@atd   Shl |
+//@atd   Shr |
+//@atd   LT |
+//@atd   GT |
+//@atd   LE |
+//@atd   GE |
+//@atd   EQ |
+//@atd   NE |
+//@atd   And |
+//@atd   Xor |
+//@atd   Or |
+//@atd   LAnd |
+//@atd   LOr |
+//@atd   Assign |
+//@atd   MulAssign |
+//@atd   DivAssign |
+//@atd   RemAssign |
+//@atd   AddAssign |
+//@atd   SubAssign |
+//@atd   ShlAssign |
+//@atd   ShrAssign |
+//@atd   AndAssign |
+//@atd   XorAssign |
+//@atd   OrAssign |
+//@atd   Comma
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBinaryOperator(const BinaryOperator *Node) {
   VisitExpr(Node);
@@ -3845,12 +3752,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CompoundAssignOperatorTupleSize() {
   return BinaryOperatorTupleSize() + 1;
 }
-/// \atd
-/// #define compound_assign_operator_tuple binary_operator_tuple * compound_assign_operator_info
-/// type compound_assign_operator_info = {
-///   lhs_type : type_ptr;
-///   result_type : type_ptr;
-/// } <ocaml field_prefix="caoi_">
+//@atd #define compound_assign_operator_tuple binary_operator_tuple * compound_assign_operator_info
+//@atd type compound_assign_operator_info = {
+//@atd   lhs_type : type_ptr;
+//@atd   result_type : type_ptr;
+//@atd } <ocaml field_prefix="caoi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCompoundAssignOperator(
     const CompoundAssignOperator *Node) {
@@ -3866,8 +3772,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::BlockExprTupleSize() {
   return ExprTupleSize() + DeclTupleSize();
 }
-/// \atd
-/// #define block_expr_tuple expr_tuple * decl
+//@atd #define block_expr_tuple expr_tuple * decl
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBlockExpr(const BlockExpr *Node) {
   VisitExpr(Node);
@@ -3878,11 +3783,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::OpaqueValueExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define opaque_value_expr_tuple expr_tuple * opaque_value_expr_info
-/// type  opaque_value_expr_info = {
-///   ?source_expr : stmt option;
-/// } <ocaml field_prefix="ovei_">
+//@atd #define opaque_value_expr_tuple expr_tuple * opaque_value_expr_info
+//@atd type  opaque_value_expr_info = {
+//@atd   ?source_expr : stmt option;
+//@atd } <ocaml field_prefix="ovei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitOpaqueValueExpr(const OpaqueValueExpr *Node) {
   VisitExpr(Node);
@@ -3902,12 +3806,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::AddrLabelExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define addr_label_expr_tuple expr_tuple * addr_label_expr_info
-/// type addr_label_expr_info = {
-///   label : string;
-///   pointer : pointer;
-/// } <ocaml field_prefix="alei_">
+//@atd #define addr_label_expr_tuple expr_tuple * addr_label_expr_info
+//@atd type addr_label_expr_info = {
+//@atd   label : string;
+//@atd   pointer : pointer;
+//@atd } <ocaml field_prefix="alei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAddrLabelExpr(const AddrLabelExpr *Node) {
   VisitExpr(Node);
@@ -3926,8 +3829,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXNamedCastExprTupleSize() {
   return ExplicitCastExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_named_cast_expr_tuple explicit_cast_expr_tuple * string
+//@atd #define cxx_named_cast_expr_tuple explicit_cast_expr_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXNamedCastExpr(
     const CXXNamedCastExpr *Node) {
@@ -3939,8 +3841,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXBoolLiteralExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_bool_literal_expr_tuple expr_tuple * int
+//@atd #define cxx_bool_literal_expr_tuple expr_tuple * int
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXBoolLiteralExpr(
     const CXXBoolLiteralExpr *Node) {
@@ -3952,13 +3853,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXConstructExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
-/// type cxx_construct_expr_info = {
-///   decl_ref : decl_ref;
-///   ~is_elidable : bool;
-///   ~requires_zero_initialization : bool;
-/// } <ocaml field_prefix="xcei_">
+//@atd #define cxx_construct_expr_tuple expr_tuple * cxx_construct_expr_info
+//@atd type cxx_construct_expr_info = {
+//@atd   decl_ref : decl_ref;
+//@atd   ~is_elidable : bool;
+//@atd   ~requires_zero_initialization : bool;
+//@atd } <ocaml field_prefix="xcei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXConstructExpr(
     const CXXConstructExpr *Node) {
@@ -3978,11 +3878,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXBindTemporaryExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_bind_temporary_expr_tuple expr_tuple * cxx_bind_temporary_expr_info
-/// type cxx_bind_temporary_expr_info = {
-///   cxx_temporary : cxx_temporary;
-/// } <ocaml field_prefix="xbtei_">
+//@atd #define cxx_bind_temporary_expr_tuple expr_tuple * cxx_bind_temporary_expr_info
+//@atd type cxx_bind_temporary_expr_info = {
+//@atd   cxx_temporary : cxx_temporary;
+//@atd } <ocaml field_prefix="xbtei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXBindTemporaryExpr(
     const CXXBindTemporaryExpr *Node) {
@@ -3996,11 +3895,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::MaterializeTemporaryExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define materialize_temporary_expr_tuple expr_tuple * materialize_temporary_expr_info
-/// type materialize_temporary_expr_info = {
-///   ?decl_ref : decl_ref option;
-/// } <ocaml field_prefix="mtei_">
+//@atd #define materialize_temporary_expr_tuple expr_tuple * materialize_temporary_expr_info
+//@atd type materialize_temporary_expr_info = {
+//@atd   ?decl_ref : decl_ref option;
+//@atd } <ocaml field_prefix="mtei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitMaterializeTemporaryExpr(
     const MaterializeTemporaryExpr *Node) {
@@ -4018,11 +3916,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ExprWithCleanupsTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define expr_with_cleanups_tuple expr_tuple * expr_with_cleanups_info
-/// type expr_with_cleanups_info = {
-///  ~decl_refs : decl_ref list;
-/// } <ocaml field_prefix="ewci_">
+//@atd #define expr_with_cleanups_tuple expr_tuple * expr_with_cleanups_info
+//@atd type expr_with_cleanups_info = {
+//@atd  ~decl_refs : decl_ref list;
+//@atd } <ocaml field_prefix="ewci_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitExprWithCleanups(
     const ExprWithCleanups *Node) {
@@ -4039,8 +3936,7 @@ void ASTExporter<ATDWriter>::VisitExprWithCleanups(
   }
 }
 
-/// \atd
-/// type cxx_temporary = pointer
+//@atd type cxx_temporary = pointer
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXTemporary(const CXXTemporary *Temporary) {
   dumpPointer(Temporary);
@@ -4051,23 +3947,22 @@ int ASTExporter<ATDWriter>::LambdaExprTupleSize() {
   return ExprTupleSize() + DeclTupleSize();
 }
 
-/// \atd
-/// type lambda_capture_info = {
-///   capture_kind : lambda_capture_kind;
-///   ~capture_this : bool;
-///   ~capture_variable : bool;
-///   ~capture_VLAtype : bool;
-///   ?captured_var : decl_ref option;
-///   ~is_implicit : bool;
-///   location : source_range;
-///   ~is_pack_expansion: bool;
-/// } <ocaml field_prefix="lci_">
-/// type lambda_capture_kind = [
-///         | LCK_This
-///         | LCK_ByCopy
-///         | LCK_ByRef
-///         | LCK_VLAType
-///         | LCK_StarThis]
+//@atd type lambda_capture_info = {
+//@atd   capture_kind : lambda_capture_kind;
+//@atd   ~capture_this : bool;
+//@atd   ~capture_variable : bool;
+//@atd   ~capture_VLAtype : bool;
+//@atd   ?captured_var : decl_ref option;
+//@atd   ~is_implicit : bool;
+//@atd   location : source_range;
+//@atd   ~is_pack_expansion: bool;
+//@atd } <ocaml field_prefix="lci_">
+//@atd type lambda_capture_kind = [
+//@atd         | LCK_This
+//@atd         | LCK_ByCopy
+//@atd         | LCK_ByRef
+//@atd         | LCK_VLAType
+//@atd         | LCK_StarThis]
 
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
@@ -4114,12 +4009,11 @@ void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
   OF.emitFlag("is_pack_expansion", IsPackExpansion);
 }
 
-/// \atd
-/// #define lambda_expr_tuple expr_tuple * lambda_expr_info
-/// type lambda_expr_info = {
-///   ~captures: lambda_capture_info list;
-///   lambda_decl: decl;
-/// } <ocaml field_prefix="lei_">
+//@atd #define lambda_expr_tuple expr_tuple * lambda_expr_info
+//@atd type lambda_expr_info = {
+//@atd   ~captures: lambda_capture_info list;
+//@atd   lambda_decl: decl;
+//@atd } <ocaml field_prefix="lei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitLambdaExpr(const LambdaExpr *Node) {
   VisitExpr(Node);
@@ -4142,13 +4036,12 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXNewExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_new_expr_tuple expr_tuple * cxx_new_expr_info
-/// type cxx_new_expr_info = {
-///   ~is_array : bool;
-///   ?array_size_expr : pointer option;
-///   ?initializer_expr : pointer option;
-/// } <ocaml field_prefix="xnei_">
+//@atd #define cxx_new_expr_tuple expr_tuple * cxx_new_expr_info
+//@atd type cxx_new_expr_info = {
+//@atd   ~is_array : bool;
+//@atd   ?array_size_expr : pointer option;
+//@atd   ?initializer_expr : pointer option;
+//@atd } <ocaml field_prefix="xnei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   VisitExpr(Node);
@@ -4158,7 +4051,7 @@ void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   bool HasInitializer = Node->hasInitializer();
   ObjectScope Scope(OF, 0 + IsArray + HasArraySize + HasInitializer);
 
-  ///  ?should_null_check : bool;
+  //  ?should_null_check : bool;
   // OF.emitFlag("should_null_check", Node->shouldNullCheckAllocation());
   OF.emitFlag("is_array", IsArray);
   if (HasArraySize) {
@@ -4175,12 +4068,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXDeleteExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_delete_expr_tuple expr_tuple * cxx_delete_expr_info
-/// type cxx_delete_expr_info = {
-///   ~is_array : bool;
-///   destroyed_type : type_ptr;
-/// } <ocaml field_prefix="xdei_">
+//@atd #define cxx_delete_expr_tuple expr_tuple * cxx_delete_expr_info
+//@atd type cxx_delete_expr_info = {
+//@atd   ~is_array : bool;
+//@atd   destroyed_type : type_ptr;
+//@atd } <ocaml field_prefix="xdei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXDeleteExpr(const CXXDeleteExpr *Node) {
   VisitExpr(Node);
@@ -4198,11 +4090,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXDefaultArgExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_default_arg_expr_tuple expr_tuple * cxx_default_expr_info
-/// type cxx_default_expr_info = {
-///   ?init_expr : stmt option;
-/// } <ocaml field_prefix="xdaei_">
+//@atd #define cxx_default_arg_expr_tuple expr_tuple * cxx_default_expr_info
+//@atd type cxx_default_expr_info = {
+//@atd   ?init_expr : stmt option;
+//@atd } <ocaml field_prefix="xdaei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXDefaultArgExpr(
     const CXXDefaultArgExpr *Node) {
@@ -4220,8 +4111,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXDefaultInitExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_default_init_expr_tuple expr_tuple * cxx_default_expr_info
+//@atd #define cxx_default_init_expr_tuple expr_tuple * cxx_default_expr_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXDefaultInitExpr(
     const CXXDefaultInitExpr *Node) {
@@ -4239,11 +4129,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TypeTraitExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define type_trait_expr_tuple expr_tuple * type_trait_info
-/// type type_trait_info = {
-///   ~value : bool;
-/// } <ocaml field_prefix="xtti_">
+//@atd #define type_trait_expr_tuple expr_tuple * type_trait_info
+//@atd type type_trait_info = {
+//@atd   ~value : bool;
+//@atd } <ocaml field_prefix="xtti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypeTraitExpr(const TypeTraitExpr *Node) {
   VisitExpr(Node);
@@ -4257,11 +4146,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CXXNoexceptExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define cxx_noexcept_expr_tuple expr_tuple * cxx_noexcept_expr_info
-/// type cxx_noexcept_expr_info = {
-///   ~value : bool;
-/// } <ocaml field_prefix="xnee_">
+//@atd #define cxx_noexcept_expr_tuple expr_tuple * cxx_noexcept_expr_info
+//@atd type cxx_noexcept_expr_info = {
+//@atd   ~value : bool;
+//@atd } <ocaml field_prefix="xnee_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXNoexceptExpr(const CXXNoexceptExpr *Node) {
   VisitExpr(Node);
@@ -4278,17 +4166,15 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCMessageExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_message_expr_tuple expr_tuple * obj_c_message_expr_info
-/// type obj_c_message_expr_info = {
-///   selector : string;
-///   ~is_definition_found : bool;
-///   ?decl_pointer : pointer option;
-///   ~receiver_kind <ocaml default="`Instance"> : receiver_kind
-/// } <ocaml field_prefix="omei_">
-///
-/// type receiver_kind = [ Instance | Class of type_ptr | SuperInstance |
-/// SuperClass ]
+//@atd #define obj_c_message_expr_tuple expr_tuple * obj_c_message_expr_info
+//@atd type obj_c_message_expr_info = {
+//@atd   selector : string;
+//@atd   ~is_definition_found : bool;
+//@atd   ?decl_pointer : pointer option;
+//@atd   ~receiver_kind <ocaml default="`Instance"> : receiver_kind
+//@atd } <ocaml field_prefix="omei_">
+//@atd type receiver_kind = [ Instance | Class of type_ptr | SuperInstance |
+//@atd SuperClass ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
   VisitExpr(Node);
@@ -4348,8 +4234,7 @@ void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
   }
 }
 
-/// \atd
-/// type selector = string
+//@atd type selector = string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpSelector(const Selector sel) {
   OF.emitString(sel.getAsString());
@@ -4359,11 +4244,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCBoxedExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_boxed_expr_tuple expr_tuple * objc_boxed_expr_info
-/// type objc_boxed_expr_info = {
-///   ?boxing_method : selector option;
-/// }  <ocaml field_prefix="obei_">
+//@atd #define obj_c_boxed_expr_tuple expr_tuple * objc_boxed_expr_info
+//@atd type objc_boxed_expr_info = {
+//@atd   ?boxing_method : selector option;
+//@atd }  <ocaml field_prefix="obei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCBoxedExpr(const ObjCBoxedExpr *Node) {
   VisitExpr(Node);
@@ -4379,12 +4263,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCAtCatchStmtTupleSize() {
   return StmtTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_at_catch_stmt_tuple stmt_tuple * obj_c_message_expr_kind
-/// type obj_c_message_expr_kind = [
-/// | CatchParam of decl
-/// | CatchAll
-/// ]
+//@atd #define obj_c_at_catch_stmt_tuple stmt_tuple * obj_c_message_expr_kind
+//@atd type obj_c_message_expr_kind = [
+//@atd | CatchParam of decl
+//@atd | CatchAll
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCAtCatchStmt(const ObjCAtCatchStmt *Node) {
   VisitStmt(Node);
@@ -4400,12 +4283,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCEncodeExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_encode_expr_tuple expr_tuple * objc_encode_expr_info
-/// type objc_encode_expr_info = {
-///   type_ptr : type_ptr;
-///   raw : string;
-/// } <ocaml field_prefix="oeei_">
+//@atd #define obj_c_encode_expr_tuple expr_tuple * objc_encode_expr_info
+//@atd type objc_encode_expr_info = {
+//@atd   type_ptr : type_ptr;
+//@atd   raw : string;
+//@atd } <ocaml field_prefix="oeei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCEncodeExpr(const ObjCEncodeExpr *Node) {
   VisitExpr(Node);
@@ -4420,8 +4302,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCSelectorExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_selector_expr_tuple expr_tuple * selector
+//@atd #define obj_c_selector_expr_tuple expr_tuple * selector
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCSelectorExpr(
     const ObjCSelectorExpr *Node) {
@@ -4433,8 +4314,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCProtocolExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_protocol_expr_tuple expr_tuple * decl_ref
+//@atd #define obj_c_protocol_expr_tuple expr_tuple * decl_ref
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCProtocolExpr(
     const ObjCProtocolExpr *Node) {
@@ -4446,26 +4326,21 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCPropertyRefExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_property_ref_expr_tuple expr_tuple * obj_c_property_ref_expr_info
-///
-/// type obj_c_property_ref_expr_info = {
-///   kind : property_ref_kind;
-///   ~is_super_receiver : bool;
-///   ~is_messaging_getter : bool;
-///   ~is_messaging_setter : bool;
-/// } <ocaml field_prefix="oprei_">
-///
-/// type property_ref_kind = [
-/// | MethodRef of obj_c_method_ref_info
-/// | PropertyRef of decl_ref
-/// ]
-///
-/// type obj_c_method_ref_info = {
-///   ?getter : selector option;
-///   ?setter : selector option
-/// } <ocaml field_prefix="mri_">
-///
+//@atd #define obj_c_property_ref_expr_tuple expr_tuple * obj_c_property_ref_expr_info
+//@atd type obj_c_property_ref_expr_info = {
+//@atd   kind : property_ref_kind;
+//@atd   ~is_super_receiver : bool;
+//@atd   ~is_messaging_getter : bool;
+//@atd   ~is_messaging_setter : bool;
+//@atd } <ocaml field_prefix="oprei_">
+//@atd type property_ref_kind = [
+//@atd | MethodRef of obj_c_method_ref_info
+//@atd | PropertyRef of decl_ref
+//@atd ]
+//@atd type obj_c_method_ref_info = {
+//@atd   ?getter : selector option;
+//@atd   ?setter : selector option
+//@atd } <ocaml field_prefix="mri_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCPropertyRefExpr(
     const ObjCPropertyRefExpr *Node) {
@@ -4509,17 +4384,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCSubscriptRefExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_subscript_ref_expr_tuple expr_tuple * obj_c_subscript_ref_expr_info
-///
-/// type obj_c_subscript_ref_expr_info = {
-///   kind : obj_c_subscript_kind;
-///   ?getter : selector option;
-///   ?setter : selector option
-/// } <ocaml field_prefix="osrei_">
-///
-/// type obj_c_subscript_kind = [ ArraySubscript | DictionarySubscript ]
-///
+//@atd #define obj_c_subscript_ref_expr_tuple expr_tuple * obj_c_subscript_ref_expr_info
+//@atd type obj_c_subscript_ref_expr_info = {
+//@atd   kind : obj_c_subscript_kind;
+//@atd   ?getter : selector option;
+//@atd   ?setter : selector option
+//@atd } <ocaml field_prefix="osrei_">
+//@atd type obj_c_subscript_kind = [ ArraySubscript | DictionarySubscript ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCSubscriptRefExpr(
     const ObjCSubscriptRefExpr *Node) {
@@ -4549,8 +4420,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCBoolLiteralExprTupleSize() {
   return ExprTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_bool_literal_expr_tuple expr_tuple * int
+//@atd #define obj_c_bool_literal_expr_tuple expr_tuple * int
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCBoolLiteralExpr(
     const ObjCBoolLiteralExpr *Node) {
@@ -4559,12 +4429,11 @@ void ASTExporter<ATDWriter>::VisitObjCBoolLiteralExpr(
 }
 
 // Main variant for statements
-/// \atd
-/// type stmt = [
-#define STMT(CLASS, PARENT) ///   | CLASS of (@CLASS@_tuple)
+//@atd type stmt = [
+#define STMT(CLASS, PARENT) //@atd   | CLASS of (@CLASS@_tuple)
 #define ABSTRACT_STMT(STMT)
 #include <clang/AST/StmtNodes.inc>
-/// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_stmt">
+//@atd ] <ocaml repr="classic" validator="Clang_ast_visit.visit_stmt">
 
 //===----------------------------------------------------------------------===//
 // Comments
@@ -4582,8 +4451,7 @@ void ASTExporter<ATDWriter>::dumpFullComment(const FullComment *C) {
   FC = 0;
 }
 
-/// \atd
-#define COMMENT(CLASS, PARENT) /// #define @CLASS@_tuple @PARENT@_tuple
+#define COMMENT(CLASS, PARENT) //@atd #define @CLASS@_tuple @PARENT@_tuple
 #define ABSTRACT_COMMENT(COMMENT) COMMENT
 #include <clang/AST/CommentNodes.inc>
 template <class ATDWriter>
@@ -4604,12 +4472,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::CommentTupleSize() {
   return 2;
 }
-/// \atd
-/// #define comment_tuple comment_info * comment list
-/// type comment_info = {
-///   parent_pointer : pointer;
-///   source_range : source_range;
-/// } <ocaml field_prefix="ci_">
+//@atd #define comment_tuple comment_info * comment list
+//@atd type comment_info = {
+//@atd   parent_pointer : pointer;
+//@atd   source_range : source_range;
+//@atd } <ocaml field_prefix="ci_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::visitComment(const Comment *C) {
   {
@@ -4632,8 +4499,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TextCommentTupleSize() {
   return CommentTupleSize() + 1;
 }
-/// \atd
-/// #define text_comment_tuple comment_tuple * string
+//@atd #define text_comment_tuple comment_tuple * string
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::visitTextComment(const TextComment *C) {
   visitComment(C);
@@ -4753,21 +4619,18 @@ void ASTExporter<ATDWriter>::visitTextComment(const TextComment *C) {
 //  OS << " Text=\"" << C->getText() << "\"";
 //}
 
-/// \atd
-/// type comment = [
-#define COMMENT(CLASS, PARENT) ///   | CLASS of (@CLASS@_tuple)
+//@atd type comment = [
+#define COMMENT(CLASS, PARENT) //@atd   | CLASS of (@CLASS@_tuple)
 #define ABSTRACT_COMMENT(COMMENT)
 #include <clang/AST/CommentNodes.inc>
-/// ] <ocaml repr="classic">
+//@atd ] <ocaml repr="classic">
 
-/// \atd
-#define TYPE(DERIVED, BASE) /// #define @DERIVED@_type_tuple @BASE@_tuple
+#define TYPE(DERIVED, BASE) //@atd #define @DERIVED@_type_tuple @BASE@_tuple
 #define ABSTRACT_TYPE(DERIVED, BASE) TYPE(DERIVED, BASE)
 TYPE(None, Type)
 #include <clang/AST/TypeNodes.def>
 #undef TYPE
 #undef ABSTRACT_TYPE
-///
 
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpType(const Type *T) {
@@ -4787,10 +4650,9 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
   }
 }
 
-/// \atd
-/// type type_ptr = int wrap <ocaml t="Clang_ast_types.t_ptr"
-///                              wrap="Clang_ast_types.pointer_to_type_ptr"
-///                              unwrap="Clang_ast_types.type_ptr_to_pointer">
+//@atd type type_ptr = int wrap <ocaml t="Clang_ast_types.t_ptr"
+//@atd                              wrap="Clang_ast_types.pointer_to_type_ptr"
+//@atd                              unwrap="Clang_ast_types.type_ptr_to_pointer">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpPointerToType(const QualType &qt) {
   const Type *T = qt.getTypePtrOrNull();
@@ -4805,14 +4667,13 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TypeWithChildInfoTupleSize() {
   return 2;
 }
-/// \atd
-/// #define type_tuple type_info
-/// type type_info = {
-///   pointer : pointer;
-///   ?desugared_type : type_ptr option;
-/// } <ocaml field_prefix="ti_">
-/// #define type_with_child_info type_info * type_ptr
-/// #define qual_type_with_child_info type_info * qual_type
+//@atd #define type_tuple type_info
+//@atd type type_info = {
+//@atd   pointer : pointer;
+//@atd   ?desugared_type : type_ptr option;
+//@atd } <ocaml field_prefix="ti_">
+//@atd #define type_with_child_info type_info * type_ptr
+//@atd #define qual_type_with_child_info type_info * qual_type
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitType(const Type *T) {
   // NOTE: T can (and will) be null here!!
@@ -4833,9 +4694,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::AdjustedTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define adjusted_type_tuple type_with_child_info
-///
+//@atd #define adjusted_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAdjustedType(const AdjustedType *T) {
   VisitType(T);
@@ -4846,9 +4705,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ArrayTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define array_type_tuple type_with_child_info
-///
+//@atd #define array_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitArrayType(const ArrayType *T) {
   VisitType(T);
@@ -4859,9 +4716,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ConstantArrayTypeTupleSize() {
   return ArrayTypeTupleSize() + 1;
 }
-/// \atd
-/// #define constant_array_type_tuple array_type_tuple * int
-///
+//@atd #define constant_array_type_tuple array_type_tuple * int
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitConstantArrayType(
     const ConstantArrayType *T) {
@@ -4873,45 +4728,43 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::AtomicTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define atomic_type_tuple type_with_child_info
+//@atd #define atomic_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
   VisitType(T);
   dumpPointerToType(T->getValueType());
 }
 
-/// \atd
-/// type type_attribute_kind = [
-///   | AddressSpace
-///   | Regparm
-///   | VectorSize
-///   | NeonVectorSize
-///   | NeonPolyVectorSize
-///   | ObjcGc
-///   | ObjcOwnership
-///   | Pcs
-///   | PcsVfp
-///   | Noreturn
-///   | Cdecl
-///   | Fastcall
-///   | Stdcall
-///   | Thiscall
-///   | Pascal
-///   | Vectorcall
-///   | Inteloclbicc
-///   | MsAbi
-///   | SysvAbi
-///   | Ptr32
-///   | Ptr64
-///   | Sptr
-///   | Uptr
-///   | Nonnull
-///   | Nullable
-///   | NullUnspecified
-///   | ObjcKindof
-///   | ObjcInsertUnsafeUnretained
-/// ]
+//@atd type type_attribute_kind = [
+//@atd   | AddressSpace
+//@atd   | Regparm
+//@atd   | VectorSize
+//@atd   | NeonVectorSize
+//@atd   | NeonPolyVectorSize
+//@atd   | ObjcGc
+//@atd   | ObjcOwnership
+//@atd   | Pcs
+//@atd   | PcsVfp
+//@atd   | Noreturn
+//@atd   | Cdecl
+//@atd   | Fastcall
+//@atd   | Stdcall
+//@atd   | Thiscall
+//@atd   | Pascal
+//@atd   | Vectorcall
+//@atd   | Inteloclbicc
+//@atd   | MsAbi
+//@atd   | SysvAbi
+//@atd   | Ptr32
+//@atd   | Ptr64
+//@atd   | Sptr
+//@atd   | Uptr
+//@atd   | Nonnull
+//@atd   | Nullable
+//@atd   | NullUnspecified
+//@atd   | ObjcKindof
+//@atd   | ObjcInsertUnsafeUnretained
+//@atd ]
 
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
@@ -5006,14 +4859,13 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
   }
 }
 
-///\atd
-/// type objc_lifetime_attr = [
-///   | OCL_None
-///   | OCL_ExplicitNone
-///   | OCL_Strong
-///   | OCL_Weak
-///   | OCL_Autoreleasing
-/// ]
+//@atd type objc_lifetime_attr = [
+//@atd   | OCL_None
+//@atd   | OCL_ExplicitNone
+//@atd   | OCL_Strong
+//@atd   | OCL_Weak
+//@atd   | OCL_Autoreleasing
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpObjCLifetimeQual(
     Qualifiers::ObjCLifetime qual) {
@@ -5041,12 +4893,11 @@ int ASTExporter<ATDWriter>::AttributedTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
 
-/// \atd
-/// #define attributed_type_tuple type_tuple * attr_type_info
-/// type attr_type_info = {
-///   attr_kind : type_attribute_kind;
-///   ~lifetime <ocaml default="`OCL_None"> : objc_lifetime_attr
-/// } <ocaml field_prefix="ati_">
+//@atd #define attributed_type_tuple type_tuple * attr_type_info
+//@atd type attr_type_info = {
+//@atd   attr_kind : type_attribute_kind;
+//@atd   ~lifetime <ocaml default="`OCL_None"> : objc_lifetime_attr
+//@atd } <ocaml field_prefix="ati_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAttributedType(const AttributedType *T) {
   VisitType(T);
@@ -5068,8 +4919,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::BlockPointerTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define block_pointer_type_tuple type_with_child_info
+//@atd #define block_pointer_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBlockPointerType(const BlockPointerType *T) {
   VisitType(T);
@@ -5080,12 +4930,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::BuiltinTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
-/// \atd
-/// #define builtin_type_tuple type_tuple * builtin_type_kind
-/// type builtin_type_kind = [
-#define BUILTIN_TYPE(TYPE, ID) ///   | TYPE
+//@atd #define builtin_type_tuple type_tuple * builtin_type_kind
+//@atd type builtin_type_kind = [
+#define BUILTIN_TYPE(TYPE, ID) //@atd   | TYPE
 #include <clang/AST/BuiltinTypes.def>
-/// ]
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBuiltinType(const BuiltinType *T) {
   VisitType(T);
@@ -5107,8 +4956,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::DecltypeTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define decltype_type_tuple type_with_child_info
+//@atd #define decltype_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecltypeType(const DecltypeType *T) {
   VisitType(T);
@@ -5119,12 +4967,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FunctionTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
-/// \atd
-/// #define function_type_tuple type_tuple * function_type_info
-/// type function_type_info = {
-///   return_type : type_ptr
-/// } <ocaml field_prefix="fti_">
-///
+//@atd #define function_type_tuple type_tuple * function_type_info
+//@atd type function_type_info = {
+//@atd   return_type : type_ptr
+//@atd } <ocaml field_prefix="fti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFunctionType(const FunctionType *T) {
   VisitType(T);
@@ -5137,12 +4983,10 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::FunctionProtoTypeTupleSize() {
   return FunctionTypeTupleSize() + 1;
 }
-/// \atd
-/// #define function_proto_type_tuple function_type_tuple * params_type_info
-/// type params_type_info = {
-///   ~params_type : type_ptr list
-/// } <ocaml field_prefix="pti_">
-///
+//@atd #define function_proto_type_tuple function_type_tuple * params_type_info
+//@atd type params_type_info = {
+//@atd   ~params_type : type_ptr list
+//@atd } <ocaml field_prefix="pti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFunctionProtoType(
     const FunctionProtoType *T) {
@@ -5164,8 +5008,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::MemberPointerTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define member_pointer_type_tuple type_with_child_info
+//@atd #define member_pointer_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitMemberPointerType(
     const MemberPointerType *T) {
@@ -5177,8 +5020,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCObjectPointerTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define obj_c_object_pointer_type_tuple qual_type_with_child_info
+//@atd #define obj_c_object_pointer_type_tuple qual_type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCObjectPointerType(
     const ObjCObjectPointerType *T) {
@@ -5190,12 +5032,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCObjectTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_object_type_tuple type_tuple * objc_object_type_info
-/// type objc_object_type_info = {
-///   base_type : type_ptr;
-///   ~protocol_decls_ptr : pointer list;
-/// } <ocaml prefix="ooti_">
+//@atd #define obj_c_object_type_tuple type_tuple * objc_object_type_info
+//@atd type objc_object_type_info = {
+//@atd   base_type : type_ptr;
+//@atd   ~protocol_decls_ptr : pointer list;
+//@atd } <ocaml prefix="ooti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
   VisitType(T);
@@ -5220,8 +5061,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ObjCInterfaceTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
-/// \atd
-/// #define obj_c_interface_type_tuple type_tuple * pointer
+//@atd #define obj_c_interface_type_tuple type_tuple * pointer
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCInterfaceType(
     const ObjCInterfaceType *T) {
@@ -5235,9 +5075,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ParenTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define paren_type_tuple type_with_child_info
-///
+//@atd #define paren_type_tuple type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitParenType(const ParenType *T) {
   // this is just syntactic sugar
@@ -5249,9 +5087,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::PointerTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define pointer_type_tuple qual_type_with_child_info
-///
+//@atd #define pointer_type_tuple qual_type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitPointerType(const PointerType *T) {
   VisitType(T);
@@ -5262,9 +5098,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::ReferenceTypeTupleSize() {
   return TypeWithChildInfoTupleSize();
 }
-/// \atd
-/// #define reference_type_tuple qual_type_with_child_info
-///
+//@atd #define reference_type_tuple qual_type_with_child_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitReferenceType(const ReferenceType *T) {
   VisitType(T);
@@ -5275,9 +5109,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TagTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
-/// \atd
-/// #define tag_type_tuple type_tuple * pointer
-///
+//@atd #define tag_type_tuple type_tuple * pointer
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTagType(const TagType *T) {
   VisitType(T);
@@ -5288,12 +5120,11 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::TypedefTypeTupleSize() {
   return TypeTupleSize() + 1;
 }
-/// \atd
-/// #define typedef_type_tuple type_tuple * typedef_type_info
-/// type typedef_type_info = {
-///   child_type : type_ptr;
-///   decl_ptr : pointer;
-/// } <ocaml field_prefix="tti_">
+//@atd #define typedef_type_tuple type_tuple * typedef_type_info
+//@atd type typedef_type_info = {
+//@atd   child_type : type_ptr;
+//@atd   decl_ptr : pointer;
+//@atd } <ocaml field_prefix="tti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
   VisitType(T);
@@ -5304,13 +5135,12 @@ void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
   dumpPointer(T->getDecl());
 }
 
-/// \atd
-/// type c_type = [
-#define TYPE(CLASS, PARENT) ///   | CLASS@@Type of (@CLASS@_type_tuple)
+//@atd type c_type = [
+#define TYPE(CLASS, PARENT) //@atd   | CLASS@@Type of (@CLASS@_type_tuple)
 #define ABSTRACT_TYPE(CLASS, PARENT)
 TYPE(None, Type)
 #include <clang/AST/TypeNodes.def>
-/// ] <ocaml repr="classic" validator="Clang_ast_visit.visit_type">
+//@atd ] <ocaml repr="classic" validator="Clang_ast_visit.visit_type">
 
 template <class ATDWriter = JsonWriter, bool ForceYojson = false>
 class ExporterASTConsumer : public ASTConsumer {

@@ -12,15 +12,14 @@ ATD basics
 
 The definition of Yojson object in ASTExporter.cpp typically look like this:
 ```
-/// \atd
-/// type record = {
-///  mandatory_field : string
-///  ?optional_int : int option
-///  ~string_empty_by_default : string
-/// } <ocaml field_prefix="r_">
+//@atd type record = {
+//@atd  mandatory_field : string
+//@atd  ?optional_int : int option
+//@atd  ~string_empty_by_default : string
+//@atd } <ocaml field_prefix="r_">
 ```
 
-It must be a `///`-style comments starting with `\atd`.
+It must be a `//@atd`-style comments.
 
 The `?` symbols mean that an absent field is ok and maps to the ocaml value `None`.
 The `~` symbols mean that an absent field is ok and maps to some default value for this type.
@@ -38,11 +37,11 @@ Simple example
 --------------
 
 ```
-/// type source_location = {
-///   ?file : string option;
-///   ?line : int option;
-///   ?column : int option;
-/// } <ocaml field_prefix="sl_">
+//@atd type source_location = {
+//@atd   ?file : string option;
+//@atd   ?line : int option;
+//@atd   ?column : int option;
+//@atd } <ocaml field_prefix="sl_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpBareSourceLocation(SourceLocation Loc) { // "Bare" indicates that we emit a Yojson object not preceded by a tag.
   ObjectScope Scope(OF);                                                  // Outputs a Yojson object. The closing brace will be added when 'Scope' is destroyed.
@@ -72,19 +71,18 @@ More complex example
 --------------------
 
 ```
-/// \atd
-/// type decl_ref = {
-///   kind : decl_kind;                (* ATD type declared below *)
-///   ?name : string;
-///   ~is_hidden : bool;
-///   ?qual_type : qual_type option
-/// } <ocaml field_prefix="dr_">
-///
-/// type decl_kind = [
-#define DECL(DERIVED, BASE) /// | DERIVED
+//@atd type decl_ref = {
+//@atd   kind : decl_kind;                (* ATD type declared below *)
+//@atd   ?name : string;
+//@atd   ~is_hidden : bool;
+//@atd   ?qual_type : qual_type option
+//@atd } <ocaml field_prefix="dr_">
+//@atd
+//@atd type decl_kind = [
+#define DECL(DERIVED, BASE) //@atd | DERIVED
 #define ABSTRACT_DECL(DECL) DECL
 #include <clang/AST/DeclNodes.inc>
-/// ]
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpBareDeclRef(const Decl &D) {
   ObjectScope Scope(OF);
@@ -106,12 +104,12 @@ The complex definition for decl_kind is processed in several stages.
 
 First we use an adequate node of the clang preprocessor to expand the #include and create the string:
 ```
-/// type decl_kind = [
-/// | AccessSpec
-/// | Block
-/// | Captured
-/// (* ... *)
-/// ]
+//@atd type decl_kind = [
+//@atd | AccessSpec
+//@atd | Block
+//@atd | Captured
+//@atd (* ... *)
+//@atd ]
 ```
 
 Then we extract the ATD specifications using different python scripts.
@@ -151,8 +149,7 @@ Let us study how declarations are handled more precisely.
 
 ##### Prelude (default values for node tuples)
 ```
-/// \atd
-#define DECL(DERIVED, BASE) /// #define @DERIVED@_decl_tuple @BASE@_tuple
+#define DECL(DERIVED, BASE) //@atd #define @DERIVED@_decl_tuple @BASE@_tuple
 #define ABSTRACT_DECL(DECL) DECL
 #include <clang/AST/DeclNodes.inc>
 ```
@@ -177,18 +174,16 @@ When the visiting method for nodes of given type is effectively written, it is e
 corresponding `#define xxxx_decl_tuple` is overwritten to add the specific information of the kind of nodes.
 
 ```
-/// \atd
-/// #define decl_tuple decl_info
-/// type decl_info = {
-///    (* ... *)
-/// } <ocaml field_prefix="di_">
+//@atd #define decl_tuple decl_info
+//@atd type decl_info = {
+//@atd    (* ... *)
+//@atd } <ocaml field_prefix="di_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) { // This is the top class. Everything here concerns all declarations nodes.
 // ...
 }
 
-/// \atd
-/// #define named_decl_tuple decl_tuple * string   (* must start with the tuple of the base class *)
+//@atd #define named_decl_tuple decl_tuple * string   (* must start with the tuple of the base class *)
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitNamedDecl(const NamedDecl *D) { // Some important intermediate abstract class NamedDecl.
   VisitDecl(D);                                                   // Must visit the base class to output its tuple of information.
@@ -202,12 +197,11 @@ The final definitions of the `xxx_decl_tuple` are meant to be inlined in the dec
 
 ```
 // main variant for declarations
-/// \atd
-/// type decl = [
-#define DECL(DERIVED, BASE)   ///   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
+//@atd type decl = [
+#define DECL(DERIVED, BASE)   //@atd   | DERIVED@@Decl of (@DERIVED@_decl_tuple)
 #define ABSTRACT_DECL(DECL)
 #include <clang/AST/DeclNodes.inc>
-/// ]
+//@atd ]
 
 ```
 
