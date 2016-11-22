@@ -3135,60 +3135,8 @@ int ASTExporter<ATDWriter>::CastExprTupleSize() {
   return ExprTupleSize() + 1;
 }
 //@atd type cast_kind = [
-//@atd | Dependent
-//@atd | BitCast
-//@atd | LValueBitCast
-//@atd | LValueToRValue
-//@atd | NoOp
-//@atd | BaseToDerived
-//@atd | DerivedToBase
-//@atd | UncheckedDerivedToBase
-//@atd | Dynamic
-//@atd | ToUnion
-//@atd | ArrayToPointerDecay
-//@atd | FunctionToPointerDecay
-//@atd | NullToPointer
-//@atd | NullToMemberPointer
-//@atd | BaseToDerivedMemberPointer
-//@atd | DerivedToBaseMemberPointer
-//@atd | MemberPointerToBoolean
-//@atd | ReinterpretMemberPointer
-//@atd | UserDefinedConversion
-//@atd | ConstructorConversion
-//@atd | IntegralToPointer
-//@atd | PointerToIntegral
-//@atd | PointerToBoolean
-//@atd | ToVoid
-//@atd | VectorSplat
-//@atd | IntegralCast
-//@atd | IntegralToBoolean
-//@atd | IntegralToFloating
-//@atd | FloatingToIntegral
-//@atd | FloatingToBoolean
-//@atd | FloatingCast
-//@atd | CPointerToObjCPointerCast
-//@atd | BlockPointerToObjCPointerCast
-//@atd | AnyPointerToBlockPointerCast
-//@atd | ObjCObjectLValueCast
-//@atd | FloatingRealToComplex
-//@atd | FloatingComplexToReal
-//@atd | FloatingComplexToBoolean
-//@atd | FloatingComplexCast
-//@atd | FloatingComplexToIntegralComplex
-//@atd | IntegralRealToComplex
-//@atd | IntegralComplexToReal
-//@atd | IntegralComplexToBoolean
-//@atd | IntegralComplexCast
-//@atd | IntegralComplexToFloatingComplex
-//@atd | ARCProduceObject
-//@atd | ARCConsumeObject
-//@atd | ARCReclaimReturnedObject
-//@atd | ARCExtendBlockObject
-//@atd | AtomicToNonAtomic
-//@atd | NonAtomicToAtomic
-//@atd | CopyAndAutoreleaseBlockObject
-//@atd | BuiltinFnToFnPtr
-//@atd | ZeroToOCLEvent
+#define CAST_OPERATION(NAME) //@atd | NAME
+#include <clang/AST/OperationKinds.def>
 //@atd ]
 //@atd #define cast_expr_tuple expr_tuple * cast_expr_info
 //@atd type cast_expr_info = {
@@ -3448,20 +3396,8 @@ int ASTExporter<ATDWriter>::UnaryOperatorTupleSize() {
 //@atd   ~is_postfix : bool;
 //@atd } <ocaml field_prefix="uoi_">
 //@atd type unary_operator_kind = [
-//@atd   PostInc
-//@atd | PostDec
-//@atd | PreInc
-//@atd | PreDec
-//@atd | AddrOf
-//@atd | Deref
-//@atd | Plus
-//@atd | Minus
-//@atd | Not
-//@atd | LNot
-//@atd | Real
-//@atd | Imag
-//@atd | Extension
-//@atd | Coawait
+#define UNARY_OPERATION(NAME, SPELLING) //@atd | NAME
+#include <clang/AST/OperationKinds.def>
 //@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryOperator(const UnaryOperator *Node) {
@@ -3472,48 +3408,11 @@ void ASTExporter<ATDWriter>::VisitUnaryOperator(const UnaryOperator *Node) {
 
   OF.emitTag("kind");
   switch (Node->getOpcode()) {
-  case UO_PostInc:
-    OF.emitSimpleVariant("PostInc");
+#define UNARY_OPERATION(NAME, SPELLING) \
+  case UO_##NAME:                       \
+    OF.emitSimpleVariant(#NAME);        \
     break;
-  case UO_PostDec:
-    OF.emitSimpleVariant("PostDec");
-    break;
-  case UO_PreInc:
-    OF.emitSimpleVariant("PreInc");
-    break;
-  case UO_PreDec:
-    OF.emitSimpleVariant("PreDec");
-    break;
-  case UO_AddrOf:
-    OF.emitSimpleVariant("AddrOf");
-    break;
-  case UO_Deref:
-    OF.emitSimpleVariant("Deref");
-    break;
-  case UO_Plus:
-    OF.emitSimpleVariant("Plus");
-    break;
-  case UO_Minus:
-    OF.emitSimpleVariant("Minus");
-    break;
-  case UO_Not:
-    OF.emitSimpleVariant("Not");
-    break;
-  case UO_LNot:
-    OF.emitSimpleVariant("LNot");
-    break;
-  case UO_Real:
-    OF.emitSimpleVariant("Real");
-    break;
-  case UO_Imag:
-    OF.emitSimpleVariant("Imag");
-    break;
-  case UO_Extension:
-    OF.emitSimpleVariant("Extension");
-    break;
-  case UO_Coawait:
-    OF.emitSimpleVariant("Coawait");
-    break;
+#include <clang/AST/OperationKinds.def>
   }
   OF.emitFlag("is_postfix", IsPostfix);
 }
@@ -3610,38 +3509,8 @@ int ASTExporter<ATDWriter>::BinaryOperatorTupleSize() {
 //@atd   kind : binary_operator_kind
 //@atd } <ocaml field_prefix="boi_">
 //@atd type binary_operator_kind = [
-//@atd   PtrMemD |
-//@atd   PtrMemI |
-//@atd   Mul |
-//@atd   Div |
-//@atd   Rem |
-//@atd   Add |
-//@atd   Sub |
-//@atd   Shl |
-//@atd   Shr |
-//@atd   LT |
-//@atd   GT |
-//@atd   LE |
-//@atd   GE |
-//@atd   EQ |
-//@atd   NE |
-//@atd   And |
-//@atd   Xor |
-//@atd   Or |
-//@atd   LAnd |
-//@atd   LOr |
-//@atd   Assign |
-//@atd   MulAssign |
-//@atd   DivAssign |
-//@atd   RemAssign |
-//@atd   AddAssign |
-//@atd   SubAssign |
-//@atd   ShlAssign |
-//@atd   ShrAssign |
-//@atd   AndAssign |
-//@atd   XorAssign |
-//@atd   OrAssign |
-//@atd   Comma
+#define BINARY_OPERATION(NAME, SPELLING) //@atd | NAME
+#include <clang/AST/OperationKinds.def>
 //@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitBinaryOperator(const BinaryOperator *Node) {
@@ -3649,102 +3518,11 @@ void ASTExporter<ATDWriter>::VisitBinaryOperator(const BinaryOperator *Node) {
   ObjectScope Scope(OF, 1);
   OF.emitTag("kind");
   switch (Node->getOpcode()) {
-  case BO_PtrMemD:
-    OF.emitSimpleVariant("PtrMemD");
+#define BINARY_OPERATION(NAME, SPELLING) \
+  case BO_##NAME:                        \
+    OF.emitSimpleVariant(#NAME);         \
     break;
-  case BO_PtrMemI:
-    OF.emitSimpleVariant("PtrMemI");
-    break;
-  case BO_Mul:
-    OF.emitSimpleVariant("Mul");
-    break;
-  case BO_Div:
-    OF.emitSimpleVariant("Div");
-    break;
-  case BO_Rem:
-    OF.emitSimpleVariant("Rem");
-    break;
-  case BO_Add:
-    OF.emitSimpleVariant("Add");
-    break;
-  case BO_Sub:
-    OF.emitSimpleVariant("Sub");
-    break;
-  case BO_Shl:
-    OF.emitSimpleVariant("Shl");
-    break;
-  case BO_Shr:
-    OF.emitSimpleVariant("Shr");
-    break;
-  case BO_LT:
-    OF.emitSimpleVariant("LT");
-    break;
-  case BO_GT:
-    OF.emitSimpleVariant("GT");
-    break;
-  case BO_LE:
-    OF.emitSimpleVariant("LE");
-    break;
-  case BO_GE:
-    OF.emitSimpleVariant("GE");
-    break;
-  case BO_EQ:
-    OF.emitSimpleVariant("EQ");
-    break;
-  case BO_NE:
-    OF.emitSimpleVariant("NE");
-    break;
-  case BO_And:
-    OF.emitSimpleVariant("And");
-    break;
-  case BO_Xor:
-    OF.emitSimpleVariant("Xor");
-    break;
-  case BO_Or:
-    OF.emitSimpleVariant("Or");
-    break;
-  case BO_LAnd:
-    OF.emitSimpleVariant("LAnd");
-    break;
-  case BO_LOr:
-    OF.emitSimpleVariant("LOr");
-    break;
-  case BO_Assign:
-    OF.emitSimpleVariant("Assign");
-    break;
-  case BO_MulAssign:
-    OF.emitSimpleVariant("MulAssign");
-    break;
-  case BO_DivAssign:
-    OF.emitSimpleVariant("DivAssign");
-    break;
-  case BO_RemAssign:
-    OF.emitSimpleVariant("RemAssign");
-    break;
-  case BO_AddAssign:
-    OF.emitSimpleVariant("AddAssign");
-    break;
-  case BO_SubAssign:
-    OF.emitSimpleVariant("SubAssign");
-    break;
-  case BO_ShlAssign:
-    OF.emitSimpleVariant("ShlAssign");
-    break;
-  case BO_ShrAssign:
-    OF.emitSimpleVariant("ShrAssign");
-    break;
-  case BO_AndAssign:
-    OF.emitSimpleVariant("AndAssign");
-    break;
-  case BO_XorAssign:
-    OF.emitSimpleVariant("XorAssign");
-    break;
-  case BO_OrAssign:
-    OF.emitSimpleVariant("OrAssign");
-    break;
-  case BO_Comma:
-    OF.emitSimpleVariant("Comma");
-    break;
+#include <clang/AST/OperationKinds.def>
   }
 }
 
