@@ -164,3 +164,12 @@ let string_of_binop_kind = function
 let string_of_unop_kind = function
 #define UNARY_OPERATION(Name, Spelling) | `Name -> s(Name)
 #include <clang/AST/OperationKinds.def>
+
+let is_valid_astnode_kind = function
+#define DECL(DERIVED, BASE) | s(DERIVED@@Decl) -> true
+#define ABSTRACT_DECL(DECL)
+#include <clang/AST/DeclNodes.inc>
+#define STMT(CLASS, PARENT) | s(CLASS) -> true
+#define ABSTRACT_STMT(STMT)
+#include <clang/AST/StmtNodes.inc>
+| _ -> false

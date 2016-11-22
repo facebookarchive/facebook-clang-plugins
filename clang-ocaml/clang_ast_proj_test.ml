@@ -57,6 +57,8 @@ let () =
   assert_equal "get_named_decl_tuple" (get_named_decl_tuple decl) (Some (di, name_info "foo"));
   assert_equal "get_type_decl_tuple" (get_type_decl_tuple decl) None;
   assert_equal "get_tag_decl_tuple" (get_tag_decl_tuple decl) None;
+  assert_equal "is_valid_astnode_kind" (is_valid_astnode_kind (get_decl_kind_string decl)) true;
+  assert_equal "is_valid_astnode_kind" (is_valid_astnode_kind "AFakeNodeThatDoesNotExist") false;
 
   let decl2 = update_named_decl_tuple (fun (di, info) -> (di, append_name_info info "bar")) decl
   in
