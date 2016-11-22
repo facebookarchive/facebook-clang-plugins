@@ -156,3 +156,11 @@ let is_valid_unop_kind_name = function
 #define UNARY_OPERATION(Name, Spelling) | s(Name) -> true
 #include <clang/AST/OperationKinds.def>
 | _ -> false
+
+let string_of_binop_kind = function
+#define BINARY_OPERATION(Name, Spelling) | `Name -> s(Name)
+#include <clang/AST/OperationKinds.def>
+
+let string_of_unop_kind = function
+#define UNARY_OPERATION(Name, Spelling) | `Name -> s(Name)
+#include <clang/AST/OperationKinds.def>

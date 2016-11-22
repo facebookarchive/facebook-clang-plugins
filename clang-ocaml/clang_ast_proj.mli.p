@@ -34,3 +34,6 @@ val update_expr_tuple : ((expr_tuple) -> (expr_tuple)) -> stmt -> stmt
 
 val is_valid_binop_kind_name : string -> bool
 val is_valid_unop_kind_name : string -> bool
+
+val string_of_binop_kind : binary_operator_kind -> string
+val string_of_unop_kind : unary_operator_kind -> string
