@@ -31,3 +31,6 @@ val update_tag_decl_tuple : ((tag_decl_tuple) -> (tag_decl_tuple)) -> decl -> de
 
 val update_stmt_tuple : ((stmt_tuple) -> (stmt_tuple)) -> stmt -> stmt
 val update_expr_tuple : ((expr_tuple) -> (expr_tuple)) -> stmt -> stmt
+
+val is_valid_binop_kind_name : string -> bool
+val is_valid_unop_kind_name : string -> bool

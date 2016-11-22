@@ -146,3 +146,13 @@ let get_type_tuple = function
 #define ABSTRACT_TYPE(DERIVED, BASE)
 TYPE(None, Type) (*  special case for nullptr type *)
 #include <clang/AST/TypeNodes.def>
+
+let is_valid_binop_kind_name = function
+#define BINARY_OPERATION(Name, Spelling) | s(Name) -> true
+#include <clang/AST/OperationKinds.def>
+| _ -> false
+
+let is_valid_unop_kind_name = function
+#define UNARY_OPERATION(Name, Spelling) | s(Name) -> true
+#include <clang/AST/OperationKinds.def>
+| _ -> false
