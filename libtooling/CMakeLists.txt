@@ -27,9 +27,8 @@ else (DEFINED CLANG_PLUGINS_EXTRA_REPO)
 
 endif (DEFINED CLANG_PLUGINS_EXTRA_REPO)
 
-add_library(
-  FacebookClangPlugin SHARED
-
+set(AST_EXPORTER_COMMON_SOURCES
+  ASTExporter.h
   SimplePluginASTAction.h
   SimplePluginASTAction.cpp
   FileUtils.h
@@ -37,8 +36,13 @@ add_library(
   FileServices.h
   FileServices.cpp
   atdlib/ATDWriter.h
-  ASTExporter.h
+  AttrParameterVectorStream.h
+  AttrParameterVectorStream.cpp
+)
+
+add_library(FacebookClangPlugin SHARED
   ASTExporter.cpp
+  ${AST_EXPORTER_COMMON_SOURCES}
   ${EXTRA_SOURCES}
 )
 
@@ -50,4 +54,9 @@ add_executable(record_copied_file
   FileServices.h
   FileServices.cpp
   record_copied_file.cpp
+)
+
+add_executable(ast_exporter_bin
+  ast_exporter_bin.cpp
+  ${AST_EXPORTER_COMMON_SOURCES}
 )
