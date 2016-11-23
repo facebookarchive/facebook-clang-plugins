@@ -747,8 +747,6 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
     tag = #X "Attr"; \
     break;
 #include <clang/Basic/AttrList.inc>
-  default:
-    llvm_unreachable("unexpected attribute kind");
   }
   VariantScope Scope(OF, tag);
   {
@@ -1951,9 +1949,6 @@ void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
   case TemplateArgument::Pack:
     OF.emitSimpleVariant("Pack");
     break;
-  default:
-    llvm_unreachable("unknown case");
-    break;
   }
 }
 
@@ -2374,8 +2369,8 @@ void ASTExporter<ATDWriter>::VisitObjCIvarDecl(const ObjCIvarDecl *D) {
     case ObjCIvarDecl::Package:
       OF.emitSimpleVariant("Package");
       break;
-    default:
-      llvm_unreachable("unknown case");
+    case ObjCIvarDecl::None:
+      llvm_unreachable("unreachable");
       break;
     }
   }
@@ -2739,8 +2734,8 @@ void ASTExporter<ATDWriter>::VisitObjCPropertyDecl(const ObjCPropertyDecl *D) {
     case ObjCPropertyDecl::Optional:
       OF.emitSimpleVariant("Optional");
       break;
-    default:
-      llvm_unreachable("unknown case");
+    case ObjCPropertyDecl::None:
+      llvm_unreachable("unreachable");
       break;
     }
   }
@@ -3086,8 +3081,8 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
     case VK_XValue:
       OF.emitSimpleVariant("XValue");
       break;
-    default:
-      llvm_unreachable("unknown case");
+    case VK_RValue:
+      llvm_unreachable("unreachable");
       break;
     }
   }
@@ -3106,8 +3101,8 @@ void ASTExporter<ATDWriter>::VisitExpr(const Expr *Node) {
     case OK_VectorComponent:
       OF.emitSimpleVariant("VectorComponent");
       break;
-    default:
-      llvm_unreachable("unknown case");
+    case OK_Ordinary:
+      llvm_unreachable("unreachable");
       break;
     }
   }
@@ -4005,8 +4000,8 @@ void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
     case ObjCMessageExpr::SuperClass:
       OF.emitSimpleVariant("SuperClass");
       break;
-    default:
-      llvm_unreachable("unknown case");
+    case ObjCMessageExpr::Instance:
+      llvm_unreachable("unreachable");
       break;
     }
   }
@@ -4542,6 +4537,9 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
 //@atd   | NullUnspecified
 //@atd   | ObjcKindof
 //@atd   | ObjcInsertUnsafeUnretained
+//@atd   | Swiftcall
+//@atd   | PreserveMost
+//@atd   | PreserveAll
 //@atd ]
 
 template <class ATDWriter>
@@ -4631,8 +4629,14 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
   case AttributedType::attr_objc_inert_unsafe_unretained:
     OF.emitSimpleVariant("ObjcInsertUnsafeUnretained");
     break;
-  default:
-    llvm_unreachable("unknown case");
+  case AttributedType::attr_swiftcall:
+    OF.emitSimpleVariant("Swiftcall");
+    break;
+  case AttributedType::attr_preserve_most:
+    OF.emitSimpleVariant("PreserveMost");
+    break;
+  case AttributedType::attr_preserve_all:
+    OF.emitSimpleVariant("PreserveAll");
     break;
   }
 }
@@ -4724,8 +4728,11 @@ void ASTExporter<ATDWriter>::VisitBuiltinType(const BuiltinType *T) {
     break;                     \
   }
 #include <clang/AST/BuiltinTypes.def>
-  default:
-    llvm_unreachable("unexpected builtin kind");
+#define IMAGE_TYPE(ImgType, ID, SingletonId, Access, Suffix) \
+  case BuiltinType::ID:
+#include <clang/Basic/OpenCLImageTypes.def>
+    llvm_unreachable("OCL builtin types are unsupported");
+    break;
   }
   OF.emitSimpleVariant(type_name);
 }
