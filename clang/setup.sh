@@ -133,6 +133,8 @@ tar --extract $QUIET_TAR --file "$CLANG_SRC"
 mkdir build
 pushd build
 
+# workaround install issue with ocaml llvm bindings and ocamldoc
+mkdir -p docs/ocamldoc/html
 
 cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
 
