@@ -29,6 +29,7 @@ endif (DEFINED CLANG_PLUGINS_EXTRA_REPO)
 
 set(AST_EXPORTER_COMMON_SOURCES
   ASTExporter.h
+  atdlib/ATDWriter.h
   SimplePluginASTAction.h
   SimplePluginASTAction.cpp
   FileUtils.h
@@ -41,6 +42,7 @@ set(AST_EXPORTER_COMMON_SOURCES
 )
 
 add_library(FacebookClangPlugin SHARED
+  PrintFiles.cpp
   ASTExporter.cpp
   ${AST_EXPORTER_COMMON_SOURCES}
   ${EXTRA_SOURCES}

@@ -25,11 +25,14 @@ class PrintDeclarationsConsumer : public ASTConsumer {
   std::unique_ptr<llvm::raw_ostream> OS;
 
  public:
-  PrintDeclarationsConsumer(
-      const CompilerInstance &CI,
-      std::unique_ptr<ASTPluginLib::PluginASTOptionsBase> &&Options,
-      std::unique_ptr<raw_ostream> OS)
-      : OS(std::move(OS)) {}
+  using ASTConsumerOptions = ASTPluginLib::PluginASTOptionsBase;
+  using PreprocessorHandler = ASTPluginLib::EmptyPreprocessorHandler;
+  using PreprocessorHandlerData = ASTPluginLib::EmptyPreprocessorHandlerData;
+
+  PrintDeclarationsConsumer(const CompilerInstance &CI,
+                            std::shared_ptr<ASTConsumerOptions> options,
+                            std::shared_ptr<PreprocessorHandlerData> sharedData,
+                            std::unique_ptr<raw_ostream> &&OS) : OS(std::move(OS)) {}
 
   virtual bool HandleTopLevelDecl(DeclGroupRef DG) {
     for (DeclGroupRef::iterator i = DG.begin(), e = DG.end(); i != e; ++i) {

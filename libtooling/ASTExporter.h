@@ -4930,38 +4930,39 @@ TYPE(None, Type)
 template <class ATDWriter = JsonWriter, bool ForceYojson = false>
 class ExporterASTConsumer : public ASTConsumer {
  private:
-  ASTExporterOptions Options;
+  std::shared_ptr<ASTExporterOptions> options;
   std::unique_ptr<raw_ostream> OS;
 
  public:
+  using ASTConsumerOptions = ASTLib::ASTExporterOptions;
+  using PreprocessorHandler = ASTPluginLib::EmptyPreprocessorHandler;
+  using PreprocessorHandlerData = ASTPluginLib::EmptyPreprocessorHandlerData;
+
   ExporterASTConsumer(const CompilerInstance &CI,
-                      std::unique_ptr<ASTExporterOptions> &&Opts,
-                      std::unique_ptr<raw_ostream> OS)
-      : Options(std::move(*Opts)), OS(std::move(OS)) {
+                      std::shared_ptr<ASTConsumerOptions> options,
+                      std::shared_ptr<PreprocessorHandlerData> sharedData,
+                      std::unique_ptr<raw_ostream> &&OS)
+      : options(options), OS(std::move(OS)) {
     if (ForceYojson) {
-      this->Options.atdWriterOptions.useYojson = true;
+      options->atdWriterOptions.useYojson = true;
     }
   }
 
   virtual void HandleTranslationUnit(ASTContext &Context) {
     TranslationUnitDecl *D = Context.getTranslationUnitDecl();
-    ASTExporter<ATDWriter> P(*OS, Context, Options);
+    ASTExporter<ATDWriter> P(*OS, Context, *options);
     P.dumpDecl(D);
   }
 };
 
 typedef ASTPluginLib::SimplePluginASTAction<
-    ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, false>,
-    ASTLib::ASTExporterOptions>
+    ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, false>>
     JsonExporterASTAction;
 typedef ASTPluginLib::SimplePluginASTAction<
-    ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, true>,
-    ASTLib::ASTExporterOptions>
+    ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, true>>
     YojsonExporterASTAction;
 typedef ASTPluginLib::SimplePluginASTAction<
-    ASTLib::ExporterASTConsumer<ATDWriter::BiniouWriter<llvm::raw_ostream>,
-                                true>,
-    ASTLib::ASTExporterOptions>
+    ASTLib::ExporterASTConsumer<ATDWriter::BiniouWriter<llvm::raw_ostream>, true>>
     BiniouExporterASTAction;
 
 } // end of namespace ASTLib
