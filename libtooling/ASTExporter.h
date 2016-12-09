@@ -491,8 +491,11 @@ void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
   writePointer(OF, Options.withPointers, Ptr);
 }
 
+//@atd type source_file = string wrap <ocaml t="Clang_ast_types.src_file"
+//@atd                              wrap="Clang_ast_types.source_file_of_string"
+//@atd                              unwrap="Clang_ast_types.string_of_source_file">
 //@atd type source_location = {
-//@atd   ?file <ocaml mutable> : string option;
+//@atd   ?file <ocaml mutable> : source_file option;
 //@atd   ?line <ocaml mutable> : int option;
 //@atd   ?column <ocaml mutable> : int option;
 //@atd } <ocaml field_prefix="sl_" validator="Clang_ast_visit.visit_source_loc">
@@ -1373,7 +1376,7 @@ void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
 }
 //@atd #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * translation_unit_decl_info
 //@atd type  translation_unit_decl_info = {
-//@atd   input_path : string;
+//@atd   input_path : source_file;
 //@atd   input_kind : input_kind;
 //@atd   ~arc_enabled : bool;
 //@atd   types : c_type list;

@@ -17,3 +17,11 @@ type t_ptr = [ | `TPtr of int ]
 let pointer_to_type_ptr raw = `TPtr raw
 
 let type_ptr_to_pointer type_ptr = match type_ptr with `TPtr raw -> raw
+
+(* Source files *)
+
+type src_file = string
+
+let source_file_of_string path = path
+
+let string_of_source_file path = path
