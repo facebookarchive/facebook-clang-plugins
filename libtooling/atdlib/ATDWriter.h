@@ -501,43 +501,16 @@ class BiniouEmitter {
   OStream &os_;
 
   // Opened container, writing in progress.
-  struct NonLazyContainer {
+  struct ATDContainer {
     uint8_t tag;
     int size;
     int count;
 
-    NonLazyContainer(uint8_t tag, int size) : tag(tag), size(size), count(0) {}
+    ATDContainer(uint8_t tag, int size) : tag(tag), size(size), count(0) {}
   };
 
-  typedef std::function<void(OStream &)> lazy_write_t;
-
-  // Opened container, deferred writing (e.g. size of self or a parent container
-  // is missing).
-  struct LazyContainer {
-    uint8_t tag;
-    std::vector<lazy_write_t> values;
-
-    int getContainerSize() {
-      int count = values.size();
-      switch (tag) {
-      case ARRAY_tag:
-        return count;
-      case TUPLE_tag:
-        return count;
-      case RECORD_tag:
-        return count / 2;
-      default:
-        return SIZE_NOT_NEEDED;
-      }
-    }
-
-    LazyContainer(uint8_t tag) : tag(tag) {}
-  };
-
-  // The full stack of opened containers is: nonLazyContainers + lazyContainers
-  // (in this order).
-  std::vector<NonLazyContainer> nonLazyContainers;
-  std::vector<std::shared_ptr<LazyContainer>> lazyContainers;
+  // The full stack of opened containers
+  std::vector<ATDContainer> atdContainers;
 
  public:
   const bool shouldSimpleVariantsBeEmittedAsStrings = false;
@@ -546,67 +519,31 @@ class BiniouEmitter {
 
  private:
   bool isValueTagNeeded() {
-    if (!lazyContainers.empty()) {
-      const LazyContainer &obj = *lazyContainers.back();
-      return obj.tag != ARRAY_tag || obj.values.size() == 0;
-    }
-    if (!nonLazyContainers.empty()) {
-      const NonLazyContainer &obj = nonLazyContainers.back();
+    if (!atdContainers.empty()) {
+      const ATDContainer &obj = atdContainers.back();
       return obj.tag != ARRAY_tag || obj.count == 0;
     }
     return true;
   }
 
-  template <class T>
-  void push_write(T write) {
-    if (lazyContainers.empty()) {
-      if (!nonLazyContainers.empty()) {
-        nonLazyContainers.back().count++;
-      }
-      write(os_);
-    } else {
-      lazyContainers.back()->values.emplace_back(std::move(write));
+  void markWrite() {
+    if (!atdContainers.empty()) {
+      atdContainers.back().count++;
     }
   }
 
-  void enterContainer(uint8_t tag) {
-    lazyContainers.push_back(std::make_shared<LazyContainer>(tag));
-  }
-
   void enterContainer(uint8_t tag, int size) {
-    if (lazyContainers.empty()) {
-      bool needTag = isValueTagNeeded();
-      nonLazyContainers.emplace_back(tag, size);
-      writeValueTag(os_, needTag, tag);
-      if (size != SIZE_NOT_NEEDED) {
-        writeUvint(os_, size);
-      }
-    } else {
-      enterContainer(tag);
+    bool needTag = isValueTagNeeded();
+    atdContainers.emplace_back(tag, size);
+    writeValueTag(os_, needTag, tag);
+    if (size != SIZE_NOT_NEEDED) {
+      writeUvint(os_, size);
     }
   }
 
   void leaveContainer() {
-    if (lazyContainers.empty()) {
-      nonLazyContainers.pop_back();
-      if (!nonLazyContainers.empty()) {
-        nonLazyContainers.back().count++;
-      }
-    } else {
-      auto me = lazyContainers.back();
-      lazyContainers.pop_back();
-      bool needTag = isValueTagNeeded();
-      push_write([needTag, me, this](OStream &os) {
-        writeValueTag(os, needTag, me->tag);
-        int size = me->getContainerSize();
-        if (size != SIZE_NOT_NEEDED) {
-          writeUvint(os, size);
-        }
-        for (auto &&value : me->values) {
-          value(os);
-        }
-      });
-    }
+    atdContainers.pop_back();
+    markWrite();
   }
 
   // string hash algorithm from the biniou spec
@@ -657,11 +594,10 @@ class BiniouEmitter {
 
   void emitDummyRecordField() {
     emitTag("!!DUMMY!!");
-    push_write([this](OStream &os) {
-      // unit is the smallest value (2 bytes)
-      write8(os, unit_tag);
-      write8(os, 0);
-    });
+    markWrite();
+    // unit is the smallest value (2 bytes)
+    write8(os_, unit_tag);
+    write8(os_, 0);
   }
 
  public:
@@ -669,36 +605,34 @@ class BiniouEmitter {
 
   void emitBoolean(bool val) {
     bool needTag = isValueTagNeeded();
-    push_write([needTag, val, this](OStream &os) {
-      writeValueTag(os, needTag, bool_tag);
-      write8(os, val);
-    });
+    markWrite();
+    writeValueTag(os_, needTag, bool_tag);
+    write8(os_, val);
   }
 
   void emitInteger(int64_t val) {
     bool needTag = isValueTagNeeded();
-    push_write([val, needTag, this](OStream &os) {
-      writeValueTag(os, needTag, svint_tag);
-      writeSvint(os, val);
-    });
+    markWrite();
+    writeValueTag(os_, needTag, svint_tag);
+    writeSvint(os_, val);
   }
 
   void emitString(const std::string &val) {
     bool needTag = isValueTagNeeded();
-    push_write([val, needTag, this](OStream &os) {
-      writeValueTag(os, needTag, string_tag);
-      writeUvint(os, val.length());
-      for (const char &c : val) {
-        write8(os, c);
-      }
-    });
+    markWrite();
+    writeValueTag(os_, needTag, string_tag);
+    writeUvint(os_, val.length());
+    for (const char &c : val) {
+      write8(os_, c);
+    }
   }
 
   void emitTag(const std::string &val) {
     int32_t hash = biniou_hash(val);
     // set first bit of hash
     hash |= 1 << 31;
-    push_write([hash, this](OStream &os) { write32(os, hash); });
+    markWrite();
+    write32(os_, hash);
   }
 
   void emitVariantTag(const std::string &val, bool hasArg) {
@@ -707,27 +641,29 @@ class BiniouEmitter {
     if (hasArg) {
       hash |= 1 << 31;
     }
-    push_write([hash, this](OStream &os) { write32(os, hash); });
+    markWrite();
+    write32(os_, hash);
   }
 
   void enterArray(int size) { enterContainer(ARRAY_tag, size); }
-  void enterArray() { enterContainer(ARRAY_tag); }
+  // unsupported:
+  //void enterArray() { enterContainer(ARRAY_tag); }
   void leaveArray() { leaveContainer(); }
   void enterObject(int size) { enterContainer(RECORD_tag, size); }
-  void enterObject() { enterContainer(RECORD_tag); }
+  // unsupported:
+  //void enterObject() { enterContainer(RECORD_tag); }
   void leaveObject() {
-    if (lazyContainers.empty()) {
-      const NonLazyContainer &obj = nonLazyContainers.back();
-      // Container's size was already written -> must fill in for missing
-      // records.
-      for (int i = obj.count / 2; i < obj.size; i++) {
-        emitDummyRecordField();
-      }
+    const ATDContainer &obj = atdContainers.back();
+    // Container's size was already written -> must fill in for missing
+    // records.
+    for (int i = obj.count / 2; i < obj.size; i++) {
+      emitDummyRecordField();
     }
     leaveContainer();
   }
   void enterTuple(int size) { enterContainer(TUPLE_tag, size); }
-  void enterTuple() { enterContainer(TUPLE_tag); }
+  // unsupported:
+  //void enterTuple() { enterContainer(TUPLE_tag); }
   void leaveTuple() { leaveContainer(); }
   void enterVariant() { enterContainer(VARIANT_tag, SIZE_NOT_NEEDED); }
   void leaveVariant() { leaveContainer(); }
