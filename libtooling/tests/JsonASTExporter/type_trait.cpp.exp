@@ -488,12 +488,18 @@
                     ]
                   ]]
                 ]
-              ]]
+              ]],
+              "template_specialization" : {
+                "template_decl" : 23,
+                "specialization_args" : [
+                  ["Type" , 30]
+                ]
+              }
             }
           ]],
           ["FunctionDecl" , [
             {
-              "pointer" : 30,
+              "pointer" : 31,
               "source_range" : [
                 {
                   "column" : 1
@@ -516,10 +522,10 @@
             },
             {
               "mangled_name" : "_Z6is_podI1XEbv",
-              "decl_ptr_with_body" : 30,
+              "decl_ptr_with_body" : 31,
               "body" : ["CompoundStmt" , [
                 {
-                  "pointer" : 31,
+                  "pointer" : 32,
                   "source_range" : [
                     {
                       "column" : 15
@@ -532,7 +538,7 @@
                 [
                   ["ReturnStmt" , [
                     {
-                      "pointer" : 32,
+                      "pointer" : 33,
                       "source_range" : [
                         {
                           "column" : 17
@@ -545,7 +551,7 @@
                     [
                       ["TypeTraitExpr" , [
                         {
-                          "pointer" : 33,
+                          "pointer" : 34,
                           "source_range" : [
                             {
                               "column" : 24
@@ -566,7 +572,13 @@
                     ]
                   ]]
                 ]
-              ]]
+              ]],
+              "template_specialization" : {
+                "template_decl" : 23,
+                "specialization_args" : [
+                  ["Type" , 8]
+                ]
+              }
             }
           ]]
         ]
@@ -574,7 +586,7 @@
     ]],
     ["VarDecl" , [
       {
-        "pointer" : 34,
+        "pointer" : 35,
         "source_range" : [
           {
             "line" : 9,
@@ -598,7 +610,7 @@
         "is_global" : true,
         "init_expr" : ["CallExpr" , [
           {
-            "pointer" : 35,
+            "pointer" : 36,
             "source_range" : [
               {
                 "column" : 10
@@ -611,7 +623,7 @@
           [
             ["ImplicitCastExpr" , [
               {
-                "pointer" : 36,
+                "pointer" : 37,
                 "source_range" : [
                   {
                     "column" : 10
@@ -624,7 +636,7 @@
               [
                 ["DeclRefExpr" , [
                   {
-                    "pointer" : 37,
+                    "pointer" : 38,
                     "source_range" : [
                       {
                         "column" : 10
@@ -666,7 +678,7 @@
                 ]]
               ],
               {
-                "type_ptr" : 38
+                "type_ptr" : 39
               },
               {
                 "cast_kind" : "FunctionToPointerDecay",
@@ -683,7 +695,7 @@
     ]],
     ["VarDecl" , [
       {
-        "pointer" : 39,
+        "pointer" : 40,
         "source_range" : [
           {
             "line" : 10,
@@ -707,7 +719,7 @@
         "is_global" : true,
         "init_expr" : ["CallExpr" , [
           {
-            "pointer" : 40,
+            "pointer" : 41,
             "source_range" : [
               {
                 "column" : 10
@@ -720,7 +732,7 @@
           [
             ["ImplicitCastExpr" , [
               {
-                "pointer" : 41,
+                "pointer" : 42,
                 "source_range" : [
                   {
                     "column" : 10
@@ -733,7 +745,7 @@
               [
                 ["DeclRefExpr" , [
                   {
-                    "pointer" : 42,
+                    "pointer" : 43,
                     "source_range" : [
                       {
                         "column" : 10
@@ -752,7 +764,7 @@
                   {
                     "decl_ref" : {
                       "kind" : "Function",
-                      "decl_pointer" : 30,
+                      "decl_pointer" : 31,
                       "name" : {
                         "name" : "is_pod",
                         "qual_name" : [
@@ -775,7 +787,7 @@
                 ]]
               ],
               {
-                "type_ptr" : 38
+                "type_ptr" : 39
               },
               {
                 "cast_kind" : "FunctionToPointerDecay",
@@ -792,7 +804,7 @@
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : 43,
+        "pointer" : 44,
         "source_range" : [
           {
           },
@@ -808,7 +820,7 @@
         ]
       },
       ["Type" , "id"],
-      44,
+      45,
       {
       }
     ]]
@@ -821,7 +833,7 @@
     "types" : [
       ["BuiltinType" , [
         {
-          "pointer" : 45
+          "pointer" : 46
         },
         "Void"
       ]],
@@ -833,25 +845,25 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 46
+          "pointer" : 47
         },
         "Char_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 47
+          "pointer" : 48
         },
         "SChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 48
+          "pointer" : 49
         },
         "Short"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 49
+          "pointer" : 30
         },
         "Int"
       ]],
@@ -1036,7 +1048,7 @@
           "pointer" : 80
         },
         {
-          "type_ptr" : 45
+          "type_ptr" : 46
         }
       ]],
       ["BuiltinType" , [
@@ -1062,7 +1074,7 @@
           "pointer" : 85
         },
         {
-          "type_ptr" : 49,
+          "type_ptr" : 30,
           "is_const" : true
         }
       ]],
@@ -1071,7 +1083,7 @@
           "pointer" : 86
         },
         {
-          "type_ptr" : 46,
+          "type_ptr" : 47,
           "is_const" : true
         }
       ]],
@@ -1080,7 +1092,7 @@
           "pointer" : 87
         },
         {
-          "type_ptr" : 46
+          "type_ptr" : 47
         }
       ]],
       ["RecordType" , [
@@ -1115,7 +1127,7 @@
           "pointer" : 11
         },
         {
-          "return_type" : 45
+          "return_type" : 46
         },
         {
         }
@@ -1202,7 +1214,7 @@
           "pointer" : 22
         },
         {
-          "return_type" : 45
+          "return_type" : 46
         },
         {
         }
@@ -1229,7 +1241,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 38
+          "pointer" : 39
         },
         {
           "type_ptr" : 25
@@ -1238,7 +1250,7 @@
       ["SubstTemplateTypeParmType" , [
         {
           "pointer" : 97,
-          "desugared_type" : 49
+          "desugared_type" : 30
         }
       ]],
       ["SubstTemplateTypeParmType" , [
@@ -1275,12 +1287,12 @@
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 44,
+          "pointer" : 45,
           "desugared_type" : 100
         },
         {
           "child_type" : 101,
-          "decl_ptr" : 43
+          "decl_ptr" : 44
         }
       ]],
       ["NoneType" , [

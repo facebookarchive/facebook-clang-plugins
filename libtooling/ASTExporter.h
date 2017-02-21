@@ -1536,7 +1536,8 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~decls_in_prototype_scope : decl list;
 //@atd   ~parameters : decl list;
 //@atd   ?decl_ptr_with_body : pointer option;
-//@atd   ?body : stmt option
+//@atd   ?body : stmt option;
+//@atd   ?template_specialization : template_specialization_info option
 //@atd } <ocaml field_prefix="fdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
@@ -1558,11 +1559,12 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     DeclWithBody = nullptr;
   }
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
+  FunctionTemplateDecl* TemplateDecl = D->getPrimaryTemplate();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
   int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
              IsModulePrivate + IsPure + IsDeletedAsWritten +
-             HasDeclarationBody + (bool)DeclWithBody;
+             HasDeclarationBody + (bool)DeclWithBody + (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
   if (ShouldMangleName) {
@@ -1645,6 +1647,10 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
       OF.emitTag("body");
       dumpStmt(Body);
     }
+  }
+  if (TemplateDecl) {
+    OF.emitTag("template_specialization");
+    dumpTemplateSpecialization(TemplateDecl, *D->getTemplateSpecializationArgs());
   }
 }
 
