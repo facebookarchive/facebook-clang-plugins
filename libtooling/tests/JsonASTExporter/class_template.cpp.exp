@@ -457,9 +457,12 @@
             {
               "is_pod" : true
             },
-            [
-              ["Type" , 26]
-            ]
+            {
+              "template_decl" : 7,
+              "specialization_args" : [
+                ["Type" , 26]
+              ]
+            }
           ]]
         ]
       }
@@ -1134,9 +1137,12 @@
           "type_ptr" : 33
         }
       },
-      [
-        ["Type" , 30]
-      ]
+      {
+        "template_decl" : 7,
+        "specialization_args" : [
+          ["Type" , 30]
+        ]
+      }
     ]],
     ["FunctionDecl" , [
       {

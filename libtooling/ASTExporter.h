@@ -257,6 +257,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpDeclarationName(const DeclarationName &Name);
   void dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS);
   void dumpTemplateArgument(const TemplateArgument &Arg);
+  void dumpTemplateSpecialization(const TemplateDecl* D, const TemplateArgumentList& Args);
   //    void dumpTemplateParameters(const TemplateParameterList *TPL);
   //    void dumpTemplateArgumentListInfo(const TemplateArgumentListInfo &TALI);
   //    void dumpTemplateArgumentLoc(const TemplateArgumentLoc &A);
@@ -1955,21 +1956,36 @@ void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
   }
 }
 
+//@atd type template_specialization_info = {
+//@atd   template_decl : pointer;
+//@atd   ~specialization_args : template_instantiation_arg_info list;
+//@atd } <ocaml field_prefix="tsi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpTemplateSpecialization(const TemplateDecl *D, const TemplateArgumentList &Args) {
+  bool HasTemplateArgs = Args.size() > 0;
+  ObjectScope oScope(OF, 1 + HasTemplateArgs);
+  OF.emitTag("template_decl");
+  dumpPointer(D);
+  if (HasTemplateArgs) {
+    OF.emitTag("specialization_args");
+    ArrayScope aScope(OF, Args.size());
+    for (size_t i = 0; i < Args.size(); i++) {
+      dumpTemplateArgument(Args[i]);
+    }
+  }
+}
+
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::ClassTemplateSpecializationDeclTupleSize() {
   return CXXRecordDeclTupleSize() + 1;
 }
 
-//@atd #define class_template_specialization_decl_tuple cxx_record_decl_tuple * template_instantiation_arg_info list
+//@atd #define class_template_specialization_decl_tuple cxx_record_decl_tuple * template_specialization_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
     const ClassTemplateSpecializationDecl *D) {
   VisitCXXRecordDecl(D);
-  const TemplateArgumentList &args = D->getTemplateInstantiationArgs();
-  ArrayScope Scope(OF, args.size());
-  for (size_t i = 0; i < args.size(); i++) {
-    dumpTemplateArgument(args[i]);
-  }
+  dumpTemplateSpecialization(D->getSpecializedTemplate(), D->getTemplateInstantiationArgs());
 }
 
 template <class ATDWriter>
