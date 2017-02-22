@@ -1468,6 +1468,7 @@ int ASTExporter<ATDWriter>::RecordDeclTupleSize() {
 }
 //@atd #define record_decl_tuple tag_decl_tuple * record_decl_info
 //@atd type record_decl_info = {
+//@atd   definition_ptr : pointer;
 //@atd   ~is_module_private : bool;
 //@atd   ~is_complete_definition : bool
 //@atd } <ocaml field_prefix="rdi_">
@@ -1477,8 +1478,9 @@ void ASTExporter<ATDWriter>::VisitRecordDecl(const RecordDecl *D) {
 
   bool IsModulePrivate = D->isModulePrivate();
   bool IsCompleteDefinition = D->isCompleteDefinition();
-  ObjectScope Scope(OF, 0 + IsModulePrivate + IsCompleteDefinition);
-
+  ObjectScope Scope(OF, 1 + IsModulePrivate + IsCompleteDefinition);
+  OF.emitTag("definition_ptr");
+  dumpPointer(D->getDefinition());
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_complete_definition", IsCompleteDefinition);
 }
