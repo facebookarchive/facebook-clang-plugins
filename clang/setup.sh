@@ -1,6 +1,8 @@
 #!/bin/bash
-
 # Simple installation script for llvm/clang.
+
+set -e
+set -o pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_RELATIVE_PATH="$(basename "${BASH_SOURCE[0]}")"
@@ -62,11 +64,32 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
+if [ "$ONLY_RECORD" = "yes" ]; then
+    record_installed
+    exit 0
+fi
+
+if check_installed; then
+    # already installed
+    if [ "$ONLY_CHECK" = "yes" ]; then
+        exit 0
+    fi
+    echo "Clang is already installed according to $CLANG_INSTALLED_VERSION_FILE"
+    echo "Nothing to do, exiting."
+    exit 0
+else
+    if [ "$ONLY_CHECK" = "yes" ]; then
+        exit 1
+    fi
+fi
+
 platform=`uname`
 
 CMAKE_ARGS=(
   -DCMAKE_INSTALL_PREFIX="$CLANG_PREFIX"
   -DCMAKE_BUILD_TYPE=Release
+  -DCMAKE_C_FLAGS="$CMAKE_C_FLAGS -s"
+  -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS -s"
   -DLLVM_ENABLE_ASSERTIONS=Off
   -DLLVM_ENABLE_EH=On
   -DLLVM_ENABLE_RTTI=On
@@ -83,39 +106,7 @@ else
     )
 fi
 
-if [ -n "$CMAKE_C_FLAGS" ]; then
-  CMAKE_ARGS+=(
-    -DCMAKE_C_FLAGS="$CMAKE_C_FLAGS"
-  )
-fi
-if [ -n "$CMAKE_CXX_FLAGS" ]; then
-  CMAKE_ARGS+=(
-    -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS"
-  )
-fi
-
-if [ "$ONLY_RECORD" = "yes" ]; then
-    record_installed
-    exit 0
-fi
-
-check_installed
-already_installed=$?
-
-if [ "$ONLY_CHECK" = "yes" ]; then
-    # trick to always exit with 0 or 1
-    [ $already_installed -eq 0 ]
-    exit $?
-fi
-
-if [ $already_installed -eq 0 ]; then
-    echo "Clang is already installed according to $CLANG_INSTALLED_VERSION_FILE"
-    echo "Nothing to do, exiting."
-    exit 0
-fi
-
 # start the installation
-set -e
 echo "Installing clang..."
 if [ -n "$CLANG_TMP_DIR" ]; then
     TMP=$CLANG_TMP_DIR
@@ -133,7 +124,7 @@ tar --extract $QUIET_TAR --file "$CLANG_SRC"
 mkdir build
 pushd build
 
-# workaround install issue with ocaml llvm bindings and ocamldoc
+# workaround install issue with ocaml llvm bindings and ocamldoc
 mkdir -p docs/ocamldoc/html
 
 cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
@@ -142,10 +133,6 @@ JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
 
 make -j $JOBS && make -j $JOBS install
 
-set +e
-strip -x "$CLANG_PREFIX"/bin/*
-find "$CLANG_PREFIX"/lib -type f \( -name '*.so.*' -o -name '*.a' \) -exec strip -x \{\} \+
-set -e
 popd # build
 popd # $TMP
 
