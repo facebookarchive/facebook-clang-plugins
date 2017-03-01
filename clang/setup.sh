@@ -88,8 +88,6 @@ platform=`uname`
 CMAKE_ARGS=(
   -DCMAKE_INSTALL_PREFIX="$CLANG_PREFIX"
   -DCMAKE_BUILD_TYPE=Release
-  -DCMAKE_C_FLAGS="$CMAKE_C_FLAGS -s"
-  -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS -s"
   -DLLVM_ENABLE_ASSERTIONS=Off
   -DLLVM_ENABLE_EH=On
   -DLLVM_ENABLE_RTTI=On
@@ -99,15 +97,19 @@ if [ "$platform" = "Darwin" ]; then
     CMAKE_ARGS+=(
       -DLLVM_ENABLE_LIBCXX=On
       -DCMAKE_SHARED_LINKER_FLAGS="$CMAKE_SHARED_LINKER_FLAGS"
+      # adding -s to the C{,XX} flags breaks the compilation on osx
+      -DCMAKE_C_FLAGS="$CMAKE_C_FLAGS"
+      -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS"
     )
 else
     CMAKE_ARGS+=(
       -DCMAKE_SHARED_LINKER_FLAGS="-lstdc++ $CMAKE_SHARED_LINKER_FLAGS"
+      -DCMAKE_C_FLAGS="-s $CMAKE_C_FLAGS"
+      -DCMAKE_CXX_FLAGS="-s $CMAKE_CXX_FLAGS"
     )
 fi
 
 # start the installation
-echo "Installing clang..."
 if [ -n "$CLANG_TMP_DIR" ]; then
     TMP=$CLANG_TMP_DIR
 else
@@ -119,6 +121,7 @@ if tar --version | grep -q 'GNU'; then
     # GNU tar is too verbose if the tarball was created on MacOS
     QUIET_TAR="--warning=no-unknown-keyword"
 fi
+echo "unpacking '$CLANG_SRC'..."
 tar --extract $QUIET_TAR --file "$CLANG_SRC"
 
 mkdir build
@@ -131,11 +134,27 @@ cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
 
 JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
 
-make -j $JOBS && make -j $JOBS install
+make -j $JOBS
+
+echo "testing clang build"
+./bin/clang --version
+
+make -j $JOBS install
 
 popd # build
 popd # $TMP
 
+# brutally strip everything, ignore errors
+set +e
+find "$CLANG_PREFIX"/{bin,lib} -type f \
+  \( -name '*.so' -o -name '*.so.*' -o -name '*.a' \) \
+  -exec strip -x \{\} \+
+set -e
+
+echo "testing installed clang"
+"$CLANG_PREFIX"/bin/clang --version
+
+echo "deleting temp dir '$CLANG_TMP_DIR'..."
 if [ -n "$CLANG_TMP_DIR" ]; then
     rm -rf "$TMP/*"
 else
