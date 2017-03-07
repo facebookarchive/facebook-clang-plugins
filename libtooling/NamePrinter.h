@@ -72,6 +72,7 @@ void NamePrinter<ATDWriter>::printTemplateArgList(
   }
 }
 
+
 template <class ATDWriter>
 void NamePrinter<ATDWriter>::printDeclName(const NamedDecl &D) {
   const DeclContext *Ctx = D.getDeclContext();
@@ -86,7 +87,16 @@ void NamePrinter<ATDWriter>::printDeclName(const NamedDecl &D) {
   }
 
   while (Ctx && isa<NamedDecl>(Ctx)) {
-    Contexts.push_back(cast<NamedDecl>(Ctx));
+    bool shouldPrintCtx = true;
+    // skip inline namespaces when printing qualified name
+    if (const NamespaceDecl *ND = dyn_cast<NamespaceDecl>(Ctx)) {
+      if (ND->isInline()) {
+        shouldPrintCtx = false;
+      }
+    }
+    if (shouldPrintCtx) {
+      Contexts.push_back(cast<NamedDecl>(Ctx));
+    }
     Ctx = Ctx->getParent();
   }
 

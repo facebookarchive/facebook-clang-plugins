@@ -3,6 +3,9 @@ namespace Q {
   }
   namespace V { // extension-namespace-definition for V
   }
+  inline namespace I {
+    int i;
+  }
 }
 
 namespace { // anonymous namespace
