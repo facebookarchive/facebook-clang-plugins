@@ -869,7 +869,8 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
 //@atd type cxx_ctor_initializer = {
 //@atd   subject : cxx_ctor_initializer_subject;
 //@atd   source_range : source_range;
-//@atd   ?init_expr : stmt option
+//@atd   ?init_expr : stmt option;
+//@atd   ~array_indices : decl list
 //@atd } <ocaml field_prefix="xci_">
 //@atd type cxx_ctor_initializer_subject = [
 //@atd   Member of decl_ref
@@ -880,7 +881,16 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
     const CXXCtorInitializer &Init) {
   const Expr *E = Init.getInit();
-  ObjectScope Scope(OF, 2 + (bool)E);
+  /* NOTE ArrayIndices are removed by clang-4.0 and replaced by new types of
+     AST nodes. Commits that change it:
+     https://github.com/llvm-mirror/clang/commit/0601f898eba295d84cc7e2239ff2c62b1e818d85
+     https://github.com/llvm-mirror/clang/commit/993e3aa6b96adce7b48000b9ba4ff27266c87104
+
+     implementation in clang-3.9:
+     https://github.com/llvm-mirror/clang/blob/release_39/include/clang/AST/DeclCXX.h#L2131-L2149
+  */
+  int NumArrayIndices = Init.getNumArrayIndices();
+  ObjectScope Scope(OF, 2 + (bool)E + (NumArrayIndices > 0));
 
   OF.emitTag("subject");
   const FieldDecl *FD = Init.getAnyMember();
@@ -903,6 +913,13 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
   if (E) {
     OF.emitTag("init_expr");
     dumpStmt(E);
+  }
+  if (NumArrayIndices > 0) {
+    OF.emitTag("array_indices");
+    ArrayScope aScope(OF, NumArrayIndices);
+    for (int i = 0; i < NumArrayIndices; i++) {
+      dumpDecl(Init.getArrayIndex(i));
+    }
   }
 }
 
