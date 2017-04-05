@@ -119,7 +119,7 @@
       {
       }
     ]],
-    ["ClassTemplateDecl" , [
+    ["NamespaceDecl" , [
       {
         "pointer" : 7,
         "source_range" : [
@@ -129,173 +129,160 @@
             "column" : 1
           },
           {
-            "line" : 4,
+            "line" : 16,
             "column" : 1
           }
         ]
       },
       {
-        "name" : "S",
+        "name" : "N",
         "qual_name" : [
-          "S"
+          "N"
         ]
       },
-      {
-        "specializations" : [
-          ["ClassTemplateSpecializationDecl" , [
-            {
-              "pointer" : 8,
-              "source_range" : [
+      [
+        ["ClassTemplateDecl" , [
+          {
+            "pointer" : 8,
+            "source_range" : [
+              {
+                "line" : 2,
+                "column" : 1
+              },
+              {
+                "line" : 5,
+                "column" : 1
+              }
+            ]
+          },
+          {
+            "name" : "S",
+            "qual_name" : [
+              "S",
+              "N"
+            ]
+          },
+          {
+            "specializations" : [
+              ["ClassTemplateSpecializationDecl" , [
                 {
-                  "line" : 1,
-                  "column" : 1
-                },
-                {
-                  "line" : 4,
-                  "column" : 1
-                }
-              ]
-            },
-            {
-              "name" : "S",
-              "qual_name" : [
-                "S<S<int> >"
-              ]
-            },
-            ["Type" , "struct S<struct S<int> >"],
-            9,
-            [
-              ["CXXRecordDecl" , [
-                {
-                  "pointer" : 10,
+                  "pointer" : 9,
                   "source_range" : [
                     {
                       "line" : 2,
                       "column" : 1
                     },
                     {
-                      "column" : 8
+                      "line" : 5,
+                      "column" : 1
                     }
-                  ],
-                  "is_implicit" : true
+                  ]
                 },
                 {
                   "name" : "S",
                   "qual_name" : [
-                    "S",
-                    "S<S<int> >"
+                    "S<N::S<int> >",
+                    "N"
                   ]
                 },
-                ["Type" , "struct S<struct S<int> >"],
-                9,
+                ["Type" , "struct N::S<struct N::S<int> >"],
+                10,
                 [
-                ],
-                {
-                },
-                {
-                  "definition_ptr" : 8
-                },
-                {
-                }
-              ]],
-              ["FieldDecl" , [
-                {
-                  "pointer" : 11,
-                  "source_range" : [
+                  ["CXXRecordDecl" , [
                     {
-                      "line" : 3,
-                      "column" : 3
-                    },
-                    {
-                      "column" : 5
-                    }
-                  ],
-                  "is_this_declaration_referenced" : true
-                },
-                {
-                  "name" : "field",
-                  "qual_name" : [
-                    "field",
-                    "S<S<int> >"
-                  ]
-                },
-                {
-                  "type_ptr" : 12
-                },
-                {
-                }
-              ]],
-              ["CXXConstructorDecl" , [
-                {
-                  "pointer" : 13,
-                  "parent_pointer" : 8,
-                  "source_range" : [
-                    {
-                      "line" : 2,
-                      "column" : 8
-                    },
-                    {
-                      "column" : 8
-                    }
-                  ],
-                  "is_implicit" : true,
-                  "is_used" : true,
-                  "is_this_declaration_referenced" : true
-                },
-                {
-                  "name" : "S",
-                  "qual_name" : [
-                    "S",
-                    "S<S<int> >"
-                  ]
-                },
-                {
-                  "type_ptr" : 14
-                },
-                {
-                  "mangled_name" : "_ZN1SIS_IiEEC1Ev",
-                  "is_inline" : true,
-                  "decl_ptr_with_body" : 13,
-                  "body" : ["CompoundStmt" , [
-                    {
-                      "pointer" : 15,
+                      "pointer" : 11,
                       "source_range" : [
                         {
-                          "column" : 8
+                          "line" : 3,
+                          "column" : 1
                         },
                         {
                           "column" : 8
                         }
+                      ],
+                      "is_implicit" : true
+                    },
+                    {
+                      "name" : "S",
+                      "qual_name" : [
+                        "S",
+                        "S<N::S<int> >",
+                        "N"
                       ]
                     },
+                    ["Type" , "struct N::S<struct N::S<int> >"],
+                    10,
                     [
-                    ]
-                  ]]
-                },
-                {
-                  "cxx_ctor_initializers" : [
+                    ],
                     {
-                      "subject" : ["Member" , {
-                        "kind" : "Field",
-                        "decl_pointer" : 11,
-                        "name" : {
-                          "name" : "field",
-                          "qual_name" : [
-                            "field",
-                            "S<S<int> >"
-                          ]
-                        },
-                        "type_ptr" : 12
-                      }],
+                    },
+                    {
+                      "definition_ptr" : 9
+                    },
+                    {
+                    }
+                  ]],
+                  ["FieldDecl" , [
+                    {
+                      "pointer" : 12,
                       "source_range" : [
                         {
+                          "line" : 4,
+                          "column" : 3
+                        },
+                        {
+                          "column" : 5
+                        }
+                      ],
+                      "is_this_declaration_referenced" : true
+                    },
+                    {
+                      "name" : "field",
+                      "qual_name" : [
+                        "field",
+                        "S<N::S<int> >",
+                        "N"
+                      ]
+                    },
+                    {
+                      "type_ptr" : 13
+                    },
+                    {
+                    }
+                  ]],
+                  ["CXXConstructorDecl" , [
+                    {
+                      "pointer" : 14,
+                      "parent_pointer" : 9,
+                      "source_range" : [
+                        {
+                          "line" : 3,
                           "column" : 8
                         },
                         {
                           "column" : 8
                         }
                       ],
-                      "init_expr" : ["CXXConstructExpr" , [
+                      "is_implicit" : true,
+                      "is_used" : true,
+                      "is_this_declaration_referenced" : true
+                    },
+                    {
+                      "name" : "S",
+                      "qual_name" : [
+                        "S",
+                        "S<N::S<int> >",
+                        "N"
+                      ]
+                    },
+                    {
+                      "type_ptr" : 15
+                    },
+                    {
+                      "mangled_name" : "_ZN1N1SINS0_IiEEEC1Ev",
+                      "is_inline" : true,
+                      "decl_ptr_with_body" : 14,
+                      "body" : ["CompoundStmt" , [
                         {
                           "pointer" : 16,
                           "source_range" : [
@@ -308,191 +295,211 @@
                           ]
                         },
                         [
-                        ],
+                        ]
+                      ]]
+                    },
+                    {
+                      "cxx_ctor_initializers" : [
                         {
-                          "type_ptr" : 12
-                        },
-                        {
-                          "decl_ref" : {
-                            "kind" : "CXXConstructor",
-                            "decl_pointer" : 17,
+                          "subject" : ["Member" , {
+                            "kind" : "Field",
+                            "decl_pointer" : 12,
                             "name" : {
-                              "name" : "S",
+                              "name" : "field",
                               "qual_name" : [
-                                "S",
-                                "S<int>"
+                                "field",
+                                "S<N::S<int> >",
+                                "N"
                               ]
                             },
-                            "type_ptr" : 14
-                          }
+                            "type_ptr" : 13
+                          }],
+                          "source_range" : [
+                            {
+                              "column" : 8
+                            },
+                            {
+                              "column" : 8
+                            }
+                          ],
+                          "init_expr" : ["CXXConstructExpr" , [
+                            {
+                              "pointer" : 17,
+                              "source_range" : [
+                                {
+                                  "column" : 8
+                                },
+                                {
+                                  "column" : 8
+                                }
+                              ]
+                            },
+                            [
+                            ],
+                            {
+                              "type_ptr" : 13
+                            },
+                            {
+                              "decl_ref" : {
+                                "kind" : "CXXConstructor",
+                                "decl_pointer" : 18,
+                                "name" : {
+                                  "name" : "S",
+                                  "qual_name" : [
+                                    "S",
+                                    "S<int>",
+                                    "N"
+                                  ]
+                                },
+                                "type_ptr" : 15
+                              }
+                            }
+                          ]]
                         }
-                      ]]
+                      ]
                     }
-                  ]
-                }
-              ]],
-              ["CXXConstructorDecl" , [
-                {
-                  "pointer" : 18,
-                  "parent_pointer" : 8,
-                  "source_range" : [
+                  ]],
+                  ["CXXConstructorDecl" , [
                     {
-                      "column" : 8
+                      "pointer" : 19,
+                      "parent_pointer" : 9,
+                      "source_range" : [
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      ],
+                      "is_implicit" : true
                     },
                     {
-                      "column" : 8
-                    }
-                  ],
-                  "is_implicit" : true
-                },
-                {
-                  "name" : "S",
-                  "qual_name" : [
-                    "S",
-                    "S<S<int> >"
-                  ]
-                },
-                {
-                  "type_ptr" : 19
-                },
-                {
-                  "mangled_name" : "_ZN1SIS_IiEEC1ERKS1_",
-                  "is_inline" : true,
-                  "parameters" : [
-                    ["ParmVarDecl" , [
-                      {
-                        "pointer" : 20,
-                        "source_range" : [
-                          {
-                            "column" : 8
-                          },
-                          {
-                            "column" : 8
-                          }
-                        ]
-                      },
-                      {
-                        "name" : "",
-                        "qual_name" : [
-                          ""
-                        ]
-                      },
-                      {
-                        "type_ptr" : 21
-                      },
-                      {
-                        "parm_index_in_function" : 0
-                      }
-                    ]]
-                  ]
-                },
-                {
-                  "is_constexpr" : true
-                }
-              ]],
-              ["CXXConstructorDecl" , [
-                {
-                  "pointer" : 22,
-                  "parent_pointer" : 8,
-                  "source_range" : [
-                    {
-                      "column" : 8
+                      "name" : "S",
+                      "qual_name" : [
+                        "S",
+                        "S<N::S<int> >",
+                        "N"
+                      ]
                     },
                     {
-                      "column" : 8
-                    }
-                  ],
-                  "is_implicit" : true
-                },
-                {
-                  "name" : "S",
-                  "qual_name" : [
-                    "S",
-                    "S<S<int> >"
-                  ]
-                },
-                {
-                  "type_ptr" : 23
-                },
-                {
-                  "mangled_name" : "_ZN1SIS_IiEEC1EOS1_",
-                  "is_inline" : true,
-                  "parameters" : [
-                    ["ParmVarDecl" , [
-                      {
-                        "pointer" : 24,
-                        "source_range" : [
+                      "type_ptr" : 20
+                    },
+                    {
+                      "mangled_name" : "_ZN1N1SINS0_IiEEEC1ERKS2_",
+                      "is_inline" : true,
+                      "parameters" : [
+                        ["ParmVarDecl" , [
                           {
-                            "column" : 8
+                            "pointer" : 21,
+                            "source_range" : [
+                              {
+                                "column" : 8
+                              },
+                              {
+                                "column" : 8
+                              }
+                            ]
                           },
                           {
-                            "column" : 8
+                            "name" : "",
+                            "qual_name" : [
+                              ""
+                            ]
+                          },
+                          {
+                            "type_ptr" : 22
+                          },
+                          {
+                            "parm_index_in_function" : 0
                           }
-                        ]
-                      },
-                      {
-                        "name" : "",
-                        "qual_name" : [
-                          ""
-                        ]
-                      },
-                      {
-                        "type_ptr" : 25
-                      },
-                      {
-                        "parm_index_in_function" : 0
-                      }
-                    ]]
-                  ]
+                        ]]
+                      ]
+                    },
+                    {
+                      "is_constexpr" : true
+                    }
+                  ]],
+                  ["CXXConstructorDecl" , [
+                    {
+                      "pointer" : 23,
+                      "parent_pointer" : 9,
+                      "source_range" : [
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      ],
+                      "is_implicit" : true
+                    },
+                    {
+                      "name" : "S",
+                      "qual_name" : [
+                        "S",
+                        "S<N::S<int> >",
+                        "N"
+                      ]
+                    },
+                    {
+                      "type_ptr" : 24
+                    },
+                    {
+                      "mangled_name" : "_ZN1N1SINS0_IiEEEC1EOS2_",
+                      "is_inline" : true,
+                      "parameters" : [
+                        ["ParmVarDecl" , [
+                          {
+                            "pointer" : 25,
+                            "source_range" : [
+                              {
+                                "column" : 8
+                              },
+                              {
+                                "column" : 8
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "",
+                            "qual_name" : [
+                              ""
+                            ]
+                          },
+                          {
+                            "type_ptr" : 26
+                          },
+                          {
+                            "parm_index_in_function" : 0
+                          }
+                        ]]
+                      ]
+                    },
+                    {
+                      "is_constexpr" : true
+                    }
+                  ]]
+                ],
+                {
                 },
                 {
-                  "is_constexpr" : true
+                  "definition_ptr" : 9,
+                  "is_complete_definition" : true
+                },
+                {
+                  "is_pod" : true
+                },
+                {
+                  "template_decl" : 8,
+                  "specialization_args" : [
+                    ["Type" , 27]
+                  ]
                 }
               ]]
-            ],
-            {
-            },
-            {
-              "definition_ptr" : 8,
-              "is_complete_definition" : true
-            },
-            {
-              "is_pod" : true
-            },
-            {
-              "template_decl" : 7,
-              "specialization_args" : [
-                ["Type" , 26]
-              ]
-            }
-          ]]
-        ]
-      }
-    ]],
-    ["ClassTemplateSpecializationDecl" , [
-      {
-        "pointer" : 27,
-        "source_range" : [
-          {
-            "line" : 6,
-            "column" : 1
-          },
-          {
-            "line" : 9,
-            "column" : 1
+            ]
           }
-        ]
-      },
-      {
-        "name" : "S",
-        "qual_name" : [
-          "S<int>"
-        ]
-      },
-      ["Type" , "struct S<int>"],
-      26,
-      [
-        ["CXXRecordDecl" , [
+        ]],
+        ["ClassTemplateSpecializationDecl" , [
           {
             "pointer" : 28,
             "source_range" : [
@@ -501,91 +508,138 @@
                 "column" : 1
               },
               {
-                "column" : 8
+                "line" : 10,
+                "column" : 1
               }
-            ],
-            "is_implicit" : true
+            ]
           },
           {
             "name" : "S",
             "qual_name" : [
-              "S",
-              "S<int>"
+              "S<int>",
+              "N"
             ]
           },
-          ["Type" , "struct S<int>"],
-          26,
+          ["Type" , "struct N::S<int>"],
+          27,
           [
-          ],
-          {
-          },
-          {
-            "definition_ptr" : 0
-          },
-          {
-          }
-        ]],
-        ["FieldDecl" , [
-          {
-            "pointer" : 29,
-            "source_range" : [
+            ["CXXRecordDecl" , [
               {
-                "line" : 8,
-                "column" : 3
+                "pointer" : 29,
+                "source_range" : [
+                  {
+                    "line" : 8,
+                    "column" : 1
+                  },
+                  {
+                    "column" : 8
+                  }
+                ],
+                "is_implicit" : true
               },
               {
-                "column" : 7
-              }
-            ],
-            "is_this_declaration_referenced" : true
-          },
-          {
-            "name" : "field",
-            "qual_name" : [
-              "field",
-              "S<int>"
-            ]
-          },
-          {
-            "type_ptr" : 30
-          },
-          {
-          }
-        ]],
-        ["CXXConstructorDecl" , [
-          {
-            "pointer" : 17,
-            "parent_pointer" : 27,
-            "source_range" : [
+                "name" : "S",
+                "qual_name" : [
+                  "S",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              ["Type" , "struct N::S<int>"],
+              27,
+              [
+              ],
               {
-                "line" : 7,
-                "column" : 8
               },
               {
-                "column" : 8
-              }
-            ],
-            "is_implicit" : true,
-            "is_used" : true,
-            "is_this_declaration_referenced" : true
-          },
-          {
-            "name" : "S",
-            "qual_name" : [
-              "S",
-              "S<int>"
-            ]
-          },
-          {
-            "type_ptr" : 14
-          },
-          {
-            "mangled_name" : "_ZN1SIiEC1Ev",
-            "is_inline" : true,
-            "decl_ptr_with_body" : 17,
-            "body" : ["CompoundStmt" , [
+                "definition_ptr" : 0
+              },
               {
-                "pointer" : 31,
+              }
+            ]],
+            ["FieldDecl" , [
+              {
+                "pointer" : 30,
+                "source_range" : [
+                  {
+                    "line" : 9,
+                    "column" : 3
+                  },
+                  {
+                    "column" : 7
+                  }
+                ],
+                "is_this_declaration_referenced" : true
+              },
+              {
+                "name" : "field",
+                "qual_name" : [
+                  "field",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              {
+                "type_ptr" : 31
+              },
+              {
+              }
+            ]],
+            ["CXXConstructorDecl" , [
+              {
+                "pointer" : 18,
+                "parent_pointer" : 28,
+                "source_range" : [
+                  {
+                    "line" : 8,
+                    "column" : 8
+                  },
+                  {
+                    "column" : 8
+                  }
+                ],
+                "is_implicit" : true,
+                "is_used" : true,
+                "is_this_declaration_referenced" : true
+              },
+              {
+                "name" : "S",
+                "qual_name" : [
+                  "S",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              {
+                "type_ptr" : 15
+              },
+              {
+                "mangled_name" : "_ZN1N1SIiEC1Ev",
+                "is_inline" : true,
+                "decl_ptr_with_body" : 18,
+                "body" : ["CompoundStmt" , [
+                  {
+                    "pointer" : 32,
+                    "source_range" : [
+                      {
+                        "column" : 8
+                      },
+                      {
+                        "column" : 8
+                      }
+                    ]
+                  },
+                  [
+                  ]
+                ]]
+              },
+              {
+              }
+            ]],
+            ["CXXDestructorDecl" , [
+              {
+                "pointer" : 33,
+                "parent_pointer" : 28,
                 "source_range" : [
                   {
                     "column" : 8
@@ -593,226 +647,31 @@
                   {
                     "column" : 8
                   }
+                ],
+                "is_implicit" : true
+              },
+              {
+                "name" : "~S",
+                "qual_name" : [
+                  "~S",
+                  "S<int>",
+                  "N"
                 ]
               },
-              [
-              ]
-            ]]
-          },
-          {
-          }
-        ]],
-        ["CXXDestructorDecl" , [
-          {
-            "pointer" : 32,
-            "parent_pointer" : 27,
-            "source_range" : [
               {
-                "column" : 8
+                "type_ptr" : 34
               },
               {
-                "column" : 8
-              }
-            ],
-            "is_implicit" : true
-          },
-          {
-            "name" : "~S",
-            "qual_name" : [
-              "~S",
-              "S<int>"
-            ]
-          },
-          {
-            "type_ptr" : 33
-          },
-          {
-            "mangled_name" : "_ZN1SIiED0Ev",
-            "is_inline" : true
-          },
-          {
-          }
-        ]],
-        ["CXXConstructorDecl" , [
-          {
-            "pointer" : 34,
-            "parent_pointer" : 27,
-            "source_range" : [
-              {
-                "column" : 8
+                "mangled_name" : "_ZN1N1SIiED0Ev",
+                "is_inline" : true
               },
               {
-                "column" : 8
               }
-            ],
-            "is_implicit" : true
-          },
-          {
-            "name" : "S",
-            "qual_name" : [
-              "S",
-              "S<int>"
-            ]
-          },
-          {
-            "type_ptr" : 35
-          },
-          {
-            "mangled_name" : "_ZN1SIiEC1ERKS0_",
-            "is_inline" : true,
-            "parameters" : [
-              ["ParmVarDecl" , [
-                {
-                  "pointer" : 36,
-                  "source_range" : [
-                    {
-                      "column" : 8
-                    },
-                    {
-                      "column" : 8
-                    }
-                  ]
-                },
-                {
-                  "name" : "",
-                  "qual_name" : [
-                    ""
-                  ]
-                },
-                {
-                  "type_ptr" : 37
-                },
-                {
-                  "parm_index_in_function" : 0
-                }
-              ]]
-            ]
-          },
-          {
-            "is_constexpr" : true
-          }
-        ]],
-        ["CXXConstructorDecl" , [
-          {
-            "pointer" : 38,
-            "parent_pointer" : 27,
-            "source_range" : [
+            ]],
+            ["CXXConstructorDecl" , [
               {
-                "column" : 8
-              },
-              {
-                "column" : 8
-              }
-            ],
-            "is_implicit" : true
-          },
-          {
-            "name" : "S",
-            "qual_name" : [
-              "S",
-              "S<int>"
-            ]
-          },
-          {
-            "type_ptr" : 39
-          },
-          {
-            "mangled_name" : "_ZN1SIiEC1EOS0_",
-            "is_inline" : true,
-            "parameters" : [
-              ["ParmVarDecl" , [
-                {
-                  "pointer" : 40,
-                  "source_range" : [
-                    {
-                      "column" : 8
-                    },
-                    {
-                      "column" : 8
-                    }
-                  ]
-                },
-                {
-                  "name" : "",
-                  "qual_name" : [
-                    ""
-                  ]
-                },
-                {
-                  "type_ptr" : 41
-                },
-                {
-                  "parm_index_in_function" : 0
-                }
-              ]]
-            ]
-          },
-          {
-            "is_constexpr" : true
-          }
-        ]],
-        ["CXXMethodDecl" , [
-          {
-            "pointer" : 42,
-            "parent_pointer" : 27,
-            "source_range" : [
-              {
-                "column" : 8
-              },
-              {
-                "column" : 8
-              }
-            ],
-            "is_implicit" : true,
-            "is_used" : true,
-            "is_this_declaration_referenced" : true
-          },
-          {
-            "name" : "operator=",
-            "qual_name" : [
-              "operator=",
-              "S<int>"
-            ]
-          },
-          {
-            "type_ptr" : 43
-          },
-          {
-            "mangled_name" : "_ZN1SIiEaSERKS0_",
-            "is_inline" : true,
-            "parameters" : [
-              ["ParmVarDecl" , [
-                {
-                  "pointer" : 44,
-                  "source_range" : [
-                    {
-                      "column" : 8
-                    },
-                    {
-                      "column" : 8
-                    }
-                  ],
-                  "is_used" : true,
-                  "is_this_declaration_referenced" : true
-                },
-                {
-                  "name" : "",
-                  "qual_name" : [
-                    ""
-                  ]
-                },
-                {
-                  "type_ptr" : 37
-                },
-                {
-                  "parm_index_in_function" : 0
-                }
-              ]]
-            ],
-            "decl_ptr_with_body" : 42,
-            "body" : ["CompoundStmt" , [
-              {
-                "pointer" : 45,
+                "pointer" : 35,
+                "parent_pointer" : 28,
                 "source_range" : [
                   {
                     "column" : 8
@@ -820,10 +679,176 @@
                   {
                     "column" : 8
                   }
+                ],
+                "is_implicit" : true
+              },
+              {
+                "name" : "S",
+                "qual_name" : [
+                  "S",
+                  "S<int>",
+                  "N"
                 ]
               },
-              [
-                ["BinaryOperator" , [
+              {
+                "type_ptr" : 36
+              },
+              {
+                "mangled_name" : "_ZN1N1SIiEC1ERKS1_",
+                "is_inline" : true,
+                "parameters" : [
+                  ["ParmVarDecl" , [
+                    {
+                      "pointer" : 37,
+                      "source_range" : [
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      ]
+                    },
+                    {
+                      "name" : "",
+                      "qual_name" : [
+                        ""
+                      ]
+                    },
+                    {
+                      "type_ptr" : 38
+                    },
+                    {
+                      "parm_index_in_function" : 0
+                    }
+                  ]]
+                ]
+              },
+              {
+                "is_constexpr" : true
+              }
+            ]],
+            ["CXXConstructorDecl" , [
+              {
+                "pointer" : 39,
+                "parent_pointer" : 28,
+                "source_range" : [
+                  {
+                    "column" : 8
+                  },
+                  {
+                    "column" : 8
+                  }
+                ],
+                "is_implicit" : true
+              },
+              {
+                "name" : "S",
+                "qual_name" : [
+                  "S",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              {
+                "type_ptr" : 40
+              },
+              {
+                "mangled_name" : "_ZN1N1SIiEC1EOS1_",
+                "is_inline" : true,
+                "parameters" : [
+                  ["ParmVarDecl" , [
+                    {
+                      "pointer" : 41,
+                      "source_range" : [
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      ]
+                    },
+                    {
+                      "name" : "",
+                      "qual_name" : [
+                        ""
+                      ]
+                    },
+                    {
+                      "type_ptr" : 42
+                    },
+                    {
+                      "parm_index_in_function" : 0
+                    }
+                  ]]
+                ]
+              },
+              {
+                "is_constexpr" : true
+              }
+            ]],
+            ["CXXMethodDecl" , [
+              {
+                "pointer" : 43,
+                "parent_pointer" : 28,
+                "source_range" : [
+                  {
+                    "column" : 8
+                  },
+                  {
+                    "column" : 8
+                  }
+                ],
+                "is_implicit" : true,
+                "is_used" : true,
+                "is_this_declaration_referenced" : true
+              },
+              {
+                "name" : "operator=",
+                "qual_name" : [
+                  "operator=",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              {
+                "type_ptr" : 44
+              },
+              {
+                "mangled_name" : "_ZN1N1SIiEaSERKS1_",
+                "is_inline" : true,
+                "parameters" : [
+                  ["ParmVarDecl" , [
+                    {
+                      "pointer" : 45,
+                      "source_range" : [
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      ],
+                      "is_used" : true,
+                      "is_this_declaration_referenced" : true
+                    },
+                    {
+                      "name" : "",
+                      "qual_name" : [
+                        ""
+                      ]
+                    },
+                    {
+                      "type_ptr" : 38
+                    },
+                    {
+                      "parm_index_in_function" : 0
+                    }
+                  ]]
+                ],
+                "decl_ptr_with_body" : 43,
+                "body" : ["CompoundStmt" , [
                   {
                     "pointer" : 46,
                     "source_range" : [
@@ -836,7 +861,7 @@
                     ]
                   },
                   [
-                    ["MemberExpr" , [
+                    ["BinaryOperator" , [
                       {
                         "pointer" : 47,
                         "source_range" : [
@@ -849,7 +874,7 @@
                         ]
                       },
                       [
-                        ["CXXThisExpr" , [
+                        ["MemberExpr" , [
                           {
                             "pointer" : 48,
                             "source_range" : [
@@ -862,69 +887,9 @@
                             ]
                           },
                           [
-                          ],
-                          {
-                            "type_ptr" : 49
-                          }
-                        ]]
-                      ],
-                      {
-                        "type_ptr" : 30,
-                        "value_kind" : "LValue"
-                      },
-                      {
-                        "is_arrow" : true,
-                        "performs_virtual_dispatch" : true,
-                        "name" : {
-                          "name" : "field",
-                          "qual_name" : [
-                            "field",
-                            "S<int>"
-                          ]
-                        },
-                        "decl_ref" : {
-                          "kind" : "Field",
-                          "decl_pointer" : 29,
-                          "name" : {
-                            "name" : "field",
-                            "qual_name" : [
-                              "field",
-                              "S<int>"
-                            ]
-                          },
-                          "type_ptr" : 30
-                        }
-                      }
-                    ]],
-                    ["ImplicitCastExpr" , [
-                      {
-                        "pointer" : 50,
-                        "source_range" : [
-                          {
-                            "column" : 8
-                          },
-                          {
-                            "column" : 8
-                          }
-                        ]
-                      },
-                      [
-                        ["MemberExpr" , [
-                          {
-                            "pointer" : 51,
-                            "source_range" : [
+                            ["CXXThisExpr" , [
                               {
-                                "column" : 8
-                              },
-                              {
-                                "column" : 8
-                              }
-                            ]
-                          },
-                          [
-                            ["DeclRefExpr" , [
-                              {
-                                "pointer" : 52,
+                                "pointer" : 49,
                                 "source_range" : [
                                   {
                                     "column" : 8
@@ -937,84 +902,148 @@
                               [
                               ],
                               {
-                                "type_ptr" : 26,
-                                "value_kind" : "LValue"
-                              },
-                              {
-                                "decl_ref" : {
-                                  "kind" : "ParmVar",
-                                  "decl_pointer" : 44,
-                                  "name" : {
-                                    "name" : "",
-                                    "qual_name" : [
-                                      ""
-                                    ]
-                                  },
-                                  "type_ptr" : 37
-                                }
+                                "type_ptr" : 50
                               }
                             ]]
                           ],
                           {
-                            "type_ptr" : 30,
+                            "type_ptr" : 31,
                             "value_kind" : "LValue"
                           },
                           {
+                            "is_arrow" : true,
                             "performs_virtual_dispatch" : true,
                             "name" : {
                               "name" : "field",
                               "qual_name" : [
                                 "field",
-                                "S<int>"
+                                "S<int>",
+                                "N"
                               ]
                             },
                             "decl_ref" : {
                               "kind" : "Field",
-                              "decl_pointer" : 29,
+                              "decl_pointer" : 30,
                               "name" : {
                                 "name" : "field",
                                 "qual_name" : [
                                   "field",
-                                  "S<int>"
+                                  "S<int>",
+                                  "N"
                                 ]
                               },
-                              "type_ptr" : 30
+                              "type_ptr" : 31
                             }
+                          }
+                        ]],
+                        ["ImplicitCastExpr" , [
+                          {
+                            "pointer" : 51,
+                            "source_range" : [
+                              {
+                                "column" : 8
+                              },
+                              {
+                                "column" : 8
+                              }
+                            ]
+                          },
+                          [
+                            ["MemberExpr" , [
+                              {
+                                "pointer" : 52,
+                                "source_range" : [
+                                  {
+                                    "column" : 8
+                                  },
+                                  {
+                                    "column" : 8
+                                  }
+                                ]
+                              },
+                              [
+                                ["DeclRefExpr" , [
+                                  {
+                                    "pointer" : 53,
+                                    "source_range" : [
+                                      {
+                                        "column" : 8
+                                      },
+                                      {
+                                        "column" : 8
+                                      }
+                                    ]
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "type_ptr" : 27,
+                                    "value_kind" : "LValue"
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : "ParmVar",
+                                      "decl_pointer" : 45,
+                                      "name" : {
+                                        "name" : "",
+                                        "qual_name" : [
+                                          ""
+                                        ]
+                                      },
+                                      "type_ptr" : 38
+                                    }
+                                  }
+                                ]]
+                              ],
+                              {
+                                "type_ptr" : 31,
+                                "value_kind" : "LValue"
+                              },
+                              {
+                                "performs_virtual_dispatch" : true,
+                                "name" : {
+                                  "name" : "field",
+                                  "qual_name" : [
+                                    "field",
+                                    "S<int>",
+                                    "N"
+                                  ]
+                                },
+                                "decl_ref" : {
+                                  "kind" : "Field",
+                                  "decl_pointer" : 30,
+                                  "name" : {
+                                    "name" : "field",
+                                    "qual_name" : [
+                                      "field",
+                                      "S<int>",
+                                      "N"
+                                    ]
+                                  },
+                                  "type_ptr" : 31
+                                }
+                              }
+                            ]]
+                          ],
+                          {
+                            "type_ptr" : 31
+                          },
+                          {
+                            "cast_kind" : "LValueToRValue",
+                            "base_path" : [
+                            ]
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 30
+                        "type_ptr" : 31,
+                        "value_kind" : "LValue"
                       },
                       {
-                        "cast_kind" : "LValueToRValue",
-                        "base_path" : [
-                        ]
+                        "kind" : "Assign"
                       }
-                    ]]
-                  ],
-                  {
-                    "type_ptr" : 30,
-                    "value_kind" : "LValue"
-                  },
-                  {
-                    "kind" : "Assign"
-                  }
-                ]],
-                ["ReturnStmt" , [
-                  {
-                    "pointer" : 53,
-                    "source_range" : [
-                      {
-                        "column" : 8
-                      },
-                      {
-                        "column" : 8
-                      }
-                    ]
-                  },
-                  [
-                    ["UnaryOperator" , [
+                    ]],
+                    ["ReturnStmt" , [
                       {
                         "pointer" : 54,
                         "source_range" : [
@@ -1027,7 +1056,7 @@
                         ]
                       },
                       [
-                        ["CXXThisExpr" , [
+                        ["UnaryOperator" , [
                           {
                             "pointer" : 55,
                             "source_range" : [
@@ -1040,259 +1069,217 @@
                             ]
                           },
                           [
+                            ["CXXThisExpr" , [
+                              {
+                                "pointer" : 56,
+                                "source_range" : [
+                                  {
+                                    "column" : 8
+                                  },
+                                  {
+                                    "column" : 8
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "type_ptr" : 50
+                              }
+                            ]]
                           ],
                           {
-                            "type_ptr" : 49
+                            "type_ptr" : 27,
+                            "value_kind" : "LValue"
+                          },
+                          {
+                            "kind" : "Deref"
                           }
                         ]]
-                      ],
-                      {
-                        "type_ptr" : 26,
-                        "value_kind" : "LValue"
-                      },
-                      {
-                        "kind" : "Deref"
-                      }
+                      ]
                     ]]
                   ]
                 ]]
-              ]
-            ]]
-          },
-          {
-          }
-        ]],
-        ["CXXMethodDecl" , [
-          {
-            "pointer" : 56,
-            "parent_pointer" : 27,
-            "source_range" : [
-              {
-                "column" : 8
               },
               {
               }
-            ],
-            "is_implicit" : true
+            ]],
+            ["CXXMethodDecl" , [
+              {
+                "pointer" : 57,
+                "parent_pointer" : 28,
+                "source_range" : [
+                  {
+                    "column" : 8
+                  },
+                  {
+                  }
+                ],
+                "is_implicit" : true
+              },
+              {
+                "name" : "operator=",
+                "qual_name" : [
+                  "operator=",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              {
+                "type_ptr" : 58
+              },
+              {
+                "mangled_name" : "_ZN1N1SIiEaSEOS1_",
+                "is_inline" : true,
+                "parameters" : [
+                  ["ParmVarDecl" , [
+                    {
+                      "pointer" : 59,
+                      "source_range" : [
+                        {
+                          "column" : 8
+                        },
+                        {
+                          "column" : 8
+                        }
+                      ]
+                    },
+                    {
+                      "name" : "",
+                      "qual_name" : [
+                        ""
+                      ]
+                    },
+                    {
+                      "type_ptr" : 42
+                    },
+                    {
+                      "parm_index_in_function" : 0
+                    }
+                  ]]
+                ]
+              },
+              {
+              }
+            ]]
+          ],
+          {
           },
           {
-            "name" : "operator=",
-            "qual_name" : [
-              "operator=",
-              "S<int>"
+            "definition_ptr" : 28,
+            "is_complete_definition" : true
+          },
+          {
+            "is_pod" : true,
+            "destructor" : {
+              "kind" : "CXXDestructor",
+              "decl_pointer" : 33,
+              "name" : {
+                "name" : "~S",
+                "qual_name" : [
+                  "~S",
+                  "S<int>",
+                  "N"
+                ]
+              },
+              "type_ptr" : 34
+            }
+          },
+          {
+            "template_decl" : 8,
+            "specialization_args" : [
+              ["Type" , 31]
+            ]
+          }
+        ]],
+        ["FunctionDecl" , [
+          {
+            "pointer" : 60,
+            "source_range" : [
+              {
+                "line" : 12,
+                "column" : 1
+              },
+              {
+                "line" : 15,
+                "column" : 1
+              }
             ]
           },
           {
-            "type_ptr" : 57
+            "name" : "test",
+            "qual_name" : [
+              "test",
+              "N"
+            ]
           },
           {
-            "mangled_name" : "_ZN1SIiEaSEOS0_",
-            "is_inline" : true,
+            "type_ptr" : 61
+          },
+          {
+            "mangled_name" : "_ZN1N4testENS_1SIiEE",
             "parameters" : [
               ["ParmVarDecl" , [
                 {
-                  "pointer" : 58,
+                  "pointer" : 62,
                   "source_range" : [
                     {
-                      "column" : 8
+                      "line" : 12,
+                      "column" : 11
                     },
                     {
-                      "column" : 8
+                      "column" : 18
                     }
-                  ]
+                  ],
+                  "is_used" : true,
+                  "is_this_declaration_referenced" : true
                 },
                 {
-                  "name" : "",
+                  "name" : "p",
                   "qual_name" : [
-                    ""
+                    "p"
                   ]
                 },
                 {
-                  "type_ptr" : 41
+                  "type_ptr" : 63
                 },
                 {
                   "parm_index_in_function" : 0
                 }
               ]]
-            ]
-          },
-          {
-          }
-        ]]
-      ],
-      {
-      },
-      {
-        "definition_ptr" : 27,
-        "is_complete_definition" : true
-      },
-      {
-        "is_pod" : true,
-        "destructor" : {
-          "kind" : "CXXDestructor",
-          "decl_pointer" : 32,
-          "name" : {
-            "name" : "~S",
-            "qual_name" : [
-              "~S",
-              "S<int>"
-            ]
-          },
-          "type_ptr" : 33
-        }
-      },
-      {
-        "template_decl" : 7,
-        "specialization_args" : [
-          ["Type" , 30]
-        ]
-      }
-    ]],
-    ["FunctionDecl" , [
-      {
-        "pointer" : 59,
-        "source_range" : [
-          {
-            "line" : 11,
-            "column" : 1
-          },
-          {
-            "line" : 14,
-            "column" : 1
-          }
-        ]
-      },
-      {
-        "name" : "test",
-        "qual_name" : [
-          "test"
-        ]
-      },
-      {
-        "type_ptr" : 60
-      },
-      {
-        "mangled_name" : "_Z4test1SIiE",
-        "parameters" : [
-          ["ParmVarDecl" , [
-            {
-              "pointer" : 61,
-              "source_range" : [
-                {
-                  "line" : 11,
-                  "column" : 11
-                },
-                {
-                  "column" : 18
-                }
-              ],
-              "is_used" : true,
-              "is_this_declaration_referenced" : true
-            },
-            {
-              "name" : "p",
-              "qual_name" : [
-                "p"
-              ]
-            },
-            {
-              "type_ptr" : 62
-            },
-            {
-              "parm_index_in_function" : 0
-            }
-          ]]
-        ],
-        "decl_ptr_with_body" : 59,
-        "body" : ["CompoundStmt" , [
-          {
-            "pointer" : 63,
-            "source_range" : [
-              {
-                "column" : 21
-              },
-              {
-                "line" : 14,
-                "column" : 1
-              }
-            ]
-          },
-          [
-            ["DeclStmt" , [
+            ],
+            "decl_ptr_with_body" : 60,
+            "body" : ["CompoundStmt" , [
               {
                 "pointer" : 64,
                 "source_range" : [
                   {
-                    "line" : 12,
-                    "column" : 3
+                    "column" : 21
                   },
                   {
-                    "column" : 20
+                    "line" : 15,
+                    "column" : 1
                   }
                 ]
               },
               [
-                ["CXXConstructExpr" , [
+                ["DeclStmt" , [
                   {
                     "pointer" : 65,
                     "source_range" : [
                       {
-                        "column" : 17
+                        "line" : 13,
+                        "column" : 3
                       },
                       {
-                        "column" : 17
+                        "column" : 20
                       }
                     ]
                   },
                   [
-                  ],
-                  {
-                    "type_ptr" : 66
-                  },
-                  {
-                    "decl_ref" : {
-                      "kind" : "CXXConstructor",
-                      "decl_pointer" : 13,
-                      "name" : {
-                        "name" : "S",
-                        "qual_name" : [
-                          "S",
-                          "S<S<int> >"
-                        ]
-                      },
-                      "type_ptr" : 14
-                    }
-                  }
-                ]]
-              ],
-              [
-                ["VarDecl" , [
-                  {
-                    "pointer" : 67,
-                    "source_range" : [
+                    ["CXXConstructExpr" , [
                       {
-                        "column" : 3
-                      },
-                      {
-                        "column" : 17
-                      }
-                    ],
-                    "is_used" : true,
-                    "is_this_declaration_referenced" : true
-                  },
-                  {
-                    "name" : "val",
-                    "qual_name" : [
-                      "val"
-                    ]
-                  },
-                  {
-                    "type_ptr" : 66
-                  },
-                  {
-                    "init_expr" : ["CXXConstructExpr" , [
-                      {
-                        "pointer" : 65,
+                        "pointer" : 66,
                         "source_range" : [
                           {
                             "column" : 17
@@ -1305,55 +1292,102 @@
                       [
                       ],
                       {
-                        "type_ptr" : 66
+                        "type_ptr" : 67
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : 13,
+                          "decl_pointer" : 14,
                           "name" : {
                             "name" : "S",
                             "qual_name" : [
                               "S",
-                              "S<S<int> >"
+                              "S<N::S<int> >",
+                              "N"
                             ]
                           },
-                          "type_ptr" : 14
+                          "type_ptr" : 15
                         }
                       }
                     ]]
-                  }
-                ]]
-              ]
-            ]],
-            ["CXXOperatorCallExpr" , [
-              {
-                "pointer" : 68,
-                "source_range" : [
-                  {
-                    "line" : 13,
-                    "column" : 3
-                  },
-                  {
-                    "column" : 15
-                  }
-                ]
-              },
-              [
-                ["ImplicitCastExpr" , [
+                  ],
+                  [
+                    ["VarDecl" , [
+                      {
+                        "pointer" : 68,
+                        "source_range" : [
+                          {
+                            "column" : 3
+                          },
+                          {
+                            "column" : 17
+                          }
+                        ],
+                        "is_used" : true,
+                        "is_this_declaration_referenced" : true
+                      },
+                      {
+                        "name" : "val",
+                        "qual_name" : [
+                          "val"
+                        ]
+                      },
+                      {
+                        "type_ptr" : 67
+                      },
+                      {
+                        "init_expr" : ["CXXConstructExpr" , [
+                          {
+                            "pointer" : 66,
+                            "source_range" : [
+                              {
+                                "column" : 17
+                              },
+                              {
+                                "column" : 17
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "type_ptr" : 67
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : "CXXConstructor",
+                              "decl_pointer" : 14,
+                              "name" : {
+                                "name" : "S",
+                                "qual_name" : [
+                                  "S",
+                                  "S<N::S<int> >",
+                                  "N"
+                                ]
+                              },
+                              "type_ptr" : 15
+                            }
+                          }
+                        ]]
+                      }
+                    ]]
+                  ]
+                ]],
+                ["CXXOperatorCallExpr" , [
                   {
                     "pointer" : 69,
                     "source_range" : [
                       {
-                        "column" : 13
+                        "line" : 14,
+                        "column" : 3
                       },
                       {
-                        "column" : 13
+                        "column" : 15
                       }
                     ]
                   },
                   [
-                    ["DeclRefExpr" , [
+                    ["ImplicitCastExpr" , [
                       {
                         "pointer" : 70,
                         "source_range" : [
@@ -1366,50 +1400,51 @@
                         ]
                       },
                       [
-                      ],
-                      {
-                        "type_ptr" : 71,
-                        "value_kind" : "LValue"
-                      },
-                      {
-                        "decl_ref" : {
-                          "kind" : "CXXMethod",
-                          "decl_pointer" : 42,
-                          "name" : {
-                            "name" : "operator=",
-                            "qual_name" : [
-                              "operator=",
-                              "S<int>"
+                        ["DeclRefExpr" , [
+                          {
+                            "pointer" : 71,
+                            "source_range" : [
+                              {
+                                "column" : 13
+                              },
+                              {
+                                "column" : 13
+                              }
                             ]
                           },
-                          "type_ptr" : 43
-                        }
-                      }
-                    ]]
-                  ],
-                  {
-                    "type_ptr" : 72
-                  },
-                  {
-                    "cast_kind" : "FunctionToPointerDecay",
-                    "base_path" : [
-                    ]
-                  }
-                ]],
-                ["MemberExpr" , [
-                  {
-                    "pointer" : 73,
-                    "source_range" : [
+                          [
+                          ],
+                          {
+                            "type_ptr" : 72,
+                            "value_kind" : "LValue"
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : "CXXMethod",
+                              "decl_pointer" : 43,
+                              "name" : {
+                                "name" : "operator=",
+                                "qual_name" : [
+                                  "operator=",
+                                  "S<int>",
+                                  "N"
+                                ]
+                              },
+                              "type_ptr" : 44
+                            }
+                          }
+                        ]]
+                      ],
                       {
-                        "column" : 3
+                        "type_ptr" : 73
                       },
                       {
-                        "column" : 7
+                        "cast_kind" : "FunctionToPointerDecay",
+                        "base_path" : [
+                        ]
                       }
-                    ]
-                  },
-                  [
-                    ["DeclRefExpr" , [
+                    ]],
+                    ["MemberExpr" , [
                       {
                         "pointer" : 74,
                         "source_range" : [
@@ -1417,72 +1452,74 @@
                             "column" : 3
                           },
                           {
-                            "column" : 3
+                            "column" : 7
                           }
                         ]
                       },
                       [
+                        ["DeclRefExpr" , [
+                          {
+                            "pointer" : 75,
+                            "source_range" : [
+                              {
+                                "column" : 3
+                              },
+                              {
+                                "column" : 3
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "type_ptr" : 67,
+                            "value_kind" : "LValue"
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : "Var",
+                              "decl_pointer" : 68,
+                              "name" : {
+                                "name" : "val",
+                                "qual_name" : [
+                                  "val"
+                                ]
+                              },
+                              "type_ptr" : 67
+                            }
+                          }
+                        ]]
                       ],
                       {
-                        "type_ptr" : 66,
+                        "type_ptr" : 13,
                         "value_kind" : "LValue"
                       },
                       {
+                        "performs_virtual_dispatch" : true,
+                        "name" : {
+                          "name" : "field",
+                          "qual_name" : [
+                            "field",
+                            "S<N::S<int> >",
+                            "N"
+                          ]
+                        },
                         "decl_ref" : {
-                          "kind" : "Var",
-                          "decl_pointer" : 67,
+                          "kind" : "Field",
+                          "decl_pointer" : 12,
                           "name" : {
-                            "name" : "val",
+                            "name" : "field",
                             "qual_name" : [
-                              "val"
+                              "field",
+                              "S<N::S<int> >",
+                              "N"
                             ]
                           },
-                          "type_ptr" : 66
+                          "type_ptr" : 13
                         }
                       }
-                    ]]
-                  ],
-                  {
-                    "type_ptr" : 12,
-                    "value_kind" : "LValue"
-                  },
-                  {
-                    "performs_virtual_dispatch" : true,
-                    "name" : {
-                      "name" : "field",
-                      "qual_name" : [
-                        "field",
-                        "S<S<int> >"
-                      ]
-                    },
-                    "decl_ref" : {
-                      "kind" : "Field",
-                      "decl_pointer" : 11,
-                      "name" : {
-                        "name" : "field",
-                        "qual_name" : [
-                          "field",
-                          "S<S<int> >"
-                        ]
-                      },
-                      "type_ptr" : 12
-                    }
-                  }
-                ]],
-                ["ImplicitCastExpr" , [
-                  {
-                    "pointer" : 75,
-                    "source_range" : [
-                      {
-                        "column" : 15
-                      },
-                      {
-                        "column" : 15
-                      }
-                    ]
-                  },
-                  [
-                    ["DeclRefExpr" , [
+                    ]],
+                    ["ImplicitCastExpr" , [
                       {
                         "pointer" : 76,
                         "source_range" : [
@@ -1495,49 +1532,68 @@
                         ]
                       },
                       [
+                        ["DeclRefExpr" , [
+                          {
+                            "pointer" : 77,
+                            "source_range" : [
+                              {
+                                "column" : 15
+                              },
+                              {
+                                "column" : 15
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "type_ptr" : 63,
+                            "value_kind" : "LValue"
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : "ParmVar",
+                              "decl_pointer" : 62,
+                              "name" : {
+                                "name" : "p",
+                                "qual_name" : [
+                                  "p"
+                                ]
+                              },
+                              "type_ptr" : 63
+                            }
+                          }
+                        ]]
                       ],
                       {
-                        "type_ptr" : 62,
+                        "type_ptr" : 27,
                         "value_kind" : "LValue"
                       },
                       {
-                        "decl_ref" : {
-                          "kind" : "ParmVar",
-                          "decl_pointer" : 61,
-                          "name" : {
-                            "name" : "p",
-                            "qual_name" : [
-                              "p"
-                            ]
-                          },
-                          "type_ptr" : 62
-                        }
+                        "cast_kind" : "NoOp",
+                        "base_path" : [
+                        ]
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 26,
+                    "type_ptr" : 27,
                     "value_kind" : "LValue"
-                  },
-                  {
-                    "cast_kind" : "NoOp",
-                    "base_path" : [
-                    ]
                   }
                 ]]
-              ],
-              {
-                "type_ptr" : 26,
-                "value_kind" : "LValue"
-              }
+              ]
             ]]
-          ]
+          }
         ]]
+      ],
+      {
+      },
+      {
       }
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : 77,
+        "pointer" : 78,
         "source_range" : [
           {
           },
@@ -1553,7 +1609,7 @@
         ]
       },
       ["Type" , "id"],
-      78,
+      79,
       {
       }
     ]]
@@ -1566,182 +1622,177 @@
     "types" : [
       ["BuiltinType" , [
         {
-          "pointer" : 79
+          "pointer" : 80
         },
         "Void"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 80
+          "pointer" : 81
         },
         "Bool"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 81
+          "pointer" : 82
         },
         "Char_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 82
+          "pointer" : 83
         },
         "SChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 83
+          "pointer" : 84
         },
         "Short"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 30
+          "pointer" : 31
         },
         "Int"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 84
+          "pointer" : 85
         },
         "Long"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 85
+          "pointer" : 86
         },
         "LongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 86
+          "pointer" : 87
         },
         "UChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 87
+          "pointer" : 88
         },
         "UShort"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 88
+          "pointer" : 89
         },
         "UInt"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 89
+          "pointer" : 90
         },
         "ULong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 90
+          "pointer" : 91
         },
         "ULongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 91
+          "pointer" : 92
         },
         "Float"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 92
+          "pointer" : 93
         },
         "Double"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 93
+          "pointer" : 94
         },
         "LongDouble"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 94
+          "pointer" : 95
         },
         "Float128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 95
+          "pointer" : 96
         },
         "Int128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 96
+          "pointer" : 97
         },
         "UInt128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 97
+          "pointer" : 98
         },
         "WChar_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 98
+          "pointer" : 99
         },
         "Char16"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 99
+          "pointer" : 100
         },
         "Char32"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 100
+          "pointer" : 101
         },
         "Dependent"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 101
+          "pointer" : 102
         },
         "Overload"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 102
+          "pointer" : 103
         },
         "BoundMember"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 103
+          "pointer" : 104
         },
         "PseudoObject"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 104
+          "pointer" : 105
         },
         "UnknownAny"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 105
+          "pointer" : 106
         },
         "ARCUnbridgedCast"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 106
+          "pointer" : 107
         },
         "BuiltinFn"
-      ]],
-      ["ComplexType" , [
-        {
-          "pointer" : 107
-        }
       ]],
       ["ComplexType" , [
         {
@@ -1758,65 +1809,61 @@
           "pointer" : 110
         }
       ]],
-      ["BuiltinType" , [
+      ["ComplexType" , [
         {
           "pointer" : 111
-        },
-        "ObjCId"
+        }
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 112
         },
-        "ObjCClass"
+        "ObjCId"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 113
         },
+        "ObjCClass"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 114
+        },
         "ObjCSel"
       ]],
       ["PointerType" , [
         {
-          "pointer" : 114
-        },
-        {
-          "type_ptr" : 79
-        }
-      ]],
-      ["BuiltinType" , [
-        {
           "pointer" : 115
         },
-        "NullPtr"
+        {
+          "type_ptr" : 80
+        }
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 116
         },
+        "NullPtr"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 117
+        },
         "Half"
       ]],
       ["RecordType" , [
         {
-          "pointer" : 117
+          "pointer" : 118
         },
-        118
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 119
-        },
-        {
-          "type_ptr" : 30,
-          "is_const" : true
-        }
+        119
       ]],
       ["PointerType" , [
         {
           "pointer" : 120
         },
         {
-          "type_ptr" : 81,
+          "type_ptr" : 31,
           "is_const" : true
         }
       ]],
@@ -1825,33 +1872,37 @@
           "pointer" : 121
         },
         {
-          "type_ptr" : 81
+          "type_ptr" : 82,
+          "is_const" : true
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 122
+        },
+        {
+          "type_ptr" : 82
         }
       ]],
       ["RecordType" , [
         {
-          "pointer" : 122
+          "pointer" : 123
         },
-        123
+        124
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 124
-        },
-        122,
-        1
-      ]],
-      ["TemplateTypeParmType" , [
-        {
           "pointer" : 125
-        }
+        },
+        123,
+        1
       ]],
       ["TemplateTypeParmType" , [
         {
           "pointer" : 126
         }
       ]],
-      ["TemplateSpecializationType" , [
+      ["TemplateTypeParmType" , [
         {
           "pointer" : 127
         }
@@ -1861,87 +1912,82 @@
           "pointer" : 128
         }
       ]],
-      ["InjectedClassNameType" , [
+      ["TemplateSpecializationType" , [
         {
           "pointer" : 129
         }
       ]],
+      ["InjectedClassNameType" , [
+        {
+          "pointer" : 130
+        }
+      ]],
       ["RecordType" , [
         {
-          "pointer" : 26
+          "pointer" : 27
         },
-        27
+        28
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 130,
-          "desugared_type" : 26
+          "pointer" : 131,
+          "desugared_type" : 27
         }
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 62,
-          "desugared_type" : 26
+          "pointer" : 63,
+          "desugared_type" : 27
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 131
+          "pointer" : 132
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            26
+            27
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 60
+          "pointer" : 61
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            62
+            63
           ]
         }
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 132,
-          "desugared_type" : 26
+          "pointer" : 133,
+          "desugared_type" : 27
         }
       ]],
       ["RecordType" , [
         {
-          "pointer" : 9
+          "pointer" : 10
         },
-        8
+        9
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 66,
-          "desugared_type" : 9
+          "pointer" : 67,
+          "desugared_type" : 10
         }
       ]],
       ["SubstTemplateTypeParmType" , [
         {
-          "pointer" : 12,
-          "desugared_type" : 26
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
-          "pointer" : 133
-        },
-        {
-          "return_type" : 79
-        },
-        {
+          "pointer" : 13,
+          "desugared_type" : 27
         }
       ]],
       ["FunctionProtoType" , [
@@ -1949,7 +1995,7 @@
           "pointer" : 134
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
         }
@@ -1959,37 +2005,9 @@
           "pointer" : 135
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
-          "pointer" : 33
-        },
-        {
-          "return_type" : 79
-        },
-        {
-        }
-      ]],
-      ["LValueReferenceType" , [
-        {
-          "pointer" : 21
-        },
-        {
-          "type_ptr" : 9,
-          "is_const" : true
-        }
-      ]],
-      ["LValueReferenceType" , [
-        {
-          "pointer" : 37
-        },
-        {
-          "type_ptr" : 26,
-          "is_const" : true
         }
       ]],
       ["FunctionProtoType" , [
@@ -1997,33 +2015,37 @@
           "pointer" : 136
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
-          "params_type" : [
-            37
-          ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 35
+          "pointer" : 34
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
-          "params_type" : [
-            37
-          ]
         }
       ]],
-      ["RValueReferenceType" , [
+      ["LValueReferenceType" , [
         {
-          "pointer" : 41
+          "pointer" : 22
         },
         {
-          "type_ptr" : 26
+          "type_ptr" : 10,
+          "is_const" : true
+        }
+      ]],
+      ["LValueReferenceType" , [
+        {
+          "pointer" : 38
+        },
+        {
+          "type_ptr" : 27,
+          "is_const" : true
         }
       ]],
       ["FunctionProtoType" , [
@@ -2031,25 +2053,33 @@
           "pointer" : 137
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            41
+            38
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 39
+          "pointer" : 36
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            41
+            38
           ]
+        }
+      ]],
+      ["RValueReferenceType" , [
+        {
+          "pointer" : 42
+        },
+        {
+          "type_ptr" : 27
         }
       ]],
       ["FunctionProtoType" , [
@@ -2057,33 +2087,25 @@
           "pointer" : 138
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            21
+            42
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 19
+          "pointer" : 40
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            21
+            42
           ]
-        }
-      ]],
-      ["RValueReferenceType" , [
-        {
-          "pointer" : 25
-        },
-        {
-          "type_ptr" : 9
         }
       ]],
       ["FunctionProtoType" , [
@@ -2091,69 +2113,77 @@
           "pointer" : 139
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            25
+            22
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 23
+          "pointer" : 20
         },
         {
-          "return_type" : 79
+          "return_type" : 80
         },
         {
           "params_type" : [
-            25
+            22
+          ]
+        }
+      ]],
+      ["RValueReferenceType" , [
+        {
+          "pointer" : 26
+        },
+        {
+          "type_ptr" : 10
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 140
+        },
+        {
+          "return_type" : 80
+        },
+        {
+          "params_type" : [
+            26
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 14
+          "pointer" : 24
         },
         {
-          "return_type" : 79
+          "return_type" : 80
+        },
+        {
+          "params_type" : [
+            26
+          ]
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 15
+        },
+        {
+          "return_type" : 80
         },
         {
         }
       ]],
       ["LValueReferenceType" , [
         {
-          "pointer" : 140
-        },
-        {
-          "type_ptr" : 26
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
           "pointer" : 141
         },
         {
-          "return_type" : 140
-        },
-        {
-          "params_type" : [
-            37
-          ]
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
-          "pointer" : 71
-        },
-        {
-          "return_type" : 140
-        },
-        {
-          "params_type" : [
-            37
-          ]
+          "type_ptr" : 27
         }
       ]],
       ["FunctionProtoType" , [
@@ -2161,98 +2191,124 @@
           "pointer" : 142
         },
         {
-          "return_type" : 140
+          "return_type" : 141
         },
         {
           "params_type" : [
-            41
+            38
           ]
         }
       ]],
       ["FunctionProtoType" , [
-        {
-          "pointer" : 57
-        },
-        {
-          "return_type" : 140
-        },
-        {
-          "params_type" : [
-            41
-          ]
-        }
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 49
-        },
-        {
-          "type_ptr" : 26
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
-          "pointer" : 43
-        },
-        {
-          "return_type" : 140
-        },
-        {
-          "params_type" : [
-            37
-          ]
-        }
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 143
-        },
-        {
-          "type_ptr" : 141
-        }
-      ]],
-      ["PointerType" , [
         {
           "pointer" : 72
         },
         {
-          "type_ptr" : 71
+          "return_type" : 141
+        },
+        {
+          "params_type" : [
+            38
+          ]
         }
       ]],
-      ["ObjCObjectType" , [
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 143
+        },
+        {
+          "return_type" : 141
+        },
+        {
+          "params_type" : [
+            42
+          ]
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 58
+        },
+        {
+          "return_type" : 141
+        },
+        {
+          "params_type" : [
+            42
+          ]
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 50
+        },
+        {
+          "type_ptr" : 27
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 44
+        },
+        {
+          "return_type" : 141
+        },
+        {
+          "params_type" : [
+            38
+          ]
+        }
+      ]],
+      ["PointerType" , [
         {
           "pointer" : 144
         },
         {
-          "base_type" : 111
+          "type_ptr" : 142
         }
       ]],
-      ["ObjCObjectPointerType" , [
+      ["PointerType" , [
+        {
+          "pointer" : 73
+        },
+        {
+          "type_ptr" : 72
+        }
+      ]],
+      ["ObjCObjectType" , [
         {
           "pointer" : 145
         },
         {
-          "type_ptr" : 144
+          "base_type" : 112
         }
       ]],
-      ["TypedefType" , [
+      ["ObjCObjectPointerType" , [
         {
-          "pointer" : 146,
-          "desugared_type" : 145
+          "pointer" : 146
         },
         {
-          "child_type" : 145,
-          "decl_ptr" : 147
+          "type_ptr" : 145
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 78,
-          "desugared_type" : 145
+          "pointer" : 147,
+          "desugared_type" : 146
         },
         {
           "child_type" : 146,
-          "decl_ptr" : 77
+          "decl_ptr" : 148
+        }
+      ]],
+      ["TypedefType" , [
+        {
+          "pointer" : 79,
+          "desugared_type" : 146
+        },
+        {
+          "child_type" : 147,
+          "decl_ptr" : 78
         }
       ]],
       ["NoneType" , [

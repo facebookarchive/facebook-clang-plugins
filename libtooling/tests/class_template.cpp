@@ -1,3 +1,4 @@
+namespace N {
 template <class T>
 struct S {
   T field;
@@ -11,4 +12,5 @@ struct S<int> {
 void test(S<int> p) {
   S< S<int>   > val;
   val.field = p;
+}
 }

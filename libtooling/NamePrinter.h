@@ -179,8 +179,10 @@ PrintingPolicy NamePrinter<ATDWriter>::getPrintingPolicy() {
   PrintingPolicy Policy(LO);
   // print tag types
   Policy.IncludeTagDefinition = false;
-  // don't print fully qualified names - we do it ourselves
-  Policy.SuppressScope = true;
+  // print fully qualified names - this is needed by PrintTemplateArgumentList
+  Policy.SuppressScope = false;
+  // don't print inline and anonymous namespaces
+  Policy.SuppressUnwrittenScope = true;
   // print locations of anonymous tags
   Policy.AnonymousTagLocations = true;
   // don't add 'struct' inside a name regardless of language
