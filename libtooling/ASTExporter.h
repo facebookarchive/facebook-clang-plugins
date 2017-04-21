@@ -492,9 +492,7 @@ void ASTExporter<ATDWriter>::dumpPointer(const void *Ptr) {
   writePointer(OF, Options.withPointers, Ptr);
 }
 
-//@atd type source_file = string wrap <ocaml t="Clang_ast_types.src_file"
-//@atd                              wrap="Clang_ast_types.source_file_of_string"
-//@atd                              unwrap="Clang_ast_types.string_of_source_file">
+//@atd type source_file = string
 //@atd type source_location = {
 //@atd   ?file <ocaml mutable> : source_file option;
 //@atd   ?line <ocaml mutable> : int option;
@@ -4471,9 +4469,7 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
   }
 }
 
-//@atd type type_ptr = int wrap <ocaml t="Clang_ast_types.t_ptr"
-//@atd                              wrap="Clang_ast_types.pointer_to_type_ptr"
-//@atd                              unwrap="Clang_ast_types.type_ptr_to_pointer">
+//@atd type type_ptr = int wrap <ocaml module="Clang_ast_types.TypePtr">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpPointerToType(const QualType &qt) {
   const Type *T = qt.getTypePtrOrNull();

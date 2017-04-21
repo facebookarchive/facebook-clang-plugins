@@ -8,20 +8,14 @@
  *
  *)
 
-(* Default implementation to add more structure to some fields *)
-(* Replace this file to get different implementation *)
-
 (* Type pointers *)
-type t_ptr = [ | `TPtr of int ]
+module TypePtr = struct
 
-let pointer_to_type_ptr raw = `TPtr raw
+(* extensible type to allow users to specify more variants *)
+type t = ..
+type t += Ptr of int
 
-let type_ptr_to_pointer type_ptr = match type_ptr with `TPtr raw -> raw
+let wrap x = Ptr x
+let unwrap = function | Ptr x -> x | _ -> raise (invalid_arg "Unknown variant type")
 
-(* Source files *)
-
-type src_file = string
-
-let source_file_of_string path = path
-
-let string_of_source_file path = path
+end
