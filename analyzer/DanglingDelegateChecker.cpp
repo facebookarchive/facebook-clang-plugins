@@ -208,7 +208,7 @@ static void verifyAndReportDangerousProperties(
     if (clearedProperties.find(*it) == clearedProperties.end()) {
       llvm::SmallString<128> buf;
       llvm::raw_svector_ostream os(buf);
-      StringRef className;
+      std::string className;
       const ObjCObjectPointerType *classType =
           dyn_cast_or_null<ObjCObjectPointerType>(ivarType.getTypePtr());
       if (classType && classType->getInterfaceDecl()) {
@@ -572,7 +572,7 @@ void DanglingDelegateChecker::checkPostObjCMessage(
   // What follows detects when we correctly clear the references inside an ivar
   // This is dual to FactFinder::VisitObjCMessageExpr
 
-  StringRef selectorStr = expr->getSelector().getAsString();
+  std::string selectorStr = expr->getSelector().getAsString();
   // do we have a first argument equal to self?
   bool paramIsSelf = isObjCSelfExpr(getArgOfObjCMessageExpr(*expr, 0));
 
@@ -609,9 +609,9 @@ void DanglingDelegateChecker::checkPostObjCMessage(
         ivarState._assignPropertyWasCleared.erase(propName);
       }
 
-    } else if (paramIsSelf && selectorStr.startswith("removeTarget:")) {
+    } else if (paramIsSelf && StringRef(selectorStr).startswith("removeTarget:")) {
       ivarState._targetWasCleared = true;
-    } else if (paramIsSelf && selectorStr.startswith("removeObserver:")) {
+    } else if (paramIsSelf && StringRef(selectorStr).startswith("removeObserver:")) {
       ivarState._observerWasCleared = true;
     } else {
       // return to avoid transitioning to a new identical state

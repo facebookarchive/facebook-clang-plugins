@@ -52,7 +52,7 @@ void WalkAST::VisitObjCMessageExpr(const ObjCMessageExpr *ME) {
   const ObjCInterfaceDecl *ID = ME->getReceiverInterface();
 
   if (ID) {
-    StringRef receiverClassName = ID->getIdentifier()->getName();
+    std::string receiverClassName = ID->getIdentifier()->getName();
     Selector sel = ME->getSelector();
 
     if (receiverClassName == "NSInvocation" &&

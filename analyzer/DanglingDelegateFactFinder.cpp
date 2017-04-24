@@ -59,7 +59,7 @@ void FactFinder::VisitMethodDecl() {
                                              "_viewdidload"};
 
   assert(_methDecl);
-  StringRef methName = _methDecl->getNameAsString();
+  std::string methName = _methDecl->getNameAsString();
   if (_methDecl->getMethodFamily() == OMF_init) {
     _facts._pseudoInitMethods.insert(methName);
     return;
@@ -72,7 +72,7 @@ void FactFinder::VisitMethodDecl() {
   for (unsigned i = 0;
        i < sizeof(pseudoInitPrefixes) / sizeof(pseudoInitPrefixes[0]);
        i++) {
-    if (methName.startswith_lower(pseudoInitPrefixes[i])) {
+    if (StringRef(methName).startswith_lower(pseudoInitPrefixes[i])) {
       _facts._pseudoInitMethods.insert(methName);
       return;
     }
@@ -105,21 +105,20 @@ void FactFinder::VisitObjCMessageExpr(const ObjCMessageExpr *expr) {
     return;
   }
 
-  StringRef selectorStr = expr->getSelector().getAsString();
+  std::string selectorStr = expr->getSelector().getAsString();
 
   // CASE 1: is the receiver an ivar?
   const ObjCIvarDecl *ivarDecl = matchIvarLValueExpression(*receiver);
   if (ivarDecl) {
-
     // try to find an assign property we may be storing self into
     const ObjCPropertyDecl *propDecl =
         matchObjCMessageWithPropertySetter(*expr);
     if (propDecl && propDecl->getSetterKind() == ObjCPropertyDecl::Assign) {
       _facts.ivarMayStoreSelfInUnsafeProperty(ivarDecl,
                                               propDecl->getNameAsString());
-    } else if (selectorStr.startswith("addTarget:")) {
+    } else if (StringRef(selectorStr).startswith("addTarget:")) {
       _facts.ivarMayTargetSelf(ivarDecl);
-    } else if (selectorStr.startswith("addObserver:")) {
+    } else if (StringRef(selectorStr).startswith("addObserver:")) {
       _facts.ivarMayObserveSelf(ivarDecl);
     }
 
@@ -131,7 +130,7 @@ void FactFinder::VisitObjCMessageExpr(const ObjCMessageExpr *expr) {
   std::string receiverObjectName = matchObservableSingletonObject(*receiver);
   if (receiverObjectName != "") {
 
-    if (selectorStr.startswith("addObserver:")) {
+    if (StringRef(selectorStr).startswith("addObserver:")) {
       _facts.sharedObjectMayObserveSelfInMethod(receiverObjectName,
                                                 _methDecl->getNameAsString());
     }

@@ -51,14 +51,15 @@ class FactFinder : public clang::ConstStmtVisitor<FactFinder> {
                                                  // defaultCenter]
                                                  // addObserver:self ..] in
                                                  // method 'init'
+
   };
 
   // structure recording facts over a class implementation
   struct ObjCImplFacts {
 
-    typedef std::map<const clang::ObjCIvarDecl *, struct IvarFacts>
+    typedef std::map<const clang::ObjCIvarDecl *, IvarFacts>
         IvarFactsMap;
-    typedef std::map<const std::string, struct SharedObserverFacts>
+    typedef std::map<const std::string, SharedObserverFacts>
         SharedObserverFactsMap;
 
     IvarFactsMap _ivarFactsMap;

@@ -71,15 +71,12 @@ const Expr *getArgOfObjCMessageExpr(const ObjCMessageExpr &expr,
 }
 
 const std::string getPropertyNameFromSetterSelector(const Selector &selector) {
-  StringRef selectorStr = selector.getAsString();
+  std::string selectorStr = selector.getAsString();
   // fancy names for setters are not supported
-  if (!selectorStr.startswith("set")) {
+  if (selectorStr.size() < 5 || !StringRef(selectorStr).startswith("set")) {
     return "";
   }
-  std::string propName = selectorStr.substr(3, selectorStr.size() - 4);
-  if (propName.size() < 1) {
-    return "";
-  }
+  std::string propName(selectorStr.begin() + 3, selectorStr.end() - 1);
   char x = propName[0];
   propName[0] = (x >= 'A' && x <= 'Z' ? x - 'A' + 'a' : x);
   return propName;
@@ -100,7 +97,7 @@ const ObjCPropertyDecl *matchObjCMessageWithPropertyGetter(
     return NULL;
   }
 
-  StringRef propName = expr.getSelector().getAsString();
+  std::string propName = expr.getSelector().getAsString();
   IdentifierInfo &ii = intDecl->getASTContext().Idents.get(propName);
     return intDecl->FindPropertyDeclaration(&ii, ObjCPropertyQueryKind::OBJC_PR_query_unknown);
 }
@@ -122,7 +119,7 @@ const ObjCPropertyDecl *matchObjCMessageWithPropertySetter(
 
   Selector selector = expr.getSelector();
   std::string propName = getPropertyNameFromSetterSelector(selector);
-  if (propName == "") {
+  if (propName.empty()) {
     return NULL;
   }
   IdentifierInfo &II = intDecl->getASTContext().Idents.get(propName);
