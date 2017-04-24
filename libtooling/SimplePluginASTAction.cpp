@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
+ * @sign_copies_of_this_file_here
  */
 
 #include <functional>
@@ -194,5 +195,10 @@ const std::string &PluginASTOptionsBase::normalizeSourcePath(
     result = realPath;
   }
   return result;
+}
+
+const std::string &PluginASTOptionsBase::normalizeSourcePath(
+  llvm::StringRef path) const {
+    return normalizeSourcePath(path.data());
 }
 }

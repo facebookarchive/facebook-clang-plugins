@@ -1,3 +1,5 @@
+// Copyright 2004-present Facebook. All Rights Reserved.
+
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -6,6 +8,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
+ * @sign_copies_of_this_file_here
  */
 
 #pragma once
@@ -104,6 +107,7 @@ struct PluginASTOptionsBase {
   void setObjectFile(const std::string &path);
 
   const std::string &normalizeSourcePath(const char *path) const;
+  const std::string &normalizeSourcePath(llvm::StringRef path) const;
 };
 
 struct EmptyPreprocessorHandlerData {};
