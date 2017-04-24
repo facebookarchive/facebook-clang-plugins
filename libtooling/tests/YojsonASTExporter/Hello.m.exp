@@ -2830,7 +2830,10 @@
           "pointer" : 163
         },
         {
-          "type_ptr" : 161
+          "element_type" : {
+            "type_ptr" : 161
+          },
+          "stride" : 192
         },
         1
       )>,
@@ -2943,7 +2946,10 @@
           "pointer" : 168
         },
         {
-          "type_ptr" : 152
+          "element_type" : {
+            "type_ptr" : 152
+          },
+          "stride" : 64
         }
       )>,
       <"IncompleteArrayType" : (
@@ -2951,8 +2957,11 @@
           "pointer" : 169
         },
         {
-          "type_ptr" : 7,
-          "is_const" : true
+          "element_type" : {
+            "type_ptr" : 7,
+            "is_const" : true
+          },
+          "stride" : 64
         }
       )>,
       <"PointerType" : (
@@ -3088,7 +3097,10 @@
           "pointer" : 86
         },
         {
-          "type_ptr" : 117
+          "element_type" : {
+            "type_ptr" : 117
+          },
+          "stride" : 8
         },
         19
       )>,
@@ -3113,7 +3125,10 @@
           "pointer" : 178
         },
         {
-          "type_ptr" : 160
+          "element_type" : {
+            "type_ptr" : 160
+          },
+          "stride" : 64
         }
       )>,
       <"PointerType" : (

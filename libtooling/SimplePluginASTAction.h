@@ -26,7 +26,6 @@
 #include <clang/Lex/Preprocessor.h>
 #include <clang/Tooling/Tooling.h>
 
-#include "FileServices.h"
 #include "FileUtils.h"
 
 namespace ASTPluginLib {
@@ -62,13 +61,6 @@ struct PluginASTOptionsBase {
   bool keepExternalPaths = false;
   /* Resolve symlinks to their real path. */
   bool resolveSymlinks = false;
-
-  /* Deduplication service: whether certain files should be visited once. */
-  std::unique_ptr<FileServices::DeduplicationService> deduplicationService;
-
-  /* Translation service: whether certain copied source files should be
-   * translated back to the original name. */
-  std::unique_ptr<FileServices::TranslationService> translationService;
 
   typedef std::unordered_map<std::string, std::string> argmap_t;
 

@@ -19,7 +19,6 @@
 
 #include <llvm/Support/Path.h>
 
-#include "FileServices.h"
 #include "FileUtils.h"
 #include "SimplePluginASTAction.h"
 
@@ -108,8 +107,6 @@ bool PluginASTOptionsBase::loadUnsignedInt(const argmap_t &map,
 
 void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
   bool needBasePath = false;
-  std::string tempDirDeduplication;
-  std::string tempDirTranslation;
 
   // Possibly override the first argument given on the command line.
   loadString(map, "OUTPUT_FILE", outputFile);
@@ -121,9 +118,6 @@ void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
   loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
   loadBool(map, "RESOLVE_SYMLINKS", resolveSymlinks);
 
-  loadString(map, "USE_TEMP_DIR_FOR_DEDUPLICATION", tempDirDeduplication);
-  loadString(map, "USE_TEMP_DIR_FOR_COPIED_PATHS", tempDirTranslation);
-
   if (needBasePath) {
     llvm::SmallString<1024> CurrentDir;
     if (llvm::sys::fs::current_path(CurrentDir)) {
@@ -131,15 +125,6 @@ void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
     } else {
       basePath = CurrentDir.str();
     }
-  }
-
-  if (tempDirDeduplication != "") {
-    deduplicationService.reset(
-        new FileServices::DeduplicationService(tempDirDeduplication));
-  }
-  if (tempDirTranslation != "") {
-    translationService.reset(
-        new FileServices::TranslationService(tempDirTranslation));
   }
 }
 
@@ -167,32 +152,21 @@ const std::string &PluginASTOptionsBase::normalizeSourcePath(
     result = path;
     return result;
   }
-  const std::string &absPath = FileUtils::makeAbsolutePath(basePath, path);
-  // optimize the default settings
-  if (translationService == nullptr && !resolveSymlinks && repoRoot == "") {
-    result = absPath;
-    return result;
-  }
-  std::string realPath;
-  if (translationService != nullptr) {
-    realPath = translationService->findOriginalFile(absPath);
-  } else {
-    realPath = absPath;
-  }
+  std::string absPath = FileUtils::makeAbsolutePath(basePath, path);
   if (resolveSymlinks) {
     // if realPath is a symlink, resolve it
     char buf[2048];
-    int len = readlink(realPath.c_str(), buf, sizeof(buf) - 1);
+    int len = readlink(absPath.c_str(), buf, sizeof(buf) - 1);
     if (len != -1) {
       buf[len] = '\0';
-      realPath = buf;
+      absPath = buf;
     }
   }
   // By convention, relative paths are only activated when repoRoot != "".
   if (repoRoot != "") {
-    result = FileUtils::makeRelativePath(repoRoot, iSysRoot, keepExternalPaths, allowSiblingsToRepoRoot, realPath);
+    result = FileUtils::makeRelativePath(repoRoot, iSysRoot, keepExternalPaths, allowSiblingsToRepoRoot, absPath);
   } else {
-    result = realPath;
+    result = absPath;
   }
   return result;
 }

@@ -14,8 +14,6 @@
 #include <string>
 #include <clang/AST/Decl.h>
 
-#include "FileServices.h"
-
 namespace FileUtils {
 
 /**
@@ -37,11 +35,4 @@ std::string makeRelativePath(const std::string &repoRoot,
                              bool allowSiblingsToRoot,
                              const std::string &path);
 
-/**
- * Determine if a declaration should be traversed.
- */
-bool shouldTraverseDeclFile(FileServices::DeduplicationService &DedupService,
-                            const std::string &BasePath,
-                            const clang::SourceManager &SM,
-                            const clang::Decl &Decl);
 }

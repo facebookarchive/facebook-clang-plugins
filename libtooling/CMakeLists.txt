@@ -34,8 +34,6 @@ set(AST_EXPORTER_COMMON_SOURCES
   SimplePluginASTAction.cpp
   FileUtils.h
   FileUtils.cpp
-  FileServices.h
-  FileServices.cpp
   atdlib/ATDWriter.h
   AttrParameterVectorStream.h
   AttrParameterVectorStream.cpp
@@ -50,12 +48,6 @@ add_library(FacebookClangPlugin SHARED
 
 target_link_libraries(
   FacebookClangPlugin
-)
-
-add_executable(record_copied_file
-  FileServices.h
-  FileServices.cpp
-  record_copied_file.cpp
 )
 
 add_executable(ast_exporter_bin

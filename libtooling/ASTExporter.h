@@ -656,14 +656,7 @@ void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   {
     std::vector<Decl *> declsToDump;
     for (auto I : DC->decls()) {
-      if (Options.deduplicationService == nullptr ||
-          FileUtils::shouldTraverseDeclFile(
-              *Options.deduplicationService,
-              Options.basePath,
-              DC->getParentASTContext().getSourceManager(),
-              *I)) {
-        declsToDump.push_back(I);
-      }
+      declsToDump.push_back(I);
     }
     /* Some typedefs are not part of AST. 'instancetype' is one of them.
     Export it nevertheless as part of TranslationUnitDecl context. */
