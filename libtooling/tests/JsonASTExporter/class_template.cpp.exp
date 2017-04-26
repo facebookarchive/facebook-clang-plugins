@@ -312,7 +312,9 @@
                                 "N"
                               ]
                             },
-                            "type_ptr" : 13
+                            "qual_type" : {
+                              "type_ptr" : 13
+                            }
                           }],
                           "source_range" : [
                             {
@@ -337,7 +339,9 @@
                             [
                             ],
                             {
-                              "type_ptr" : 13
+                              "qual_type" : {
+                                "type_ptr" : 13
+                              }
                             },
                             {
                               "decl_ref" : {
@@ -351,7 +355,9 @@
                                     "N"
                                   ]
                                 },
-                                "type_ptr" : 15
+                                "qual_type" : {
+                                  "type_ptr" : 15
+                                }
                               }
                             }
                           ]]
@@ -492,7 +498,9 @@
                 {
                   "template_decl" : 8,
                   "specialization_args" : [
-                    ["Type" , 27]
+                    ["Type" , {
+                      "type_ptr" : 27
+                    }]
                   ]
                 }
               ]]
@@ -902,12 +910,16 @@
                               [
                               ],
                               {
-                                "type_ptr" : 50
+                                "qual_type" : {
+                                  "type_ptr" : 50
+                                }
                               }
                             ]]
                           ],
                           {
-                            "type_ptr" : 31,
+                            "qual_type" : {
+                              "type_ptr" : 31
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -932,7 +944,9 @@
                                   "N"
                                 ]
                               },
-                              "type_ptr" : 31
+                              "qual_type" : {
+                                "type_ptr" : 31
+                              }
                             }
                           }
                         ]],
@@ -977,7 +991,10 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : 27,
+                                    "qual_type" : {
+                                      "type_ptr" : 27,
+                                      "is_const" : true
+                                    },
                                     "value_kind" : "LValue"
                                   },
                                   {
@@ -990,13 +1007,18 @@
                                           ""
                                         ]
                                       },
-                                      "type_ptr" : 38
+                                      "qual_type" : {
+                                        "type_ptr" : 38
+                                      }
                                     }
                                   }
                                 ]]
                               ],
                               {
-                                "type_ptr" : 31,
+                                "qual_type" : {
+                                  "type_ptr" : 31,
+                                  "is_const" : true
+                                },
                                 "value_kind" : "LValue"
                               },
                               {
@@ -1020,13 +1042,17 @@
                                       "N"
                                     ]
                                   },
-                                  "type_ptr" : 31
+                                  "qual_type" : {
+                                    "type_ptr" : 31
+                                  }
                                 }
                               }
                             ]]
                           ],
                           {
-                            "type_ptr" : 31
+                            "qual_type" : {
+                              "type_ptr" : 31
+                            }
                           },
                           {
                             "cast_kind" : "LValueToRValue",
@@ -1036,7 +1062,9 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 31,
+                        "qual_type" : {
+                          "type_ptr" : 31
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -1084,12 +1112,16 @@
                               [
                               ],
                               {
-                                "type_ptr" : 50
+                                "qual_type" : {
+                                  "type_ptr" : 50
+                                }
                               }
                             ]]
                           ],
                           {
-                            "type_ptr" : 27,
+                            "qual_type" : {
+                              "type_ptr" : 27
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1182,13 +1214,17 @@
                   "N"
                 ]
               },
-              "type_ptr" : 34
+              "qual_type" : {
+                "type_ptr" : 34
+              }
             }
           },
           {
             "template_decl" : 8,
             "specialization_args" : [
-              ["Type" , 31]
+              ["Type" , {
+                "type_ptr" : 31
+              }]
             ]
           }
         ]],
@@ -1292,7 +1328,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 67
+                        "qual_type" : {
+                          "type_ptr" : 67
+                        }
                       },
                       {
                         "decl_ref" : {
@@ -1306,7 +1344,9 @@
                               "N"
                             ]
                           },
-                          "type_ptr" : 15
+                          "qual_type" : {
+                            "type_ptr" : 15
+                          }
                         }
                       }
                     ]]
@@ -1351,7 +1391,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 67
+                            "qual_type" : {
+                              "type_ptr" : 67
+                            }
                           },
                           {
                             "decl_ref" : {
@@ -1365,7 +1407,9 @@
                                   "N"
                                 ]
                               },
-                              "type_ptr" : 15
+                              "qual_type" : {
+                                "type_ptr" : 15
+                              }
                             }
                           }
                         ]]
@@ -1415,7 +1459,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 72,
+                            "qual_type" : {
+                              "type_ptr" : 72
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1430,13 +1476,17 @@
                                   "N"
                                 ]
                               },
-                              "type_ptr" : 44
+                              "qual_type" : {
+                                "type_ptr" : 44
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 73
+                        "qual_type" : {
+                          "type_ptr" : 73
+                        }
                       },
                       {
                         "cast_kind" : "FunctionToPointerDecay",
@@ -1472,7 +1522,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 67,
+                            "qual_type" : {
+                              "type_ptr" : 67
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1485,13 +1537,17 @@
                                   "val"
                                 ]
                               },
-                              "type_ptr" : 67
+                              "qual_type" : {
+                                "type_ptr" : 67
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 13,
+                        "qual_type" : {
+                          "type_ptr" : 13
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -1515,7 +1571,9 @@
                               "N"
                             ]
                           },
-                          "type_ptr" : 13
+                          "qual_type" : {
+                            "type_ptr" : 13
+                          }
                         }
                       }
                     ]],
@@ -1547,7 +1605,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 63,
+                            "qual_type" : {
+                              "type_ptr" : 63
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1560,13 +1620,18 @@
                                   "p"
                                 ]
                               },
-                              "type_ptr" : 63
+                              "qual_type" : {
+                                "type_ptr" : 63
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 27,
+                        "qual_type" : {
+                          "type_ptr" : 27,
+                          "is_const" : true
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -1577,7 +1642,9 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : 27,
+                    "qual_type" : {
+                      "type_ptr" : 27
+                    },
                     "value_kind" : "LValue"
                   }
                 ]]
@@ -1894,7 +1961,9 @@
         {
           "pointer" : 125
         },
-        123,
+        {
+          "type_ptr" : 123
+        },
         1
       ]],
       ["TemplateTypeParmType" , [
@@ -1945,11 +2014,15 @@
           "pointer" : 132
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            27
+            {
+              "type_ptr" : 27
+            }
           ]
         }
       ]],
@@ -1958,11 +2031,15 @@
           "pointer" : 61
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            63
+            {
+              "type_ptr" : 63
+            }
           ]
         }
       ]],
@@ -1995,7 +2072,9 @@
           "pointer" : 134
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
         }
@@ -2005,7 +2084,9 @@
           "pointer" : 135
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
         }
@@ -2015,7 +2096,9 @@
           "pointer" : 136
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
         }
@@ -2025,7 +2108,9 @@
           "pointer" : 34
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
         }
@@ -2053,11 +2138,15 @@
           "pointer" : 137
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            38
+            {
+              "type_ptr" : 38
+            }
           ]
         }
       ]],
@@ -2066,11 +2155,15 @@
           "pointer" : 36
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            38
+            {
+              "type_ptr" : 38
+            }
           ]
         }
       ]],
@@ -2087,11 +2180,15 @@
           "pointer" : 138
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            42
+            {
+              "type_ptr" : 42
+            }
           ]
         }
       ]],
@@ -2100,11 +2197,15 @@
           "pointer" : 40
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            42
+            {
+              "type_ptr" : 42
+            }
           ]
         }
       ]],
@@ -2113,11 +2214,15 @@
           "pointer" : 139
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            22
+            {
+              "type_ptr" : 22
+            }
           ]
         }
       ]],
@@ -2126,11 +2231,15 @@
           "pointer" : 20
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            22
+            {
+              "type_ptr" : 22
+            }
           ]
         }
       ]],
@@ -2147,11 +2256,15 @@
           "pointer" : 140
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            26
+            {
+              "type_ptr" : 26
+            }
           ]
         }
       ]],
@@ -2160,11 +2273,15 @@
           "pointer" : 24
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
           "params_type" : [
-            26
+            {
+              "type_ptr" : 26
+            }
           ]
         }
       ]],
@@ -2173,7 +2290,9 @@
           "pointer" : 15
         },
         {
-          "return_type" : 80
+          "return_type" : {
+            "type_ptr" : 80
+          }
         },
         {
         }
@@ -2191,11 +2310,15 @@
           "pointer" : 142
         },
         {
-          "return_type" : 141
+          "return_type" : {
+            "type_ptr" : 141
+          }
         },
         {
           "params_type" : [
-            38
+            {
+              "type_ptr" : 38
+            }
           ]
         }
       ]],
@@ -2204,11 +2327,15 @@
           "pointer" : 72
         },
         {
-          "return_type" : 141
+          "return_type" : {
+            "type_ptr" : 141
+          }
         },
         {
           "params_type" : [
-            38
+            {
+              "type_ptr" : 38
+            }
           ]
         }
       ]],
@@ -2217,11 +2344,15 @@
           "pointer" : 143
         },
         {
-          "return_type" : 141
+          "return_type" : {
+            "type_ptr" : 141
+          }
         },
         {
           "params_type" : [
-            42
+            {
+              "type_ptr" : 42
+            }
           ]
         }
       ]],
@@ -2230,11 +2361,15 @@
           "pointer" : 58
         },
         {
-          "return_type" : 141
+          "return_type" : {
+            "type_ptr" : 141
+          }
         },
         {
           "params_type" : [
-            42
+            {
+              "type_ptr" : 42
+            }
           ]
         }
       ]],
@@ -2251,11 +2386,15 @@
           "pointer" : 44
         },
         {
-          "return_type" : 141
+          "return_type" : {
+            "type_ptr" : 141
+          }
         },
         {
           "params_type" : [
-            38
+            {
+              "type_ptr" : 38
+            }
           ]
         }
       ]],
@@ -2297,7 +2436,9 @@
           "desugared_type" : 146
         },
         {
-          "child_type" : 146,
+          "child_type" : {
+            "type_ptr" : 146
+          },
           "decl_ptr" : 148
         }
       ]],
@@ -2307,7 +2448,9 @@
           "desugared_type" : 146
         },
         {
-          "child_type" : 147,
+          "child_type" : {
+            "type_ptr" : 147
+          },
           "decl_ptr" : 78
         }
       ]],

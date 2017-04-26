@@ -639,7 +639,9 @@
         {
           "pointer" : 62
         },
-        60,
+        {
+          "type_ptr" : 60
+        },
         1
       ]],
       ["ObjCObjectType" , [
@@ -664,7 +666,9 @@
           "desugared_type" : 64
         },
         {
-          "child_type" : 64,
+          "child_type" : {
+            "type_ptr" : 64
+          },
           "decl_ptr" : 66
         }
       ]],
@@ -674,7 +678,9 @@
           "desugared_type" : 64
         },
         {
-          "child_type" : 65,
+          "child_type" : {
+            "type_ptr" : 65
+          },
           "decl_ptr" : 15
         }
       ]],

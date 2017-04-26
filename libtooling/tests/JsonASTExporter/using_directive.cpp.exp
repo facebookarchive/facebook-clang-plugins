@@ -365,7 +365,9 @@
               [
               ],
               {
-                "type_ptr" : 10,
+                "qual_type" : {
+                  "type_ptr" : 10
+                },
                 "value_kind" : "LValue"
               },
               {
@@ -380,13 +382,17 @@
                       "nsa"
                     ]
                   },
-                  "type_ptr" : 10
+                  "qual_type" : {
+                    "type_ptr" : 10
+                  }
                 }
               }
             ]]
           ],
           {
-            "type_ptr" : 10
+            "qual_type" : {
+              "type_ptr" : 10
+            }
           },
           {
             "cast_kind" : "LValueToRValue",
@@ -699,7 +705,9 @@
         {
           "pointer" : 63
         },
-        61,
+        {
+          "type_ptr" : 61
+        },
         1
       ]],
       ["ObjCObjectType" , [
@@ -724,7 +732,9 @@
           "desugared_type" : 65
         },
         {
-          "child_type" : 65,
+          "child_type" : {
+            "type_ptr" : 65
+          },
           "decl_ptr" : 67
         }
       ]],
@@ -734,7 +744,9 @@
           "desugared_type" : 65
         },
         {
-          "child_type" : 66,
+          "child_type" : {
+            "type_ptr" : 66
+          },
           "decl_ptr" : 16
         }
       ]],

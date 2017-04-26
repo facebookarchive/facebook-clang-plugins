@@ -565,7 +565,9 @@
                   [
                   ],
                   {
-                    "type_ptr" : 18
+                    "qual_type" : {
+                      "type_ptr" : 18
+                    }
                   },
                   {
                     "decl_ref" : {
@@ -579,7 +581,9 @@
                           "fun"
                         ]
                       },
-                      "type_ptr" : 21
+                      "qual_type" : {
+                        "type_ptr" : 21
+                      }
                     }
                   }
                 ]]
@@ -622,7 +626,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 18
+                        "qual_type" : {
+                          "type_ptr" : 18
+                        }
                       },
                       {
                         "decl_ref" : {
@@ -636,7 +642,9 @@
                               "fun"
                             ]
                           },
-                          "type_ptr" : 21
+                          "qual_type" : {
+                            "type_ptr" : 21
+                          }
                         }
                       }
                     ]]
@@ -700,7 +708,9 @@
               [
               ],
               {
-                "type_ptr" : 11
+                "qual_type" : {
+                  "type_ptr" : 11
+                }
               },
               "3"
             ]],
@@ -719,13 +729,17 @@
               [
               ],
               {
-                "type_ptr" : 11
+                "qual_type" : {
+                  "type_ptr" : 11
+                }
               },
               "4"
             ]]
           ],
           {
-            "type_ptr" : 8
+            "qual_type" : {
+              "type_ptr" : 8
+            }
           }
         ]]
       }
@@ -1033,7 +1047,9 @@
         {
           "pointer" : 85
         },
-        83,
+        {
+          "type_ptr" : 83
+        },
         1
       ]],
       ["RecordType" , [
@@ -1047,7 +1063,9 @@
           "pointer" : 14
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
         }
@@ -1063,7 +1081,9 @@
           "pointer" : 86
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
         }
@@ -1082,11 +1102,15 @@
           "pointer" : 87
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
           "params_type" : [
-            26
+            {
+              "type_ptr" : 26
+            }
           ]
         }
       ]],
@@ -1095,11 +1119,15 @@
           "pointer" : 24
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
           "params_type" : [
-            26
+            {
+              "type_ptr" : 26
+            }
           ]
         }
       ]],
@@ -1116,11 +1144,15 @@
           "pointer" : 88
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
           "params_type" : [
-            30
+            {
+              "type_ptr" : 30
+            }
           ]
         }
       ]],
@@ -1129,11 +1161,15 @@
           "pointer" : 28
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
           "params_type" : [
-            30
+            {
+              "type_ptr" : 30
+            }
           ]
         }
       ]],
@@ -1142,7 +1178,9 @@
           "pointer" : 21
         },
         {
-          "return_type" : 40
+          "return_type" : {
+            "type_ptr" : 40
+          }
         },
         {
         }
@@ -1169,7 +1207,9 @@
           "desugared_type" : 90
         },
         {
-          "child_type" : 90,
+          "child_type" : {
+            "type_ptr" : 90
+          },
           "decl_ptr" : 92
         }
       ]],
@@ -1179,7 +1219,9 @@
           "desugared_type" : 90
         },
         {
-          "child_type" : 91,
+          "child_type" : {
+            "type_ptr" : 91
+          },
           "decl_ptr" : 38
         }
       ]],

@@ -306,7 +306,9 @@
             ]
           },
           {
-            "result_type" : 20
+            "result_type" : {
+              "type_ptr" : 20
+            }
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -331,7 +333,9 @@
             ]
           },
           {
-            "result_type" : 20
+            "result_type" : {
+              "type_ptr" : 20
+            }
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -357,7 +361,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 20
+            "result_type" : {
+              "type_ptr" : 20
+            }
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -383,7 +389,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 20
+            "result_type" : {
+              "type_ptr" : 20
+            }
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -409,7 +417,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 9
+            "result_type" : {
+              "type_ptr" : 9
+            }
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -435,7 +445,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 15,
+            "result_type" : {
+              "type_ptr" : 15
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -488,7 +500,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 15,
+            "result_type" : {
+              "type_ptr" : 15
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -567,7 +581,9 @@
             ]
           },
           {
-            "result_type" : 20,
+            "result_type" : {
+              "type_ptr" : 20
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -657,7 +673,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 17
+            "result_type" : {
+              "type_ptr" : 17
+            }
           }
         )>
       ],
@@ -719,7 +737,9 @@
             ]
           },
           {
-            "result_type" : 20,
+            "result_type" : {
+              "type_ptr" : 20
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -822,7 +842,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 7,
+            "result_type" : {
+              "type_ptr" : 7
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -911,7 +933,9 @@
             ]
           },
           {
-            "result_type" : 20,
+            "result_type" : {
+              "type_ptr" : 20
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -989,7 +1013,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 7,
+            "result_type" : {
+              "type_ptr" : 7
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -1262,7 +1288,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 63,
+            "result_type" : {
+              "type_ptr" : 63
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -1363,7 +1391,9 @@
           },
           {
             "is_instance_method" : true,
-            "result_type" : 63,
+            "result_type" : {
+              "type_ptr" : 63
+            },
             "parameters" : [
               <"ParmVarDecl" : (
                 {
@@ -1539,7 +1569,9 @@
                               [
                               ],
                               {
-                                "type_ptr" : 33,
+                                "qual_type" : {
+                                  "type_ptr" : 33
+                                },
                                 "value_kind" : <"LValue">
                               },
                               {
@@ -1552,13 +1584,17 @@
                                       "i"
                                     ]
                                   },
-                                  "type_ptr" : 33
+                                  "qual_type" : {
+                                    "type_ptr" : 33
+                                  }
                                 }
                               }
                             )>
                           ],
                           {
-                            "type_ptr" : 33
+                            "qual_type" : {
+                              "type_ptr" : 33
+                            }
                           },
                           {
                             "cast_kind" : <"LValueToRValue">,
@@ -1581,7 +1617,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 33
+                            "qual_type" : {
+                              "type_ptr" : 33
+                            }
                           },
                           {
                             "is_signed" : true,
@@ -1591,7 +1629,9 @@
                         )>
                       ],
                       {
-                        "type_ptr" : 33
+                        "qual_type" : {
+                          "type_ptr" : 33
+                        }
                       },
                       {
                         "kind" : <"GT">
@@ -1653,7 +1693,9 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : 55
+                                    "qual_type" : {
+                                      "type_ptr" : 55
+                                    }
                                   },
                                   {
                                     "decl_ref" : {
@@ -1665,13 +1707,17 @@
                                           "NSLog"
                                         ]
                                       },
-                                      "type_ptr" : 55
+                                      "qual_type" : {
+                                        "type_ptr" : 55
+                                      }
                                     }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : 82
+                                "qual_type" : {
+                                  "type_ptr" : 82
+                                }
                               },
                               {
                                 "cast_kind" : <"FunctionToPointerDecay">,
@@ -1720,19 +1766,25 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : 86,
+                                        "qual_type" : {
+                                          "type_ptr" : 86
+                                        },
                                         "value_kind" : <"LValue">
                                       },
                                       "Hello, world! (%d)"
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : 60
+                                    "qual_type" : {
+                                      "type_ptr" : 60
+                                    }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : 7
+                                "qual_type" : {
+                                  "type_ptr" : 7
+                                }
                               },
                               {
                                 "cast_kind" : <"BitCast">,
@@ -1768,7 +1820,9 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : 33,
+                                    "qual_type" : {
+                                      "type_ptr" : 33
+                                    },
                                     "value_kind" : <"LValue">
                                   },
                                   {
@@ -1781,13 +1835,17 @@
                                           "i"
                                         ]
                                       },
-                                      "type_ptr" : 33
+                                      "qual_type" : {
+                                        "type_ptr" : 33
+                                      }
                                     }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : 33
+                                "qual_type" : {
+                                  "type_ptr" : 33
+                                }
                               },
                               {
                                 "cast_kind" : <"LValueToRValue">,
@@ -1797,7 +1855,9 @@
                             )>
                           ],
                           {
-                            "type_ptr" : 63
+                            "qual_type" : {
+                              "type_ptr" : 63
+                            }
                           }
                         )>
                       ]
@@ -1974,7 +2034,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 33
+                        "qual_type" : {
+                          "type_ptr" : 33
+                        }
                       },
                       {
                         "is_signed" : true,
@@ -2023,7 +2085,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 33
+                            "qual_type" : {
+                              "type_ptr" : 33
+                            }
                           },
                           {
                             "is_signed" : true,
@@ -2089,7 +2153,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 33,
+                            "qual_type" : {
+                              "type_ptr" : 33
+                            },
                             "value_kind" : <"LValue">
                           },
                           {
@@ -2102,13 +2168,17 @@
                                   "i"
                                 ]
                               },
-                              "type_ptr" : 33
+                              "qual_type" : {
+                                "type_ptr" : 33
+                              }
                             }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : 33
+                        "qual_type" : {
+                          "type_ptr" : 33
+                        }
                       },
                       {
                         "cast_kind" : <"LValueToRValue">,
@@ -2131,7 +2201,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 33
+                        "qual_type" : {
+                          "type_ptr" : 33
+                        }
                       },
                       {
                         "is_signed" : true,
@@ -2141,7 +2213,9 @@
                     )>
                   ],
                   {
-                    "type_ptr" : 33
+                    "qual_type" : {
+                      "type_ptr" : 33
+                    }
                   },
                   {
                     "kind" : <"LT">
@@ -2175,7 +2249,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 33,
+                        "qual_type" : {
+                          "type_ptr" : 33
+                        },
                         "value_kind" : <"LValue">
                       },
                       {
@@ -2188,13 +2264,17 @@
                               "i"
                             ]
                           },
-                          "type_ptr" : 33
+                          "qual_type" : {
+                            "type_ptr" : 33
+                          }
                         }
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : 33
+                    "qual_type" : {
+                      "type_ptr" : 33
+                    }
                   },
                   {
                     "kind" : <"PostInc">,
@@ -2274,12 +2354,16 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : 69
+                                    "qual_type" : {
+                                      "type_ptr" : 69
+                                    }
                                   },
                                   {
                                     "selector" : "new",
                                     "decl_pointer" : 21,
-                                    "receiver_kind" : <"Class" : 110>
+                                    "receiver_kind" : <"Class" : {
+                                      "type_ptr" : 110
+                                    }>
                                   }
                                 )>,
                                 <"ImplicitCastExpr" : (
@@ -2310,7 +2394,9 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : 33,
+                                        "qual_type" : {
+                                          "type_ptr" : 33
+                                        },
                                         "value_kind" : <"LValue">
                                       },
                                       {
@@ -2323,13 +2409,17 @@
                                               "i"
                                             ]
                                           },
-                                          "type_ptr" : 33
+                                          "qual_type" : {
+                                            "type_ptr" : 33
+                                          }
                                         }
                                       }
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : 33
+                                    "qual_type" : {
+                                      "type_ptr" : 33
+                                    }
                                   },
                                   {
                                     "cast_kind" : <"LValueToRValue">,
@@ -2339,7 +2429,9 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : 63
+                                "qual_type" : {
+                                  "type_ptr" : 63
+                                }
                               },
                               {
                                 "selector" : "say:",
@@ -2384,7 +2476,9 @@
                   [
                   ],
                   {
-                    "type_ptr" : 33
+                    "qual_type" : {
+                      "type_ptr" : 33
+                    }
                   },
                   {
                     "is_signed" : true,
@@ -2735,7 +2829,9 @@
         {
           "pointer" : 163
         },
-        161,
+        {
+          "type_ptr" : 161
+        },
         1
       )>,
       <"ObjCInterfaceType" : (
@@ -2750,7 +2846,9 @@
           "desugared_type" : 152
         },
         {
-          "child_type" : 152,
+          "child_type" : {
+            "type_ptr" : 152
+          },
           "decl_ptr" : 6
         }
       )>,
@@ -2760,7 +2858,9 @@
           "desugared_type" : 152
         },
         {
-          "child_type" : 7,
+          "child_type" : {
+            "type_ptr" : 7
+          },
           "decl_ptr" : 115
         }
       )>,
@@ -2770,7 +2870,9 @@
           "desugared_type" : 154
         },
         {
-          "child_type" : 154,
+          "child_type" : {
+            "type_ptr" : 154
+          },
           "decl_ptr" : 8
         }
       )>,
@@ -2780,7 +2882,9 @@
           "desugared_type" : 33
         },
         {
-          "child_type" : 33,
+          "child_type" : {
+            "type_ptr" : 33
+          },
           "decl_ptr" : 14
         }
       )>,
@@ -2790,7 +2894,9 @@
           "desugared_type" : 150
         },
         {
-          "child_type" : 150,
+          "child_type" : {
+            "type_ptr" : 150
+          },
           "decl_ptr" : 4
         }
       )>,
@@ -2820,7 +2926,9 @@
           "desugared_type" : 49
         },
         {
-          "child_type" : 49,
+          "child_type" : {
+            "type_ptr" : 49
+          },
           "decl_ptr" : 16
         }
       )>,
@@ -2834,13 +2942,18 @@
         {
           "pointer" : 168
         },
-        152
+        {
+          "type_ptr" : 152
+        }
       )>,
       <"IncompleteArrayType" : (
         {
           "pointer" : 169
         },
-        7
+        {
+          "type_ptr" : 7,
+          "is_const" : true
+        }
       )>,
       <"PointerType" : (
         {
@@ -2865,7 +2978,9 @@
           "pointer" : 39,
           "desugared_type" : 171
         },
-        171
+        {
+          "type_ptr" : 171
+        }
       )>,
       <"ObjCInterfaceType" : (
         {
@@ -2908,11 +3023,15 @@
           "pointer" : 175
         },
         {
-          "return_type" : 63
+          "return_type" : {
+            "type_ptr" : 63
+          }
         },
         {
           "params_type" : [
-            60
+            {
+              "type_ptr" : 60
+            }
           ]
         }
       )>,
@@ -2921,11 +3040,15 @@
           "pointer" : 176
         },
         {
-          "return_type" : 63
+          "return_type" : {
+            "type_ptr" : 63
+          }
         },
         {
           "params_type" : [
-            152
+            {
+              "type_ptr" : 152
+            }
           ]
         }
       )>,
@@ -2934,11 +3057,15 @@
           "pointer" : 55
         },
         {
-          "return_type" : 63
+          "return_type" : {
+            "type_ptr" : 63
+          }
         },
         {
           "params_type" : [
-            7
+            {
+              "type_ptr" : 7
+            }
           ]
         }
       )>,
@@ -2960,7 +3087,9 @@
         {
           "pointer" : 86
         },
-        117,
+        {
+          "type_ptr" : 117
+        },
         19
       )>,
       <"PointerType" : (
@@ -2983,7 +3112,9 @@
         {
           "pointer" : 178
         },
-        160
+        {
+          "type_ptr" : 160
+        }
       )>,
       <"PointerType" : (
         {
@@ -2998,19 +3129,27 @@
           "pointer" : 93,
           "desugared_type" : 179
         },
-        179
+        {
+          "type_ptr" : 179
+        }
       )>,
       <"FunctionProtoType" : (
         {
           "pointer" : 180
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
           "params_type" : [
-            33,
-            179
+            {
+              "type_ptr" : 33
+            },
+            {
+              "type_ptr" : 179
+            }
           ]
         }
       )>,
@@ -3019,12 +3158,18 @@
           "pointer" : 90
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
           "params_type" : [
-            33,
-            93
+            {
+              "type_ptr" : 33
+            },
+            {
+              "type_ptr" : 93
+            }
           ]
         }
       )>,

@@ -480,7 +480,9 @@
         {
           "pointer" : 57
         },
-        55,
+        {
+          "type_ptr" : 55
+        },
         1
       )>,
       <"FunctionProtoType" : (
@@ -488,11 +490,15 @@
           "pointer" : 9
         },
         {
-          "return_type" : 11
+          "return_type" : {
+            "type_ptr" : 11
+          }
         },
         {
           "params_type" : [
-            11
+            {
+              "type_ptr" : 11
+            }
           ]
         }
       )>,
@@ -518,7 +524,9 @@
           "desugared_type" : 59
         },
         {
-          "child_type" : 59,
+          "child_type" : {
+            "type_ptr" : 59
+          },
           "decl_ptr" : 61
         }
       )>,
@@ -528,7 +536,9 @@
           "desugared_type" : 59
         },
         {
-          "child_type" : 60,
+          "child_type" : {
+            "type_ptr" : 60
+          },
           "decl_ptr" : 12
         }
       )>,

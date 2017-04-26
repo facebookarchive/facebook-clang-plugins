@@ -297,7 +297,9 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : 8,
+                                    "qual_type" : {
+                                      "type_ptr" : 8
+                                    },
                                     "value_kind" : <"LValue">
                                   },
                                   {
@@ -310,13 +312,17 @@
                                           "no_throw"
                                         ]
                                       },
-                                      "type_ptr" : 8
+                                      "qual_type" : {
+                                        "type_ptr" : 8
+                                      }
                                     }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : 20
+                                "qual_type" : {
+                                  "type_ptr" : 20
+                                }
                               },
                               {
                                 "cast_kind" : <"FunctionToPointerDecay">,
@@ -326,12 +332,16 @@
                             )>
                           ],
                           {
-                            "type_ptr" : 21
+                            "qual_type" : {
+                              "type_ptr" : 21
+                            }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : 22
+                        "qual_type" : {
+                          "type_ptr" : 22
+                        }
                       },
                       {
                         "value" : true
@@ -339,7 +349,9 @@
                     )>
                   ],
                   {
-                    "type_ptr" : 23
+                    "qual_type" : {
+                      "type_ptr" : 23
+                    }
                   },
                   {
                     "cast_kind" : <"IntegralCast">,
@@ -656,7 +668,9 @@
         {
           "pointer" : 69
         },
-        67,
+        {
+          "type_ptr" : 67
+        },
         1
       )>,
       <"FunctionProtoType" : (
@@ -664,7 +678,9 @@
           "pointer" : 70
         },
         {
-          "return_type" : 21
+          "return_type" : {
+            "type_ptr" : 21
+          }
         },
         {
         }
@@ -674,7 +690,9 @@
           "pointer" : 8
         },
         {
-          "return_type" : 21
+          "return_type" : {
+            "type_ptr" : 21
+          }
         },
         {
         }
@@ -684,7 +702,9 @@
           "pointer" : 12
         },
         {
-          "return_type" : 23
+          "return_type" : {
+            "type_ptr" : 23
+          }
         },
         {
         }
@@ -735,7 +755,9 @@
           "desugared_type" : 74
         },
         {
-          "child_type" : 74,
+          "child_type" : {
+            "type_ptr" : 74
+          },
           "decl_ptr" : 76
         }
       )>,
@@ -745,7 +767,9 @@
           "desugared_type" : 74
         },
         {
-          "child_type" : 75,
+          "child_type" : {
+            "type_ptr" : 75
+          },
           "decl_ptr" : 24
         }
       )>,

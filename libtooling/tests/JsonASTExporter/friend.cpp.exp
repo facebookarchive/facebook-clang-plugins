@@ -176,7 +176,9 @@
             {
               "template_decl" : 7,
               "specialization_args" : [
-                ["Type" , 10]
+                ["Type" , {
+                  "type_ptr" : 10
+                }]
               ]
             }
           ]]
@@ -497,7 +499,9 @@
             {
               "template_decl" : 11,
               "specialization_args" : [
-                ["Type" , 30]
+                ["Type" , {
+                  "type_ptr" : 30
+                }]
               ]
             }
           ]]
@@ -543,7 +547,9 @@
           [
           ],
           {
-            "type_ptr" : 32
+            "qual_type" : {
+              "type_ptr" : 32
+            }
           },
           {
             "decl_ref" : {
@@ -556,7 +562,9 @@
                   "Y<int>"
                 ]
               },
-              "type_ptr" : 20
+              "qual_type" : {
+                "type_ptr" : 20
+              }
             }
           }
         ]]
@@ -865,7 +873,9 @@
         {
           "pointer" : 81
         },
-        79,
+        {
+          "type_ptr" : 79
+        },
         1
       ]],
       ["TemplateTypeParmType" , [
@@ -1022,7 +1032,9 @@
           "pointer" : 103
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
         }
@@ -1032,7 +1044,9 @@
           "pointer" : 104
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
         }
@@ -1051,11 +1065,15 @@
           "pointer" : 105
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
           "params_type" : [
-            25
+            {
+              "type_ptr" : 25
+            }
           ]
         }
       ]],
@@ -1064,11 +1082,15 @@
           "pointer" : 23
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
           "params_type" : [
-            25
+            {
+              "type_ptr" : 25
+            }
           ]
         }
       ]],
@@ -1085,11 +1107,15 @@
           "pointer" : 106
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
           "params_type" : [
-            29
+            {
+              "type_ptr" : 29
+            }
           ]
         }
       ]],
@@ -1098,11 +1124,15 @@
           "pointer" : 27
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
           "params_type" : [
-            29
+            {
+              "type_ptr" : 29
+            }
           ]
         }
       ]],
@@ -1111,7 +1141,9 @@
           "pointer" : 20
         },
         {
-          "return_type" : 36
+          "return_type" : {
+            "type_ptr" : 36
+          }
         },
         {
         }
@@ -1138,7 +1170,9 @@
           "desugared_type" : 108
         },
         {
-          "child_type" : 108,
+          "child_type" : {
+            "type_ptr" : 108
+          },
           "decl_ptr" : 110
         }
       ]],
@@ -1148,7 +1182,9 @@
           "desugared_type" : 108
         },
         {
-          "child_type" : 109,
+          "child_type" : {
+            "type_ptr" : 109
+          },
           "decl_ptr" : 34
         }
       ]],

@@ -161,7 +161,9 @@
           [
           ],
           {
-            "type_ptr" : 8
+            "qual_type" : {
+              "type_ptr" : 8
+            }
           },
           {
             "is_signed" : true,
@@ -249,7 +251,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -262,13 +266,17 @@
                               "i"
                             ]
                           },
-                          "type_ptr" : 8
+                          "qual_type" : {
+                            "type_ptr" : 8
+                          }
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 8
+                    "qual_type" : {
+                      "type_ptr" : 8
+                    }
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -278,7 +286,9 @@
                 ]]
               ],
               {
-                "type_ptr" : 11
+                "qual_type" : {
+                  "type_ptr" : 11
+                }
               },
               {
                 "cast_kind" : "IntegralCast",
@@ -288,14 +298,18 @@
             ]]
           ],
           {
-            "type_ptr" : 11
+            "qual_type" : {
+              "type_ptr" : 11
+            }
           },
           {
             "cast_kind" : "NoOp",
             "base_path" : [
             ]
           },
-          11
+          {
+            "type_ptr" : 11
+          }
         ]]
       }
     ]],
@@ -377,7 +391,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -390,13 +406,17 @@
                               "i"
                             ]
                           },
-                          "type_ptr" : 8
+                          "qual_type" : {
+                            "type_ptr" : 8
+                          }
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 8
+                    "qual_type" : {
+                      "type_ptr" : 8
+                    }
                   },
                   {
                     "cast_kind" : "LValueToRValue",
@@ -406,7 +426,9 @@
                 ]]
               ],
               {
-                "type_ptr" : 11
+                "qual_type" : {
+                  "type_ptr" : 11
+                }
               },
               {
                 "cast_kind" : "IntegralCast",
@@ -416,14 +438,18 @@
             ]]
           ],
           {
-            "type_ptr" : 11
+            "qual_type" : {
+              "type_ptr" : 11
+            }
           },
           {
             "cast_kind" : "NoOp",
             "base_path" : [
             ]
           },
-          11
+          {
+            "type_ptr" : 11
+          }
         ]]
       }
     ]],
@@ -730,7 +756,9 @@
         {
           "pointer" : 67
         },
-        65,
+        {
+          "type_ptr" : 65
+        },
         1
       ]],
       ["ObjCObjectType" , [
@@ -755,7 +783,9 @@
           "desugared_type" : 69
         },
         {
-          "child_type" : 69,
+          "child_type" : {
+            "type_ptr" : 69
+          },
           "decl_ptr" : 71
         }
       ]],
@@ -765,7 +795,9 @@
           "desugared_type" : 69
         },
         {
-          "child_type" : 70,
+          "child_type" : {
+            "type_ptr" : 70
+          },
           "decl_ptr" : 21
         }
       ]],

@@ -366,7 +366,9 @@
               "S"
             ]
           },
-          "type_ptr" : 15
+          "qual_type" : {
+            "type_ptr" : 15
+          }
         }
       }
     )>,
@@ -492,7 +494,9 @@
                                   [
                                   ],
                                   {
-                                    "type_ptr" : 8
+                                    "qual_type" : {
+                                      "type_ptr" : 8
+                                    }
                                   },
                                   {
                                     "decl_ref" : {
@@ -505,13 +509,17 @@
                                           "S"
                                         ]
                                       },
-                                      "type_ptr" : 12
+                                      "qual_type" : {
+                                        "type_ptr" : 12
+                                      }
                                     }
                                   }
                                 )>
                               ],
                               {
-                                "type_ptr" : 8
+                                "qual_type" : {
+                                  "type_ptr" : 8
+                                }
                               },
                               {
                                 "cxx_temporary" : 29
@@ -519,7 +527,10 @@
                             )>
                           ],
                           {
-                            "type_ptr" : 8
+                            "qual_type" : {
+                              "type_ptr" : 8,
+                              "is_const" : true
+                            }
                           },
                           {
                             "cast_kind" : <"NoOp">,
@@ -529,7 +540,10 @@
                         )>
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8,
+                          "is_const" : true
+                        },
                         "value_kind" : <"LValue">
                       },
                       {
@@ -542,13 +556,18 @@
                               "s_ref"
                             ]
                           },
-                          "type_ptr" : 20
+                          "qual_type" : {
+                            "type_ptr" : 20
+                          }
                         }
                       }
                     )>
                   ],
                   {
-                    "type_ptr" : 8,
+                    "qual_type" : {
+                      "type_ptr" : 8,
+                      "is_const" : true
+                    },
                     "value_kind" : <"LValue">
                   },
                   {
@@ -645,7 +664,9 @@
                                       [
                                       ],
                                       {
-                                        "type_ptr" : 8
+                                        "qual_type" : {
+                                          "type_ptr" : 8
+                                        }
                                       },
                                       {
                                         "decl_ref" : {
@@ -658,13 +679,17 @@
                                               "S"
                                             ]
                                           },
-                                          "type_ptr" : 12
+                                          "qual_type" : {
+                                            "type_ptr" : 12
+                                          }
                                         }
                                       }
                                     )>
                                   ],
                                   {
-                                    "type_ptr" : 8
+                                    "qual_type" : {
+                                      "type_ptr" : 8
+                                    }
                                   },
                                   {
                                     "cxx_temporary" : 29
@@ -672,7 +697,10 @@
                                 )>
                               ],
                               {
-                                "type_ptr" : 8
+                                "qual_type" : {
+                                  "type_ptr" : 8,
+                                  "is_const" : true
+                                }
                               },
                               {
                                 "cast_kind" : <"NoOp">,
@@ -682,7 +710,10 @@
                             )>
                           ],
                           {
-                            "type_ptr" : 8,
+                            "qual_type" : {
+                              "type_ptr" : 8,
+                              "is_const" : true
+                            },
                             "value_kind" : <"LValue">
                           },
                           {
@@ -695,13 +726,18 @@
                                   "s_ref"
                                 ]
                               },
-                              "type_ptr" : 20
+                              "qual_type" : {
+                                "type_ptr" : 20
+                              }
                             }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8,
+                          "is_const" : true
+                        },
                         "value_kind" : <"LValue">
                       },
                       {
@@ -1018,7 +1054,9 @@
         {
           "pointer" : 79
         },
-        77,
+        {
+          "type_ptr" : 77
+        },
         1
       )>,
       <"RecordType" : (
@@ -1040,7 +1078,9 @@
           "pointer" : 12
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
         }
@@ -1050,7 +1090,9 @@
           "pointer" : 81
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
         }
@@ -1060,7 +1102,9 @@
           "pointer" : 15
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
         }
@@ -1079,11 +1123,15 @@
           "pointer" : 82
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
           "params_type" : [
-            20
+            {
+              "type_ptr" : 20
+            }
           ]
         }
       )>,
@@ -1092,11 +1140,15 @@
           "pointer" : 18
         },
         {
-          "return_type" : 33
+          "return_type" : {
+            "type_ptr" : 33
+          }
         },
         {
           "params_type" : [
-            20
+            {
+              "type_ptr" : 20
+            }
           ]
         }
       )>,
@@ -1122,7 +1174,9 @@
           "desugared_type" : 84
         },
         {
-          "child_type" : 84,
+          "child_type" : {
+            "type_ptr" : 84
+          },
           "decl_ptr" : 86
         }
       )>,
@@ -1132,7 +1186,9 @@
           "desugared_type" : 84
         },
         {
-          "child_type" : 85,
+          "child_type" : {
+            "type_ptr" : 85
+          },
           "decl_ptr" : 31
         }
       )>,

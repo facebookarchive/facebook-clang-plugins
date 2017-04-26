@@ -582,7 +582,9 @@
         {
           "pointer" : 67
         },
-        65,
+        {
+          "type_ptr" : 65
+        },
         1
       ]],
       ["TemplateTypeParmType" , [
@@ -600,11 +602,15 @@
           "pointer" : 70
         },
         {
-          "return_type" : 51
+          "return_type" : {
+            "type_ptr" : 51
+          }
         },
         {
           "params_type" : [
-            68
+            {
+              "type_ptr" : 68
+            }
           ]
         }
       ]],
@@ -613,11 +619,15 @@
           "pointer" : 71
         },
         {
-          "return_type" : 51
+          "return_type" : {
+            "type_ptr" : 51
+          }
         },
         {
           "params_type" : [
-            69
+            {
+              "type_ptr" : 69
+            }
           ]
         }
       ]],
@@ -627,7 +637,9 @@
           "desugared_type" : 56
         },
         {
-          "child_type" : 56,
+          "child_type" : {
+            "type_ptr" : 56
+          },
           "decl_ptr" : 5
         }
       ]],
@@ -637,7 +649,9 @@
           "desugared_type" : 56
         },
         {
-          "child_type" : 6,
+          "child_type" : {
+            "type_ptr" : 6
+          },
           "decl_ptr" : 13
         }
       ]],

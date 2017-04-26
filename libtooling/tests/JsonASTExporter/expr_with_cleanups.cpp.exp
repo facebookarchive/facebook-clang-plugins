@@ -419,7 +419,9 @@
               "X"
             ]
           },
-          "type_ptr" : 23
+          "qual_type" : {
+            "type_ptr" : 23
+          }
         }
       }
     ]],
@@ -682,7 +684,9 @@
               "Y"
             ]
           },
-          "type_ptr" : 23
+          "qual_type" : {
+            "type_ptr" : 23
+          }
         }
       }
     ]],
@@ -879,7 +883,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 14
+                        "qual_type" : {
+                          "type_ptr" : 14
+                        }
                       },
                       {
                         "is_signed" : true,
@@ -889,7 +895,9 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : 8
+                    "qual_type" : {
+                      "type_ptr" : 8
+                    }
                   },
                   {
                     "decl_ref" : {
@@ -902,7 +910,9 @@
                           "X"
                         ]
                       },
-                      "type_ptr" : 12
+                      "qual_type" : {
+                        "type_ptr" : 12
+                      }
                     }
                   }
                 ]]
@@ -960,7 +970,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 14
+                            "qual_type" : {
+                              "type_ptr" : 14
+                            }
                           },
                           {
                             "is_signed" : true,
@@ -970,7 +982,9 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 8
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        }
                       },
                       {
                         "decl_ref" : {
@@ -983,7 +997,9 @@
                               "X"
                             ]
                           },
-                          "type_ptr" : 12
+                          "qual_type" : {
+                            "type_ptr" : 12
+                          }
                         }
                       }
                     ]]
@@ -1111,7 +1127,9 @@
                                               [
                                               ],
                                               {
-                                                "type_ptr" : 37,
+                                                "qual_type" : {
+                                                  "type_ptr" : 37
+                                                },
                                                 "value_kind" : "LValue"
                                               },
                                               {
@@ -1124,13 +1142,17 @@
                                                       "f"
                                                     ]
                                                   },
-                                                  "type_ptr" : 37
+                                                  "qual_type" : {
+                                                    "type_ptr" : 37
+                                                  }
                                                 }
                                               }
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 58
+                                            "qual_type" : {
+                                              "type_ptr" : 58
+                                            }
                                           },
                                           {
                                             "cast_kind" : "FunctionToPointerDecay",
@@ -1244,7 +1266,9 @@
                                                                       [
                                                                       ],
                                                                       {
-                                                                        "type_ptr" : 14
+                                                                        "qual_type" : {
+                                                                          "type_ptr" : 14
+                                                                        }
                                                                       },
                                                                       {
                                                                         "is_signed" : true,
@@ -1254,7 +1278,9 @@
                                                                     ]]
                                                                   ],
                                                                   {
-                                                                    "type_ptr" : 8
+                                                                    "qual_type" : {
+                                                                      "type_ptr" : 8
+                                                                    }
                                                                   },
                                                                   {
                                                                     "decl_ref" : {
@@ -1267,13 +1293,17 @@
                                                                           "X"
                                                                         ]
                                                                       },
-                                                                      "type_ptr" : 12
+                                                                      "qual_type" : {
+                                                                        "type_ptr" : 12
+                                                                      }
                                                                     }
                                                                   }
                                                                 ]]
                                                               ],
                                                               {
-                                                                "type_ptr" : 8
+                                                                "qual_type" : {
+                                                                  "type_ptr" : 8
+                                                                }
                                                               },
                                                               {
                                                                 "cxx_temporary" : 67
@@ -1281,18 +1311,25 @@
                                                             ]]
                                                           ],
                                                           {
-                                                            "type_ptr" : 8
+                                                            "qual_type" : {
+                                                              "type_ptr" : 8
+                                                            }
                                                           },
                                                           {
                                                             "cast_kind" : "ConstructorConversion",
                                                             "base_path" : [
                                                             ]
                                                           },
-                                                          8
+                                                          {
+                                                            "type_ptr" : 8
+                                                          }
                                                         ]]
                                                       ],
                                                       {
-                                                        "type_ptr" : 8
+                                                        "qual_type" : {
+                                                          "type_ptr" : 8,
+                                                          "is_const" : true
+                                                        }
                                                       },
                                                       {
                                                         "cast_kind" : "NoOp",
@@ -1302,7 +1339,10 @@
                                                     ]]
                                                   ],
                                                   {
-                                                    "type_ptr" : 8,
+                                                    "qual_type" : {
+                                                      "type_ptr" : 8,
+                                                      "is_const" : true
+                                                    },
                                                     "value_kind" : "LValue"
                                                   },
                                                   {
@@ -1310,7 +1350,9 @@
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 8
+                                                "qual_type" : {
+                                                  "type_ptr" : 8
+                                                }
                                               },
                                               {
                                                 "decl_ref" : {
@@ -1323,14 +1365,18 @@
                                                       "X"
                                                     ]
                                                   },
-                                                  "type_ptr" : 16
+                                                  "qual_type" : {
+                                                    "type_ptr" : 16
+                                                  }
                                                 },
                                                 "is_elidable" : true
                                               }
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 8
+                                            "qual_type" : {
+                                              "type_ptr" : 8
+                                            }
                                           },
                                           {
                                             "cxx_temporary" : 68
@@ -1338,12 +1384,16 @@
                                         ]]
                                       ],
                                       {
-                                        "type_ptr" : 8
+                                        "qual_type" : {
+                                          "type_ptr" : 8
+                                        }
                                       }
                                     ]]
                                   ],
                                   {
-                                    "type_ptr" : 8
+                                    "qual_type" : {
+                                      "type_ptr" : 8
+                                    }
                                   },
                                   {
                                     "cxx_temporary" : 69
@@ -1351,7 +1401,10 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : 8
+                                "qual_type" : {
+                                  "type_ptr" : 8,
+                                  "is_const" : true
+                                }
                               },
                               {
                                 "cast_kind" : "NoOp",
@@ -1361,7 +1414,10 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : 8,
+                            "qual_type" : {
+                              "type_ptr" : 8,
+                              "is_const" : true
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1369,7 +1425,9 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 8
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        }
                       },
                       {
                         "decl_ref" : {
@@ -1382,14 +1440,18 @@
                               "X"
                             ]
                           },
-                          "type_ptr" : 16
+                          "qual_type" : {
+                            "type_ptr" : 16
+                          }
                         },
                         "is_elidable" : true
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 8
+                    "qual_type" : {
+                      "type_ptr" : 8
+                    }
                   },
                   {
                   }
@@ -1524,7 +1586,9 @@
                                                   [
                                                   ],
                                                   {
-                                                    "type_ptr" : 37,
+                                                    "qual_type" : {
+                                                      "type_ptr" : 37
+                                                    },
                                                     "value_kind" : "LValue"
                                                   },
                                                   {
@@ -1537,13 +1601,17 @@
                                                           "f"
                                                         ]
                                                       },
-                                                      "type_ptr" : 37
+                                                      "qual_type" : {
+                                                        "type_ptr" : 37
+                                                      }
                                                     }
                                                   }
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 58
+                                                "qual_type" : {
+                                                  "type_ptr" : 58
+                                                }
                                               },
                                               {
                                                 "cast_kind" : "FunctionToPointerDecay",
@@ -1657,7 +1725,9 @@
                                                                           [
                                                                           ],
                                                                           {
-                                                                            "type_ptr" : 14
+                                                                            "qual_type" : {
+                                                                              "type_ptr" : 14
+                                                                            }
                                                                           },
                                                                           {
                                                                             "is_signed" : true,
@@ -1667,7 +1737,9 @@
                                                                         ]]
                                                                       ],
                                                                       {
-                                                                        "type_ptr" : 8
+                                                                        "qual_type" : {
+                                                                          "type_ptr" : 8
+                                                                        }
                                                                       },
                                                                       {
                                                                         "decl_ref" : {
@@ -1680,13 +1752,17 @@
                                                                               "X"
                                                                             ]
                                                                           },
-                                                                          "type_ptr" : 12
+                                                                          "qual_type" : {
+                                                                            "type_ptr" : 12
+                                                                          }
                                                                         }
                                                                       }
                                                                     ]]
                                                                   ],
                                                                   {
-                                                                    "type_ptr" : 8
+                                                                    "qual_type" : {
+                                                                      "type_ptr" : 8
+                                                                    }
                                                                   },
                                                                   {
                                                                     "cxx_temporary" : 67
@@ -1694,18 +1770,25 @@
                                                                 ]]
                                                               ],
                                                               {
-                                                                "type_ptr" : 8
+                                                                "qual_type" : {
+                                                                  "type_ptr" : 8
+                                                                }
                                                               },
                                                               {
                                                                 "cast_kind" : "ConstructorConversion",
                                                                 "base_path" : [
                                                                 ]
                                                               },
-                                                              8
+                                                              {
+                                                                "type_ptr" : 8
+                                                              }
                                                             ]]
                                                           ],
                                                           {
-                                                            "type_ptr" : 8
+                                                            "qual_type" : {
+                                                              "type_ptr" : 8,
+                                                              "is_const" : true
+                                                            }
                                                           },
                                                           {
                                                             "cast_kind" : "NoOp",
@@ -1715,7 +1798,10 @@
                                                         ]]
                                                       ],
                                                       {
-                                                        "type_ptr" : 8,
+                                                        "qual_type" : {
+                                                          "type_ptr" : 8,
+                                                          "is_const" : true
+                                                        },
                                                         "value_kind" : "LValue"
                                                       },
                                                       {
@@ -1723,7 +1809,9 @@
                                                     ]]
                                                   ],
                                                   {
-                                                    "type_ptr" : 8
+                                                    "qual_type" : {
+                                                      "type_ptr" : 8
+                                                    }
                                                   },
                                                   {
                                                     "decl_ref" : {
@@ -1736,14 +1824,18 @@
                                                           "X"
                                                         ]
                                                       },
-                                                      "type_ptr" : 16
+                                                      "qual_type" : {
+                                                        "type_ptr" : 16
+                                                      }
                                                     },
                                                     "is_elidable" : true
                                                   }
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 8
+                                                "qual_type" : {
+                                                  "type_ptr" : 8
+                                                }
                                               },
                                               {
                                                 "cxx_temporary" : 68
@@ -1751,12 +1843,16 @@
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 8
+                                            "qual_type" : {
+                                              "type_ptr" : 8
+                                            }
                                           }
                                         ]]
                                       ],
                                       {
-                                        "type_ptr" : 8
+                                        "qual_type" : {
+                                          "type_ptr" : 8
+                                        }
                                       },
                                       {
                                         "cxx_temporary" : 69
@@ -1764,7 +1860,10 @@
                                     ]]
                                   ],
                                   {
-                                    "type_ptr" : 8
+                                    "qual_type" : {
+                                      "type_ptr" : 8,
+                                      "is_const" : true
+                                    }
                                   },
                                   {
                                     "cast_kind" : "NoOp",
@@ -1774,7 +1873,10 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : 8,
+                                "qual_type" : {
+                                  "type_ptr" : 8,
+                                  "is_const" : true
+                                },
                                 "value_kind" : "LValue"
                               },
                               {
@@ -1782,7 +1884,9 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : 8
+                            "qual_type" : {
+                              "type_ptr" : 8
+                            }
                           },
                           {
                             "decl_ref" : {
@@ -1795,14 +1899,18 @@
                                   "X"
                                 ]
                               },
-                              "type_ptr" : 16
+                              "qual_type" : {
+                                "type_ptr" : 16
+                              }
                             },
                             "is_elidable" : true
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 8
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        }
                       },
                       {
                       }
@@ -1931,7 +2039,9 @@
                                               [
                                               ],
                                               {
-                                                "type_ptr" : 40,
+                                                "qual_type" : {
+                                                  "type_ptr" : 40
+                                                },
                                                 "value_kind" : "LValue"
                                               },
                                               {
@@ -1944,13 +2054,17 @@
                                                       "g"
                                                     ]
                                                   },
-                                                  "type_ptr" : 40
+                                                  "qual_type" : {
+                                                    "type_ptr" : 40
+                                                  }
                                                 }
                                               }
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 80
+                                            "qual_type" : {
+                                              "type_ptr" : 80
+                                            }
                                           },
                                           {
                                             "cast_kind" : "FunctionToPointerDecay",
@@ -2064,7 +2178,9 @@
                                                                       [
                                                                       ],
                                                                       {
-                                                                        "type_ptr" : 14
+                                                                        "qual_type" : {
+                                                                          "type_ptr" : 14
+                                                                        }
                                                                       },
                                                                       {
                                                                         "is_signed" : true,
@@ -2074,7 +2190,9 @@
                                                                     ]]
                                                                   ],
                                                                   {
-                                                                    "type_ptr" : 25
+                                                                    "qual_type" : {
+                                                                      "type_ptr" : 25
+                                                                    }
                                                                   },
                                                                   {
                                                                     "decl_ref" : {
@@ -2087,13 +2205,17 @@
                                                                           "Y"
                                                                         ]
                                                                       },
-                                                                      "type_ptr" : 12
+                                                                      "qual_type" : {
+                                                                        "type_ptr" : 12
+                                                                      }
                                                                     }
                                                                   }
                                                                 ]]
                                                               ],
                                                               {
-                                                                "type_ptr" : 25
+                                                                "qual_type" : {
+                                                                  "type_ptr" : 25
+                                                                }
                                                               },
                                                               {
                                                                 "cxx_temporary" : 89
@@ -2101,18 +2223,25 @@
                                                             ]]
                                                           ],
                                                           {
-                                                            "type_ptr" : 25
+                                                            "qual_type" : {
+                                                              "type_ptr" : 25
+                                                            }
                                                           },
                                                           {
                                                             "cast_kind" : "ConstructorConversion",
                                                             "base_path" : [
                                                             ]
                                                           },
-                                                          25
+                                                          {
+                                                            "type_ptr" : 25
+                                                          }
                                                         ]]
                                                       ],
                                                       {
-                                                        "type_ptr" : 25
+                                                        "qual_type" : {
+                                                          "type_ptr" : 25,
+                                                          "is_const" : true
+                                                        }
                                                       },
                                                       {
                                                         "cast_kind" : "NoOp",
@@ -2122,7 +2251,10 @@
                                                     ]]
                                                   ],
                                                   {
-                                                    "type_ptr" : 25,
+                                                    "qual_type" : {
+                                                      "type_ptr" : 25,
+                                                      "is_const" : true
+                                                    },
                                                     "value_kind" : "LValue"
                                                   },
                                                   {
@@ -2130,7 +2262,9 @@
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 25
+                                                "qual_type" : {
+                                                  "type_ptr" : 25
+                                                }
                                               },
                                               {
                                                 "decl_ref" : {
@@ -2143,14 +2277,18 @@
                                                       "Y"
                                                     ]
                                                   },
-                                                  "type_ptr" : 32
+                                                  "qual_type" : {
+                                                    "type_ptr" : 32
+                                                  }
                                                 },
                                                 "is_elidable" : true
                                               }
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 25
+                                            "qual_type" : {
+                                              "type_ptr" : 25
+                                            }
                                           },
                                           {
                                             "cxx_temporary" : 90
@@ -2158,12 +2296,16 @@
                                         ]]
                                       ],
                                       {
-                                        "type_ptr" : 25
+                                        "qual_type" : {
+                                          "type_ptr" : 25
+                                        }
                                       }
                                     ]]
                                   ],
                                   {
-                                    "type_ptr" : 25
+                                    "qual_type" : {
+                                      "type_ptr" : 25
+                                    }
                                   },
                                   {
                                     "cxx_temporary" : 91
@@ -2171,7 +2313,10 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : 25
+                                "qual_type" : {
+                                  "type_ptr" : 25,
+                                  "is_const" : true
+                                }
                               },
                               {
                                 "cast_kind" : "NoOp",
@@ -2181,7 +2326,10 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : 25,
+                            "qual_type" : {
+                              "type_ptr" : 25,
+                              "is_const" : true
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -2189,7 +2337,9 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 25
+                        "qual_type" : {
+                          "type_ptr" : 25
+                        }
                       },
                       {
                         "decl_ref" : {
@@ -2202,14 +2352,18 @@
                               "Y"
                             ]
                           },
-                          "type_ptr" : 32
+                          "qual_type" : {
+                            "type_ptr" : 32
+                          }
                         },
                         "is_elidable" : true
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 25
+                    "qual_type" : {
+                      "type_ptr" : 25
+                    }
                   },
                   {
                   }
@@ -2344,7 +2498,9 @@
                                                   [
                                                   ],
                                                   {
-                                                    "type_ptr" : 40,
+                                                    "qual_type" : {
+                                                      "type_ptr" : 40
+                                                    },
                                                     "value_kind" : "LValue"
                                                   },
                                                   {
@@ -2357,13 +2513,17 @@
                                                           "g"
                                                         ]
                                                       },
-                                                      "type_ptr" : 40
+                                                      "qual_type" : {
+                                                        "type_ptr" : 40
+                                                      }
                                                     }
                                                   }
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 80
+                                                "qual_type" : {
+                                                  "type_ptr" : 80
+                                                }
                                               },
                                               {
                                                 "cast_kind" : "FunctionToPointerDecay",
@@ -2477,7 +2637,9 @@
                                                                           [
                                                                           ],
                                                                           {
-                                                                            "type_ptr" : 14
+                                                                            "qual_type" : {
+                                                                              "type_ptr" : 14
+                                                                            }
                                                                           },
                                                                           {
                                                                             "is_signed" : true,
@@ -2487,7 +2649,9 @@
                                                                         ]]
                                                                       ],
                                                                       {
-                                                                        "type_ptr" : 25
+                                                                        "qual_type" : {
+                                                                          "type_ptr" : 25
+                                                                        }
                                                                       },
                                                                       {
                                                                         "decl_ref" : {
@@ -2500,13 +2664,17 @@
                                                                               "Y"
                                                                             ]
                                                                           },
-                                                                          "type_ptr" : 12
+                                                                          "qual_type" : {
+                                                                            "type_ptr" : 12
+                                                                          }
                                                                         }
                                                                       }
                                                                     ]]
                                                                   ],
                                                                   {
-                                                                    "type_ptr" : 25
+                                                                    "qual_type" : {
+                                                                      "type_ptr" : 25
+                                                                    }
                                                                   },
                                                                   {
                                                                     "cxx_temporary" : 89
@@ -2514,18 +2682,25 @@
                                                                 ]]
                                                               ],
                                                               {
-                                                                "type_ptr" : 25
+                                                                "qual_type" : {
+                                                                  "type_ptr" : 25
+                                                                }
                                                               },
                                                               {
                                                                 "cast_kind" : "ConstructorConversion",
                                                                 "base_path" : [
                                                                 ]
                                                               },
-                                                              25
+                                                              {
+                                                                "type_ptr" : 25
+                                                              }
                                                             ]]
                                                           ],
                                                           {
-                                                            "type_ptr" : 25
+                                                            "qual_type" : {
+                                                              "type_ptr" : 25,
+                                                              "is_const" : true
+                                                            }
                                                           },
                                                           {
                                                             "cast_kind" : "NoOp",
@@ -2535,7 +2710,10 @@
                                                         ]]
                                                       ],
                                                       {
-                                                        "type_ptr" : 25,
+                                                        "qual_type" : {
+                                                          "type_ptr" : 25,
+                                                          "is_const" : true
+                                                        },
                                                         "value_kind" : "LValue"
                                                       },
                                                       {
@@ -2543,7 +2721,9 @@
                                                     ]]
                                                   ],
                                                   {
-                                                    "type_ptr" : 25
+                                                    "qual_type" : {
+                                                      "type_ptr" : 25
+                                                    }
                                                   },
                                                   {
                                                     "decl_ref" : {
@@ -2556,14 +2736,18 @@
                                                           "Y"
                                                         ]
                                                       },
-                                                      "type_ptr" : 32
+                                                      "qual_type" : {
+                                                        "type_ptr" : 32
+                                                      }
                                                     },
                                                     "is_elidable" : true
                                                   }
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 25
+                                                "qual_type" : {
+                                                  "type_ptr" : 25
+                                                }
                                               },
                                               {
                                                 "cxx_temporary" : 90
@@ -2571,12 +2755,16 @@
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 25
+                                            "qual_type" : {
+                                              "type_ptr" : 25
+                                            }
                                           }
                                         ]]
                                       ],
                                       {
-                                        "type_ptr" : 25
+                                        "qual_type" : {
+                                          "type_ptr" : 25
+                                        }
                                       },
                                       {
                                         "cxx_temporary" : 91
@@ -2584,7 +2772,10 @@
                                     ]]
                                   ],
                                   {
-                                    "type_ptr" : 25
+                                    "qual_type" : {
+                                      "type_ptr" : 25,
+                                      "is_const" : true
+                                    }
                                   },
                                   {
                                     "cast_kind" : "NoOp",
@@ -2594,7 +2785,10 @@
                                 ]]
                               ],
                               {
-                                "type_ptr" : 25,
+                                "qual_type" : {
+                                  "type_ptr" : 25,
+                                  "is_const" : true
+                                },
                                 "value_kind" : "LValue"
                               },
                               {
@@ -2602,7 +2796,9 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : 25
+                            "qual_type" : {
+                              "type_ptr" : 25
+                            }
                           },
                           {
                             "decl_ref" : {
@@ -2615,14 +2811,18 @@
                                   "Y"
                                 ]
                               },
-                              "type_ptr" : 32
+                              "qual_type" : {
+                                "type_ptr" : 32
+                              }
                             },
                             "is_elidable" : true
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 25
+                        "qual_type" : {
+                          "type_ptr" : 25
+                        }
                       },
                       {
                       }
@@ -2686,7 +2886,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 20,
+                            "qual_type" : {
+                              "type_ptr" : 20
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -2700,13 +2902,17 @@
                                   "X"
                                 ]
                               },
-                              "type_ptr" : 20
+                              "qual_type" : {
+                                "type_ptr" : 20
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 97
+                        "qual_type" : {
+                          "type_ptr" : 97
+                        }
                       },
                       {
                         "cast_kind" : "FunctionToPointerDecay",
@@ -2729,7 +2935,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -2742,7 +2950,9 @@
                               "a"
                             ]
                           },
-                          "type_ptr" : 8
+                          "qual_type" : {
+                            "type_ptr" : 8
+                          }
                         }
                       }
                     ]],
@@ -2826,7 +3036,9 @@
                                           [
                                           ],
                                           {
-                                            "type_ptr" : 37,
+                                            "qual_type" : {
+                                              "type_ptr" : 37
+                                            },
                                             "value_kind" : "LValue"
                                           },
                                           {
@@ -2839,13 +3051,17 @@
                                                   "f"
                                                 ]
                                               },
-                                              "type_ptr" : 37
+                                              "qual_type" : {
+                                                "type_ptr" : 37
+                                              }
                                             }
                                           }
                                         ]]
                                       ],
                                       {
-                                        "type_ptr" : 58
+                                        "qual_type" : {
+                                          "type_ptr" : 58
+                                        }
                                       },
                                       {
                                         "cast_kind" : "FunctionToPointerDecay",
@@ -2907,7 +3123,9 @@
                                                   [
                                                   ],
                                                   {
-                                                    "type_ptr" : 8,
+                                                    "qual_type" : {
+                                                      "type_ptr" : 8
+                                                    },
                                                     "value_kind" : "LValue"
                                                   },
                                                   {
@@ -2920,13 +3138,18 @@
                                                           "a"
                                                         ]
                                                       },
-                                                      "type_ptr" : 8
+                                                      "qual_type" : {
+                                                        "type_ptr" : 8
+                                                      }
                                                     }
                                                   }
                                                 ]]
                                               ],
                                               {
-                                                "type_ptr" : 8,
+                                                "qual_type" : {
+                                                  "type_ptr" : 8,
+                                                  "is_const" : true
+                                                },
                                                 "value_kind" : "LValue"
                                               },
                                               {
@@ -2937,7 +3160,9 @@
                                             ]]
                                           ],
                                           {
-                                            "type_ptr" : 8
+                                            "qual_type" : {
+                                              "type_ptr" : 8
+                                            }
                                           },
                                           {
                                             "decl_ref" : {
@@ -2950,13 +3175,17 @@
                                                   "X"
                                                 ]
                                               },
-                                              "type_ptr" : 16
+                                              "qual_type" : {
+                                                "type_ptr" : 16
+                                              }
                                             }
                                           }
                                         ]]
                                       ],
                                       {
-                                        "type_ptr" : 8
+                                        "qual_type" : {
+                                          "type_ptr" : 8
+                                        }
                                       },
                                       {
                                         "cxx_temporary" : 109
@@ -2964,12 +3193,16 @@
                                     ]]
                                   ],
                                   {
-                                    "type_ptr" : 8
+                                    "qual_type" : {
+                                      "type_ptr" : 8
+                                    }
                                   }
                                 ]]
                               ],
                               {
-                                "type_ptr" : 8
+                                "qual_type" : {
+                                  "type_ptr" : 8
+                                }
                               },
                               {
                                 "cxx_temporary" : 110
@@ -2977,7 +3210,10 @@
                             ]]
                           ],
                           {
-                            "type_ptr" : 8
+                            "qual_type" : {
+                              "type_ptr" : 8,
+                              "is_const" : true
+                            }
                           },
                           {
                             "cast_kind" : "NoOp",
@@ -2987,7 +3223,10 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8,
+                          "is_const" : true
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -2995,13 +3234,17 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : 8,
+                    "qual_type" : {
+                      "type_ptr" : 8
+                    },
                     "value_kind" : "LValue"
                   }
                 ]]
               ],
               {
-                "type_ptr" : 8,
+                "qual_type" : {
+                  "type_ptr" : 8
+                },
                 "value_kind" : "LValue"
               },
               {
@@ -3314,7 +3557,9 @@
         {
           "pointer" : 158
         },
-        156,
+        {
+          "type_ptr" : 156
+        },
         1
       ]],
       ["RecordType" , [
@@ -3336,11 +3581,15 @@
           "pointer" : 12
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
           "params_type" : [
-            14
+            {
+              "type_ptr" : 14
+            }
           ]
         }
       ]],
@@ -3358,11 +3607,15 @@
           "pointer" : 16
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
           "params_type" : [
-            18
+            {
+              "type_ptr" : 18
+            }
           ]
         }
       ]],
@@ -3379,11 +3632,15 @@
           "pointer" : 20
         },
         {
-          "return_type" : 160
+          "return_type" : {
+            "type_ptr" : 160
+          }
         },
         {
           "params_type" : [
-            18
+            {
+              "type_ptr" : 18
+            }
           ]
         }
       ]],
@@ -3392,7 +3649,9 @@
           "pointer" : 43
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
         }
@@ -3402,7 +3661,9 @@
           "pointer" : 161
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
         }
@@ -3426,7 +3687,9 @@
           "pointer" : 163
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
         }
@@ -3436,11 +3699,15 @@
           "pointer" : 37
         },
         {
-          "return_type" : 8
+          "return_type" : {
+            "type_ptr" : 8
+          }
         },
         {
           "params_type" : [
-            8
+            {
+              "type_ptr" : 8
+            }
           ]
         }
       ]],
@@ -3449,11 +3716,15 @@
           "pointer" : 40
         },
         {
-          "return_type" : 25
+          "return_type" : {
+            "type_ptr" : 25
+          }
         },
         {
           "params_type" : [
-            25
+            {
+              "type_ptr" : 25
+            }
           ]
         }
       ]],
@@ -3462,7 +3733,9 @@
           "pointer" : 23
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
         }
@@ -3489,11 +3762,15 @@
           "pointer" : 164
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
           "params_type" : [
-            34
+            {
+              "type_ptr" : 34
+            }
           ]
         }
       ]],
@@ -3502,11 +3779,15 @@
           "pointer" : 165
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
           "params_type" : [
-            34
+            {
+              "type_ptr" : 34
+            }
           ]
         }
       ]],
@@ -3523,11 +3804,15 @@
           "pointer" : 32
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
           "params_type" : [
-            34
+            {
+              "type_ptr" : 34
+            }
           ]
         }
       ]],
@@ -3561,7 +3846,9 @@
           "desugared_type" : 167
         },
         {
-          "child_type" : 167,
+          "child_type" : {
+            "type_ptr" : 167
+          },
           "decl_ptr" : 169
         }
       ]],
@@ -3571,7 +3858,9 @@
           "desugared_type" : 167
         },
         {
-          "child_type" : 168,
+          "child_type" : {
+            "type_ptr" : 168
+          },
           "decl_ptr" : 111
         }
       ]],

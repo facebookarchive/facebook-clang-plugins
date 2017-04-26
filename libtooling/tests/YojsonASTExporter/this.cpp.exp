@@ -288,12 +288,16 @@
                           [
                           ],
                           {
-                            "type_ptr" : 18
+                            "qual_type" : {
+                              "type_ptr" : 18
+                            }
                           }
                         )>
                       ],
                       {
-                        "type_ptr" : 11,
+                        "qual_type" : {
+                          "type_ptr" : 11
+                        },
                         "value_kind" : <"LValue">
                       },
                       {
@@ -316,7 +320,9 @@
                               "T"
                             ]
                           },
-                          "type_ptr" : 11
+                          "qual_type" : {
+                            "type_ptr" : 11
+                          }
                         }
                       }
                     )>,
@@ -335,7 +341,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 11
+                        "qual_type" : {
+                          "type_ptr" : 11
+                        }
                       },
                       {
                         "is_signed" : true,
@@ -345,7 +353,9 @@
                     )>
                   ],
                   {
-                    "type_ptr" : 11,
+                    "qual_type" : {
+                      "type_ptr" : 11
+                    },
                     "value_kind" : <"LValue">
                   },
                   {
@@ -671,7 +681,9 @@
         {
           "pointer" : 67
         },
-        65,
+        {
+          "type_ptr" : 65
+        },
         1
       )>,
       <"RecordType" : (
@@ -693,7 +705,9 @@
           "pointer" : 13
         },
         {
-          "return_type" : 22
+          "return_type" : {
+            "type_ptr" : 22
+          }
         },
         {
         }
@@ -720,7 +734,9 @@
           "desugared_type" : 69
         },
         {
-          "child_type" : 69,
+          "child_type" : {
+            "type_ptr" : 69
+          },
           "decl_ptr" : 71
         }
       )>,
@@ -730,7 +746,9 @@
           "desugared_type" : 69
         },
         {
-          "child_type" : 70,
+          "child_type" : {
+            "type_ptr" : 70
+          },
           "decl_ptr" : 20
         }
       )>,

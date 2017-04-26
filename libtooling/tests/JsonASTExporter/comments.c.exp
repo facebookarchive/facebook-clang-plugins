@@ -455,7 +455,9 @@
         {
           "pointer" : 56
         },
-        54,
+        {
+          "type_ptr" : 54
+        },
         1
       ]],
       ["FunctionNoProtoType" , [
@@ -463,7 +465,9 @@
           "pointer" : 8
         },
         {
-          "return_type" : 12
+          "return_type" : {
+            "type_ptr" : 12
+          }
         }
       ]],
       ["ObjCObjectType" , [
@@ -488,7 +492,9 @@
           "desugared_type" : 58
         },
         {
-          "child_type" : 58,
+          "child_type" : {
+            "type_ptr" : 58
+          },
           "decl_ptr" : 60
         }
       ]],
@@ -498,7 +504,9 @@
           "desugared_type" : 58
         },
         {
-          "child_type" : 59,
+          "child_type" : {
+            "type_ptr" : 59
+          },
           "decl_ptr" : 10
         }
       ]],

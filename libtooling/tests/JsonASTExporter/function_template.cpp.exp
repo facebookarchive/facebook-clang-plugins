@@ -249,7 +249,9 @@
                             [
                             ],
                             {
-                              "type_ptr" : 11,
+                              "qual_type" : {
+                                "type_ptr" : 11
+                              },
                               "value_kind" : "LValue"
                             },
                             {
@@ -262,13 +264,17 @@
                                     "x"
                                   ]
                                 },
-                                "type_ptr" : 11
+                                "qual_type" : {
+                                  "type_ptr" : 11
+                                }
                               }
                             }
                           ]]
                         ],
                         {
-                          "type_ptr" : 11
+                          "qual_type" : {
+                            "type_ptr" : 11
+                          }
                         },
                         {
                           "cast_kind" : "LValueToRValue",
@@ -283,7 +289,9 @@
               "template_specialization" : {
                 "template_decl" : 7,
                 "specialization_args" : [
-                  ["Type" , 16]
+                  ["Type" , {
+                    "type_ptr" : 16
+                  }]
                 ]
               }
             }
@@ -397,7 +405,9 @@
                             [
                             ],
                             {
-                              "type_ptr" : 20,
+                              "qual_type" : {
+                                "type_ptr" : 20
+                              },
                               "value_kind" : "LValue"
                             },
                             {
@@ -410,13 +420,17 @@
                                     "x"
                                   ]
                                 },
-                                "type_ptr" : 20
+                                "qual_type" : {
+                                  "type_ptr" : 20
+                                }
                               }
                             }
                           ]]
                         ],
                         {
-                          "type_ptr" : 20
+                          "qual_type" : {
+                            "type_ptr" : 20
+                          }
                         },
                         {
                           "cast_kind" : "LValueToRValue",
@@ -431,7 +445,9 @@
               "template_specialization" : {
                 "template_decl" : 7,
                 "specialization_args" : [
-                  ["Type" , 25]
+                  ["Type" , {
+                    "type_ptr" : 25
+                  }]
                 ]
               }
             }
@@ -545,7 +561,9 @@
                             [
                             ],
                             {
-                              "type_ptr" : 29,
+                              "qual_type" : {
+                                "type_ptr" : 29
+                              },
                               "value_kind" : "LValue"
                             },
                             {
@@ -558,13 +576,17 @@
                                     "x"
                                   ]
                                 },
-                                "type_ptr" : 29
+                                "qual_type" : {
+                                  "type_ptr" : 29
+                                }
                               }
                             }
                           ]]
                         ],
                         {
-                          "type_ptr" : 29
+                          "qual_type" : {
+                            "type_ptr" : 29
+                          }
                         },
                         {
                           "cast_kind" : "LValueToRValue",
@@ -579,7 +601,9 @@
               "template_specialization" : {
                 "template_decl" : 7,
                 "specialization_args" : [
-                  ["Type" , 34]
+                  ["Type" , {
+                    "type_ptr" : 34
+                  }]
                 ]
               }
             }
@@ -696,7 +720,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 38
+                        "qual_type" : {
+                          "type_ptr" : 38
+                        }
                       },
                       {
                         "is_signed" : true,
@@ -732,7 +758,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 38,
+                            "qual_type" : {
+                              "type_ptr" : 38
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -745,13 +773,17 @@
                                   "x"
                                 ]
                               },
-                              "type_ptr" : 38
+                              "qual_type" : {
+                                "type_ptr" : 38
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 38
+                        "qual_type" : {
+                          "type_ptr" : 38
+                        }
                       },
                       {
                         "cast_kind" : "LValueToRValue",
@@ -761,7 +793,9 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : 38
+                    "qual_type" : {
+                      "type_ptr" : 38
+                    }
                   },
                   {
                     "kind" : "Mul"
@@ -774,7 +808,9 @@
         "template_specialization" : {
           "template_decl" : 7,
           "specialization_args" : [
-            ["Type" , 38]
+            ["Type" , {
+              "type_ptr" : 38
+            }]
           ]
         }
       }
@@ -937,7 +973,9 @@
                   [
                   ],
                   {
-                    "type_ptr" : 25,
+                    "qual_type" : {
+                      "type_ptr" : 25
+                    },
                     "value_kind" : "LValue"
                   },
                   {
@@ -950,7 +988,9 @@
                           "c"
                         ]
                       },
-                      "type_ptr" : 25
+                      "qual_type" : {
+                        "type_ptr" : 25
+                      }
                     }
                   }
                 ]],
@@ -995,7 +1035,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 18,
+                            "qual_type" : {
+                              "type_ptr" : 18
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1008,7 +1050,9 @@
                                   "get<char>"
                                 ]
                               },
-                              "type_ptr" : 18
+                              "qual_type" : {
+                                "type_ptr" : 18
+                              }
                             },
                             "found_decl_ref" : {
                               "kind" : "FunctionTemplate",
@@ -1024,7 +1068,9 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 57
+                        "qual_type" : {
+                          "type_ptr" : 57
+                        }
                       },
                       {
                         "cast_kind" : "FunctionToPointerDecay",
@@ -1060,7 +1106,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 25,
+                            "qual_type" : {
+                              "type_ptr" : 25
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1073,13 +1121,17 @@
                                   "c"
                                 ]
                               },
-                              "type_ptr" : 25
+                              "qual_type" : {
+                                "type_ptr" : 25
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 25
+                        "qual_type" : {
+                          "type_ptr" : 25
+                        }
                       },
                       {
                         "cast_kind" : "LValueToRValue",
@@ -1089,12 +1141,16 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : 20
+                    "qual_type" : {
+                      "type_ptr" : 20
+                    }
                   }
                 ]]
               ],
               {
-                "type_ptr" : 25,
+                "qual_type" : {
+                  "type_ptr" : 25
+                },
                 "value_kind" : "LValue"
               },
               {
@@ -1130,7 +1186,9 @@
                   [
                   ],
                   {
-                    "type_ptr" : 34,
+                    "qual_type" : {
+                      "type_ptr" : 34
+                    },
                     "value_kind" : "LValue"
                   },
                   {
@@ -1143,7 +1201,9 @@
                           "f"
                         ]
                       },
-                      "type_ptr" : 34
+                      "qual_type" : {
+                        "type_ptr" : 34
+                      }
                     }
                   }
                 ]],
@@ -1188,7 +1248,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 27,
+                            "qual_type" : {
+                              "type_ptr" : 27
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1201,7 +1263,9 @@
                                   "get<float>"
                                 ]
                               },
-                              "type_ptr" : 27
+                              "qual_type" : {
+                                "type_ptr" : 27
+                              }
                             },
                             "found_decl_ref" : {
                               "kind" : "FunctionTemplate",
@@ -1217,7 +1281,9 @@
                         ]]
                       ],
                       {
-                        "type_ptr" : 65
+                        "qual_type" : {
+                          "type_ptr" : 65
+                        }
                       },
                       {
                         "cast_kind" : "FunctionToPointerDecay",
@@ -1253,7 +1319,9 @@
                           [
                           ],
                           {
-                            "type_ptr" : 34,
+                            "qual_type" : {
+                              "type_ptr" : 34
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -1266,13 +1334,17 @@
                                   "f"
                                 ]
                               },
-                              "type_ptr" : 34
+                              "qual_type" : {
+                                "type_ptr" : 34
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 34
+                        "qual_type" : {
+                          "type_ptr" : 34
+                        }
                       },
                       {
                         "cast_kind" : "LValueToRValue",
@@ -1282,12 +1354,16 @@
                     ]]
                   ],
                   {
-                    "type_ptr" : 29
+                    "qual_type" : {
+                      "type_ptr" : 29
+                    }
                   }
                 ]]
               ],
               {
-                "type_ptr" : 34,
+                "qual_type" : {
+                  "type_ptr" : 34
+                },
                 "value_kind" : "LValue"
               },
               {
@@ -1601,7 +1677,9 @@
         {
           "pointer" : 112
         },
-        110,
+        {
+          "type_ptr" : 110
+        },
         1
       ]],
       ["TemplateTypeParmType" , [
@@ -1619,11 +1697,15 @@
           "pointer" : 115
         },
         {
-          "return_type" : 113
+          "return_type" : {
+            "type_ptr" : 113
+          }
         },
         {
           "params_type" : [
-            113
+            {
+              "type_ptr" : 113
+            }
           ]
         }
       ]],
@@ -1632,11 +1714,15 @@
           "pointer" : 116
         },
         {
-          "return_type" : 114
+          "return_type" : {
+            "type_ptr" : 114
+          }
         },
         {
           "params_type" : [
-            114
+            {
+              "type_ptr" : 114
+            }
           ]
         }
       ]],
@@ -1645,11 +1731,15 @@
           "pointer" : 36
         },
         {
-          "return_type" : 38
+          "return_type" : {
+            "type_ptr" : 38
+          }
         },
         {
           "params_type" : [
-            38
+            {
+              "type_ptr" : 38
+            }
           ]
         }
       ]],
@@ -1664,11 +1754,15 @@
           "pointer" : 118
         },
         {
-          "return_type" : 117
+          "return_type" : {
+            "type_ptr" : 117
+          }
         },
         {
           "params_type" : [
-            117
+            {
+              "type_ptr" : 117
+            }
           ]
         }
       ]],
@@ -1677,11 +1771,15 @@
           "pointer" : 119
         },
         {
-          "return_type" : 16
+          "return_type" : {
+            "type_ptr" : 16
+          }
         },
         {
           "params_type" : [
-            16
+            {
+              "type_ptr" : 16
+            }
           ]
         }
       ]],
@@ -1696,11 +1794,15 @@
           "pointer" : 9
         },
         {
-          "return_type" : 11
+          "return_type" : {
+            "type_ptr" : 11
+          }
         },
         {
           "params_type" : [
-            11
+            {
+              "type_ptr" : 11
+            }
           ]
         }
       ]],
@@ -1709,7 +1811,9 @@
           "pointer" : 46
         },
         {
-          "return_type" : 70
+          "return_type" : {
+            "type_ptr" : 70
+          }
         },
         {
         }
@@ -1725,11 +1829,15 @@
           "pointer" : 120
         },
         {
-          "return_type" : 25
+          "return_type" : {
+            "type_ptr" : 25
+          }
         },
         {
           "params_type" : [
-            25
+            {
+              "type_ptr" : 25
+            }
           ]
         }
       ]],
@@ -1738,11 +1846,15 @@
           "pointer" : 18
         },
         {
-          "return_type" : 20
+          "return_type" : {
+            "type_ptr" : 20
+          }
         },
         {
           "params_type" : [
-            20
+            {
+              "type_ptr" : 20
+            }
           ]
         }
       ]],
@@ -1773,11 +1885,15 @@
           "pointer" : 122
         },
         {
-          "return_type" : 34
+          "return_type" : {
+            "type_ptr" : 34
+          }
         },
         {
           "params_type" : [
-            34
+            {
+              "type_ptr" : 34
+            }
           ]
         }
       ]],
@@ -1786,11 +1902,15 @@
           "pointer" : 27
         },
         {
-          "return_type" : 29
+          "return_type" : {
+            "type_ptr" : 29
+          }
         },
         {
           "params_type" : [
-            29
+            {
+              "type_ptr" : 29
+            }
           ]
         }
       ]],
@@ -1832,7 +1952,9 @@
           "desugared_type" : 125
         },
         {
-          "child_type" : 125,
+          "child_type" : {
+            "type_ptr" : 125
+          },
           "decl_ptr" : 127
         }
       ]],
@@ -1842,7 +1964,9 @@
           "desugared_type" : 125
         },
         {
-          "child_type" : 126,
+          "child_type" : {
+            "type_ptr" : 126
+          },
           "decl_ptr" : 68
         }
       ]],

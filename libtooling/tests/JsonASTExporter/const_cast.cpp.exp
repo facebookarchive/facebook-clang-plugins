@@ -362,7 +362,10 @@
                       [
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8,
+                          "is_const" : true
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -375,13 +378,17 @@
                               "f"
                             ]
                           },
-                          "type_ptr" : 17
+                          "qual_type" : {
+                            "type_ptr" : 17
+                          }
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 8,
+                    "qual_type" : {
+                      "type_ptr" : 8
+                    },
                     "value_kind" : "LValue"
                   },
                   {
@@ -389,7 +396,9 @@
                     "base_path" : [
                     ]
                   },
-                  22,
+                  {
+                    "type_ptr" : 22
+                  },
                   "const_cast"
                 ]]
               ],
@@ -446,7 +455,10 @@
                           [
                           ],
                           {
-                            "type_ptr" : 8,
+                            "qual_type" : {
+                              "type_ptr" : 8,
+                              "is_const" : true
+                            },
                             "value_kind" : "LValue"
                           },
                           {
@@ -459,13 +471,17 @@
                                   "f"
                                 ]
                               },
-                              "type_ptr" : 17
+                              "qual_type" : {
+                                "type_ptr" : 17
+                              }
                             }
                           }
                         ]]
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -473,7 +489,9 @@
                         "base_path" : [
                         ]
                       },
-                      22,
+                      {
+                        "type_ptr" : 22
+                      },
                       "const_cast"
                     ]]
                   }
@@ -522,7 +540,9 @@
                       [
                       ],
                       {
-                        "type_ptr" : 8,
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        },
                         "value_kind" : "LValue"
                       },
                       {
@@ -535,13 +555,17 @@
                               "fRef"
                             ]
                           },
-                          "type_ptr" : 22
+                          "qual_type" : {
+                            "type_ptr" : 22
+                          }
                         }
                       }
                     ]]
                   ],
                   {
-                    "type_ptr" : 27
+                    "qual_type" : {
+                      "type_ptr" : 27
+                    }
                   },
                   {
                     "performs_virtual_dispatch" : true,
@@ -562,13 +586,17 @@
                           "Foo"
                         ]
                       },
-                      "type_ptr" : 12
+                      "qual_type" : {
+                        "type_ptr" : 12
+                      }
                     }
                   }
                 ]]
               ],
               {
-                "type_ptr" : 28
+                "qual_type" : {
+                  "type_ptr" : 28
+                }
               }
             ]]
           ]
@@ -616,7 +644,9 @@
           [
           ],
           {
-            "type_ptr" : 30
+            "qual_type" : {
+              "type_ptr" : 30
+            }
           },
           {
             "is_signed" : true,
@@ -929,7 +959,9 @@
         {
           "pointer" : 77
         },
-        75,
+        {
+          "type_ptr" : 75
+        },
         1
       ]],
       ["RecordType" , [
@@ -951,7 +983,9 @@
           "pointer" : 12
         },
         {
-          "return_type" : 28
+          "return_type" : {
+            "type_ptr" : 28
+          }
         },
         {
         }
@@ -970,11 +1004,15 @@
           "pointer" : 15
         },
         {
-          "return_type" : 28
+          "return_type" : {
+            "type_ptr" : 28
+          }
         },
         {
           "params_type" : [
-            17
+            {
+              "type_ptr" : 17
+            }
           ]
         }
       ]],
@@ -1017,7 +1055,9 @@
           "desugared_type" : 81
         },
         {
-          "child_type" : 81,
+          "child_type" : {
+            "type_ptr" : 81
+          },
           "decl_ptr" : 83
         }
       ]],
@@ -1027,7 +1067,9 @@
           "desugared_type" : 81
         },
         {
-          "child_type" : 82,
+          "child_type" : {
+            "type_ptr" : 82
+          },
           "decl_ptr" : 32
         }
       ]],
