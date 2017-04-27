@@ -3469,7 +3469,7 @@ int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
 //@atd   kind : unary_expr_or_type_trait_kind;
 //@atd   ?qual_type : qual_type option
 //@atd } <ocaml field_prefix="uttei_">
-//@atd type unary_expr_or_type_trait_kind = [ SizeOf | AlignOf | VecStep |
+//@atd type unary_expr_or_type_trait_kind = [ SizeOf of int | AlignOf | VecStep |
 //@atd OpenMPRequiredSimdAlign ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
@@ -3481,9 +3481,18 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
 
   OF.emitTag("kind");
   switch (Node->getKind()) {
-  case UETT_SizeOf:
-    OF.emitSimpleVariant("SizeOf");
+  case UETT_SizeOf: {
+    VariantScope Scope(OF, "SizeOf");
+    const Type *ArgType = Node->getTypeOfArgument().getTypePtr();
+    uint64_t size = 0;
+    // clang goes into an infinite loop trying to compute the TypeInfo of
+    // template type parameters
+    if (!ArgType->isTemplateTypeParmType()) {
+      size = Context.getTypeInfo(ArgType).Width;
+    }
+    OF.emitInteger(size);
     break;
+  };
   case UETT_AlignOf:
     OF.emitSimpleVariant("AlignOf");
     break;
