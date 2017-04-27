@@ -3484,10 +3484,12 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
   case UETT_SizeOf: {
     VariantScope Scope(OF, "SizeOf");
     const Type *ArgType = Node->getTypeOfArgument().getTypePtr();
-    uint64_t size = 0;
+    uint64_t size;
     // clang goes into an infinite loop trying to compute the TypeInfo of
-    // template type parameters
-    if (!ArgType->isTemplateTypeParmType()) {
+    // dependent types
+    if (ArgType->isDependentType() || !ArgType->isConstantSizeType()) {
+      size = -1;
+    } else {
       size = Context.getTypeInfo(ArgType).Width;
     }
     OF.emitInteger(size);

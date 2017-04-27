@@ -251,16 +251,22 @@
                   [
                   ],
                   {
-                    "type_ptr" : 15
+                    "qual_type" : {
+                      "type_ptr" : 15
+                    }
                   },
                   {
-                    "kind" : <"SizeOf" : 0>,
-                    "type_ptr" : 16
+                    "kind" : <"SizeOf" : -1>,
+                    "qual_type" : {
+                      "type_ptr" : 16
+                    }
                   }
                 )>
               ],
               {
-                "type_ptr" : 12
+                "qual_type" : {
+                  "type_ptr" : 12
+                }
               },
               {
                 "cast_kind" : <"IntegralCast">,
@@ -341,7 +347,9 @@
       {
         "template_decl" : 7,
         "specialization_args" : [
-          <"Type" : 21>,
+          <"Type" : {
+            "type_ptr" : 21
+          }>,
           <"Integral">
         ]
       }
@@ -398,16 +406,22 @@
               [
               ],
               {
-                "type_ptr" : 15
+                "qual_type" : {
+                  "type_ptr" : 15
+                }
               },
               {
                 "kind" : <"SizeOf" : 8>,
-                "type_ptr" : 25
+                "qual_type" : {
+                  "type_ptr" : 25
+                }
               }
             )>
           ],
           {
-            "type_ptr" : 12
+            "qual_type" : {
+              "type_ptr" : 12
+            }
           },
           {
             "cast_kind" : <"IntegralCast">,
@@ -720,7 +734,9 @@
         {
           "pointer" : 71
         },
-        69,
+        {
+          "type_ptr" : 69
+        },
         1
       )>,
       <"TemplateTypeParmType" : (
@@ -786,7 +802,9 @@
           "pointer" : 19
         },
         {
-          "return_type" : 28
+          "return_type" : {
+            "type_ptr" : 28
+          }
         },
         {
         }
@@ -813,7 +831,9 @@
           "desugared_type" : 81
         },
         {
-          "child_type" : 81,
+          "child_type" : {
+            "type_ptr" : 81
+          },
           "decl_ptr" : 83
         }
       )>,
@@ -823,7 +843,9 @@
           "desugared_type" : 81
         },
         {
-          "child_type" : 82,
+          "child_type" : {
+            "type_ptr" : 82
+          },
           "decl_ptr" : 26
         }
       )>,
