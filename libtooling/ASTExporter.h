@@ -565,15 +565,21 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
 //@atd type qual_type = {
 //@atd   type_ptr : type_ptr;
 //@atd   ~is_const : bool;
+//@atd   ~is_restrict : bool;
+//@atd   ~is_volatile : bool;
 //@atd } <ocaml field_prefix="qt_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(const QualType &qt) {
-  bool isNull = qt.isNull();
-  bool IsConst = isNull ? false : qt.isConstQualified();
-  ObjectScope oScope(OF, 1 + IsConst);
+  clang::Qualifiers Quals = qt.isNull() ? clang::Qualifiers() : qt.getQualifiers();
+  bool isConst = Quals.hasConst();
+  bool isRestrict = Quals.hasRestrict();
+  bool isVolatile = Quals.hasVolatile();
+  ObjectScope oScope(OF, 1 + isConst + isVolatile + isRestrict);
   OF.emitTag("type_ptr");
   dumpQualTypeNoQuals(qt);
-  OF.emitFlag("is_const", IsConst);
+  OF.emitFlag("is_const", isConst);
+  OF.emitFlag("is_restrict", isRestrict);
+  OF.emitFlag("is_volatile", isVolatile);
 }
 
 //@atd type named_decl_info = {
