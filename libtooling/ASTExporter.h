@@ -472,6 +472,12 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 //  Utilities
 //===----------------------------------------------------------------------===//
 
+bool hasMeaningfulTypeInfo(const Type *T) {
+  // clang goes into an infinite loop trying to compute the TypeInfo of
+  // dependent types, and a width of 0 if the type doesn't have a constant size
+  return !T->isDependentType() && T->isConstantSizeType();
+}
+
 std::unordered_map<const void *, int> pointerMap;
 int pointerCounter = 1;
 
@@ -3475,8 +3481,8 @@ int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
 //@atd   kind : unary_expr_or_type_trait_kind;
 //@atd   ?qual_type : qual_type option
 //@atd } <ocaml field_prefix="uttei_">
-//@atd type unary_expr_or_type_trait_kind = [ SizeOf of int | AlignOf | VecStep |
-//@atd OpenMPRequiredSimdAlign ]
+//@atd type unary_expr_or_type_trait_kind = [ SizeOfWithSize of int | SizeOf | AlignOf |
+//@atd   VecStep | OpenMPRequiredSimdAlign ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const UnaryExprOrTypeTraitExpr *Node) {
@@ -3488,19 +3494,15 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
   OF.emitTag("kind");
   switch (Node->getKind()) {
   case UETT_SizeOf: {
-    VariantScope Scope(OF, "SizeOf");
     const Type *ArgType = Node->getTypeOfArgument().getTypePtr();
-    uint64_t size;
-    // clang goes into an infinite loop trying to compute the TypeInfo of
-    // dependent types
-    if (ArgType->isDependentType() || !ArgType->isConstantSizeType()) {
-      size = -1;
+    if (hasMeaningfulTypeInfo(ArgType)) {
+      VariantScope Scope(OF, "SizeOfWithSize");
+      OF.emitInteger(Context.getTypeInfo(ArgType).Width);
     } else {
-      size = Context.getTypeInfo(ArgType).Width;
+      OF.emitSimpleVariant("SizeOf");
     }
-    OF.emitInteger(size);
     break;
-  };
+  }
   case UETT_AlignOf:
     OF.emitSimpleVariant("AlignOf");
     break;
@@ -4544,13 +4546,25 @@ void ASTExporter<ATDWriter>::VisitAdjustedType(const AdjustedType *T) {
 
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::ArrayTypeTupleSize() {
-  return TypeWithChildInfoTupleSize();
+  return TypeTupleSize() + 1;
 }
-//@atd #define array_type_tuple type_with_child_info
+//@atd #define array_type_tuple type_tuple * array_type_info
+//@atd type array_type_info = {
+//@atd   element_type : qual_type;
+//@atd   ?stride : int option;
+//@atd } <ocaml field_prefix="arti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitArrayType(const ArrayType *T) {
   VisitType(T);
-  dumpQualType(T->getElementType());
+  QualType EltT = T->getElementType();
+  bool HasStride = hasMeaningfulTypeInfo(EltT.getTypePtr());
+  ObjectScope Scope(OF, 1 + HasStride);
+  OF.emitTag("element_type");
+  dumpQualType(EltT);
+  if (HasStride) {
+    OF.emitTag("stride");
+    OF.emitInteger(Context.getTypeInfo(EltT).Width);
+  };
 }
 
 template <class ATDWriter>

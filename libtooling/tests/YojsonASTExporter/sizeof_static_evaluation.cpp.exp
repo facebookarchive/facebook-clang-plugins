@@ -256,7 +256,7 @@
                     }
                   },
                   {
-                    "kind" : <"SizeOf" : -1>,
+                    "kind" : <"SizeOf">,
                     "qual_type" : {
                       "type_ptr" : 16
                     }
@@ -411,7 +411,7 @@
                 }
               },
               {
-                "kind" : <"SizeOf" : 8>,
+                "kind" : <"SizeOfWithSize" : 8>,
                 "qual_type" : {
                   "type_ptr" : 25
                 }
@@ -735,7 +735,10 @@
           "pointer" : 71
         },
         {
-          "type_ptr" : 69
+          "element_type" : {
+            "type_ptr" : 69
+          },
+          "stride" : 192
         },
         1
       )>,
