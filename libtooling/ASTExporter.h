@@ -437,7 +437,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(ConstantArrayType)
   //  DECLARE_VISITOR(DependentSizedArrayType)
   //  DECLARE_VISITOR(IncompleteArrayType)
-  //  DECLARE_VISITOR(VariableArrayType)
+  DECLARE_VISITOR(VariableArrayType)
   DECLARE_VISITOR(AtomicType)
   DECLARE_VISITOR(AttributedType) // getEquivalentType() + getAttrKind -> string
   //  DECLARE_VISITOR(AutoType)
@@ -4577,6 +4577,18 @@ void ASTExporter<ATDWriter>::VisitConstantArrayType(
     const ConstantArrayType *T) {
   VisitArrayType(T);
   OF.emitInteger(T->getSize().getLimitedValue());
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::VariableArrayTypeTupleSize() {
+  return ArrayTypeTupleSize() + 1;
+}
+//@atd #define variable_array_type_tuple array_type_tuple * pointer
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitVariableArrayType(
+    const VariableArrayType *T) {
+  VisitArrayType(T);
+  dumpPointer(T->getSizeExpr());
 }
 
 template <class ATDWriter>
