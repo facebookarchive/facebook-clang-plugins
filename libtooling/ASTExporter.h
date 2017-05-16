@@ -475,7 +475,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 bool hasMeaningfulTypeInfo(const Type *T) {
   // clang goes into an infinite loop trying to compute the TypeInfo of
   // dependent types, and a width of 0 if the type doesn't have a constant size
-  return !T->isDependentType() && T->isConstantSizeType();
+  return T && !T->isIncompleteType() && !T->isDependentType() && T->isConstantSizeType();
 }
 
 std::unordered_map<const void *, int> pointerMap;
