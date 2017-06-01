@@ -173,3 +173,7 @@ let is_valid_astnode_kind = function
 #define ABSTRACT_STMT(STMT)
 #include <clang/AST/StmtNodes.inc>
 | _ -> false
+
+let string_of_cast_kind = function
+#define CAST_OPERATION(Name) | `Name -> s(Name)
+#include <clang/AST/OperationKinds.def>
