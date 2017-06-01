@@ -1557,6 +1557,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~is_module_private : bool;
 //@atd   ~is_pure : bool;
 //@atd   ~is_delete_as_written : bool;
+//@atd   ~is_no_throw : bool;
 //@atd   ~decls_in_prototype_scope : decl list;
 //@atd   ~parameters : decl list;
 //@atd   ?decl_ptr_with_body : pointer option;
@@ -1575,6 +1576,11 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool IsModulePrivate = D->isModulePrivate();
   bool IsPure = D->isPure();
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
+
+  const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
+  // This will change when upgrading clang to FunctionProtoType::canThrow
+  // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
+  auto IsNoThrow = FPT ? FPT->isNothrow(Context) : false;
   const FunctionDecl *DeclWithBody = D;
   // FunctionDecl::hasBody() will set DeclWithBody pointer to decl that
   // has body. If there is no body in all decls of that function,
@@ -1587,7 +1593,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
   int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
-             IsModulePrivate + IsPure + IsDeletedAsWritten +
+             IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow +
              HasDeclarationBody + (bool)DeclWithBody + (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
@@ -1614,6 +1620,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_pure", IsPure);
   OF.emitFlag("is_delete_as_written", IsDeletedAsWritten);
+  OF.emitFlag("is_no_throw", IsNoThrow);
 
   //  if (const FunctionProtoType *FPT =
   //  D->getType()->getAs<FunctionProtoType>()) {
