@@ -177,3 +177,13 @@ let is_valid_astnode_kind = function
 let string_of_cast_kind = function
 #define CAST_OPERATION(Name) | `Name -> s(Name)
 #include <clang/AST/OperationKinds.def>
+
+let get_cast_kind = function
+#define STMT(CLASS, PARENT)
+#define ABSTRACT_STMT(TYPE)
+#define CASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info)
+#define EXPLICITCASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info, _)
+#define CXXNAMEDCASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info, _, _)
+#include<clang/AST/StmtNodes.inc>
+-> Some cast_expr_info.cei_cast_kind
+| _ -> None
