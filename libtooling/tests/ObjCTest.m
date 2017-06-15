@@ -78,6 +78,14 @@
 
 @end
 
+@interface MyClassGenerics<ObjectType> : NSObject
+
+@end
+
+@interface BarGenerics : NSObject
++ (instancetype)newWithCs:(MyClassGenerics<NSObject*>*)Cs;
+@end
+
 int main(int argc, char** argv) {
   @autoreleasepool {
     [[[[MyClass alloc] init] autorelease] foo:@"hello"];
@@ -85,3 +93,4 @@ int main(int argc, char** argv) {
   }
   return 0;
 }
+

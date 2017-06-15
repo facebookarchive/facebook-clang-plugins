@@ -258,7 +258,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpDeclarationName(const DeclarationName &Name);
   void dumpNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS);
   void dumpTemplateArgument(const TemplateArgument &Arg);
-  void dumpTemplateSpecialization(const TemplateDecl* D, const TemplateArgumentList& Args);
+  void dumpTemplateSpecialization(const TemplateDecl *D,
+                                  const TemplateArgumentList &Args);
   //    void dumpTemplateParameters(const TemplateParameterList *TPL);
   //    void dumpTemplateArgumentListInfo(const TemplateArgumentListInfo &TALI);
   //    void dumpTemplateArgumentLoc(const TemplateArgumentLoc &A);
@@ -475,7 +476,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 bool hasMeaningfulTypeInfo(const Type *T) {
   // clang goes into an infinite loop trying to compute the TypeInfo of
   // dependent types, and a width of 0 if the type doesn't have a constant size
-  return T && !T->isIncompleteType() && !T->isDependentType() && T->isConstantSizeType();
+  return T && !T->isIncompleteType() && !T->isDependentType() &&
+         T->isConstantSizeType();
 }
 
 std::unordered_map<const void *, int> pointerMap;
@@ -576,7 +578,8 @@ void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
 //@atd } <ocaml field_prefix="qt_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpQualType(const QualType &qt) {
-  clang::Qualifiers Quals = qt.isNull() ? clang::Qualifiers() : qt.getQualifiers();
+  clang::Qualifiers Quals =
+      qt.isNull() ? clang::Qualifiers() : qt.getQualifiers();
   bool isConst = Quals.hasConst();
   bool isRestrict = Quals.hasRestrict();
   bool isVolatile = Quals.hasVolatile();
@@ -1589,7 +1592,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     DeclWithBody = nullptr;
   }
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
-  FunctionTemplateDecl* TemplateDecl = D->getPrimaryTemplate();
+  FunctionTemplateDecl *TemplateDecl = D->getPrimaryTemplate();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
   int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
@@ -1681,7 +1684,8 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   }
   if (TemplateDecl) {
     OF.emitTag("template_specialization");
-    dumpTemplateSpecialization(TemplateDecl, *D->getTemplateSpecializationArgs());
+    dumpTemplateSpecialization(TemplateDecl,
+                               *D->getTemplateSpecializationArgs());
   }
 }
 
@@ -1998,7 +2002,8 @@ void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
 //@atd   ~specialization_args : template_instantiation_arg_info list;
 //@atd } <ocaml field_prefix="tsi_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpTemplateSpecialization(const TemplateDecl *D, const TemplateArgumentList &Args) {
+void ASTExporter<ATDWriter>::dumpTemplateSpecialization(
+    const TemplateDecl *D, const TemplateArgumentList &Args) {
   bool HasTemplateArgs = Args.size() > 0;
   ObjectScope oScope(OF, 1 + HasTemplateArgs);
   OF.emitTag("template_decl");
@@ -2022,7 +2027,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
     const ClassTemplateSpecializationDecl *D) {
   VisitCXXRecordDecl(D);
-  dumpTemplateSpecialization(D->getSpecializedTemplate(), D->getTemplateInstantiationArgs());
+  dumpTemplateSpecialization(D->getSpecializedTemplate(),
+                             D->getTemplateInstantiationArgs());
 }
 
 template <class ATDWriter>
@@ -4492,7 +4498,7 @@ void ASTExporter<ATDWriter>::dumpType(const Type *T) {
 
 //@atd type type_ptr = int wrap <ocaml module="Clang_ast_types.TypePtr">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpPointerToType(const Type* T) {
+void ASTExporter<ATDWriter>::dumpPointerToType(const Type *T) {
   dumpPointer(T);
 }
 
@@ -4915,6 +4921,7 @@ int ASTExporter<ATDWriter>::ObjCObjectTypeTupleSize() {
 //@atd type objc_object_type_info = {
 //@atd   base_type : type_ptr;
 //@atd   ~protocol_decls_ptr : pointer list;
+//@atd   ~type_args : qual_type list;
 //@atd } <ocaml prefix="ooti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
@@ -4922,7 +4929,8 @@ void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
 
   int numProtocols = T->getNumProtocols();
   bool HasProtocols = numProtocols > 0;
-  ObjectScope Scope(OF, 1 + HasProtocols);
+  bool isSpecialized = T->isSpecialized();
+  ObjectScope Scope(OF, 1 + HasProtocols + isSpecialized);
 
   OF.emitTag("base_type");
   dumpQualTypeNoQuals(T->getBaseType());
@@ -4933,6 +4941,14 @@ void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
     for (int i = 0; i < numProtocols; i++) {
       dumpPointer(T->getProtocol(i));
     }
+  }
+
+  if (isSpecialized) {
+    OF.emitTag("type_args");
+    ArrayScope aScope(OF, T->getTypeArgs().size());
+    for (auto &argType : T->getTypeArgs()) {
+      dumpQualType(argType);
+    };
   }
 }
 
@@ -4946,6 +4962,7 @@ void ASTExporter<ATDWriter>::VisitObjCInterfaceType(
     const ObjCInterfaceType *T) {
   // skip VisitObjCObjectType deliberately - ObjCInterfaceType can't have any
   // protocols
+
   VisitType(T);
   dumpPointer(T->getDecl());
 }
@@ -5056,7 +5073,8 @@ typedef ASTPluginLib::SimplePluginASTAction<
     ASTLib::ExporterASTConsumer<ASTLib::JsonWriter, true>>
     YojsonExporterASTAction;
 typedef ASTPluginLib::SimplePluginASTAction<
-    ASTLib::ExporterASTConsumer<ATDWriter::BiniouWriter<llvm::raw_ostream>, true>>
+    ASTLib::ExporterASTConsumer<ATDWriter::BiniouWriter<llvm::raw_ostream>,
+                                true>>
     BiniouExporterASTAction;
 
 } // end of namespace ASTLib

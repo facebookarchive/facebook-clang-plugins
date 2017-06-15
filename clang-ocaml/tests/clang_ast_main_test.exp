@@ -1,4 +1,4 @@
-118 180 102 
+122 180 107 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -403,9 +403,13 @@ TranslationUnitDecl None:None:None None:None:None
                   ParenExpr
                     CStyleCastExpr
                       IntegerLiteral
-  FunctionDecl tests/ObjCTest.m:81:1 tests/ObjCTest.m:87:1
-     ParmVarDecl tests/ObjCTest.m:81:10 tests/ObjCTest.m:81:14
-     ParmVarDecl tests/ObjCTest.m:81:20 tests/ObjCTest.m:81:27
+  ObjCInterfaceDecl tests/ObjCTest.m:81:1 tests/ObjCTest.m:83:2
+  ObjCInterfaceDecl tests/ObjCTest.m:85:1 tests/ObjCTest.m:87:2
+    ObjCMethodDecl tests/ObjCTest.m:86:1 tests/ObjCTest.m:86:58
+       ParmVarDecl tests/ObjCTest.m:86:28 tests/ObjCTest.m:86:56
+  FunctionDecl tests/ObjCTest.m:89:1 tests/ObjCTest.m:95:1
+     ParmVarDecl tests/ObjCTest.m:89:10 tests/ObjCTest.m:89:14
+     ParmVarDecl tests/ObjCTest.m:89:20 tests/ObjCTest.m:89:27
     CompoundStmt
       ObjCAutoreleasePoolStmt
         CompoundStmt
@@ -421,4 +425,4 @@ TranslationUnitDecl None:None:None None:None:None
               StringLiteral
       ReturnStmt
         IntegerLiteral
-  TypedefDecl tests/ObjCTest.m:86:10 tests/ObjCTest.m:86:10
+  TypedefDecl tests/ObjCTest.m:94:10 tests/ObjCTest.m:94:10
