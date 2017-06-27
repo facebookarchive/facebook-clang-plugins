@@ -156,7 +156,8 @@
                 "column" : 7
               }
             ],
-            "is_implicit" : true
+            "is_implicit" : true,
+            "access" : "Public"
           },
           {
             "name" : "Foo",
@@ -188,7 +189,8 @@
               {
                 "column" : 7
               }
-            ]
+            ],
+            "access" : "Public"
           }
         ]],
         ["CXXMethodDecl" , [
@@ -205,7 +207,8 @@
               }
             ],
             "is_used" : true,
-            "is_this_declaration_referenced" : true
+            "is_this_declaration_referenced" : true,
+            "access" : "Public"
           },
           {
             "name" : "func",

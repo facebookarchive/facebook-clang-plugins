@@ -33,7 +33,8 @@ let decl_info start stop = {
   di_is_this_declaration_referenced = false;
   di_is_invalid_decl = false;
   di_attributes = [];
-  di_full_comment = None
+  di_full_comment = None;
+  di_access = `None
 }
 
 let name_info name = {

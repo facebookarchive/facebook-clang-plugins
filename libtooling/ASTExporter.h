@@ -1158,6 +1158,7 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::DeclTupleSize() {
   return 1;
 }
+
 //@atd #define decl_tuple decl_info
 //@atd type decl_info = {
 //@atd   pointer : pointer;
@@ -1171,7 +1172,8 @@ int ASTExporter<ATDWriter>::DeclTupleSize() {
 //@atd   ~is_this_declaration_referenced : bool;
 //@atd   ~is_invalid_decl : bool;
 //@atd   ~attributes : attribute list;
-//@atd   ?full_comment : comment option
+//@atd   ?full_comment : comment option;
+//@atd   ~access <ocaml default="`None"> : access_specifier
 //@atd } <ocaml field_prefix="di_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
@@ -1192,9 +1194,11 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     bool HasAttributes = D->hasAttrs();
     const FullComment *Comment =
         D->getASTContext().getLocalCommentForDeclUncached(D);
+    AccessSpecifier Access = D->getAccess();
+    bool HasAccess = Access != AccessSpecifier::AS_none;
     int maxSize = 3 + ShouldEmitParentPointer + (bool)M + IsNDHidden +
                   IsDImplicit + IsDUsed + IsDReferenced + IsDInvalid +
-                  HasAttributes + (bool)Comment;
+                  HasAttributes + (bool)Comment + HasAccess;
     ObjectScope Scope(OF, maxSize);
 
     OF.emitTag("pointer");
@@ -1228,6 +1232,11 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     if (Comment && Options.dumpComments) {
       OF.emitTag("full_comment");
       dumpFullComment(Comment);
+    }
+
+    if (HasAccess) {
+      OF.emitTag("access");
+      dumpAccessSpecifier(Access);
     }
   }
 }

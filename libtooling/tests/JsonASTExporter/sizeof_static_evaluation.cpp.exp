@@ -178,7 +178,8 @@
               }
             ],
             "is_implicit" : true,
-            "is_this_declaration_referenced" : true
+            "is_this_declaration_referenced" : true,
+            "access" : "Public"
           },
           {
             "name" : "__foo",
@@ -211,7 +212,8 @@
               {
                 "column" : 19
               }
-            ]
+            ],
+            "access" : "Private"
           },
           {
             "name" : "x",
@@ -288,7 +290,8 @@
               {
                 "column" : 9
               }
-            ]
+            ],
+            "access" : "Public"
           }
         ]],
         ["CXXConstructorDecl" , [
@@ -302,7 +305,8 @@
               {
                 "column" : 20
               }
-            ]
+            ],
+            "access" : "Public"
           },
           {
             "name" : "__foo<type-parameter-0-0, true>",
