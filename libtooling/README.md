@@ -8,4 +8,6 @@ export CLANG_PREFIX=/usr/local
 make -C libtooling test
 ```
 
-See http://clang.llvm.org/docs/ClangPlugins.html for general documentation.
+More information:
+- [`ATD_GUIDELINES`](https://github.com/facebook/facebook-clang-plugins/tree/master/libtooling/ATD_GUIDELINES.md) for documentation about ASTExporter.
+- http://clang.llvm.org/docs/ClangPlugins.html for general documentation about clang plugins
