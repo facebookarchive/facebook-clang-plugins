@@ -53,7 +53,7 @@ build/FacebookClangPlugin.dylib: $(OBJS:%=build/%) $(HEADERS)
 AST_EXPORTER_OBJS=ast_exporter_bin.o SimplePluginASTAction.o FileUtils.o AttrParameterVectorStream.o
 build/ast_exporter_bin: $(AST_EXPORTER_OBJS:%=build/%) $(HEADERS)
 	@mkdir -p build
-	$(CXX) -o $@ $(AST_EXPORTER_OBJS:%=build/%) $(LDFLAGS) $(LLVM_CXXFLAGS) $(CLANG_TOOL_LIBS) $(LLVM_LDFLAGS) -lz -lpthread -lm 
+	$(CXX) -o $@ $(AST_EXPORTER_OBJS:%=build/%) $(LDFLAGS) $(LLVM_CXXFLAGS) $(CLANG_TOOL_LIBS) $(LLVM_LDFLAGS) -lz -lpthread -lm
 
 TEST_DIRS=tests
 ifneq "$(EXTRA_DIR)" ""
@@ -98,10 +98,10 @@ test: build/FacebookClangPlugin.dylib
 	       EXTRA_FLAGS="-ObjC -fblocks";                                            \
 	       ;;                                                                       \
 	     *.cpp )                                                                    \
-	       EXTRA_FLAGS="--std=c++11";                                               \
+	       EXTRA_FLAGS="--std=c++14";                                               \
 	       ;;                                                                       \
 	     *.mm )                                                                     \
-	       EXTRA_FLAGS="--std=c++11 -ObjC++ -fblocks";                              \
+	       EXTRA_FLAGS="--std=c++14 -ObjC++ -fblocks";                              \
 	       ;;                                                                       \
 	     esac;                                                                      \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
@@ -136,7 +136,7 @@ build/ast_samples/%.cpp.yjson: %.cpp build/FacebookClangPlugin.dylib
 
 build/ast_samples/%.cpp.yjson: tests/%.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) --std=c++11 $(YJ_DUMPER_ARGS) $@ -c $<
+	@$(CLANG_FRONTEND) --std=c++14 $(YJ_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.c.yjson: tests/%.c build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
@@ -148,7 +148,7 @@ build/ast_samples/%.m.yjson: tests/%.m build/FacebookClangPlugin.dylib
 
 build/ast_samples/%.mm.yjson: tests/%.mm build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) --std=c++11 $(YJ_DUMPER_ARGS) $@ -c $<
+	@$(CLANG_FRONTEND) --std=c++14 $(YJ_DUMPER_ARGS) $@ -c $<
 
 # dump sample files in Yojson using ASTExporter.cpp
 J_DUMPER_ARGS=-Xclang -plugin -Xclang JsonASTExporter -Xclang -plugin-arg-JsonASTExporter -Xclang
@@ -159,7 +159,7 @@ build/ast_samples/%.cpp.json: %.cpp build/FacebookClangPlugin.dylib
 
 build/ast_samples/%.cpp.json: tests/%.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) --std=c++11 $(J_DUMPER_ARGS) $@ -c $<
+	@$(CLANG_FRONTEND) --std=c++14 $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.c.json: tests/%.c build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples

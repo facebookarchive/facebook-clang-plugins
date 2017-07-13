@@ -12,11 +12,11 @@ ifneq "$(SDKPATH)" ""
 IOSFLAGS=-arch i386 -fmessage-length=0 -fpascal-strings -isysroot $(SDKPATH) -fexceptions -fasm-blocks -fstrict-aliasing -g -fobjc-abi-version=2 -mios-simulator-version-min=5.0 -Wno-objc-property-synthesis -Werror
 endif
 
-# we assume that the targeted clang was configured with --enable-libcpp --enable-cxx11
-CFLAGS_Darwin+=-stdlib=libc++ -std=c++11
+# we assume that the targeted clang was configured with --enable-libcpp --enable-cxx14
+CFLAGS_Darwin+=-stdlib=libc++ -std=c++14
 LDFLAGS_Darwin+=-stdlib=libc++
 
-CFLAGS_Linux+=-std=c++11 -fPIC
+CFLAGS_Linux+=-std=c++14 -fPIC
 LDFLAGS_Linux+=
 
 override CFLAGS+=$(CFLAGS_$(shell uname)) -g

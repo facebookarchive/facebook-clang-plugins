@@ -1511,7 +1511,7 @@
                     ]
                   },
                   [
-                    ["IntegerLiteral" , [
+                    ["ImplicitCastExpr" , [
                       {
                         "pointer" : 67,
                         "source_range" : [
@@ -1524,16 +1524,41 @@
                         ]
                       },
                       [
+                        ["IntegerLiteral" , [
+                          {
+                            "pointer" : 68,
+                            "source_range" : [
+                              {
+                                "column" : 23
+                              },
+                              {
+                                "column" : 23
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 11
+                            }
+                          },
+                          {
+                            "is_signed" : true,
+                            "bitwidth" : 32,
+                            "value" : "10"
+                          }
+                        ]]
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 11
+                          "type_ptr" : 69
                         }
                       },
                       {
-                        "is_signed" : true,
-                        "bitwidth" : 32,
-                        "value" : "10"
+                        "cast_kind" : "IntegralCast",
+                        "base_path" : [
+                        ]
                       }
                     ]]
                   ],
@@ -1551,7 +1576,7 @@
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 68,
+                    "pointer" : 70,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1586,7 +1611,7 @@
                         ]
                       },
                       [
-                        ["IntegerLiteral" , [
+                        ["ImplicitCastExpr" , [
                           {
                             "pointer" : 67,
                             "source_range" : [
@@ -1599,16 +1624,41 @@
                             ]
                           },
                           [
+                            ["IntegerLiteral" , [
+                              {
+                                "pointer" : 68,
+                                "source_range" : [
+                                  {
+                                    "column" : 23
+                                  },
+                                  {
+                                    "column" : 23
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 11
+                                }
+                              },
+                              {
+                                "is_signed" : true,
+                                "bitwidth" : 32,
+                                "value" : "10"
+                              }
+                            ]]
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 11
+                              "type_ptr" : 69
                             }
                           },
                           {
-                            "is_signed" : true,
-                            "bitwidth" : 32,
-                            "value" : "10"
+                            "cast_kind" : "IntegralCast",
+                            "base_path" : [
+                            ]
                           }
                         ]]
                       ],
@@ -1628,7 +1678,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 69,
+                "pointer" : 71,
                 "source_range" : [
                   {
                     "line" : 17,
@@ -1642,7 +1692,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 70,
+                    "pointer" : 72,
                     "source_range" : [
                       {
                         "column" : 13
@@ -1655,7 +1705,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : 71,
+                        "pointer" : 73,
                         "source_range" : [
                           {
                             "column" : 17
@@ -1692,18 +1742,18 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 72
+                      "type_ptr" : 74
                     }
                   },
                   {
-                    "initializer_expr" : 71
+                    "initializer_expr" : 73
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 73,
+                    "pointer" : 75,
                     "source_range" : [
                       {
                         "column" : 3
@@ -1722,12 +1772,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 74
+                    "type_ptr" : 76
                   },
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : 70,
+                        "pointer" : 72,
                         "source_range" : [
                           {
                             "column" : 13
@@ -1740,7 +1790,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 71,
+                            "pointer" : 73,
                             "source_range" : [
                               {
                                 "column" : 17
@@ -1777,11 +1827,11 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 72
+                          "type_ptr" : 74
                         }
                       },
                       {
-                        "initializer_expr" : 71
+                        "initializer_expr" : 73
                       }
                     ]]
                   }
@@ -1790,7 +1840,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 75,
+                "pointer" : 77,
                 "source_range" : [
                   {
                     "line" : 18,
@@ -1804,7 +1854,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 76,
+                    "pointer" : 78,
                     "source_range" : [
                       {
                         "column" : 15
@@ -1815,121 +1865,22 @@
                     ]
                   },
                   [
-                    ["IntegerLiteral" , [
+                    ["ImplicitCastExpr" , [
                       {
-                        "pointer" : 77,
+                        "pointer" : 79,
                         "source_range" : [
                           {
                             "column" : 23
                           },
                           {
                             "column" : 23
-                          }
-                        ]
-                      },
-                      [
-                      ],
-                      {
-                        "qual_type" : {
-                          "type_ptr" : 11
-                        }
-                      },
-                      {
-                        "is_signed" : true,
-                        "bitwidth" : 32,
-                        "value" : "10"
-                      }
-                    ]],
-                    ["CXXConstructExpr" , [
-                      {
-                        "pointer" : 78,
-                        "source_range" : [
-                          {
-                            "column" : 19
-                          },
-                          {
-                            "column" : 19
-                          }
-                        ]
-                      },
-                      [
-                      ],
-                      {
-                        "qual_type" : {
-                          "type_ptr" : 8
-                        }
-                      },
-                      {
-                        "decl_ref" : {
-                          "kind" : "CXXConstructor",
-                          "decl_pointer" : 12,
-                          "name" : {
-                            "name" : "pod",
-                            "qual_name" : [
-                              "pod",
-                              "pod"
-                            ]
-                          },
-                          "qual_type" : {
-                            "type_ptr" : 13
-                          }
-                        }
-                      }
-                    ]]
-                  ],
-                  {
-                    "qual_type" : {
-                      "type_ptr" : 72
-                    }
-                  },
-                  {
-                    "is_array" : true,
-                    "array_size_expr" : 77,
-                    "initializer_expr" : 78
-                  }
-                ]]
-              ],
-              [
-                ["VarDecl" , [
-                  {
-                    "pointer" : 79,
-                    "source_range" : [
-                      {
-                        "column" : 3
-                      },
-                      {
-                        "column" : 25
-                      }
-                    ],
-                    "is_used" : true,
-                    "is_this_declaration_referenced" : true
-                  },
-                  {
-                    "name" : "p_a",
-                    "qual_name" : [
-                      "p_a"
-                    ]
-                  },
-                  {
-                    "type_ptr" : 74
-                  },
-                  {
-                    "init_expr" : ["CXXNewExpr" , [
-                      {
-                        "pointer" : 76,
-                        "source_range" : [
-                          {
-                            "column" : 15
-                          },
-                          {
-                            "column" : 25
                           }
                         ]
                       },
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 77,
+                            "pointer" : 80,
                             "source_range" : [
                               {
                                 "column" : 23
@@ -1951,10 +1902,159 @@
                             "bitwidth" : 32,
                             "value" : "10"
                           }
+                        ]]
+                      ],
+                      {
+                        "qual_type" : {
+                          "type_ptr" : 69
+                        }
+                      },
+                      {
+                        "cast_kind" : "IntegralCast",
+                        "base_path" : [
+                        ]
+                      }
+                    ]],
+                    ["CXXConstructExpr" , [
+                      {
+                        "pointer" : 81,
+                        "source_range" : [
+                          {
+                            "column" : 19
+                          },
+                          {
+                            "column" : 19
+                          }
+                        ]
+                      },
+                      [
+                      ],
+                      {
+                        "qual_type" : {
+                          "type_ptr" : 8
+                        }
+                      },
+                      {
+                        "decl_ref" : {
+                          "kind" : "CXXConstructor",
+                          "decl_pointer" : 12,
+                          "name" : {
+                            "name" : "pod",
+                            "qual_name" : [
+                              "pod",
+                              "pod"
+                            ]
+                          },
+                          "qual_type" : {
+                            "type_ptr" : 13
+                          }
+                        }
+                      }
+                    ]]
+                  ],
+                  {
+                    "qual_type" : {
+                      "type_ptr" : 74
+                    }
+                  },
+                  {
+                    "is_array" : true,
+                    "array_size_expr" : 79,
+                    "initializer_expr" : 81
+                  }
+                ]]
+              ],
+              [
+                ["VarDecl" , [
+                  {
+                    "pointer" : 82,
+                    "source_range" : [
+                      {
+                        "column" : 3
+                      },
+                      {
+                        "column" : 25
+                      }
+                    ],
+                    "is_used" : true,
+                    "is_this_declaration_referenced" : true
+                  },
+                  {
+                    "name" : "p_a",
+                    "qual_name" : [
+                      "p_a"
+                    ]
+                  },
+                  {
+                    "type_ptr" : 76
+                  },
+                  {
+                    "init_expr" : ["CXXNewExpr" , [
+                      {
+                        "pointer" : 78,
+                        "source_range" : [
+                          {
+                            "column" : 15
+                          },
+                          {
+                            "column" : 25
+                          }
+                        ]
+                      },
+                      [
+                        ["ImplicitCastExpr" , [
+                          {
+                            "pointer" : 79,
+                            "source_range" : [
+                              {
+                                "column" : 23
+                              },
+                              {
+                                "column" : 23
+                              }
+                            ]
+                          },
+                          [
+                            ["IntegerLiteral" , [
+                              {
+                                "pointer" : 80,
+                                "source_range" : [
+                                  {
+                                    "column" : 23
+                                  },
+                                  {
+                                    "column" : 23
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 11
+                                }
+                              },
+                              {
+                                "is_signed" : true,
+                                "bitwidth" : 32,
+                                "value" : "10"
+                              }
+                            ]]
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 69
+                            }
+                          },
+                          {
+                            "cast_kind" : "IntegralCast",
+                            "base_path" : [
+                            ]
+                          }
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 78,
+                            "pointer" : 81,
                             "source_range" : [
                               {
                                 "column" : 19
@@ -1991,13 +2091,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 72
+                          "type_ptr" : 74
                         }
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 77,
-                        "initializer_expr" : 78
+                        "array_size_expr" : 79,
+                        "initializer_expr" : 81
                       }
                     ]]
                   }
@@ -2006,7 +2106,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 80,
+                "pointer" : 83,
                 "source_range" : [
                   {
                     "line" : 20,
@@ -2020,7 +2120,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 81,
+                    "pointer" : 84,
                     "source_range" : [
                       {
                         "column" : 13
@@ -2033,7 +2133,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : 82,
+                        "pointer" : 85,
                         "source_range" : [
                           {
                             "column" : 17
@@ -2046,7 +2146,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 83,
+                            "pointer" : 86,
                             "source_range" : [
                               {
                                 "column" : 25
@@ -2071,7 +2171,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 84,
+                            "pointer" : 87,
                             "source_range" : [
                               {
                                 "column" : 28
@@ -2120,18 +2220,18 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 85
+                      "type_ptr" : 88
                     }
                   },
                   {
-                    "initializer_expr" : 82
+                    "initializer_expr" : 85
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 86,
+                    "pointer" : 89,
                     "source_range" : [
                       {
                         "column" : 3
@@ -2150,12 +2250,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 87
+                    "type_ptr" : 90
                   },
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : 81,
+                        "pointer" : 84,
                         "source_range" : [
                           {
                             "column" : 13
@@ -2168,7 +2268,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 82,
+                            "pointer" : 85,
                             "source_range" : [
                               {
                                 "column" : 17
@@ -2181,7 +2281,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 83,
+                                "pointer" : 86,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -2206,7 +2306,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 84,
+                                "pointer" : 87,
                                 "source_range" : [
                                   {
                                     "column" : 28
@@ -2255,11 +2355,11 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 85
+                          "type_ptr" : 88
                         }
                       },
                       {
-                        "initializer_expr" : 82
+                        "initializer_expr" : 85
                       }
                     ]]
                   }
@@ -2268,7 +2368,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 88,
+                "pointer" : 91,
                 "source_range" : [
                   {
                     "line" : 21,
@@ -2282,7 +2382,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 89,
+                    "pointer" : 92,
                     "source_range" : [
                       {
                         "column" : 15
@@ -2293,9 +2393,9 @@
                     ]
                   },
                   [
-                    ["IntegerLiteral" , [
+                    ["ImplicitCastExpr" , [
                       {
-                        "pointer" : 90,
+                        "pointer" : 93,
                         "source_range" : [
                           {
                             "column" : 27
@@ -2306,21 +2406,46 @@
                         ]
                       },
                       [
+                        ["IntegerLiteral" , [
+                          {
+                            "pointer" : 94,
+                            "source_range" : [
+                              {
+                                "column" : 27
+                              },
+                              {
+                                "column" : 27
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 11
+                            }
+                          },
+                          {
+                            "is_signed" : true,
+                            "bitwidth" : 32,
+                            "value" : "10"
+                          }
+                        ]]
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 11
+                          "type_ptr" : 69
                         }
                       },
                       {
-                        "is_signed" : true,
-                        "bitwidth" : 32,
-                        "value" : "10"
+                        "cast_kind" : "IntegralCast",
+                        "base_path" : [
+                        ]
                       }
                     ]],
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : 91,
+                        "pointer" : 95,
                         "source_range" : [
                           {
                             "column" : 19
@@ -2357,20 +2482,20 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 85
+                      "type_ptr" : 88
                     }
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : 90,
-                    "initializer_expr" : 91
+                    "array_size_expr" : 93,
+                    "initializer_expr" : 95
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 92,
+                    "pointer" : 96,
                     "source_range" : [
                       {
                         "column" : 3
@@ -2389,12 +2514,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 87
+                    "type_ptr" : 90
                   },
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : 89,
+                        "pointer" : 92,
                         "source_range" : [
                           {
                             "column" : 15
@@ -2405,9 +2530,9 @@
                         ]
                       },
                       [
-                        ["IntegerLiteral" , [
+                        ["ImplicitCastExpr" , [
                           {
-                            "pointer" : 90,
+                            "pointer" : 93,
                             "source_range" : [
                               {
                                 "column" : 27
@@ -2418,21 +2543,46 @@
                             ]
                           },
                           [
+                            ["IntegerLiteral" , [
+                              {
+                                "pointer" : 94,
+                                "source_range" : [
+                                  {
+                                    "column" : 27
+                                  },
+                                  {
+                                    "column" : 27
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 11
+                                }
+                              },
+                              {
+                                "is_signed" : true,
+                                "bitwidth" : 32,
+                                "value" : "10"
+                              }
+                            ]]
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 11
+                              "type_ptr" : 69
                             }
                           },
                           {
-                            "is_signed" : true,
-                            "bitwidth" : 32,
-                            "value" : "10"
+                            "cast_kind" : "IntegralCast",
+                            "base_path" : [
+                            ]
                           }
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 91,
+                            "pointer" : 95,
                             "source_range" : [
                               {
                                 "column" : 19
@@ -2469,13 +2619,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 85
+                          "type_ptr" : 88
                         }
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 90,
-                        "initializer_expr" : 91
+                        "array_size_expr" : 93,
+                        "initializer_expr" : 95
                       }
                     ]]
                   }
@@ -2484,7 +2634,7 @@
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : 93,
+                "pointer" : 97,
                 "source_range" : [
                   {
                     "line" : 23,
@@ -2498,7 +2648,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : 94,
+                    "pointer" : 98,
                     "source_range" : [
                       {
                         "column" : 10
@@ -2511,7 +2661,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : 95,
+                        "pointer" : 99,
                         "source_range" : [
                           {
                             "column" : 10
@@ -2560,18 +2710,18 @@
               ],
               {
                 "qual_type" : {
-                  "type_ptr" : 96
+                  "type_ptr" : 100
                 }
               },
               {
                 "destroyed_type" : {
-                  "type_ptr" : 97
+                  "type_ptr" : 101
                 }
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : 98,
+                "pointer" : 102,
                 "source_range" : [
                   {
                     "line" : 24,
@@ -2585,7 +2735,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : 99,
+                    "pointer" : 103,
                     "source_range" : [
                       {
                         "column" : 12
@@ -2598,7 +2748,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : 100,
+                        "pointer" : 104,
                         "source_range" : [
                           {
                             "column" : 12
@@ -2619,7 +2769,7 @@
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : 68,
+                          "decl_pointer" : 70,
                           "name" : {
                             "name" : "i_a",
                             "qual_name" : [
@@ -2647,19 +2797,19 @@
               ],
               {
                 "qual_type" : {
-                  "type_ptr" : 96
+                  "type_ptr" : 100
                 }
               },
               {
                 "is_array" : true,
                 "destroyed_type" : {
-                  "type_ptr" : 97
+                  "type_ptr" : 101
                 }
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : 101,
+                "pointer" : 105,
                 "source_range" : [
                   {
                     "line" : 25,
@@ -2673,7 +2823,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : 102,
+                    "pointer" : 106,
                     "source_range" : [
                       {
                         "column" : 10
@@ -2686,7 +2836,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : 103,
+                        "pointer" : 107,
                         "source_range" : [
                           {
                             "column" : 10
@@ -2700,14 +2850,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 74
+                          "type_ptr" : 76
                         },
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : 73,
+                          "decl_pointer" : 75,
                           "name" : {
                             "name" : "p",
                             "qual_name" : [
@@ -2715,7 +2865,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 74
+                            "type_ptr" : 76
                           }
                         }
                       }
@@ -2723,7 +2873,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 74
+                      "type_ptr" : 76
                     }
                   },
                   {
@@ -2735,18 +2885,18 @@
               ],
               {
                 "qual_type" : {
-                  "type_ptr" : 96
+                  "type_ptr" : 100
                 }
               },
               {
                 "destroyed_type" : {
-                  "type_ptr" : 104
+                  "type_ptr" : 108
                 }
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : 105,
+                "pointer" : 109,
                 "source_range" : [
                   {
                     "line" : 26,
@@ -2760,7 +2910,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : 106,
+                    "pointer" : 110,
                     "source_range" : [
                       {
                         "column" : 12
@@ -2773,7 +2923,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : 107,
+                        "pointer" : 111,
                         "source_range" : [
                           {
                             "column" : 12
@@ -2787,14 +2937,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 74
+                          "type_ptr" : 76
                         },
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : 79,
+                          "decl_pointer" : 82,
                           "name" : {
                             "name" : "p_a",
                             "qual_name" : [
@@ -2802,7 +2952,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 74
+                            "type_ptr" : 76
                           }
                         }
                       }
@@ -2810,7 +2960,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 74
+                      "type_ptr" : 76
                     }
                   },
                   {
@@ -2822,19 +2972,19 @@
               ],
               {
                 "qual_type" : {
-                  "type_ptr" : 96
+                  "type_ptr" : 100
                 }
               },
               {
                 "is_array" : true,
                 "destroyed_type" : {
-                  "type_ptr" : 104
+                  "type_ptr" : 108
                 }
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : 108,
+                "pointer" : 112,
                 "source_range" : [
                   {
                     "line" : 27,
@@ -2848,7 +2998,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : 109,
+                    "pointer" : 113,
                     "source_range" : [
                       {
                         "column" : 10
@@ -2861,7 +3011,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : 110,
+                        "pointer" : 114,
                         "source_range" : [
                           {
                             "column" : 10
@@ -2875,14 +3025,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 87
+                          "type_ptr" : 90
                         },
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : 86,
+                          "decl_pointer" : 89,
                           "name" : {
                             "name" : "c",
                             "qual_name" : [
@@ -2890,7 +3040,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 87
+                            "type_ptr" : 90
                           }
                         }
                       }
@@ -2898,7 +3048,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 87
+                      "type_ptr" : 90
                     }
                   },
                   {
@@ -2910,18 +3060,18 @@
               ],
               {
                 "qual_type" : {
-                  "type_ptr" : 96
+                  "type_ptr" : 100
                 }
               },
               {
                 "destroyed_type" : {
-                  "type_ptr" : 111
+                  "type_ptr" : 115
                 }
               }
             ]],
             ["CXXDeleteExpr" , [
               {
-                "pointer" : 112,
+                "pointer" : 116,
                 "source_range" : [
                   {
                     "line" : 28,
@@ -2935,7 +3085,7 @@
               [
                 ["ImplicitCastExpr" , [
                   {
-                    "pointer" : 113,
+                    "pointer" : 117,
                     "source_range" : [
                       {
                         "column" : 12
@@ -2948,7 +3098,7 @@
                   [
                     ["DeclRefExpr" , [
                       {
-                        "pointer" : 114,
+                        "pointer" : 118,
                         "source_range" : [
                           {
                             "column" : 12
@@ -2962,14 +3112,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 87
+                          "type_ptr" : 90
                         },
                         "value_kind" : "LValue"
                       },
                       {
                         "decl_ref" : {
                           "kind" : "Var",
-                          "decl_pointer" : 92,
+                          "decl_pointer" : 96,
                           "name" : {
                             "name" : "c_a",
                             "qual_name" : [
@@ -2977,7 +3127,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 87
+                            "type_ptr" : 90
                           }
                         }
                       }
@@ -2985,7 +3135,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 87
+                      "type_ptr" : 90
                     }
                   },
                   {
@@ -2997,13 +3147,13 @@
               ],
               {
                 "qual_type" : {
-                  "type_ptr" : 96
+                  "type_ptr" : 100
                 }
               },
               {
                 "is_array" : true,
                 "destroyed_type" : {
-                  "type_ptr" : 111
+                  "type_ptr" : 115
                 }
               }
             ]]
@@ -3013,7 +3163,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : 115,
+        "pointer" : 119,
         "source_range" : [
           {
           },
@@ -3025,7 +3175,7 @@
         "is_this_declaration_referenced" : true,
         "attributes" : [
           ["VisibilityAttr" , {
-            "pointer" : 116,
+            "pointer" : 120,
             "source_range" : [
               {
               },
@@ -3046,77 +3196,10 @@
         ]
       },
       {
-        "type_ptr" : 117
+        "type_ptr" : 121
       },
       {
         "mangled_name" : "_Znwm",
-        "parameters" : [
-          ["ParmVarDecl" , [
-            {
-              "pointer" : 118,
-              "source_range" : [
-                {
-                },
-                {
-                }
-              ],
-              "is_implicit" : true
-            },
-            {
-              "name" : "",
-              "qual_name" : [
-                ""
-              ]
-            },
-            {
-              "type_ptr" : 119
-            },
-            {
-              "parm_index_in_function" : 0
-            }
-          ]]
-        ]
-      }
-    ]],
-    ["FunctionDecl" , [
-      {
-        "pointer" : 120,
-        "source_range" : [
-          {
-          },
-          {
-          }
-        ],
-        "is_implicit" : true,
-        "is_used" : true,
-        "is_this_declaration_referenced" : true,
-        "attributes" : [
-          ["VisibilityAttr" , {
-            "pointer" : 121,
-            "source_range" : [
-              {
-              },
-              {
-              }
-            ],
-            "parameters" : [
-              " Default"
-            ],
-            "is_implicit" : true
-          }]
-        ]
-      },
-      {
-        "name" : "operator new[]",
-        "qual_name" : [
-          "operator new[]"
-        ]
-      },
-      {
-        "type_ptr" : 117
-      },
-      {
-        "mangled_name" : "_Znam",
         "parameters" : [
           ["ParmVarDecl" , [
             {
@@ -3136,7 +3219,7 @@
               ]
             },
             {
-              "type_ptr" : 119
+              "type_ptr" : 69
             },
             {
               "parm_index_in_function" : 0
@@ -3174,21 +3257,20 @@
         ]
       },
       {
-        "name" : "operator delete",
+        "name" : "operator new[]",
         "qual_name" : [
-          "operator delete"
+          "operator new[]"
         ]
       },
       {
-        "type_ptr" : 125
+        "type_ptr" : 121
       },
       {
-        "mangled_name" : "_ZdlPv",
-        "is_no_throw" : true,
+        "mangled_name" : "_Znam",
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : 126,
+              "pointer" : 125,
               "source_range" : [
                 {
                 },
@@ -3204,7 +3286,7 @@
               ]
             },
             {
-              "type_ptr" : 127
+              "type_ptr" : 69
             },
             {
               "parm_index_in_function" : 0
@@ -3215,7 +3297,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : 128,
+        "pointer" : 126,
         "source_range" : [
           {
           },
@@ -3227,7 +3309,75 @@
         "is_this_declaration_referenced" : true,
         "attributes" : [
           ["VisibilityAttr" , {
-            "pointer" : 129,
+            "pointer" : 127,
+            "source_range" : [
+              {
+              },
+              {
+              }
+            ],
+            "parameters" : [
+              " Default"
+            ],
+            "is_implicit" : true
+          }]
+        ]
+      },
+      {
+        "name" : "operator delete",
+        "qual_name" : [
+          "operator delete"
+        ]
+      },
+      {
+        "type_ptr" : 128
+      },
+      {
+        "mangled_name" : "_ZdlPv",
+        "is_no_throw" : true,
+        "parameters" : [
+          ["ParmVarDecl" , [
+            {
+              "pointer" : 129,
+              "source_range" : [
+                {
+                },
+                {
+                }
+              ],
+              "is_implicit" : true
+            },
+            {
+              "name" : "",
+              "qual_name" : [
+                ""
+              ]
+            },
+            {
+              "type_ptr" : 130
+            },
+            {
+              "parm_index_in_function" : 0
+            }
+          ]]
+        ]
+      }
+    ]],
+    ["FunctionDecl" , [
+      {
+        "pointer" : 131,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "is_used" : true,
+        "is_this_declaration_referenced" : true,
+        "attributes" : [
+          ["VisibilityAttr" , {
+            "pointer" : 132,
             "source_range" : [
               {
               },
@@ -3248,7 +3398,7 @@
         ]
       },
       {
-        "type_ptr" : 125
+        "type_ptr" : 128
       },
       {
         "mangled_name" : "_ZdaPv",
@@ -3256,7 +3406,7 @@
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : 130,
+              "pointer" : 133,
               "source_range" : [
                 {
                 },
@@ -3272,7 +3422,7 @@
               ]
             },
             {
-              "type_ptr" : 127
+              "type_ptr" : 130
             },
             {
               "parm_index_in_function" : 0
@@ -3283,7 +3433,7 @@
     ]],
     ["FunctionDecl" , [
       {
-        "pointer" : 131,
+        "pointer" : 134,
         "source_range" : [
           {
             "line" : 32,
@@ -3306,10 +3456,10 @@
       },
       {
         "mangled_name" : "_Z8test_c11v",
-        "decl_ptr_with_body" : 131,
+        "decl_ptr_with_body" : 134,
         "body" : ["CompoundStmt" , [
           {
-            "pointer" : 132,
+            "pointer" : 135,
             "source_range" : [
               {
                 "line" : 32,
@@ -3324,7 +3474,7 @@
           [
             ["DeclStmt" , [
               {
-                "pointer" : 133,
+                "pointer" : 136,
                 "source_range" : [
                   {
                     "line" : 33,
@@ -3338,7 +3488,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 134,
+                    "pointer" : 137,
                     "source_range" : [
                       {
                         "column" : 13
@@ -3349,9 +3499,9 @@
                     ]
                   },
                   [
-                    ["IntegerLiteral" , [
+                    ["ImplicitCastExpr" , [
                       {
-                        "pointer" : 135,
+                        "pointer" : 138,
                         "source_range" : [
                           {
                             "column" : 21
@@ -3362,21 +3512,46 @@
                         ]
                       },
                       [
+                        ["IntegerLiteral" , [
+                          {
+                            "pointer" : 139,
+                            "source_range" : [
+                              {
+                                "column" : 21
+                              },
+                              {
+                                "column" : 21
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 11
+                            }
+                          },
+                          {
+                            "is_signed" : true,
+                            "bitwidth" : 32,
+                            "value" : "3"
+                          }
+                        ]]
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 11
+                          "type_ptr" : 69
                         }
                       },
                       {
-                        "is_signed" : true,
-                        "bitwidth" : 32,
-                        "value" : "3"
+                        "cast_kind" : "IntegralCast",
+                        "base_path" : [
+                        ]
                       }
                     ]],
                     ["InitListExpr" , [
                       {
-                        "pointer" : 136,
+                        "pointer" : 140,
                         "source_range" : [
                           {
                             "column" : 24
@@ -3389,7 +3564,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 137,
+                            "pointer" : 141,
                             "source_range" : [
                               {
                                 "column" : 25
@@ -3414,7 +3589,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 138,
+                            "pointer" : 142,
                             "source_range" : [
                               {
                                 "column" : 27
@@ -3439,7 +3614,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 139,
+                            "pointer" : 143,
                             "source_range" : [
                               {
                                 "column" : 29
@@ -3465,7 +3640,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 140
+                          "type_ptr" : 144
                         }
                       }
                     ]]
@@ -3477,15 +3652,15 @@
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : 135,
-                    "initializer_expr" : 136
+                    "array_size_expr" : 138,
+                    "initializer_expr" : 140
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 141,
+                    "pointer" : 145,
                     "source_range" : [
                       {
                         "column" : 3
@@ -3507,7 +3682,7 @@
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : 134,
+                        "pointer" : 137,
                         "source_range" : [
                           {
                             "column" : 13
@@ -3518,9 +3693,9 @@
                         ]
                       },
                       [
-                        ["IntegerLiteral" , [
+                        ["ImplicitCastExpr" , [
                           {
-                            "pointer" : 135,
+                            "pointer" : 138,
                             "source_range" : [
                               {
                                 "column" : 21
@@ -3531,21 +3706,46 @@
                             ]
                           },
                           [
+                            ["IntegerLiteral" , [
+                              {
+                                "pointer" : 139,
+                                "source_range" : [
+                                  {
+                                    "column" : 21
+                                  },
+                                  {
+                                    "column" : 21
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 11
+                                }
+                              },
+                              {
+                                "is_signed" : true,
+                                "bitwidth" : 32,
+                                "value" : "3"
+                              }
+                            ]]
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 11
+                              "type_ptr" : 69
                             }
                           },
                           {
-                            "is_signed" : true,
-                            "bitwidth" : 32,
-                            "value" : "3"
+                            "cast_kind" : "IntegralCast",
+                            "base_path" : [
+                            ]
                           }
                         ]],
                         ["InitListExpr" , [
                           {
-                            "pointer" : 136,
+                            "pointer" : 140,
                             "source_range" : [
                               {
                                 "column" : 24
@@ -3558,7 +3758,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 137,
+                                "pointer" : 141,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -3583,7 +3783,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 138,
+                                "pointer" : 142,
                                 "source_range" : [
                                   {
                                     "column" : 27
@@ -3608,7 +3808,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 139,
+                                "pointer" : 143,
                                 "source_range" : [
                                   {
                                     "column" : 29
@@ -3634,7 +3834,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 140
+                              "type_ptr" : 144
                             }
                           }
                         ]]
@@ -3646,8 +3846,8 @@
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 135,
-                        "initializer_expr" : 136
+                        "array_size_expr" : 138,
+                        "initializer_expr" : 140
                       }
                     ]]
                   }
@@ -3656,7 +3856,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 142,
+                "pointer" : 146,
                 "source_range" : [
                   {
                     "line" : 34,
@@ -3670,7 +3870,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 143,
+                    "pointer" : 147,
                     "source_range" : [
                       {
                         "column" : 13
@@ -3683,7 +3883,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : 144,
+                        "pointer" : 148,
                         "source_range" : [
                           {
                             "column" : 17
@@ -3696,7 +3896,7 @@
                       [
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 145,
+                            "pointer" : 149,
                             "source_range" : [
                               {
                                 "column" : 26
@@ -3721,7 +3921,7 @@
                         ]],
                         ["IntegerLiteral" , [
                           {
-                            "pointer" : 146,
+                            "pointer" : 150,
                             "source_range" : [
                               {
                                 "column" : 28
@@ -3770,18 +3970,18 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 85
+                      "type_ptr" : 88
                     }
                   },
                   {
-                    "initializer_expr" : 144
+                    "initializer_expr" : 148
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 147,
+                    "pointer" : 151,
                     "source_range" : [
                       {
                         "column" : 3
@@ -3798,12 +3998,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 87
+                    "type_ptr" : 90
                   },
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : 143,
+                        "pointer" : 147,
                         "source_range" : [
                           {
                             "column" : 13
@@ -3816,7 +4016,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 144,
+                            "pointer" : 148,
                             "source_range" : [
                               {
                                 "column" : 17
@@ -3829,7 +4029,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 145,
+                                "pointer" : 149,
                                 "source_range" : [
                                   {
                                     "column" : 26
@@ -3854,7 +4054,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 146,
+                                "pointer" : 150,
                                 "source_range" : [
                                   {
                                     "column" : 28
@@ -3903,11 +4103,11 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 85
+                          "type_ptr" : 88
                         }
                       },
                       {
-                        "initializer_expr" : 144
+                        "initializer_expr" : 148
                       }
                     ]]
                   }
@@ -3916,7 +4116,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 148,
+                "pointer" : 152,
                 "source_range" : [
                   {
                     "line" : 35,
@@ -3930,7 +4130,7 @@
               [
                 ["CXXNewExpr" , [
                   {
-                    "pointer" : 149,
+                    "pointer" : 153,
                     "source_range" : [
                       {
                         "column" : 15
@@ -3941,9 +4141,9 @@
                     ]
                   },
                   [
-                    ["IntegerLiteral" , [
+                    ["ImplicitCastExpr" , [
                       {
-                        "pointer" : 150,
+                        "pointer" : 154,
                         "source_range" : [
                           {
                             "column" : 27
@@ -3954,21 +4154,46 @@
                         ]
                       },
                       [
+                        ["IntegerLiteral" , [
+                          {
+                            "pointer" : 155,
+                            "source_range" : [
+                              {
+                                "column" : 27
+                              },
+                              {
+                                "column" : 27
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 11
+                            }
+                          },
+                          {
+                            "is_signed" : true,
+                            "bitwidth" : 32,
+                            "value" : "4"
+                          }
+                        ]]
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 11
+                          "type_ptr" : 69
                         }
                       },
                       {
-                        "is_signed" : true,
-                        "bitwidth" : 32,
-                        "value" : "4"
+                        "cast_kind" : "IntegralCast",
+                        "base_path" : [
+                        ]
                       }
                     ]],
                     ["InitListExpr" , [
                       {
-                        "pointer" : 151,
+                        "pointer" : 156,
                         "source_range" : [
                           {
                             "column" : 30
@@ -3981,7 +4206,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 152,
+                            "pointer" : 157,
                             "source_range" : [
                               {
                                 "column" : 31
@@ -3994,7 +4219,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 153,
+                                "pointer" : 158,
                                 "source_range" : [
                                   {
                                     "column" : 32
@@ -4019,7 +4244,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 154,
+                                "pointer" : 159,
                                 "source_range" : [
                                   {
                                     "column" : 34
@@ -4067,7 +4292,7 @@
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 155,
+                            "pointer" : 160,
                             "source_range" : [
                               {
                                 "column" : 38
@@ -4080,7 +4305,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 156,
+                                "pointer" : 161,
                                 "source_range" : [
                                   {
                                     "column" : 39
@@ -4105,7 +4330,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 157,
+                                "pointer" : 162,
                                 "source_range" : [
                                   {
                                     "column" : 41
@@ -4153,7 +4378,7 @@
                         ]],
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 158,
+                            "pointer" : 163,
                             "source_range" : [
                               {
                                 "column" : 45
@@ -4166,7 +4391,7 @@
                           [
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 159,
+                                "pointer" : 164,
                                 "source_range" : [
                                   {
                                     "column" : 46
@@ -4191,7 +4416,7 @@
                             ]],
                             ["IntegerLiteral" , [
                               {
-                                "pointer" : 160,
+                                "pointer" : 165,
                                 "source_range" : [
                                   {
                                     "column" : 48
@@ -4240,27 +4465,27 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 161
+                          "type_ptr" : 166
                         }
                       }
                     ]]
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 85
+                      "type_ptr" : 88
                     }
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : 150,
-                    "initializer_expr" : 151
+                    "array_size_expr" : 154,
+                    "initializer_expr" : 156
                   }
                 ]]
               ],
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 162,
+                    "pointer" : 167,
                     "source_range" : [
                       {
                         "column" : 3
@@ -4277,12 +4502,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 87
+                    "type_ptr" : 90
                   },
                   {
                     "init_expr" : ["CXXNewExpr" , [
                       {
-                        "pointer" : 149,
+                        "pointer" : 153,
                         "source_range" : [
                           {
                             "column" : 15
@@ -4293,9 +4518,9 @@
                         ]
                       },
                       [
-                        ["IntegerLiteral" , [
+                        ["ImplicitCastExpr" , [
                           {
-                            "pointer" : 150,
+                            "pointer" : 154,
                             "source_range" : [
                               {
                                 "column" : 27
@@ -4306,21 +4531,46 @@
                             ]
                           },
                           [
+                            ["IntegerLiteral" , [
+                              {
+                                "pointer" : 155,
+                                "source_range" : [
+                                  {
+                                    "column" : 27
+                                  },
+                                  {
+                                    "column" : 27
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 11
+                                }
+                              },
+                              {
+                                "is_signed" : true,
+                                "bitwidth" : 32,
+                                "value" : "4"
+                              }
+                            ]]
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 11
+                              "type_ptr" : 69
                             }
                           },
                           {
-                            "is_signed" : true,
-                            "bitwidth" : 32,
-                            "value" : "4"
+                            "cast_kind" : "IntegralCast",
+                            "base_path" : [
+                            ]
                           }
                         ]],
                         ["InitListExpr" , [
                           {
-                            "pointer" : 151,
+                            "pointer" : 156,
                             "source_range" : [
                               {
                                 "column" : 30
@@ -4333,7 +4583,7 @@
                           [
                             ["CXXConstructExpr" , [
                               {
-                                "pointer" : 152,
+                                "pointer" : 157,
                                 "source_range" : [
                                   {
                                     "column" : 31
@@ -4346,7 +4596,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 153,
+                                    "pointer" : 158,
                                     "source_range" : [
                                       {
                                         "column" : 32
@@ -4371,7 +4621,7 @@
                                 ]],
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 154,
+                                    "pointer" : 159,
                                     "source_range" : [
                                       {
                                         "column" : 34
@@ -4419,7 +4669,7 @@
                             ]],
                             ["CXXConstructExpr" , [
                               {
-                                "pointer" : 155,
+                                "pointer" : 160,
                                 "source_range" : [
                                   {
                                     "column" : 38
@@ -4432,7 +4682,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 156,
+                                    "pointer" : 161,
                                     "source_range" : [
                                       {
                                         "column" : 39
@@ -4457,7 +4707,7 @@
                                 ]],
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 157,
+                                    "pointer" : 162,
                                     "source_range" : [
                                       {
                                         "column" : 41
@@ -4505,7 +4755,7 @@
                             ]],
                             ["CXXConstructExpr" , [
                               {
-                                "pointer" : 158,
+                                "pointer" : 163,
                                 "source_range" : [
                                   {
                                     "column" : 45
@@ -4518,7 +4768,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 159,
+                                    "pointer" : 164,
                                     "source_range" : [
                                       {
                                         "column" : 46
@@ -4543,7 +4793,7 @@
                                 ]],
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 160,
+                                    "pointer" : 165,
                                     "source_range" : [
                                       {
                                         "column" : 48
@@ -4592,20 +4842,20 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 161
+                              "type_ptr" : 166
                             }
                           }
                         ]]
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 85
+                          "type_ptr" : 88
                         }
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 150,
-                        "initializer_expr" : 151
+                        "array_size_expr" : 154,
+                        "initializer_expr" : 156
                       }
                     ]]
                   }
@@ -4618,7 +4868,7 @@
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : 163,
+        "pointer" : 168,
         "source_range" : [
           {
           },
@@ -4634,7 +4884,7 @@
         ]
       },
       ["Type" , "id"],
-      164,
+      169,
       {
       }
     ]]
@@ -4647,31 +4897,31 @@
     "types" : [
       ["BuiltinType" , [
         {
-          "pointer" : 96
+          "pointer" : 100
         },
         "Void"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 165
+          "pointer" : 170
         },
         "Bool"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 166
+          "pointer" : 171
         },
         "Char_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 167
+          "pointer" : 172
         },
         "SChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 168
+          "pointer" : 173
         },
         "Short"
       ]],
@@ -4683,209 +4933,209 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 169
+          "pointer" : 174
         },
         "Long"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 170
+          "pointer" : 175
         },
         "LongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 171
+          "pointer" : 176
         },
         "UChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 172
+          "pointer" : 177
         },
         "UShort"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 173
+          "pointer" : 178
         },
         "UInt"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 119
+          "pointer" : 69
         },
         "ULong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 174
+          "pointer" : 179
         },
         "ULongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 175
+          "pointer" : 180
         },
         "Float"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 176
+          "pointer" : 181
         },
         "Double"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 177
+          "pointer" : 182
         },
         "LongDouble"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 178
+          "pointer" : 183
         },
         "Float128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 179
+          "pointer" : 184
         },
         "Int128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 180
+          "pointer" : 185
         },
         "UInt128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 181
+          "pointer" : 186
         },
         "WChar_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 182
+          "pointer" : 187
         },
         "Char16"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 183
+          "pointer" : 188
         },
         "Char32"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 184
+          "pointer" : 189
         },
         "Dependent"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 185
+          "pointer" : 190
         },
         "Overload"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 186
+          "pointer" : 191
         },
         "BoundMember"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 187
+          "pointer" : 192
         },
         "PseudoObject"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 188
+          "pointer" : 193
         },
         "UnknownAny"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 189
+          "pointer" : 194
         },
         "ARCUnbridgedCast"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 190
+          "pointer" : 195
         },
         "BuiltinFn"
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 191
+          "pointer" : 196
         }
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 192
+          "pointer" : 197
         }
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 193
+          "pointer" : 198
         }
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 194
+          "pointer" : 199
         }
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 195
+          "pointer" : 200
         },
         "ObjCId"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 196
+          "pointer" : 201
         },
         "ObjCClass"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 197
+          "pointer" : 202
         },
         "ObjCSel"
       ]],
       ["PointerType" , [
         {
-          "pointer" : 127
+          "pointer" : 130
         },
         {
-          "type_ptr" : 96
+          "type_ptr" : 100
         }
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 198
+          "pointer" : 203
         },
         "NullPtr"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 199
+          "pointer" : 204
         },
         "Half"
       ]],
       ["RecordType" , [
         {
-          "pointer" : 200
+          "pointer" : 205
         },
-        201
+        206
       ]],
       ["PointerType" , [
         {
-          "pointer" : 202
+          "pointer" : 207
         },
         {
           "type_ptr" : 11,
@@ -4894,34 +5144,34 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 203
+          "pointer" : 208
         },
         {
-          "type_ptr" : 166,
+          "type_ptr" : 171,
           "is_const" : true
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 204
+          "pointer" : 209
         },
         {
-          "type_ptr" : 166
+          "type_ptr" : 171
         }
       ]],
       ["RecordType" , [
         {
-          "pointer" : 205
+          "pointer" : 210
         },
-        206
+        211
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 207
+          "pointer" : 212
         },
         {
           "element_type" : {
-            "type_ptr" : 205
+            "type_ptr" : 210
           },
           "stride" : 192
         },
@@ -4941,7 +5191,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 85
+          "pointer" : 88
         },
         {
           "type_ptr" : 26
@@ -4953,7 +5203,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -4965,7 +5215,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -4981,11 +5231,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 208
+          "pointer" : 213
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5002,11 +5252,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 209
+          "pointer" : 214
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5023,7 +5273,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5044,11 +5294,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 210
+          "pointer" : 215
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5065,7 +5315,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5082,7 +5332,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5090,10 +5340,10 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 211
+          "pointer" : 216
         },
         {
-          "type_ptr" : 212
+          "type_ptr" : 217
         }
       ]],
       ["PointerType" , [
@@ -5106,114 +5356,58 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 117
+          "pointer" : 121
         },
         {
           "return_type" : {
-            "type_ptr" : 127
+            "type_ptr" : 130
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 119
+              "type_ptr" : 69
             }
           ]
         }
       ]],
       ["FunctionProtoType" , [
-        {
-          "pointer" : 213
-        },
-        {
-          "return_type" : {
-            "type_ptr" : 96
-          }
-        },
-        {
-          "params_type" : [
-            {
-              "type_ptr" : 127
-            }
-          ]
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
-          "pointer" : 125
-        },
-        {
-          "return_type" : {
-            "type_ptr" : 96
-          }
-        },
-        {
-          "params_type" : [
-            {
-              "type_ptr" : 127
-            }
-          ]
-        }
-      ]],
-      ["TemplateTypeParmType" , [
-        {
-          "pointer" : 214
-        }
-      ]],
-      ["TemplateTypeParmType" , [
-        {
-          "pointer" : 215
-        }
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 216
-        },
-        {
-          "type_ptr" : 214
-        }
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 217
-        },
-        {
-          "type_ptr" : 215
-        }
-      ]],
-      ["AutoType" , [
-        {
-          "pointer" : 97,
-          "desugared_type" : 11
-        }
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 64
-        },
-        {
-          "type_ptr" : 97
-        }
-      ]],
-      ["TemplateTypeParmType" , [
         {
           "pointer" : 218
+        },
+        {
+          "return_type" : {
+            "type_ptr" : 100
+          }
+        },
+        {
+          "params_type" : [
+            {
+              "type_ptr" : 130
+            }
+          ]
         }
       ]],
-      ["PointerType" , [
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 128
+        },
+        {
+          "return_type" : {
+            "type_ptr" : 100
+          }
+        },
+        {
+          "params_type" : [
+            {
+              "type_ptr" : 130
+            }
+          ]
+        }
+      ]],
+      ["TemplateTypeParmType" , [
         {
           "pointer" : 219
-        },
-        {
-          "type_ptr" : 218
-        }
-      ]],
-      ["PointerType" , [
-        {
-          "pointer" : 72
-        },
-        {
-          "type_ptr" : 8
         }
       ]],
       ["TemplateTypeParmType" , [
@@ -5226,13 +5420,42 @@
           "pointer" : 221
         },
         {
+          "type_ptr" : 219
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 222
+        },
+        {
           "type_ptr" : 220
         }
       ]],
       ["AutoType" , [
         {
-          "pointer" : 104,
-          "desugared_type" : 8
+          "pointer" : 101,
+          "desugared_type" : 11
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 64
+        },
+        {
+          "type_ptr" : 101
+        }
+      ]],
+      ["TemplateTypeParmType" , [
+        {
+          "pointer" : 223
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 224
+        },
+        {
+          "type_ptr" : 223
         }
       ]],
       ["PointerType" , [
@@ -5240,7 +5463,34 @@
           "pointer" : 74
         },
         {
-          "type_ptr" : 104
+          "type_ptr" : 8
+        }
+      ]],
+      ["TemplateTypeParmType" , [
+        {
+          "pointer" : 225
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 226
+        },
+        {
+          "type_ptr" : 225
+        }
+      ]],
+      ["AutoType" , [
+        {
+          "pointer" : 108,
+          "desugared_type" : 8
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 76
+        },
+        {
+          "type_ptr" : 108
         }
       ]],
       ["FunctionProtoType" , [
@@ -5249,7 +5499,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5257,15 +5507,15 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 222
+          "pointer" : 227
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 223
+          "pointer" : 228
         },
         {
-          "type_ptr" : 222
+          "type_ptr" : 227
         }
       ]],
       ["LValueReferenceType" , [
@@ -5279,11 +5529,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 224
+          "pointer" : 229
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5300,7 +5550,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5321,11 +5571,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 225
+          "pointer" : 230
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5342,7 +5592,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5355,29 +5605,29 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 226
+          "pointer" : 231
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 227
+          "pointer" : 232
         },
         {
-          "type_ptr" : 226
+          "type_ptr" : 231
         }
       ]],
       ["AutoType" , [
         {
-          "pointer" : 111,
+          "pointer" : 115,
           "desugared_type" : 26
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 87
+          "pointer" : 90
         },
         {
-          "type_ptr" : 111
+          "type_ptr" : 115
         }
       ]],
       ["FunctionProtoType" , [
@@ -5386,7 +5636,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 100
           }
         },
         {
@@ -5394,20 +5644,20 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 228
+          "pointer" : 233
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 229
+          "pointer" : 234
         },
         {
-          "type_ptr" : 228
+          "type_ptr" : 233
         }
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 140
+          "pointer" : 144
         },
         {
           "element_type" : {
@@ -5419,33 +5669,33 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 230
+          "pointer" : 235
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 231
+          "pointer" : 236
         },
         {
-          "type_ptr" : 230
+          "type_ptr" : 235
         }
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 232
+          "pointer" : 237
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 233
+          "pointer" : 238
         },
         {
-          "type_ptr" : 232
+          "type_ptr" : 237
         }
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 161
+          "pointer" : 166
         },
         {
           "element_type" : {
@@ -5457,55 +5707,55 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 234
+          "pointer" : 239
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 235
+          "pointer" : 240
         },
         {
-          "type_ptr" : 234
+          "type_ptr" : 239
         }
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 236
+          "pointer" : 241
         },
         {
-          "base_type" : 195
+          "base_type" : 200
         }
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 237
+          "pointer" : 242
         },
         {
-          "type_ptr" : 236
+          "type_ptr" : 241
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 238,
-          "desugared_type" : 237
+          "pointer" : 243,
+          "desugared_type" : 242
         },
         {
           "child_type" : {
-            "type_ptr" : 237
+            "type_ptr" : 242
           },
-          "decl_ptr" : 239
+          "decl_ptr" : 244
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 164,
-          "desugared_type" : 237
+          "pointer" : 169,
+          "desugared_type" : 242
         },
         {
           "child_type" : {
-            "type_ptr" : 238
+            "type_ptr" : 243
           },
-          "decl_ptr" : 163
+          "decl_ptr" : 168
         }
       ]],
       ["NoneType" , [
