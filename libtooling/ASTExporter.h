@@ -3808,6 +3808,7 @@ int ASTExporter<ATDWriter>::LambdaExprTupleSize() {
 //@atd   ~capture_this : bool;
 //@atd   ~capture_variable : bool;
 //@atd   ~capture_VLAtype : bool;
+//@atd   ?init_captured_vardecl : decl option;
 //@atd   ?captured_var : decl_ref option;
 //@atd   ~is_implicit : bool;
 //@atd   location : source_range;
@@ -3828,12 +3829,13 @@ void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
   bool CapturesVariable = C->capturesVariable();
   bool CapturesVLAType = C->capturesVLAType();
   VarDecl *decl = C->capturesVariable() ? C->getCapturedVar() : nullptr;
+  bool IsInitCapture = decl && decl->isInitCapture();;
   bool IsImplicit = C->isImplicit();
   SourceRange source_range = C->getLocation();
   bool IsPackExpansion = C->isPackExpansion();
   ObjectScope Scope(OF,
                     2 + CapturesThis + CapturesVariable + CapturesVLAType +
-                        (bool)decl + IsImplicit + IsPackExpansion);
+                        IsInitCapture + (bool)decl + IsImplicit + IsPackExpansion);
   OF.emitTag("capture_kind");
   switch (CK) {
   case LCK_This:
@@ -3856,6 +3858,10 @@ void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
   OF.emitFlag("capture_variable", CapturesVariable);
   OF.emitFlag("capture_VLAtype", CapturesVLAType);
   if (decl) {
+    if (IsInitCapture) {
+      OF.emitTag("init_captured_vardecl");
+      dumpDecl(decl);
+    }
     OF.emitTag("captured_var");
     dumpDeclRef(*decl);
   }
