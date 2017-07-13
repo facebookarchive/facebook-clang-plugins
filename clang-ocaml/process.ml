@@ -34,7 +34,7 @@ let mktemp base =
 let buffer_size = 8192
 
 let tee ic ocs =
-  let buffer = String.create buffer_size in
+  let buffer = Bytes.create buffer_size in
   let rec loop () = match input ic buffer 0 buffer_size with
     | 0 -> ()
     | r -> List.iter (fun oc -> output oc buffer 0 r) ocs; loop ()
@@ -43,7 +43,7 @@ let tee ic ocs =
 
 let gzip ic oc =
   let ocz = Gzip.open_out_chan oc in
-  let buffer = String.create buffer_size in
+  let buffer = Bytes.create buffer_size in
   let rec loop () = match input ic buffer 0 buffer_size with
     | 0 -> ()
     | r -> Gzip.output ocz buffer 0 r; loop ()
@@ -59,7 +59,7 @@ let gzip ic oc =
 
 let gunzip ic oc =
   let icz = Gzip.open_in_chan ic in
-  let buffer = String.create buffer_size in
+  let buffer = Bytes.create buffer_size in
   let rec loop () = match Gzip.input icz buffer 0 buffer_size with
     | 0 -> ()
     | r -> output oc buffer 0 r; loop ()

@@ -17,7 +17,7 @@ ATDLIB=$(LEVEL)/libtooling/atdlib
 ATDGEN=atdgen
 ATDCAT=atdcat -i
 
-OCAMLOPT=ocamlfind ocamlopt -package unix,atdgen,camlzip -I build
+OCAMLOPT=ocamlfind ocamlopt -package unix,atdgen,camlzip -I build -safe-string
 
 all: build/clang_ast_converter build/clang_ast_named_decl_printer
 

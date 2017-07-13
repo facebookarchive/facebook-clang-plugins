@@ -2,7 +2,7 @@ Ocaml frontend to the Clang AST
 -------------------------------
 
 Additionaly requirements:
-- ocaml >= 4.01
+- ocaml >= 4.02
 - camlzip
 - yojson
 - atd >= 1.1.2
