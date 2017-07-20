@@ -878,7 +878,6 @@ void ASTExporter<ATDWriter>::dumpAccessSpecifier(AccessSpecifier AS) {
 //@atd   subject : cxx_ctor_initializer_subject;
 //@atd   source_range : source_range;
 //@atd   ?init_expr : stmt option;
-//@atd   ~array_indices : decl list
 //@atd } <ocaml field_prefix="xci_">
 //@atd type cxx_ctor_initializer_subject = [
 //@atd   Member of decl_ref
@@ -889,16 +888,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
     const CXXCtorInitializer &Init) {
   const Expr *E = Init.getInit();
-  /* NOTE ArrayIndices are removed by clang-4.0 and replaced by new types of
-     AST nodes. Commits that change it:
-     https://github.com/llvm-mirror/clang/commit/0601f898eba295d84cc7e2239ff2c62b1e818d85
-     https://github.com/llvm-mirror/clang/commit/993e3aa6b96adce7b48000b9ba4ff27266c87104
-
-     implementation in clang-3.9:
-     https://github.com/llvm-mirror/clang/blob/release_39/include/clang/AST/DeclCXX.h#L2131-L2149
-  */
-  int NumArrayIndices = Init.getNumArrayIndices();
-  ObjectScope Scope(OF, 2 + (bool)E + (NumArrayIndices > 0));
+  ObjectScope Scope(OF, 2 + (bool)E);
 
   OF.emitTag("subject");
   const FieldDecl *FD = Init.getAnyMember();
@@ -922,13 +912,6 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
     OF.emitTag("init_expr");
     dumpStmt(E);
   }
-  if (NumArrayIndices > 0) {
-    OF.emitTag("array_indices");
-    ArrayScope aScope(OF, NumArrayIndices);
-    for (int i = 0; i < NumArrayIndices; i++) {
-      dumpDecl(Init.getArrayIndex(i));
-    }
-  }
 }
 
 //@atd type declaration_name = {
@@ -946,6 +929,7 @@ void ASTExporter<ATDWriter>::dumpCXXCtorInitializer(
 //@atd | CXXOperatorName
 //@atd | CXXLiteralOperatorName
 //@atd | CXXUsingDirective
+//@atd | CXXDeductionGuideName
 //@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
@@ -981,6 +965,9 @@ void ASTExporter<ATDWriter>::dumpDeclarationName(const DeclarationName &Name) {
     break;
   case DeclarationName::CXXUsingDirective:
     OF.emitSimpleVariant("CXXUsingDirective");
+    break;
+  case DeclarationName::CXXDeductionGuideName:
+    OF.emitSimpleVariant("CXXDeductionGuideName");
     break;
   }
   OF.emitTag("name");
@@ -1346,66 +1333,45 @@ int ASTExporter<ATDWriter>::TranslationUnitDeclTupleSize() {
 //@atd | IK_CXX
 //@atd | IK_ObjC
 //@atd | IK_ObjCXX
-//@atd | IK_PreprocessedC
-//@atd | IK_PreprocessedCXX
-//@atd | IK_PreprocessedObjC
-//@atd | IK_PreprocessedObjCXX
 //@atd | IK_OpenCL
 //@atd | IK_CUDA
-//@atd | IK_PreprocessedCuda
 //@atd | IK_RenderScript
-//@atd | IK_AST
 //@atd | IK_LLVM_IR
 //@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
-  switch (kind) {
-  case IK_None:
+  // Despite here we deal only with the language field of InputKind, there are
+  // new info in InputKind that can still be used, e.g. whether the source is
+  // preprocessed (PP), or precompiled.
+  switch (kind.getLanguage()) {
+  case InputKind::Unknown:
     OF.emitSimpleVariant("IK_None");
     break;
-  case IK_Asm:
+  case InputKind::Asm:
     OF.emitSimpleVariant("IK_Asm");
     break;
-  case IK_C:
+  case InputKind::C:
     OF.emitSimpleVariant("IK_C");
     break;
-  case IK_CXX:
+  case InputKind::CXX:
     OF.emitSimpleVariant("IK_CXX");
     break;
-  case IK_ObjC:
+  case InputKind::ObjC:
     OF.emitSimpleVariant("IK_ObjC");
     break;
-  case IK_ObjCXX:
+  case InputKind::ObjCXX:
     OF.emitSimpleVariant("IK_ObjCXX");
     break;
-  case IK_PreprocessedC:
-    OF.emitSimpleVariant("IK_PreprocessedC");
-    break;
-  case IK_PreprocessedCXX:
-    OF.emitSimpleVariant("IK_PreprocessedCXX");
-    break;
-  case IK_PreprocessedObjC:
-    OF.emitSimpleVariant("IK_PreprocessedObjC");
-    break;
-  case IK_PreprocessedObjCXX:
-    OF.emitSimpleVariant("IK_PreprocessedObjCXX");
-    break;
-  case IK_OpenCL:
+  case InputKind::OpenCL:
     OF.emitSimpleVariant("IK_OpenCL");
     break;
-  case IK_CUDA:
+  case InputKind::CUDA:
     OF.emitSimpleVariant("IK_CUDA");
     break;
-  case IK_PreprocessedCuda:
-    OF.emitSimpleVariant("IK_PreprocessedCuda");
-    break;
-  case IK_RenderScript:
+  case InputKind::RenderScript:
     OF.emitSimpleVariant("IK_RenderScript");
     break;
-  case IK_AST:
-    OF.emitSimpleVariant("IK_AST");
-    break;
-  case IK_LLVM_IR:
+  case InputKind::LLVM_IR:
     OF.emitSimpleVariant("IK_LLVM_IR");
     break;
   }
@@ -1571,7 +1537,6 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~is_pure : bool;
 //@atd   ~is_delete_as_written : bool;
 //@atd   ~is_no_throw : bool;
-//@atd   ~decls_in_prototype_scope : decl list;
 //@atd   ~parameters : decl list;
 //@atd   ?decl_ptr_with_body : pointer option;
 //@atd   ?body : stmt option;
@@ -1591,7 +1556,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
 
   const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
-  // This will change when upgrading clang to FunctionProtoType::canThrow
+  // FunctionProtoType::canThrow is more informative, consider using CanThrowResult type instead
   // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
   auto IsNoThrow = FPT ? FPT->isNothrow(Context) : false;
   const FunctionDecl *DeclWithBody = D;
@@ -1657,17 +1622,6 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   //  if (HasTemplateSpecialization) {
   //    dumpTemplateArgumentList(*FTSI->TemplateArguments);
   //  }
-
-  {
-    const auto &decls = D->getDeclsInPrototypeScope();
-    if (!decls.empty()) {
-      OF.emitTag("decls_in_prototype_scope");
-      ArrayScope Scope(OF, decls.size()); // not covered by tests
-      for (const auto *decl : decls) {
-        dumpDecl(decl);
-      }
-    }
-  }
 
   {
     FunctionDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
@@ -4656,6 +4610,7 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
 //@atd   | Swiftcall
 //@atd   | PreserveMost
 //@atd   | PreserveAll
+//@atd   | Regcall
 //@atd ]
 
 template <class ATDWriter>
@@ -4753,6 +4708,9 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
     break;
   case AttributedType::attr_preserve_all:
     OF.emitSimpleVariant("PreserveAll");
+    break;
+  case AttributedType::attr_regcall:
+    OF.emitSimpleVariant("Regcall");
     break;
   }
 }

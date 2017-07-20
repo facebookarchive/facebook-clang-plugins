@@ -31,8 +31,7 @@ static llvm::cl::opt<Mode> astExporterMode(
     llvm::cl::desc("Mode of operation"),
     llvm::cl::values(clEnumVal(json, "json output"),
                      clEnumVal(yojson, "yojson output"),
-                     clEnumVal(biniou, "biniou output"),
-                     clEnumValEnd),
+                     clEnumVal(biniou, "biniou output")),
     llvm::cl::cat(astExporterCategory));
 
 static llvm::cl::opt<std::string> astExporterOutput(

@@ -402,11 +402,12 @@
             ]
           },
           {
-            "type_ptr" : 24
+            "type_ptr" : 13
           },
           {
             "mangled_name" : "_ZN3podD0Ev",
-            "is_inline" : true
+            "is_inline" : true,
+            "is_no_throw" : true
           },
           {
           }
@@ -431,14 +432,14 @@
             ]
           },
           "qual_type" : {
-            "type_ptr" : 24
+            "type_ptr" : 13
           }
         }
       }
     )>,
     <"CXXRecordDecl" : (
       {
-        "pointer" : 25,
+        "pointer" : 24,
         "source_range" : (
           {
             "line" : 5,
@@ -458,11 +459,11 @@
         ]
       },
       <"Type" : "struct cpplike">,
-      26,
+      25,
       [
         <"CXXRecordDecl" : (
           {
-            "pointer" : 27,
+            "pointer" : 26,
             "source_range" : (
               {
                 "line" : 5,
@@ -484,7 +485,7 @@
             ]
           },
           <"Type" : "struct cpplike">,
-          26,
+          25,
           [
           ],
           {
@@ -497,8 +498,8 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : 28,
-            "parent_pointer" : 25,
+            "pointer" : 27,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "line" : 6,
@@ -525,8 +526,8 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : 29,
-            "parent_pointer" : 25,
+            "pointer" : 28,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "line" : 7,
@@ -553,8 +554,8 @@
         )>,
         <"FieldDecl" : (
           {
-            "pointer" : 30,
-            "parent_pointer" : 25,
+            "pointer" : 29,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "line" : 8,
@@ -581,8 +582,8 @@
         )>,
         <"CXXConstructorDecl" : (
           {
-            "pointer" : 31,
-            "parent_pointer" : 25,
+            "pointer" : 30,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "line" : 9,
@@ -604,14 +605,14 @@
             ]
           },
           {
-            "type_ptr" : 32
+            "type_ptr" : 31
           },
           {
             "mangled_name" : "_ZN7cpplikeC1Ev",
-            "decl_ptr_with_body" : 31,
+            "decl_ptr_with_body" : 30,
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : 33,
+                "pointer" : 32,
                 "source_range" : (
                   {
                     "column" : 27
@@ -630,7 +631,7 @@
               {
                 "subject" : <"Member" : {
                   "kind" : <"Field">,
-                  "decl_pointer" : 28,
+                  "decl_pointer" : 27,
                   "name" : {
                     "name" : "a",
                     "qual_name" : [
@@ -652,7 +653,7 @@
                 ),
                 "init_expr" : <"IntegerLiteral" : (
                   {
-                    "pointer" : 34,
+                    "pointer" : 33,
                     "source_range" : (
                       {
                         "column" : 17
@@ -679,7 +680,7 @@
               {
                 "subject" : <"Member" : {
                   "kind" : <"Field">,
-                  "decl_pointer" : 29,
+                  "decl_pointer" : 28,
                   "name" : {
                     "name" : "b",
                     "qual_name" : [
@@ -701,7 +702,7 @@
                 ),
                 "init_expr" : <"IntegerLiteral" : (
                   {
-                    "pointer" : 35,
+                    "pointer" : 34,
                     "source_range" : (
                       {
                         "column" : 24
@@ -728,7 +729,7 @@
               {
                 "subject" : <"Member" : {
                   "kind" : <"Field">,
-                  "decl_pointer" : 30,
+                  "decl_pointer" : 29,
                   "name" : {
                     "name" : "c",
                     "qual_name" : [
@@ -750,7 +751,7 @@
                 ),
                 "init_expr" : <"CXXConstructExpr" : (
                   {
-                    "pointer" : 36,
+                    "pointer" : 35,
                     "source_range" : (
                       {
                         "column" : 3
@@ -790,8 +791,8 @@
         )>,
         <"CXXConstructorDecl" : (
           {
-            "pointer" : 37,
-            "parent_pointer" : 25,
+            "pointer" : 36,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "line" : 10,
@@ -813,14 +814,14 @@
             ]
           },
           {
-            "type_ptr" : 38
+            "type_ptr" : 37
           },
           {
             "mangled_name" : "_ZN7cpplikeC1Eii",
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : 39,
+                  "pointer" : 38,
                   "source_range" : (
                     {
                       "column" : 11
@@ -847,7 +848,7 @@
               )>,
               <"ParmVarDecl" : (
                 {
-                  "pointer" : 40,
+                  "pointer" : 39,
                   "source_range" : (
                     {
                       "column" : 18
@@ -873,10 +874,10 @@
                 }
               )>
             ],
-            "decl_ptr_with_body" : 37,
+            "decl_ptr_with_body" : 36,
             "body" : <"CompoundStmt" : (
               {
-                "pointer" : 41,
+                "pointer" : 40,
                 "source_range" : (
                   {
                     "column" : 38
@@ -895,7 +896,7 @@
               {
                 "subject" : <"Member" : {
                   "kind" : <"Field">,
-                  "decl_pointer" : 28,
+                  "decl_pointer" : 27,
                   "name" : {
                     "name" : "a",
                     "qual_name" : [
@@ -917,7 +918,7 @@
                 ),
                 "init_expr" : <"ImplicitCastExpr" : (
                   {
-                    "pointer" : 42,
+                    "pointer" : 41,
                     "source_range" : (
                       {
                         "column" : 29
@@ -930,7 +931,7 @@
                   [
                     <"DeclRefExpr" : (
                       {
-                        "pointer" : 43,
+                        "pointer" : 42,
                         "source_range" : (
                           {
                             "column" : 29
@@ -951,7 +952,7 @@
                       {
                         "decl_ref" : {
                           "kind" : <"ParmVar">,
-                          "decl_pointer" : 39,
+                          "decl_pointer" : 38,
                           "name" : {
                             "name" : "a",
                             "qual_name" : [
@@ -980,7 +981,7 @@
               {
                 "subject" : <"Member" : {
                   "kind" : <"Field">,
-                  "decl_pointer" : 29,
+                  "decl_pointer" : 28,
                   "name" : {
                     "name" : "b",
                     "qual_name" : [
@@ -1002,7 +1003,7 @@
                 ),
                 "init_expr" : <"ImplicitCastExpr" : (
                   {
-                    "pointer" : 44,
+                    "pointer" : 43,
                     "source_range" : (
                       {
                         "column" : 35
@@ -1015,7 +1016,7 @@
                   [
                     <"DeclRefExpr" : (
                       {
-                        "pointer" : 45,
+                        "pointer" : 44,
                         "source_range" : (
                           {
                             "column" : 35
@@ -1036,7 +1037,7 @@
                       {
                         "decl_ref" : {
                           "kind" : <"ParmVar">,
-                          "decl_pointer" : 40,
+                          "decl_pointer" : 39,
                           "name" : {
                             "name" : "b",
                             "qual_name" : [
@@ -1065,7 +1066,7 @@
               {
                 "subject" : <"Member" : {
                   "kind" : <"Field">,
-                  "decl_pointer" : 30,
+                  "decl_pointer" : 29,
                   "name" : {
                     "name" : "c",
                     "qual_name" : [
@@ -1087,7 +1088,7 @@
                 ),
                 "init_expr" : <"CXXConstructExpr" : (
                   {
-                    "pointer" : 46,
+                    "pointer" : 45,
                     "source_range" : (
                       {
                         "column" : 3
@@ -1127,8 +1128,8 @@
         )>,
         <"CXXConstructorDecl" : (
           {
-            "pointer" : 47,
-            "parent_pointer" : 25,
+            "pointer" : 46,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "line" : 5,
@@ -1149,7 +1150,7 @@
             ]
           },
           {
-            "type_ptr" : 48
+            "type_ptr" : 47
           },
           {
             "mangled_name" : "_ZN7cpplikeC1ERKS_",
@@ -1157,7 +1158,7 @@
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : 49,
+                  "pointer" : 48,
                   "source_range" : (
                     {
                       "column" : 8
@@ -1174,7 +1175,7 @@
                   ]
                 },
                 {
-                  "type_ptr" : 50
+                  "type_ptr" : 49
                 },
                 {
                   "parm_index_in_function" : 0
@@ -1188,8 +1189,8 @@
         )>,
         <"CXXConstructorDecl" : (
           {
-            "pointer" : 51,
-            "parent_pointer" : 25,
+            "pointer" : 50,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "column" : 8
@@ -1209,7 +1210,7 @@
             ]
           },
           {
-            "type_ptr" : 52
+            "type_ptr" : 51
           },
           {
             "mangled_name" : "_ZN7cpplikeC1EOS_",
@@ -1217,7 +1218,7 @@
             "parameters" : [
               <"ParmVarDecl" : (
                 {
-                  "pointer" : 53,
+                  "pointer" : 52,
                   "source_range" : (
                     {
                       "column" : 8
@@ -1234,7 +1235,7 @@
                   ]
                 },
                 {
-                  "type_ptr" : 54
+                  "type_ptr" : 53
                 },
                 {
                   "parm_index_in_function" : 0
@@ -1248,8 +1249,8 @@
         )>,
         <"CXXDestructorDecl" : (
           {
-            "pointer" : 55,
-            "parent_pointer" : 25,
+            "pointer" : 54,
+            "parent_pointer" : 24,
             "source_range" : (
               {
                 "column" : 8
@@ -1270,11 +1271,12 @@
             ]
           },
           {
-            "type_ptr" : 56
+            "type_ptr" : 13
           },
           {
             "mangled_name" : "_ZN7cpplikeD0Ev",
-            "is_inline" : true
+            "is_inline" : true,
+            "is_no_throw" : true
           },
           {
           }
@@ -1283,13 +1285,13 @@
       {
       },
       {
-        "definition_ptr" : 25,
+        "definition_ptr" : 24,
         "is_complete_definition" : true
       },
       {
         "destructor" : {
           "kind" : <"CXXDestructor">,
-          "decl_pointer" : 55,
+          "decl_pointer" : 54,
           "name" : {
             "name" : "~cpplike",
             "qual_name" : [
@@ -1298,14 +1300,14 @@
             ]
           },
           "qual_type" : {
-            "type_ptr" : 56
+            "type_ptr" : 13
           }
         }
       }
     )>,
     <"FunctionDecl" : (
       {
-        "pointer" : 57,
+        "pointer" : 55,
         "source_range" : (
           {
             "line" : 13,
@@ -1324,14 +1326,14 @@
         ]
       },
       {
-        "type_ptr" : 32
+        "type_ptr" : 31
       },
       {
         "mangled_name" : "_Z4testv",
-        "decl_ptr_with_body" : 57,
+        "decl_ptr_with_body" : 55,
         "body" : <"CompoundStmt" : (
           {
-            "pointer" : 58,
+            "pointer" : 56,
             "source_range" : (
               {
                 "line" : 13,
@@ -1346,7 +1348,7 @@
           [
             <"DeclStmt" : (
               {
-                "pointer" : 59,
+                "pointer" : 57,
                 "source_range" : (
                   {
                     "line" : 14,
@@ -1360,7 +1362,7 @@
               [
                 <"CXXNewExpr" : (
                   {
-                    "pointer" : 60,
+                    "pointer" : 58,
                     "source_range" : (
                       {
                         "column" : 13
@@ -1373,7 +1375,7 @@
                   [
                     <"IntegerLiteral" : (
                       {
-                        "pointer" : 61,
+                        "pointer" : 59,
                         "source_range" : (
                           {
                             "column" : 21
@@ -1399,18 +1401,18 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 62
+                      "type_ptr" : 60
                     }
                   },
                   {
-                    "initializer_expr" : 61
+                    "initializer_expr" : 59
                   }
                 )>
               ],
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 63,
+                    "pointer" : 61,
                     "source_range" : (
                       {
                         "column" : 3
@@ -1429,12 +1431,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 64
+                    "type_ptr" : 62
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
                       {
-                        "pointer" : 60,
+                        "pointer" : 58,
                         "source_range" : (
                           {
                             "column" : 13
@@ -1447,7 +1449,7 @@
                       [
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : 61,
+                            "pointer" : 59,
                             "source_range" : (
                               {
                                 "column" : 21
@@ -1473,11 +1475,11 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 62
+                          "type_ptr" : 60
                         }
                       },
                       {
-                        "initializer_expr" : 61
+                        "initializer_expr" : 59
                       }
                     )>
                   }
@@ -1486,7 +1488,7 @@
             )>,
             <"DeclStmt" : (
               {
-                "pointer" : 65,
+                "pointer" : 63,
                 "source_range" : (
                   {
                     "line" : 15,
@@ -1500,7 +1502,7 @@
               [
                 <"CXXNewExpr" : (
                   {
-                    "pointer" : 66,
+                    "pointer" : 64,
                     "source_range" : (
                       {
                         "column" : 15
@@ -1513,7 +1515,7 @@
                   [
                     <"ImplicitCastExpr" : (
                       {
-                        "pointer" : 67,
+                        "pointer" : 65,
                         "source_range" : (
                           {
                             "column" : 23
@@ -1526,7 +1528,7 @@
                       [
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : 68,
+                            "pointer" : 66,
                             "source_range" : (
                               {
                                 "column" : 23
@@ -1552,7 +1554,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 69
+                          "type_ptr" : 67
                         }
                       },
                       {
@@ -1564,19 +1566,19 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 62
+                      "type_ptr" : 60
                     }
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : 67
+                    "array_size_expr" : 65
                   }
                 )>
               ],
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 70,
+                    "pointer" : 68,
                     "source_range" : (
                       {
                         "column" : 3
@@ -1595,12 +1597,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 64
+                    "type_ptr" : 62
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
                       {
-                        "pointer" : 66,
+                        "pointer" : 64,
                         "source_range" : (
                           {
                             "column" : 15
@@ -1613,7 +1615,7 @@
                       [
                         <"ImplicitCastExpr" : (
                           {
-                            "pointer" : 67,
+                            "pointer" : 65,
                             "source_range" : (
                               {
                                 "column" : 23
@@ -1626,7 +1628,7 @@
                           [
                             <"IntegerLiteral" : (
                               {
-                                "pointer" : 68,
+                                "pointer" : 66,
                                 "source_range" : (
                                   {
                                     "column" : 23
@@ -1652,7 +1654,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 69
+                              "type_ptr" : 67
                             }
                           },
                           {
@@ -1664,12 +1666,12 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 62
+                          "type_ptr" : 60
                         }
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 67
+                        "array_size_expr" : 65
                       }
                     )>
                   }
@@ -1678,7 +1680,7 @@
             )>,
             <"DeclStmt" : (
               {
-                "pointer" : 71,
+                "pointer" : 69,
                 "source_range" : (
                   {
                     "line" : 17,
@@ -1692,7 +1694,7 @@
               [
                 <"CXXNewExpr" : (
                   {
-                    "pointer" : 72,
+                    "pointer" : 70,
                     "source_range" : (
                       {
                         "column" : 13
@@ -1705,7 +1707,7 @@
                   [
                     <"CXXConstructExpr" : (
                       {
-                        "pointer" : 73,
+                        "pointer" : 71,
                         "source_range" : (
                           {
                             "column" : 17
@@ -1742,18 +1744,18 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 74
+                      "type_ptr" : 72
                     }
                   },
                   {
-                    "initializer_expr" : 73
+                    "initializer_expr" : 71
                   }
                 )>
               ],
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 75,
+                    "pointer" : 73,
                     "source_range" : (
                       {
                         "column" : 3
@@ -1772,12 +1774,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 76
+                    "type_ptr" : 74
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
                       {
-                        "pointer" : 72,
+                        "pointer" : 70,
                         "source_range" : (
                           {
                             "column" : 13
@@ -1790,7 +1792,7 @@
                       [
                         <"CXXConstructExpr" : (
                           {
-                            "pointer" : 73,
+                            "pointer" : 71,
                             "source_range" : (
                               {
                                 "column" : 17
@@ -1827,11 +1829,11 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 74
+                          "type_ptr" : 72
                         }
                       },
                       {
-                        "initializer_expr" : 73
+                        "initializer_expr" : 71
                       }
                     )>
                   }
@@ -1840,7 +1842,7 @@
             )>,
             <"DeclStmt" : (
               {
-                "pointer" : 77,
+                "pointer" : 75,
                 "source_range" : (
                   {
                     "line" : 18,
@@ -1854,7 +1856,7 @@
               [
                 <"CXXNewExpr" : (
                   {
-                    "pointer" : 78,
+                    "pointer" : 76,
                     "source_range" : (
                       {
                         "column" : 15
@@ -1867,7 +1869,7 @@
                   [
                     <"ImplicitCastExpr" : (
                       {
-                        "pointer" : 79,
+                        "pointer" : 77,
                         "source_range" : (
                           {
                             "column" : 23
@@ -1880,7 +1882,7 @@
                       [
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : 80,
+                            "pointer" : 78,
                             "source_range" : (
                               {
                                 "column" : 23
@@ -1906,7 +1908,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 69
+                          "type_ptr" : 67
                         }
                       },
                       {
@@ -1917,7 +1919,7 @@
                     )>,
                     <"CXXConstructExpr" : (
                       {
-                        "pointer" : 81,
+                        "pointer" : 79,
                         "source_range" : (
                           {
                             "column" : 19
@@ -1931,7 +1933,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 8
+                          "type_ptr" : 80
                         }
                       },
                       {
@@ -1954,20 +1956,20 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 74
+                      "type_ptr" : 72
                     }
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : 79,
-                    "initializer_expr" : 81
+                    "array_size_expr" : 77,
+                    "initializer_expr" : 79
                   }
                 )>
               ],
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 82,
+                    "pointer" : 81,
                     "source_range" : (
                       {
                         "column" : 3
@@ -1986,12 +1988,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 76
+                    "type_ptr" : 74
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
                       {
-                        "pointer" : 78,
+                        "pointer" : 76,
                         "source_range" : (
                           {
                             "column" : 15
@@ -2004,7 +2006,7 @@
                       [
                         <"ImplicitCastExpr" : (
                           {
-                            "pointer" : 79,
+                            "pointer" : 77,
                             "source_range" : (
                               {
                                 "column" : 23
@@ -2017,7 +2019,7 @@
                           [
                             <"IntegerLiteral" : (
                               {
-                                "pointer" : 80,
+                                "pointer" : 78,
                                 "source_range" : (
                                   {
                                     "column" : 23
@@ -2043,7 +2045,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 69
+                              "type_ptr" : 67
                             }
                           },
                           {
@@ -2054,7 +2056,7 @@
                         )>,
                         <"CXXConstructExpr" : (
                           {
-                            "pointer" : 81,
+                            "pointer" : 79,
                             "source_range" : (
                               {
                                 "column" : 19
@@ -2068,7 +2070,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 8
+                              "type_ptr" : 80
                             }
                           },
                           {
@@ -2091,13 +2093,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 74
+                          "type_ptr" : 72
                         }
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 79,
-                        "initializer_expr" : 81
+                        "array_size_expr" : 77,
+                        "initializer_expr" : 79
                       }
                     )>
                   }
@@ -2106,7 +2108,7 @@
             )>,
             <"DeclStmt" : (
               {
-                "pointer" : 83,
+                "pointer" : 82,
                 "source_range" : (
                   {
                     "line" : 20,
@@ -2120,7 +2122,7 @@
               [
                 <"CXXNewExpr" : (
                   {
-                    "pointer" : 84,
+                    "pointer" : 83,
                     "source_range" : (
                       {
                         "column" : 13
@@ -2133,7 +2135,7 @@
                   [
                     <"CXXConstructExpr" : (
                       {
-                        "pointer" : 85,
+                        "pointer" : 84,
                         "source_range" : (
                           {
                             "column" : 17
@@ -2146,7 +2148,7 @@
                       [
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : 86,
+                            "pointer" : 85,
                             "source_range" : (
                               {
                                 "column" : 25
@@ -2171,7 +2173,7 @@
                         )>,
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : 87,
+                            "pointer" : 86,
                             "source_range" : (
                               {
                                 "column" : 28
@@ -2197,13 +2199,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 26
+                          "type_ptr" : 25
                         }
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"CXXConstructor">,
-                          "decl_pointer" : 37,
+                          "decl_pointer" : 36,
                           "name" : {
                             "name" : "cpplike",
                             "qual_name" : [
@@ -2212,7 +2214,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 38
+                            "type_ptr" : 37
                           }
                         }
                       }
@@ -2220,18 +2222,18 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 88
+                      "type_ptr" : 87
                     }
                   },
                   {
-                    "initializer_expr" : 85
+                    "initializer_expr" : 84
                   }
                 )>
               ],
               [
                 <"VarDecl" : (
                   {
-                    "pointer" : 89,
+                    "pointer" : 88,
                     "source_range" : (
                       {
                         "column" : 3
@@ -2250,12 +2252,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 90
+                    "type_ptr" : 89
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
                       {
-                        "pointer" : 84,
+                        "pointer" : 83,
                         "source_range" : (
                           {
                             "column" : 13
@@ -2268,7 +2270,7 @@
                       [
                         <"CXXConstructExpr" : (
                           {
-                            "pointer" : 85,
+                            "pointer" : 84,
                             "source_range" : (
                               {
                                 "column" : 17
@@ -2281,7 +2283,7 @@
                           [
                             <"IntegerLiteral" : (
                               {
-                                "pointer" : 86,
+                                "pointer" : 85,
                                 "source_range" : (
                                   {
                                     "column" : 25
@@ -2306,7 +2308,7 @@
                             )>,
                             <"IntegerLiteral" : (
                               {
-                                "pointer" : 87,
+                                "pointer" : 86,
                                 "source_range" : (
                                   {
                                     "column" : 28
@@ -2332,13 +2334,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 26
+                              "type_ptr" : 25
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"CXXConstructor">,
-                              "decl_pointer" : 37,
+                              "decl_pointer" : 36,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -2347,7 +2349,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 38
+                                "type_ptr" : 37
                               }
                             }
                           }
@@ -2355,11 +2357,11 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 88
+                          "type_ptr" : 87
                         }
                       },
                       {
-                        "initializer_expr" : 85
+                        "initializer_expr" : 84
                       }
                     )>
                   }
@@ -2368,7 +2370,7 @@
             )>,
             <"DeclStmt" : (
               {
-                "pointer" : 91,
+                "pointer" : 90,
                 "source_range" : (
                   {
                     "line" : 21,
@@ -2382,7 +2384,7 @@
               [
                 <"CXXNewExpr" : (
                   {
-                    "pointer" : 92,
+                    "pointer" : 91,
                     "source_range" : (
                       {
                         "column" : 15
@@ -2395,7 +2397,7 @@
                   [
                     <"ImplicitCastExpr" : (
                       {
-                        "pointer" : 93,
+                        "pointer" : 92,
                         "source_range" : (
                           {
                             "column" : 27
@@ -2408,7 +2410,7 @@
                       [
                         <"IntegerLiteral" : (
                           {
-                            "pointer" : 94,
+                            "pointer" : 93,
                             "source_range" : (
                               {
                                 "column" : 27
@@ -2434,7 +2436,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 69
+                          "type_ptr" : 67
                         }
                       },
                       {
@@ -2445,7 +2447,7 @@
                     )>,
                     <"CXXConstructExpr" : (
                       {
-                        "pointer" : 95,
+                        "pointer" : 94,
                         "source_range" : (
                           {
                             "column" : 19
@@ -2459,13 +2461,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 26
+                          "type_ptr" : 95
                         }
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"CXXConstructor">,
-                          "decl_pointer" : 31,
+                          "decl_pointer" : 30,
                           "name" : {
                             "name" : "cpplike",
                             "qual_name" : [
@@ -2474,7 +2476,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 32
+                            "type_ptr" : 31
                           }
                         }
                       }
@@ -2482,13 +2484,13 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 88
+                      "type_ptr" : 87
                     }
                   },
                   {
                     "is_array" : true,
-                    "array_size_expr" : 93,
-                    "initializer_expr" : 95
+                    "array_size_expr" : 92,
+                    "initializer_expr" : 94
                   }
                 )>
               ],
@@ -2514,12 +2516,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 90
+                    "type_ptr" : 89
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
                       {
-                        "pointer" : 92,
+                        "pointer" : 91,
                         "source_range" : (
                           {
                             "column" : 15
@@ -2532,7 +2534,7 @@
                       [
                         <"ImplicitCastExpr" : (
                           {
-                            "pointer" : 93,
+                            "pointer" : 92,
                             "source_range" : (
                               {
                                 "column" : 27
@@ -2545,7 +2547,7 @@
                           [
                             <"IntegerLiteral" : (
                               {
-                                "pointer" : 94,
+                                "pointer" : 93,
                                 "source_range" : (
                                   {
                                     "column" : 27
@@ -2571,7 +2573,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 69
+                              "type_ptr" : 67
                             }
                           },
                           {
@@ -2582,7 +2584,7 @@
                         )>,
                         <"CXXConstructExpr" : (
                           {
-                            "pointer" : 95,
+                            "pointer" : 94,
                             "source_range" : (
                               {
                                 "column" : 19
@@ -2596,13 +2598,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 26
+                              "type_ptr" : 95
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"CXXConstructor">,
-                              "decl_pointer" : 31,
+                              "decl_pointer" : 30,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -2611,7 +2613,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 32
+                                "type_ptr" : 31
                               }
                             }
                           }
@@ -2619,13 +2621,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 88
+                          "type_ptr" : 87
                         }
                       },
                       {
                         "is_array" : true,
-                        "array_size_expr" : 93,
-                        "initializer_expr" : 95
+                        "array_size_expr" : 92,
+                        "initializer_expr" : 94
                       }
                     )>
                   }
@@ -2675,14 +2677,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 64
+                          "type_ptr" : 62
                         },
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : 63,
+                          "decl_pointer" : 61,
                           "name" : {
                             "name" : "i",
                             "qual_name" : [
@@ -2690,7 +2692,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 64
+                            "type_ptr" : 62
                           }
                         }
                       }
@@ -2698,7 +2700,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 64
+                      "type_ptr" : 62
                     }
                   },
                   {
@@ -2762,14 +2764,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 64
+                          "type_ptr" : 62
                         },
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : 70,
+                          "decl_pointer" : 68,
                           "name" : {
                             "name" : "i_a",
                             "qual_name" : [
@@ -2777,7 +2779,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 64
+                            "type_ptr" : 62
                           }
                         }
                       }
@@ -2785,7 +2787,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 64
+                      "type_ptr" : 62
                     }
                   },
                   {
@@ -2850,14 +2852,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 76
+                          "type_ptr" : 74
                         },
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : 75,
+                          "decl_pointer" : 73,
                           "name" : {
                             "name" : "p",
                             "qual_name" : [
@@ -2865,7 +2867,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 76
+                            "type_ptr" : 74
                           }
                         }
                       }
@@ -2873,7 +2875,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 76
+                      "type_ptr" : 74
                     }
                   },
                   {
@@ -2937,14 +2939,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 76
+                          "type_ptr" : 74
                         },
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : 82,
+                          "decl_pointer" : 81,
                           "name" : {
                             "name" : "p_a",
                             "qual_name" : [
@@ -2952,7 +2954,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 76
+                            "type_ptr" : 74
                           }
                         }
                       }
@@ -2960,7 +2962,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 76
+                      "type_ptr" : 74
                     }
                   },
                   {
@@ -3025,14 +3027,14 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 90
+                          "type_ptr" : 89
                         },
                         "value_kind" : <"LValue">
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"Var">,
-                          "decl_pointer" : 89,
+                          "decl_pointer" : 88,
                           "name" : {
                             "name" : "c",
                             "qual_name" : [
@@ -3040,7 +3042,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 90
+                            "type_ptr" : 89
                           }
                         }
                       }
@@ -3048,7 +3050,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 90
+                      "type_ptr" : 89
                     }
                   },
                   {
@@ -3112,7 +3114,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 90
+                          "type_ptr" : 89
                         },
                         "value_kind" : <"LValue">
                       },
@@ -3127,7 +3129,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 90
+                            "type_ptr" : 89
                           }
                         }
                       }
@@ -3135,7 +3137,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 90
+                      "type_ptr" : 89
                     }
                   },
                   {
@@ -3219,7 +3221,7 @@
               ]
             },
             {
-              "type_ptr" : 69
+              "type_ptr" : 67
             },
             {
               "parm_index_in_function" : 0
@@ -3286,7 +3288,7 @@
               ]
             },
             {
-              "type_ptr" : 69
+              "type_ptr" : 67
             },
             {
               "parm_index_in_function" : 0
@@ -3452,7 +3454,7 @@
         ]
       },
       {
-        "type_ptr" : 32
+        "type_ptr" : 31
       },
       {
         "mangled_name" : "_Z8test_c11v",
@@ -3540,7 +3542,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 69
+                          "type_ptr" : 67
                         }
                       },
                       {
@@ -3647,7 +3649,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 62
+                      "type_ptr" : 60
                     }
                   },
                   {
@@ -3677,7 +3679,7 @@
                     ]
                   },
                   {
-                    "type_ptr" : 64
+                    "type_ptr" : 62
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
@@ -3734,7 +3736,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 69
+                              "type_ptr" : 67
                             }
                           },
                           {
@@ -3841,7 +3843,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 62
+                          "type_ptr" : 60
                         }
                       },
                       {
@@ -3947,13 +3949,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 26
+                          "type_ptr" : 25
                         }
                       },
                       {
                         "decl_ref" : {
                           "kind" : <"CXXConstructor">,
-                          "decl_pointer" : 37,
+                          "decl_pointer" : 36,
                           "name" : {
                             "name" : "cpplike",
                             "qual_name" : [
@@ -3962,7 +3964,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 38
+                            "type_ptr" : 37
                           }
                         }
                       }
@@ -3970,7 +3972,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 88
+                      "type_ptr" : 87
                     }
                   },
                   {
@@ -3998,7 +4000,7 @@
                     ]
                   },
                   {
-                    "type_ptr" : 90
+                    "type_ptr" : 89
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
@@ -4080,13 +4082,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 26
+                              "type_ptr" : 25
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"CXXConstructor">,
-                              "decl_pointer" : 37,
+                              "decl_pointer" : 36,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -4095,7 +4097,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 38
+                                "type_ptr" : 37
                               }
                             }
                           }
@@ -4103,7 +4105,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 88
+                          "type_ptr" : 87
                         }
                       },
                       {
@@ -4182,7 +4184,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 69
+                          "type_ptr" : 67
                         }
                       },
                       {
@@ -4270,13 +4272,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 26
+                              "type_ptr" : 25
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"CXXConstructor">,
-                              "decl_pointer" : 37,
+                              "decl_pointer" : 36,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -4285,7 +4287,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 38
+                                "type_ptr" : 37
                               }
                             }
                           }
@@ -4356,13 +4358,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 26
+                              "type_ptr" : 25
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"CXXConstructor">,
-                              "decl_pointer" : 37,
+                              "decl_pointer" : 36,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -4371,7 +4373,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 38
+                                "type_ptr" : 37
                               }
                             }
                           }
@@ -4442,13 +4444,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 26
+                              "type_ptr" : 25
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : <"CXXConstructor">,
-                              "decl_pointer" : 37,
+                              "decl_pointer" : 36,
                               "name" : {
                                 "name" : "cpplike",
                                 "qual_name" : [
@@ -4457,7 +4459,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 38
+                                "type_ptr" : 37
                               }
                             }
                           }
@@ -4472,7 +4474,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 88
+                      "type_ptr" : 87
                     }
                   },
                   {
@@ -4502,7 +4504,7 @@
                     ]
                   },
                   {
-                    "type_ptr" : 90
+                    "type_ptr" : 89
                   },
                   {
                     "init_expr" : <"CXXNewExpr" : (
@@ -4559,7 +4561,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 69
+                              "type_ptr" : 67
                             }
                           },
                           {
@@ -4647,13 +4649,13 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 26
+                                  "type_ptr" : 25
                                 }
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : <"CXXConstructor">,
-                                  "decl_pointer" : 37,
+                                  "decl_pointer" : 36,
                                   "name" : {
                                     "name" : "cpplike",
                                     "qual_name" : [
@@ -4662,7 +4664,7 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "type_ptr" : 38
+                                    "type_ptr" : 37
                                   }
                                 }
                               }
@@ -4733,13 +4735,13 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 26
+                                  "type_ptr" : 25
                                 }
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : <"CXXConstructor">,
-                                  "decl_pointer" : 37,
+                                  "decl_pointer" : 36,
                                   "name" : {
                                     "name" : "cpplike",
                                     "qual_name" : [
@@ -4748,7 +4750,7 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "type_ptr" : 38
+                                    "type_ptr" : 37
                                   }
                                 }
                               }
@@ -4819,13 +4821,13 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 26
+                                  "type_ptr" : 25
                                 }
                               },
                               {
                                 "decl_ref" : {
                                   "kind" : <"CXXConstructor">,
-                                  "decl_pointer" : 37,
+                                  "decl_pointer" : 36,
                                   "name" : {
                                     "name" : "cpplike",
                                     "qual_name" : [
@@ -4834,7 +4836,7 @@
                                     ]
                                   },
                                   "qual_type" : {
-                                    "type_ptr" : 38
+                                    "type_ptr" : 37
                                   }
                                 }
                               }
@@ -4849,7 +4851,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 88
+                          "type_ptr" : 87
                         }
                       },
                       {
@@ -4963,7 +4965,7 @@
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 69
+          "pointer" : 67
         },
         <"ULong">
       )>,
@@ -5185,21 +5187,21 @@
       )>,
       <"RecordType" : (
         {
-          "pointer" : 26
+          "pointer" : 25
         },
-        25
+        24
       )>,
       <"PointerType" : (
         {
-          "pointer" : 88
+          "pointer" : 87
         },
         {
-          "type_ptr" : 26
+          "type_ptr" : 25
         }
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 32
+          "pointer" : 31
         },
         {
           "return_type" : {
@@ -5211,7 +5213,7 @@
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 38
+          "pointer" : 37
         },
         {
           "return_type" : {
@@ -5348,7 +5350,7 @@
       )>,
       <"PointerType" : (
         {
-          "pointer" : 62
+          "pointer" : 60
         },
         {
           "type_ptr" : 11
@@ -5366,7 +5368,7 @@
         {
           "params_type" : [
             {
-              "type_ptr" : 69
+              "type_ptr" : 67
             }
           ]
         }
@@ -5439,28 +5441,40 @@
       )>,
       <"PointerType" : (
         {
-          "pointer" : 64
+          "pointer" : 62
         },
         {
           "type_ptr" : 101
         }
       )>,
-      <"TemplateTypeParmType" : (
+      <"ConstantArrayType" : (
         {
           "pointer" : 223
-        }
-      )>,
-      <"PointerType" : (
-        {
-          "pointer" : 224
         },
         {
-          "type_ptr" : 223
+          "element_type" : {
+            "type_ptr" : 11
+          },
+          "stride" : 32
+        },
+        10
+      )>,
+      <"TemplateTypeParmType" : (
+        {
+          "pointer" : 224
         }
       )>,
       <"PointerType" : (
         {
-          "pointer" : 74
+          "pointer" : 225
+        },
+        {
+          "type_ptr" : 224
+        }
+      )>,
+      <"PointerType" : (
+        {
+          "pointer" : 72
         },
         {
           "type_ptr" : 8
@@ -5468,15 +5482,15 @@
       )>,
       <"TemplateTypeParmType" : (
         {
-          "pointer" : 225
+          "pointer" : 226
         }
       )>,
       <"PointerType" : (
         {
-          "pointer" : 226
+          "pointer" : 227
         },
         {
-          "type_ptr" : 225
+          "type_ptr" : 226
         }
       )>,
       <"AutoType" : (
@@ -5487,15 +5501,27 @@
       )>,
       <"PointerType" : (
         {
-          "pointer" : 76
+          "pointer" : 74
         },
         {
           "type_ptr" : 108
         }
       )>,
+      <"ConstantArrayType" : (
+        {
+          "pointer" : 80
+        },
+        {
+          "element_type" : {
+            "type_ptr" : 8
+          },
+          "stride" : 32
+        },
+        10
+      )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 24
+          "pointer" : 228
         },
         {
           "return_type" : {
@@ -5507,29 +5533,29 @@
       )>,
       <"TemplateTypeParmType" : (
         {
-          "pointer" : 227
+          "pointer" : 229
         }
       )>,
       <"PointerType" : (
         {
-          "pointer" : 228
+          "pointer" : 230
         },
         {
-          "type_ptr" : 227
+          "type_ptr" : 229
         }
       )>,
       <"LValueReferenceType" : (
         {
-          "pointer" : 50
+          "pointer" : 49
         },
         {
-          "type_ptr" : 26,
+          "type_ptr" : 25,
           "is_const" : true
         }
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 229
+          "pointer" : 231
         },
         {
           "return_type" : {
@@ -5539,14 +5565,14 @@
         {
           "params_type" : [
             {
-              "type_ptr" : 50
+              "type_ptr" : 49
             }
           ]
         }
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 48
+          "pointer" : 47
         },
         {
           "return_type" : {
@@ -5556,83 +5582,39 @@
         {
           "params_type" : [
             {
-              "type_ptr" : 50
+              "type_ptr" : 49
             }
           ]
         }
       )>,
       <"RValueReferenceType" : (
         {
-          "pointer" : 54
+          "pointer" : 53
         },
         {
-          "type_ptr" : 26
+          "type_ptr" : 25
         }
       )>,
       <"FunctionProtoType" : (
-        {
-          "pointer" : 230
-        },
-        {
-          "return_type" : {
-            "type_ptr" : 100
-          }
-        },
-        {
-          "params_type" : [
-            {
-              "type_ptr" : 54
-            }
-          ]
-        }
-      )>,
-      <"FunctionProtoType" : (
-        {
-          "pointer" : 52
-        },
-        {
-          "return_type" : {
-            "type_ptr" : 100
-          }
-        },
-        {
-          "params_type" : [
-            {
-              "type_ptr" : 54
-            }
-          ]
-        }
-      )>,
-      <"TemplateTypeParmType" : (
-        {
-          "pointer" : 231
-        }
-      )>,
-      <"PointerType" : (
         {
           "pointer" : 232
         },
         {
-          "type_ptr" : 231
-        }
-      )>,
-      <"AutoType" : (
-        {
-          "pointer" : 115,
-          "desugared_type" : 26
-        }
-      )>,
-      <"PointerType" : (
-        {
-          "pointer" : 90
+          "return_type" : {
+            "type_ptr" : 100
+          }
         },
         {
-          "type_ptr" : 115
+          "params_type" : [
+            {
+              "type_ptr" : 53
+            }
+          ]
         }
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 56
+          "pointer" : 51
         },
         {
           "return_type" : {
@@ -5640,6 +5622,11 @@
           }
         },
         {
+          "params_type" : [
+            {
+              "type_ptr" : 53
+            }
+          ]
         }
       )>,
       <"TemplateTypeParmType" : (
@@ -5655,6 +5642,57 @@
           "type_ptr" : 233
         }
       )>,
+      <"AutoType" : (
+        {
+          "pointer" : 115,
+          "desugared_type" : 25
+        }
+      )>,
+      <"PointerType" : (
+        {
+          "pointer" : 89
+        },
+        {
+          "type_ptr" : 115
+        }
+      )>,
+      <"ConstantArrayType" : (
+        {
+          "pointer" : 95
+        },
+        {
+          "element_type" : {
+            "type_ptr" : 25
+          },
+          "stride" : 96
+        },
+        10
+      )>,
+      <"FunctionProtoType" : (
+        {
+          "pointer" : 235
+        },
+        {
+          "return_type" : {
+            "type_ptr" : 100
+          }
+        },
+        {
+        }
+      )>,
+      <"TemplateTypeParmType" : (
+        {
+          "pointer" : 236
+        }
+      )>,
+      <"PointerType" : (
+        {
+          "pointer" : 237
+        },
+        {
+          "type_ptr" : 236
+        }
+      )>,
       <"ConstantArrayType" : (
         {
           "pointer" : 144
@@ -5665,32 +5703,32 @@
           },
           "stride" : 32
         },
-        4
+        3
       )>,
       <"TemplateTypeParmType" : (
-        {
-          "pointer" : 235
-        }
-      )>,
-      <"PointerType" : (
-        {
-          "pointer" : 236
-        },
-        {
-          "type_ptr" : 235
-        }
-      )>,
-      <"TemplateTypeParmType" : (
-        {
-          "pointer" : 237
-        }
-      )>,
-      <"PointerType" : (
         {
           "pointer" : 238
+        }
+      )>,
+      <"PointerType" : (
+        {
+          "pointer" : 239
         },
         {
-          "type_ptr" : 237
+          "type_ptr" : 238
+        }
+      )>,
+      <"TemplateTypeParmType" : (
+        {
+          "pointer" : 240
+        }
+      )>,
+      <"PointerType" : (
+        {
+          "pointer" : 241
+        },
+        {
+          "type_ptr" : 240
         }
       )>,
       <"ConstantArrayType" : (
@@ -5699,7 +5737,7 @@
         },
         {
           "element_type" : {
-            "type_ptr" : 26
+            "type_ptr" : 25
           },
           "stride" : 96
         },
@@ -5707,20 +5745,20 @@
       )>,
       <"TemplateTypeParmType" : (
         {
-          "pointer" : 239
+          "pointer" : 242
         }
       )>,
       <"PointerType" : (
         {
-          "pointer" : 240
+          "pointer" : 243
         },
         {
-          "type_ptr" : 239
+          "type_ptr" : 242
         }
       )>,
       <"ObjCObjectType" : (
         {
-          "pointer" : 241
+          "pointer" : 244
         },
         {
           "base_type" : 200
@@ -5728,32 +5766,32 @@
       )>,
       <"ObjCObjectPointerType" : (
         {
-          "pointer" : 242
+          "pointer" : 245
         },
         {
-          "type_ptr" : 241
+          "type_ptr" : 244
         }
       )>,
       <"TypedefType" : (
         {
-          "pointer" : 243,
-          "desugared_type" : 242
+          "pointer" : 246,
+          "desugared_type" : 245
         },
         {
           "child_type" : {
-            "type_ptr" : 242
+            "type_ptr" : 245
           },
-          "decl_ptr" : 244
+          "decl_ptr" : 247
         }
       )>,
       <"TypedefType" : (
         {
           "pointer" : 169,
-          "desugared_type" : 242
+          "desugared_type" : 245
         },
         {
           "child_type" : {
-            "type_ptr" : 243
+            "type_ptr" : 246
           },
           "decl_ptr" : 168
         }

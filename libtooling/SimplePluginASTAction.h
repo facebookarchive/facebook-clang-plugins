@@ -158,10 +158,10 @@ class SimplePluginASTActionBase : public clang::PluginASTAction {
     // will be ran for each of them separately. Hence, Inputs.size() = 1.
     clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
 
-    switch (inputFile.getKind()) {
-    case clang::IK_None:
-    case clang::IK_Asm:
-    case clang::IK_LLVM_IR:
+    switch (inputFile.getKind().getLanguage()) {
+    case clang::InputKind::Unknown:
+    case clang::InputKind::Asm:
+    case clang::InputKind::LLVM_IR:
       // We can't do anything with these - they may trigger errors when running
       // clang frontend
       return false;

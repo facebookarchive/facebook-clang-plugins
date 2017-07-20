@@ -77,7 +77,7 @@ class PrintFilesConsumer : public ASTConsumer {
     std::cout << "Input file: "
               << options->normalizeSourcePath(options->inputFile.getFile().data())
               << "\n";
-    std::cout << "Input file kind: " << options->inputFile.getKind() << "\n";
+    std::cout << "Input file kind: " << options->inputFile.getKind().getLanguage() << "\n";
     if (outputFile) {
       std::cout << "Output file: " << *outputFile << "\n";
     }

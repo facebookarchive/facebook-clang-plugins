@@ -6046,7 +6046,8 @@
                                     "qual_type" : {
                                       "type_ptr" : 165
                                     },
-                                    "value_kind" : <"LValue">
+                                    "value_kind" : <"LValue">,
+                                    "object_kind" : <"ObjCSubscript">
                                   },
                                   {
                                     "kind" : <"ArraySubscript">
@@ -7058,7 +7059,8 @@
                                     "qual_type" : {
                                       "type_ptr" : 165
                                     },
-                                    "value_kind" : <"LValue">
+                                    "value_kind" : <"LValue">,
+                                    "object_kind" : <"ObjCSubscript">
                                   },
                                   {
                                     "kind" : <"DictionarySubscript">
@@ -8713,9 +8715,9 @@
           "kind" : <"ObjCCategoryImpl">,
           "decl_pointer" : 277,
           "name" : {
-            "name" : "MyClass",
+            "name" : "MyCategory",
             "qual_name" : [
-              "MyClass"
+              "MyCategory"
             ]
           }
         }
@@ -8736,9 +8738,9 @@
         )
       },
       {
-        "name" : "MyClass",
+        "name" : "MyCategory",
         "qual_name" : [
-          "MyClass"
+          "MyCategory"
         ]
       },
       [
@@ -8761,7 +8763,7 @@
             "name" : "bar:",
             "qual_name" : [
               "bar:",
-              "MyClass"
+              "MyCategory"
             ]
           },
           {
@@ -12223,21 +12225,27 @@
         },
         7
       )>,
-      <"ObjCInterfaceType" : (
+      <"ObjCTypeParamType" : (
         {
-          "pointer" : 410
-        },
-        316
+          "pointer" : 410,
+          "desugared_type" : 378
+        }
       )>,
       <"ObjCInterfaceType" : (
         {
           "pointer" : 411
         },
+        316
+      )>,
+      <"ObjCInterfaceType" : (
+        {
+          "pointer" : 412
+        },
         317
       )>,
       <"ObjCObjectPointerType" : (
         {
-          "pointer" : 412
+          "pointer" : 413
         },
         {
           "type_ptr" : 389
@@ -12245,13 +12253,13 @@
       )>,
       <"ObjCObjectType" : (
         {
-          "pointer" : 413
+          "pointer" : 414
         },
         {
-          "base_type" : 410,
+          "base_type" : 411,
           "type_args" : [
             {
-              "type_ptr" : 412
+              "type_ptr" : 413
             }
           ]
         }
@@ -12261,7 +12269,7 @@
           "pointer" : 320
         },
         {
-          "type_ptr" : 413
+          "type_ptr" : 414
         }
       )>,
       <"PointerType" : (

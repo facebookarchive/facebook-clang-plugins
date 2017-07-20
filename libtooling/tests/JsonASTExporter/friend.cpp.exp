@@ -959,15 +959,15 @@
           "pointer" : 94
         }
       ]],
-      ["TemplateSpecializationType" , [
-        {
-          "pointer" : 95
-        }
-      ]],
       ["ElaboratedType" , [
         {
-          "pointer" : 96,
-          "desugared_type" : 95
+          "pointer" : 95,
+          "desugared_type" : 94
+        }
+      ]],
+      ["TemplateTypeParmType" , [
+        {
+          "pointer" : 96
         }
       ]],
       ["TemplateTypeParmType" , [
@@ -975,9 +975,19 @@
           "pointer" : 97
         }
       ]],
-      ["TemplateTypeParmType" , [
+      ["TemplateSpecializationType" , [
         {
           "pointer" : 98
+        }
+      ]],
+      ["TemplateSpecializationType" , [
+        {
+          "pointer" : 99
+        }
+      ]],
+      ["InjectedClassNameType" , [
+        {
+          "pointer" : 100
         }
       ]],
       ["RecordType" , [
@@ -994,7 +1004,7 @@
       ]],
       ["SubstTemplateTypeParmType" , [
         {
-          "pointer" : 99,
+          "pointer" : 101,
           "desugared_type" : 30
         }
       ]],
@@ -1008,10 +1018,10 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 100
+          "pointer" : 102
         },
         {
-          "type_ptr" : 99
+          "type_ptr" : 101
         }
       ]],
       ["RecordType" , [
@@ -1022,7 +1032,7 @@
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 101,
+          "pointer" : 103,
           "desugared_type" : 9
         }
       ]],
@@ -1034,12 +1044,12 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 102
+          "pointer" : 104
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 103
+          "pointer" : 105
         },
         {
           "return_type" : {
@@ -1051,7 +1061,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 104
+          "pointer" : 106
         },
         {
           "return_type" : {
@@ -1072,7 +1082,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 105
+          "pointer" : 107
         },
         {
           "return_type" : {
@@ -1114,7 +1124,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 106
+          "pointer" : 108
         },
         {
           "return_type" : {
@@ -1160,7 +1170,7 @@
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 107
+          "pointer" : 109
         },
         {
           "base_type" : 68
@@ -1168,32 +1178,32 @@
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 108
+          "pointer" : 110
         },
         {
-          "type_ptr" : 107
+          "type_ptr" : 109
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 109,
-          "desugared_type" : 108
+          "pointer" : 111,
+          "desugared_type" : 110
         },
         {
           "child_type" : {
-            "type_ptr" : 108
+            "type_ptr" : 110
           },
-          "decl_ptr" : 110
+          "decl_ptr" : 112
         }
       ]],
       ["TypedefType" , [
         {
           "pointer" : 35,
-          "desugared_type" : 108
+          "desugared_type" : 110
         },
         {
           "child_type" : {
-            "type_ptr" : 109
+            "type_ptr" : 111
           },
           "decl_ptr" : 34
         }

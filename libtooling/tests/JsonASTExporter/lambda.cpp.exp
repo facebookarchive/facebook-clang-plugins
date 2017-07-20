@@ -566,7 +566,8 @@
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_0D0Ev",
-                                        "is_inline" : true
+                                        "is_inline" : true,
+                                        "is_no_throw" : true
                                       },
                                       {
                                       }
@@ -1144,7 +1145,8 @@
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_0D0Ev",
-                                            "is_inline" : true
+                                            "is_inline" : true,
+                                            "is_no_throw" : true
                                           },
                                           {
                                           }
@@ -1952,18 +1954,19 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 64
+                                        "type_ptr" : 31
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_1D0Ev",
-                                        "is_inline" : true
+                                        "is_inline" : true,
+                                        "is_no_throw" : true
                                       },
                                       {
                                       }
                                     ]],
                                     ["CXXConstructorDecl" , [
                                       {
-                                        "pointer" : 65,
+                                        "pointer" : 64,
                                         "parent_pointer" : 56,
                                         "source_range" : [
                                           {
@@ -1985,7 +1988,7 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 66
+                                        "type_ptr" : 65
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_1C1ERKS_",
@@ -1993,7 +1996,7 @@
                                         "parameters" : [
                                           ["ParmVarDecl" , [
                                             {
-                                              "pointer" : 67,
+                                              "pointer" : 66,
                                               "source_range" : [
                                                 {
                                                   "column" : 16
@@ -2010,7 +2013,7 @@
                                               ]
                                             },
                                             {
-                                              "type_ptr" : 68
+                                              "type_ptr" : 67
                                             },
                                             {
                                               "parm_index_in_function" : 0
@@ -2024,7 +2027,7 @@
                                     ]],
                                     ["CXXConstructorDecl" , [
                                       {
-                                        "pointer" : 69,
+                                        "pointer" : 68,
                                         "parent_pointer" : 56,
                                         "source_range" : [
                                           {
@@ -2048,7 +2051,7 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 70
+                                        "type_ptr" : 69
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_1C1EOS_",
@@ -2057,7 +2060,7 @@
                                         "parameters" : [
                                           ["ParmVarDecl" , [
                                             {
-                                              "pointer" : 71,
+                                              "pointer" : 70,
                                               "source_range" : [
                                                 {
                                                   "column" : 16
@@ -2076,17 +2079,17 @@
                                               ]
                                             },
                                             {
-                                              "type_ptr" : 72
+                                              "type_ptr" : 71
                                             },
                                             {
                                               "parm_index_in_function" : 0
                                             }
                                           ]]
                                         ],
-                                        "decl_ptr_with_body" : 69,
+                                        "decl_ptr_with_body" : 68,
                                         "body" : ["CompoundStmt" , [
                                           {
-                                            "pointer" : 73,
+                                            "pointer" : 72,
                                             "source_range" : [
                                               {
                                                 "column" : 16
@@ -2129,7 +2132,7 @@
                                             ],
                                             "init_expr" : ["MemberExpr" , [
                                               {
-                                                "pointer" : 74,
+                                                "pointer" : 73,
                                                 "source_range" : [
                                                   {
                                                     "column" : 16
@@ -2142,7 +2145,7 @@
                                               [
                                                 ["CXXStaticCastExpr" , [
                                                   {
-                                                    "pointer" : 75,
+                                                    "pointer" : 74,
                                                     "source_range" : [
                                                       {
                                                         "column" : 16
@@ -2155,7 +2158,7 @@
                                                   [
                                                     ["DeclRefExpr" , [
                                                       {
-                                                        "pointer" : 76,
+                                                        "pointer" : 75,
                                                         "source_range" : [
                                                           {
                                                             "column" : 16
@@ -2176,7 +2179,7 @@
                                                       {
                                                         "decl_ref" : {
                                                           "kind" : "ParmVar",
-                                                          "decl_pointer" : 71,
+                                                          "decl_pointer" : 70,
                                                           "name" : {
                                                             "name" : "",
                                                             "qual_name" : [
@@ -2184,7 +2187,7 @@
                                                             ]
                                                           },
                                                           "qual_type" : {
-                                                            "type_ptr" : 72
+                                                            "type_ptr" : 71
                                                           }
                                                         }
                                                       }
@@ -2202,7 +2205,7 @@
                                                     ]
                                                   },
                                                   {
-                                                    "type_ptr" : 72
+                                                    "type_ptr" : 71
                                                   },
                                                   "static_cast"
                                                 ]]
@@ -2267,7 +2270,7 @@
                                             ],
                                             "init_expr" : ["ImplicitCastExpr" , [
                                               {
-                                                "pointer" : 77,
+                                                "pointer" : 76,
                                                 "source_range" : [
                                                   {
                                                     "column" : 16
@@ -2280,7 +2283,7 @@
                                               [
                                                 ["MemberExpr" , [
                                                   {
-                                                    "pointer" : 78,
+                                                    "pointer" : 77,
                                                     "source_range" : [
                                                       {
                                                         "column" : 16
@@ -2293,7 +2296,7 @@
                                                   [
                                                     ["CXXStaticCastExpr" , [
                                                       {
-                                                        "pointer" : 79,
+                                                        "pointer" : 78,
                                                         "source_range" : [
                                                           {
                                                             "column" : 16
@@ -2306,7 +2309,7 @@
                                                       [
                                                         ["DeclRefExpr" , [
                                                           {
-                                                            "pointer" : 80,
+                                                            "pointer" : 79,
                                                             "source_range" : [
                                                               {
                                                                 "column" : 16
@@ -2327,7 +2330,7 @@
                                                           {
                                                             "decl_ref" : {
                                                               "kind" : "ParmVar",
-                                                              "decl_pointer" : 71,
+                                                              "decl_pointer" : 70,
                                                               "name" : {
                                                                 "name" : "",
                                                                 "qual_name" : [
@@ -2335,7 +2338,7 @@
                                                                 ]
                                                               },
                                                               "qual_type" : {
-                                                                "type_ptr" : 72
+                                                                "type_ptr" : 71
                                                               }
                                                             }
                                                           }
@@ -2353,7 +2356,7 @@
                                                         ]
                                                       },
                                                       {
-                                                        "type_ptr" : 72
+                                                        "type_ptr" : 71
                                                       },
                                                       "static_cast"
                                                     ]]
@@ -2427,7 +2430,7 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "type_ptr" : 64
+                                        "type_ptr" : 31
                                       }
                                     },
                                     "lambda_call_operator" : {
@@ -2462,13 +2465,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 81
+                          "type_ptr" : 80
                         }
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : 69,
+                          "decl_pointer" : 68,
                           "name" : {
                             "name" : "",
                             "qual_name" : [
@@ -2478,7 +2481,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 70
+                            "type_ptr" : 69
                           }
                         },
                         "is_elidable" : true
@@ -2487,7 +2490,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 81
+                      "type_ptr" : 80
                     }
                   },
                   {
@@ -2497,7 +2500,7 @@
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 82,
+                    "pointer" : 81,
                     "source_range" : [
                       {
                         "column" : 5
@@ -2514,7 +2517,7 @@
                     ]
                   },
                   {
-                    "type_ptr" : 81
+                    "type_ptr" : 80
                   },
                   {
                     "init_expr" : ["ExprWithCleanups" , [
@@ -3075,18 +3078,19 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 64
+                                            "type_ptr" : 31
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_1D0Ev",
-                                            "is_inline" : true
+                                            "is_inline" : true,
+                                            "is_no_throw" : true
                                           },
                                           {
                                           }
                                         ]],
                                         ["CXXConstructorDecl" , [
                                           {
-                                            "pointer" : 65,
+                                            "pointer" : 64,
                                             "parent_pointer" : 56,
                                             "source_range" : [
                                               {
@@ -3108,7 +3112,7 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 66
+                                            "type_ptr" : 65
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_1C1ERKS_",
@@ -3116,7 +3120,7 @@
                                             "parameters" : [
                                               ["ParmVarDecl" , [
                                                 {
-                                                  "pointer" : 67,
+                                                  "pointer" : 66,
                                                   "source_range" : [
                                                     {
                                                       "column" : 16
@@ -3133,7 +3137,7 @@
                                                   ]
                                                 },
                                                 {
-                                                  "type_ptr" : 68
+                                                  "type_ptr" : 67
                                                 },
                                                 {
                                                   "parm_index_in_function" : 0
@@ -3147,7 +3151,7 @@
                                         ]],
                                         ["CXXConstructorDecl" , [
                                           {
-                                            "pointer" : 69,
+                                            "pointer" : 68,
                                             "parent_pointer" : 56,
                                             "source_range" : [
                                               {
@@ -3171,7 +3175,7 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 70
+                                            "type_ptr" : 69
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_1C1EOS_",
@@ -3180,7 +3184,7 @@
                                             "parameters" : [
                                               ["ParmVarDecl" , [
                                                 {
-                                                  "pointer" : 71,
+                                                  "pointer" : 70,
                                                   "source_range" : [
                                                     {
                                                       "column" : 16
@@ -3199,17 +3203,17 @@
                                                   ]
                                                 },
                                                 {
-                                                  "type_ptr" : 72
+                                                  "type_ptr" : 71
                                                 },
                                                 {
                                                   "parm_index_in_function" : 0
                                                 }
                                               ]]
                                             ],
-                                            "decl_ptr_with_body" : 69,
+                                            "decl_ptr_with_body" : 68,
                                             "body" : ["CompoundStmt" , [
                                               {
-                                                "pointer" : 73,
+                                                "pointer" : 72,
                                                 "source_range" : [
                                                   {
                                                     "column" : 16
@@ -3252,7 +3256,7 @@
                                                 ],
                                                 "init_expr" : ["MemberExpr" , [
                                                   {
-                                                    "pointer" : 74,
+                                                    "pointer" : 73,
                                                     "source_range" : [
                                                       {
                                                         "column" : 16
@@ -3265,7 +3269,7 @@
                                                   [
                                                     ["CXXStaticCastExpr" , [
                                                       {
-                                                        "pointer" : 75,
+                                                        "pointer" : 74,
                                                         "source_range" : [
                                                           {
                                                             "column" : 16
@@ -3278,7 +3282,7 @@
                                                       [
                                                         ["DeclRefExpr" , [
                                                           {
-                                                            "pointer" : 76,
+                                                            "pointer" : 75,
                                                             "source_range" : [
                                                               {
                                                                 "column" : 16
@@ -3299,7 +3303,7 @@
                                                           {
                                                             "decl_ref" : {
                                                               "kind" : "ParmVar",
-                                                              "decl_pointer" : 71,
+                                                              "decl_pointer" : 70,
                                                               "name" : {
                                                                 "name" : "",
                                                                 "qual_name" : [
@@ -3307,7 +3311,7 @@
                                                                 ]
                                                               },
                                                               "qual_type" : {
-                                                                "type_ptr" : 72
+                                                                "type_ptr" : 71
                                                               }
                                                             }
                                                           }
@@ -3325,7 +3329,7 @@
                                                         ]
                                                       },
                                                       {
-                                                        "type_ptr" : 72
+                                                        "type_ptr" : 71
                                                       },
                                                       "static_cast"
                                                     ]]
@@ -3390,7 +3394,7 @@
                                                 ],
                                                 "init_expr" : ["ImplicitCastExpr" , [
                                                   {
-                                                    "pointer" : 77,
+                                                    "pointer" : 76,
                                                     "source_range" : [
                                                       {
                                                         "column" : 16
@@ -3403,7 +3407,7 @@
                                                   [
                                                     ["MemberExpr" , [
                                                       {
-                                                        "pointer" : 78,
+                                                        "pointer" : 77,
                                                         "source_range" : [
                                                           {
                                                             "column" : 16
@@ -3416,7 +3420,7 @@
                                                       [
                                                         ["CXXStaticCastExpr" , [
                                                           {
-                                                            "pointer" : 79,
+                                                            "pointer" : 78,
                                                             "source_range" : [
                                                               {
                                                                 "column" : 16
@@ -3429,7 +3433,7 @@
                                                           [
                                                             ["DeclRefExpr" , [
                                                               {
-                                                                "pointer" : 80,
+                                                                "pointer" : 79,
                                                                 "source_range" : [
                                                                   {
                                                                     "column" : 16
@@ -3450,7 +3454,7 @@
                                                               {
                                                                 "decl_ref" : {
                                                                   "kind" : "ParmVar",
-                                                                  "decl_pointer" : 71,
+                                                                  "decl_pointer" : 70,
                                                                   "name" : {
                                                                     "name" : "",
                                                                     "qual_name" : [
@@ -3458,7 +3462,7 @@
                                                                     ]
                                                                   },
                                                                   "qual_type" : {
-                                                                    "type_ptr" : 72
+                                                                    "type_ptr" : 71
                                                                   }
                                                                 }
                                                               }
@@ -3476,7 +3480,7 @@
                                                             ]
                                                           },
                                                           {
-                                                            "type_ptr" : 72
+                                                            "type_ptr" : 71
                                                           },
                                                           "static_cast"
                                                         ]]
@@ -3550,7 +3554,7 @@
                                             ]
                                           },
                                           "qual_type" : {
-                                            "type_ptr" : 64
+                                            "type_ptr" : 31
                                           }
                                         },
                                         "lambda_call_operator" : {
@@ -3585,13 +3589,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 81
+                              "type_ptr" : 80
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : 69,
+                              "decl_pointer" : 68,
                               "name" : {
                                 "name" : "",
                                 "qual_name" : [
@@ -3601,7 +3605,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 70
+                                "type_ptr" : 69
                               }
                             },
                             "is_elidable" : true
@@ -3610,7 +3614,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 81
+                          "type_ptr" : 80
                         }
                       },
                       {
@@ -3622,7 +3626,7 @@
             ]],
             ["DeclStmt" , [
               {
-                "pointer" : 83,
+                "pointer" : 82,
                 "source_range" : [
                   {
                     "line" : 8,
@@ -3636,7 +3640,7 @@
               [
                 ["ExprWithCleanups" , [
                   {
-                    "pointer" : 84,
+                    "pointer" : 83,
                     "source_range" : [
                       {
                         "column" : 25
@@ -3649,7 +3653,7 @@
                   [
                     ["CXXConstructExpr" , [
                       {
-                        "pointer" : 85,
+                        "pointer" : 84,
                         "source_range" : [
                           {
                             "column" : 25
@@ -3662,7 +3666,7 @@
                       [
                         ["MaterializeTemporaryExpr" , [
                           {
-                            "pointer" : 86,
+                            "pointer" : 85,
                             "source_range" : [
                               {
                                 "column" : 25
@@ -3675,7 +3679,7 @@
                           [
                             ["LambdaExpr" , [
                               {
-                                "pointer" : 87,
+                                "pointer" : 86,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -3688,7 +3692,7 @@
                               [
                                 ["IntegerLiteral" , [
                                   {
-                                    "pointer" : 88,
+                                    "pointer" : 87,
                                     "source_range" : [
                                       {
                                         "column" : 30
@@ -3713,7 +3717,7 @@
                                 ]],
                                 ["CompoundStmt" , [
                                   {
-                                    "pointer" : 89,
+                                    "pointer" : 88,
                                     "source_range" : [
                                       {
                                         "column" : 35
@@ -3726,7 +3730,7 @@
                                   [
                                     ["ReturnStmt" , [
                                       {
-                                        "pointer" : 90,
+                                        "pointer" : 89,
                                         "source_range" : [
                                           {
                                             "column" : 37
@@ -3739,7 +3743,7 @@
                                       [
                                         ["ImplicitCastExpr" , [
                                           {
-                                            "pointer" : 91,
+                                            "pointer" : 90,
                                             "source_range" : [
                                               {
                                                 "column" : 44
@@ -3752,7 +3756,7 @@
                                           [
                                             ["DeclRefExpr" , [
                                               {
-                                                "pointer" : 92,
+                                                "pointer" : 91,
                                                 "source_range" : [
                                                   {
                                                     "column" : 44
@@ -3766,7 +3770,7 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "type_ptr" : 93,
+                                                  "type_ptr" : 92,
                                                   "is_const" : true
                                                 },
                                                 "value_kind" : "LValue"
@@ -3774,7 +3778,7 @@
                                               {
                                                 "decl_ref" : {
                                                   "kind" : "Var",
-                                                  "decl_pointer" : 94,
+                                                  "decl_pointer" : 93,
                                                   "name" : {
                                                     "name" : "i",
                                                     "qual_name" : [
@@ -3782,7 +3786,7 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "type_ptr" : 93
+                                                    "type_ptr" : 92
                                                   }
                                                 }
                                               }
@@ -3790,7 +3794,7 @@
                                           ],
                                           {
                                             "qual_type" : {
-                                              "type_ptr" : 93
+                                              "type_ptr" : 92
                                             }
                                           },
                                           {
@@ -3806,7 +3810,7 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 95
+                                  "type_ptr" : 94
                                 }
                               },
                               {
@@ -3816,7 +3820,7 @@
                                     "capture_variable" : true,
                                     "init_captured_vardecl" : ["VarDecl" , [
                                       {
-                                        "pointer" : 94,
+                                        "pointer" : 93,
                                         "source_range" : [
                                           {
                                             "column" : 26
@@ -3835,13 +3839,13 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 93
+                                        "type_ptr" : 92
                                       },
                                       {
                                         "storage_class" : "auto",
                                         "init_expr" : ["IntegerLiteral" , [
                                           {
-                                            "pointer" : 88,
+                                            "pointer" : 87,
                                             "source_range" : [
                                               {
                                                 "column" : 30
@@ -3868,7 +3872,7 @@
                                     ]],
                                     "captured_var" : {
                                       "kind" : "Var",
-                                      "decl_pointer" : 94,
+                                      "decl_pointer" : 93,
                                       "name" : {
                                         "name" : "i",
                                         "qual_name" : [
@@ -3876,7 +3880,7 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "type_ptr" : 93
+                                        "type_ptr" : 92
                                       }
                                     },
                                     "location" : [
@@ -3891,7 +3895,7 @@
                                 ],
                                 "lambda_decl" : ["CXXRecordDecl" , [
                                   {
-                                    "pointer" : 96,
+                                    "pointer" : 95,
                                     "source_range" : [
                                       {
                                         "column" : 25
@@ -3910,12 +3914,12 @@
                                     ]
                                   },
                                   ["Type" , "class (lambda at tests/lambda.cpp:8:25)"],
-                                  95,
+                                  94,
                                   [
                                     ["FieldDecl" , [
                                       {
-                                        "pointer" : 97,
-                                        "parent_pointer" : 96,
+                                        "pointer" : 96,
+                                        "parent_pointer" : 95,
                                         "source_range" : [
                                           {
                                             "column" : 26
@@ -3937,15 +3941,15 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 93
+                                        "type_ptr" : 92
                                       },
                                       {
                                       }
                                     ]],
                                     ["CXXMethodDecl" , [
                                       {
-                                        "pointer" : 98,
-                                        "parent_pointer" : 96,
+                                        "pointer" : 97,
+                                        "parent_pointer" : 95,
                                         "source_range" : [
                                           {
                                             "column" : 33
@@ -3970,10 +3974,10 @@
                                       {
                                         "mangled_name" : "_ZZ4mainENK3$_2clEv",
                                         "is_inline" : true,
-                                        "decl_ptr_with_body" : 98,
+                                        "decl_ptr_with_body" : 97,
                                         "body" : ["CompoundStmt" , [
                                           {
-                                            "pointer" : 89,
+                                            "pointer" : 88,
                                             "source_range" : [
                                               {
                                                 "column" : 35
@@ -3986,7 +3990,7 @@
                                           [
                                             ["ReturnStmt" , [
                                               {
-                                                "pointer" : 90,
+                                                "pointer" : 89,
                                                 "source_range" : [
                                                   {
                                                     "column" : 37
@@ -3999,7 +4003,7 @@
                                               [
                                                 ["ImplicitCastExpr" , [
                                                   {
-                                                    "pointer" : 91,
+                                                    "pointer" : 90,
                                                     "source_range" : [
                                                       {
                                                         "column" : 44
@@ -4012,7 +4016,7 @@
                                                   [
                                                     ["DeclRefExpr" , [
                                                       {
-                                                        "pointer" : 92,
+                                                        "pointer" : 91,
                                                         "source_range" : [
                                                           {
                                                             "column" : 44
@@ -4026,7 +4030,7 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "type_ptr" : 93,
+                                                          "type_ptr" : 92,
                                                           "is_const" : true
                                                         },
                                                         "value_kind" : "LValue"
@@ -4034,7 +4038,7 @@
                                                       {
                                                         "decl_ref" : {
                                                           "kind" : "Var",
-                                                          "decl_pointer" : 94,
+                                                          "decl_pointer" : 93,
                                                           "name" : {
                                                             "name" : "i",
                                                             "qual_name" : [
@@ -4042,7 +4046,7 @@
                                                             ]
                                                           },
                                                           "qual_type" : {
-                                                            "type_ptr" : 93
+                                                            "type_ptr" : 92
                                                           }
                                                         }
                                                       }
@@ -4050,7 +4054,7 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "type_ptr" : 93
+                                                      "type_ptr" : 92
                                                     }
                                                   },
                                                   {
@@ -4069,8 +4073,8 @@
                                     ]],
                                     ["CXXDestructorDecl" , [
                                       {
-                                        "pointer" : 99,
-                                        "parent_pointer" : 96,
+                                        "pointer" : 98,
+                                        "parent_pointer" : 95,
                                         "source_range" : [
                                           {
                                             "column" : 25
@@ -4092,19 +4096,20 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 100
+                                        "type_ptr" : 31
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_2D0Ev",
-                                        "is_inline" : true
+                                        "is_inline" : true,
+                                        "is_no_throw" : true
                                       },
                                       {
                                       }
                                     ]],
                                     ["CXXConstructorDecl" , [
                                       {
-                                        "pointer" : 101,
-                                        "parent_pointer" : 96,
+                                        "pointer" : 99,
+                                        "parent_pointer" : 95,
                                         "source_range" : [
                                           {
                                             "column" : 25
@@ -4125,7 +4130,7 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 102
+                                        "type_ptr" : 100
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_2C1ERKS_",
@@ -4133,7 +4138,7 @@
                                         "parameters" : [
                                           ["ParmVarDecl" , [
                                             {
-                                              "pointer" : 103,
+                                              "pointer" : 101,
                                               "source_range" : [
                                                 {
                                                   "column" : 25
@@ -4150,7 +4155,7 @@
                                               ]
                                             },
                                             {
-                                              "type_ptr" : 104
+                                              "type_ptr" : 102
                                             },
                                             {
                                               "parm_index_in_function" : 0
@@ -4164,8 +4169,8 @@
                                     ]],
                                     ["CXXConstructorDecl" , [
                                       {
-                                        "pointer" : 105,
-                                        "parent_pointer" : 96,
+                                        "pointer" : 103,
+                                        "parent_pointer" : 95,
                                         "source_range" : [
                                           {
                                             "column" : 25
@@ -4188,7 +4193,7 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 106
+                                        "type_ptr" : 104
                                       },
                                       {
                                         "mangled_name" : "_ZZ4mainEN3$_2C1EOS_",
@@ -4197,7 +4202,7 @@
                                         "parameters" : [
                                           ["ParmVarDecl" , [
                                             {
-                                              "pointer" : 107,
+                                              "pointer" : 105,
                                               "source_range" : [
                                                 {
                                                   "column" : 25
@@ -4216,17 +4221,17 @@
                                               ]
                                             },
                                             {
-                                              "type_ptr" : 108
+                                              "type_ptr" : 106
                                             },
                                             {
                                               "parm_index_in_function" : 0
                                             }
                                           ]]
                                         ],
-                                        "decl_ptr_with_body" : 105,
+                                        "decl_ptr_with_body" : 103,
                                         "body" : ["CompoundStmt" , [
                                           {
-                                            "pointer" : 109,
+                                            "pointer" : 107,
                                             "source_range" : [
                                               {
                                                 "column" : 25
@@ -4246,7 +4251,7 @@
                                           {
                                             "subject" : ["Member" , {
                                               "kind" : "Field",
-                                              "decl_pointer" : 97,
+                                              "decl_pointer" : 96,
                                               "name" : {
                                                 "name" : "",
                                                 "qual_name" : [
@@ -4256,7 +4261,7 @@
                                                 ]
                                               },
                                               "qual_type" : {
-                                                "type_ptr" : 93
+                                                "type_ptr" : 92
                                               }
                                             }],
                                             "source_range" : [
@@ -4269,7 +4274,7 @@
                                             ],
                                             "init_expr" : ["ImplicitCastExpr" , [
                                               {
-                                                "pointer" : 110,
+                                                "pointer" : 108,
                                                 "source_range" : [
                                                   {
                                                     "column" : 25
@@ -4282,7 +4287,7 @@
                                               [
                                                 ["MemberExpr" , [
                                                   {
-                                                    "pointer" : 111,
+                                                    "pointer" : 109,
                                                     "source_range" : [
                                                       {
                                                         "column" : 25
@@ -4295,7 +4300,7 @@
                                                   [
                                                     ["CXXStaticCastExpr" , [
                                                       {
-                                                        "pointer" : 112,
+                                                        "pointer" : 110,
                                                         "source_range" : [
                                                           {
                                                             "column" : 25
@@ -4308,7 +4313,7 @@
                                                       [
                                                         ["DeclRefExpr" , [
                                                           {
-                                                            "pointer" : 113,
+                                                            "pointer" : 111,
                                                             "source_range" : [
                                                               {
                                                                 "column" : 25
@@ -4322,14 +4327,14 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "type_ptr" : 95
+                                                              "type_ptr" : 94
                                                             },
                                                             "value_kind" : "LValue"
                                                           },
                                                           {
                                                             "decl_ref" : {
                                                               "kind" : "ParmVar",
-                                                              "decl_pointer" : 107,
+                                                              "decl_pointer" : 105,
                                                               "name" : {
                                                                 "name" : "",
                                                                 "qual_name" : [
@@ -4337,7 +4342,7 @@
                                                                 ]
                                                               },
                                                               "qual_type" : {
-                                                                "type_ptr" : 108
+                                                                "type_ptr" : 106
                                                               }
                                                             }
                                                           }
@@ -4345,7 +4350,7 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "type_ptr" : 95
+                                                          "type_ptr" : 94
                                                         },
                                                         "value_kind" : "XValue"
                                                       },
@@ -4355,14 +4360,14 @@
                                                         ]
                                                       },
                                                       {
-                                                        "type_ptr" : 108
+                                                        "type_ptr" : 106
                                                       },
                                                       "static_cast"
                                                     ]]
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "type_ptr" : 93
+                                                      "type_ptr" : 92
                                                     },
                                                     "value_kind" : "XValue"
                                                   },
@@ -4378,7 +4383,7 @@
                                                     },
                                                     "decl_ref" : {
                                                       "kind" : "Field",
-                                                      "decl_pointer" : 97,
+                                                      "decl_pointer" : 96,
                                                       "name" : {
                                                         "name" : "",
                                                         "qual_name" : [
@@ -4388,7 +4393,7 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "type_ptr" : 93
+                                                        "type_ptr" : 92
                                                       }
                                                     }
                                                   }
@@ -4396,7 +4401,7 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "type_ptr" : 93
+                                                  "type_ptr" : 92
                                                 }
                                               },
                                               {
@@ -4413,13 +4418,13 @@
                                   {
                                   },
                                   {
-                                    "definition_ptr" : 96,
+                                    "definition_ptr" : 95,
                                     "is_complete_definition" : true
                                   },
                                   {
                                     "destructor" : {
                                       "kind" : "CXXDestructor",
-                                      "decl_pointer" : 99,
+                                      "decl_pointer" : 98,
                                       "name" : {
                                         "name" : "~",
                                         "qual_name" : [
@@ -4429,12 +4434,12 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "type_ptr" : 100
+                                        "type_ptr" : 31
                                       }
                                     },
                                     "lambda_call_operator" : {
                                       "kind" : "CXXMethod",
-                                      "decl_pointer" : 98,
+                                      "decl_pointer" : 97,
                                       "name" : {
                                         "name" : "operator()",
                                         "qual_name" : [
@@ -4454,7 +4459,7 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 95
+                              "type_ptr" : 94
                             },
                             "value_kind" : "XValue"
                           },
@@ -4464,13 +4469,13 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 114
+                          "type_ptr" : 112
                         }
                       },
                       {
                         "decl_ref" : {
                           "kind" : "CXXConstructor",
-                          "decl_pointer" : 105,
+                          "decl_pointer" : 103,
                           "name" : {
                             "name" : "",
                             "qual_name" : [
@@ -4480,7 +4485,7 @@
                             ]
                           },
                           "qual_type" : {
-                            "type_ptr" : 106
+                            "type_ptr" : 104
                           }
                         },
                         "is_elidable" : true
@@ -4489,7 +4494,7 @@
                   ],
                   {
                     "qual_type" : {
-                      "type_ptr" : 114
+                      "type_ptr" : 112
                     }
                   },
                   {
@@ -4499,7 +4504,7 @@
               [
                 ["VarDecl" , [
                   {
-                    "pointer" : 115,
+                    "pointer" : 113,
                     "source_range" : [
                       {
                         "column" : 5
@@ -4516,12 +4521,12 @@
                     ]
                   },
                   {
-                    "type_ptr" : 114
+                    "type_ptr" : 112
                   },
                   {
                     "init_expr" : ["ExprWithCleanups" , [
                       {
-                        "pointer" : 84,
+                        "pointer" : 83,
                         "source_range" : [
                           {
                             "column" : 25
@@ -4534,7 +4539,7 @@
                       [
                         ["CXXConstructExpr" , [
                           {
-                            "pointer" : 85,
+                            "pointer" : 84,
                             "source_range" : [
                               {
                                 "column" : 25
@@ -4547,7 +4552,7 @@
                           [
                             ["MaterializeTemporaryExpr" , [
                               {
-                                "pointer" : 86,
+                                "pointer" : 85,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -4560,7 +4565,7 @@
                               [
                                 ["LambdaExpr" , [
                                   {
-                                    "pointer" : 87,
+                                    "pointer" : 86,
                                     "source_range" : [
                                       {
                                         "column" : 25
@@ -4573,7 +4578,7 @@
                                   [
                                     ["IntegerLiteral" , [
                                       {
-                                        "pointer" : 88,
+                                        "pointer" : 87,
                                         "source_range" : [
                                           {
                                             "column" : 30
@@ -4598,7 +4603,7 @@
                                     ]],
                                     ["CompoundStmt" , [
                                       {
-                                        "pointer" : 89,
+                                        "pointer" : 88,
                                         "source_range" : [
                                           {
                                             "column" : 35
@@ -4611,7 +4616,7 @@
                                       [
                                         ["ReturnStmt" , [
                                           {
-                                            "pointer" : 90,
+                                            "pointer" : 89,
                                             "source_range" : [
                                               {
                                                 "column" : 37
@@ -4624,7 +4629,7 @@
                                           [
                                             ["ImplicitCastExpr" , [
                                               {
-                                                "pointer" : 91,
+                                                "pointer" : 90,
                                                 "source_range" : [
                                                   {
                                                     "column" : 44
@@ -4637,7 +4642,7 @@
                                               [
                                                 ["DeclRefExpr" , [
                                                   {
-                                                    "pointer" : 92,
+                                                    "pointer" : 91,
                                                     "source_range" : [
                                                       {
                                                         "column" : 44
@@ -4651,7 +4656,7 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "type_ptr" : 93,
+                                                      "type_ptr" : 92,
                                                       "is_const" : true
                                                     },
                                                     "value_kind" : "LValue"
@@ -4659,7 +4664,7 @@
                                                   {
                                                     "decl_ref" : {
                                                       "kind" : "Var",
-                                                      "decl_pointer" : 94,
+                                                      "decl_pointer" : 93,
                                                       "name" : {
                                                         "name" : "i",
                                                         "qual_name" : [
@@ -4667,7 +4672,7 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "type_ptr" : 93
+                                                        "type_ptr" : 92
                                                       }
                                                     }
                                                   }
@@ -4675,7 +4680,7 @@
                                               ],
                                               {
                                                 "qual_type" : {
-                                                  "type_ptr" : 93
+                                                  "type_ptr" : 92
                                                 }
                                               },
                                               {
@@ -4691,7 +4696,7 @@
                                   ],
                                   {
                                     "qual_type" : {
-                                      "type_ptr" : 95
+                                      "type_ptr" : 94
                                     }
                                   },
                                   {
@@ -4701,7 +4706,7 @@
                                         "capture_variable" : true,
                                         "init_captured_vardecl" : ["VarDecl" , [
                                           {
-                                            "pointer" : 94,
+                                            "pointer" : 93,
                                             "source_range" : [
                                               {
                                                 "column" : 26
@@ -4720,13 +4725,13 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 93
+                                            "type_ptr" : 92
                                           },
                                           {
                                             "storage_class" : "auto",
                                             "init_expr" : ["IntegerLiteral" , [
                                               {
-                                                "pointer" : 88,
+                                                "pointer" : 87,
                                                 "source_range" : [
                                                   {
                                                     "column" : 30
@@ -4753,7 +4758,7 @@
                                         ]],
                                         "captured_var" : {
                                           "kind" : "Var",
-                                          "decl_pointer" : 94,
+                                          "decl_pointer" : 93,
                                           "name" : {
                                             "name" : "i",
                                             "qual_name" : [
@@ -4761,7 +4766,7 @@
                                             ]
                                           },
                                           "qual_type" : {
-                                            "type_ptr" : 93
+                                            "type_ptr" : 92
                                           }
                                         },
                                         "location" : [
@@ -4776,7 +4781,7 @@
                                     ],
                                     "lambda_decl" : ["CXXRecordDecl" , [
                                       {
-                                        "pointer" : 96,
+                                        "pointer" : 95,
                                         "source_range" : [
                                           {
                                             "column" : 25
@@ -4795,12 +4800,12 @@
                                         ]
                                       },
                                       ["Type" , "class (lambda at tests/lambda.cpp:8:25)"],
-                                      95,
+                                      94,
                                       [
                                         ["FieldDecl" , [
                                           {
-                                            "pointer" : 97,
-                                            "parent_pointer" : 96,
+                                            "pointer" : 96,
+                                            "parent_pointer" : 95,
                                             "source_range" : [
                                               {
                                                 "column" : 26
@@ -4822,15 +4827,15 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 93
+                                            "type_ptr" : 92
                                           },
                                           {
                                           }
                                         ]],
                                         ["CXXMethodDecl" , [
                                           {
-                                            "pointer" : 98,
-                                            "parent_pointer" : 96,
+                                            "pointer" : 97,
+                                            "parent_pointer" : 95,
                                             "source_range" : [
                                               {
                                                 "column" : 33
@@ -4855,10 +4860,10 @@
                                           {
                                             "mangled_name" : "_ZZ4mainENK3$_2clEv",
                                             "is_inline" : true,
-                                            "decl_ptr_with_body" : 98,
+                                            "decl_ptr_with_body" : 97,
                                             "body" : ["CompoundStmt" , [
                                               {
-                                                "pointer" : 89,
+                                                "pointer" : 88,
                                                 "source_range" : [
                                                   {
                                                     "column" : 35
@@ -4871,7 +4876,7 @@
                                               [
                                                 ["ReturnStmt" , [
                                                   {
-                                                    "pointer" : 90,
+                                                    "pointer" : 89,
                                                     "source_range" : [
                                                       {
                                                         "column" : 37
@@ -4884,7 +4889,7 @@
                                                   [
                                                     ["ImplicitCastExpr" , [
                                                       {
-                                                        "pointer" : 91,
+                                                        "pointer" : 90,
                                                         "source_range" : [
                                                           {
                                                             "column" : 44
@@ -4897,7 +4902,7 @@
                                                       [
                                                         ["DeclRefExpr" , [
                                                           {
-                                                            "pointer" : 92,
+                                                            "pointer" : 91,
                                                             "source_range" : [
                                                               {
                                                                 "column" : 44
@@ -4911,7 +4916,7 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "type_ptr" : 93,
+                                                              "type_ptr" : 92,
                                                               "is_const" : true
                                                             },
                                                             "value_kind" : "LValue"
@@ -4919,7 +4924,7 @@
                                                           {
                                                             "decl_ref" : {
                                                               "kind" : "Var",
-                                                              "decl_pointer" : 94,
+                                                              "decl_pointer" : 93,
                                                               "name" : {
                                                                 "name" : "i",
                                                                 "qual_name" : [
@@ -4927,7 +4932,7 @@
                                                                 ]
                                                               },
                                                               "qual_type" : {
-                                                                "type_ptr" : 93
+                                                                "type_ptr" : 92
                                                               }
                                                             }
                                                           }
@@ -4935,7 +4940,7 @@
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "type_ptr" : 93
+                                                          "type_ptr" : 92
                                                         }
                                                       },
                                                       {
@@ -4954,8 +4959,8 @@
                                         ]],
                                         ["CXXDestructorDecl" , [
                                           {
-                                            "pointer" : 99,
-                                            "parent_pointer" : 96,
+                                            "pointer" : 98,
+                                            "parent_pointer" : 95,
                                             "source_range" : [
                                               {
                                                 "column" : 25
@@ -4977,19 +4982,20 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 100
+                                            "type_ptr" : 31
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_2D0Ev",
-                                            "is_inline" : true
+                                            "is_inline" : true,
+                                            "is_no_throw" : true
                                           },
                                           {
                                           }
                                         ]],
                                         ["CXXConstructorDecl" , [
                                           {
-                                            "pointer" : 101,
-                                            "parent_pointer" : 96,
+                                            "pointer" : 99,
+                                            "parent_pointer" : 95,
                                             "source_range" : [
                                               {
                                                 "column" : 25
@@ -5010,7 +5016,7 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 102
+                                            "type_ptr" : 100
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_2C1ERKS_",
@@ -5018,7 +5024,7 @@
                                             "parameters" : [
                                               ["ParmVarDecl" , [
                                                 {
-                                                  "pointer" : 103,
+                                                  "pointer" : 101,
                                                   "source_range" : [
                                                     {
                                                       "column" : 25
@@ -5035,7 +5041,7 @@
                                                   ]
                                                 },
                                                 {
-                                                  "type_ptr" : 104
+                                                  "type_ptr" : 102
                                                 },
                                                 {
                                                   "parm_index_in_function" : 0
@@ -5049,8 +5055,8 @@
                                         ]],
                                         ["CXXConstructorDecl" , [
                                           {
-                                            "pointer" : 105,
-                                            "parent_pointer" : 96,
+                                            "pointer" : 103,
+                                            "parent_pointer" : 95,
                                             "source_range" : [
                                               {
                                                 "column" : 25
@@ -5073,7 +5079,7 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 106
+                                            "type_ptr" : 104
                                           },
                                           {
                                             "mangled_name" : "_ZZ4mainEN3$_2C1EOS_",
@@ -5082,7 +5088,7 @@
                                             "parameters" : [
                                               ["ParmVarDecl" , [
                                                 {
-                                                  "pointer" : 107,
+                                                  "pointer" : 105,
                                                   "source_range" : [
                                                     {
                                                       "column" : 25
@@ -5101,17 +5107,17 @@
                                                   ]
                                                 },
                                                 {
-                                                  "type_ptr" : 108
+                                                  "type_ptr" : 106
                                                 },
                                                 {
                                                   "parm_index_in_function" : 0
                                                 }
                                               ]]
                                             ],
-                                            "decl_ptr_with_body" : 105,
+                                            "decl_ptr_with_body" : 103,
                                             "body" : ["CompoundStmt" , [
                                               {
-                                                "pointer" : 109,
+                                                "pointer" : 107,
                                                 "source_range" : [
                                                   {
                                                     "column" : 25
@@ -5131,7 +5137,7 @@
                                               {
                                                 "subject" : ["Member" , {
                                                   "kind" : "Field",
-                                                  "decl_pointer" : 97,
+                                                  "decl_pointer" : 96,
                                                   "name" : {
                                                     "name" : "",
                                                     "qual_name" : [
@@ -5141,7 +5147,7 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "type_ptr" : 93
+                                                    "type_ptr" : 92
                                                   }
                                                 }],
                                                 "source_range" : [
@@ -5154,7 +5160,7 @@
                                                 ],
                                                 "init_expr" : ["ImplicitCastExpr" , [
                                                   {
-                                                    "pointer" : 110,
+                                                    "pointer" : 108,
                                                     "source_range" : [
                                                       {
                                                         "column" : 25
@@ -5167,7 +5173,7 @@
                                                   [
                                                     ["MemberExpr" , [
                                                       {
-                                                        "pointer" : 111,
+                                                        "pointer" : 109,
                                                         "source_range" : [
                                                           {
                                                             "column" : 25
@@ -5180,7 +5186,7 @@
                                                       [
                                                         ["CXXStaticCastExpr" , [
                                                           {
-                                                            "pointer" : 112,
+                                                            "pointer" : 110,
                                                             "source_range" : [
                                                               {
                                                                 "column" : 25
@@ -5193,7 +5199,7 @@
                                                           [
                                                             ["DeclRefExpr" , [
                                                               {
-                                                                "pointer" : 113,
+                                                                "pointer" : 111,
                                                                 "source_range" : [
                                                                   {
                                                                     "column" : 25
@@ -5207,14 +5213,14 @@
                                                               ],
                                                               {
                                                                 "qual_type" : {
-                                                                  "type_ptr" : 95
+                                                                  "type_ptr" : 94
                                                                 },
                                                                 "value_kind" : "LValue"
                                                               },
                                                               {
                                                                 "decl_ref" : {
                                                                   "kind" : "ParmVar",
-                                                                  "decl_pointer" : 107,
+                                                                  "decl_pointer" : 105,
                                                                   "name" : {
                                                                     "name" : "",
                                                                     "qual_name" : [
@@ -5222,7 +5228,7 @@
                                                                     ]
                                                                   },
                                                                   "qual_type" : {
-                                                                    "type_ptr" : 108
+                                                                    "type_ptr" : 106
                                                                   }
                                                                 }
                                                               }
@@ -5230,7 +5236,7 @@
                                                           ],
                                                           {
                                                             "qual_type" : {
-                                                              "type_ptr" : 95
+                                                              "type_ptr" : 94
                                                             },
                                                             "value_kind" : "XValue"
                                                           },
@@ -5240,14 +5246,14 @@
                                                             ]
                                                           },
                                                           {
-                                                            "type_ptr" : 108
+                                                            "type_ptr" : 106
                                                           },
                                                           "static_cast"
                                                         ]]
                                                       ],
                                                       {
                                                         "qual_type" : {
-                                                          "type_ptr" : 93
+                                                          "type_ptr" : 92
                                                         },
                                                         "value_kind" : "XValue"
                                                       },
@@ -5263,7 +5269,7 @@
                                                         },
                                                         "decl_ref" : {
                                                           "kind" : "Field",
-                                                          "decl_pointer" : 97,
+                                                          "decl_pointer" : 96,
                                                           "name" : {
                                                             "name" : "",
                                                             "qual_name" : [
@@ -5273,7 +5279,7 @@
                                                             ]
                                                           },
                                                           "qual_type" : {
-                                                            "type_ptr" : 93
+                                                            "type_ptr" : 92
                                                           }
                                                         }
                                                       }
@@ -5281,7 +5287,7 @@
                                                   ],
                                                   {
                                                     "qual_type" : {
-                                                      "type_ptr" : 93
+                                                      "type_ptr" : 92
                                                     }
                                                   },
                                                   {
@@ -5298,13 +5304,13 @@
                                       {
                                       },
                                       {
-                                        "definition_ptr" : 96,
+                                        "definition_ptr" : 95,
                                         "is_complete_definition" : true
                                       },
                                       {
                                         "destructor" : {
                                           "kind" : "CXXDestructor",
-                                          "decl_pointer" : 99,
+                                          "decl_pointer" : 98,
                                           "name" : {
                                             "name" : "~",
                                             "qual_name" : [
@@ -5314,12 +5320,12 @@
                                             ]
                                           },
                                           "qual_type" : {
-                                            "type_ptr" : 100
+                                            "type_ptr" : 31
                                           }
                                         },
                                         "lambda_call_operator" : {
                                           "kind" : "CXXMethod",
-                                          "decl_pointer" : 98,
+                                          "decl_pointer" : 97,
                                           "name" : {
                                             "name" : "operator()",
                                             "qual_name" : [
@@ -5339,7 +5345,7 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 95
+                                  "type_ptr" : 94
                                 },
                                 "value_kind" : "XValue"
                               },
@@ -5349,13 +5355,13 @@
                           ],
                           {
                             "qual_type" : {
-                              "type_ptr" : 114
+                              "type_ptr" : 112
                             }
                           },
                           {
                             "decl_ref" : {
                               "kind" : "CXXConstructor",
-                              "decl_pointer" : 105,
+                              "decl_pointer" : 103,
                               "name" : {
                                 "name" : "",
                                 "qual_name" : [
@@ -5365,7 +5371,7 @@
                                 ]
                               },
                               "qual_type" : {
-                                "type_ptr" : 106
+                                "type_ptr" : 104
                               }
                             },
                             "is_elidable" : true
@@ -5374,7 +5380,7 @@
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 114
+                          "type_ptr" : 112
                         }
                       },
                       {
@@ -5386,7 +5392,7 @@
             ]],
             ["ReturnStmt" , [
               {
-                "pointer" : 116,
+                "pointer" : 114,
                 "source_range" : [
                   {
                     "line" : 10,
@@ -5400,7 +5406,7 @@
               [
                 ["IntegerLiteral" , [
                   {
-                    "pointer" : 117,
+                    "pointer" : 115,
                     "source_range" : [
                       {
                         "column" : 12
@@ -5431,7 +5437,7 @@
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : 118,
+        "pointer" : 116,
         "source_range" : [
           {
           },
@@ -5447,7 +5453,7 @@
         ]
       },
       ["Type" , "id"],
-      119,
+      117,
       {
       }
     ]]
@@ -5460,31 +5466,31 @@
     "types" : [
       ["BuiltinType" , [
         {
-          "pointer" : 120
+          "pointer" : 118
         },
         "Void"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 121
+          "pointer" : 119
         },
         "Bool"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 122
+          "pointer" : 120
         },
         "Char_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 123
+          "pointer" : 121
         },
         "SChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 124
+          "pointer" : 122
         },
         "Short"
       ]],
@@ -5496,141 +5502,151 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 125
+          "pointer" : 123
         },
         "Long"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 126
+          "pointer" : 124
         },
         "LongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 127
+          "pointer" : 125
         },
         "UChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 128
+          "pointer" : 126
         },
         "UShort"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 129
+          "pointer" : 127
         },
         "UInt"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 130
+          "pointer" : 128
         },
         "ULong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 131
+          "pointer" : 129
         },
         "ULongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 132
+          "pointer" : 130
         },
         "Float"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 133
+          "pointer" : 131
         },
         "Double"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 134
+          "pointer" : 132
         },
         "LongDouble"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 135
+          "pointer" : 133
         },
         "Float128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 136
+          "pointer" : 134
         },
         "Int128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 137
+          "pointer" : 135
         },
         "UInt128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 138
+          "pointer" : 136
         },
         "WChar_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 139
+          "pointer" : 137
         },
         "Char16"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 140
+          "pointer" : 138
         },
         "Char32"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 141
+          "pointer" : 139
         },
         "Dependent"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 142
+          "pointer" : 140
         },
         "Overload"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 143
+          "pointer" : 141
         },
         "BoundMember"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 144
+          "pointer" : 142
         },
         "PseudoObject"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 145
+          "pointer" : 143
         },
         "UnknownAny"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 146
+          "pointer" : 144
         },
         "ARCUnbridgedCast"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 147
+          "pointer" : 145
         },
         "BuiltinFn"
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 146
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 147
+        }
       ]],
       ["ComplexType" , [
         {
@@ -5642,63 +5658,53 @@
           "pointer" : 149
         }
       ]],
-      ["ComplexType" , [
-        {
-          "pointer" : 150
-        }
-      ]],
-      ["ComplexType" , [
-        {
-          "pointer" : 151
-        }
-      ]],
       ["BuiltinType" , [
         {
-          "pointer" : 152
+          "pointer" : 150
         },
         "ObjCId"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 153
+          "pointer" : 151
         },
         "ObjCClass"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 154
+          "pointer" : 152
         },
         "ObjCSel"
       ]],
       ["PointerType" , [
         {
-          "pointer" : 155
+          "pointer" : 153
         },
         {
-          "type_ptr" : 120
+          "type_ptr" : 118
         }
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 156
+          "pointer" : 154
         },
         "NullPtr"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 157
+          "pointer" : 155
         },
         "Half"
       ]],
       ["RecordType" , [
         {
-          "pointer" : 158
+          "pointer" : 156
         },
-        159
+        157
       ]],
       ["PointerType" , [
         {
-          "pointer" : 160
+          "pointer" : 158
         },
         {
           "type_ptr" : 12,
@@ -5707,34 +5713,34 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 161
+          "pointer" : 159
         },
         {
-          "type_ptr" : 122,
+          "type_ptr" : 120,
           "is_const" : true
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 162
+          "pointer" : 160
         },
         {
-          "type_ptr" : 122
+          "type_ptr" : 120
         }
       ]],
       ["RecordType" , [
         {
-          "pointer" : 163
+          "pointer" : 161
         },
-        164
+        162
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 165
+          "pointer" : 163
         },
         {
           "element_type" : {
-            "type_ptr" : 163
+            "type_ptr" : 161
           },
           "stride" : 192
         },
@@ -5754,19 +5760,19 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 166
+          "pointer" : 164
         },
         {
-          "type_ptr" : 162
+          "type_ptr" : 160
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 167
+          "pointer" : 165
         },
         {
           "return_type" : {
-            "type_ptr" : 168
+            "type_ptr" : 166
           }
         },
         {
@@ -5780,23 +5786,23 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 169
+          "pointer" : 167
         }
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 170
+          "pointer" : 168
         }
       ]],
       ["AutoType" , [
         {
-          "pointer" : 93,
+          "pointer" : 92,
           "desugared_type" : 12
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 171
+          "pointer" : 169
         },
         {
           "return_type" : {
@@ -5812,7 +5818,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 93
+            "type_ptr" : 92
           }
         },
         {
@@ -5824,7 +5830,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 93
+            "type_ptr" : 92
           }
         },
         {
@@ -5832,7 +5838,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 172
+          "pointer" : 170
         },
         {
           "type_ptr" : 8
@@ -5840,7 +5846,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 173
+          "pointer" : 171
         },
         {
           "type_ptr" : 29
@@ -5848,11 +5854,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 174
+          "pointer" : 172
         },
         {
           "return_type" : {
-            "type_ptr" : 172
+            "type_ptr" : 170
           }
         },
         {
@@ -5864,7 +5870,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 173
+            "type_ptr" : 171
           }
         },
         {
@@ -5872,11 +5878,23 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 175
+          "pointer" : 173
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
+          }
+        },
+        {
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 174
+        },
+        {
+          "return_type" : {
+            "type_ptr" : 118
           }
         },
         {
@@ -5888,7 +5906,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -5896,7 +5914,7 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 176
+          "pointer" : 175
         }
       ]],
       ["AutoType" , [
@@ -5916,11 +5934,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 177
+          "pointer" : 176
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -5937,7 +5955,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -5958,11 +5976,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 178
+          "pointer" : 177
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -5975,11 +5993,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 179
+          "pointer" : 178
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -5996,7 +6014,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -6009,11 +6027,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 180
+          "pointer" : 179
         },
         {
           "return_type" : {
-            "type_ptr" : 168
+            "type_ptr" : 166
           }
         },
         {
@@ -6040,12 +6058,12 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 181
+          "pointer" : 180
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 182
+          "pointer" : 181
         },
         {
           "return_type" : {
@@ -6066,7 +6084,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 93
+            "type_ptr" : 92
           }
         },
         {
@@ -6079,11 +6097,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 64
+          "pointer" : 182
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -6096,13 +6114,13 @@
       ]],
       ["AutoType" , [
         {
-          "pointer" : 81,
+          "pointer" : 80,
           "desugared_type" : 55
         }
       ]],
       ["LValueReferenceType" , [
         {
-          "pointer" : 68
+          "pointer" : 67
         },
         {
           "type_ptr" : 55,
@@ -6115,37 +6133,37 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 68
+              "type_ptr" : 67
             }
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 66
+          "pointer" : 65
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 68
+              "type_ptr" : 67
             }
           ]
         }
       ]],
       ["RValueReferenceType" , [
         {
-          "pointer" : 72
+          "pointer" : 71
         },
         {
           "type_ptr" : 55
@@ -6157,13 +6175,13 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 72
+              "type_ptr" : 71
             }
           ]
         }
@@ -6174,30 +6192,30 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 72
+              "type_ptr" : 71
             }
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 70
+          "pointer" : 69
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 72
+              "type_ptr" : 71
             }
           ]
         }
@@ -6209,9 +6227,9 @@
       ]],
       ["RecordType" , [
         {
-          "pointer" : 95
+          "pointer" : 94
         },
-        96
+        95
       ]],
       ["TemplateTypeParmType" , [
         {
@@ -6220,11 +6238,11 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 100
+          "pointer" : 189
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
@@ -6232,64 +6250,22 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 189
+          "pointer" : 190
         }
       ]],
       ["AutoType" , [
         {
-          "pointer" : 114,
-          "desugared_type" : 95
+          "pointer" : 112,
+          "desugared_type" : 94
         }
       ]],
       ["LValueReferenceType" , [
         {
-          "pointer" : 104
-        },
-        {
-          "type_ptr" : 95,
-          "is_const" : true
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
-          "pointer" : 190
-        },
-        {
-          "return_type" : {
-            "type_ptr" : 120
-          }
-        },
-        {
-          "params_type" : [
-            {
-              "type_ptr" : 104
-            }
-          ]
-        }
-      ]],
-      ["FunctionProtoType" , [
-        {
           "pointer" : 102
         },
         {
-          "return_type" : {
-            "type_ptr" : 120
-          }
-        },
-        {
-          "params_type" : [
-            {
-              "type_ptr" : 104
-            }
-          ]
-        }
-      ]],
-      ["RValueReferenceType" , [
-        {
-          "pointer" : 108
-        },
-        {
-          "type_ptr" : 95
+          "type_ptr" : 94,
+          "is_const" : true
         }
       ]],
       ["FunctionProtoType" , [
@@ -6298,15 +6274,40 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 108
+              "type_ptr" : 102
             }
           ]
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 100
+        },
+        {
+          "return_type" : {
+            "type_ptr" : 118
+          }
+        },
+        {
+          "params_type" : [
+            {
+              "type_ptr" : 102
+            }
+          ]
+        }
+      ]],
+      ["RValueReferenceType" , [
+        {
+          "pointer" : 106
+        },
+        {
+          "type_ptr" : 94
         }
       ]],
       ["FunctionProtoType" , [
@@ -6315,72 +6316,89 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 108
+              "type_ptr" : 106
             }
           ]
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 106
+          "pointer" : 193
         },
         {
           "return_type" : {
-            "type_ptr" : 120
+            "type_ptr" : 118
           }
         },
         {
           "params_type" : [
             {
-              "type_ptr" : 108
+              "type_ptr" : 106
+            }
+          ]
+        }
+      ]],
+      ["FunctionProtoType" , [
+        {
+          "pointer" : 104
+        },
+        {
+          "return_type" : {
+            "type_ptr" : 118
+          }
+        },
+        {
+          "params_type" : [
+            {
+              "type_ptr" : 106
             }
           ]
         }
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 193
+          "pointer" : 194
         },
         {
-          "base_type" : 152
+          "base_type" : 150
         }
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 194
+          "pointer" : 195
         },
         {
-          "type_ptr" : 193
+          "type_ptr" : 194
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 195,
-          "desugared_type" : 194
-        },
-        {
-          "child_type" : {
-            "type_ptr" : 194
-          },
-          "decl_ptr" : 196
-        }
-      ]],
-      ["TypedefType" , [
-        {
-          "pointer" : 119,
-          "desugared_type" : 194
+          "pointer" : 196,
+          "desugared_type" : 195
         },
         {
           "child_type" : {
             "type_ptr" : 195
           },
-          "decl_ptr" : 118
+          "decl_ptr" : 197
+        }
+      ]],
+      ["TypedefType" , [
+        {
+          "pointer" : 117,
+          "desugared_type" : 195
+        },
+        {
+          "child_type" : {
+            "type_ptr" : 196
+          },
+          "decl_ptr" : 116
         }
       ]],
       ["NoneType" , [
