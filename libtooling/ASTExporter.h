@@ -3467,7 +3467,7 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const Type *ArgType = Node->getTypeOfArgument().getTypePtr();
     if (hasMeaningfulTypeInfo(ArgType)) {
       VariantScope Scope(OF, "SizeOfWithSize");
-      OF.emitInteger(Context.getTypeInfo(ArgType).Width);
+      OF.emitInteger(Context.getTypeInfo(ArgType).Width / 8);
     } else {
       OF.emitSimpleVariant("SizeOf");
     }
@@ -4539,7 +4539,7 @@ void ASTExporter<ATDWriter>::VisitArrayType(const ArrayType *T) {
   dumpQualType(EltT);
   if (HasStride) {
     OF.emitTag("stride");
-    OF.emitInteger(Context.getTypeInfo(EltT).Width);
+    OF.emitInteger(Context.getTypeInfo(EltT).Width / 8);
   };
 }
 
