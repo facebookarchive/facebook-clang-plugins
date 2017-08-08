@@ -1992,7 +1992,7 @@ void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
     const ClassTemplateSpecializationDecl *D) {
   VisitCXXRecordDecl(D);
   dumpTemplateSpecialization(D->getSpecializedTemplate(),
-                             D->getTemplateInstantiationArgs());
+                             D->getTemplateArgs());
 }
 
 template <class ATDWriter>
