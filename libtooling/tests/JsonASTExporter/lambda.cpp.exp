@@ -1643,58 +1643,6 @@
                                 }
                               },
                               {
-                                "captures" : [
-                                  {
-                                    "capture_kind" : "LCK_ByRef",
-                                    "capture_variable" : true,
-                                    "captured_var" : {
-                                      "kind" : "Var",
-                                      "decl_pointer" : 11,
-                                      "name" : {
-                                        "name" : "m",
-                                        "qual_name" : [
-                                          "m"
-                                        ]
-                                      },
-                                      "qual_type" : {
-                                        "type_ptr" : 12
-                                      }
-                                    },
-                                    "location" : [
-                                      {
-                                        "column" : 18
-                                      },
-                                      {
-                                        "column" : 18
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "capture_kind" : "LCK_ByCopy",
-                                    "capture_variable" : true,
-                                    "captured_var" : {
-                                      "kind" : "Var",
-                                      "decl_pointer" : 13,
-                                      "name" : {
-                                        "name" : "n",
-                                        "qual_name" : [
-                                          "n"
-                                        ]
-                                      },
-                                      "qual_type" : {
-                                        "type_ptr" : 12
-                                      }
-                                    },
-                                    "location" : [
-                                      {
-                                        "column" : 21
-                                      },
-                                      {
-                                        "column" : 21
-                                      }
-                                    ]
-                                  }
-                                ],
                                 "lambda_decl" : ["CXXRecordDecl" , [
                                   {
                                     "pointer" : 56,
@@ -2447,7 +2395,59 @@
                                       "qual_type" : {
                                         "type_ptr" : 61
                                       }
-                                    }
+                                    },
+                                    "lambda_captures" : [
+                                      {
+                                        "capture_kind" : "LCK_ByRef",
+                                        "capture_variable" : true,
+                                        "captured_var" : {
+                                          "kind" : "Var",
+                                          "decl_pointer" : 11,
+                                          "name" : {
+                                            "name" : "m",
+                                            "qual_name" : [
+                                              "m"
+                                            ]
+                                          },
+                                          "qual_type" : {
+                                            "type_ptr" : 12
+                                          }
+                                        },
+                                        "location" : [
+                                          {
+                                            "column" : 18
+                                          },
+                                          {
+                                            "column" : 18
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "capture_kind" : "LCK_ByCopy",
+                                        "capture_variable" : true,
+                                        "captured_var" : {
+                                          "kind" : "Var",
+                                          "decl_pointer" : 13,
+                                          "name" : {
+                                            "name" : "n",
+                                            "qual_name" : [
+                                              "n"
+                                            ]
+                                          },
+                                          "qual_type" : {
+                                            "type_ptr" : 12
+                                          }
+                                        },
+                                        "location" : [
+                                          {
+                                            "column" : 21
+                                          },
+                                          {
+                                            "column" : 21
+                                          }
+                                        ]
+                                      }
+                                    ]
                                   }
                                 ]]
                               }
@@ -2767,58 +2767,6 @@
                                     }
                                   },
                                   {
-                                    "captures" : [
-                                      {
-                                        "capture_kind" : "LCK_ByRef",
-                                        "capture_variable" : true,
-                                        "captured_var" : {
-                                          "kind" : "Var",
-                                          "decl_pointer" : 11,
-                                          "name" : {
-                                            "name" : "m",
-                                            "qual_name" : [
-                                              "m"
-                                            ]
-                                          },
-                                          "qual_type" : {
-                                            "type_ptr" : 12
-                                          }
-                                        },
-                                        "location" : [
-                                          {
-                                            "column" : 18
-                                          },
-                                          {
-                                            "column" : 18
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "capture_kind" : "LCK_ByCopy",
-                                        "capture_variable" : true,
-                                        "captured_var" : {
-                                          "kind" : "Var",
-                                          "decl_pointer" : 13,
-                                          "name" : {
-                                            "name" : "n",
-                                            "qual_name" : [
-                                              "n"
-                                            ]
-                                          },
-                                          "qual_type" : {
-                                            "type_ptr" : 12
-                                          }
-                                        },
-                                        "location" : [
-                                          {
-                                            "column" : 21
-                                          },
-                                          {
-                                            "column" : 21
-                                          }
-                                        ]
-                                      }
-                                    ],
                                     "lambda_decl" : ["CXXRecordDecl" , [
                                       {
                                         "pointer" : 56,
@@ -3571,7 +3519,59 @@
                                           "qual_type" : {
                                             "type_ptr" : 61
                                           }
-                                        }
+                                        },
+                                        "lambda_captures" : [
+                                          {
+                                            "capture_kind" : "LCK_ByRef",
+                                            "capture_variable" : true,
+                                            "captured_var" : {
+                                              "kind" : "Var",
+                                              "decl_pointer" : 11,
+                                              "name" : {
+                                                "name" : "m",
+                                                "qual_name" : [
+                                                  "m"
+                                                ]
+                                              },
+                                              "qual_type" : {
+                                                "type_ptr" : 12
+                                              }
+                                            },
+                                            "location" : [
+                                              {
+                                                "column" : 18
+                                              },
+                                              {
+                                                "column" : 18
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "capture_kind" : "LCK_ByCopy",
+                                            "capture_variable" : true,
+                                            "captured_var" : {
+                                              "kind" : "Var",
+                                              "decl_pointer" : 13,
+                                              "name" : {
+                                                "name" : "n",
+                                                "qual_name" : [
+                                                  "n"
+                                                ]
+                                              },
+                                              "qual_type" : {
+                                                "type_ptr" : 12
+                                              }
+                                            },
+                                            "location" : [
+                                              {
+                                                "column" : 21
+                                              },
+                                              {
+                                                "column" : 21
+                                              }
+                                            ]
+                                          }
+                                        ]
                                       }
                                     ]]
                                   }
@@ -3814,85 +3814,6 @@
                                 }
                               },
                               {
-                                "captures" : [
-                                  {
-                                    "capture_kind" : "LCK_ByCopy",
-                                    "capture_variable" : true,
-                                    "init_captured_vardecl" : ["VarDecl" , [
-                                      {
-                                        "pointer" : 93,
-                                        "source_range" : [
-                                          {
-                                            "column" : 26
-                                          },
-                                          {
-                                            "column" : 30
-                                          }
-                                        ],
-                                        "is_used" : true,
-                                        "is_this_declaration_referenced" : true
-                                      },
-                                      {
-                                        "name" : "i",
-                                        "qual_name" : [
-                                          "i"
-                                        ]
-                                      },
-                                      {
-                                        "type_ptr" : 92
-                                      },
-                                      {
-                                        "storage_class" : "auto",
-                                        "init_expr" : ["IntegerLiteral" , [
-                                          {
-                                            "pointer" : 87,
-                                            "source_range" : [
-                                              {
-                                                "column" : 30
-                                              },
-                                              {
-                                                "column" : 30
-                                              }
-                                            ]
-                                          },
-                                          [
-                                          ],
-                                          {
-                                            "qual_type" : {
-                                              "type_ptr" : 12
-                                            }
-                                          },
-                                          {
-                                            "is_signed" : true,
-                                            "bitwidth" : 32,
-                                            "value" : "0"
-                                          }
-                                        ]]
-                                      }
-                                    ]],
-                                    "captured_var" : {
-                                      "kind" : "Var",
-                                      "decl_pointer" : 93,
-                                      "name" : {
-                                        "name" : "i",
-                                        "qual_name" : [
-                                          "i"
-                                        ]
-                                      },
-                                      "qual_type" : {
-                                        "type_ptr" : 92
-                                      }
-                                    },
-                                    "location" : [
-                                      {
-                                        "column" : 26
-                                      },
-                                      {
-                                        "column" : 26
-                                      }
-                                    ]
-                                  }
-                                ],
                                 "lambda_decl" : ["CXXRecordDecl" , [
                                   {
                                     "pointer" : 95,
@@ -4451,7 +4372,86 @@
                                       "qual_type" : {
                                         "type_ptr" : 25
                                       }
-                                    }
+                                    },
+                                    "lambda_captures" : [
+                                      {
+                                        "capture_kind" : "LCK_ByCopy",
+                                        "capture_variable" : true,
+                                        "init_captured_vardecl" : ["VarDecl" , [
+                                          {
+                                            "pointer" : 93,
+                                            "source_range" : [
+                                              {
+                                                "column" : 26
+                                              },
+                                              {
+                                                "column" : 30
+                                              }
+                                            ],
+                                            "is_used" : true,
+                                            "is_this_declaration_referenced" : true
+                                          },
+                                          {
+                                            "name" : "i",
+                                            "qual_name" : [
+                                              "i"
+                                            ]
+                                          },
+                                          {
+                                            "type_ptr" : 92
+                                          },
+                                          {
+                                            "storage_class" : "auto",
+                                            "init_expr" : ["IntegerLiteral" , [
+                                              {
+                                                "pointer" : 87,
+                                                "source_range" : [
+                                                  {
+                                                    "column" : 30
+                                                  },
+                                                  {
+                                                    "column" : 30
+                                                  }
+                                                ]
+                                              },
+                                              [
+                                              ],
+                                              {
+                                                "qual_type" : {
+                                                  "type_ptr" : 12
+                                                }
+                                              },
+                                              {
+                                                "is_signed" : true,
+                                                "bitwidth" : 32,
+                                                "value" : "0"
+                                              }
+                                            ]]
+                                          }
+                                        ]],
+                                        "captured_var" : {
+                                          "kind" : "Var",
+                                          "decl_pointer" : 93,
+                                          "name" : {
+                                            "name" : "i",
+                                            "qual_name" : [
+                                              "i"
+                                            ]
+                                          },
+                                          "qual_type" : {
+                                            "type_ptr" : 92
+                                          }
+                                        },
+                                        "location" : [
+                                          {
+                                            "column" : 26
+                                          },
+                                          {
+                                            "column" : 26
+                                          }
+                                        ]
+                                      }
+                                    ]
                                   }
                                 ]]
                               }
@@ -4700,85 +4700,6 @@
                                     }
                                   },
                                   {
-                                    "captures" : [
-                                      {
-                                        "capture_kind" : "LCK_ByCopy",
-                                        "capture_variable" : true,
-                                        "init_captured_vardecl" : ["VarDecl" , [
-                                          {
-                                            "pointer" : 93,
-                                            "source_range" : [
-                                              {
-                                                "column" : 26
-                                              },
-                                              {
-                                                "column" : 30
-                                              }
-                                            ],
-                                            "is_used" : true,
-                                            "is_this_declaration_referenced" : true
-                                          },
-                                          {
-                                            "name" : "i",
-                                            "qual_name" : [
-                                              "i"
-                                            ]
-                                          },
-                                          {
-                                            "type_ptr" : 92
-                                          },
-                                          {
-                                            "storage_class" : "auto",
-                                            "init_expr" : ["IntegerLiteral" , [
-                                              {
-                                                "pointer" : 87,
-                                                "source_range" : [
-                                                  {
-                                                    "column" : 30
-                                                  },
-                                                  {
-                                                    "column" : 30
-                                                  }
-                                                ]
-                                              },
-                                              [
-                                              ],
-                                              {
-                                                "qual_type" : {
-                                                  "type_ptr" : 12
-                                                }
-                                              },
-                                              {
-                                                "is_signed" : true,
-                                                "bitwidth" : 32,
-                                                "value" : "0"
-                                              }
-                                            ]]
-                                          }
-                                        ]],
-                                        "captured_var" : {
-                                          "kind" : "Var",
-                                          "decl_pointer" : 93,
-                                          "name" : {
-                                            "name" : "i",
-                                            "qual_name" : [
-                                              "i"
-                                            ]
-                                          },
-                                          "qual_type" : {
-                                            "type_ptr" : 92
-                                          }
-                                        },
-                                        "location" : [
-                                          {
-                                            "column" : 26
-                                          },
-                                          {
-                                            "column" : 26
-                                          }
-                                        ]
-                                      }
-                                    ],
                                     "lambda_decl" : ["CXXRecordDecl" , [
                                       {
                                         "pointer" : 95,
@@ -5337,7 +5258,86 @@
                                           "qual_type" : {
                                             "type_ptr" : 25
                                           }
-                                        }
+                                        },
+                                        "lambda_captures" : [
+                                          {
+                                            "capture_kind" : "LCK_ByCopy",
+                                            "capture_variable" : true,
+                                            "init_captured_vardecl" : ["VarDecl" , [
+                                              {
+                                                "pointer" : 93,
+                                                "source_range" : [
+                                                  {
+                                                    "column" : 26
+                                                  },
+                                                  {
+                                                    "column" : 30
+                                                  }
+                                                ],
+                                                "is_used" : true,
+                                                "is_this_declaration_referenced" : true
+                                              },
+                                              {
+                                                "name" : "i",
+                                                "qual_name" : [
+                                                  "i"
+                                                ]
+                                              },
+                                              {
+                                                "type_ptr" : 92
+                                              },
+                                              {
+                                                "storage_class" : "auto",
+                                                "init_expr" : ["IntegerLiteral" , [
+                                                  {
+                                                    "pointer" : 87,
+                                                    "source_range" : [
+                                                      {
+                                                        "column" : 30
+                                                      },
+                                                      {
+                                                        "column" : 30
+                                                      }
+                                                    ]
+                                                  },
+                                                  [
+                                                  ],
+                                                  {
+                                                    "qual_type" : {
+                                                      "type_ptr" : 12
+                                                    }
+                                                  },
+                                                  {
+                                                    "is_signed" : true,
+                                                    "bitwidth" : 32,
+                                                    "value" : "0"
+                                                  }
+                                                ]]
+                                              }
+                                            ]],
+                                            "captured_var" : {
+                                              "kind" : "Var",
+                                              "decl_pointer" : 93,
+                                              "name" : {
+                                                "name" : "i",
+                                                "qual_name" : [
+                                                  "i"
+                                                ]
+                                              },
+                                              "qual_type" : {
+                                                "type_ptr" : 92
+                                              }
+                                            },
+                                            "location" : [
+                                              {
+                                                "column" : 26
+                                              },
+                                              {
+                                                "column" : 26
+                                              }
+                                            ]
+                                          }
+                                        ]
                                       }
                                     ]]
                                   }
