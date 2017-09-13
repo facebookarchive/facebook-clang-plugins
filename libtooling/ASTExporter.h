@@ -1919,6 +1919,7 @@ int ASTExporter<ATDWriter>::CXXRecordDeclTupleSize() {
 //@atd type cxx_record_decl_info = {
 //@atd   ~bases : type_ptr list;
 //@atd   ~vbases : type_ptr list;
+//@atd   ~transitive_vbases : type_ptr list;
 //@atd   ~is_pod : bool;
 //@atd   ?destructor : decl_ref option;
 //@atd   ?lambda_call_operator : decl_ref option;
@@ -1950,13 +1951,15 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
 
   bool HasVBases = vBases.size() > 0;
   bool HasNonVBases = nonVBases.size() > 0;
+  unsigned numTransitiveVBases = D->getNumVBases();
+  bool HasTransitiveVBases = numTransitiveVBases > 0;
   bool IsPOD = D->isPOD();
   const CXXDestructorDecl *DestructorDecl = D->getDestructor();
   const CXXMethodDecl *LambdaCallOperator = D->getLambdaCallOperator();
 
   auto I = D->captures_begin(), E = D->captures_end();
   ObjectScope Scope(OF,
-                    0 + HasNonVBases + HasVBases + IsPOD +
+                    0 + HasNonVBases + HasVBases + HasTransitiveVBases + IsPOD +
                         (bool)DestructorDecl + (bool)LambdaCallOperator + (I != E));
 
   if (HasNonVBases) {
@@ -1970,6 +1973,13 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
     OF.emitTag("vbases");
     ArrayScope aScope(OF, vBases.size());
     for (const auto base : vBases) {
+      dumpQualTypeNoQuals(base.getType());
+    }
+  }
+  if (HasTransitiveVBases) {
+    OF.emitTag("transitive_vbases");
+    ArrayScope aScope(OF, numTransitiveVBases);
+    for (const auto base : D->vbases()) {
       dumpQualTypeNoQuals(base.getType());
     }
   }
