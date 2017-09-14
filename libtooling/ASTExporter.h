@@ -2007,13 +2007,13 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
 //@atd type template_instantiation_arg_info = [
 //@atd   | Null
 //@atd   | Type of qual_type
-//@atd   | Declaration
+//@atd   | Declaration of pointer
 //@atd   | NullPtr
-//@atd   | Integral
+//@atd   | Integral of string
 //@atd   | Template
 //@atd   | TemplateExpansion
 //@atd   | Expression
-//@atd   | Pack
+//@atd   | Pack of template_instantiation_arg_info list
 //@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
@@ -2026,27 +2026,40 @@ void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
     dumpQualType(Arg.getAsType());
     break;
   }
-  case TemplateArgument::Declaration:
-    OF.emitSimpleVariant("Declaration");
+  case TemplateArgument::Declaration: {
+    VariantScope Scope(OF, "Declaration");
+    dumpPointer(Arg.getAsDecl());
     break;
+  }
   case TemplateArgument::NullPtr:
     OF.emitSimpleVariant("NullPtr");
     break;
-  case TemplateArgument::Integral:
-    OF.emitSimpleVariant("Integral");
+  case TemplateArgument::Integral: {
+    VariantScope Scope(OF, "Integral");
+    OF.emitString(Arg.getAsIntegral().toString(10));
     break;
-  case TemplateArgument::Template:
+  }
+  case TemplateArgument::Template: {
     OF.emitSimpleVariant("Template");
     break;
-  case TemplateArgument::TemplateExpansion:
+  }
+  case TemplateArgument::TemplateExpansion: {
     OF.emitSimpleVariant("TemplateExpansion");
     break;
-  case TemplateArgument::Expression:
+  }
+  case TemplateArgument::Expression: {
     OF.emitSimpleVariant("Expression");
     break;
-  case TemplateArgument::Pack:
-    OF.emitSimpleVariant("Pack");
+  }
+  case TemplateArgument::Pack: {
+    VariantScope Scope(OF, "Pack");
+    ArrayScope aScope(OF, Arg.pack_size());
+    for (TemplateArgument::pack_iterator I = Arg.pack_begin(), E = Arg.pack_end();
+         I != E; ++I) {
+      dumpTemplateArgument(*I);
+    }
     break;
+  }
   }
 }
 
@@ -2072,14 +2085,23 @@ void ASTExporter<ATDWriter>::dumpTemplateSpecialization(
 
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::ClassTemplateSpecializationDeclTupleSize() {
-  return CXXRecordDeclTupleSize() + 1;
+  return CXXRecordDeclTupleSize() + 2;
 }
 
-//@atd #define class_template_specialization_decl_tuple cxx_record_decl_tuple * template_specialization_info
+//@atd #define class_template_specialization_decl_tuple cxx_record_decl_tuple * string * template_specialization_info
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
     const ClassTemplateSpecializationDecl *D) {
   VisitCXXRecordDecl(D);
+  bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
+  if (ShouldMangleName) {
+    std::string mangled;
+    llvm::raw_string_ostream StrOS(mangled);
+    Mangler->mangleName(D, StrOS);
+    OF.emitString(StrOS.str());
+  } else {
+    OF.emitString("");
+  }
   dumpTemplateSpecialization(D->getSpecializedTemplate(),
                              D->getTemplateArgs());
 }
