@@ -1587,8 +1587,8 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
 
   if (ShouldMangleName) {
     OF.emitTag("mangled_name");
-    std::string mangled;
-    llvm::raw_string_ostream StrOS(mangled);
+    SmallString<64> Buf;
+    llvm::raw_svector_ostream StrOS(Buf);
     if (const auto *CD = dyn_cast<CXXConstructorDecl>(D)) {
       Mangler->mangleCXXCtor(CD, Ctor_Complete, StrOS);
     } else if (const auto *DD = dyn_cast<CXXDestructorDecl>(D)) {
@@ -1596,7 +1596,8 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     } else {
       Mangler->mangleName(D, StrOS);
     }
-    OF.emitString(StrOS.str());
+    // mangled names can get ridiculously long, so hash them to a fixed size
+    OF.emitString(std::to_string(fnv64Hash(StrOS)));
   }
 
   if (HasStorageClass) {
@@ -2105,10 +2106,11 @@ void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
   VisitCXXRecordDecl(D);
   bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
   if (ShouldMangleName) {
-    std::string mangled;
-    llvm::raw_string_ostream StrOS(mangled);
+    SmallString<64> Buf;
+    llvm::raw_svector_ostream StrOS(Buf);
     Mangler->mangleName(D, StrOS);
-    OF.emitString(StrOS.str());
+    // mangled names can get ridiculously long, so hash them to a fixed size
+    OF.emitString(std::to_string(fnv64Hash(StrOS)));
   } else {
     OF.emitString("");
   }

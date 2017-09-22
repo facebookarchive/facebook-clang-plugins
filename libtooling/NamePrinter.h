@@ -55,6 +55,11 @@ uint64_t fnv64Hash(const char *s, int n) {
   return hash;
 }
 
+uint64_t fnv64Hash(llvm::raw_svector_ostream &OS) {
+  std::string s = OS.str();
+  return fnv64Hash(s.data(), s.size());
+}
+
 const int templateLengthThreshold = 40;
 template <class ATDWriter>
 void NamePrinter<ATDWriter>::printTemplateArgList(
@@ -65,7 +70,7 @@ void NamePrinter<ATDWriter>::printTemplateArgList(
       tmpOS, Args, getPrintingPolicy());
   if (tmpOS.str().size() > templateLengthThreshold) {
     OS << "<";
-    OS.write_hex(fnv64Hash(tmpOS.str().data(), tmpOS.str().size()));
+    OS.write_hex(fnv64Hash(tmpOS));
     OS << ">";
   } else {
     OS << tmpOS.str();
