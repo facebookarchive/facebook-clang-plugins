@@ -557,19 +557,6 @@ void ASTExporter<ATDWriter>::dumpSourceRange(SourceRange R) {
   dumpSourceLocation(R.getEnd());
 }
 
-// TODO: really dump types as trees
-//@atd type opt_type = [Type of string | NoType]
-template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpTypeOld(const Type *T) {
-  if (!T) {
-    OF.emitSimpleVariant("NoType");
-  } else {
-    VariantScope Scope(OF, "Type");
-    OF.emitString(
-        QualType::getAsString(QualType(T, 0).getSplitDesugaredType()));
-  }
-}
-
 //@atd type qual_type = {
 //@atd   type_ptr : type_ptr;
 //@atd   ~is_const : bool;
@@ -1289,25 +1276,48 @@ void ASTExporter<ATDWriter>::VisitObjCContainerDecl(
 
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::TagDeclTupleSize() {
-  return TypeDeclTupleSize() + DeclContextTupleSize();
+  return TypeDeclTupleSize() + DeclContextTupleSize() + 1;
 }
-//@atd #define tag_decl_tuple type_decl_tuple * decl_context_tuple
+//@atd type tag_kind = [
+//@atd   TTK_Struct
+//@atd | TTK_Interface
+//@atd | TTK_Union
+//@atd | TTK_Class
+//@atd | TTK_Enum
+//@atd ]
+//@atd #define tag_decl_tuple type_decl_tuple * decl_context_tuple * tag_kind
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
   VisitTypeDecl(D);
   VisitDeclContext(D);
+  switch (D->getTagKind()) {
+  case TagTypeKind::TTK_Struct:
+    OF.emitSimpleVariant("TTK_Struct");
+    break;
+  case TagTypeKind::TTK_Interface:
+    OF.emitSimpleVariant("TTK_Interface");
+    break;
+  case TagTypeKind::TTK_Union:
+    OF.emitSimpleVariant("TTK_Union");
+    break;
+  case TagTypeKind::TTK_Class:
+    OF.emitSimpleVariant("TTK_Class");
+    break;
+  case TagTypeKind::TTK_Enum:
+    OF.emitSimpleVariant("TTK_Enum");
+    break;
+  }
 }
 
 template <class ATDWriter>
 int ASTExporter<ATDWriter>::TypeDeclTupleSize() {
-  return NamedDeclTupleSize() + 1 + 1;
+  return NamedDeclTupleSize() + 1;
 }
-//@atd #define type_decl_tuple named_decl_tuple * opt_type * type_ptr
+//@atd #define type_decl_tuple named_decl_tuple * type_ptr
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitTypeDecl(const TypeDecl *D) {
   VisitNamedDecl(D);
   const Type *T = D->getTypeForDecl();
-  dumpTypeOld(T);
   dumpPointerToType(T);
 }
 

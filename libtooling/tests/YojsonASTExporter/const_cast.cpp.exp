@@ -26,7 +26,6 @@
           "__int128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -48,7 +47,6 @@
           "__uint128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -70,7 +68,6 @@
           "__NSConstantString"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -92,7 +89,6 @@
           "__builtin_ms_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -114,7 +110,6 @@
           "__builtin_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -141,7 +136,6 @@
           "Foo"
         ]
       },
-      <"Type" : "class Foo">,
       8,
       [
         <"CXXRecordDecl" : (
@@ -166,12 +160,12 @@
               "Foo"
             ]
           },
-          <"Type" : "class Foo">,
           8,
           [
           ],
           {
           },
+          <"TTK_Class">,
           {
             "definition_ptr" : 0
           },
@@ -245,6 +239,7 @@
       ],
       {
       },
+      <"TTK_Class">,
       {
         "definition_ptr" : 7,
         "is_complete_definition" : true
@@ -676,7 +671,6 @@
           "instancetype"
         ]
       },
-      <"Type" : "id">,
       33,
       {
       }

@@ -26,7 +26,6 @@
           "__int128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -48,7 +47,6 @@
           "__uint128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -70,7 +68,6 @@
           "__NSConstantString"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -92,7 +89,6 @@
           "__builtin_ms_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -114,7 +110,6 @@
           "__builtin_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -185,7 +180,6 @@
                     "N"
                   ]
                 },
-                <"Type" : "struct N::S<struct N::S<int> *>">,
                 10,
                 [
                   <"CXXRecordDecl" : (
@@ -211,12 +205,12 @@
                         "N"
                       ]
                     },
-                    <"Type" : "struct N::S<struct N::S<int> *>">,
                     10,
                     [
                     ],
                     {
                     },
+                    <"TTK_Struct">,
                     {
                       "definition_ptr" : 9
                     },
@@ -495,6 +489,7 @@
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 9,
                   "is_complete_definition" : true
@@ -536,7 +531,6 @@
               "N"
             ]
           },
-          <"Type" : "S<type-parameter-0-0 *>">,
           29,
           [
             <"CXXRecordDecl" : (
@@ -562,12 +556,12 @@
                   "N"
                 ]
               },
-              <"Type" : "S<type-parameter-0-0 *>">,
               29,
               [
               ],
               {
               },
+              <"TTK_Struct">,
               {
                 "definition_ptr" : 0
               },
@@ -606,6 +600,7 @@
           ],
           {
           },
+          <"TTK_Struct">,
           {
             "definition_ptr" : 28,
             "is_complete_definition" : true
@@ -643,7 +638,6 @@
               "N"
             ]
           },
-          <"Type" : "struct N::S<int>">,
           35,
           [
             <"CXXRecordDecl" : (
@@ -669,12 +663,12 @@
                   "N"
                 ]
               },
-              <"Type" : "struct N::S<int>">,
               35,
               [
               ],
               {
               },
+              <"TTK_Struct">,
               {
                 "definition_ptr" : 0
               },
@@ -1325,6 +1319,7 @@
           ],
           {
           },
+          <"TTK_Struct">,
           {
             "definition_ptr" : 34,
             "is_complete_definition" : true
@@ -1804,7 +1799,6 @@
           "instancetype"
         ]
       },
-      <"Type" : "id">,
       84,
       {
       }

@@ -9,7 +9,6 @@
             #21ac3408: unit
           },
           { #c8ff724b: "__int128_t", #2cdb06fb: [ "__int128_t" ] },
-          <#d132a7bb>,
           0,
           { })>,
       <#0f3f4d35:
@@ -20,7 +19,6 @@
             #21ac3408: unit
           },
           { #c8ff724b: "__uint128_t", #2cdb06fb: [ "__uint128_t" ] },
-          <#d132a7bb>,
           0,
           { })>,
       <#0f3f4d35:
@@ -34,7 +32,6 @@
             #c8ff724b: "__NSConstantString",
             #2cdb06fb: [ "__NSConstantString" ]
           },
-          <#d132a7bb>,
           0,
           { })>,
       <#0f3f4d35:
@@ -48,7 +45,6 @@
             #c8ff724b: "__builtin_ms_va_list",
             #2cdb06fb: [ "__builtin_ms_va_list" ]
           },
-          <#d132a7bb>,
           0,
           { })>,
       <#0f3f4d35:
@@ -62,7 +58,6 @@
             #c8ff724b: "__builtin_va_list",
             #2cdb06fb: [ "__builtin_va_list" ]
           },
-          <#d132a7bb>,
           0,
           { })>,
       <#37b901fc:
@@ -89,10 +84,10 @@
                     #21ac3408: unit
                   },
                   { #c8ff724b: "Tuple", #2cdb06fb: [ "Tuple<int>" ] },
-                  <#37e21eda: "struct Tuple<int>">,
                   9,
                   [],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 0 },
                   { },
                   "_Z5TupleIJiEE",
@@ -111,7 +106,6 @@
                     #21ac3408: unit
                   },
                   { #c8ff724b: "Tuple", #2cdb06fb: [ "Tuple<Tuple<int> >" ] },
-                  <#37e21eda: "struct Tuple<struct Tuple<int> >">,
                   12,
                   [
                     <#f50d797e:
@@ -126,10 +120,10 @@
                           #c8ff724b: "Tuple",
                           #2cdb06fb: [ "Tuple", "Tuple<Tuple<int> >" ]
                         },
-                        <#37e21eda: "struct Tuple<struct Tuple<int> >">,
                         12,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 11 },
                         { })>,
                     <#cc498dc1:
@@ -231,6 +225,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 11, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z5TupleIJS_IJiEEEE",
@@ -281,7 +276,6 @@
             #21ac3408: unit
           },
           { #c8ff724b: "nullptr_t", #2cdb06fb: [ "nullptr_t" ] },
-          <#37e21eda: "nullptr_t">,
           29,
           { })>,
       <#37b901fc:
@@ -307,7 +301,6 @@
                     #c8ff724b: "NullPtrTemplate",
                     #2cdb06fb: [ "NullPtrTemplate<nullptr>" ]
                   },
-                  <#37e21eda: "struct NullPtrTemplate<nullptr>">,
                   32,
                   [
                     <#f50d797e:
@@ -324,10 +317,10 @@
                             "NullPtrTemplate", "NullPtrTemplate<nullptr>"
                           ]
                         },
-                        <#37e21eda: "struct NullPtrTemplate<nullptr>">,
                         32,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 31 },
                         { })>,
                     <#cc498dc1:
@@ -435,6 +428,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 31, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z15NullPtrTemplateILDn0EE",
@@ -497,7 +491,6 @@
                     #c8ff724b: "IntTemplate",
                     #2cdb06fb: [ "IntTemplate<0>" ]
                   },
-                  <#37e21eda: "struct IntTemplate<0>">,
                   49,
                   [
                     <#f50d797e:
@@ -512,10 +505,10 @@
                           #c8ff724b: "IntTemplate",
                           #2cdb06fb: [ "IntTemplate", "IntTemplate<0>" ]
                         },
-                        <#37e21eda: "struct IntTemplate<0>">,
                         49,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 48 },
                         { })>,
                     <#cc498dc1:
@@ -617,6 +610,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 48, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z11IntTemplateILi0EE",
@@ -646,7 +640,6 @@
                     #c8ff724b: "CharTemplate",
                     #2cdb06fb: [ "CharTemplate<'c'>" ]
                   },
-                  <#37e21eda: "struct CharTemplate<'c'>">,
                   63,
                   [
                     <#f50d797e:
@@ -661,10 +654,10 @@
                           #c8ff724b: "CharTemplate",
                           #2cdb06fb: [ "CharTemplate", "CharTemplate<'c'>" ]
                         },
-                        <#37e21eda: "struct CharTemplate<'c'>">,
                         63,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 62 },
                         { })>,
                     <#cc498dc1:
@@ -766,6 +759,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 62, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z12CharTemplateILc99EE",
@@ -795,7 +789,6 @@
                     #c8ff724b: "LongTemplate",
                     #2cdb06fb: [ "LongTemplate<78187493520>" ]
                   },
-                  <#37e21eda: "struct LongTemplate<78187493520>">,
                   77,
                   [
                     <#f50d797e:
@@ -812,10 +805,10 @@
                             "LongTemplate", "LongTemplate<78187493520>"
                           ]
                         },
-                        <#37e21eda: "struct LongTemplate<78187493520>">,
                         77,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 76 },
                         { })>,
                     <#cc498dc1:
@@ -925,6 +918,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 76, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z12LongTemplateILl78187493520EE",
@@ -1049,7 +1043,6 @@
                     #21ac3408: unit
                   },
                   { #c8ff724b: "X", #2cdb06fb: [ "X<&x5>" ] },
-                  <#37e21eda: "struct X<&x5>">,
                   100,
                   [
                     <#f50d797e:
@@ -1061,10 +1054,10 @@
                           #21ac3408: unit
                         },
                         { #c8ff724b: "X", #2cdb06fb: [ "X", "X<&x5>" ] },
-                        <#37e21eda: "struct X<&x5>">,
                         100,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 99 },
                         { })>,
                     <#cc498dc1:
@@ -1157,6 +1150,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 99, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z1XIXadL_Z2x5EEE",
@@ -1182,7 +1176,6 @@
             #21ac3408: unit
           },
           { #c8ff724b: "Y", #2cdb06fb: [ "Y" ] },
-          <#37e21eda: "struct Y">,
           115,
           [
             <#f50d797e:
@@ -1194,10 +1187,10 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "Y", #2cdb06fb: [ "Y", "Y" ] },
-                <#37e21eda: "struct Y">,
                 115,
                 [],
                 { },
+                <#c5b1f8a9>,
                 { #33244202: 0 },
                 { })>,
             <#cc498dc1:
@@ -1287,6 +1280,7 @@
                 { #fe288443: true })>
           ],
           { },
+          <#c5b1f8a9>,
           { #33244202: 114, #1a9a7e84: true },
           { #f1ae3b70: true })>,
       <#37b901fc:
@@ -1309,7 +1303,6 @@
                     #21ac3408: unit
                   },
                   { #c8ff724b: "Z", #2cdb06fb: [ "Z<&y>" ] },
-                  <#37e21eda: "struct Z<&y>">,
                   129,
                   [
                     <#f50d797e:
@@ -1321,10 +1314,10 @@
                           #21ac3408: unit
                         },
                         { #c8ff724b: "Z", #2cdb06fb: [ "Z", "Z<&y>" ] },
-                        <#37e21eda: "struct Z<&y>">,
                         129,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 128 },
                         { })>,
                     <#cc498dc1:
@@ -1417,6 +1410,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 128, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z1ZIL_Z1yEE",
@@ -1473,7 +1467,6 @@
                     #21ac3408: unit
                   },
                   { #c8ff724b: "W", #2cdb06fb: [ "W<&b>" ] },
-                  <#37e21eda: "struct W<&b>">,
                   145,
                   [
                     <#f50d797e:
@@ -1485,10 +1478,10 @@
                           #21ac3408: unit
                         },
                         { #c8ff724b: "W", #2cdb06fb: [ "W", "W<&b>" ] },
-                        <#37e21eda: "struct W<&b>">,
                         145,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 144 },
                         { })>,
                     <#cc498dc1:
@@ -1581,6 +1574,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 144, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z1WIL_Z1bEE",
@@ -1643,7 +1637,6 @@
                     #21ac3408: unit
                   },
                   { #c8ff724b: "A", #2cdb06fb: [ "A<&f>" ] },
-                  <#37e21eda: "struct A<&f>">,
                   164,
                   [
                     <#f50d797e:
@@ -1655,10 +1648,10 @@
                           #21ac3408: unit
                         },
                         { #c8ff724b: "A", #2cdb06fb: [ "A", "A<&f>" ] },
-                        <#37e21eda: "struct A<&f>">,
                         164,
                         [],
                         { },
+                        <#c5b1f8a9>,
                         { #33244202: 163 },
                         { })>,
                     <#cc498dc1:
@@ -1751,6 +1744,7 @@
                         { #fe288443: true })>
                   ],
                   { },
+                  <#c5b1f8a9>,
                   { #33244202: 163, #1a9a7e84: true },
                   { #f1ae3b70: true },
                   "_Z1AIXadL_Z1fiEEE",
@@ -1889,7 +1883,6 @@
             #21ac3408: unit
           },
           { #c8ff724b: "instancetype", #2cdb06fb: [ "instancetype" ] },
-          <#37e21eda: "id">,
           189,
           { })>
     ],

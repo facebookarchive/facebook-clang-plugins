@@ -26,7 +26,6 @@
           "__int128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -48,7 +47,6 @@
           "__uint128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -70,7 +68,6 @@
           "__NSConstantString"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -92,7 +89,6 @@
           "__builtin_ms_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -114,7 +110,6 @@
           "__builtin_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -162,12 +157,12 @@
                 "Tuple<int>"
               ]
             },
-            <"Type" : "struct Tuple<int>">,
             9,
             [
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 0
             },
@@ -205,7 +200,6 @@
                 "Tuple<Tuple<int> >"
               ]
             },
-            <"Type" : "struct Tuple<struct Tuple<int> >">,
             12,
             [
               <"CXXRecordDecl" : (
@@ -229,12 +223,12 @@
                     "Tuple<Tuple<int> >"
                   ]
                 },
-                <"Type" : "struct Tuple<struct Tuple<int> >">,
                 12,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 11
                 },
@@ -416,6 +410,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 11,
               "is_complete_definition" : true
@@ -520,7 +515,6 @@
           "nullptr_t"
         ]
       },
-      <"Type" : "nullptr_t">,
       29,
       {
       }
@@ -567,7 +561,6 @@
                 "NullPtrTemplate<nullptr>"
               ]
             },
-            <"Type" : "struct NullPtrTemplate<nullptr>">,
             32,
             [
               <"CXXRecordDecl" : (
@@ -591,12 +584,12 @@
                     "NullPtrTemplate<nullptr>"
                   ]
                 },
-                <"Type" : "struct NullPtrTemplate<nullptr>">,
                 32,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 31
                 },
@@ -778,6 +771,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 31,
               "is_complete_definition" : true
@@ -900,7 +894,6 @@
                 "IntTemplate<0>"
               ]
             },
-            <"Type" : "struct IntTemplate<0>">,
             49,
             [
               <"CXXRecordDecl" : (
@@ -924,12 +917,12 @@
                     "IntTemplate<0>"
                   ]
                 },
-                <"Type" : "struct IntTemplate<0>">,
                 49,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 48
                 },
@@ -1111,6 +1104,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 48,
               "is_complete_definition" : true
@@ -1171,7 +1165,6 @@
                 "CharTemplate<'c'>"
               ]
             },
-            <"Type" : "struct CharTemplate<'c'>">,
             63,
             [
               <"CXXRecordDecl" : (
@@ -1195,12 +1188,12 @@
                     "CharTemplate<'c'>"
                   ]
                 },
-                <"Type" : "struct CharTemplate<'c'>">,
                 63,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 62
                 },
@@ -1382,6 +1375,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 62,
               "is_complete_definition" : true
@@ -1442,7 +1436,6 @@
                 "LongTemplate<78187493520>"
               ]
             },
-            <"Type" : "struct LongTemplate<78187493520>">,
             77,
             [
               <"CXXRecordDecl" : (
@@ -1466,12 +1459,12 @@
                     "LongTemplate<78187493520>"
                   ]
                 },
-                <"Type" : "struct LongTemplate<78187493520>">,
                 77,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 76
                 },
@@ -1653,6 +1646,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 76,
               "is_complete_definition" : true
@@ -1899,7 +1893,6 @@
                 "X<&x5>"
               ]
             },
-            <"Type" : "struct X<&x5>">,
             100,
             [
               <"CXXRecordDecl" : (
@@ -1923,12 +1916,12 @@
                     "X<&x5>"
                   ]
                 },
-                <"Type" : "struct X<&x5>">,
                 100,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 99
                 },
@@ -2110,6 +2103,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 99,
               "is_complete_definition" : true
@@ -2176,7 +2170,6 @@
           "Y"
         ]
       },
-      <"Type" : "struct Y">,
       115,
       [
         <"CXXRecordDecl" : (
@@ -2200,12 +2193,12 @@
               "Y"
             ]
           },
-          <"Type" : "struct Y">,
           115,
           [
           ],
           {
           },
+          <"TTK_Struct">,
           {
             "definition_ptr" : 0
           },
@@ -2387,6 +2380,7 @@
       ],
       {
       },
+      <"TTK_Struct">,
       {
         "definition_ptr" : 114,
         "is_complete_definition" : true
@@ -2437,7 +2431,6 @@
                 "Z<&y>"
               ]
             },
-            <"Type" : "struct Z<&y>">,
             129,
             [
               <"CXXRecordDecl" : (
@@ -2461,12 +2454,12 @@
                     "Z<&y>"
                   ]
                 },
-                <"Type" : "struct Z<&y>">,
                 129,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 128
                 },
@@ -2648,6 +2641,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 128,
               "is_complete_definition" : true
@@ -2772,7 +2766,6 @@
                 "W<&b>"
               ]
             },
-            <"Type" : "struct W<&b>">,
             145,
             [
               <"CXXRecordDecl" : (
@@ -2796,12 +2789,12 @@
                     "W<&b>"
                   ]
                 },
-                <"Type" : "struct W<&b>">,
                 145,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 144
                 },
@@ -2983,6 +2976,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 144,
               "is_complete_definition" : true
@@ -3126,7 +3120,6 @@
                 "A<&f>"
               ]
             },
-            <"Type" : "struct A<&f>">,
             164,
             [
               <"CXXRecordDecl" : (
@@ -3150,12 +3143,12 @@
                     "A<&f>"
                   ]
                 },
-                <"Type" : "struct A<&f>">,
                 164,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 163
                 },
@@ -3337,6 +3330,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 163,
               "is_complete_definition" : true
@@ -3620,7 +3614,6 @@
           "instancetype"
         ]
       },
-      <"Type" : "id">,
       189,
       {
       }

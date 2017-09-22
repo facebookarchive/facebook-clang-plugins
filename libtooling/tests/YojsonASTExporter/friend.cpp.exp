@@ -26,7 +26,6 @@
           "__int128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -48,7 +47,6 @@
           "__uint128_t"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -70,7 +68,6 @@
           "__NSConstantString"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -92,7 +89,6 @@
           "__builtin_ms_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -114,7 +110,6 @@
           "__builtin_va_list"
         ]
       },
-      <"NoType">,
       0,
       {
       }
@@ -162,12 +157,12 @@
                 "AnotherClass<int *>"
               ]
             },
-            <"Type" : "struct AnotherClass<int *>">,
             9,
             [
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 0
             },
@@ -228,7 +223,6 @@
                 "Y<int>"
               ]
             },
-            <"Type" : "struct Y<int>">,
             13,
             [
               <"CXXRecordDecl" : (
@@ -253,12 +247,12 @@
                     "Y<int>"
                   ]
                 },
-                <"Type" : "struct Y<int>">,
                 13,
                 [
                 ],
                 {
                 },
+                <"TTK_Struct">,
                 {
                   "definition_ptr" : 12
                 },
@@ -497,6 +491,7 @@
             ],
             {
             },
+            <"TTK_Struct">,
             {
               "definition_ptr" : 12,
               "is_complete_definition" : true
@@ -596,7 +591,6 @@
           "instancetype"
         ]
       },
-      <"Type" : "id">,
       35,
       {
       }
