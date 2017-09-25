@@ -410,6 +410,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(ObjCSubscriptRefExpr)
   DECLARE_VISITOR(ObjCIvarRefExpr)
   DECLARE_VISITOR(ObjCBoolLiteralExpr)
+  DECLARE_VISITOR(ObjCAvailabilityCheckExpr)
 
   // Comments.
   const char *getCommandName(unsigned CommandID);
@@ -4287,6 +4288,27 @@ void ASTExporter<ATDWriter>::VisitObjCBoolLiteralExpr(
     const ObjCBoolLiteralExpr *Node) {
   VisitExpr(Node);
   OF.emitInteger(Node->getValue());
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCAvailabilityCheckExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
+
+//@atd #define obj_c_availability_check_expr_tuple expr_tuple * obj_c_availability_check_expr_info
+//@atd type obj_c_availability_check_expr_info = {
+//@atd   ?version : string option;
+//@atd } <ocaml field_prefix="oacei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCAvailabilityCheckExpr(const ObjCAvailabilityCheckExpr *Expr) {
+  VisitExpr(Expr);
+  bool HasVersion = Expr->hasVersion();
+  ObjectScope Scope(OF, HasVersion); 
+  if (HasVersion) {
+    OF.emitTag("version");
+    ObjCAvailabilityCheckExpr* E = (ObjCAvailabilityCheckExpr*)Expr;
+    OF.emitString(E->getVersion().getAsString());
+  }
 }
 
 // Main variant for statements
