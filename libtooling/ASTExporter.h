@@ -791,54 +791,6 @@ void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
   }
 }
 
-//@atd type previous_decl = [
-//@atd | None
-//@atd | First of pointer
-//@atd | Previous of pointer
-//@atd ]
-template <class ATDWriter>
-static void dumpPreviousDeclImpl(ATDWriter &OF, bool withPointers, ...) {}
-
-template <class ATDWriter, typename T>
-static void dumpPreviousDeclImpl(ATDWriter &OF,
-                                 bool withPointers,
-                                 const Mergeable<T> *D) {
-  const T *First = D->getFirstDecl();
-  if (First != D) {
-    OF.emitTag("previous_decl");
-    typename ATDWriter::VariantScope Scope(OF, "First");
-    writePointer(OF, withPointers, First);
-  }
-}
-
-template <class ATDWriter, typename T>
-static void dumpPreviousDeclImpl(ATDWriter &OF,
-                                 bool withPointers,
-                                 const Redeclarable<T> *D) {
-  const T *Prev = D->getPreviousDecl();
-  if (Prev) {
-    OF.emitTag("previous_decl");
-    typename ATDWriter::VariantScope Scope(OF, "Previous");
-    writePointer(OF, withPointers, Prev);
-  }
-}
-
-/// Dump the previous declaration in the redeclaration chain for a declaration,
-/// if any.
-template <class ATDWriter>
-static void dumpPreviousDeclOptionallyWithTag(ATDWriter &OF,
-                                              bool withPointers,
-                                              const Decl *D) {
-  switch (D->getKind()) {
-#define DECL(DERIVED, BASE) \
-  case Decl::DERIVED:       \
-    return dumpPreviousDeclImpl(OF, cast<DERIVED##Decl>(D));
-#define ABSTRACT_DECL(DECL)
-#include <clang/AST/DeclNodes.inc>
-  }
-  llvm_unreachable("Decl that isn't part of DeclNodes.inc!");
-}
-
 //===----------------------------------------------------------------------===//
 //  C++ Utilities
 //===----------------------------------------------------------------------===//
@@ -1138,7 +1090,6 @@ int ASTExporter<ATDWriter>::DeclTupleSize() {
 //@atd type decl_info = {
 //@atd   pointer : pointer;
 //@atd   ?parent_pointer : pointer option;
-//@atd   ~previous_decl <ocaml default="`None"> : previous_decl;
 //@atd   source_range : source_range;
 //@atd   ?owning_module : string option;
 //@atd   ~is_hidden : bool;
@@ -1182,7 +1133,6 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
       OF.emitTag("parent_pointer");
       dumpPointer(cast<Decl>(D->getDeclContext()));
     }
-    dumpPreviousDeclOptionallyWithTag(OF, Options.withPointers, D);
 
     OF.emitTag("source_range");
     dumpSourceRange(D->getSourceRange());

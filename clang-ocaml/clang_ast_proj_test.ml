@@ -24,7 +24,6 @@ let empty_source_location = source_location ()
 let decl_info start stop = {
   di_pointer = 0;
   di_parent_pointer = None;
-  di_previous_decl = `None;
   di_source_range = (start, stop) ;
   di_owning_module = None;
   di_is_hidden = false;
