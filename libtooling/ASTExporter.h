@@ -4253,7 +4253,7 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCAvailabilityCheckExpr(const ObjCAvailabilityCheckExpr *Expr) {
   VisitExpr(Expr);
   bool HasVersion = Expr->hasVersion();
-  ObjectScope Scope(OF, HasVersion); 
+  ObjectScope Scope(OF, HasVersion);
   if (HasVersion) {
     OF.emitTag("version");
     ObjCAvailabilityCheckExpr* E = (ObjCAvailabilityCheckExpr*)Expr;
@@ -4913,7 +4913,7 @@ int ASTExporter<ATDWriter>::ObjCObjectTypeTupleSize() {
 //@atd   base_type : type_ptr;
 //@atd   ~protocol_decls_ptr : pointer list;
 //@atd   ~type_args : qual_type list;
-//@atd } <ocaml prefix="ooti_">
+//@atd } <ocaml field_prefix="ooti_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCObjectType(const ObjCObjectType *T) {
   VisitType(T);
