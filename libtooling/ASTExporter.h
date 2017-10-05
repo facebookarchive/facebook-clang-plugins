@@ -1520,7 +1520,8 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
 
   const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
-  // FunctionProtoType::canThrow is more informative, consider using CanThrowResult type instead
+  // FunctionProtoType::canThrow is more informative, consider using
+  // CanThrowResult type instead
   // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
   auto IsNoThrow = FPT ? FPT->isNothrow(Context) : false;
   const FunctionDecl *DeclWithBody = D;
@@ -1808,7 +1809,6 @@ void ASTExporter<ATDWriter>::VisitNamespaceAliasDecl(
   dumpDeclRef(*D->getNamespace());
 }
 
-
 //@atd type lambda_capture_info = {
 //@atd   capture_kind : lambda_capture_kind;
 //@atd   ~capture_this : bool;
@@ -1834,13 +1834,14 @@ void ASTExporter<ATDWriter>::dumpClassLambdaCapture(const LambdaCapture *C) {
   bool CapturesVariable = C->capturesVariable();
   bool CapturesVLAType = C->capturesVLAType();
   VarDecl *decl = C->capturesVariable() ? C->getCapturedVar() : nullptr;
-  bool IsInitCapture = decl && decl->isInitCapture();;
+  bool IsInitCapture = decl && decl->isInitCapture();
   bool IsImplicit = C->isImplicit();
   SourceRange source_range = C->getLocation();
   bool IsPackExpansion = C->isPackExpansion();
   ObjectScope Scope(OF,
                     2 + CapturesThis + CapturesVariable + CapturesVLAType +
-                        IsInitCapture + (bool)decl + IsImplicit + IsPackExpansion);
+                        IsInitCapture + (bool)decl + IsImplicit +
+                        IsPackExpansion);
   OF.emitTag("capture_kind");
   switch (CK) {
   case LCK_This:
@@ -1925,7 +1926,8 @@ void ASTExporter<ATDWriter>::VisitCXXRecordDecl(const CXXRecordDecl *D) {
   auto I = D->captures_begin(), E = D->captures_end();
   ObjectScope Scope(OF,
                     0 + HasNonVBases + HasVBases + HasTransitiveVBases + IsPOD +
-                        (bool)DestructorDecl + (bool)LambdaCallOperator + (I != E));
+                        (bool)DestructorDecl + (bool)LambdaCallOperator +
+                        (I != E));
 
   if (HasNonVBases) {
     OF.emitTag("bases");
@@ -2019,8 +2021,10 @@ void ASTExporter<ATDWriter>::dumpTemplateArgument(const TemplateArgument &Arg) {
   case TemplateArgument::Pack: {
     VariantScope Scope(OF, "Pack");
     ArrayScope aScope(OF, Arg.pack_size());
-    for (TemplateArgument::pack_iterator I = Arg.pack_begin(), E = Arg.pack_end();
-         I != E; ++I) {
+    for (TemplateArgument::pack_iterator I = Arg.pack_begin(),
+                                         E = Arg.pack_end();
+         I != E;
+         ++I) {
       dumpTemplateArgument(*I);
     }
     break;
@@ -2068,8 +2072,7 @@ void ASTExporter<ATDWriter>::VisitClassTemplateSpecializationDecl(
   } else {
     OF.emitString("");
   }
-  dumpTemplateSpecialization(D->getSpecializedTemplate(),
-                             D->getTemplateArgs());
+  dumpTemplateSpecialization(D->getSpecializedTemplate(), D->getTemplateArgs());
 }
 
 template <class ATDWriter>
@@ -3481,11 +3484,21 @@ template <class ATDWriter>
 int ASTExporter<ATDWriter>::StringLiteralTupleSize() {
   return ExprTupleSize() + 1;
 }
-//@atd #define string_literal_tuple expr_tuple * string
+//@atd #define string_literal_tuple expr_tuple * string list
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
   VisitExpr(Str);
-  OF.emitString(Str->getBytes());
+  size_t n_chunks;
+  if (Str->getByteLength() == 0) {
+    n_chunks = 1;
+  } else {
+    n_chunks = 1 + ((Str->getByteLength() - 1) / Options.maxStringSize);
+  }
+  ArrayScope Scope(OF, n_chunks);
+  for (size_t i = 0; i < n_chunks; ++i) {
+    OF.emitString(Str->getBytes().substr(i * Options.maxStringSize,
+                                         Options.maxStringSize));
+  }
 }
 
 template <class ATDWriter>
@@ -4253,13 +4266,14 @@ int ASTExporter<ATDWriter>::ObjCAvailabilityCheckExprTupleSize() {
 //@atd   ?version : string option;
 //@atd } <ocaml field_prefix="oacei_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitObjCAvailabilityCheckExpr(const ObjCAvailabilityCheckExpr *Expr) {
+void ASTExporter<ATDWriter>::VisitObjCAvailabilityCheckExpr(
+    const ObjCAvailabilityCheckExpr *Expr) {
   VisitExpr(Expr);
   bool HasVersion = Expr->hasVersion();
   ObjectScope Scope(OF, HasVersion);
   if (HasVersion) {
     OF.emitTag("version");
-    ObjCAvailabilityCheckExpr* E = (ObjCAvailabilityCheckExpr*)Expr;
+    ObjCAvailabilityCheckExpr *E = (ObjCAvailabilityCheckExpr *)Expr;
     OF.emitString(E->getVersion().getAsString());
   }
 }

@@ -10,12 +10,12 @@
  */
 
 #include <functional>
-#include <string>
-#include <unordered_map>
-#include <memory>
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
+#include <string>
 #include <unistd.h>
+#include <unordered_map>
 
 #include <llvm/Support/Path.h>
 
@@ -108,15 +108,17 @@ bool PluginASTOptionsBase::loadUnsignedInt(const argmap_t &map,
 void PluginASTOptionsBase::loadValuesFromEnvAndMap(const argmap_t map) {
   bool needBasePath = false;
 
+  loadBool(map, "ALLOW_SIBLINGS_TO_REPO_ROOT", allowSiblingsToRepoRoot);
+  loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
+  loadString(map, "MAKE_RELATIVE_TO", repoRoot);
+  loadUnsignedInt(map, "MAX_STRING_SIZE", maxStringSize);
+
   // Possibly override the first argument given on the command line.
   loadString(map, "OUTPUT_FILE", outputFile);
 
   loadBool(map, "PREPEND_CURRENT_DIR", needBasePath);
-  loadString(map, "MAKE_RELATIVE_TO", repoRoot);
-  loadString(map, "STRIP_ISYSROOT", iSysRoot);
-  loadBool(map, "ALLOW_SIBLINGS_TO_REPO_ROOT", allowSiblingsToRepoRoot);
-  loadBool(map, "KEEP_EXTERNAL_PATHS", keepExternalPaths);
   loadBool(map, "RESOLVE_SYMLINKS", resolveSymlinks);
+  loadString(map, "STRIP_ISYSROOT", iSysRoot);
 
   if (needBasePath) {
     llvm::SmallString<1024> CurrentDir;
@@ -164,7 +166,11 @@ const std::string &PluginASTOptionsBase::normalizeSourcePath(
   }
   // By convention, relative paths are only activated when repoRoot != "".
   if (repoRoot != "") {
-    result = FileUtils::makeRelativePath(repoRoot, iSysRoot, keepExternalPaths, allowSiblingsToRepoRoot, absPath);
+    result = FileUtils::makeRelativePath(repoRoot,
+                                         iSysRoot,
+                                         keepExternalPaths,
+                                         allowSiblingsToRepoRoot,
+                                         absPath);
   } else {
     result = absPath;
   }
@@ -172,7 +178,7 @@ const std::string &PluginASTOptionsBase::normalizeSourcePath(
 }
 
 const std::string &PluginASTOptionsBase::normalizeSourcePath(
-  llvm::StringRef path) const {
-    return normalizeSourcePath(path.data());
+    llvm::StringRef path) const {
+  return normalizeSourcePath(path.data());
 }
-}
+} // namespace ASTPluginLib

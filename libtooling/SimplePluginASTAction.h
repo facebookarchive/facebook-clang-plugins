@@ -61,6 +61,8 @@ struct PluginASTOptionsBase {
   bool keepExternalPaths = false;
   /* Resolve symlinks to their real path. */
   bool resolveSymlinks = false;
+  /* do not emit string literals larger than this size */
+  unsigned long maxStringSize = 65535;
 
   typedef std::unordered_map<std::string, std::string> argmap_t;
 
@@ -105,9 +107,10 @@ struct PluginASTOptionsBase {
 struct EmptyPreprocessorHandlerData {};
 
 struct EmptyPreprocessorHandler : public clang::PPCallbacks {
-  EmptyPreprocessorHandler(clang::SourceManager &SM,
-                           std::shared_ptr<PluginASTOptionsBase> options,
-                           std::shared_ptr<EmptyPreprocessorHandlerData> sharedData) {}
+  EmptyPreprocessorHandler(
+      clang::SourceManager &SM,
+      std::shared_ptr<PluginASTOptionsBase> options,
+      std::shared_ptr<EmptyPreprocessorHandlerData> sharedData) {}
 };
 
 template <class PluginASTOptions = PluginASTOptionsBase,
@@ -120,15 +123,14 @@ class SimplePluginASTActionBase : public clang::PluginASTAction {
 
   void ExecuteAction() override {
     auto &preprocessor = getCompilerInstance().getPreprocessor();
-    preprocessor.addPPCallbacks(
-      llvm::make_unique<PreprocessorHandler>(preprocessor.getSourceManager(), options, sharedData)
-    );
+    preprocessor.addPPCallbacks(llvm::make_unique<PreprocessorHandler>(
+        preprocessor.getSourceManager(), options, sharedData));
     clang::PluginASTAction::ExecuteAction();
   }
 
   // Called when FrontendPluginRegistry is used.
   bool ParseArgs(const clang::CompilerInstance &CI,
-                         const std::vector<std::string> &args_) override {
+                 const std::vector<std::string> &args_) override {
     std::vector<std::string> args = args_;
     if (args.size() > 0) {
       options->outputFile = args[0];
@@ -149,11 +151,13 @@ class SimplePluginASTActionBase : public clang::PluginASTAction {
 
   // Alternate constructor to pass an optional sequence "KEY=VALUE,.."
   // expected to be use with SimpleFrontendActionFactory below.
-  explicit SimplePluginASTActionBase(const std::vector<std::string> &args): SimplePluginASTActionBase() {
+  explicit SimplePluginASTActionBase(const std::vector<std::string> &args)
+      : SimplePluginASTActionBase() {
     options->loadValuesFromEnvAndMap(PluginASTOptions::makeMap(args));
   }
 
-  bool SetFileOptions(clang::CompilerInstance &CI, llvm::StringRef inputFilename) {
+  bool SetFileOptions(clang::CompilerInstance &CI,
+                      llvm::StringRef inputFilename) {
     // When running clang tool on more than one source file, CreateASTConsumer
     // will be ran for each of them separately. Hence, Inputs.size() = 1.
     clang::FrontendInputFile inputFile = CI.getFrontendOpts().Inputs[0];
@@ -196,19 +200,20 @@ template <class ASTConsumer,
           bool UseTemporary = 1,
           bool CreateMissingDirectories = 0>
 class SimplePluginASTAction
-  : public SimplePluginASTActionBase<
-      typename ASTConsumer::ASTConsumerOptions,
-      typename ASTConsumer::PreprocessorHandler,
-      typename ASTConsumer::PreprocessorHandlerData> {
-  using Parent = SimplePluginASTActionBase<
-    typename ASTConsumer::ASTConsumerOptions,
-    typename ASTConsumer::PreprocessorHandler,
-    typename ASTConsumer::PreprocessorHandlerData>;
+    : public SimplePluginASTActionBase<
+          typename ASTConsumer::ASTConsumerOptions,
+          typename ASTConsumer::PreprocessorHandler,
+          typename ASTConsumer::PreprocessorHandlerData> {
+  using Parent =
+      SimplePluginASTActionBase<typename ASTConsumer::ASTConsumerOptions,
+                                typename ASTConsumer::PreprocessorHandler,
+                                typename ASTConsumer::PreprocessorHandlerData>;
 
  public:
   SimplePluginASTAction() {}
 
-  explicit SimplePluginASTAction(const std::vector<std::string> &args) : Parent(args) {}
+  explicit SimplePluginASTAction(const std::vector<std::string> &args)
+      : Parent(args) {}
 
  protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
@@ -228,26 +233,27 @@ class SimplePluginASTAction
       return nullptr;
     }
 
-    return std::unique_ptr<clang::ASTConsumer>(
-        new ASTConsumer(CI, Parent::options, Parent::sharedData, std::move(OS)));
+    return std::unique_ptr<clang::ASTConsumer>(new ASTConsumer(
+        CI, Parent::options, Parent::sharedData, std::move(OS)));
   }
 };
 
 template <class ASTConsumer>
 class NoOpenSimplePluginASTAction
-  : public SimplePluginASTActionBase<
-      typename ASTConsumer::ASTConsumerOptions,
-      typename ASTConsumer::PreprocessorHandler,
-      typename ASTConsumer::PreprocessorHandlerData> {
-  using Parent = SimplePluginASTActionBase<
-    typename ASTConsumer::ASTConsumerOptions,
-    typename ASTConsumer::PreprocessorHandler,
-    typename ASTConsumer::PreprocessorHandlerData>;
+    : public SimplePluginASTActionBase<
+          typename ASTConsumer::ASTConsumerOptions,
+          typename ASTConsumer::PreprocessorHandler,
+          typename ASTConsumer::PreprocessorHandlerData> {
+  using Parent =
+      SimplePluginASTActionBase<typename ASTConsumer::ASTConsumerOptions,
+                                typename ASTConsumer::PreprocessorHandler,
+                                typename ASTConsumer::PreprocessorHandlerData>;
 
  public:
   NoOpenSimplePluginASTAction() {}
 
-  explicit NoOpenSimplePluginASTAction(const std::vector<std::string> &args) : Parent(args) {}
+  explicit NoOpenSimplePluginASTAction(const std::vector<std::string> &args)
+      : Parent(args) {}
 
  protected:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
@@ -257,8 +263,8 @@ class NoOpenSimplePluginASTAction
     }
     std::unique_ptr<std::string> outputFile = std::unique_ptr<std::string>(
         new std::string(Parent::options->outputFile));
-    return std::unique_ptr<clang::ASTConsumer>(
-        new ASTConsumer(CI, Parent::options, Parent::sharedData, std::move(outputFile)));
+    return std::unique_ptr<clang::ASTConsumer>(new ASTConsumer(
+        CI, Parent::options, Parent::sharedData, std::move(outputFile)));
   }
 };
-}
+} // namespace ASTPluginLib
