@@ -1442,7 +1442,8 @@ void ASTExporter<ATDWriter>::VisitRecordDecl(const RecordDecl *D) {
   bool IsModulePrivate = D->isModulePrivate();
   bool IsCompleteDefinition = D->isCompleteDefinition();
   bool IsDependentType = D->isDependentType();
-  ObjectScope Scope(OF, 1 + IsModulePrivate + IsCompleteDefinition + IsDependentType);
+  ObjectScope Scope(
+      OF, 1 + IsModulePrivate + IsCompleteDefinition + IsDependentType);
   OF.emitTag("definition_ptr");
   dumpPointer(D->getDefinition());
   OF.emitFlag("is_module_private", IsModulePrivate);
@@ -1666,6 +1667,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 //@atd   ~tls_kind <ocaml default="`Tls_none">: tls_kind;
 //@atd   ~is_global : bool;
 //@atd   ~is_static_local : bool;
+//@atd   ~is_static_data_member : bool;
 //@atd   ~is_module_private : bool;
 //@atd   ~is_nrvo_variable : bool;
 //@atd   ~is_const_expr : bool;
@@ -1681,6 +1683,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool HasStorageClass = SC != SC_None;
   bool IsGlobal = D->hasGlobalStorage(); // including static function variables
   bool IsStaticLocal = D->isStaticLocal(); // static function variables
+  bool IsStaticDataMember = D->isStaticDataMember();
   bool IsModulePrivate = D->isModulePrivate();
   bool IsNRVOVariable = D->isNRVOVariable();
   bool IsConstExpr = D->isConstexpr();
@@ -1690,8 +1693,8 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   // suboptimal: tls_kind is not taken into account accurately
   ObjectScope Scope(OF,
                     1 + HasStorageClass + IsGlobal + IsStaticLocal +
-                        IsModulePrivate + IsNRVOVariable + IsConstExpr +
-                        HasInit + HasParmIndex);
+                        IsStaticDataMember + IsModulePrivate + IsNRVOVariable +
+                        IsConstExpr + HasInit + HasParmIndex);
 
   if (HasStorageClass) {
     OF.emitTag("storage_class");
@@ -1713,6 +1716,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
 
   OF.emitFlag("is_global", IsGlobal);
   OF.emitFlag("is_static_local", IsStaticLocal);
+  OF.emitFlag("is_static_data_member", IsStaticDataMember);
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_nrvo_variable", IsNRVOVariable);
   OF.emitFlag("is_const_expr", IsConstExpr);

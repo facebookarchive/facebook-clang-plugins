@@ -125,7 +125,7 @@
           },
           {
             "line" : 3,
-            "column" : 2
+            "column" : 1
           }
         ),
         "is_this_declaration_referenced" : true
@@ -179,10 +179,10 @@
             "source_range" : (
               {
                 "line" : 2,
-                "column" : 4
+                "column" : 3
               },
               {
-                "column" : 11
+                "column" : 10
               }
             ),
             "access" : <"Public">
@@ -206,10 +206,10 @@
             "parent_pointer" : 7,
             "source_range" : (
               {
-                "column" : 4
+                "column" : 3
               },
               {
-                "column" : 14
+                "column" : 13
               }
             ),
             "access" : <"Public">
@@ -289,7 +289,7 @@
                     "column" : 3
                   },
                   {
-                    "column" : 15
+                    "column" : 14
                   }
                 )
               },
@@ -304,7 +304,7 @@
                         "column" : 3
                       },
                       {
-                        "column" : 14
+                        "column" : 13
                       }
                     ),
                     "is_this_declaration_referenced" : true
@@ -670,7 +670,7 @@
             "column" : 1
           },
           {
-            "column" : 26
+            "column" : 24
           }
         )
       },
@@ -693,7 +693,7 @@
                 "column" : 15
               },
               {
-                "column" : 26
+                "column" : 24
               }
             )
           },
@@ -703,10 +703,10 @@
                 "pointer" : 36,
                 "source_range" : (
                   {
-                    "column" : 17
+                    "column" : 16
                   },
                   {
-                    "column" : 17
+                    "column" : 16
                   }
                 )
               },
@@ -724,10 +724,10 @@
                 "pointer" : 37,
                 "source_range" : (
                   {
-                    "column" : 22
+                    "column" : 21
                   },
                   {
-                    "column" : 22
+                    "column" : 21
                   }
                 )
               },
@@ -749,9 +749,286 @@
         )>
       }
     )>,
-    <"TypedefDecl" : (
+    <"CXXRecordDecl" : (
       {
         "pointer" : 38,
+        "source_range" : (
+          {
+            "line" : 12,
+            "column" : 1
+          },
+          {
+            "line" : 14,
+            "column" : 1
+          }
+        )
+      },
+      {
+        "name" : "A",
+        "qual_name" : [
+          "A"
+        ]
+      },
+      39,
+      [
+        <"CXXRecordDecl" : (
+          {
+            "pointer" : 40,
+            "source_range" : (
+              {
+                "line" : 12,
+                "column" : 1
+              },
+              {
+                "column" : 8
+              }
+            ),
+            "is_implicit" : true,
+            "access" : <"Public">
+          },
+          {
+            "name" : "A",
+            "qual_name" : [
+              "A",
+              "A"
+            ]
+          },
+          39,
+          [
+          ],
+          {
+          },
+          <"TTK_Struct">,
+          {
+            "definition_ptr" : 0
+          },
+          {
+          }
+        )>,
+        <"VarDecl" : (
+          {
+            "pointer" : 41,
+            "source_range" : (
+              {
+                "line" : 13,
+                "column" : 3
+              },
+              {
+                "column" : 14
+              }
+            ),
+            "access" : <"Public">
+          },
+          {
+            "name" : "a",
+            "qual_name" : [
+              "a",
+              "A"
+            ]
+          },
+          {
+            "type_ptr" : 42
+          },
+          {
+            "storage_class" : "static",
+            "is_global" : true,
+            "is_static_data_member" : true
+          }
+        )>
+      ],
+      {
+      },
+      <"TTK_Struct">,
+      {
+        "definition_ptr" : 38,
+        "is_complete_definition" : true
+      },
+      {
+        "is_pod" : true
+      }
+    )>,
+    <"VarDecl" : (
+      {
+        "pointer" : 43,
+        "parent_pointer" : 38,
+        "source_range" : (
+          {
+            "line" : 16,
+            "column" : 1
+          },
+          {
+            "column" : 12
+          }
+        ),
+        "access" : <"Public">
+      },
+      {
+        "name" : "a",
+        "qual_name" : [
+          "a",
+          "A"
+        ]
+      },
+      {
+        "type_ptr" : 42
+      },
+      {
+        "is_global" : true,
+        "is_static_data_member" : true,
+        "init_expr" : <"IntegerLiteral" : (
+          {
+            "pointer" : 44,
+            "source_range" : (
+              {
+                "column" : 12
+              },
+              {
+                "column" : 12
+              }
+            )
+          },
+          [
+          ],
+          {
+            "qual_type" : {
+              "type_ptr" : 42
+            }
+          },
+          {
+            "is_signed" : true,
+            "bitwidth" : 32,
+            "value" : "32"
+          }
+        )>
+      }
+    )>,
+    <"CXXRecordDecl" : (
+      {
+        "pointer" : 45,
+        "source_range" : (
+          {
+            "line" : 18,
+            "column" : 1
+          },
+          {
+            "line" : 20,
+            "column" : 1
+          }
+        )
+      },
+      {
+        "name" : "B",
+        "qual_name" : [
+          "B"
+        ]
+      },
+      46,
+      [
+        <"CXXRecordDecl" : (
+          {
+            "pointer" : 47,
+            "source_range" : (
+              {
+                "line" : 18,
+                "column" : 1
+              },
+              {
+                "column" : 8
+              }
+            ),
+            "is_implicit" : true,
+            "access" : <"Public">
+          },
+          {
+            "name" : "B",
+            "qual_name" : [
+              "B",
+              "B"
+            ]
+          },
+          46,
+          [
+          ],
+          {
+          },
+          <"TTK_Struct">,
+          {
+            "definition_ptr" : 0
+          },
+          {
+          }
+        )>,
+        <"VarDecl" : (
+          {
+            "pointer" : 48,
+            "source_range" : (
+              {
+                "line" : 19,
+                "column" : 3
+              },
+              {
+                "column" : 24
+              }
+            ),
+            "access" : <"Public">
+          },
+          {
+            "name" : "b",
+            "qual_name" : [
+              "b",
+              "B"
+            ]
+          },
+          {
+            "type_ptr" : 42,
+            "is_const" : true
+          },
+          {
+            "storage_class" : "static",
+            "is_global" : true,
+            "is_static_data_member" : true,
+            "init_expr" : <"IntegerLiteral" : (
+              {
+                "pointer" : 49,
+                "source_range" : (
+                  {
+                    "column" : 24
+                  },
+                  {
+                    "column" : 24
+                  }
+                )
+              },
+              [
+              ],
+              {
+                "qual_type" : {
+                  "type_ptr" : 42
+                }
+              },
+              {
+                "is_signed" : true,
+                "bitwidth" : 32,
+                "value" : "52"
+              }
+            )>
+          }
+        )>
+      ],
+      {
+      },
+      <"TTK_Struct">,
+      {
+        "definition_ptr" : 45,
+        "is_complete_definition" : true
+      },
+      {
+        "is_pod" : true
+      }
+    )>,
+    <"TypedefDecl" : (
+      {
+        "pointer" : 50,
         "source_range" : (
           {
           },
@@ -766,7 +1043,7 @@
           "instancetype"
         ]
       },
-      39,
+      51,
       {
       }
     )>
@@ -779,85 +1056,85 @@
     "types" : [
       <"BuiltinType" : (
         {
-          "pointer" : 40
+          "pointer" : 52
         },
         <"Void">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 41
+          "pointer" : 53
         },
         <"Bool">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 42
+          "pointer" : 54
         },
         <"Char_S">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 43
+          "pointer" : 55
         },
         <"SChar">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 44
+          "pointer" : 56
         },
         <"Short">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 45
+          "pointer" : 42
         },
         <"Int">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 46
+          "pointer" : 57
         },
         <"Long">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 47
+          "pointer" : 58
         },
         <"LongLong">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 48
+          "pointer" : 59
         },
         <"UChar">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 49
+          "pointer" : 60
         },
         <"UShort">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 50
+          "pointer" : 61
         },
         <"UInt">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 51
+          "pointer" : 62
         },
         <"ULong">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 52
+          "pointer" : 63
         },
         <"ULongLong">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 53
+          "pointer" : 64
         },
         <"Float">
       )>,
@@ -869,164 +1146,155 @@
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 54
+          "pointer" : 65
         },
         <"LongDouble">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 55
+          "pointer" : 66
         },
         <"Float128">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 56
+          "pointer" : 67
         },
         <"Int128">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 57
+          "pointer" : 68
         },
         <"UInt128">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 58
+          "pointer" : 69
         },
         <"WChar_S">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 59
+          "pointer" : 70
         },
         <"Char16">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 60
+          "pointer" : 71
         },
         <"Char32">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 61
+          "pointer" : 72
         },
         <"Dependent">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 62
+          "pointer" : 73
         },
         <"Overload">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 63
+          "pointer" : 74
         },
         <"BoundMember">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 64
+          "pointer" : 75
         },
         <"PseudoObject">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 65
+          "pointer" : 76
         },
         <"UnknownAny">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 66
+          "pointer" : 77
         },
         <"ARCUnbridgedCast">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 67
+          "pointer" : 78
         },
         <"BuiltinFn">
       )>,
       <"ComplexType" : (
         {
-          "pointer" : 68
+          "pointer" : 79
         }
       )>,
       <"ComplexType" : (
         {
-          "pointer" : 69
+          "pointer" : 80
         }
       )>,
       <"ComplexType" : (
         {
-          "pointer" : 70
+          "pointer" : 81
         }
       )>,
       <"ComplexType" : (
         {
-          "pointer" : 71
+          "pointer" : 82
         }
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 72
+          "pointer" : 83
         },
         <"ObjCId">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 73
+          "pointer" : 84
         },
         <"ObjCClass">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 74
+          "pointer" : 85
         },
         <"ObjCSel">
       )>,
       <"PointerType" : (
         {
-          "pointer" : 75
+          "pointer" : 86
         },
         {
-          "type_ptr" : 40
+          "type_ptr" : 52
         }
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 76
+          "pointer" : 87
         },
         <"NullPtr">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 77
+          "pointer" : 88
         },
         <"Half">
       )>,
       <"RecordType" : (
         {
-          "pointer" : 78
+          "pointer" : 89
         },
-        79
+        90
       )>,
       <"PointerType" : (
         {
-          "pointer" : 80
-        },
-        {
-          "type_ptr" : 45,
-          "is_const" : true
-        }
-      )>,
-      <"PointerType" : (
-        {
-          "pointer" : 81
+          "pointer" : 91
         },
         {
           "type_ptr" : 42,
@@ -1035,25 +1303,34 @@
       )>,
       <"PointerType" : (
         {
-          "pointer" : 82
+          "pointer" : 92
         },
         {
-          "type_ptr" : 42
+          "type_ptr" : 54,
+          "is_const" : true
+        }
+      )>,
+      <"PointerType" : (
+        {
+          "pointer" : 93
+        },
+        {
+          "type_ptr" : 54
         }
       )>,
       <"RecordType" : (
         {
-          "pointer" : 83
+          "pointer" : 94
         },
-        84
+        95
       )>,
       <"ConstantArrayType" : (
         {
-          "pointer" : 85
+          "pointer" : 96
         },
         {
           "element_type" : {
-            "type_ptr" : 83
+            "type_ptr" : 94
           },
           "stride" : 24
         },
@@ -1071,7 +1348,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
@@ -1085,11 +1362,11 @@
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 86
+          "pointer" : 97
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
@@ -1106,11 +1383,11 @@
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 87
+          "pointer" : 98
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
@@ -1127,7 +1404,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
@@ -1148,11 +1425,11 @@
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 88
+          "pointer" : 99
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
@@ -1169,7 +1446,7 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
@@ -1186,50 +1463,62 @@
         },
         {
           "return_type" : {
-            "type_ptr" : 40
+            "type_ptr" : 52
           }
         },
         {
         }
       )>,
+      <"RecordType" : (
+        {
+          "pointer" : 39
+        },
+        38
+      )>,
+      <"RecordType" : (
+        {
+          "pointer" : 46
+        },
+        45
+      )>,
       <"ObjCObjectType" : (
         {
-          "pointer" : 89
+          "pointer" : 100
         },
         {
-          "base_type" : 72
+          "base_type" : 83
         }
       )>,
       <"ObjCObjectPointerType" : (
         {
-          "pointer" : 90
+          "pointer" : 101
         },
         {
-          "type_ptr" : 89
+          "type_ptr" : 100
         }
       )>,
       <"TypedefType" : (
         {
-          "pointer" : 91,
-          "desugared_type" : 90
+          "pointer" : 102,
+          "desugared_type" : 101
         },
         {
           "child_type" : {
-            "type_ptr" : 90
+            "type_ptr" : 101
           },
-          "decl_ptr" : 92
+          "decl_ptr" : 103
         }
       )>,
       <"TypedefType" : (
         {
-          "pointer" : 39,
-          "desugared_type" : 90
+          "pointer" : 51,
+          "desugared_type" : 101
         },
         {
           "child_type" : {
-            "type_ptr" : 91
+            "type_ptr" : 102
           },
-          "decl_ptr" : 38
+          "decl_ptr" : 50
         }
       )>,
       <"NoneType" : (
