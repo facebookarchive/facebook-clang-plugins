@@ -1663,62 +1663,34 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 }
 //@atd #define var_decl_tuple declarator_decl_tuple * var_decl_info
 //@atd type var_decl_info = {
-//@atd   ?storage_class : string option;
-//@atd   ~tls_kind <ocaml default="`Tls_none">: tls_kind;
 //@atd   ~is_global : bool;
+//@atd   ~is_extern : bool;
 //@atd   ~is_static_local : bool;
 //@atd   ~is_static_data_member : bool;
-//@atd   ~is_module_private : bool;
-//@atd   ~is_nrvo_variable : bool;
 //@atd   ~is_const_expr : bool;
 //@atd   ?init_expr : stmt option;
 //@atd   ?parm_index_in_function : int option;
 //@atd } <ocaml field_prefix="vdi_">
-//@atd type tls_kind = [ Tls_none | Tls_static | Tls_dynamic ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   ASTExporter<ATDWriter>::VisitDeclaratorDecl(D);
 
-  StorageClass SC = D->getStorageClass();
-  bool HasStorageClass = SC != SC_None;
   bool IsGlobal = D->hasGlobalStorage(); // including static function variables
+  bool IsExtern = D->hasExternalStorage();
   bool IsStaticLocal = D->isStaticLocal(); // static function variables
   bool IsStaticDataMember = D->isStaticDataMember();
-  bool IsModulePrivate = D->isModulePrivate();
-  bool IsNRVOVariable = D->isNRVOVariable();
   bool IsConstExpr = D->isConstexpr();
   bool HasInit = D->hasInit();
   const ParmVarDecl *ParmDecl = dyn_cast<ParmVarDecl>(D);
   bool HasParmIndex = (bool)ParmDecl;
-  // suboptimal: tls_kind is not taken into account accurately
   ObjectScope Scope(OF,
-                    1 + HasStorageClass + IsGlobal + IsStaticLocal +
-                        IsStaticDataMember + IsModulePrivate + IsNRVOVariable +
+                    IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
                         IsConstExpr + HasInit + HasParmIndex);
 
-  if (HasStorageClass) {
-    OF.emitTag("storage_class");
-    OF.emitString(VarDecl::getStorageClassSpecifierString(SC));
-  }
-
-  switch (D->getTLSKind()) {
-  case VarDecl::TLS_None:
-    break;
-  case VarDecl::TLS_Static:
-    OF.emitTag("tls_kind");
-    OF.emitSimpleVariant("Tls_static");
-    break;
-  case VarDecl::TLS_Dynamic:
-    OF.emitTag("tls_kind");
-    OF.emitSimpleVariant("Tls_dynamic");
-    break;
-  }
-
   OF.emitFlag("is_global", IsGlobal);
+  OF.emitFlag("is_extern", IsExtern);
   OF.emitFlag("is_static_local", IsStaticLocal);
   OF.emitFlag("is_static_data_member", IsStaticDataMember);
-  OF.emitFlag("is_module_private", IsModulePrivate);
-  OF.emitFlag("is_nrvo_variable", IsNRVOVariable);
   OF.emitFlag("is_const_expr", IsConstExpr);
   if (HasInit) {
     OF.emitTag("init_expr");
