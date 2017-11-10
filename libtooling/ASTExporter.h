@@ -1670,6 +1670,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 //@atd   ~is_const_expr : bool;
 //@atd   ?init_expr : stmt option;
 //@atd   ?parm_index_in_function : int option;
+//@atd   ?storage_class : string option;
 //@atd } <ocaml field_prefix="vdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
@@ -1683,9 +1684,11 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool HasInit = D->hasInit();
   const ParmVarDecl *ParmDecl = dyn_cast<ParmVarDecl>(D);
   bool HasParmIndex = (bool)ParmDecl;
+  StorageClass SC = D->getStorageClass();
+  bool HasStorageClass = SC != SC_None;
   ObjectScope Scope(OF,
                     IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
-                        IsConstExpr + HasInit + HasParmIndex);
+                        IsConstExpr + HasInit + HasParmIndex + HasStorageClass);
 
   OF.emitFlag("is_global", IsGlobal);
   OF.emitFlag("is_extern", IsExtern);
@@ -1699,6 +1702,10 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   if (HasParmIndex) {
     OF.emitTag("parm_index_in_function");
     OF.emitInteger(ParmDecl->getFunctionScopeIndex());
+  }
+  if (HasStorageClass) {
+    OF.emitTag("storage_class");
+    OF.emitString(VarDecl::getStorageClassSpecifierString(SC));
   }
 }
 
