@@ -831,7 +831,8 @@
           },
           {
             "is_global" : true,
-            "is_static_data_member" : true
+            "is_static_data_member" : true,
+            "storage_class" : "static"
           }
         )>
       ],
@@ -1009,7 +1010,8 @@
                 "bitwidth" : 32,
                 "value" : "52"
               }
-            )>
+            )>,
+            "storage_class" : "static"
           }
         )>
       ],
