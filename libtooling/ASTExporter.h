@@ -4011,6 +4011,11 @@ void ASTExporter<ATDWriter>::VisitObjCMessageExpr(const ObjCMessageExpr *Node) {
       m_decl = receiver->lookupMethod(selector, IsInst);
     }
   }
+  // Fall back to the default method lookup method
+  if (!m_decl) {
+    m_decl = Node->getMethodDecl();
+  }
+
   ObjCMessageExpr::ReceiverKind RK = Node->getReceiverKind();
   bool HasNonDefaultReceiverKind = RK != ObjCMessageExpr::Instance;
   ObjectScope Scope(
