@@ -3852,6 +3852,7 @@ int ASTExporter<ATDWriter>::CXXNewExprTupleSize() {
 //@atd   ~is_array : bool;
 //@atd   ?array_size_expr : pointer option;
 //@atd   ?initializer_expr : pointer option;
+//@atd   ~placement_args : pointer list;
 //@atd } <ocaml field_prefix="xnei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
@@ -3860,7 +3861,10 @@ void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   bool IsArray = Node->isArray();
   bool HasArraySize = Node->getArraySize();
   bool HasInitializer = Node->hasInitializer();
-  ObjectScope Scope(OF, 0 + IsArray + HasArraySize + HasInitializer);
+  unsigned PlacementArgs = Node->getNumPlacementArgs();
+  bool HasPlacementArgs = PlacementArgs > 0;
+  ObjectScope Scope(
+      OF, 0 + IsArray + HasArraySize + HasInitializer + HasPlacementArgs);
 
   //  ?should_null_check : bool;
   // OF.emitFlag("should_null_check", Node->shouldNullCheckAllocation());
@@ -3872,6 +3876,13 @@ void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   if (HasInitializer) {
     OF.emitTag("initializer_expr");
     dumpPointer(Node->getInitializer());
+  }
+  if (HasPlacementArgs) {
+    OF.emitTag("placement_args");
+    ArrayScope aScope(OF, PlacementArgs);
+    for (auto arg : Node->placement_arguments()) {
+      dumpPointer(arg);
+    }
   }
 }
 
