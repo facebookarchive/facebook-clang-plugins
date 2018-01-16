@@ -51,7 +51,7 @@ let add_node_to_cache node cache =
 	let value = get_val_from_node node in
 	cache := PointerMap.add key value !cache
 
-let process_decl path decl =
+let process_decl _path decl =
 	add_node_to_cache (`DeclNode decl) declMap;
   match decl with
   | Clang_ast_t.ObjCPropertyDecl (_, _, obj_c_property_decl_info) ->
@@ -63,10 +63,10 @@ let process_decl path decl =
          | None -> ())
   | _ -> ()
 
-let add_stmt_to_cache path stmt =
+let add_stmt_to_cache _path stmt =
 	add_node_to_cache (`StmtNode stmt) stmtMap
 
-let add_type_to_cache path c_type =
+let add_type_to_cache _path c_type =
 	add_node_to_cache (`TypeNode c_type) typeMap
 
 let previous_sloc = { Clang_ast_t.sl_file = None; sl_line = None; sl_column = None }
@@ -84,7 +84,7 @@ let mutate_sloc sloc file line column =
 
 let reset_sloc sloc = mutate_sloc sloc None None None
 
-let complete_source_location path source_loc =
+let complete_source_location _path source_loc =
   let open Clang_ast_t in
   let file = get_sloc source_loc.sl_file previous_sloc.sl_file in
   let line = get_sloc source_loc.sl_line previous_sloc.sl_line in

@@ -27,12 +27,8 @@ let print_named_decl_from_file fname =
   visit_named_decls (fun _ info -> print_string (getname info); print_newline ()) ast
 
 let main =
-  let v = Sys.argv
-  in
   try
-    for i = 1 to Array.length v - 1 do
-      print_named_decl_from_file v.(i)
-    done
+    Array.iter print_named_decl_from_file Sys.argv
   with
     Yojson.Json_error s
   | Ag_oj_run.Error s -> begin

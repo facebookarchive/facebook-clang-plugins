@@ -51,8 +51,7 @@ let print_stmt path stmt =
 
 
 let print_map_size map =
-  let sum_el k v acc = acc + 1 in
-  let s = Clang_ast_main.PointerMap.fold sum_el map 0 in
+  let s = Clang_ast_main.PointerMap.cardinal map in
   prerr_string (string_of_int s ^ " ")
 
 let check_decl_cache_from_file fname =

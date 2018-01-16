@@ -52,7 +52,7 @@ let () =
 let () =
   let count = ref 0
   in
-  let f x = incr count
+  let f _ = incr count
   in
   let g = make_cached f
   in

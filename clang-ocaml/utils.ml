@@ -97,7 +97,7 @@ let stream_concat streams =
 let stream_append s1 s2 = stream_concat (Stream.of_list [s1; s2])
 
 let stream_map f stream =
-  let rec next i =
+  let rec next _ =
       try Some (f (Stream.next stream))
       with Stream.Failure -> None in
     Stream.from next

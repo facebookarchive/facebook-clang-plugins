@@ -14,7 +14,7 @@ type visit_type_t = Ag_util.Validation.path -> Clang_ast_t.c_type -> unit
 type visit_src_loc_t = Ag_util.Validation.path -> Clang_ast_t.source_location -> unit
 
 
-let empty_visitor path decl = ()
+let empty_visitor _path _decl = ()
 
 let decl_visitor = ref (empty_visitor : visit_decl_t)
 let stmt_visitor = ref (empty_visitor : visit_stmt_t)
