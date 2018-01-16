@@ -134,6 +134,10 @@ record-test-outputs:
 	@for F in tests/*.out; do cp $$F $${F%.out}.exp; done
 	@rm -f tests/*.out
 
+.PHONY: fmt
+fmt:
+	ocamlformat -i $(wildcard *.ml) $(wildcard *.mli)
+
 -include .depend
 
 .depend: $(wildcard *.ml) $(wildcard *.mli) build/clang_ast_t.mli build/clang_ast_t.ml build/clang_ast_j.mli build/clang_ast_j.ml build/clang_ast_v.mli build/clang_ast_v.ml build/clang_ast_proj.mli build/clang_ast_proj.ml

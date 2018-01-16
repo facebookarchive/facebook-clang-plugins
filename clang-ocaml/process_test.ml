@@ -11,10 +11,12 @@
 open Process
 
 let main =
-  let pid, ic = fork (fun oc -> output_string oc "This is a test\n"; true)
+  let pid, ic =
+    fork (fun oc ->
+        output_string oc "This is a test\n" ;
+        true )
   in
-  let zipunzip = compose gzip gunzip
-  in
-  ignore (diff_on_same_input (fun ic oc -> copy ic oc; flush_all (); true) zipunzip ic stderr);
-  close_in ic;
+  let zipunzip = compose gzip gunzip in
+  ignore (diff_on_same_input (fun ic oc -> copy ic oc ; flush_all () ; true) zipunzip ic stderr) ;
+  close_in ic ;
   ignore (wait pid)
