@@ -419,7 +419,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   // Inline comments.
   DECLARE_LOWERCASE_VISITOR(Comment)
-  DECLARE_LOWERCASE_VISITOR(TextComment)
+  //DECLARE_LOWERCASE_VISITOR(TextComment)
   //    void visitInlineCommandComment(const InlineCommandComment *C);
   //    void visitHTMLStartTagComment(const HTMLStartTagComment *C);
   //    void visitHTMLEndTagComment(const HTMLEndTagComment *C);
@@ -4332,17 +4332,6 @@ void ASTExporter<ATDWriter>::visitComment(const Comment *C) {
       dumpComment(*I);
     }
   }
-}
-
-template <class ATDWriter>
-int ASTExporter<ATDWriter>::TextCommentTupleSize() {
-  return CommentTupleSize() + 1;
-}
-//@atd #define text_comment_tuple comment_tuple * string
-template <class ATDWriter>
-void ASTExporter<ATDWriter>::visitTextComment(const TextComment *C) {
-  visitComment(C);
-  OF.emitString(C->getText());
 }
 
 // template <class ATDWriter>
