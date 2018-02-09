@@ -296,7 +296,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(FunctionDecl)
   DECLARE_VISITOR(FieldDecl)
   DECLARE_VISITOR(VarDecl)
-  DECLARE_VISITOR(FileScopeAsmDecl)
+  // no use for these yet, ignore them
+  //DECLARE_VISITOR(FileScopeAsmDecl)
   DECLARE_VISITOR(ImportDecl)
 
   // C++ Decls
@@ -1707,17 +1708,6 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
     OF.emitTag("storage_class");
     OF.emitString(VarDecl::getStorageClassSpecifierString(SC));
   }
-}
-
-template <class ATDWriter>
-int ASTExporter<ATDWriter>::FileScopeAsmDeclTupleSize() {
-  return DeclTupleSize() + 1;
-}
-//@atd #define file_scope_asm_decl_tuple decl_tuple * string
-template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitFileScopeAsmDecl(const FileScopeAsmDecl *D) {
-  VisitDecl(D);
-  OF.emitString(D->getAsmString()->getBytes());
 }
 
 template <class ATDWriter>
