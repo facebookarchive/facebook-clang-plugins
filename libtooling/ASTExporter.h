@@ -66,7 +66,8 @@ struct ASTExporterOptions : ASTPluginLib::PluginASTOptionsBase {
   bool dumpComments = false;
   bool useMacroExpansionLocation = true;
   ATDWriter::ATDWriterOptions atdWriterOptions = {
-      .useYojson = false, .prettifyJson = true,
+      .useYojson = false,
+      .prettifyJson = true,
   };
 
   void loadValuesFromEnvAndMap(
@@ -83,7 +84,7 @@ using namespace clang::comments;
 
 template <class Impl>
 struct TupleSizeBase {
-// Decls
+  // Decls
 
 #define DECL(DERIVED, BASE)                              \
   int DERIVED##DeclTupleSize() {                         \
@@ -103,7 +104,7 @@ struct TupleSizeBase {
     llvm_unreachable("Decl that isn't part of DeclNodes.inc!");
   }
 
-// Stmts
+  // Stmts
 
 #define STMT(CLASS, PARENT)                                \
   int CLASS##TupleSize() {                                 \
@@ -125,7 +126,7 @@ struct TupleSizeBase {
     llvm_unreachable("Stmt that isn't part of StmtNodes.inc!");
   }
 
-// Comments
+  // Comments
 
 #define COMMENT(CLASS, PARENT)                             \
   int CLASS##TupleSize() {                                 \
@@ -147,7 +148,7 @@ struct TupleSizeBase {
     llvm_unreachable("Comment that isn't part of CommentNodes.inc!");
   }
 
-// Types
+  // Types
 
 #define TYPE(DERIVED, BASE)                              \
   int DERIVED##TypeTupleSize() {                         \
@@ -297,7 +298,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(FieldDecl)
   DECLARE_VISITOR(VarDecl)
   // no use for these yet, ignore them
-  //DECLARE_VISITOR(FileScopeAsmDecl)
+  // DECLARE_VISITOR(FileScopeAsmDecl)
   DECLARE_VISITOR(ImportDecl)
 
   // C++ Decls
@@ -419,7 +420,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   // Inline comments.
   DECLARE_LOWERCASE_VISITOR(Comment)
-  //DECLARE_LOWERCASE_VISITOR(TextComment)
+  // DECLARE_LOWERCASE_VISITOR(TextComment)
   //    void visitInlineCommandComment(const InlineCommandComment *C);
   //    void visitHTMLStartTagComment(const HTMLStartTagComment *C);
   //    void visitHTMLEndTagComment(const HTMLEndTagComment *C);
@@ -641,7 +642,9 @@ int ASTExporter<ATDWriter>::DeclContextTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitDeclContext(const DeclContext *DC) {
   if (!DC) {
-    { ArrayScope Scope(OF, 0); }
+    {
+      ArrayScope Scope(OF, 0);
+    }
     { ObjectScope Scope(OF, 0); }
     return;
   }
@@ -4262,7 +4265,11 @@ void ASTExporter<ATDWriter>::VisitObjCAvailabilityCheckExpr(
   ObjectScope Scope(OF, HasVersion);
   if (HasVersion) {
     OF.emitTag("version");
+    // cast is safe, getVersion() should be marked const but isn't
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcast-qual"
     ObjCAvailabilityCheckExpr *E = (ObjCAvailabilityCheckExpr *)Expr;
+#pragma clang diagnostic pop
     OF.emitString(E->getVersion().getAsString());
   }
 }
@@ -4618,11 +4625,12 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
 //@atd   | Nullable
 //@atd   | NullUnspecified
 //@atd   | ObjcKindof
-//@atd   | ObjcInsertUnsafeUnretained
+//@atd   | ObjcInertUnsafeUnretained
 //@atd   | Swiftcall
 //@atd   | PreserveMost
 //@atd   | PreserveAll
 //@atd   | Regcall
+//@atd   | NSReturnsRetained
 //@atd ]
 
 template <class ATDWriter>
@@ -4710,7 +4718,7 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
     OF.emitSimpleVariant("ObjcKindof");
     break;
   case AttributedType::attr_objc_inert_unsafe_unretained:
-    OF.emitSimpleVariant("ObjcInsertUnsafeUnretained");
+    OF.emitSimpleVariant("ObjcInertUnsafeUnretained");
     break;
   case AttributedType::attr_swiftcall:
     OF.emitSimpleVariant("Swiftcall");
@@ -4723,6 +4731,9 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
     break;
   case AttributedType::attr_regcall:
     OF.emitSimpleVariant("Regcall");
+    break;
+  case AttributedType::attr_ns_returns_retained:
+    OF.emitSimpleVariant("NSReturnsRetained");
     break;
   }
 }

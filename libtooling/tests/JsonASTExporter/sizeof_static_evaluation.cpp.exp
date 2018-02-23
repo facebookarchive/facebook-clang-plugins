@@ -568,78 +568,79 @@
         {
           "pointer" : 42
         },
-        "Int128"
+        "Float16"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 43
         },
-        "UInt128"
+        "Int128"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 44
         },
-        "WChar_S"
+        "UInt128"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 45
         },
-        "Char16"
+        "WChar_S"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 46
         },
-        "Char32"
+        "Char16"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 47
         },
-        "Dependent"
+        "Char32"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 48
         },
-        "Overload"
+        "Dependent"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 49
         },
-        "BoundMember"
+        "Overload"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 50
         },
-        "PseudoObject"
+        "BoundMember"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 51
         },
-        "UnknownAny"
+        "PseudoObject"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 52
         },
-        "ARCUnbridgedCast"
+        "UnknownAny"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 53
         },
-        "BuiltinFn"
+        "ARCUnbridgedCast"
       ]],
-      ["ComplexType" , [
+      ["BuiltinType" , [
         {
           "pointer" : 54
-        }
+        },
+        "BuiltinFn"
       ]],
       ["ComplexType" , [
         {
@@ -656,27 +657,32 @@
           "pointer" : 57
         }
       ]],
-      ["BuiltinType" , [
+      ["ComplexType" , [
         {
           "pointer" : 58
-        },
-        "ObjCId"
+        }
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 59
         },
-        "ObjCClass"
+        "ObjCId"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 60
         },
+        "ObjCClass"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 61
+        },
         "ObjCSel"
       ]],
       ["PointerType" , [
         {
-          "pointer" : 61
+          "pointer" : 62
         },
         {
           "type_ptr" : 28
@@ -684,25 +690,25 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 62
+          "pointer" : 63
         },
         "NullPtr"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 63
+          "pointer" : 64
         },
         "Half"
       ]],
       ["RecordType" , [
         {
-          "pointer" : 64
+          "pointer" : 65
         },
-        65
+        66
       ]],
       ["PointerType" , [
         {
-          "pointer" : 66
+          "pointer" : 67
         },
         {
           "type_ptr" : 12,
@@ -711,7 +717,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 67
+          "pointer" : 68
         },
         {
           "type_ptr" : 25,
@@ -720,7 +726,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 68
+          "pointer" : 69
         },
         {
           "type_ptr" : 25
@@ -728,17 +734,17 @@
       ]],
       ["RecordType" , [
         {
-          "pointer" : 69
+          "pointer" : 70
         },
-        70
+        71
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 71
+          "pointer" : 72
         },
         {
           "element_type" : {
-            "type_ptr" : 69
+            "type_ptr" : 70
           },
           "stride" : 24
         },
@@ -751,11 +757,6 @@
       ]],
       ["TemplateTypeParmType" , [
         {
-          "pointer" : 72
-        }
-      ]],
-      ["TemplateSpecializationType" , [
-        {
           "pointer" : 73
         }
       ]],
@@ -764,9 +765,14 @@
           "pointer" : 74
         }
       ]],
-      ["InjectedClassNameType" , [
+      ["TemplateSpecializationType" , [
         {
           "pointer" : 75
+        }
+      ]],
+      ["InjectedClassNameType" , [
+        {
+          "pointer" : 76
         }
       ]],
       ["TemplateTypeParmType" , [
@@ -776,12 +782,12 @@
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 76
+          "pointer" : 77
         }
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 77
+          "pointer" : 78
         }
       ]],
       ["InjectedClassNameType" , [
@@ -791,12 +797,12 @@
       ]],
       ["TemplateSpecializationType" , [
         {
-          "pointer" : 78
+          "pointer" : 79
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 79
+          "pointer" : 80
         },
         {
           "type_ptr" : 9
@@ -816,40 +822,40 @@
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 80
+          "pointer" : 81
         },
         {
-          "base_type" : 58
+          "base_type" : 59
         }
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 81
+          "pointer" : 82
         },
         {
-          "type_ptr" : 80
+          "type_ptr" : 81
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 82,
-          "desugared_type" : 81
+          "pointer" : 83,
+          "desugared_type" : 82
         },
         {
           "child_type" : {
-            "type_ptr" : 81
+            "type_ptr" : 82
           },
-          "decl_ptr" : 83
+          "decl_ptr" : 84
         }
       ]],
       ["TypedefType" , [
         {
           "pointer" : 27,
-          "desugared_type" : 81
+          "desugared_type" : 82
         },
         {
           "child_type" : {
-            "type_ptr" : 82
+            "type_ptr" : 83
           },
           "decl_ptr" : 26
         }

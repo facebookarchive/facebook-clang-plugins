@@ -66,8 +66,7 @@ void NamePrinter<ATDWriter>::printTemplateArgList(
     llvm::raw_ostream &OS, const ArrayRef<TemplateArgument> Args) {
   SmallString<64> Buf;
   llvm::raw_svector_ostream tmpOS(Buf);
-  TemplateSpecializationType::PrintTemplateArgumentList(
-      tmpOS, Args, getPrintingPolicy());
+  clang::printTemplateArgumentList(tmpOS, Args, getPrintingPolicy());
   if (tmpOS.str().size() > templateLengthThreshold) {
     OS << "<";
     OS.write_hex(fnv64Hash(tmpOS));

@@ -383,78 +383,79 @@
         {
           "pointer" : 32
         },
-        <"Int128">
+        <"Float16">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 33
         },
-        <"UInt128">
+        <"Int128">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 34
         },
-        <"WChar_S">
+        <"UInt128">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 35
         },
-        <"Char16">
+        <"WChar_S">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 36
         },
-        <"Char32">
+        <"Char16">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 37
         },
-        <"Dependent">
+        <"Char32">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 38
         },
-        <"Overload">
+        <"Dependent">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 39
         },
-        <"BoundMember">
+        <"Overload">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 40
         },
-        <"PseudoObject">
+        <"BoundMember">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 41
         },
-        <"UnknownAny">
+        <"PseudoObject">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 42
         },
-        <"ARCUnbridgedCast">
+        <"UnknownAny">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 43
         },
-        <"BuiltinFn">
+        <"ARCUnbridgedCast">
       )>,
-      <"ComplexType" : (
+      <"BuiltinType" : (
         {
           "pointer" : 44
-        }
+        },
+        <"BuiltinFn">
       )>,
       <"ComplexType" : (
         {
@@ -471,27 +472,32 @@
           "pointer" : 47
         }
       )>,
-      <"BuiltinType" : (
+      <"ComplexType" : (
         {
           "pointer" : 48
-        },
-        <"ObjCId">
+        }
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 49
         },
-        <"ObjCClass">
+        <"ObjCId">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 50
         },
+        <"ObjCClass">
+      )>,
+      <"BuiltinType" : (
+        {
+          "pointer" : 51
+        },
         <"ObjCSel">
       )>,
       <"PointerType" : (
         {
-          "pointer" : 51
+          "pointer" : 52
         },
         {
           "type_ptr" : 17
@@ -499,25 +505,25 @@
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 52
+          "pointer" : 53
         },
         <"NullPtr">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 53
+          "pointer" : 54
         },
         <"Half">
       )>,
       <"RecordType" : (
         {
-          "pointer" : 54
+          "pointer" : 55
         },
-        55
+        56
       )>,
       <"PointerType" : (
         {
-          "pointer" : 56
+          "pointer" : 57
         },
         {
           "type_ptr" : 14,
@@ -526,7 +532,7 @@
       )>,
       <"PointerType" : (
         {
-          "pointer" : 57
+          "pointer" : 58
         },
         {
           "type_ptr" : 19,
@@ -535,7 +541,7 @@
       )>,
       <"PointerType" : (
         {
-          "pointer" : 58
+          "pointer" : 59
         },
         {
           "type_ptr" : 19
@@ -543,17 +549,17 @@
       )>,
       <"RecordType" : (
         {
-          "pointer" : 59
+          "pointer" : 60
         },
-        60
+        61
       )>,
       <"ConstantArrayType" : (
         {
-          "pointer" : 61
+          "pointer" : 62
         },
         {
           "element_type" : {
-            "type_ptr" : 59
+            "type_ptr" : 60
           },
           "stride" : 24
         },
@@ -570,40 +576,40 @@
       )>,
       <"ObjCObjectType" : (
         {
-          "pointer" : 62
+          "pointer" : 63
         },
         {
-          "base_type" : 48
+          "base_type" : 49
         }
       )>,
       <"ObjCObjectPointerType" : (
         {
-          "pointer" : 63
+          "pointer" : 64
         },
         {
-          "type_ptr" : 62
+          "type_ptr" : 63
         }
       )>,
       <"TypedefType" : (
         {
-          "pointer" : 64,
-          "desugared_type" : 63
+          "pointer" : 65,
+          "desugared_type" : 64
         },
         {
           "child_type" : {
-            "type_ptr" : 63
+            "type_ptr" : 64
           },
-          "decl_ptr" : 65
+          "decl_ptr" : 66
         }
       )>,
       <"TypedefType" : (
         {
           "pointer" : 16,
-          "desugared_type" : 63
+          "desugared_type" : 64
         },
         {
           "child_type" : {
-            "type_ptr" : 64
+            "type_ptr" : 65
           },
           "decl_ptr" : 15
         }

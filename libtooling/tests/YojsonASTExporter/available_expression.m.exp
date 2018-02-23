@@ -833,66 +833,67 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
         {
           "pointer" : 50
         },
-        <"Int128">
+        <"Float16">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 51
         },
-        <"UInt128">
+        <"Int128">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 52
         },
-        <"WChar_S">
+        <"UInt128">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 53
         },
-        <"Dependent">
+        <"WChar_S">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 54
         },
-        <"Overload">
+        <"Dependent">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 55
         },
-        <"BoundMember">
+        <"Overload">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 56
         },
-        <"PseudoObject">
+        <"BoundMember">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 57
         },
-        <"UnknownAny">
+        <"PseudoObject">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 58
         },
-        <"ARCUnbridgedCast">
+        <"UnknownAny">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 59
         },
-        <"BuiltinFn">
+        <"ARCUnbridgedCast">
       )>,
-      <"ComplexType" : (
+      <"BuiltinType" : (
         {
           "pointer" : 60
-        }
+        },
+        <"BuiltinFn">
       )>,
       <"ComplexType" : (
         {
@@ -909,27 +910,32 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
           "pointer" : 63
         }
       )>,
-      <"BuiltinType" : (
+      <"ComplexType" : (
         {
           "pointer" : 64
-        },
-        <"ObjCId">
+        }
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 65
         },
-        <"ObjCClass">
+        <"ObjCId">
       )>,
       <"BuiltinType" : (
         {
           "pointer" : 66
         },
+        <"ObjCClass">
+      )>,
+      <"BuiltinType" : (
+        {
+          "pointer" : 67
+        },
         <"ObjCSel">
       )>,
       <"PointerType" : (
         {
-          "pointer" : 67
+          "pointer" : 68
         },
         {
           "type_ptr" : 18
@@ -937,43 +943,27 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 68
+          "pointer" : 69
         },
         <"NullPtr">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 69
+          "pointer" : 70
         },
         <"Half">
       )>,
       <"PointerType" : (
         {
-          "pointer" : 70
-        },
-        {
-          "type_ptr" : 66
-        }
-      )>,
-      <"ObjCObjectType" : (
-        {
           "pointer" : 71
         },
         {
-          "base_type" : 64
-        }
-      )>,
-      <"ObjCObjectPointerType" : (
-        {
-          "pointer" : 72
-        },
-        {
-          "type_ptr" : 71
+          "type_ptr" : 67
         }
       )>,
       <"ObjCObjectType" : (
         {
-          "pointer" : 73
+          "pointer" : 72
         },
         {
           "base_type" : 65
@@ -981,27 +971,43 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       )>,
       <"ObjCObjectPointerType" : (
         {
+          "pointer" : 73
+        },
+        {
+          "type_ptr" : 72
+        }
+      )>,
+      <"ObjCObjectType" : (
+        {
           "pointer" : 74
         },
         {
-          "type_ptr" : 73
+          "base_type" : 66
+        }
+      )>,
+      <"ObjCObjectPointerType" : (
+        {
+          "pointer" : 75
+        },
+        {
+          "type_ptr" : 74
         }
       )>,
       <"ObjCInterfaceType" : (
         {
-          "pointer" : 75
+          "pointer" : 76
         },
         9
       )>,
       <"RecordType" : (
         {
-          "pointer" : 76
+          "pointer" : 77
         },
-        77
+        78
       )>,
       <"PointerType" : (
         {
-          "pointer" : 78
+          "pointer" : 79
         },
         {
           "type_ptr" : 20,
@@ -1010,7 +1016,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       )>,
       <"PointerType" : (
         {
-          "pointer" : 79
+          "pointer" : 80
         },
         {
           "type_ptr" : 36,
@@ -1019,7 +1025,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       )>,
       <"PointerType" : (
         {
-          "pointer" : 80
+          "pointer" : 81
         },
         {
           "type_ptr" : 36
@@ -1027,17 +1033,17 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       )>,
       <"RecordType" : (
         {
-          "pointer" : 81
+          "pointer" : 82
         },
-        82
+        83
       )>,
       <"ConstantArrayType" : (
         {
-          "pointer" : 83
+          "pointer" : 84
         },
         {
           "element_type" : {
-            "type_ptr" : 81
+            "type_ptr" : 82
           },
           "stride" : 24
         },
@@ -1045,13 +1051,13 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       )>,
       <"ObjCInterfaceType" : (
         {
-          "pointer" : 84
+          "pointer" : 85
         },
         13
       )>,
       <"ObjCInterfaceType" : (
         {
-          "pointer" : 85
+          "pointer" : 86
         },
         15
       )>,
@@ -1060,17 +1066,17 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
           "pointer" : 22
         },
         {
-          "type_ptr" : 85
+          "type_ptr" : 86
         }
       )>,
       <"TypedefType" : (
         {
           "pointer" : 7,
-          "desugared_type" : 72
+          "desugared_type" : 73
         },
         {
           "child_type" : {
-            "type_ptr" : 72
+            "type_ptr" : 73
           },
           "decl_ptr" : 6
         }
@@ -1078,7 +1084,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       <"TypedefType" : (
         {
           "pointer" : 35,
-          "desugared_type" : 72
+          "desugared_type" : 73
         },
         {
           "child_type" : {
@@ -1090,11 +1096,11 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
       <"TypedefType" : (
         {
           "pointer" : 5,
-          "desugared_type" : 70
+          "desugared_type" : 71
         },
         {
           "child_type" : {
-            "type_ptr" : 70
+            "type_ptr" : 71
           },
           "decl_ptr" : 4
         }
