@@ -119,9 +119,12 @@ void NamePrinter<ATDWriter>::VisitNamedDecl(const NamedDecl *D) {
 template <class ATDWriter>
 void NamePrinter<ATDWriter>::VisitNamespaceDecl(const NamespaceDecl *ND) {
   if (ND->isAnonymousNamespace()) {
-    // consumers of this should work out how to disambiguate anonymous
-    // namespaces on their end
-    OF.emitString("anonymous_namespace");
+    PresumedLoc PLoc = SM.getPresumedLoc(ND->getLocation());
+    std::string file = "invalid_loc";
+    if (PLoc.isValid()) {
+      file = PLoc.getFilename();
+    }
+    OF.emitString("anonymous_namespace_" + file);
   } else {
     // for non-anonymous namespaces, fallback to normal behavior
     VisitNamedDecl(ND);
@@ -138,12 +141,15 @@ void NamePrinter<ATDWriter>::VisitTagDecl(const TagDecl *D) {
   } else if (TypedefNameDecl *Typedef = D->getTypedefNameForAnonDecl()) {
     StrOS << Typedef->getIdentifier()->getName();
   } else {
-    // consumers of this should work out how to disambiguate lambdas
-    // and anonymous types on their end
     if (isa<CXXRecordDecl>(D) && cast<CXXRecordDecl>(D)->isLambda()) {
       StrOS << "lambda";
     } else {
       StrOS << "anonymous_" << D->getKindName();
+    }
+    PresumedLoc PLoc = SM.getPresumedLoc(D->getLocation());
+    if (PLoc.isValid()) {
+      StrOS << "_" << PLoc.getFilename() << ':' << PLoc.getLine() << ':'
+            << PLoc.getColumn();
     }
   }
   if (const ClassTemplateSpecializationDecl *Spec =
