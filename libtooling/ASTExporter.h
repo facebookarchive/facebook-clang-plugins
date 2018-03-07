@@ -399,6 +399,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(CXXDefaultArgExpr)
   DECLARE_VISITOR(CXXDefaultInitExpr)
   DECLARE_VISITOR(TypeTraitExpr)
+  DECLARE_VISITOR(GenericSelectionExpr)
   DECLARE_VISITOR(CXXNoexceptExpr)
 
   // ObjC
@@ -3955,6 +3956,25 @@ void ASTExporter<ATDWriter>::VisitTypeTraitExpr(const TypeTraitExpr *Node) {
   bool value = Node->isValueDependent() ? false : Node->getValue();
   ObjectScope Scope(OF, 0 + value);
   OF.emitFlag("value", value);
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::GenericSelectionExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
+//@atd #define generic_selection_expr_tuple expr_tuple * generic_selection_info
+//@atd type generic_selection_info = {
+//@atd   ?value : stmt option;
+//@atd } <ocaml field_prefix="gse_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitGenericSelectionExpr(const GenericSelectionExpr *Node) {
+  VisitExpr(Node);
+  const Expr *ResultExpr = Node->getResultExpr();
+  ObjectScope Scope(OF, 0 + (bool)ResultExpr);
+  if (ResultExpr) {
+    OF.emitTag("value");
+    dumpStmt(ResultExpr);
+  }
 }
 
 template <class ATDWriter>
