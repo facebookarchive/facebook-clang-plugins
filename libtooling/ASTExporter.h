@@ -3525,8 +3525,7 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const UnaryExprOrTypeTraitExpr *Node) {
   VisitExpr(Node);
 
-  bool HasType = Node->isArgumentType();
-  ObjectScope Scope(OF, 1 + HasType); // not covered by tests
+  ObjectScope Scope(OF, 2); // not covered by tests
 
   OF.emitTag("kind");
   switch (Node->getKind()) {
@@ -3550,10 +3549,9 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     OF.emitSimpleVariant("OpenMPRequiredSimdAlign");
     break;
   }
-  if (HasType) {
-    OF.emitTag("qual_type");
-    dumpQualType(Node->getArgumentType());
-  }
+
+  OF.emitTag("qual_type");
+  dumpQualType(Node->getTypeOfArgument());
 }
 
 template <class ATDWriter>
