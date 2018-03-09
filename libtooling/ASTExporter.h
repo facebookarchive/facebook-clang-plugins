@@ -3516,7 +3516,7 @@ int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
 //@atd #define unary_expr_or_type_trait_expr_tuple expr_tuple * unary_expr_or_type_trait_expr_info
 //@atd type unary_expr_or_type_trait_expr_info = {
 //@atd   kind : unary_expr_or_type_trait_kind;
-//@atd   ?qual_type : qual_type option
+//@atd   qual_type : qual_type
 //@atd } <ocaml field_prefix="uttei_">
 //@atd type unary_expr_or_type_trait_kind = [ SizeOfWithSize of int | SizeOf | AlignOf |
 //@atd   VecStep | OpenMPRequiredSimdAlign ]
