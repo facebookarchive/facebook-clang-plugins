@@ -32,6 +32,6 @@ let print_named_decl_from_file fname =
 
 
 let main =
-  try Array.iter print_named_decl_from_file Sys.argv with
+  try Array.iteri (fun i arg -> if i <> 0 then print_named_decl_from_file arg) Sys.argv with
   | Yojson.Json_error s | Ag_oj_run.Error s ->
       prerr_string s ; prerr_newline () ; exit 1
