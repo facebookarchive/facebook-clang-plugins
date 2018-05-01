@@ -3733,20 +3733,23 @@ int ASTExporter<ATDWriter>::CXXConstructExprTupleSize() {
 //@atd   decl_ref : decl_ref;
 //@atd   ~is_elidable : bool;
 //@atd   ~requires_zero_initialization : bool;
+//@atd   ~is_copy_constructor : bool;
 //@atd } <ocaml field_prefix="xcei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitCXXConstructExpr(
     const CXXConstructExpr *Node) {
   VisitExpr(Node);
-
+  CXXConstructorDecl *Ctor = Node->getConstructor();
+  bool IsCopyConstructor = Ctor->isCopyConstructor();
   bool IsElidable = Node->isElidable();
   bool RequiresZeroInitialization = Node->requiresZeroInitialization();
-  ObjectScope Scope(OF, 1 + IsElidable + RequiresZeroInitialization);
+  ObjectScope Scope(OF, 1 + IsElidable + RequiresZeroInitialization + IsCopyConstructor);
 
   OF.emitTag("decl_ref");
-  dumpDeclRef(*Node->getConstructor());
+  dumpDeclRef(*Ctor);
   OF.emitFlag("is_elidable", IsElidable);
   OF.emitFlag("requires_zero_initialization", RequiresZeroInitialization);
+  OF.emitFlag("is_copy_constructor", IsCopyConstructor);
 }
 
 template <class ATDWriter>
