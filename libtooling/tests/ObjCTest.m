@@ -86,6 +86,21 @@
 + (instancetype)newWithCs:(MyClassGenerics<NSObject*>*)Cs;
 @end
 
+@interface MySubclass : MyClass
+@end
+
+@implementation MySubclass
+
+- (void)bar:(NSString *)s {
+  [super bar:s];
+}
+
+- (void)foo:(NSString * __nonnull)s {
+  [super foo:s];
+}
+
+@end
+
 int main(int argc, char** argv) {
   @autoreleasepool {
     [[[[MyClass alloc] init] autorelease] foo:@"hello"];

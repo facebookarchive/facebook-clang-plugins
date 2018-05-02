@@ -1825,7 +1825,8 @@
                 {
                 }
               ]]
-            ]
+            ],
+            "is_overriding" : true
           }
         ]],
         ["ObjCMethodDecl" , [
@@ -1940,7 +1941,8 @@
                 {
                 }
               ]]
-            ]
+            ],
+            "is_overriding" : true
           }
         ]],
         ["ObjCMethodDecl" , [
@@ -10999,7 +11001,7 @@
         }
       }
     ]],
-    ["FunctionDecl" , [
+    ["ObjCInterfaceDecl" , [
       {
         "pointer" : 321,
         "source_range" : [
@@ -11008,7 +11010,515 @@
             "column" : 1
           },
           {
-            "line" : 95,
+            "line" : 90,
+            "column" : 2
+          }
+        ]
+      },
+      {
+        "name" : "MySubclass",
+        "qual_name" : [
+          "MySubclass"
+        ]
+      },
+      [
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : "ObjCInterface",
+          "decl_pointer" : 68,
+          "name" : {
+            "name" : "MyClass",
+            "qual_name" : [
+              "MyClass"
+            ]
+          }
+        },
+        "implementation" : {
+          "kind" : "ObjCImplementation",
+          "decl_pointer" : 322,
+          "name" : {
+            "name" : "MySubclass",
+            "qual_name" : [
+              "MySubclass"
+            ]
+          }
+        }
+      }
+    ]],
+    ["ObjCImplementationDecl" , [
+      {
+        "pointer" : 322,
+        "source_range" : [
+          {
+            "line" : 92,
+            "column" : 1
+          },
+          {
+            "line" : 102,
+            "column" : 1
+          }
+        ]
+      },
+      {
+        "name" : "MySubclass",
+        "qual_name" : [
+          "MySubclass"
+        ]
+      },
+      [
+        ["ObjCMethodDecl" , [
+          {
+            "pointer" : 323,
+            "parent_pointer" : 322,
+            "source_range" : [
+              {
+                "line" : 94,
+                "column" : 1
+              },
+              {
+                "line" : 96,
+                "column" : 1
+              }
+            ]
+          },
+          {
+            "name" : "bar:",
+            "qual_name" : [
+              "bar:",
+              "MySubclass"
+            ]
+          },
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "type_ptr" : 65
+            },
+            "parameters" : [
+              ["ParmVarDecl" , [
+                {
+                  "pointer" : 324,
+                  "source_range" : [
+                    {
+                      "line" : 94,
+                      "column" : 14
+                    },
+                    {
+                      "column" : 25
+                    }
+                  ],
+                  "is_used" : true,
+                  "is_this_declaration_referenced" : true
+                },
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
+                {
+                  "type_ptr" : 60
+                },
+                {
+                  "parm_index_in_function" : 0
+                }
+              ]]
+            ],
+            "implicit_parameters" : [
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 325,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "self",
+                  "qual_name" : [
+                    "self"
+                  ]
+                },
+                {
+                  "type_ptr" : 326
+                },
+                {
+                }
+              ]],
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 327,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "_cmd",
+                  "qual_name" : [
+                    "_cmd"
+                  ]
+                },
+                {
+                  "type_ptr" : 5
+                },
+                {
+                }
+              ]]
+            ],
+            "is_overriding" : true,
+            "body" : ["CompoundStmt" , [
+              {
+                "pointer" : 328,
+                "source_range" : [
+                  {
+                    "column" : 27
+                  },
+                  {
+                    "line" : 96,
+                    "column" : 1
+                  }
+                ]
+              },
+              [
+                ["ObjCMessageExpr" , [
+                  {
+                    "pointer" : 329,
+                    "source_range" : [
+                      {
+                        "line" : 95,
+                        "column" : 3
+                      },
+                      {
+                        "column" : 15
+                      }
+                    ]
+                  },
+                  [
+                    ["ImplicitCastExpr" , [
+                      {
+                        "pointer" : 330,
+                        "source_range" : [
+                          {
+                            "column" : 14
+                          },
+                          {
+                            "column" : 14
+                          }
+                        ]
+                      },
+                      [
+                        ["DeclRefExpr" , [
+                          {
+                            "pointer" : 331,
+                            "source_range" : [
+                              {
+                                "column" : 14
+                              },
+                              {
+                                "column" : 14
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 60
+                            },
+                            "value_kind" : "LValue"
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : "ParmVar",
+                              "decl_pointer" : 324,
+                              "name" : {
+                                "name" : "s",
+                                "qual_name" : [
+                                  "s"
+                                ]
+                              },
+                              "qual_type" : {
+                                "type_ptr" : 60
+                              }
+                            }
+                          }
+                        ]]
+                      ],
+                      {
+                        "qual_type" : {
+                          "type_ptr" : 60
+                        }
+                      },
+                      {
+                        "cast_kind" : "LValueToRValue",
+                        "base_path" : [
+                        ]
+                      }
+                    ]]
+                  ],
+                  {
+                    "qual_type" : {
+                      "type_ptr" : 65
+                    }
+                  },
+                  {
+                    "selector" : "bar:",
+                    "is_definition_found" : true,
+                    "decl_pointer" : 278,
+                    "receiver_kind" : "SuperInstance"
+                  }
+                ]]
+              ]
+            ]]
+          }
+        ]],
+        ["ObjCMethodDecl" , [
+          {
+            "pointer" : 332,
+            "parent_pointer" : 322,
+            "source_range" : [
+              {
+                "line" : 98,
+                "column" : 1
+              },
+              {
+                "line" : 100,
+                "column" : 1
+              }
+            ]
+          },
+          {
+            "name" : "foo:",
+            "qual_name" : [
+              "foo:",
+              "MySubclass"
+            ]
+          },
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "type_ptr" : 65
+            },
+            "parameters" : [
+              ["ParmVarDecl" , [
+                {
+                  "pointer" : 333,
+                  "source_range" : [
+                    {
+                      "line" : 98,
+                      "column" : 14
+                    },
+                    {
+                      "column" : 35
+                    }
+                  ],
+                  "is_used" : true,
+                  "is_this_declaration_referenced" : true
+                },
+                {
+                  "name" : "s",
+                  "qual_name" : [
+                    "s"
+                  ]
+                },
+                {
+                  "type_ptr" : 113
+                },
+                {
+                  "parm_index_in_function" : 0
+                }
+              ]]
+            ],
+            "implicit_parameters" : [
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 334,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "self",
+                  "qual_name" : [
+                    "self"
+                  ]
+                },
+                {
+                  "type_ptr" : 326
+                },
+                {
+                }
+              ]],
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 335,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "_cmd",
+                  "qual_name" : [
+                    "_cmd"
+                  ]
+                },
+                {
+                  "type_ptr" : 5
+                },
+                {
+                }
+              ]]
+            ],
+            "is_overriding" : true,
+            "body" : ["CompoundStmt" , [
+              {
+                "pointer" : 336,
+                "source_range" : [
+                  {
+                    "column" : 37
+                  },
+                  {
+                    "line" : 100,
+                    "column" : 1
+                  }
+                ]
+              },
+              [
+                ["ObjCMessageExpr" , [
+                  {
+                    "pointer" : 337,
+                    "source_range" : [
+                      {
+                        "line" : 99,
+                        "column" : 3
+                      },
+                      {
+                        "column" : 15
+                      }
+                    ]
+                  },
+                  [
+                    ["ImplicitCastExpr" , [
+                      {
+                        "pointer" : 338,
+                        "source_range" : [
+                          {
+                            "column" : 14
+                          },
+                          {
+                            "column" : 14
+                          }
+                        ]
+                      },
+                      [
+                        ["DeclRefExpr" , [
+                          {
+                            "pointer" : 339,
+                            "source_range" : [
+                              {
+                                "column" : 14
+                              },
+                              {
+                                "column" : 14
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 113
+                            },
+                            "value_kind" : "LValue"
+                          },
+                          {
+                            "decl_ref" : {
+                              "kind" : "ParmVar",
+                              "decl_pointer" : 333,
+                              "name" : {
+                                "name" : "s",
+                                "qual_name" : [
+                                  "s"
+                                ]
+                              },
+                              "qual_type" : {
+                                "type_ptr" : 113
+                              }
+                            }
+                          }
+                        ]]
+                      ],
+                      {
+                        "qual_type" : {
+                          "type_ptr" : 113
+                        }
+                      },
+                      {
+                        "cast_kind" : "LValueToRValue",
+                        "base_path" : [
+                        ]
+                      }
+                    ]]
+                  ],
+                  {
+                    "qual_type" : {
+                      "type_ptr" : 65
+                    }
+                  },
+                  {
+                    "selector" : "foo:",
+                    "is_definition_found" : true,
+                    "decl_pointer" : 114,
+                    "receiver_kind" : "SuperInstance"
+                  }
+                ]]
+              ]
+            ]]
+          }
+        ]]
+      ],
+      {
+      },
+      {
+        "class_interface" : {
+          "kind" : "ObjCInterface",
+          "decl_pointer" : 321,
+          "name" : {
+            "name" : "MySubclass",
+            "qual_name" : [
+              "MySubclass"
+            ]
+          }
+        }
+      }
+    ]],
+    ["FunctionDecl" , [
+      {
+        "pointer" : 340,
+        "source_range" : [
+          {
+            "line" : 104,
+            "column" : 1
+          },
+          {
+            "line" : 110,
             "column" : 1
           }
         ]
@@ -11020,16 +11530,16 @@
         ]
       },
       {
-        "type_ptr" : 322
+        "type_ptr" : 341
       },
       {
         "parameters" : [
           ["ParmVarDecl" , [
             {
-              "pointer" : 323,
+              "pointer" : 342,
               "source_range" : [
                 {
-                  "line" : 89,
+                  "line" : 104,
                   "column" : 10
                 },
                 {
@@ -11052,7 +11562,7 @@
           ]],
           ["ParmVarDecl" , [
             {
-              "pointer" : 324,
+              "pointer" : 343,
               "source_range" : [
                 {
                   "column" : 20
@@ -11069,23 +11579,23 @@
               ]
             },
             {
-              "type_ptr" : 325
+              "type_ptr" : 344
             },
             {
               "parm_index_in_function" : 1
             }
           ]]
         ],
-        "decl_ptr_with_body" : 321,
+        "decl_ptr_with_body" : 340,
         "body" : ["CompoundStmt" , [
           {
-            "pointer" : 326,
+            "pointer" : 345,
             "source_range" : [
               {
                 "column" : 33
               },
               {
-                "line" : 95,
+                "line" : 110,
                 "column" : 1
               }
             ]
@@ -11093,14 +11603,14 @@
           [
             ["ObjCAutoreleasePoolStmt" , [
               {
-                "pointer" : 327,
+                "pointer" : 346,
                 "source_range" : [
                   {
-                    "line" : 90,
+                    "line" : 105,
                     "column" : 3
                   },
                   {
-                    "line" : 93,
+                    "line" : 108,
                     "column" : 3
                   }
                 ]
@@ -11108,14 +11618,14 @@
               [
                 ["CompoundStmt" , [
                   {
-                    "pointer" : 328,
+                    "pointer" : 347,
                     "source_range" : [
                       {
-                        "line" : 90,
+                        "line" : 105,
                         "column" : 20
                       },
                       {
-                        "line" : 93,
+                        "line" : 108,
                         "column" : 3
                       }
                     ]
@@ -11123,10 +11633,10 @@
                   [
                     ["ObjCMessageExpr" , [
                       {
-                        "pointer" : 329,
+                        "pointer" : 348,
                         "source_range" : [
                           {
-                            "line" : 91,
+                            "line" : 106,
                             "column" : 5
                           },
                           {
@@ -11137,7 +11647,7 @@
                       [
                         ["ObjCMessageExpr" , [
                           {
-                            "pointer" : 330,
+                            "pointer" : 349,
                             "source_range" : [
                               {
                                 "column" : 6
@@ -11150,7 +11660,7 @@
                           [
                             ["ObjCMessageExpr" , [
                               {
-                                "pointer" : 331,
+                                "pointer" : 350,
                                 "source_range" : [
                                   {
                                     "column" : 7
@@ -11163,7 +11673,7 @@
                               [
                                 ["ObjCMessageExpr" , [
                                   {
-                                    "pointer" : 332,
+                                    "pointer" : 351,
                                     "source_range" : [
                                       {
                                         "column" : 8
@@ -11184,7 +11694,7 @@
                                     "selector" : "alloc",
                                     "decl_pointer" : 19,
                                     "receiver_kind" : ["Class" , {
-                                      "type_ptr" : 333
+                                      "type_ptr" : 352
                                     }]
                                   }
                                 ]]
@@ -11212,7 +11722,7 @@
                         ]],
                         ["ObjCStringLiteral" , [
                           {
-                            "pointer" : 334,
+                            "pointer" : 353,
                             "source_range" : [
                               {
                                 "column" : 47
@@ -11225,7 +11735,7 @@
                           [
                             ["StringLiteral" , [
                               {
-                                "pointer" : 335,
+                                "pointer" : 354,
                                 "source_range" : [
                                   {
                                     "column" : 48
@@ -11239,7 +11749,7 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 336
+                                  "type_ptr" : 355
                                 },
                                 "value_kind" : "LValue"
                               },
@@ -11268,10 +11778,10 @@
                     ]],
                     ["ObjCMessageExpr" , [
                       {
-                        "pointer" : 337,
+                        "pointer" : 356,
                         "source_range" : [
                           {
-                            "line" : 92,
+                            "line" : 107,
                             "column" : 5
                           },
                           {
@@ -11282,7 +11792,7 @@
                       [
                         ["ObjCMessageExpr" , [
                           {
-                            "pointer" : 338,
+                            "pointer" : 357,
                             "source_range" : [
                               {
                                 "column" : 6
@@ -11303,13 +11813,13 @@
                             "selector" : "new",
                             "decl_pointer" : 21,
                             "receiver_kind" : ["Class" , {
-                              "type_ptr" : 333
+                              "type_ptr" : 352
                             }]
                           }
                         ]],
                         ["ObjCStringLiteral" , [
                           {
-                            "pointer" : 339,
+                            "pointer" : 358,
                             "source_range" : [
                               {
                                 "column" : 24
@@ -11322,7 +11832,7 @@
                           [
                             ["StringLiteral" , [
                               {
-                                "pointer" : 340,
+                                "pointer" : 359,
                                 "source_range" : [
                                   {
                                     "column" : 25
@@ -11336,7 +11846,7 @@
                               ],
                               {
                                 "qual_type" : {
-                                  "type_ptr" : 336
+                                  "type_ptr" : 355
                                 },
                                 "value_kind" : "LValue"
                               },
@@ -11369,10 +11879,10 @@
             ]],
             ["ReturnStmt" , [
               {
-                "pointer" : 341,
+                "pointer" : 360,
                 "source_range" : [
                   {
-                    "line" : 94,
+                    "line" : 109,
                     "column" : 3
                   },
                   {
@@ -11383,7 +11893,7 @@
               [
                 ["IntegerLiteral" , [
                   {
-                    "pointer" : 342,
+                    "pointer" : 361,
                     "source_range" : [
                       {
                         "column" : 10
@@ -11414,7 +11924,7 @@
     ]],
     ["TypedefDecl" , [
       {
-        "pointer" : 343,
+        "pointer" : 362,
         "source_range" : [
           {
           },
@@ -11448,25 +11958,25 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 344
+          "pointer" : 363
         },
         "Bool"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 345
+          "pointer" : 364
         },
         "Char_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 346
+          "pointer" : 365
         },
         "SChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 347
+          "pointer" : 366
         },
         "Short"
       ]],
@@ -11478,25 +11988,25 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 348
+          "pointer" : 367
         },
         "Long"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 349
+          "pointer" : 368
         },
         "LongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 350
+          "pointer" : 369
         },
         "UChar"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 351
+          "pointer" : 370
         },
         "UShort"
       ]],
@@ -11508,79 +12018,79 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 352
+          "pointer" : 371
         },
         "ULong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 353
+          "pointer" : 372
         },
         "ULongLong"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 354
+          "pointer" : 373
         },
         "Float"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 355
+          "pointer" : 374
         },
         "Double"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 356
+          "pointer" : 375
         },
         "LongDouble"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 357
+          "pointer" : 376
         },
         "Float128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 358
+          "pointer" : 377
         },
         "Float16"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 359
+          "pointer" : 378
         },
         "Int128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 360
+          "pointer" : 379
         },
         "UInt128"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 361
+          "pointer" : 380
         },
         "WChar_S"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 362
+          "pointer" : 381
         },
         "Dependent"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 363
+          "pointer" : 382
         },
         "Overload"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 364
+          "pointer" : 383
         },
         "BoundMember"
       ]],
@@ -11592,57 +12102,57 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 365
+          "pointer" : 384
         },
         "UnknownAny"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 366
+          "pointer" : 385
         },
         "ARCUnbridgedCast"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 367
+          "pointer" : 386
         },
         "BuiltinFn"
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 368
+          "pointer" : 387
         }
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 369
+          "pointer" : 388
         }
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 370
+          "pointer" : 389
         }
       ]],
       ["ComplexType" , [
         {
-          "pointer" : 371
+          "pointer" : 390
         }
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 372
+          "pointer" : 391
         },
         "ObjCId"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 373
+          "pointer" : 392
         },
         "ObjCClass"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 374
+          "pointer" : 393
         },
         "ObjCSel"
       ]],
@@ -11656,71 +12166,71 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 375
+          "pointer" : 394
         },
         "NullPtr"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 376
+          "pointer" : 395
         },
         "Half"
       ]],
       ["PointerType" , [
         {
-          "pointer" : 377
+          "pointer" : 396
         },
         {
-          "type_ptr" : 374
+          "type_ptr" : 393
         }
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 378
+          "pointer" : 397
         },
         {
-          "base_type" : 372
+          "base_type" : 391
         }
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 379
+          "pointer" : 398
         },
         {
-          "type_ptr" : 378
+          "type_ptr" : 397
         }
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 380
+          "pointer" : 399
         },
         {
-          "base_type" : 373
+          "base_type" : 392
         }
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 381
+          "pointer" : 400
         },
         {
-          "type_ptr" : 380
+          "type_ptr" : 399
         }
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 382
+          "pointer" : 401
         },
         10
       ]],
       ["RecordType" , [
         {
-          "pointer" : 383
+          "pointer" : 402
         },
-        384
+        403
       ]],
       ["PointerType" , [
         {
-          "pointer" : 385
+          "pointer" : 404
         },
         {
           "type_ptr" : 33,
@@ -11729,10 +12239,10 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 386
+          "pointer" : 405
         },
         {
-          "type_ptr" : 345,
+          "type_ptr" : 364,
           "is_const" : true
         }
       ]],
@@ -11741,22 +12251,22 @@
           "pointer" : 130
         },
         {
-          "type_ptr" : 345
+          "type_ptr" : 364
         }
       ]],
       ["RecordType" , [
         {
-          "pointer" : 387
+          "pointer" : 406
         },
-        388
+        407
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 389
+          "pointer" : 408
         },
         {
           "element_type" : {
-            "type_ptr" : 387
+            "type_ptr" : 406
           },
           "stride" : 24
         },
@@ -11764,18 +12274,18 @@
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 390
+          "pointer" : 409
         },
         18
       ]],
       ["TypedefType" , [
         {
           "pointer" : 7,
-          "desugared_type" : 379
+          "desugared_type" : 398
         },
         {
           "child_type" : {
-            "type_ptr" : 379
+            "type_ptr" : 398
           },
           "decl_ptr" : 6
         }
@@ -11783,23 +12293,23 @@
       ["TypedefType" , [
         {
           "pointer" : 20,
-          "desugared_type" : 379
+          "desugared_type" : 398
         },
         {
           "child_type" : {
             "type_ptr" : 7
           },
-          "decl_ptr" : 343
+          "decl_ptr" : 362
         }
       ]],
       ["TypedefType" , [
         {
           "pointer" : 9,
-          "desugared_type" : 381
+          "desugared_type" : 400
         },
         {
           "child_type" : {
-            "type_ptr" : 381
+            "type_ptr" : 400
           },
           "decl_ptr" : 8
         }
@@ -11819,11 +12329,11 @@
       ["TypedefType" , [
         {
           "pointer" : 5,
-          "desugared_type" : 377
+          "desugared_type" : 396
         },
         {
           "child_type" : {
-            "type_ptr" : 377
+            "type_ptr" : 396
           },
           "decl_ptr" : 4
         }
@@ -11833,18 +12343,18 @@
           "pointer" : 29
         },
         {
-          "type_ptr" : 382
+          "type_ptr" : 401
         }
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 391
+          "pointer" : 410
         },
         30
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 392
+          "pointer" : 411
         },
         34
       ]],
@@ -11862,24 +12372,24 @@
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 393
+          "pointer" : 412
         },
         36
       ]],
       ["IncompleteArrayType" , [
         {
-          "pointer" : 394
+          "pointer" : 413
         },
         {
           "element_type" : {
-            "type_ptr" : 379
+            "type_ptr" : 398
           },
           "stride" : 8
         }
       ]],
       ["IncompleteArrayType" , [
         {
-          "pointer" : 395
+          "pointer" : 414
         },
         {
           "element_type" : {
@@ -11891,16 +12401,16 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 396
+          "pointer" : 415
         },
         {
-          "type_ptr" : 379,
+          "type_ptr" : 398,
           "is_const" : true
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 397
+          "pointer" : 416
         },
         {
           "type_ptr" : 7,
@@ -11910,24 +12420,24 @@
       ["DecayedType" , [
         {
           "pointer" : 39,
-          "desugared_type" : 397
+          "desugared_type" : 416
         },
         {
-          "type_ptr" : 397
+          "type_ptr" : 416
         }
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 398
+          "pointer" : 417
         },
         44
       ]],
       ["PointerType" , [
         {
-          "pointer" : 399
+          "pointer" : 418
         },
         {
-          "type_ptr" : 379
+          "type_ptr" : 398
         }
       ]],
       ["PointerType" , [
@@ -11940,7 +12450,7 @@
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 400
+          "pointer" : 419
         },
         52
       ]],
@@ -11949,12 +12459,12 @@
           "pointer" : 60
         },
         {
-          "type_ptr" : 392
+          "type_ptr" : 411
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 401
+          "pointer" : 420
         },
         {
           "return_type" : {
@@ -11971,7 +12481,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 402
+          "pointer" : 421
         },
         {
           "return_type" : {
@@ -11981,7 +12491,7 @@
         {
           "params_type" : [
             {
-              "type_ptr" : 379
+              "type_ptr" : 398
             }
           ]
         }
@@ -12005,16 +12515,16 @@
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 333
+          "pointer" : 352
         },
         68
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 403
+          "pointer" : 422
         },
         {
-          "base_type" : 390,
+          "base_type" : 409,
           "protocol_decls_ptr" : [
             67
           ]
@@ -12025,7 +12535,7 @@
           "pointer" : 83
         },
         {
-          "type_ptr" : 403
+          "type_ptr" : 422
         }
       ]],
       ["AttributedType" , [
@@ -12042,7 +12552,7 @@
           "pointer" : 88
         },
         {
-          "type_ptr" : 333
+          "type_ptr" : 352
         }
       ]],
       ["ConstantArrayType" , [
@@ -12051,7 +12561,7 @@
         },
         {
           "element_type" : {
-            "type_ptr" : 345
+            "type_ptr" : 364
           },
           "stride" : 1
         },
@@ -12059,7 +12569,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 404
+          "pointer" : 423
         },
         {
           "type_ptr" : 33
@@ -12070,15 +12580,15 @@
           "pointer" : 129
         },
         {
-          "type_ptr" : 404
+          "type_ptr" : 423
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 405
+          "pointer" : 424
         },
         {
-          "type_ptr" : 402
+          "type_ptr" : 421
         }
       ]],
       ["PointerType" , [
@@ -12091,7 +12601,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 406
+          "pointer" : 425
         },
         {
           "return_type" : {
@@ -12108,7 +12618,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 407
+          "pointer" : 426
         },
         {
           "return_type" : {
@@ -12125,19 +12635,19 @@
       ]],
       ["ParenType" , [
         {
-          "pointer" : 408,
-          "desugared_type" : 407
+          "pointer" : 427,
+          "desugared_type" : 426
         },
         {
-          "type_ptr" : 407
+          "type_ptr" : 426
         }
       ]],
       ["BlockPointerType" , [
         {
-          "pointer" : 409
+          "pointer" : 428
         },
         {
-          "type_ptr" : 406
+          "type_ptr" : 425
         }
       ]],
       ["BlockPointerType" , [
@@ -12145,16 +12655,16 @@
           "pointer" : 176
         },
         {
-          "type_ptr" : 408
+          "type_ptr" : 427
         }
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 410
+          "pointer" : 429
         },
         {
           "return_type" : {
-            "type_ptr" : 362
+            "type_ptr" : 381
           }
         },
         {
@@ -12170,7 +12680,7 @@
           "pointer" : 155
         },
         {
-          "type_ptr" : 407
+          "type_ptr" : 426
         }
       ]],
       ["ObjCObjectPointerType" , [
@@ -12178,7 +12688,7 @@
           "pointer" : 185
         },
         {
-          "type_ptr" : 398
+          "type_ptr" : 417
         }
       ]],
       ["ObjCObjectPointerType" , [
@@ -12186,7 +12696,7 @@
           "pointer" : 184
         },
         {
-          "type_ptr" : 391
+          "type_ptr" : 410
         }
       ]],
       ["ObjCObjectPointerType" , [
@@ -12194,7 +12704,7 @@
           "pointer" : 210
         },
         {
-          "type_ptr" : 393
+          "type_ptr" : 412
         }
       ]],
       ["ConstantArrayType" , [
@@ -12203,7 +12713,7 @@
         },
         {
           "element_type" : {
-            "type_ptr" : 345
+            "type_ptr" : 364
           },
           "stride" : 1
         },
@@ -12214,7 +12724,7 @@
           "pointer" : 249
         },
         {
-          "type_ptr" : 400
+          "type_ptr" : 419
         }
       ]],
       ["ConstantArrayType" , [
@@ -12223,7 +12733,7 @@
         },
         {
           "element_type" : {
-            "type_ptr" : 345
+            "type_ptr" : 364
           },
           "stride" : 1
         },
@@ -12235,7 +12745,7 @@
         },
         {
           "element_type" : {
-            "type_ptr" : 345
+            "type_ptr" : 364
           },
           "stride" : 1
         },
@@ -12247,7 +12757,7 @@
         },
         {
           "element_type" : {
-            "type_ptr" : 345
+            "type_ptr" : 364
           },
           "stride" : 1
         },
@@ -12255,39 +12765,39 @@
       ]],
       ["ObjCTypeParamType" , [
         {
-          "pointer" : 411,
-          "desugared_type" : 379
+          "pointer" : 430,
+          "desugared_type" : 398
         }
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 412
+          "pointer" : 431
         },
         316
       ]],
       ["ObjCInterfaceType" , [
         {
-          "pointer" : 413
+          "pointer" : 432
         },
         317
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 414
+          "pointer" : 433
         },
         {
-          "type_ptr" : 390
+          "type_ptr" : 409
         }
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 415
+          "pointer" : 434
         },
         {
-          "base_type" : 412,
+          "base_type" : 431,
           "type_args" : [
             {
-              "type_ptr" : 414
+              "type_ptr" : 433
             }
           ]
         }
@@ -12297,12 +12807,26 @@
           "pointer" : 320
         },
         {
-          "type_ptr" : 415
+          "type_ptr" : 434
+        }
+      ]],
+      ["ObjCInterfaceType" , [
+        {
+          "pointer" : 435
+        },
+        321
+      ]],
+      ["ObjCObjectPointerType" , [
+        {
+          "pointer" : 326
+        },
+        {
+          "type_ptr" : 435
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 325
+          "pointer" : 344
         },
         {
           "type_ptr" : 130
@@ -12310,7 +12834,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 322
+          "pointer" : 341
         },
         {
           "return_type" : {
@@ -12323,18 +12847,18 @@
               "type_ptr" : 33
             },
             {
-              "type_ptr" : 325
+              "type_ptr" : 344
             }
           ]
         }
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 336
+          "pointer" : 355
         },
         {
           "element_type" : {
-            "type_ptr" : 345
+            "type_ptr" : 364
           },
           "stride" : 1
         },

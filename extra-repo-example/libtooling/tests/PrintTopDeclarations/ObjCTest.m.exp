@@ -18,4 +18,8 @@ ObjCMethod bar:
 ObjCCategoryImpl MyClass(MyCategory)
 ObjCInterface MyClassGenerics
 ObjCInterface BarGenerics
+ObjCInterface MySubclass
+ObjCMethod bar:
+ObjCMethod foo:
+ObjCImplementation MySubclass
 Function main

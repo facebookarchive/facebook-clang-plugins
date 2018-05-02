@@ -2476,6 +2476,7 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 //@atd   ~parameters : decl list;
 //@atd   ~implicit_parameters : decl list;
 //@atd   ~is_variadic : bool;
+//@atd   ~is_overriding : bool;
 //@atd   ?body : stmt option;
 //@atd } <ocaml field_prefix="omdi_">
 template <class ATDWriter>
@@ -2501,11 +2502,13 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   }
   bool HasImplicitParameters = !ImplicitParams.empty();
   bool IsVariadic = D->isVariadic();
+  bool IsOverriding = D->isOverriding();
   const Stmt *Body = D->getBody();
   ObjectScope Scope(OF,
                     1 + IsInstanceMethod + IsPropertyAccessor +
                         (bool)PropertyDecl + HasParameters +
-                        HasImplicitParameters + IsVariadic + (bool)Body);
+                        HasImplicitParameters + IsVariadic + IsOverriding +
+                        (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
@@ -2532,6 +2535,8 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   }
 
   OF.emitFlag("is_variadic", IsVariadic);
+
+  OF.emitFlag("is_overriding", IsOverriding);
 
   if (Body) {
     OF.emitTag("body");
@@ -3968,7 +3973,8 @@ int ASTExporter<ATDWriter>::GenericSelectionExprTupleSize() {
 //@atd   ?value : stmt option;
 //@atd } <ocaml field_prefix="gse_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitGenericSelectionExpr(const GenericSelectionExpr *Node) {
+void ASTExporter<ATDWriter>::VisitGenericSelectionExpr(
+    const GenericSelectionExpr *Node) {
   VisitExpr(Node);
   const Expr *ResultExpr = Node->getResultExpr();
   ObjectScope Scope(OF, 0 + (bool)ResultExpr);
