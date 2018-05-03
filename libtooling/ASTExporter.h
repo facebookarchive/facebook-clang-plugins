@@ -387,6 +387,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(CXXNamedCastExpr)
   DECLARE_VISITOR(CXXBoolLiteralExpr)
   DECLARE_VISITOR(CXXConstructExpr)
+  DECLARE_VISITOR(CXXInheritedCtorInitExpr)
   DECLARE_VISITOR(CXXBindTemporaryExpr)
   DECLARE_VISITOR(MaterializeTemporaryExpr)
   DECLARE_VISITOR(ExprWithCleanups)
@@ -3755,6 +3756,23 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(
   OF.emitFlag("is_elidable", IsElidable);
   OF.emitFlag("requires_zero_initialization", RequiresZeroInitialization);
   OF.emitFlag("is_copy_constructor", IsCopyConstructor);
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::CXXInheritedCtorInitExprTupleSize() {
+  return ExprTupleSize() + 1;
+}
+
+//@atd #define cxx_inherited_ctor_init_expr_tuple expr_tuple * cxx_construct_expr_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitCXXInheritedCtorInitExpr(
+    const CXXInheritedCtorInitExpr *Node) {
+  VisitExpr(Node);
+  CXXConstructorDecl *Ctor = Node->getConstructor();
+  ObjectScope Scope(OF, 1 );
+
+  OF.emitTag("decl_ref");
+  dumpDeclRef(*Ctor);
 }
 
 template <class ATDWriter>
