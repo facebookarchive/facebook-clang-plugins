@@ -12,6 +12,9 @@ CLANG_PATCH="$SCRIPT_DIR/src/AttrDump.inc.patch"
 CLANG_PREFIX="$SCRIPT_DIR/install"
 CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
 
+NCPUS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)"
+JOBS="${JOBS:-$NCPUS}"
+
 SHA256SUM="shasum -a 256 -p"
 
 usage () {
@@ -93,12 +96,16 @@ CMAKE_ARGS=(
   -DLLVM_ENABLE_ASSERTIONS=Off
   -DLLVM_ENABLE_EH=On
   -DLLVM_ENABLE_RTTI=On
+  -DLLVM_INCLUDE_DOCS=Off
+  -DLLVM_TARGETS_TO_BUILD=all
+  -DLLVM_BUILD_EXTERNAL_COMPILER_RT=On
 )
 
 if [ "$platform" = "Darwin" ]; then
     CMAKE_ARGS+=(
       -DLLVM_ENABLE_LIBCXX=On
       -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS $CMAKE_SHARED_LINKER_FLAGS"
+      -DLLVM_BUILD_LLVM_DYLIB=ON
     )
 else
     CMAKE_ARGS+=(
@@ -129,12 +136,13 @@ mkdir -p docs/ocamldoc/html
 
 cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
 
-JOBS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
-
 make -j $JOBS
 
 echo "testing clang build"
 ./bin/clang --version
+
+# "uninstall" previous clang
+rm -fr "$CLANG_PREFIX"
 
 make -j $JOBS install
 
