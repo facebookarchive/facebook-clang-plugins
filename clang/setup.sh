@@ -14,7 +14,7 @@ CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
 STRIP=${STRIP:-strip}
 
 NCPUS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)"
-JOBS="${JOBS:-$(($NCPUS - 2))}"
+JOBS="${JOBS:-$(($NCPUS>=8?$NCPUS/4:2))}"
 
 SHA256SUM="shasum -a 256 -p"
 
@@ -89,6 +89,12 @@ fi
 
 platform=`uname`
 
+# strip binaries as we go unless NO_CMAKE_STRIP is passed or we are on osx
+if [ "$platform" != "Darwin" ] && [ -z $NO_CMAKE_STRIP ]; then
+  CMAKE_C_FLAGS+=" -s"
+  CMAKE_CXX_FLAGS+=" -s"
+fi
+
 CMAKE_ARGS=(
   -DCMAKE_INSTALL_PREFIX="$CLANG_PREFIX"
   -DCMAKE_BUILD_TYPE=Release
@@ -151,9 +157,11 @@ popd # build
 popd # $TMP
 
 # brutally strip everything, ignore errors
-set +e
-find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \+
-set -e
+if [ "$platform" = "Darwin" ] || [ -n $NO_CMAKE_STRIP ]; then
+  set +e
+  find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \+
+  set -e
+fi
 
 echo "testing installed clang"
 "$CLANG_PREFIX"/bin/clang --version
