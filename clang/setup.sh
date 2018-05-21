@@ -11,9 +11,10 @@ CLANG_SRC="$SCRIPT_DIR/$CLANG_RELATIVE_SRC"
 CLANG_PATCH="$SCRIPT_DIR/src/AttrDump.inc.patch"
 CLANG_PREFIX="$SCRIPT_DIR/install"
 CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
+STRIP=${STRIP:-strip}
 
 NCPUS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)"
-JOBS="${JOBS:-$NCPUS}"
+JOBS="${JOBS:-$(($NCPUS - 2))}"
 
 SHA256SUM="shasum -a 256 -p"
 
@@ -151,7 +152,7 @@ popd # $TMP
 
 # brutally strip everything, ignore errors
 set +e
-find "$CLANG_PREFIX"/{bin,lib} -type f -exec strip -x \{\} \+
+find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \+
 set -e
 
 echo "testing installed clang"
