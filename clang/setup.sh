@@ -157,7 +157,7 @@ popd # build
 popd # $TMP
 
 # brutally strip everything, ignore errors
-if [ "$platform" = "Darwin" ] || [ -n $NO_CMAKE_STRIP ]; then
+if [ "$platform" = "Darwin" ] || [ -n "$NO_CMAKE_STRIP" ]; then
   set +e
   find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \+
   set -e
