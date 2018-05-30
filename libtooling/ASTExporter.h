@@ -1503,6 +1503,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd type function_decl_info = {
 //@atd   ?mangled_name : string option;
 //@atd   ?storage_class : string option;
+//@atd   ~is_cpp : bool;
 //@atd   ~is_inline : bool;
 //@atd   ~is_module_private : bool;
 //@atd   ~is_pure : bool;
@@ -1525,6 +1526,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool IsModulePrivate = D->isModulePrivate();
   bool IsPure = D->isPure();
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
+  bool IsCpp = Mangler->getASTContext().getLangOpts().CPlusPlus;
 
   const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
   // FunctionProtoType::canThrow is more informative, consider using
@@ -1544,7 +1546,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // accurately
   int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
              IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow +
-             HasDeclarationBody + (bool)DeclWithBody + (bool)TemplateDecl;
+             IsCpp + HasDeclarationBody + (bool)DeclWithBody + (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
   if (ShouldMangleName) {
@@ -1567,6 +1569,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     OF.emitString(VarDecl::getStorageClassSpecifierString(SC));
   }
 
+  OF.emitFlag("is_cpp", IsCpp);
   OF.emitFlag("is_inline", IsInlineSpecified);
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_pure", IsPure);
