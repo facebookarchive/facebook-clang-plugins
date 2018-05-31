@@ -89,6 +89,12 @@ fi
 
 platform=`uname`
 
+# strip binaries as we go unless NO_CMAKE_STRIP is passed or we are on osx
+if [ "$platform" != "Darwin" ] && [ -z $NO_CMAKE_STRIP ]; then
+  CMAKE_C_FLAGS+=" -s"
+  CMAKE_CXX_FLAGS+=" -s"
+fi
+
 CMAKE_ARGS=(
   -DCMAKE_INSTALL_PREFIX="$CLANG_PREFIX"
   -DCMAKE_BUILD_TYPE=Release
