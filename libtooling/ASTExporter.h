@@ -1509,6 +1509,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~is_pure : bool;
 //@atd   ~is_delete_as_written : bool;
 //@atd   ~is_no_throw : bool;
+//@atd   ~is_variadic : bool;
 //@atd   ~parameters : decl list;
 //@atd   ?decl_ptr_with_body : pointer option;
 //@atd   ?body : stmt option;
@@ -1527,6 +1528,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool IsPure = D->isPure();
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
   bool IsCpp = Mangler->getASTContext().getLangOpts().CPlusPlus;
+  bool IsVariadic = D->isVariadic();
 
   const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
   // FunctionProtoType::canThrow is more informative, consider using
@@ -1545,7 +1547,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
   int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
-             IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow +
+             IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow + IsVariadic +
              IsCpp + HasDeclarationBody + (bool)DeclWithBody + (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
@@ -1575,6 +1577,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   OF.emitFlag("is_pure", IsPure);
   OF.emitFlag("is_delete_as_written", IsDeletedAsWritten);
   OF.emitFlag("is_no_throw", IsNoThrow);
+  OF.emitFlag("is_variadic", IsVariadic);
 
   //  if (const FunctionProtoType *FPT =
   //  D->getType()->getAs<FunctionProtoType>()) {
