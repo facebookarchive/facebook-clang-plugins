@@ -116,7 +116,7 @@ if [ "$platform" = "Darwin" ]; then
     )
 else
     CMAKE_ARGS+=(
-      -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS $CMAKE_SHARED_LINKER_FLAGS -lstdc++"
+      -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS $CMAKE_SHARED_LINKER_FLAGS -lstdc++ -fPIC"
     )
 fi
 
