@@ -415,6 +415,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(ObjCIvarRefExpr)
   DECLARE_VISITOR(ObjCBoolLiteralExpr)
   DECLARE_VISITOR(ObjCAvailabilityCheckExpr)
+  DECLARE_VISITOR(ObjCArrayLiteral)
+  DECLARE_VISITOR(ObjCDictionaryLiteral)
 
   // Comments.
   const char *getCommandName(unsigned CommandID);
@@ -4323,6 +4325,46 @@ void ASTExporter<ATDWriter>::VisitObjCAvailabilityCheckExpr(
 #pragma clang diagnostic pop
     OF.emitString(E->getVersion().getAsString());
   }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCArrayLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
+
+//@atd #define obj_c_array_literal_tuple expr_tuple * obj_c_array_literal_expr_info
+//@atd type obj_c_array_literal_expr_info = {
+//@atd   ?array_method : pointer option;
+//@atd } <ocaml field_prefix="oalei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCArrayLiteral(const ObjCArrayLiteral *Expr) {
+    VisitExpr(Expr);
+    ObjCMethodDecl* ArrayMethod = Expr->getArrayWithObjectsMethod();
+    ObjectScope Scope(OF, 1);
+    if (ArrayMethod) {
+      OF.emitTag("array_method");
+      dumpPointer(ArrayMethod);
+    }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCDictionaryLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
+
+//@atd #define obj_c_dictionary_literal_tuple expr_tuple * obj_c_dictionary_literal_expr_info
+//@atd type obj_c_dictionary_literal_expr_info = {
+//@atd   ?dict_method : pointer option;
+//@atd } <ocaml field_prefix="odlei_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCDictionaryLiteral(const ObjCDictionaryLiteral *Expr) {
+    VisitExpr(Expr);
+    ObjCMethodDecl* DictMethod = Expr->getDictWithObjectsMethod();
+    ObjectScope Scope(OF, 1);
+    if (DictMethod) {
+      OF.emitTag("dict_method");
+      dumpPointer(DictMethod);
+    }
 }
 
 // Main variant for statements
