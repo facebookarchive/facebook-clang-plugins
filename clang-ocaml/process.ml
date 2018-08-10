@@ -25,8 +25,9 @@ let mktemp base =
   let rec aux () =
     let name = Printf.sprintf "%s.%d.%08d.tmp" base pid !tmp_counter in
     incr tmp_counter ;
-    if file_exists name
-       (* This should not happen unless the file is very old and the pid is reused. *)
+    if
+      file_exists name
+      (* This should not happen unless the file is very old and the pid is reused. *)
     then aux ()
     else name
   in
