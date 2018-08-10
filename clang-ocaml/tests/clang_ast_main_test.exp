@@ -1,4 +1,4 @@
-122 180 109 
+132 188 111 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -407,9 +407,27 @@ TranslationUnitDecl None:None:None None:None:None
   ObjCInterfaceDecl tests/ObjCTest.m:85:1 tests/ObjCTest.m:87:2
     ObjCMethodDecl tests/ObjCTest.m:86:1 tests/ObjCTest.m:86:58
        ParmVarDecl tests/ObjCTest.m:86:28 tests/ObjCTest.m:86:56
-  FunctionDecl tests/ObjCTest.m:89:1 tests/ObjCTest.m:95:1
-     ParmVarDecl tests/ObjCTest.m:89:10 tests/ObjCTest.m:89:14
-     ParmVarDecl tests/ObjCTest.m:89:20 tests/ObjCTest.m:89:27
+  ObjCInterfaceDecl tests/ObjCTest.m:89:1 tests/ObjCTest.m:90:2
+  ObjCImplementationDecl tests/ObjCTest.m:92:1 tests/ObjCTest.m:102:1
+    ObjCMethodDecl tests/ObjCTest.m:94:1 tests/ObjCTest.m:96:1
+       ParmVarDecl tests/ObjCTest.m:94:14 tests/ObjCTest.m:94:25
+       ImplicitParamDecl tests/ObjCTest.m:94:25 tests/ObjCTest.m:94:25
+       ImplicitParamDecl tests/ObjCTest.m:94:25 tests/ObjCTest.m:94:25
+      CompoundStmt
+        ObjCMessageExpr
+          ImplicitCastExpr
+            DeclRefExpr
+    ObjCMethodDecl tests/ObjCTest.m:98:1 tests/ObjCTest.m:100:1
+       ParmVarDecl tests/ObjCTest.m:98:14 tests/ObjCTest.m:98:35
+       ImplicitParamDecl tests/ObjCTest.m:98:35 tests/ObjCTest.m:98:35
+       ImplicitParamDecl tests/ObjCTest.m:98:35 tests/ObjCTest.m:98:35
+      CompoundStmt
+        ObjCMessageExpr
+          ImplicitCastExpr
+            DeclRefExpr
+  FunctionDecl tests/ObjCTest.m:104:1 tests/ObjCTest.m:110:1
+     ParmVarDecl tests/ObjCTest.m:104:10 tests/ObjCTest.m:104:14
+     ParmVarDecl tests/ObjCTest.m:104:20 tests/ObjCTest.m:104:27
     CompoundStmt
       ObjCAutoreleasePoolStmt
         CompoundStmt
@@ -425,4 +443,4 @@ TranslationUnitDecl None:None:None None:None:None
               StringLiteral
       ReturnStmt
         IntegerLiteral
-  TypedefDecl tests/ObjCTest.m:94:10 tests/ObjCTest.m:94:10
+  TypedefDecl tests/ObjCTest.m:109:10 tests/ObjCTest.m:109:10

@@ -54,7 +54,7 @@ let print_map_size map =
 
 
 let check_decl_cache_from_file fname =
-  let ast = Util.Json.from_file Clang_ast_j.read_decl fname in
+  let ast = Atdgen_runtime.Util.Json.from_file Clang_ast_j.read_decl fname in
   let decl_cache, stmt_cache, type_cache, _ = Clang_ast_main.index_node_pointers ast in
   print_map_size decl_cache ;
   print_map_size stmt_cache ;
@@ -72,5 +72,5 @@ let main =
   | PointerMismatch ->
       prerr_string "Pointer in cache doesn't match" ;
       exit 1
-  | Yojson.Json_error s | Ag_oj_run.Error s ->
+  | Yojson.Json_error s | Atdgen_runtime.Oj_run.Error s ->
       prerr_string s ; prerr_newline () ; exit 1
