@@ -7,7 +7,7 @@ Additional requirements:
 - camlzip
 - yojson
 - atd >= 1.1.2
-- atdgen >= 1.6.0
+- atdgen >= 2.0.0
 
 The simplest way to install these dependencies is
 1) to install ocaml and opam using your system package manager (e.g. homebrew on MAC OS).

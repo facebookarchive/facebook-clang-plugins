@@ -8,13 +8,13 @@
  *
  *)
 
-type visit_decl_t = Ag_util.Validation.path -> Clang_ast_t.decl -> unit
+type visit_decl_t = Atdgen_runtime.Util.Validation.path -> Clang_ast_t.decl -> unit
 
-type visit_stmt_t = Ag_util.Validation.path -> Clang_ast_t.stmt -> unit
+type visit_stmt_t = Atdgen_runtime.Util.Validation.path -> Clang_ast_t.stmt -> unit
 
-type visit_type_t = Ag_util.Validation.path -> Clang_ast_t.c_type -> unit
+type visit_type_t = Atdgen_runtime.Util.Validation.path -> Clang_ast_t.c_type -> unit
 
-type visit_src_loc_t = Ag_util.Validation.path -> Clang_ast_t.source_location -> unit
+type visit_src_loc_t = Atdgen_runtime.Util.Validation.path -> Clang_ast_t.source_location -> unit
 
 let empty_visitor _path _decl = ()
 

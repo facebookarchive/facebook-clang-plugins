@@ -34,9 +34,9 @@ let read_data_from_file reader fname =
   let data =
     if U.string_ends_with fname ".value.gz" then input_gunzipped Marshal.from_channel ic
     else if U.string_ends_with fname ".gz" then
-      input_gunzipped (Ag_util.Json.from_channel ~fname reader) ic
+      input_gunzipped (Atdgen_runtime.Util.Json.from_channel ~fname reader) ic
     else if U.string_ends_with fname ".value" then Marshal.from_channel ic
-    else Ag_util.Json.from_channel ~fname reader ic
+    else Atdgen_runtime.Util.Json.from_channel ~fname reader ic
   in
   close_in ic ; data
 
@@ -55,8 +55,8 @@ let write_data_to_file ?(pretty= false) ?(compact_json= false) ?(std_json= false
     if not (r1 && r2) then failwith "write_data_to_file (pretty)" else ()
   in
   let write_json ocx data =
-    if pretty then output_pretty (Ag_util.Json.to_channel writer) ocx data
-    else Ag_util.Json.to_channel writer ocx data
+    if pretty then output_pretty (Atdgen_runtime.Util.Json.to_channel writer) ocx data
+    else Atdgen_runtime.Util.Json.to_channel writer ocx data
   in
   let oc = open_out fname in
   if U.string_ends_with fname ".value.gz" then
@@ -72,7 +72,7 @@ let convert ?(pretty= false) ?(compact_json= false) ?(std_json= false) reader wr
     read_data_from_file reader fin
     |> write_data_to_file writer ~pretty ~compact_json ~std_json fout
   with
-  | Yojson.Json_error s | Ag_oj_run.Error s ->
+  | Yojson.Json_error s | Atdgen_runtime.Oj_run.Error s ->
       prerr_string s ; prerr_newline () ; exit 1
 
 

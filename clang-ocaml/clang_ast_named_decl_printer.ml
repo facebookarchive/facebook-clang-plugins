@@ -22,7 +22,7 @@ let rec visit_named_decls f decl =
 
 
 let print_named_decl_from_file fname =
-  let ast = Ag_util.Json.from_file Clang_ast_j.read_decl fname in
+  let ast = Atdgen_runtime.Util.Json.from_file Clang_ast_j.read_decl fname in
   let getname name_info = name_info.Clang_ast_t.ni_name in
   visit_named_decls
     (fun _ info ->
@@ -33,5 +33,5 @@ let print_named_decl_from_file fname =
 
 let main =
   try Array.iteri (fun i arg -> if i <> 0 then print_named_decl_from_file arg) Sys.argv with
-  | Yojson.Json_error s | Ag_oj_run.Error s ->
+  | Yojson.Json_error s | Atdgen_runtime.Oj_run.Error s ->
       prerr_string s ; prerr_newline () ; exit 1

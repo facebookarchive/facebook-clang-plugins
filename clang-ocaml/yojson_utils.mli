@@ -8,14 +8,15 @@
  *
  *)
 
-val read_data_from_file : 'a Ag_util.Json.reader -> string -> 'a
+val read_data_from_file : 'a Atdgen_runtime.Util.Json.reader -> string -> 'a
 
 val write_data_to_file :
-  ?pretty:bool -> ?compact_json:bool -> ?std_json:bool -> 'a Ag_util.Json.writer -> string -> 'a
-  -> unit
+  ?pretty:bool -> ?compact_json:bool -> ?std_json:bool -> 'a Atdgen_runtime.Util.Json.writer
+  -> string -> 'a -> unit
 
 val ydump : ?compact_json:bool -> ?std_json:bool -> in_channel -> out_channel -> bool
 
 val empty_string : string
 
-val run_converter_tool : 'a Ag_util.Json.reader -> 'a Ag_util.Json.writer -> unit
+val run_converter_tool :
+  'a Atdgen_runtime.Util.Json.reader -> 'a Atdgen_runtime.Util.Json.writer -> unit
