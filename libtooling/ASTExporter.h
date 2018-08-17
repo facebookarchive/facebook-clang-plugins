@@ -1549,8 +1549,9 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
   int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
-             IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow + IsVariadic +
-             IsCpp + HasDeclarationBody + (bool)DeclWithBody + (bool)TemplateDecl;
+             IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow +
+             IsVariadic + IsCpp + HasDeclarationBody + (bool)DeclWithBody +
+             (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
   if (ShouldMangleName) {
@@ -1683,6 +1684,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 //@atd   ~is_static_data_member : bool;
 //@atd   ~is_const_expr : bool;
 //@atd   ?init_expr : stmt option;
+//@atd   ~is_init_expr_cxx11_constant: bool;
 //@atd   ?parm_index_in_function : int option;
 //@atd   ?storage_class : string option;
 //@atd } <ocaml field_prefix="vdi_">
@@ -1700,9 +1702,14 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool HasParmIndex = (bool)ParmDecl;
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
+  bool isInitExprCXX11ConstantExpr = false;
+  if (HasInit) {
+    isInitExprCXX11ConstantExpr = D->getInit()->isCXX11ConstantExpr(Context);
+  }
   ObjectScope Scope(OF,
                     IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
-                        IsConstExpr + HasInit + HasParmIndex + HasStorageClass);
+                        IsConstExpr + HasInit + HasParmIndex + HasStorageClass +
+                        isInitExprCXX11ConstantExpr);
 
   OF.emitFlag("is_global", IsGlobal);
   OF.emitFlag("is_extern", IsExtern);
@@ -1712,6 +1719,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   if (HasInit) {
     OF.emitTag("init_expr");
     dumpStmt(D->getInit());
+    OF.emitFlag("is_init_expr_cxx11_constant", isInitExprCXX11ConstantExpr);
   }
   if (HasParmIndex) {
     OF.emitTag("parm_index_in_function");
@@ -3757,7 +3765,8 @@ void ASTExporter<ATDWriter>::VisitCXXConstructExpr(
   bool IsCopyConstructor = Ctor->isCopyConstructor();
   bool IsElidable = Node->isElidable();
   bool RequiresZeroInitialization = Node->requiresZeroInitialization();
-  ObjectScope Scope(OF, 1 + IsElidable + RequiresZeroInitialization + IsCopyConstructor);
+  ObjectScope Scope(
+      OF, 1 + IsElidable + RequiresZeroInitialization + IsCopyConstructor);
 
   OF.emitTag("decl_ref");
   dumpDeclRef(*Ctor);
@@ -3777,7 +3786,7 @@ void ASTExporter<ATDWriter>::VisitCXXInheritedCtorInitExpr(
     const CXXInheritedCtorInitExpr *Node) {
   VisitExpr(Node);
   CXXConstructorDecl *Ctor = Node->getConstructor();
-  ObjectScope Scope(OF, 1 );
+  ObjectScope Scope(OF, 1);
 
   OF.emitTag("decl_ref");
   dumpDeclRef(*Ctor);
@@ -4337,14 +4346,15 @@ int ASTExporter<ATDWriter>::ObjCArrayLiteralTupleSize() {
 //@atd   ?array_method : pointer option;
 //@atd } <ocaml field_prefix="oalei_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitObjCArrayLiteral(const ObjCArrayLiteral *Expr) {
-    VisitExpr(Expr);
-    ObjCMethodDecl* ArrayMethod = Expr->getArrayWithObjectsMethod();
-    ObjectScope Scope(OF, 1);
-    if (ArrayMethod) {
-      OF.emitTag("array_method");
-      dumpPointer(ArrayMethod);
-    }
+void ASTExporter<ATDWriter>::VisitObjCArrayLiteral(
+    const ObjCArrayLiteral *Expr) {
+  VisitExpr(Expr);
+  ObjCMethodDecl *ArrayMethod = Expr->getArrayWithObjectsMethod();
+  ObjectScope Scope(OF, 1);
+  if (ArrayMethod) {
+    OF.emitTag("array_method");
+    dumpPointer(ArrayMethod);
+  }
 }
 
 template <class ATDWriter>
@@ -4357,14 +4367,15 @@ int ASTExporter<ATDWriter>::ObjCDictionaryLiteralTupleSize() {
 //@atd   ?dict_method : pointer option;
 //@atd } <ocaml field_prefix="odlei_">
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitObjCDictionaryLiteral(const ObjCDictionaryLiteral *Expr) {
-    VisitExpr(Expr);
-    ObjCMethodDecl* DictMethod = Expr->getDictWithObjectsMethod();
-    ObjectScope Scope(OF, 1);
-    if (DictMethod) {
-      OF.emitTag("dict_method");
-      dumpPointer(DictMethod);
-    }
+void ASTExporter<ATDWriter>::VisitObjCDictionaryLiteral(
+    const ObjCDictionaryLiteral *Expr) {
+  VisitExpr(Expr);
+  ObjCMethodDecl *DictMethod = Expr->getDictWithObjectsMethod();
+  ObjectScope Scope(OF, 1);
+  if (DictMethod) {
+    OF.emitTag("dict_method");
+    dumpPointer(DictMethod);
+  }
 }
 
 // Main variant for statements
