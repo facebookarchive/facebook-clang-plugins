@@ -60,10 +60,10 @@ build/ast_inline.atd: build/ast_inline.atd.p
 	$(ATD_CPP) $< > $@
 
 build/clang_ast.atd: build/ast_inline.atd
-	# $(ATDCAT) returns 0 even if it fails - look at the output file to
-	# determine whether it failed or not. Then remove the result file as
-	# make misteriously doesn't do that by itself
-	$(ATDCAT) $< > $@ && ([ -s $@ ] || (rm $@; exit 1))
+#	$(ATDCAT) returns 0 even if it fails - look at the output file to
+#	determine whether it failed or not. Then remove the result file as
+#	make misteriously doesn't do that by itself
+	$(ATDCAT) $< > $@ && {[ -s $@ ] || {rm $@; exit 1}}
 
 build/ast_inline.atd.inc: build/ast_inline.atd.p
 	cat $< | grep '^#' > $@
@@ -77,14 +77,23 @@ build/clang_ast_proj.mli: clang_ast_proj.mli.p build/ast_inline.atd.inc
 build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
 	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o - | python $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
 
-TEST_FILES=ASTExporter.cpp Hello.m ObjCTest.m c_attributes.c bind_temporary.cpp \
+# test files except for Objective-C
+TEST_FILES_COMMON=c_attributes.c bind_temporary.cpp \
 c_cast.cpp const_cast.cpp dynamic_cast.cpp expr_with_cleanups.cpp inheritance.cpp \
 lambda.cpp materialize_temporary.cpp namespace_decl.cpp new.cpp struct.cpp this.cpp \
 unresolved_lookup.cpp using_directive.cpp class_template.cpp function_template.cpp \
-objcpp_template_unboxing.mm type_trait.cpp no_except_expr.cpp friend.cpp
+type_trait.cpp no_except_expr.cpp friend.cpp
 
-PRINTER_TEST_FILES=ObjCTest.m
-CONVERTER_TEST_FILE=Hello.m
+TEST_FILES=$(TEST_FILES_COMMON)
+
+# only add Objective-C(++) files on mac
+ifeq ($(shell uname),Darwin)
+TEST_FILES+=Hello.m ObjCTest.m objcpp_template_unboxing.mm
+endif
+
+PRINTER_TEST_FILES=$(TEST_FILES)
+CONVERTER_TEST_FILE=struct.cpp
+YOJSON_VALIDATOR_TEST_FILE=$(TEST_FILES)
 
 # simple library for composing unix processes
 build/process_test: build/process.cmx build/process_test.cmx
@@ -122,10 +131,18 @@ test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_p
 	 $(RUNTEST) tests/utils_test build/utils_test; \
 	 $(RUNTEST) tests/yojson_utils_test build/yojson_utils_test; \
 	 $(RUNTEST) tests/clang_ast_proj_test build/clang_ast_proj_test; \
-	 $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 if [ "$$(uname)" != "Darwin" ]; then \
+	   printf "[~] %s skipped (non-Darwin architecture detected)\n" clang_ast_named_decl_printer; \
+	 else \
+	   $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 fi; \
 	 $(RUNTEST) tests/clang_ast_converter build/clang_ast_converter --pretty $(CONVERTER_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
-	 $(RUNTEST) tests/clang_ast_yojson_validation ./yojson_validator.sh build/clang_ast_converter $(TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz); \
-	 $(RUNTEST) tests/clang_ast_main_test build/clang_ast_main_test $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson)
+	 $(RUNTEST) tests/clang_ast_yojson_validation ./yojson_validator.sh build/clang_ast_converter $(YOJSON_VALIDATOR_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz); \
+	 if [ "$$(uname)" != "Darwin" ]; then \
+	   printf "[~] %s skipped (non-Darwin architecture detected)\n" clang_ast_main_test; \
+	 else \
+	   $(RUNTEST) tests/clang_ast_main_test build/clang_ast_main_test $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 fi
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi
 
 record-test-outputs:
