@@ -12,7 +12,7 @@
 
 #include <string>
 #include <vector>
-#include <clang/Basic/VersionTuple.h>
+#include <llvm/Support/VersionTuple.h>
 
 namespace ASTLib {
 
@@ -26,7 +26,7 @@ class AttrParameterVectorStream {
 
   AttrParameterVectorStream &operator<<(const std::string &str);
   AttrParameterVectorStream &operator<<(const unsigned int x);
-  AttrParameterVectorStream &operator<<(const clang::VersionTuple &verTup);
+  AttrParameterVectorStream &operator<<(const llvm::VersionTuple &verTup);
 
   const std::vector<std::string> &getContent();
 };

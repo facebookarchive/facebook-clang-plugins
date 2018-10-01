@@ -29,7 +29,7 @@ AttrParameterVectorStream &AttrParameterVectorStream::operator<<(
 }
 
 AttrParameterVectorStream &AttrParameterVectorStream::operator<<(
-    const clang::VersionTuple &verTup) {
+  const llvm::VersionTuple &verTup) {
   return operator<<(verTup.getAsString());
 }
 

@@ -20,14 +20,14 @@
 // ASTExporter Plugin
 //===----------------------------------------------------------------------===//
 
-static clang::FrontendPluginRegistry::Add<ASTLib::JsonExporterASTAction> X(
+static ASTLib::FrontendPluginRegistry::Add<ASTLib::JsonExporterASTAction> X(
     "JsonASTExporter",
     "Export the AST of source files into ATD-specified Json data");
 
-static clang::FrontendPluginRegistry::Add<ASTLib::YojsonExporterASTAction> Y(
+static ASTLib::FrontendPluginRegistry::Add<ASTLib::YojsonExporterASTAction> Y(
     "YojsonASTExporter",
     "Export the AST of source files into ATD-specified Yojson data");
 
-static clang::FrontendPluginRegistry::Add<ASTLib::BiniouExporterASTAction> Z(
+static ASTLib::FrontendPluginRegistry::Add<ASTLib::BiniouExporterASTAction> Z(
     "BiniouASTExporter",
     "Export the AST of source files into ATD-specified biniou data");

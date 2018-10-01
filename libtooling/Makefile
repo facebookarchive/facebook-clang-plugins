@@ -170,7 +170,7 @@ build/ast_samples/%.m.json: tests/%.m build/FacebookClangPlugin.dylib
 	@$(CLANG_FRONTEND) $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.gz: build/ast_samples/%
-	@gzip -f -k $<
+	@gzip -f < $< > $@
 
 # generate a preprocessed version of ASTExporter.cpp where ATD directives can be read
 # we do not include the C/C++ headers to avoid parsing issues with the 'traditional' cpp (needed for precisely expanding our /// comments)

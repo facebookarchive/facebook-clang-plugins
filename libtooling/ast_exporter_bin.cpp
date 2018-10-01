@@ -15,8 +15,8 @@
 
 #include "ASTExporter.h"
 
-#include <clang/Tooling/Tooling.h>
 #include <clang/Tooling/CommonOptionsParser.h>
+#include <clang/Tooling/Tooling.h>
 
 //===----------------------------------------------------------------------===//
 // ASTExporter Tool

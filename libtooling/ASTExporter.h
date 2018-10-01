@@ -370,6 +370,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(PredefinedExpr)
   DECLARE_VISITOR(CharacterLiteral)
   DECLARE_VISITOR(IntegerLiteral)
+  DECLARE_VISITOR(FixedPointLiteral)
   DECLARE_VISITOR(FloatingLiteral)
   DECLARE_VISITOR(StringLiteral)
   //    DECLARE_VISITOR(InitListExpr)
@@ -1304,6 +1305,7 @@ int ASTExporter<ATDWriter>::TranslationUnitDeclTupleSize() {
 //@atd | IK_ObjCXX
 //@atd | IK_OpenCL
 //@atd | IK_CUDA
+//@atd | IK_HIP
 //@atd | IK_RenderScript
 //@atd | IK_LLVM_IR
 //@atd ]
@@ -1342,6 +1344,9 @@ void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
     break;
   case InputKind::LLVM_IR:
     OF.emitSimpleVariant("IK_LLVM_IR");
+    break;
+  case InputKind::HIP:
+    OF.emitSimpleVariant("IK_HIP");
     break;
   }
 }
@@ -1533,7 +1538,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // FunctionProtoType::canThrow is more informative, consider using
   // CanThrowResult type instead
   // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
-  auto IsNoThrow = FPT ? FPT->isNothrow(Context) : false;
+  auto IsNoThrow = FPT ? FPT->isNothrow() : false;
   const FunctionDecl *DeclWithBody = D;
   // FunctionDecl::hasBody() will set DeclWithBody pointer to decl that
   // has body. If there is no body in all decls of that function,
@@ -3400,6 +3405,7 @@ int ASTExporter<ATDWriter>::PredefinedExprTupleSize() {
 //@atd | LFunction
 //@atd | FuncDName
 //@atd | FuncSig
+//@atd | LFuncSig
 //@atd | PrettyFunction
 //@atd | PrettyFunctionNoVirtual
 //@atd ]
@@ -3415,6 +3421,9 @@ void ASTExporter<ATDWriter>::VisitPredefinedExpr(const PredefinedExpr *Node) {
     break;
   case PredefinedExpr::LFunction:
     OF.emitSimpleVariant("LFunction");
+    break;
+  case PredefinedExpr::LFuncSig:
+    OF.emitSimpleVariant("LFuncSig");
     break;
   case PredefinedExpr::FuncDName:
     OF.emitSimpleVariant("FuncDName");
@@ -3465,6 +3474,19 @@ void ASTExporter<ATDWriter>::VisitIntegerLiteral(const IntegerLiteral *Node) {
   OF.emitInteger(Node->getValue().getBitWidth());
   OF.emitTag("value");
   OF.emitString(Node->getValue().toString(10, IsSigned));
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::FixedPointLiteralTupleSize() {
+  return ExprTupleSize() + 1;
+}
+//@atd #define fixed_point_literal_tuple expr_tuple * string
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitFixedPointLiteral(
+    const FixedPointLiteral *Node) {
+  VisitExpr(Node);
+  int radix = 10;
+  OF.emitString(Node->getValueAsString(radix));
 }
 
 template <class ATDWriter>
@@ -4736,6 +4758,8 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
 //@atd   | PreserveAll
 //@atd   | Regcall
 //@atd   | NSReturnsRetained
+//@atd   | NocfCheck
+//@atd   | Lifetimebound
 //@atd ]
 
 template <class ATDWriter>
@@ -4839,6 +4863,12 @@ void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
     break;
   case AttributedType::attr_ns_returns_retained:
     OF.emitSimpleVariant("NSReturnsRetained");
+    break;
+  case AttributedType::attr_nocf_check:
+    OF.emitSimpleVariant("NocfCheck");
+    break;
+  case AttributedType::attr_lifetimebound:
+    OF.emitSimpleVariant("Lifetimebound");
     break;
   }
 }

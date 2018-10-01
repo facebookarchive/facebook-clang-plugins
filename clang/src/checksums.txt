@@ -1,12 +1,32 @@
-=== Clang 5.0 - branch google/stable ===
-Downloaded from https://github.com/llvm-mirror
+= Clang 7.0 -- official release
+
+Downloaded from http://releases.llvm.org/download.html#7.0.0
 
 Included components:
-llvm: 2dfb40348165c484a5f348f477e2f3abe4270c9e (stable)
-clang (in llvm/tools/): d296d06ff9171330531ecabb10be185b9454ab19 (google/stable)
-compiler-rt (in llvm/projects): 52b72376fd6ce2eba8f6f5da835e727a685214cf (google/stable)
-libcxx (in llvm/projects): 598ae4fa2e4da8b0a4b839c8c26b6cd3f672a968 (release_50)
-libcxxabi (in llvm/projects): 5df6b5da0deba63bbf9046bcaa385241c4d72847 (release_50)
-openmp (in llvm/projects): 29b515e1e6d26b5b0d32d47d28dcdb4b8a11470d (release_50)
+8bc1f844e6cbde1b652c19c1edebc1864456fd9c78b8c1bea038e51b363fe222  llvm-7.0.0.src.tar.xz
+550212711c752697d2f82c648714a7221b1207fd9441543ff4aa9e3be45bba55  cfe-7.0.0.src.tar.xz (clang)
+bdec7fe3cf2c85f55656c07dfb0bd93ae46f2b3dd8f33ff3ad6e7586f4c670d6  compiler-rt-7.0.0.src.tar.xz
+9b342625ba2f4e65b52764ab2061e116c0337db2179c6bce7f9a0d70c52134f0  libcxx-7.0.0.src.tar.xz
+9b45c759ff397512eae4d938ff82827b1bd7ccba49920777e5b5e460baeb245f  libcxxabi-7.0.0.src.tar.xz
+30662b632f5556c59ee9215c1309f61de50b3ea8e89dcc28ba9a9494bba238ff  openmp-7.0.0.src.tar.xz
 
-SHA256(clang-5.0.tar.xz)= 29b837a13b43e666b2f45544e3e19ceae381d7c43d00027b832e703de36c07bb
+Result:
+13a649f0e6bb7667eeb9e39297e89586b385d37258f13b716faa363b34ffe19b  llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.tar.xz
+
+Script to build the archive:
+
+tar xf llvm-7.0.0.src.tar.xz
+cd llvm-7.0.0.src/tools/
+tar xf ../../cfe-7.0.0.src.tar.xz
+mv cfe-7.0.0.src/ clang
+cd ../projects/
+tar xf ../../compiler-rt-7.0.0.src.tar.xz
+mv compiler-rt-7.0.0.src/ compiler-rt
+tar xf ../../libcxx-7.0.0.src.tar.xz
+mv libcxx-7.0.0.src/ libcxx
+tar xf ../../libcxxabi-7.0.0.src.tar.xz
+mv libcxxabi-7.0.0.src/ libcxxabi
+tar xf ../../openmp-7.0.0.src.tar.xz
+mv openmp-7.0.0.src/ openmp
+mv llvm-7.0.0.src llvm
+tar cJ llvm > llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.tar.xz
