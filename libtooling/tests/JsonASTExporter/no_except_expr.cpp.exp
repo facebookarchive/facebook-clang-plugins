@@ -503,115 +503,265 @@
         {
           "pointer" : 41
         },
-        "Int128"
+        "ShortAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 42
         },
-        "UInt128"
+        "Accum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 43
         },
-        "WChar_S"
+        "LongAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 44
         },
-        "Char16"
+        "UShortAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 45
         },
-        "Char32"
+        "UAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 46
         },
-        "Dependent"
+        "ULongAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 47
         },
-        "Overload"
+        "ShortFract"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 48
         },
-        "BoundMember"
+        "Fract"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 49
         },
-        "PseudoObject"
+        "LongFract"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 50
         },
-        "UnknownAny"
+        "UShortFract"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 51
         },
-        "ARCUnbridgedCast"
+        "UFract"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 52
         },
-        "BuiltinFn"
+        "ULongFract"
       ]],
-      ["ComplexType" , [
+      ["BuiltinType" , [
         {
           "pointer" : 53
-        }
+        },
+        "SatShortAccum"
       ]],
-      ["ComplexType" , [
+      ["BuiltinType" , [
         {
           "pointer" : 54
-        }
+        },
+        "SatAccum"
       ]],
-      ["ComplexType" , [
+      ["BuiltinType" , [
         {
           "pointer" : 55
-        }
+        },
+        "SatLongAccum"
       ]],
-      ["ComplexType" , [
+      ["BuiltinType" , [
         {
           "pointer" : 56
-        }
+        },
+        "SatUShortAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 57
         },
-        "ObjCId"
+        "SatUAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 58
         },
-        "ObjCClass"
+        "SatULongAccum"
       ]],
       ["BuiltinType" , [
         {
           "pointer" : 59
         },
+        "SatShortFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 60
+        },
+        "SatFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 61
+        },
+        "SatLongFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 62
+        },
+        "SatUShortFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 63
+        },
+        "SatUFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 64
+        },
+        "SatULongFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 65
+        },
+        "Int128"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 66
+        },
+        "UInt128"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 67
+        },
+        "WChar_S"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 68
+        },
+        "Char8"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 69
+        },
+        "Char16"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 70
+        },
+        "Char32"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 71
+        },
+        "Dependent"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 72
+        },
+        "Overload"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 73
+        },
+        "BoundMember"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 74
+        },
+        "PseudoObject"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 75
+        },
+        "UnknownAny"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 76
+        },
+        "ARCUnbridgedCast"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 77
+        },
+        "BuiltinFn"
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 78
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 79
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 80
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 81
+        }
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 82
+        },
+        "ObjCId"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 83
+        },
+        "ObjCClass"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 84
+        },
         "ObjCSel"
       ]],
       ["PointerType" , [
         {
-          "pointer" : 60
+          "pointer" : 85
         },
         {
           "type_ptr" : 21
@@ -619,25 +769,25 @@
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 61
+          "pointer" : 86
         },
         "NullPtr"
       ]],
       ["BuiltinType" , [
         {
-          "pointer" : 62
+          "pointer" : 87
         },
         "Half"
       ]],
       ["RecordType" , [
         {
-          "pointer" : 63
+          "pointer" : 88
         },
-        64
+        89
       ]],
       ["PointerType" , [
         {
-          "pointer" : 65
+          "pointer" : 90
         },
         {
           "type_ptr" : 23,
@@ -646,7 +796,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 66
+          "pointer" : 91
         },
         {
           "type_ptr" : 26,
@@ -655,7 +805,7 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 67
+          "pointer" : 92
         },
         {
           "type_ptr" : 26
@@ -663,17 +813,17 @@
       ]],
       ["RecordType" , [
         {
-          "pointer" : 68
+          "pointer" : 93
         },
-        69
+        94
       ]],
       ["ConstantArrayType" , [
         {
-          "pointer" : 70
+          "pointer" : 95
         },
         {
           "element_type" : {
-            "type_ptr" : 68
+            "type_ptr" : 93
           },
           "stride" : 24
         },
@@ -681,7 +831,7 @@
       ]],
       ["FunctionProtoType" , [
         {
-          "pointer" : 71
+          "pointer" : 96
         },
         {
           "return_type" : {
@@ -717,18 +867,18 @@
       ]],
       ["PointerType" , [
         {
-          "pointer" : 72
+          "pointer" : 97
         },
         {
-          "type_ptr" : 67
+          "type_ptr" : 92
         }
       ]],
       ["PointerType" , [
         {
-          "pointer" : 73
+          "pointer" : 98
         },
         {
-          "type_ptr" : 71
+          "type_ptr" : 96
         }
       ]],
       ["PointerType" , [
@@ -741,40 +891,40 @@
       ]],
       ["ObjCObjectType" , [
         {
-          "pointer" : 74
+          "pointer" : 99
         },
         {
-          "base_type" : 57
+          "base_type" : 82
         }
       ]],
       ["ObjCObjectPointerType" , [
         {
-          "pointer" : 75
+          "pointer" : 100
         },
         {
-          "type_ptr" : 74
+          "type_ptr" : 99
         }
       ]],
       ["TypedefType" , [
         {
-          "pointer" : 76,
-          "desugared_type" : 75
+          "pointer" : 101,
+          "desugared_type" : 100
         },
         {
           "child_type" : {
-            "type_ptr" : 75
+            "type_ptr" : 100
           },
-          "decl_ptr" : 77
+          "decl_ptr" : 102
         }
       ]],
       ["TypedefType" , [
         {
           "pointer" : 25,
-          "desugared_type" : 75
+          "desugared_type" : 100
         },
         {
           "child_type" : {
-            "type_ptr" : 76
+            "type_ptr" : 101
           },
           "decl_ptr" : 24
         }
