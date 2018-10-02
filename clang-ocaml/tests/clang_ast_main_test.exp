@@ -1,4 +1,4 @@
-9 0 50 
+9 0 75 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -8,7 +8,7 @@ TranslationUnitDecl None:None:None None:None:None
   FunctionDecl tests/c_attributes.c:1:1 tests/c_attributes.c:1:59
      ParmVarDecl tests/c_attributes.c:1:18 tests/c_attributes.c:1:22
   TypedefDecl tests/c_attributes.c:1:22 tests/c_attributes.c:1:22
-16 9 59 
+16 9 84 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -39,7 +39,7 @@ TranslationUnitDecl None:None:None None:None:None
                 CXXBindTemporaryExpr
                   CXXTemporaryObjectExpr
   TypedefDecl tests/bind_temporary.cpp:7:23 tests/bind_temporary.cpp:7:23
-10 9 51 
+10 9 76 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -59,7 +59,7 @@ TranslationUnitDecl None:None:None None:None:None
         ImplicitCastExpr
           DeclRefExpr
   TypedefDecl tests/c_cast.cpp:3:16 tests/c_cast.cpp:3:16
-15 9 58 
+15 9 83 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -86,7 +86,7 @@ TranslationUnitDecl None:None:None None:None:None
   VarDecl tests/const_cast.cpp:11:1 tests/const_cast.cpp:11:19
     IntegerLiteral
   TypedefDecl tests/const_cast.cpp:11:19 tests/const_cast.cpp:11:19
-44 40 86 
+44 40 111 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -197,7 +197,7 @@ TranslationUnitDecl None:None:None None:None:None
               ImplicitCastExpr
                 DeclRefExpr
   TypedefDecl tests/dynamic_cast.cpp:18:32 tests/dynamic_cast.cpp:18:32
-33 54 73 
+33 54 98 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -319,7 +319,7 @@ TranslationUnitDecl None:None:None None:None:None
                       ImplicitCastExpr
                         DeclRefExpr
   TypedefDecl tests/expr_with_cleanups.cpp:19:9 tests/expr_with_cleanups.cpp:19:9
-41 57 79 
+41 57 104 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -418,7 +418,7 @@ TranslationUnitDecl None:None:None None:None:None
        ParmVarDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
     CXXDestructorDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
   TypedefDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
-41 48 106 
+41 48 131 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -601,7 +601,7 @@ TranslationUnitDecl None:None:None None:None:None
       ReturnStmt
         IntegerLiteral
   TypedefDecl tests/lambda.cpp:10:12 tests/lambda.cpp:10:12
-8 4 52 
+8 4 77 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -614,7 +614,7 @@ TranslationUnitDecl None:None:None None:None:None
         ImplicitCastExpr
           FloatingLiteral
   TypedefDecl tests/materialize_temporary.cpp:1:16 tests/materialize_temporary.cpp:1:16
-14 0 51 
+14 0 76 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -629,7 +629,7 @@ TranslationUnitDecl None:None:None None:None:None
   NamespaceDecl tests/namespace_decl.cpp:11:1 tests/namespace_decl.cpp:13:1
   UsingDirectiveDecl tests/namespace_decl.cpp:11:11 tests/namespace_decl.cpp:11:11
   TypedefDecl tests/namespace_decl.cpp:11:11 tests/namespace_decl.cpp:11:11
-58 98 114 
+58 98 139 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -837,7 +837,7 @@ TranslationUnitDecl None:None:None None:None:None
               UnaryOperator
                 DeclRefExpr
   TypedefDecl tests/new.cpp:44:24 tests/new.cpp:44:24
-28 10 64 
+28 10 89 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -877,7 +877,7 @@ TranslationUnitDecl None:None:None None:None:None
     VarDecl tests/struct.cpp:19:3 tests/struct.cpp:19:24
       IntegerLiteral
   TypedefDecl tests/struct.cpp:19:24 tests/struct.cpp:19:24
-11 5 54 
+11 5 79 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -894,7 +894,7 @@ TranslationUnitDecl None:None:None None:None:None
             CXXThisExpr
           IntegerLiteral
   TypedefDecl tests/this.cpp:4:19 tests/this.cpp:4:19
-8 0 64 
+8 0 89 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -903,7 +903,7 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   ClassTemplateDecl tests/unresolved_lookup.cpp:1:1 tests/unresolved_lookup.cpp:4:1
   TypedefDecl tests/unresolved_lookup.cpp:4:1 tests/unresolved_lookup.cpp:4:1
-13 2 51 
+13 2 76 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -919,7 +919,7 @@ TranslationUnitDecl None:None:None None:None:None
     ImplicitCastExpr
       DeclRefExpr
   TypedefDecl tests/using_directive.cpp:8:9 tests/using_directive.cpp:8:9
-36 23 100 
+36 23 125 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -980,7 +980,7 @@ TranslationUnitDecl None:None:None None:None:None
           ImplicitCastExpr
             DeclRefExpr
   TypedefDecl tests/class_template.cpp:19:15 tests/class_template.cpp:19:15
-19 35 72 
+19 35 97 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1035,7 +1035,7 @@ TranslationUnitDecl None:None:None None:None:None
           ImplicitCastExpr
             DeclRefExpr
   TypedefDecl tests/function_template.cpp:16:11 tests/function_template.cpp:16:11
-20 13 68 
+20 13 93 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1069,7 +1069,7 @@ TranslationUnitDecl None:None:None None:None:None
       ImplicitCastExpr
         DeclRefExpr
   TypedefDecl tests/type_trait.cpp:10:18 tests/type_trait.cpp:10:18
-10 8 57 
+10 8 82 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1088,7 +1088,7 @@ TranslationUnitDecl None:None:None None:None:None
               ImplicitCastExpr
                 DeclRefExpr
   TypedefDecl tests/no_except_expr.cpp:4:19 tests/no_except_expr.cpp:4:19
-21 2 88 
+21 2 113 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1112,7 +1112,7 @@ TranslationUnitDecl None:None:None None:None:None
   VarDecl tests/friend.cpp:12:1 tests/friend.cpp:12:8
     CXXConstructExpr
   TypedefDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
-58 35 85 
+58 35 110 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1210,7 +1210,7 @@ TranslationUnitDecl None:None:None None:None:None
       ReturnStmt
         IntegerLiteral
   TypedefDecl tests/Hello.m:24:10 tests/Hello.m:24:10
-132 188 111 
+132 188 136 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1656,7 +1656,7 @@ TranslationUnitDecl None:None:None None:None:None
       ReturnStmt
         IntegerLiteral
   TypedefDecl tests/ObjCTest.m:109:10 tests/ObjCTest.m:109:10
-12 0 59 
+12 0 84 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
