@@ -250,6 +250,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpSelector(const Selector sel);
   void dumpName(const NamedDecl &decl);
   void dumpInputKind(const InputKind kind);
+  void dumpIntegerTypeWidths(const TargetInfo &info);
 
   bool alwaysEmitParent(const Decl *D);
 
@@ -1350,10 +1351,32 @@ void ASTExporter<ATDWriter>::dumpInputKind(InputKind kind) {
     break;
   }
 }
+//@atd type integer_type_widths = {
+//@atd char_type : int;
+//@atd short_type : int;
+//@atd int_type : int;
+//@atd long_type : int;
+//@atd longlong_type : int;
+//@atd } <ocaml field_prefix="itw_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpIntegerTypeWidths(const TargetInfo &info) {
+  ObjectScope Scope(OF, 5);
+  OF.emitTag("char_type");
+  OF.emitInteger(info.getCharWidth());
+  OF.emitTag("short_type");
+  OF.emitInteger(info.getShortWidth());
+  OF.emitTag("int_type");
+  OF.emitInteger(info.getIntWidth());
+  OF.emitTag("long_type");
+  OF.emitInteger(info.getLongWidth());
+  OF.emitTag("longlong_type");
+  OF.emitInteger(info.getLongLongWidth());
+}
 //@atd #define translation_unit_decl_tuple decl_tuple * decl_context_tuple * translation_unit_decl_info
 //@atd type  translation_unit_decl_info = {
 //@atd   input_path : source_file;
 //@atd   input_kind : input_kind;
+//@atd   integer_type_widths : integer_type_widths;
 //@atd   types : c_type list;
 //@atd } <ocaml field_prefix="tudi_">
 template <class ATDWriter>
@@ -1361,12 +1384,14 @@ void ASTExporter<ATDWriter>::VisitTranslationUnitDecl(
     const TranslationUnitDecl *D) {
   VisitDecl(D);
   VisitDeclContext(D);
-  ObjectScope Scope(OF, 3);
+  ObjectScope Scope(OF, 4);
   OF.emitTag("input_path");
   OF.emitString(
       Options.normalizeSourcePath(Options.inputFile.getFile().str().c_str()));
   OF.emitTag("input_kind");
   dumpInputKind(Options.inputFile.getKind());
+  OF.emitTag("integer_type_widths");
+  dumpIntegerTypeWidths(Context.getTargetInfo());
   OF.emitTag("types");
   const auto &types = Context.getTypes();
   ArrayScope aScope(OF, types.size() + 1); // + 1 for nullptr

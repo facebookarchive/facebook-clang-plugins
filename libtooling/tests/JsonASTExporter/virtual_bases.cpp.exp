@@ -1579,6 +1579,13 @@
   {
     "input_path" : "tests/virtual_bases.cpp",
     "input_kind" : "IK_CXX",
+    "integer_type_widths" : {
+      "char_type" : 8,
+      "short_type" : 16,
+      "int_type" : 32,
+      "long_type" : 64,
+      "longlong_type" : 64
+    },
     "types" : [
       ["BuiltinType" , [
         {
