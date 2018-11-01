@@ -1710,6 +1710,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 //@atd   ~is_static_local : bool;
 //@atd   ~is_static_data_member : bool;
 //@atd   ~is_const_expr : bool;
+//@atd   ~is_init_ice : bool;
 //@atd   ?init_expr : stmt option;
 //@atd   ~is_init_expr_cxx11_constant: bool;
 //@atd   ?parm_index_in_function : int option;
@@ -1724,6 +1725,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool IsStaticLocal = D->isStaticLocal(); // static function variables
   bool IsStaticDataMember = D->isStaticDataMember();
   bool IsConstExpr = D->isConstexpr();
+  bool IsInitICE = D->isInitKnownICE() && D->isInitICE();
   bool HasInit = D->hasInit();
   const ParmVarDecl *ParmDecl = dyn_cast<ParmVarDecl>(D);
   bool HasParmIndex = (bool)ParmDecl;
@@ -1739,7 +1741,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   //}
   ObjectScope Scope(OF,
                     IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
-                        IsConstExpr + HasInit + HasParmIndex + HasStorageClass +
+                        IsConstExpr + IsInitICE + HasInit + HasParmIndex + HasStorageClass +
                         isInitExprCXX11ConstantExpr);
 
   OF.emitFlag("is_global", IsGlobal);
@@ -1747,6 +1749,7 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   OF.emitFlag("is_static_local", IsStaticLocal);
   OF.emitFlag("is_static_data_member", IsStaticDataMember);
   OF.emitFlag("is_const_expr", IsConstExpr);
+  OF.emitFlag("is_init_ice", IsInitICE);
   if (HasInit) {
     OF.emitTag("init_expr");
     dumpStmt(D->getInit());
