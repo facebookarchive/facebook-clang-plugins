@@ -595,8 +595,17 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpName(const NamedDecl &Decl) {
   // dump name
   ObjectScope oScope(OF, 2);
+
   OF.emitTag("name");
-  OF.emitString(Decl.getNameAsString());
+
+  std::string name = Decl.getNameAsString();
+  if (name.length() == 0) {
+    const FieldDecl *FD = dyn_cast<FieldDecl>(&Decl);
+    if (FD) {
+      name = "__anon_field_" + std::to_string(FD->getFieldIndex());
+    }
+  }
+  OF.emitString(name);
 
   OF.emitTag("qual_name");
   NamePrint.printDeclName(Decl);
