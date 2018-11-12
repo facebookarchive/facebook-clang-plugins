@@ -17,7 +17,7 @@ STRIP=${STRIP:-strip}
 NCPUS="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)"
 JOBS="${JOBS:-$(($NCPUS>=8?$NCPUS/4:2))}"
 
-SHA256SUM="shasum -a 256 -p"
+SHASUM=${SHASUM:-shasum -a 256}
 
 usage () {
     echo "Usage: $0 [-chr]"
@@ -30,7 +30,7 @@ usage () {
 
 check_installed () {
     pushd "$SCRIPT_DIR" > /dev/null
-    $SHA256SUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null
+    $SHASUM -c "$CLANG_INSTALLED_VERSION_FILE" >& /dev/null
     local result=$?
     popd > /dev/null
     return $result
@@ -38,7 +38,7 @@ check_installed () {
 
 record_installed () {
     pushd "$SCRIPT_DIR" > /dev/null
-    $SHA256SUM "$CLANG_RELATIVE_SRC" "$SCRIPT_RELATIVE_PATH" > "$CLANG_INSTALLED_VERSION_FILE"
+    $SHASUM "$CLANG_RELATIVE_SRC" "$SCRIPT_RELATIVE_PATH" > "$CLANG_INSTALLED_VERSION_FILE"
     popd > /dev/null
 }
 
