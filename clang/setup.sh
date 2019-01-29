@@ -8,6 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_RELATIVE_PATH="$(basename "${BASH_SOURCE[0]}")"
 CLANG_RELATIVE_SRC="src/llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.tar.xz"
 CLANG_SRC="$SCRIPT_DIR/$CLANG_RELATIVE_SRC"
+CLANG_PREBUILD_PATCH="$SCRIPT_DIR/src/err_ret_local_block.patch"
 CLANG_PATCH="$SCRIPT_DIR/src/attr_dump_cpu_cases_compilation_fix.patch"
 CLANG_PREFIX="$SCRIPT_DIR/install"
 CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
@@ -129,6 +130,9 @@ if tar --version | grep -q 'GNU'; then
 fi
 echo "unpacking '$CLANG_SRC'..."
 tar --extract $QUIET_TAR --file "$CLANG_SRC"
+
+# apply prebuild patch
+"$PATCH" --batch -p 1 < "$CLANG_PREBUILD_PATCH"
 
 mkdir build
 pushd build
