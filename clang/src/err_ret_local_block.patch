@@ -1,5 +1,5 @@
---- a/llvm/tools/clang/lib/Sema/SemaInit.cpp 	2019-01-28 08:00:44.857227971 -0800
-+++ b/llvm/tools/clang/lib/Sema/SemaInit.cpp 	2019-01-28 08:00:29.685109362 -0800
+--- a/llvm/tools/clang/lib/Sema/SemaInit.cpp    2018-08-17 15:18:56.000000000 -0700
++++ b/llvm/tools/clang/lib/Sema/SemaInit.cpp    2019-01-30 06:37:36.000000000 -0700
 @@ -6940,7 +6940,9 @@
              << Entity.getType()->isReferenceType() << DRE->getDecl()
              << isa<ParmVarDecl>(DRE->getDecl()) << DiagRange;
