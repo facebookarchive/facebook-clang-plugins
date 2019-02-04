@@ -1,0 +1,58 @@
+diff -wbBdu -p1 -ru a/llvm/tools/clang/lib/AST/ItaniumMangle.cpp b/llvm/tools/clang/lib/AST/ItaniumMangle.cpp
+--- a/llvm/tools/clang/lib/AST/ItaniumMangle.cpp	2018-07-30 12:24:48.000000000 -0700
++++ b/llvm/tools/clang/lib/AST/ItaniumMangle.cpp	2019-02-04 07:22:44.790716718 -0800
+@@ -3018,7 +3018,3 @@ void CXXNameMangler::mangleNeonVectorTyp
+ void CXXNameMangler::mangleNeonVectorType(const DependentVectorType *T) {
+-  DiagnosticsEngine &Diags = Context.getDiags();
+-  unsigned DiagID = Diags.getCustomDiagID(
+-      DiagnosticsEngine::Error,
+-      "cannot mangle this dependent neon vector type yet");
+-  Diags.Report(T->getAttributeLoc(), DiagID);
++  Out << "__unhandled_NeonVectorType";
+ }
+@@ -3093,7 +3089,3 @@ void CXXNameMangler::mangleAArch64NeonVe
+ void CXXNameMangler::mangleAArch64NeonVectorType(const DependentVectorType *T) {
+-  DiagnosticsEngine &Diags = Context.getDiags();
+-  unsigned DiagID = Diags.getCustomDiagID(
+-      DiagnosticsEngine::Error,
+-      "cannot mangle this dependent neon vector type yet");
+-  Diags.Report(T->getAttributeLoc(), DiagID);
++  Out << "__unhandled_AArch64NeonVectorType";
+ }
+@@ -3564,8 +3556,3 @@ recurse:
+     if (!NullOut) {
+-      // As bad as this diagnostic is, it's better than crashing.
+-      DiagnosticsEngine &Diags = Context.getDiags();
+-      unsigned DiagID = Diags.getCustomDiagID(DiagnosticsEngine::Error,
+-                                       "cannot yet mangle expression type %0");
+-      Diags.Report(E->getExprLoc(), DiagID)
+-        << E->getStmtClassName() << E->getSourceRange();
++      Out << "__unhandled_expression";
+     }
+@@ -3590,8 +3577,3 @@ recurse:
+   case Expr::BinaryConditionalOperatorClass: {
+-    DiagnosticsEngine &Diags = Context.getDiags();
+-    unsigned DiagID =
+-      Diags.getCustomDiagID(DiagnosticsEngine::Error,
+-                "?: operator with omitted middle operand cannot be mangled");
+-    Diags.Report(E->getExprLoc(), DiagID)
+-      << E->getStmtClassName() << E->getSourceRange();
++    Out << "__unhandled_BinaryConditionalOperatorClass";
+     break;
+@@ -3889,6 +3871,3 @@ recurse:
+     case UETT_VecStep: {
+-      DiagnosticsEngine &Diags = Context.getDiags();
+-      unsigned DiagID = Diags.getCustomDiagID(DiagnosticsEngine::Error,
+-                                     "cannot yet mangle vec_step expression");
+-      Diags.Report(DiagID);
++      Out << "__unhandled_VecStep";
+       return;
+@@ -3896,7 +3875,3 @@ recurse:
+     case UETT_OpenMPRequiredSimdAlign:
+-      DiagnosticsEngine &Diags = Context.getDiags();
+-      unsigned DiagID = Diags.getCustomDiagID(
+-          DiagnosticsEngine::Error,
+-          "cannot yet mangle __builtin_omp_required_simd_align expression");
+-      Diags.Report(DiagID);
++      Out << "__unhandled_UETT_OpenMPRequiredSimdAlign";
+       return;
