@@ -1,32 +1,16 @@
 Facebook Clang Plugins
 ======================
 
-This [repository](https://github.com/facebook/facebook-clang-plugins) aims to share some useful clang plugins developed at Facebook.
+This [repository](https://github.com/facebook/facebook-clang-plugins) aims to share some useful clang plugins developed at Facebook. They are mostly used by [infer](https://github.com/facebook/infer).
 
-It contains two kinds of plugins to the [clang compiler](http://clang.llvm.org/):
-
-- analyzer plugins use the internal APIs of [clang analyzer](http://clang-analyzer.llvm.org/) to find bugs and report them;
-
-- frontend plugins process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyses easier.
-
-Most of the plugins here have been written with iOS in mind. However, different platforms may be considered in the future.
-
-Pre-release notes
------------------
-
-This pre-release is meant to spark interest and gather early feedback.
-Plugins are still subject to be deleted, moved, added, or heavily rewritten.
+It contains frontend plugins to the [clang compiler](http://clang.llvm.org/) to process the syntax of source files directly to accomplish more general tasks; specifically, we have developed a clang-to-ocaml bridge to make code analyses easier.
 
 Structure of the repository
 ---------------------------
 
-- [`analyzer`](https://github.com/facebook/facebook-clang-plugins/tree/master/analyzer) : plugins for clang analyzer,
-
 - [`libtooling`](https://github.com/facebook/facebook-clang-plugins/tree/master/libtooling) : frontend plugins (currently a clang-to-json AST exporter),
 
-- [`clang-ocaml`](https://github.com/facebook/facebook-clang-plugins/tree/master/clang-ocaml) : ocaml libraries to process the JSON output of frontend plugins,
-
-- [`extra-repo-example`](https://github.com/facebook/facebook-clang-plugins/tree/master/extra-repo-example) : example of external repository where to add plugins and piggyback on the build system.
+- [`clang-ocaml`](https://github.com/facebook/facebook-clang-plugins/tree/master/clang-ocaml) : OCaml libraries to process the JSON output of frontend plugins,
 
 
 Quick start
@@ -45,15 +29,14 @@ Caveat:
 
 Once the target compiler is installed, `make test` should run the unit tests.
 
-Ocaml users may also run:
+OCaml users may also run:
 ```
 make -C clang-ocaml test  #requires proper ocaml libraries, see included clang-ocaml/README
 ```
 
-Mac users may create an Xcode project as follows:
-```
-export CLANG_PREFIX=/usr/local #should be the same as above
-make xcode
-```
+Additional configuration options are available in `Makefile.config`.
 
-Additional configuration options are available in `Makefile.config` (and possibly `CMakeLists.txt`).
+Licence
+-------
+
+The plugins are BSD-licensed. We also provide an additional patent grant.

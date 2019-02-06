@@ -8,13 +8,3 @@
 build/%.o: %.cpp $(HEADERS) $(CLANG)
 	@mkdir -p $$(dirname $@)
 	$(CXX) $(CFLAGS) -c $< -o $@
-
-ifneq "$(EXTRA_DIR)" ""
-build/%.o: $(EXTRA_DIR)/%.cpp $(HEADERS) $(CLANG) $(EXTRA_HEADERS:%=$(EXTRA_DIR)/%)
-	@mkdir -p $$(dirname $@)
-	$(CXX) $(CFLAGS) -I . -c $< -o $@
-endif
-
-# Local Variables:
-# mode: makefile
-# End:

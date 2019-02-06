@@ -11,10 +11,7 @@ LEVEL=..
 include $(LEVEL)/Makefile.common
 
 HEADERS+=SimplePluginASTAction.h FileUtils.h AttrParameterVectorStream.h
-OBJS+=SimplePluginASTAction.o FileUtils.o AttrParameterVectorStream.o PrintFiles.o
-
-# Testing
-PLUGINS+=PrintFiles
+OBJS+=SimplePluginASTAction.o FileUtils.o AttrParameterVectorStream.o
 
 # ASTExporter
 HEADERS+=atdlib/ATDWriter.h ASTExporter.h NamePrinter.h
@@ -35,12 +32,6 @@ EXTS+=.biniou
 
 all: build/FacebookClangPlugin.dylib build/ast_exporter_bin
 
-# hook to optional external sources
-include $(LEVEL)/Makefile.extra
-ifneq "$(EXTRA_DIR)" ""
-include $(EXTRA_DIR)/Makefile.include
-endif
-
 include $(LEVEL)/Makefile.rules
 
 CLANG_FRONTEND=$(CLANG) -fsyntax-only -Xpreprocessor -detailed-preprocessing-record -Xclang -load -Xclang $(shell pwd)/build/FacebookClangPlugin.dylib
@@ -56,25 +47,15 @@ build/ast_exporter_bin: $(AST_EXPORTER_OBJS:%=build/%) $(HEADERS)
 	$(CXX) -o $@ $(AST_EXPORTER_OBJS:%=build/%) $(LDFLAGS) $(LLVM_CXXFLAGS) $(CLANG_TOOL_LIBS) $(LLVM_LDFLAGS) -lz -lpthread -lm
 
 TEST_DIRS=tests
-ifneq "$(EXTRA_DIR)" ""
-TEST_DIRS+=$(EXTRA_DIR)/tests
-endif
 
 OUT_TEST_FILES=${TEST_DIRS:%=%/*/*.out}
 
 # To make sharing of test files easier, each source file should be
-# found either in 'tests' or '$(EXTRA_DIR)/tests'. A plugin will only
-# use the source files for which a .exp file exists in the
-# corresponding subdirectory.
-ifneq "$(EXTRA_DIR)" ""
-EXPFILES_FORMULA=tests/$$P/*.exp "$(EXTRA_DIR)"/tests/$$P/*.exp
-SRCFILE_FORMULA=$$(ls {tests,"$(EXTRA_DIR)"/tests}/$$(basename $$TEST) 2>/dev/null || true)
-FILTERFILE_FORMULA=$$(ls {tests,"$(EXTRA_DIR)"/tests}/$${P}/filter.sh 2>/dev/null || true)
-else
+# found in 'tests'. A plugin will only use the source files for which
+# a .exp file exists in the corresponding subdirectory.
 EXPFILES_FORMULA=tests/$$P/*.exp
 SRCFILE_FORMULA=tests/$$(basename $$TEST)
 FILTERFILE_FORMULA=tests/$${P}/filter.sh
-endif
 
 test: build/FacebookClangPlugin.dylib
 	@for P in $(PLUGINS); do                                                        \
