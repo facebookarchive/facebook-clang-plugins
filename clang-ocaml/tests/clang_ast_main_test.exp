@@ -5,9 +5,9 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  FunctionDecl tests/c_attributes.c:1:1 tests/c_attributes.c:1:59
-     ParmVarDecl tests/c_attributes.c:1:18 tests/c_attributes.c:1:22
-  TypedefDecl tests/c_attributes.c:1:22 tests/c_attributes.c:1:22
+  FunctionDecl tests/c_attributes.c:7:1 tests/c_attributes.c:7:59
+     ParmVarDecl tests/c_attributes.c:7:18 tests/c_attributes.c:7:22
+  TypedefDecl tests/c_attributes.c:7:22 tests/c_attributes.c:7:22
 16 9 84 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -15,16 +15,16 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/bind_temporary.cpp:1:2 tests/bind_temporary.cpp:5:2
-    CXXRecordDecl tests/bind_temporary.cpp:1:2 tests/bind_temporary.cpp:1:9
-    AccessSpecDecl tests/bind_temporary.cpp:2:4 tests/bind_temporary.cpp:2:10
-    CXXConstructorDecl tests/bind_temporary.cpp:3:6 tests/bind_temporary.cpp:3:12
+  CXXRecordDecl tests/bind_temporary.cpp:7:2 tests/bind_temporary.cpp:11:2
+    CXXRecordDecl tests/bind_temporary.cpp:7:2 tests/bind_temporary.cpp:7:9
+    AccessSpecDecl tests/bind_temporary.cpp:8:4 tests/bind_temporary.cpp:8:10
+    CXXConstructorDecl tests/bind_temporary.cpp:9:6 tests/bind_temporary.cpp:9:12
       CompoundStmt
-    CXXDestructorDecl tests/bind_temporary.cpp:4:6 tests/bind_temporary.cpp:4:13
+    CXXDestructorDecl tests/bind_temporary.cpp:10:6 tests/bind_temporary.cpp:10:13
       CompoundStmt
-    CXXConstructorDecl tests/bind_temporary.cpp:1:9 tests/bind_temporary.cpp:1:9
-       ParmVarDecl tests/bind_temporary.cpp:1:9 tests/bind_temporary.cpp:1:9
-  FunctionDecl tests/bind_temporary.cpp:6:2 tests/bind_temporary.cpp:8:2
+    CXXConstructorDecl tests/bind_temporary.cpp:7:9 tests/bind_temporary.cpp:7:9
+       ParmVarDecl tests/bind_temporary.cpp:7:9 tests/bind_temporary.cpp:7:9
+  FunctionDecl tests/bind_temporary.cpp:12:2 tests/bind_temporary.cpp:14:2
     CompoundStmt
       DeclStmt
         ExprWithCleanups
@@ -32,13 +32,13 @@ TranslationUnitDecl None:None:None None:None:None
             ImplicitCastExpr
               CXXBindTemporaryExpr
                 CXXTemporaryObjectExpr
-        VarDecl tests/bind_temporary.cpp:7:4 tests/bind_temporary.cpp:7:23
+        VarDecl tests/bind_temporary.cpp:13:4 tests/bind_temporary.cpp:13:23
           ExprWithCleanups
             MaterializeTemporaryExpr
               ImplicitCastExpr
                 CXXBindTemporaryExpr
                   CXXTemporaryObjectExpr
-  TypedefDecl tests/bind_temporary.cpp:7:23 tests/bind_temporary.cpp:7:23
+  TypedefDecl tests/bind_temporary.cpp:13:23 tests/bind_temporary.cpp:13:23
 10 9 76 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -46,19 +46,19 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  VarDecl tests/c_cast.cpp:1:1 tests/c_cast.cpp:1:9
+  VarDecl tests/c_cast.cpp:7:1 tests/c_cast.cpp:7:9
     IntegerLiteral
-  VarDecl tests/c_cast.cpp:2:1 tests/c_cast.cpp:2:17
+  VarDecl tests/c_cast.cpp:8:1 tests/c_cast.cpp:8:17
     CStyleCastExpr
       ImplicitCastExpr
         ImplicitCastExpr
           DeclRefExpr
-  VarDecl tests/c_cast.cpp:3:1 tests/c_cast.cpp:3:17
+  VarDecl tests/c_cast.cpp:9:1 tests/c_cast.cpp:9:17
     CXXFunctionalCastExpr
       ImplicitCastExpr
         ImplicitCastExpr
           DeclRefExpr
-  TypedefDecl tests/c_cast.cpp:3:16 tests/c_cast.cpp:3:16
+  TypedefDecl tests/c_cast.cpp:9:16 tests/c_cast.cpp:9:16
 15 9 83 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -66,26 +66,26 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/const_cast.cpp:1:1 tests/const_cast.cpp:4:1
-    CXXRecordDecl tests/const_cast.cpp:1:1 tests/const_cast.cpp:1:7
-    AccessSpecDecl tests/const_cast.cpp:2:1 tests/const_cast.cpp:2:7
-    CXXMethodDecl tests/const_cast.cpp:3:3 tests/const_cast.cpp:3:16
+  CXXRecordDecl tests/const_cast.cpp:7:1 tests/const_cast.cpp:10:1
+    CXXRecordDecl tests/const_cast.cpp:7:1 tests/const_cast.cpp:7:7
+    AccessSpecDecl tests/const_cast.cpp:8:1 tests/const_cast.cpp:8:7
+    CXXMethodDecl tests/const_cast.cpp:9:3 tests/const_cast.cpp:9:16
       CompoundStmt
-  FunctionDecl tests/const_cast.cpp:6:1 tests/const_cast.cpp:9:1
-     ParmVarDecl tests/const_cast.cpp:6:20 tests/const_cast.cpp:6:31
+  FunctionDecl tests/const_cast.cpp:12:1 tests/const_cast.cpp:15:1
+     ParmVarDecl tests/const_cast.cpp:12:20 tests/const_cast.cpp:12:31
     CompoundStmt
       DeclStmt
         CXXConstCastExpr
           DeclRefExpr
-        VarDecl tests/const_cast.cpp:7:3 tests/const_cast.cpp:7:33
+        VarDecl tests/const_cast.cpp:13:3 tests/const_cast.cpp:13:33
           CXXConstCastExpr
             DeclRefExpr
       CXXMemberCallExpr
         MemberExpr
           DeclRefExpr
-  VarDecl tests/const_cast.cpp:11:1 tests/const_cast.cpp:11:19
+  VarDecl tests/const_cast.cpp:17:1 tests/const_cast.cpp:17:19
     IntegerLiteral
-  TypedefDecl tests/const_cast.cpp:11:19 tests/const_cast.cpp:11:19
+  TypedefDecl tests/const_cast.cpp:17:19 tests/const_cast.cpp:17:19
 44 40 111 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -93,52 +93,52 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/dynamic_cast.cpp:1:3 tests/dynamic_cast.cpp:3:3
-    CXXRecordDecl tests/dynamic_cast.cpp:1:3 tests/dynamic_cast.cpp:1:10
-    CXXMethodDecl tests/dynamic_cast.cpp:2:5 tests/dynamic_cast.cpp:2:24
+  CXXRecordDecl tests/dynamic_cast.cpp:7:3 tests/dynamic_cast.cpp:9:3
+    CXXRecordDecl tests/dynamic_cast.cpp:7:3 tests/dynamic_cast.cpp:7:10
+    CXXMethodDecl tests/dynamic_cast.cpp:8:5 tests/dynamic_cast.cpp:8:24
       CompoundStmt
-    CXXMethodDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-       ParmVarDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-    CXXMethodDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-       ParmVarDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-    CXXDestructorDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-    CXXConstructorDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
+    CXXMethodDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+       ParmVarDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+    CXXMethodDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+       ParmVarDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+    CXXDestructorDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+    CXXConstructorDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
       CompoundStmt
-    CXXConstructorDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-       ParmVarDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-    CXXConstructorDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-       ParmVarDecl tests/dynamic_cast.cpp:1:10 tests/dynamic_cast.cpp:1:10
-  CXXRecordDecl tests/dynamic_cast.cpp:4:3 tests/dynamic_cast.cpp:4:25
-    CXXRecordDecl tests/dynamic_cast.cpp:4:3 tests/dynamic_cast.cpp:4:10
-    CXXMethodDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-       ParmVarDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-    CXXMethodDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-       ParmVarDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-    CXXDestructorDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-    CXXConstructorDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
+    CXXConstructorDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+       ParmVarDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+    CXXConstructorDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+       ParmVarDecl tests/dynamic_cast.cpp:7:10 tests/dynamic_cast.cpp:7:10
+  CXXRecordDecl tests/dynamic_cast.cpp:10:3 tests/dynamic_cast.cpp:10:25
+    CXXRecordDecl tests/dynamic_cast.cpp:10:3 tests/dynamic_cast.cpp:10:10
+    CXXMethodDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+       ParmVarDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+    CXXMethodDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+       ParmVarDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+    CXXDestructorDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+    CXXConstructorDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
       CompoundStmt
         CXXConstructExpr
-    CXXConstructorDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-       ParmVarDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-    CXXConstructorDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-       ParmVarDecl tests/dynamic_cast.cpp:4:10 tests/dynamic_cast.cpp:4:10
-  CXXRecordDecl tests/dynamic_cast.cpp:5:3 tests/dynamic_cast.cpp:5:14
-    CXXRecordDecl tests/dynamic_cast.cpp:5:3 tests/dynamic_cast.cpp:5:10
-  FunctionDecl tests/dynamic_cast.cpp:7:3 tests/dynamic_cast.cpp:19:3
+    CXXConstructorDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+       ParmVarDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+    CXXConstructorDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+       ParmVarDecl tests/dynamic_cast.cpp:10:10 tests/dynamic_cast.cpp:10:10
+  CXXRecordDecl tests/dynamic_cast.cpp:11:3 tests/dynamic_cast.cpp:11:14
+    CXXRecordDecl tests/dynamic_cast.cpp:11:3 tests/dynamic_cast.cpp:11:10
+  FunctionDecl tests/dynamic_cast.cpp:13:3 tests/dynamic_cast.cpp:25:3
     CompoundStmt
       DeclStmt
         CXXConstructExpr
-        VarDecl tests/dynamic_cast.cpp:8:5 tests/dynamic_cast.cpp:8:7
+        VarDecl tests/dynamic_cast.cpp:14:5 tests/dynamic_cast.cpp:14:7
           CXXConstructExpr
       DeclStmt
         CXXConstructExpr
-        VarDecl tests/dynamic_cast.cpp:9:5 tests/dynamic_cast.cpp:9:7
+        VarDecl tests/dynamic_cast.cpp:15:5 tests/dynamic_cast.cpp:15:7
           CXXConstructExpr
       DeclStmt
         ImplicitCastExpr
           UnaryOperator
             DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:11:5 tests/dynamic_cast.cpp:11:14
+        VarDecl tests/dynamic_cast.cpp:17:5 tests/dynamic_cast.cpp:17:14
           ImplicitCastExpr
             UnaryOperator
               DeclRefExpr
@@ -146,7 +146,7 @@ TranslationUnitDecl None:None:None None:None:None
         CXXDynamicCastExpr
           UnaryOperator
             DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:12:5 tests/dynamic_cast.cpp:12:33
+        VarDecl tests/dynamic_cast.cpp:18:5 tests/dynamic_cast.cpp:18:33
           CXXDynamicCastExpr
             UnaryOperator
               DeclRefExpr
@@ -154,7 +154,7 @@ TranslationUnitDecl None:None:None None:None:None
         CXXDynamicCastExpr
           ImplicitCastExpr
             DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:13:5 tests/dynamic_cast.cpp:13:33
+        VarDecl tests/dynamic_cast.cpp:19:5 tests/dynamic_cast.cpp:19:33
           CXXDynamicCastExpr
             ImplicitCastExpr
               DeclRefExpr
@@ -162,7 +162,7 @@ TranslationUnitDecl None:None:None None:None:None
         CXXDynamicCastExpr
           ImplicitCastExpr
             DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:14:5 tests/dynamic_cast.cpp:14:32
+        VarDecl tests/dynamic_cast.cpp:20:5 tests/dynamic_cast.cpp:20:32
           CXXDynamicCastExpr
             ImplicitCastExpr
               DeclRefExpr
@@ -171,7 +171,7 @@ TranslationUnitDecl None:None:None None:None:None
           UnaryOperator
             ImplicitCastExpr
               DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:16:5 tests/dynamic_cast.cpp:16:34
+        VarDecl tests/dynamic_cast.cpp:22:5 tests/dynamic_cast.cpp:22:34
           CXXDynamicCastExpr
             UnaryOperator
               ImplicitCastExpr
@@ -181,7 +181,7 @@ TranslationUnitDecl None:None:None None:None:None
           UnaryOperator
             ImplicitCastExpr
               DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:17:5 tests/dynamic_cast.cpp:17:34
+        VarDecl tests/dynamic_cast.cpp:23:5 tests/dynamic_cast.cpp:23:34
           CXXDynamicCastExpr
             UnaryOperator
               ImplicitCastExpr
@@ -191,12 +191,12 @@ TranslationUnitDecl None:None:None None:None:None
           UnaryOperator
             ImplicitCastExpr
               DeclRefExpr
-        VarDecl tests/dynamic_cast.cpp:18:5 tests/dynamic_cast.cpp:18:34
+        VarDecl tests/dynamic_cast.cpp:24:5 tests/dynamic_cast.cpp:24:34
           CXXDynamicCastExpr
             UnaryOperator
               ImplicitCastExpr
                 DeclRefExpr
-  TypedefDecl tests/dynamic_cast.cpp:18:32 tests/dynamic_cast.cpp:18:32
+  TypedefDecl tests/dynamic_cast.cpp:24:32 tests/dynamic_cast.cpp:24:32
 33 54 98 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -204,35 +204,35 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/expr_with_cleanups.cpp:1:1 tests/expr_with_cleanups.cpp:7:1
-    CXXRecordDecl tests/expr_with_cleanups.cpp:1:1 tests/expr_with_cleanups.cpp:1:7
-    AccessSpecDecl tests/expr_with_cleanups.cpp:2:1 tests/expr_with_cleanups.cpp:2:7
-    CXXConstructorDecl tests/expr_with_cleanups.cpp:3:3 tests/expr_with_cleanups.cpp:3:8
-       ParmVarDecl tests/expr_with_cleanups.cpp:3:5 tests/expr_with_cleanups.cpp:3:5
-    CXXConstructorDecl tests/expr_with_cleanups.cpp:4:3 tests/expr_with_cleanups.cpp:4:13
-       ParmVarDecl tests/expr_with_cleanups.cpp:4:5 tests/expr_with_cleanups.cpp:4:12
-    CXXMethodDecl tests/expr_with_cleanups.cpp:5:3 tests/expr_with_cleanups.cpp:5:24
-       ParmVarDecl tests/expr_with_cleanups.cpp:5:16 tests/expr_with_cleanups.cpp:5:23
-    CXXDestructorDecl tests/expr_with_cleanups.cpp:6:3 tests/expr_with_cleanups.cpp:6:6
-  CXXRecordDecl tests/expr_with_cleanups.cpp:8:1 tests/expr_with_cleanups.cpp:12:1
-    CXXRecordDecl tests/expr_with_cleanups.cpp:8:1 tests/expr_with_cleanups.cpp:8:7
-    AccessSpecDecl tests/expr_with_cleanups.cpp:9:1 tests/expr_with_cleanups.cpp:9:7
-    CXXConstructorDecl tests/expr_with_cleanups.cpp:10:3 tests/expr_with_cleanups.cpp:10:8
-       ParmVarDecl tests/expr_with_cleanups.cpp:10:5 tests/expr_with_cleanups.cpp:10:5
-    CXXDestructorDecl tests/expr_with_cleanups.cpp:11:3 tests/expr_with_cleanups.cpp:11:6
-    CXXConstructorDecl tests/expr_with_cleanups.cpp:8:7 tests/expr_with_cleanups.cpp:8:7
-       ParmVarDecl tests/expr_with_cleanups.cpp:8:7 tests/expr_with_cleanups.cpp:8:7
+  CXXRecordDecl tests/expr_with_cleanups.cpp:7:1 tests/expr_with_cleanups.cpp:13:1
+    CXXRecordDecl tests/expr_with_cleanups.cpp:7:1 tests/expr_with_cleanups.cpp:7:7
+    AccessSpecDecl tests/expr_with_cleanups.cpp:8:1 tests/expr_with_cleanups.cpp:8:7
+    CXXConstructorDecl tests/expr_with_cleanups.cpp:9:3 tests/expr_with_cleanups.cpp:9:8
+       ParmVarDecl tests/expr_with_cleanups.cpp:9:5 tests/expr_with_cleanups.cpp:9:5
+    CXXConstructorDecl tests/expr_with_cleanups.cpp:10:3 tests/expr_with_cleanups.cpp:10:13
+       ParmVarDecl tests/expr_with_cleanups.cpp:10:5 tests/expr_with_cleanups.cpp:10:12
+    CXXMethodDecl tests/expr_with_cleanups.cpp:11:3 tests/expr_with_cleanups.cpp:11:24
+       ParmVarDecl tests/expr_with_cleanups.cpp:11:16 tests/expr_with_cleanups.cpp:11:23
+    CXXDestructorDecl tests/expr_with_cleanups.cpp:12:3 tests/expr_with_cleanups.cpp:12:6
+  CXXRecordDecl tests/expr_with_cleanups.cpp:14:1 tests/expr_with_cleanups.cpp:18:1
+    CXXRecordDecl tests/expr_with_cleanups.cpp:14:1 tests/expr_with_cleanups.cpp:14:7
+    AccessSpecDecl tests/expr_with_cleanups.cpp:15:1 tests/expr_with_cleanups.cpp:15:7
+    CXXConstructorDecl tests/expr_with_cleanups.cpp:16:3 tests/expr_with_cleanups.cpp:16:8
+       ParmVarDecl tests/expr_with_cleanups.cpp:16:5 tests/expr_with_cleanups.cpp:16:5
+    CXXDestructorDecl tests/expr_with_cleanups.cpp:17:3 tests/expr_with_cleanups.cpp:17:6
+    CXXConstructorDecl tests/expr_with_cleanups.cpp:14:7 tests/expr_with_cleanups.cpp:14:7
+       ParmVarDecl tests/expr_with_cleanups.cpp:14:7 tests/expr_with_cleanups.cpp:14:7
       CompoundStmt
-  FunctionDecl tests/expr_with_cleanups.cpp:13:1 tests/expr_with_cleanups.cpp:13:6
-     ParmVarDecl tests/expr_with_cleanups.cpp:13:5 tests/expr_with_cleanups.cpp:13:5
-  FunctionDecl tests/expr_with_cleanups.cpp:14:1 tests/expr_with_cleanups.cpp:14:6
-     ParmVarDecl tests/expr_with_cleanups.cpp:14:5 tests/expr_with_cleanups.cpp:14:5
-  FunctionDecl tests/expr_with_cleanups.cpp:15:1 tests/expr_with_cleanups.cpp:20:1
+  FunctionDecl tests/expr_with_cleanups.cpp:19:1 tests/expr_with_cleanups.cpp:19:6
+     ParmVarDecl tests/expr_with_cleanups.cpp:19:5 tests/expr_with_cleanups.cpp:19:5
+  FunctionDecl tests/expr_with_cleanups.cpp:20:1 tests/expr_with_cleanups.cpp:20:6
+     ParmVarDecl tests/expr_with_cleanups.cpp:20:5 tests/expr_with_cleanups.cpp:20:5
+  FunctionDecl tests/expr_with_cleanups.cpp:21:1 tests/expr_with_cleanups.cpp:26:1
     CompoundStmt
       DeclStmt
         CXXConstructExpr
           IntegerLiteral
-        VarDecl tests/expr_with_cleanups.cpp:16:3 tests/expr_with_cleanups.cpp:16:8
+        VarDecl tests/expr_with_cleanups.cpp:22:3 tests/expr_with_cleanups.cpp:22:8
           CXXConstructExpr
             IntegerLiteral
       DeclStmt
@@ -252,7 +252,7 @@ TranslationUnitDecl None:None:None None:None:None
                               CXXBindTemporaryExpr
                                 CXXConstructExpr
                                   IntegerLiteral
-        VarDecl tests/expr_with_cleanups.cpp:17:3 tests/expr_with_cleanups.cpp:17:15
+        VarDecl tests/expr_with_cleanups.cpp:23:3 tests/expr_with_cleanups.cpp:23:15
           ExprWithCleanups
             CXXConstructExpr
               MaterializeTemporaryExpr
@@ -286,7 +286,7 @@ TranslationUnitDecl None:None:None None:None:None
                               CXXBindTemporaryExpr
                                 CXXConstructExpr
                                   IntegerLiteral
-        VarDecl tests/expr_with_cleanups.cpp:18:3 tests/expr_with_cleanups.cpp:18:15
+        VarDecl tests/expr_with_cleanups.cpp:24:3 tests/expr_with_cleanups.cpp:24:15
           ExprWithCleanups
             CXXConstructExpr
               MaterializeTemporaryExpr
@@ -318,7 +318,7 @@ TranslationUnitDecl None:None:None None:None:None
                     CXXConstructExpr
                       ImplicitCastExpr
                         DeclRefExpr
-  TypedefDecl tests/expr_with_cleanups.cpp:19:9 tests/expr_with_cleanups.cpp:19:9
+  TypedefDecl tests/expr_with_cleanups.cpp:25:9 tests/expr_with_cleanups.cpp:25:9
 41 57 104 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -326,47 +326,47 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  FunctionDecl tests/inheritance.cpp:1:1 tests/inheritance.cpp:1:26
-     ParmVarDecl tests/inheritance.cpp:1:20 tests/inheritance.cpp:1:20
-  FunctionDecl tests/inheritance.cpp:2:1 tests/inheritance.cpp:2:33
-     ParmVarDecl tests/inheritance.cpp:2:19 tests/inheritance.cpp:2:19
-     ParmVarDecl tests/inheritance.cpp:2:27 tests/inheritance.cpp:2:27
-  CXXRecordDecl tests/inheritance.cpp:4:1 tests/inheritance.cpp:20:1
-    CXXRecordDecl tests/inheritance.cpp:4:1 tests/inheritance.cpp:4:7
-    AccessSpecDecl tests/inheritance.cpp:5:1 tests/inheritance.cpp:5:8
-    FieldDecl tests/inheritance.cpp:6:3 tests/inheritance.cpp:6:10
-    AccessSpecDecl tests/inheritance.cpp:8:1 tests/inheritance.cpp:8:7
-    FieldDecl tests/inheritance.cpp:9:3 tests/inheritance.cpp:9:7
-    CXXMethodDecl tests/inheritance.cpp:10:3 tests/inheritance.cpp:10:27
+  FunctionDecl tests/inheritance.cpp:7:1 tests/inheritance.cpp:7:26
+     ParmVarDecl tests/inheritance.cpp:7:20 tests/inheritance.cpp:7:20
+  FunctionDecl tests/inheritance.cpp:8:1 tests/inheritance.cpp:8:33
+     ParmVarDecl tests/inheritance.cpp:8:19 tests/inheritance.cpp:8:19
+     ParmVarDecl tests/inheritance.cpp:8:27 tests/inheritance.cpp:8:27
+  CXXRecordDecl tests/inheritance.cpp:10:1 tests/inheritance.cpp:26:1
+    CXXRecordDecl tests/inheritance.cpp:10:1 tests/inheritance.cpp:10:7
+    AccessSpecDecl tests/inheritance.cpp:11:1 tests/inheritance.cpp:11:8
+    FieldDecl tests/inheritance.cpp:12:3 tests/inheritance.cpp:12:10
+    AccessSpecDecl tests/inheritance.cpp:14:1 tests/inheritance.cpp:14:7
+    FieldDecl tests/inheritance.cpp:15:3 tests/inheritance.cpp:15:7
+    CXXMethodDecl tests/inheritance.cpp:16:3 tests/inheritance.cpp:16:27
       CompoundStmt
-    CXXMethodDecl tests/inheritance.cpp:12:3 tests/inheritance.cpp:14:3
+    CXXMethodDecl tests/inheritance.cpp:18:3 tests/inheritance.cpp:20:3
       CompoundStmt
         ReturnStmt
           ImplicitCastExpr
             MemberExpr
               CXXThisExpr
-    CXXMethodDecl tests/inheritance.cpp:16:3 tests/inheritance.cpp:18:3
-       ParmVarDecl tests/inheritance.cpp:16:16 tests/inheritance.cpp:16:23
+    CXXMethodDecl tests/inheritance.cpp:22:3 tests/inheritance.cpp:24:3
+       ParmVarDecl tests/inheritance.cpp:22:16 tests/inheritance.cpp:22:23
       CompoundStmt
         BinaryOperator
           MemberExpr
             CXXThisExpr
           ImplicitCastExpr
             DeclRefExpr
-    CXXMethodDecl tests/inheritance.cpp:4:7 tests/inheritance.cpp:4:7
-       ParmVarDecl tests/inheritance.cpp:4:7 tests/inheritance.cpp:4:7
-    CXXMethodDecl tests/inheritance.cpp:4:7 tests/inheritance.cpp:4:7
-       ParmVarDecl tests/inheritance.cpp:4:7 tests/inheritance.cpp:4:7
-    CXXDestructorDecl tests/inheritance.cpp:4:7 tests/inheritance.cpp:4:7
-  CXXRecordDecl tests/inheritance.cpp:22:1 tests/inheritance.cpp:39:1
-    CXXRecordDecl tests/inheritance.cpp:22:1 tests/inheritance.cpp:22:7
-    AccessSpecDecl tests/inheritance.cpp:23:1 tests/inheritance.cpp:23:7
-    CXXMethodDecl tests/inheritance.cpp:24:3 tests/inheritance.cpp:24:28
+    CXXMethodDecl tests/inheritance.cpp:10:7 tests/inheritance.cpp:10:7
+       ParmVarDecl tests/inheritance.cpp:10:7 tests/inheritance.cpp:10:7
+    CXXMethodDecl tests/inheritance.cpp:10:7 tests/inheritance.cpp:10:7
+       ParmVarDecl tests/inheritance.cpp:10:7 tests/inheritance.cpp:10:7
+    CXXDestructorDecl tests/inheritance.cpp:10:7 tests/inheritance.cpp:10:7
+  CXXRecordDecl tests/inheritance.cpp:28:1 tests/inheritance.cpp:45:1
+    CXXRecordDecl tests/inheritance.cpp:28:1 tests/inheritance.cpp:28:7
+    AccessSpecDecl tests/inheritance.cpp:29:1 tests/inheritance.cpp:29:7
+    CXXMethodDecl tests/inheritance.cpp:30:3 tests/inheritance.cpp:30:28
       CompoundStmt
-    CXXMethodDecl tests/inheritance.cpp:25:3 tests/inheritance.cpp:29:3
+    CXXMethodDecl tests/inheritance.cpp:31:3 tests/inheritance.cpp:35:3
       CompoundStmt
         DeclStmt
-          VarDecl tests/inheritance.cpp:26:5 tests/inheritance.cpp:26:12
+          VarDecl tests/inheritance.cpp:32:5 tests/inheritance.cpp:32:12
         BinaryOperator
           DeclRefExpr
           CXXMemberCallExpr
@@ -384,8 +384,8 @@ TranslationUnitDecl None:None:None None:None:None
                 ImplicitCastExpr
                   IntegerLiteral
               FloatingLiteral
-    CXXMethodDecl tests/inheritance.cpp:31:3 tests/inheritance.cpp:33:3
-       ParmVarDecl tests/inheritance.cpp:31:17 tests/inheritance.cpp:31:24
+    CXXMethodDecl tests/inheritance.cpp:37:3 tests/inheritance.cpp:39:3
+       ParmVarDecl tests/inheritance.cpp:37:17 tests/inheritance.cpp:37:24
       CompoundStmt
         CXXMemberCallExpr
           MemberExpr
@@ -402,7 +402,7 @@ TranslationUnitDecl None:None:None None:None:None
               ImplicitCastExpr
                 IntegerLiteral
             FloatingLiteral
-    CXXMethodDecl tests/inheritance.cpp:35:3 tests/inheritance.cpp:37:3
+    CXXMethodDecl tests/inheritance.cpp:41:3 tests/inheritance.cpp:43:3
       CompoundStmt
         ReturnStmt
           ParenExpr
@@ -412,12 +412,12 @@ TranslationUnitDecl None:None:None None:None:None
                   ImplicitCastExpr
                     CXXThisExpr
               IntegerLiteral
-    CXXMethodDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
-       ParmVarDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
-    CXXMethodDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
-       ParmVarDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
-    CXXDestructorDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
-  TypedefDecl tests/inheritance.cpp:22:7 tests/inheritance.cpp:22:7
+    CXXMethodDecl tests/inheritance.cpp:28:7 tests/inheritance.cpp:28:7
+       ParmVarDecl tests/inheritance.cpp:28:7 tests/inheritance.cpp:28:7
+    CXXMethodDecl tests/inheritance.cpp:28:7 tests/inheritance.cpp:28:7
+       ParmVarDecl tests/inheritance.cpp:28:7 tests/inheritance.cpp:28:7
+    CXXDestructorDecl tests/inheritance.cpp:28:7 tests/inheritance.cpp:28:7
+  TypedefDecl tests/inheritance.cpp:28:7 tests/inheritance.cpp:28:7
 41 48 131 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -425,11 +425,11 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  FunctionDecl tests/lambda.cpp:1:1 tests/lambda.cpp:11:1
+  FunctionDecl tests/lambda.cpp:7:1 tests/lambda.cpp:17:1
     CompoundStmt
       DeclStmt
-        VarDecl tests/lambda.cpp:2:1 tests/lambda.cpp:2:5
-        VarDecl tests/lambda.cpp:2:1 tests/lambda.cpp:2:7
+        VarDecl tests/lambda.cpp:8:1 tests/lambda.cpp:8:5
+        VarDecl tests/lambda.cpp:8:1 tests/lambda.cpp:8:7
       DeclStmt
         ExprWithCleanups
           CXXConstructExpr
@@ -438,20 +438,20 @@ TranslationUnitDecl None:None:None None:None:None
                 CompoundStmt
                   ReturnStmt
                     IntegerLiteral
-                CXXRecordDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                  CXXMethodDecl tests/lambda.cpp:4:13 tests/lambda.cpp:4:24
+                CXXRecordDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                  CXXMethodDecl tests/lambda.cpp:10:13 tests/lambda.cpp:10:24
                     CompoundStmt
                       ReturnStmt
                         IntegerLiteral
-                  CXXConversionDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:24
-                  CXXMethodDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:24
-                  CXXDestructorDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                  CXXConstructorDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                     ParmVarDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                  CXXConstructorDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                     ParmVarDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
+                  CXXConversionDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:24
+                  CXXMethodDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:24
+                  CXXDestructorDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                  CXXConstructorDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                     ParmVarDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                  CXXConstructorDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                     ParmVarDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
                     CompoundStmt
-        VarDecl tests/lambda.cpp:4:1 tests/lambda.cpp:4:24
+        VarDecl tests/lambda.cpp:10:1 tests/lambda.cpp:10:24
           ExprWithCleanups
             CXXConstructExpr
               MaterializeTemporaryExpr
@@ -459,18 +459,18 @@ TranslationUnitDecl None:None:None None:None:None
                   CompoundStmt
                     ReturnStmt
                       IntegerLiteral
-                  CXXRecordDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                    CXXMethodDecl tests/lambda.cpp:4:13 tests/lambda.cpp:4:24
+                  CXXRecordDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                    CXXMethodDecl tests/lambda.cpp:10:13 tests/lambda.cpp:10:24
                       CompoundStmt
                         ReturnStmt
                           IntegerLiteral
-                    CXXConversionDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:24
-                    CXXMethodDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:24
-                    CXXDestructorDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                    CXXConstructorDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                       ParmVarDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                    CXXConstructorDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
-                       ParmVarDecl tests/lambda.cpp:4:10 tests/lambda.cpp:4:10
+                    CXXConversionDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:24
+                    CXXMethodDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:24
+                    CXXDestructorDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                    CXXConstructorDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                       ParmVarDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                    CXXConstructorDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
+                       ParmVarDecl tests/lambda.cpp:10:10 tests/lambda.cpp:10:10
                       CompoundStmt
       DeclStmt
         ExprWithCleanups
@@ -484,20 +484,20 @@ TranslationUnitDecl None:None:None None:None:None
                   ReturnStmt
                     ImplicitCastExpr
                       DeclRefExpr
-                CXXRecordDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                  FieldDecl tests/lambda.cpp:6:18 tests/lambda.cpp:6:18
-                  FieldDecl tests/lambda.cpp:6:21 tests/lambda.cpp:6:21
-                  CXXMethodDecl tests/lambda.cpp:6:30 tests/lambda.cpp:6:44
-                     ParmVarDecl tests/lambda.cpp:6:25 tests/lambda.cpp:6:29
+                CXXRecordDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                  FieldDecl tests/lambda.cpp:12:18 tests/lambda.cpp:12:18
+                  FieldDecl tests/lambda.cpp:12:21 tests/lambda.cpp:12:21
+                  CXXMethodDecl tests/lambda.cpp:12:30 tests/lambda.cpp:12:44
+                     ParmVarDecl tests/lambda.cpp:12:25 tests/lambda.cpp:12:29
                     CompoundStmt
                       ReturnStmt
                         ImplicitCastExpr
                           DeclRefExpr
-                  CXXDestructorDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                  CXXConstructorDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                     ParmVarDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                  CXXConstructorDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                     ParmVarDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
+                  CXXDestructorDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                  CXXConstructorDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                     ParmVarDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                  CXXConstructorDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                     ParmVarDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
                     CompoundStmt
                       MemberExpr
                         CXXStaticCastExpr
@@ -506,7 +506,7 @@ TranslationUnitDecl None:None:None None:None:None
                         MemberExpr
                           CXXStaticCastExpr
                             DeclRefExpr
-        VarDecl tests/lambda.cpp:6:5 tests/lambda.cpp:6:44
+        VarDecl tests/lambda.cpp:12:5 tests/lambda.cpp:12:44
           ExprWithCleanups
             CXXConstructExpr
               MaterializeTemporaryExpr
@@ -518,20 +518,20 @@ TranslationUnitDecl None:None:None None:None:None
                     ReturnStmt
                       ImplicitCastExpr
                         DeclRefExpr
-                  CXXRecordDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                    FieldDecl tests/lambda.cpp:6:18 tests/lambda.cpp:6:18
-                    FieldDecl tests/lambda.cpp:6:21 tests/lambda.cpp:6:21
-                    CXXMethodDecl tests/lambda.cpp:6:30 tests/lambda.cpp:6:44
-                       ParmVarDecl tests/lambda.cpp:6:25 tests/lambda.cpp:6:29
+                  CXXRecordDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                    FieldDecl tests/lambda.cpp:12:18 tests/lambda.cpp:12:18
+                    FieldDecl tests/lambda.cpp:12:21 tests/lambda.cpp:12:21
+                    CXXMethodDecl tests/lambda.cpp:12:30 tests/lambda.cpp:12:44
+                       ParmVarDecl tests/lambda.cpp:12:25 tests/lambda.cpp:12:29
                       CompoundStmt
                         ReturnStmt
                           ImplicitCastExpr
                             DeclRefExpr
-                    CXXDestructorDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                    CXXConstructorDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                       ParmVarDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                    CXXConstructorDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
-                       ParmVarDecl tests/lambda.cpp:6:16 tests/lambda.cpp:6:16
+                    CXXDestructorDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                    CXXConstructorDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                       ParmVarDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                    CXXConstructorDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
+                       ParmVarDecl tests/lambda.cpp:12:16 tests/lambda.cpp:12:16
                       CompoundStmt
                         MemberExpr
                           CXXStaticCastExpr
@@ -550,26 +550,26 @@ TranslationUnitDecl None:None:None None:None:None
                   ReturnStmt
                     ImplicitCastExpr
                       DeclRefExpr
-                CXXRecordDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                  FieldDecl tests/lambda.cpp:8:26 tests/lambda.cpp:8:26
-                  CXXMethodDecl tests/lambda.cpp:8:33 tests/lambda.cpp:8:47
+                CXXRecordDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                  FieldDecl tests/lambda.cpp:14:26 tests/lambda.cpp:14:26
+                  CXXMethodDecl tests/lambda.cpp:14:33 tests/lambda.cpp:14:47
                     CompoundStmt
                       ReturnStmt
                         ImplicitCastExpr
                           DeclRefExpr
-                  CXXDestructorDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                  CXXConstructorDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                     ParmVarDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                  CXXConstructorDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                     ParmVarDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
+                  CXXDestructorDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                  CXXConstructorDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                     ParmVarDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                  CXXConstructorDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                     ParmVarDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
                     CompoundStmt
                       ImplicitCastExpr
                         MemberExpr
                           CXXStaticCastExpr
                             DeclRefExpr
-                    VarDecl tests/lambda.cpp:8:26 tests/lambda.cpp:8:30
+                    VarDecl tests/lambda.cpp:14:26 tests/lambda.cpp:14:30
                       IntegerLiteral
-        VarDecl tests/lambda.cpp:8:5 tests/lambda.cpp:8:47
+        VarDecl tests/lambda.cpp:14:5 tests/lambda.cpp:14:47
           ExprWithCleanups
             CXXConstructExpr
               MaterializeTemporaryExpr
@@ -579,28 +579,28 @@ TranslationUnitDecl None:None:None None:None:None
                     ReturnStmt
                       ImplicitCastExpr
                         DeclRefExpr
-                  CXXRecordDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                    FieldDecl tests/lambda.cpp:8:26 tests/lambda.cpp:8:26
-                    CXXMethodDecl tests/lambda.cpp:8:33 tests/lambda.cpp:8:47
+                  CXXRecordDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                    FieldDecl tests/lambda.cpp:14:26 tests/lambda.cpp:14:26
+                    CXXMethodDecl tests/lambda.cpp:14:33 tests/lambda.cpp:14:47
                       CompoundStmt
                         ReturnStmt
                           ImplicitCastExpr
                             DeclRefExpr
-                    CXXDestructorDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                    CXXConstructorDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                       ParmVarDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                    CXXConstructorDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
-                       ParmVarDecl tests/lambda.cpp:8:25 tests/lambda.cpp:8:25
+                    CXXDestructorDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                    CXXConstructorDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                       ParmVarDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                    CXXConstructorDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
+                       ParmVarDecl tests/lambda.cpp:14:25 tests/lambda.cpp:14:25
                       CompoundStmt
                         ImplicitCastExpr
                           MemberExpr
                             CXXStaticCastExpr
                               DeclRefExpr
-                      VarDecl tests/lambda.cpp:8:26 tests/lambda.cpp:8:30
+                      VarDecl tests/lambda.cpp:14:26 tests/lambda.cpp:14:30
                         IntegerLiteral
       ReturnStmt
         IntegerLiteral
-  TypedefDecl tests/lambda.cpp:10:12 tests/lambda.cpp:10:12
+  TypedefDecl tests/lambda.cpp:16:12 tests/lambda.cpp:16:12
 8 4 77 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -608,12 +608,12 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  VarDecl tests/materialize_temporary.cpp:1:1 tests/materialize_temporary.cpp:1:16
+  VarDecl tests/materialize_temporary.cpp:7:1 tests/materialize_temporary.cpp:7:16
     ExprWithCleanups
       MaterializeTemporaryExpr
         ImplicitCastExpr
           FloatingLiteral
-  TypedefDecl tests/materialize_temporary.cpp:1:16 tests/materialize_temporary.cpp:1:16
+  TypedefDecl tests/materialize_temporary.cpp:7:16 tests/materialize_temporary.cpp:7:16
 14 0 76 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -621,14 +621,14 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  NamespaceDecl tests/namespace_decl.cpp:1:1 tests/namespace_decl.cpp:9:1
-    NamespaceDecl tests/namespace_decl.cpp:2:3 tests/namespace_decl.cpp:3:3
-    NamespaceDecl tests/namespace_decl.cpp:4:3 tests/namespace_decl.cpp:5:3
-    NamespaceDecl tests/namespace_decl.cpp:6:3 tests/namespace_decl.cpp:8:3
-      VarDecl tests/namespace_decl.cpp:7:5 tests/namespace_decl.cpp:7:9
-  NamespaceDecl tests/namespace_decl.cpp:11:1 tests/namespace_decl.cpp:13:1
-  UsingDirectiveDecl tests/namespace_decl.cpp:11:11 tests/namespace_decl.cpp:11:11
-  TypedefDecl tests/namespace_decl.cpp:11:11 tests/namespace_decl.cpp:11:11
+  NamespaceDecl tests/namespace_decl.cpp:7:1 tests/namespace_decl.cpp:15:1
+    NamespaceDecl tests/namespace_decl.cpp:8:3 tests/namespace_decl.cpp:9:3
+    NamespaceDecl tests/namespace_decl.cpp:10:3 tests/namespace_decl.cpp:11:3
+    NamespaceDecl tests/namespace_decl.cpp:12:3 tests/namespace_decl.cpp:14:3
+      VarDecl tests/namespace_decl.cpp:13:5 tests/namespace_decl.cpp:13:9
+  NamespaceDecl tests/namespace_decl.cpp:17:1 tests/namespace_decl.cpp:19:1
+  UsingDirectiveDecl tests/namespace_decl.cpp:17:11 tests/namespace_decl.cpp:17:11
+  TypedefDecl tests/namespace_decl.cpp:17:11 tests/namespace_decl.cpp:17:11
 58 98 139 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -636,60 +636,60 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/new.cpp:1:1 tests/new.cpp:3:1
-    CXXRecordDecl tests/new.cpp:1:1 tests/new.cpp:1:8
-    FieldDecl tests/new.cpp:2:3 tests/new.cpp:2:7
-    CXXConstructorDecl tests/new.cpp:1:8 tests/new.cpp:1:8
-      CompoundStmt
-    CXXConstructorDecl tests/new.cpp:1:8 tests/new.cpp:1:8
-       ParmVarDecl tests/new.cpp:1:8 tests/new.cpp:1:8
-    CXXConstructorDecl tests/new.cpp:1:8 tests/new.cpp:1:8
-       ParmVarDecl tests/new.cpp:1:8 tests/new.cpp:1:8
-    CXXDestructorDecl tests/new.cpp:1:8 tests/new.cpp:1:8
-  CXXRecordDecl tests/new.cpp:5:1 tests/new.cpp:11:1
-    CXXRecordDecl tests/new.cpp:5:1 tests/new.cpp:5:8
-    FieldDecl tests/new.cpp:6:3 tests/new.cpp:6:7
-    FieldDecl tests/new.cpp:7:3 tests/new.cpp:7:7
+  CXXRecordDecl tests/new.cpp:7:1 tests/new.cpp:9:1
+    CXXRecordDecl tests/new.cpp:7:1 tests/new.cpp:7:8
     FieldDecl tests/new.cpp:8:3 tests/new.cpp:8:7
-    CXXConstructorDecl tests/new.cpp:9:3 tests/new.cpp:9:28
+    CXXConstructorDecl tests/new.cpp:7:8 tests/new.cpp:7:8
+      CompoundStmt
+    CXXConstructorDecl tests/new.cpp:7:8 tests/new.cpp:7:8
+       ParmVarDecl tests/new.cpp:7:8 tests/new.cpp:7:8
+    CXXConstructorDecl tests/new.cpp:7:8 tests/new.cpp:7:8
+       ParmVarDecl tests/new.cpp:7:8 tests/new.cpp:7:8
+    CXXDestructorDecl tests/new.cpp:7:8 tests/new.cpp:7:8
+  CXXRecordDecl tests/new.cpp:11:1 tests/new.cpp:17:1
+    CXXRecordDecl tests/new.cpp:11:1 tests/new.cpp:11:8
+    FieldDecl tests/new.cpp:12:3 tests/new.cpp:12:7
+    FieldDecl tests/new.cpp:13:3 tests/new.cpp:13:7
+    FieldDecl tests/new.cpp:14:3 tests/new.cpp:14:7
+    CXXConstructorDecl tests/new.cpp:15:3 tests/new.cpp:15:28
       CompoundStmt
         IntegerLiteral
         IntegerLiteral
         CXXConstructExpr
-    CXXConstructorDecl tests/new.cpp:10:3 tests/new.cpp:10:39
-       ParmVarDecl tests/new.cpp:10:11 tests/new.cpp:10:15
-       ParmVarDecl tests/new.cpp:10:18 tests/new.cpp:10:22
+    CXXConstructorDecl tests/new.cpp:16:3 tests/new.cpp:16:39
+       ParmVarDecl tests/new.cpp:16:11 tests/new.cpp:16:15
+       ParmVarDecl tests/new.cpp:16:18 tests/new.cpp:16:22
       CompoundStmt
         ImplicitCastExpr
           DeclRefExpr
         ImplicitCastExpr
           DeclRefExpr
         CXXConstructExpr
-    CXXConstructorDecl tests/new.cpp:5:8 tests/new.cpp:5:8
-       ParmVarDecl tests/new.cpp:5:8 tests/new.cpp:5:8
-    CXXConstructorDecl tests/new.cpp:5:8 tests/new.cpp:5:8
-       ParmVarDecl tests/new.cpp:5:8 tests/new.cpp:5:8
-    CXXDestructorDecl tests/new.cpp:5:8 tests/new.cpp:5:8
-  FunctionDecl tests/new.cpp:13:1 tests/new.cpp:29:1
+    CXXConstructorDecl tests/new.cpp:11:8 tests/new.cpp:11:8
+       ParmVarDecl tests/new.cpp:11:8 tests/new.cpp:11:8
+    CXXConstructorDecl tests/new.cpp:11:8 tests/new.cpp:11:8
+       ParmVarDecl tests/new.cpp:11:8 tests/new.cpp:11:8
+    CXXDestructorDecl tests/new.cpp:11:8 tests/new.cpp:11:8
+  FunctionDecl tests/new.cpp:19:1 tests/new.cpp:35:1
     CompoundStmt
       DeclStmt
         CXXNewExpr
           IntegerLiteral
-        VarDecl tests/new.cpp:14:3 tests/new.cpp:14:22
+        VarDecl tests/new.cpp:20:3 tests/new.cpp:20:22
           CXXNewExpr
             IntegerLiteral
       DeclStmt
         CXXNewExpr
           ImplicitCastExpr
             IntegerLiteral
-        VarDecl tests/new.cpp:15:3 tests/new.cpp:15:25
+        VarDecl tests/new.cpp:21:3 tests/new.cpp:21:25
           CXXNewExpr
             ImplicitCastExpr
               IntegerLiteral
       DeclStmt
         CXXNewExpr
           CXXConstructExpr
-        VarDecl tests/new.cpp:17:3 tests/new.cpp:17:17
+        VarDecl tests/new.cpp:23:3 tests/new.cpp:23:17
           CXXNewExpr
             CXXConstructExpr
       DeclStmt
@@ -697,7 +697,7 @@ TranslationUnitDecl None:None:None None:None:None
           ImplicitCastExpr
             IntegerLiteral
           CXXConstructExpr
-        VarDecl tests/new.cpp:18:3 tests/new.cpp:18:25
+        VarDecl tests/new.cpp:24:3 tests/new.cpp:24:25
           CXXNewExpr
             ImplicitCastExpr
               IntegerLiteral
@@ -707,7 +707,7 @@ TranslationUnitDecl None:None:None None:None:None
           CXXConstructExpr
             IntegerLiteral
             IntegerLiteral
-        VarDecl tests/new.cpp:20:3 tests/new.cpp:20:29
+        VarDecl tests/new.cpp:26:3 tests/new.cpp:26:29
           CXXNewExpr
             CXXConstructExpr
               IntegerLiteral
@@ -717,7 +717,7 @@ TranslationUnitDecl None:None:None None:None:None
           ImplicitCastExpr
             IntegerLiteral
           CXXConstructExpr
-        VarDecl tests/new.cpp:21:3 tests/new.cpp:21:29
+        VarDecl tests/new.cpp:27:3 tests/new.cpp:27:29
           CXXNewExpr
             ImplicitCastExpr
               IntegerLiteral
@@ -740,15 +740,15 @@ TranslationUnitDecl None:None:None None:None:None
       CXXDeleteExpr
         ImplicitCastExpr
           DeclRefExpr
-  FunctionDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-     ParmVarDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-  FunctionDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-     ParmVarDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-  FunctionDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-     ParmVarDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-  FunctionDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-     ParmVarDecl tests/new.cpp:28:12 tests/new.cpp:28:12
-  FunctionDecl tests/new.cpp:32:1 tests/new.cpp:36:1
+  FunctionDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+     ParmVarDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+  FunctionDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+     ParmVarDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+  FunctionDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+     ParmVarDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+  FunctionDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+     ParmVarDecl tests/new.cpp:34:12 tests/new.cpp:34:12
+  FunctionDecl tests/new.cpp:38:1 tests/new.cpp:42:1
     CompoundStmt
       DeclStmt
         CXXNewExpr
@@ -758,7 +758,7 @@ TranslationUnitDecl None:None:None None:None:None
             IntegerLiteral
             IntegerLiteral
             IntegerLiteral
-        VarDecl tests/new.cpp:33:3 tests/new.cpp:33:30
+        VarDecl tests/new.cpp:39:3 tests/new.cpp:39:30
           CXXNewExpr
             ImplicitCastExpr
               IntegerLiteral
@@ -771,7 +771,7 @@ TranslationUnitDecl None:None:None None:None:None
           CXXConstructExpr
             IntegerLiteral
             IntegerLiteral
-        VarDecl tests/new.cpp:34:3 tests/new.cpp:34:29
+        VarDecl tests/new.cpp:40:3 tests/new.cpp:40:29
           CXXNewExpr
             CXXConstructExpr
               IntegerLiteral
@@ -790,7 +790,7 @@ TranslationUnitDecl None:None:None None:None:None
             CXXConstructExpr
               IntegerLiteral
               IntegerLiteral
-        VarDecl tests/new.cpp:35:3 tests/new.cpp:35:50
+        VarDecl tests/new.cpp:41:3 tests/new.cpp:41:50
           CXXNewExpr
             ImplicitCastExpr
               IntegerLiteral
@@ -804,21 +804,21 @@ TranslationUnitDecl None:None:None None:None:None
               CXXConstructExpr
                 IntegerLiteral
                 IntegerLiteral
-  FunctionDecl tests/new.cpp:38:1 tests/new.cpp:40:1
-     ParmVarDecl tests/new.cpp:38:21 tests/new.cpp:38:35
-     ParmVarDecl tests/new.cpp:38:41 tests/new.cpp:38:47
-     ParmVarDecl tests/new.cpp:38:52 tests/new.cpp:38:58
+  FunctionDecl tests/new.cpp:44:1 tests/new.cpp:46:1
+     ParmVarDecl tests/new.cpp:44:21 tests/new.cpp:44:35
+     ParmVarDecl tests/new.cpp:44:41 tests/new.cpp:44:47
+     ParmVarDecl tests/new.cpp:44:52 tests/new.cpp:44:58
     CompoundStmt
       ReturnStmt
         ImplicitCastExpr
           DeclRefExpr
-  EmptyDecl tests/new.cpp:40:2 tests/new.cpp:40:2
-  FunctionDecl tests/new.cpp:42:1 tests/new.cpp:45:1
-     ParmVarDecl tests/new.cpp:42:21 tests/new.cpp:42:27
+  EmptyDecl tests/new.cpp:46:2 tests/new.cpp:46:2
+  FunctionDecl tests/new.cpp:48:1 tests/new.cpp:51:1
+     ParmVarDecl tests/new.cpp:48:21 tests/new.cpp:48:27
     CompoundStmt
       DeclStmt
         IntegerLiteral
-        VarDecl tests/new.cpp:43:3 tests/new.cpp:43:11
+        VarDecl tests/new.cpp:49:3 tests/new.cpp:49:11
           IntegerLiteral
       DeclStmt
         CXXNewExpr
@@ -828,7 +828,7 @@ TranslationUnitDecl None:None:None None:None:None
           ImplicitCastExpr
             UnaryOperator
               DeclRefExpr
-        VarDecl tests/new.cpp:44:3 tests/new.cpp:44:27
+        VarDecl tests/new.cpp:50:3 tests/new.cpp:50:27
           CXXNewExpr
             CXXConstructExpr
             ImplicitCastExpr
@@ -836,7 +836,7 @@ TranslationUnitDecl None:None:None None:None:None
             ImplicitCastExpr
               UnaryOperator
                 DeclRefExpr
-  TypedefDecl tests/new.cpp:44:24 tests/new.cpp:44:24
+  TypedefDecl tests/new.cpp:50:24 tests/new.cpp:50:24
 28 10 89 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -844,39 +844,39 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/struct.cpp:1:1 tests/struct.cpp:3:1
-    CXXRecordDecl tests/struct.cpp:1:1 tests/struct.cpp:1:8
-    FieldDecl tests/struct.cpp:2:3 tests/struct.cpp:2:10
-    FieldDecl tests/struct.cpp:2:3 tests/struct.cpp:2:13
-  FunctionDecl tests/struct.cpp:5:1 tests/struct.cpp:8:1
+  CXXRecordDecl tests/struct.cpp:7:1 tests/struct.cpp:9:1
+    CXXRecordDecl tests/struct.cpp:7:1 tests/struct.cpp:7:8
+    FieldDecl tests/struct.cpp:8:3 tests/struct.cpp:8:10
+    FieldDecl tests/struct.cpp:8:3 tests/struct.cpp:8:13
+  FunctionDecl tests/struct.cpp:11:1 tests/struct.cpp:14:1
     CompoundStmt
       DeclStmt
-        CXXRecordDecl tests/struct.cpp:6:3 tests/struct.cpp:6:13
-          CXXRecordDecl tests/struct.cpp:6:3 tests/struct.cpp:6:10
-          CXXConstructorDecl tests/struct.cpp:6:10 tests/struct.cpp:6:10
+        CXXRecordDecl tests/struct.cpp:12:3 tests/struct.cpp:12:13
+          CXXRecordDecl tests/struct.cpp:12:3 tests/struct.cpp:12:10
+          CXXConstructorDecl tests/struct.cpp:12:10 tests/struct.cpp:12:10
             CompoundStmt
-          CXXConstructorDecl tests/struct.cpp:6:10 tests/struct.cpp:6:10
-             ParmVarDecl tests/struct.cpp:6:10 tests/struct.cpp:6:10
-          CXXConstructorDecl tests/struct.cpp:6:10 tests/struct.cpp:6:10
-             ParmVarDecl tests/struct.cpp:6:10 tests/struct.cpp:6:10
+          CXXConstructorDecl tests/struct.cpp:12:10 tests/struct.cpp:12:10
+             ParmVarDecl tests/struct.cpp:12:10 tests/struct.cpp:12:10
+          CXXConstructorDecl tests/struct.cpp:12:10 tests/struct.cpp:12:10
+             ParmVarDecl tests/struct.cpp:12:10 tests/struct.cpp:12:10
       DeclStmt
         CXXConstructExpr
-        VarDecl tests/struct.cpp:7:3 tests/struct.cpp:7:5
+        VarDecl tests/struct.cpp:13:3 tests/struct.cpp:13:5
           CXXConstructExpr
-  VarDecl tests/struct.cpp:10:1 tests/struct.cpp:10:24
+  VarDecl tests/struct.cpp:16:1 tests/struct.cpp:16:24
     InitListExpr
       FloatingLiteral
       FloatingLiteral
-  CXXRecordDecl tests/struct.cpp:12:1 tests/struct.cpp:14:1
-    CXXRecordDecl tests/struct.cpp:12:1 tests/struct.cpp:12:8
-    VarDecl tests/struct.cpp:13:3 tests/struct.cpp:13:14
-  VarDecl tests/struct.cpp:16:1 tests/struct.cpp:16:12
-    IntegerLiteral
   CXXRecordDecl tests/struct.cpp:18:1 tests/struct.cpp:20:1
     CXXRecordDecl tests/struct.cpp:18:1 tests/struct.cpp:18:8
-    VarDecl tests/struct.cpp:19:3 tests/struct.cpp:19:24
+    VarDecl tests/struct.cpp:19:3 tests/struct.cpp:19:14
+  VarDecl tests/struct.cpp:22:1 tests/struct.cpp:22:12
+    IntegerLiteral
+  CXXRecordDecl tests/struct.cpp:24:1 tests/struct.cpp:26:1
+    CXXRecordDecl tests/struct.cpp:24:1 tests/struct.cpp:24:8
+    VarDecl tests/struct.cpp:25:3 tests/struct.cpp:25:24
       IntegerLiteral
-  TypedefDecl tests/struct.cpp:19:24 tests/struct.cpp:19:24
+  TypedefDecl tests/struct.cpp:25:24 tests/struct.cpp:25:24
 11 5 79 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -884,16 +884,16 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/this.cpp:1:1 tests/this.cpp:6:1
-    CXXRecordDecl tests/this.cpp:1:1 tests/this.cpp:1:7
-    FieldDecl tests/this.cpp:2:5 tests/this.cpp:2:9
-    CXXMethodDecl tests/this.cpp:3:5 tests/this.cpp:5:5
+  CXXRecordDecl tests/this.cpp:7:1 tests/this.cpp:12:1
+    CXXRecordDecl tests/this.cpp:7:1 tests/this.cpp:7:7
+    FieldDecl tests/this.cpp:8:5 tests/this.cpp:8:9
+    CXXMethodDecl tests/this.cpp:9:5 tests/this.cpp:11:5
       CompoundStmt
         BinaryOperator
           MemberExpr
             CXXThisExpr
           IntegerLiteral
-  TypedefDecl tests/this.cpp:4:19 tests/this.cpp:4:19
+  TypedefDecl tests/this.cpp:10:19 tests/this.cpp:10:19
 8 0 89 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -901,8 +901,8 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  ClassTemplateDecl tests/unresolved_lookup.cpp:1:1 tests/unresolved_lookup.cpp:4:1
-  TypedefDecl tests/unresolved_lookup.cpp:4:1 tests/unresolved_lookup.cpp:4:1
+  ClassTemplateDecl tests/unresolved_lookup.cpp:7:1 tests/unresolved_lookup.cpp:10:1
+  TypedefDecl tests/unresolved_lookup.cpp:10:1 tests/unresolved_lookup.cpp:10:1
 13 2 76 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -910,15 +910,15 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  NamespaceDecl tests/using_directive.cpp:1:1 tests/using_directive.cpp:5:1
-    NamespaceDecl tests/using_directive.cpp:2:3 tests/using_directive.cpp:4:3
-      VarDecl tests/using_directive.cpp:3:5 tests/using_directive.cpp:3:9
-  UsingDirectiveDecl tests/using_directive.cpp:6:1 tests/using_directive.cpp:6:22
-  NamespaceAliasDecl tests/using_directive.cpp:7:1 tests/using_directive.cpp:7:20
-  VarDecl tests/using_directive.cpp:8:1 tests/using_directive.cpp:8:9
+  NamespaceDecl tests/using_directive.cpp:7:1 tests/using_directive.cpp:11:1
+    NamespaceDecl tests/using_directive.cpp:8:3 tests/using_directive.cpp:10:3
+      VarDecl tests/using_directive.cpp:9:5 tests/using_directive.cpp:9:9
+  UsingDirectiveDecl tests/using_directive.cpp:12:1 tests/using_directive.cpp:12:22
+  NamespaceAliasDecl tests/using_directive.cpp:13:1 tests/using_directive.cpp:13:20
+  VarDecl tests/using_directive.cpp:14:1 tests/using_directive.cpp:14:9
     ImplicitCastExpr
       DeclRefExpr
-  TypedefDecl tests/using_directive.cpp:8:9 tests/using_directive.cpp:8:9
+  TypedefDecl tests/using_directive.cpp:14:9 tests/using_directive.cpp:14:9
 36 23 125 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -926,33 +926,33 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  NamespaceDecl tests/class_template.cpp:1:1 tests/class_template.cpp:21:1
-    ClassTemplateDecl tests/class_template.cpp:2:1 tests/class_template.cpp:5:1
-       ClassTemplateSpecializationDecl tests/class_template.cpp:7:1 tests/class_template.cpp:10:1
-         CXXRecordDecl tests/class_template.cpp:8:1 tests/class_template.cpp:8:8
-         FieldDecl tests/class_template.cpp:9:3 tests/class_template.cpp:9:5
-         CXXConstructorDecl tests/class_template.cpp:8:8 tests/class_template.cpp:8:8
+  NamespaceDecl tests/class_template.cpp:7:1 tests/class_template.cpp:27:1
+    ClassTemplateDecl tests/class_template.cpp:8:1 tests/class_template.cpp:11:1
+       ClassTemplateSpecializationDecl tests/class_template.cpp:13:1 tests/class_template.cpp:16:1
+         CXXRecordDecl tests/class_template.cpp:14:1 tests/class_template.cpp:14:8
+         FieldDecl tests/class_template.cpp:15:3 tests/class_template.cpp:15:5
+         CXXConstructorDecl tests/class_template.cpp:14:8 tests/class_template.cpp:14:8
            CompoundStmt
              CXXConstructExpr
-         CXXConstructorDecl tests/class_template.cpp:8:8 tests/class_template.cpp:8:8
-            ParmVarDecl tests/class_template.cpp:8:8 tests/class_template.cpp:8:8
-         CXXConstructorDecl tests/class_template.cpp:8:8 tests/class_template.cpp:8:8
-            ParmVarDecl tests/class_template.cpp:8:8 tests/class_template.cpp:8:8
-    ClassTemplatePartialSpecializationDecl tests/class_template.cpp:7:1 tests/class_template.cpp:10:1
-      CXXRecordDecl tests/class_template.cpp:8:1 tests/class_template.cpp:8:8
-      FieldDecl tests/class_template.cpp:9:3 tests/class_template.cpp:9:5
-    ClassTemplateSpecializationDecl tests/class_template.cpp:12:1 tests/class_template.cpp:15:1
-      CXXRecordDecl tests/class_template.cpp:13:1 tests/class_template.cpp:13:8
-      FieldDecl tests/class_template.cpp:14:3 tests/class_template.cpp:14:7
-      CXXConstructorDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
+         CXXConstructorDecl tests/class_template.cpp:14:8 tests/class_template.cpp:14:8
+            ParmVarDecl tests/class_template.cpp:14:8 tests/class_template.cpp:14:8
+         CXXConstructorDecl tests/class_template.cpp:14:8 tests/class_template.cpp:14:8
+            ParmVarDecl tests/class_template.cpp:14:8 tests/class_template.cpp:14:8
+    ClassTemplatePartialSpecializationDecl tests/class_template.cpp:13:1 tests/class_template.cpp:16:1
+      CXXRecordDecl tests/class_template.cpp:14:1 tests/class_template.cpp:14:8
+      FieldDecl tests/class_template.cpp:15:3 tests/class_template.cpp:15:5
+    ClassTemplateSpecializationDecl tests/class_template.cpp:18:1 tests/class_template.cpp:21:1
+      CXXRecordDecl tests/class_template.cpp:19:1 tests/class_template.cpp:19:8
+      FieldDecl tests/class_template.cpp:20:3 tests/class_template.cpp:20:7
+      CXXConstructorDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
         CompoundStmt
-      CXXDestructorDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-      CXXConstructorDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-         ParmVarDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-      CXXConstructorDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-         ParmVarDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-      CXXMethodDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-         ParmVarDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
+      CXXDestructorDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+      CXXConstructorDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+         ParmVarDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+      CXXConstructorDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+         ParmVarDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+      CXXMethodDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+         ParmVarDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
         CompoundStmt
           BinaryOperator
             MemberExpr
@@ -963,14 +963,14 @@ TranslationUnitDecl None:None:None None:None:None
           ReturnStmt
             UnaryOperator
               CXXThisExpr
-      CXXMethodDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-         ParmVarDecl tests/class_template.cpp:13:8 tests/class_template.cpp:13:8
-    FunctionDecl tests/class_template.cpp:17:1 tests/class_template.cpp:20:1
-       ParmVarDecl tests/class_template.cpp:17:11 tests/class_template.cpp:17:18
+      CXXMethodDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+         ParmVarDecl tests/class_template.cpp:19:8 tests/class_template.cpp:19:8
+    FunctionDecl tests/class_template.cpp:23:1 tests/class_template.cpp:26:1
+       ParmVarDecl tests/class_template.cpp:23:11 tests/class_template.cpp:23:18
       CompoundStmt
         DeclStmt
           CXXConstructExpr
-          VarDecl tests/class_template.cpp:18:3 tests/class_template.cpp:18:14
+          VarDecl tests/class_template.cpp:24:3 tests/class_template.cpp:24:14
             CXXConstructExpr
         CXXOperatorCallExpr
           ImplicitCastExpr
@@ -979,7 +979,7 @@ TranslationUnitDecl None:None:None None:None:None
             DeclRefExpr
           ImplicitCastExpr
             DeclRefExpr
-  TypedefDecl tests/class_template.cpp:19:15 tests/class_template.cpp:19:15
+  TypedefDecl tests/class_template.cpp:25:15 tests/class_template.cpp:25:15
 19 35 97 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -987,39 +987,39 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  FunctionTemplateDecl tests/function_template.cpp:2:1 tests/function_template.cpp:3:24
-     FunctionDecl tests/function_template.cpp:3:1 tests/function_template.cpp:3:24
-        ParmVarDecl tests/function_template.cpp:3:7 tests/function_template.cpp:3:9
+  FunctionTemplateDecl tests/function_template.cpp:8:1 tests/function_template.cpp:9:24
+     FunctionDecl tests/function_template.cpp:9:1 tests/function_template.cpp:9:24
+        ParmVarDecl tests/function_template.cpp:9:7 tests/function_template.cpp:9:9
        CompoundStmt
          ReturnStmt
            ImplicitCastExpr
              DeclRefExpr
-     FunctionDecl tests/function_template.cpp:3:1 tests/function_template.cpp:3:24
-        ParmVarDecl tests/function_template.cpp:3:7 tests/function_template.cpp:3:9
+     FunctionDecl tests/function_template.cpp:9:1 tests/function_template.cpp:9:24
+        ParmVarDecl tests/function_template.cpp:9:7 tests/function_template.cpp:9:9
        CompoundStmt
          ReturnStmt
            ImplicitCastExpr
              DeclRefExpr
-     FunctionDecl tests/function_template.cpp:3:1 tests/function_template.cpp:3:24
-        ParmVarDecl tests/function_template.cpp:3:7 tests/function_template.cpp:3:9
+     FunctionDecl tests/function_template.cpp:9:1 tests/function_template.cpp:9:24
+        ParmVarDecl tests/function_template.cpp:9:7 tests/function_template.cpp:9:9
        CompoundStmt
          ReturnStmt
            ImplicitCastExpr
              DeclRefExpr
-  FunctionDecl tests/function_template.cpp:6:1 tests/function_template.cpp:7:32
-     ParmVarDecl tests/function_template.cpp:7:9 tests/function_template.cpp:7:13
+  FunctionDecl tests/function_template.cpp:12:1 tests/function_template.cpp:13:32
+     ParmVarDecl tests/function_template.cpp:13:9 tests/function_template.cpp:13:13
     CompoundStmt
       ReturnStmt
         BinaryOperator
           IntegerLiteral
           ImplicitCastExpr
             DeclRefExpr
-  FunctionDecl tests/function_template.cpp:12:1 tests/function_template.cpp:17:1
+  FunctionDecl tests/function_template.cpp:18:1 tests/function_template.cpp:23:1
     CompoundStmt
       DeclStmt
-        VarDecl tests/function_template.cpp:13:3 tests/function_template.cpp:13:8
+        VarDecl tests/function_template.cpp:19:3 tests/function_template.cpp:19:8
       DeclStmt
-        VarDecl tests/function_template.cpp:14:3 tests/function_template.cpp:14:9
+        VarDecl tests/function_template.cpp:20:3 tests/function_template.cpp:20:9
       BinaryOperator
         DeclRefExpr
         CallExpr
@@ -1034,7 +1034,7 @@ TranslationUnitDecl None:None:None None:None:None
             DeclRefExpr
           ImplicitCastExpr
             DeclRefExpr
-  TypedefDecl tests/function_template.cpp:16:11 tests/function_template.cpp:16:11
+  TypedefDecl tests/function_template.cpp:22:11 tests/function_template.cpp:22:11
 20 13 93 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1042,33 +1042,33 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  CXXRecordDecl tests/type_trait.cpp:2:1 tests/type_trait.cpp:4:1
-    CXXRecordDecl tests/type_trait.cpp:2:1 tests/type_trait.cpp:2:8
-    CXXMethodDecl tests/type_trait.cpp:3:3 tests/type_trait.cpp:3:21
+  CXXRecordDecl tests/type_trait.cpp:8:1 tests/type_trait.cpp:10:1
+    CXXRecordDecl tests/type_trait.cpp:8:1 tests/type_trait.cpp:8:8
+    CXXMethodDecl tests/type_trait.cpp:9:3 tests/type_trait.cpp:9:21
       CompoundStmt
-    CXXMethodDecl tests/type_trait.cpp:2:8 tests/type_trait.cpp:2:8
-       ParmVarDecl tests/type_trait.cpp:2:8 tests/type_trait.cpp:2:8
-    CXXMethodDecl tests/type_trait.cpp:2:8 tests/type_trait.cpp:2:8
-       ParmVarDecl tests/type_trait.cpp:2:8 tests/type_trait.cpp:2:8
-    CXXDestructorDecl tests/type_trait.cpp:2:8 tests/type_trait.cpp:2:8
-  FunctionTemplateDecl tests/type_trait.cpp:6:1 tests/type_trait.cpp:7:37
-     FunctionDecl tests/type_trait.cpp:7:1 tests/type_trait.cpp:7:37
+    CXXMethodDecl tests/type_trait.cpp:8:8 tests/type_trait.cpp:8:8
+       ParmVarDecl tests/type_trait.cpp:8:8 tests/type_trait.cpp:8:8
+    CXXMethodDecl tests/type_trait.cpp:8:8 tests/type_trait.cpp:8:8
+       ParmVarDecl tests/type_trait.cpp:8:8 tests/type_trait.cpp:8:8
+    CXXDestructorDecl tests/type_trait.cpp:8:8 tests/type_trait.cpp:8:8
+  FunctionTemplateDecl tests/type_trait.cpp:12:1 tests/type_trait.cpp:13:37
+     FunctionDecl tests/type_trait.cpp:13:1 tests/type_trait.cpp:13:37
        CompoundStmt
          ReturnStmt
            TypeTraitExpr
-     FunctionDecl tests/type_trait.cpp:7:1 tests/type_trait.cpp:7:37
+     FunctionDecl tests/type_trait.cpp:13:1 tests/type_trait.cpp:13:37
        CompoundStmt
          ReturnStmt
            TypeTraitExpr
-  VarDecl tests/type_trait.cpp:9:1 tests/type_trait.cpp:9:22
+  VarDecl tests/type_trait.cpp:15:1 tests/type_trait.cpp:15:22
     CallExpr
       ImplicitCastExpr
         DeclRefExpr
-  VarDecl tests/type_trait.cpp:10:1 tests/type_trait.cpp:10:20
+  VarDecl tests/type_trait.cpp:16:1 tests/type_trait.cpp:16:20
     CallExpr
       ImplicitCastExpr
         DeclRefExpr
-  TypedefDecl tests/type_trait.cpp:10:18 tests/type_trait.cpp:10:18
+  TypedefDecl tests/type_trait.cpp:16:18 tests/type_trait.cpp:16:18
 10 8 82 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1076,10 +1076,10 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  FunctionDecl tests/no_except_expr.cpp:1:1 tests/no_except_expr.cpp:1:27
+  FunctionDecl tests/no_except_expr.cpp:7:1 tests/no_except_expr.cpp:7:27
     CompoundStmt
-  EmptyDecl tests/no_except_expr.cpp:1:28 tests/no_except_expr.cpp:1:28
-  FunctionDecl tests/no_except_expr.cpp:3:1 tests/no_except_expr.cpp:5:1
+  EmptyDecl tests/no_except_expr.cpp:7:28 tests/no_except_expr.cpp:7:28
+  FunctionDecl tests/no_except_expr.cpp:9:1 tests/no_except_expr.cpp:11:1
     CompoundStmt
       ReturnStmt
         ImplicitCastExpr
@@ -1087,7 +1087,7 @@ TranslationUnitDecl None:None:None None:None:None
             CallExpr
               ImplicitCastExpr
                 DeclRefExpr
-  TypedefDecl tests/no_except_expr.cpp:4:19 tests/no_except_expr.cpp:4:19
+  TypedefDecl tests/no_except_expr.cpp:10:19 tests/no_except_expr.cpp:10:19
 21 2 113 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1095,23 +1095,23 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  ClassTemplateDecl tests/friend.cpp:2:1 tests/friend.cpp:3:22
-     ClassTemplateSpecializationDecl tests/friend.cpp:2:1 tests/friend.cpp:3:22
-  ClassTemplateDecl tests/friend.cpp:5:1 tests/friend.cpp:10:1
-     ClassTemplateSpecializationDecl tests/friend.cpp:5:1 tests/friend.cpp:10:1
-       CXXRecordDecl tests/friend.cpp:6:1 tests/friend.cpp:6:8
-       FriendDecl tests/friend.cpp:7:3 tests/friend.cpp:7:32
-       FriendDecl tests/friend.cpp:8:3 tests/friend.cpp:9:16
-        ClassTemplateDecl tests/friend.cpp:8:3 tests/friend.cpp:9:16
-       CXXConstructorDecl tests/friend.cpp:6:8 tests/friend.cpp:6:8
+  ClassTemplateDecl tests/friend.cpp:8:1 tests/friend.cpp:9:22
+     ClassTemplateSpecializationDecl tests/friend.cpp:8:1 tests/friend.cpp:9:22
+  ClassTemplateDecl tests/friend.cpp:11:1 tests/friend.cpp:16:1
+     ClassTemplateSpecializationDecl tests/friend.cpp:11:1 tests/friend.cpp:16:1
+       CXXRecordDecl tests/friend.cpp:12:1 tests/friend.cpp:12:8
+       FriendDecl tests/friend.cpp:13:3 tests/friend.cpp:13:32
+       FriendDecl tests/friend.cpp:14:3 tests/friend.cpp:15:16
+        ClassTemplateDecl tests/friend.cpp:14:3 tests/friend.cpp:15:16
+       CXXConstructorDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
          CompoundStmt
-       CXXConstructorDecl tests/friend.cpp:6:8 tests/friend.cpp:6:8
-          ParmVarDecl tests/friend.cpp:6:8 tests/friend.cpp:6:8
-       CXXConstructorDecl tests/friend.cpp:6:8 tests/friend.cpp:6:8
-          ParmVarDecl tests/friend.cpp:6:8 tests/friend.cpp:6:8
-  VarDecl tests/friend.cpp:12:1 tests/friend.cpp:12:8
+       CXXConstructorDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
+          ParmVarDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
+       CXXConstructorDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
+          ParmVarDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
+  VarDecl tests/friend.cpp:18:1 tests/friend.cpp:18:8
     CXXConstructExpr
-  TypedefDecl tests/friend.cpp:12:8 tests/friend.cpp:12:8
+  TypedefDecl tests/friend.cpp:18:8 tests/friend.cpp:18:8
 58 35 110 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1123,49 +1123,49 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  TypedefDecl tests/FoundationStub.h:3:1 tests/FoundationStub.h:3:13
-  TypedefDecl tests/FoundationStub.h:4:1 tests/FoundationStub.h:4:22
-  ObjCInterfaceDecl tests/FoundationStub.h:11:1 tests/FoundationStub.h:22:2
-    ObjCMethodDecl tests/FoundationStub.h:13:1 tests/FoundationStub.h:13:22
-    ObjCMethodDecl tests/FoundationStub.h:14:1 tests/FoundationStub.h:14:20
-    ObjCMethodDecl tests/FoundationStub.h:15:1 tests/FoundationStub.h:15:28
-    ObjCMethodDecl tests/FoundationStub.h:16:1 tests/FoundationStub.h:16:21
-    ObjCMethodDecl tests/FoundationStub.h:17:1 tests/FoundationStub.h:17:15
-    ObjCMethodDecl tests/FoundationStub.h:19:1 tests/FoundationStub.h:19:34
-       ParmVarDecl tests/FoundationStub.h:19:29 tests/FoundationStub.h:19:33
-    ObjCMethodDecl tests/FoundationStub.h:20:1 tests/FoundationStub.h:20:41
-       ParmVarDecl tests/FoundationStub.h:20:29 tests/FoundationStub.h:20:40
-  ObjCInterfaceDecl tests/FoundationStub.h:25:1 tests/FoundationStub.h:27:2
-    ObjCMethodDecl tests/FoundationStub.h:26:1 tests/FoundationStub.h:26:37
-       ParmVarDecl tests/FoundationStub.h:26:32 tests/FoundationStub.h:26:36
-  ObjCInterfaceDecl tests/FoundationStub.h:29:1 tests/FoundationStub.h:31:2
-    ObjCMethodDecl tests/FoundationStub.h:30:1 tests/FoundationStub.h:30:21
-  ObjCInterfaceDecl tests/FoundationStub.h:33:1 tests/FoundationStub.h:36:2
-    ObjCMethodDecl tests/FoundationStub.h:34:1 tests/FoundationStub.h:34:109
-       ParmVarDecl tests/FoundationStub.h:34:46 tests/FoundationStub.h:34:52
-       ParmVarDecl tests/FoundationStub.h:34:75 tests/FoundationStub.h:34:81
-       ParmVarDecl tests/FoundationStub.h:34:93 tests/FoundationStub.h:34:104
-    ObjCMethodDecl tests/FoundationStub.h:35:1 tests/FoundationStub.h:35:38
-       ParmVarDecl tests/FoundationStub.h:35:32 tests/FoundationStub.h:35:35
+  TypedefDecl tests/FoundationStub.h:8:1 tests/FoundationStub.h:8:13
+  TypedefDecl tests/FoundationStub.h:9:1 tests/FoundationStub.h:9:22
+  ObjCInterfaceDecl tests/FoundationStub.h:16:1 tests/FoundationStub.h:27:2
+    ObjCMethodDecl tests/FoundationStub.h:18:1 tests/FoundationStub.h:18:22
+    ObjCMethodDecl tests/FoundationStub.h:19:1 tests/FoundationStub.h:19:20
+    ObjCMethodDecl tests/FoundationStub.h:20:1 tests/FoundationStub.h:20:28
+    ObjCMethodDecl tests/FoundationStub.h:21:1 tests/FoundationStub.h:21:21
+    ObjCMethodDecl tests/FoundationStub.h:22:1 tests/FoundationStub.h:22:15
+    ObjCMethodDecl tests/FoundationStub.h:24:1 tests/FoundationStub.h:24:34
+       ParmVarDecl tests/FoundationStub.h:24:29 tests/FoundationStub.h:24:33
+    ObjCMethodDecl tests/FoundationStub.h:25:1 tests/FoundationStub.h:25:41
+       ParmVarDecl tests/FoundationStub.h:25:29 tests/FoundationStub.h:25:40
+  ObjCInterfaceDecl tests/FoundationStub.h:30:1 tests/FoundationStub.h:32:2
+    ObjCMethodDecl tests/FoundationStub.h:31:1 tests/FoundationStub.h:31:37
+       ParmVarDecl tests/FoundationStub.h:31:32 tests/FoundationStub.h:31:36
+  ObjCInterfaceDecl tests/FoundationStub.h:34:1 tests/FoundationStub.h:36:2
+    ObjCMethodDecl tests/FoundationStub.h:35:1 tests/FoundationStub.h:35:21
   ObjCInterfaceDecl tests/FoundationStub.h:38:1 tests/FoundationStub.h:41:2
-    ObjCMethodDecl tests/FoundationStub.h:39:1 tests/FoundationStub.h:39:64
-       ParmVarDecl tests/FoundationStub.h:39:35 tests/FoundationStub.h:39:40
-       ParmVarDecl tests/FoundationStub.h:39:52 tests/FoundationStub.h:39:61
-    ObjCMethodDecl tests/FoundationStub.h:40:1 tests/FoundationStub.h:40:49
-       ParmVarDecl tests/FoundationStub.h:40:33 tests/FoundationStub.h:40:44
-  ObjCInterfaceDecl tests/FoundationStub.h:43:1 tests/FoundationStub.h:44:2
-  FunctionDecl tests/FoundationStub.h:46:13 tests/FoundationStub.h:46:13
-     ParmVarDecl tests/FoundationStub.h:46:13 tests/FoundationStub.h:46:13
-  FunctionDecl tests/FoundationStub.h:46:1 tests/FoundationStub.h:46:34
-     ParmVarDecl tests/FoundationStub.h:46:19 tests/FoundationStub.h:46:28
-  ObjCInterfaceDecl tests/Hello.m:5:1 tests/Hello.m:7:2
-    ObjCMethodDecl tests/Hello.m:6:1 tests/Hello.m:6:19
-       ParmVarDecl tests/Hello.m:6:14 tests/Hello.m:6:18
-  ObjCImplementationDecl tests/Hello.m:9:1 tests/Hello.m:15:1
-    ObjCMethodDecl tests/Hello.m:10:1 tests/Hello.m:14:1
-       ParmVarDecl tests/Hello.m:10:14 tests/Hello.m:10:18
-       ImplicitParamDecl tests/Hello.m:10:18 tests/Hello.m:10:18
-       ImplicitParamDecl tests/Hello.m:10:18 tests/Hello.m:10:18
+    ObjCMethodDecl tests/FoundationStub.h:39:1 tests/FoundationStub.h:39:109
+       ParmVarDecl tests/FoundationStub.h:39:46 tests/FoundationStub.h:39:52
+       ParmVarDecl tests/FoundationStub.h:39:75 tests/FoundationStub.h:39:81
+       ParmVarDecl tests/FoundationStub.h:39:93 tests/FoundationStub.h:39:104
+    ObjCMethodDecl tests/FoundationStub.h:40:1 tests/FoundationStub.h:40:38
+       ParmVarDecl tests/FoundationStub.h:40:32 tests/FoundationStub.h:40:35
+  ObjCInterfaceDecl tests/FoundationStub.h:43:1 tests/FoundationStub.h:46:2
+    ObjCMethodDecl tests/FoundationStub.h:44:1 tests/FoundationStub.h:44:64
+       ParmVarDecl tests/FoundationStub.h:44:35 tests/FoundationStub.h:44:40
+       ParmVarDecl tests/FoundationStub.h:44:52 tests/FoundationStub.h:44:61
+    ObjCMethodDecl tests/FoundationStub.h:45:1 tests/FoundationStub.h:45:49
+       ParmVarDecl tests/FoundationStub.h:45:33 tests/FoundationStub.h:45:44
+  ObjCInterfaceDecl tests/FoundationStub.h:48:1 tests/FoundationStub.h:49:2
+  FunctionDecl tests/FoundationStub.h:51:13 tests/FoundationStub.h:51:13
+     ParmVarDecl tests/FoundationStub.h:51:13 tests/FoundationStub.h:51:13
+  FunctionDecl tests/FoundationStub.h:51:1 tests/FoundationStub.h:51:34
+     ParmVarDecl tests/FoundationStub.h:51:19 tests/FoundationStub.h:51:28
+  ObjCInterfaceDecl tests/Hello.m:10:1 tests/Hello.m:12:2
+    ObjCMethodDecl tests/Hello.m:11:1 tests/Hello.m:11:19
+       ParmVarDecl tests/Hello.m:11:14 tests/Hello.m:11:18
+  ObjCImplementationDecl tests/Hello.m:14:1 tests/Hello.m:20:1
+    ObjCMethodDecl tests/Hello.m:15:1 tests/Hello.m:19:1
+       ParmVarDecl tests/Hello.m:15:14 tests/Hello.m:15:18
+       ImplicitParamDecl tests/Hello.m:15:18 tests/Hello.m:15:18
+       ImplicitParamDecl tests/Hello.m:15:18 tests/Hello.m:15:18
       CompoundStmt
         IfStmt
           NullStmt
@@ -1184,14 +1184,14 @@ TranslationUnitDecl None:None:None None:None:None
               ImplicitCastExpr
                 DeclRefExpr
           NullStmt
-  FunctionDecl tests/Hello.m:17:1 tests/Hello.m:25:1
-     ParmVarDecl tests/Hello.m:17:10 tests/Hello.m:17:14
-     ParmVarDecl tests/Hello.m:17:20 tests/Hello.m:17:31
+  FunctionDecl tests/Hello.m:22:1 tests/Hello.m:30:1
+     ParmVarDecl tests/Hello.m:22:10 tests/Hello.m:22:14
+     ParmVarDecl tests/Hello.m:22:20 tests/Hello.m:22:31
     CompoundStmt
       ForStmt
         DeclStmt
           IntegerLiteral
-          VarDecl tests/Hello.m:19:8 tests/Hello.m:19:16
+          VarDecl tests/Hello.m:24:8 tests/Hello.m:24:16
             IntegerLiteral
         NullStmt
         BinaryOperator
@@ -1209,7 +1209,7 @@ TranslationUnitDecl None:None:None None:None:None
                   DeclRefExpr
       ReturnStmt
         IntegerLiteral
-  TypedefDecl tests/Hello.m:24:10 tests/Hello.m:24:10
+  TypedefDecl tests/Hello.m:29:10 tests/Hello.m:29:10
 132 188 136 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1221,88 +1221,88 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  TypedefDecl tests/FoundationStub.h:3:1 tests/FoundationStub.h:3:13
-  TypedefDecl tests/FoundationStub.h:4:1 tests/FoundationStub.h:4:22
-  ObjCInterfaceDecl tests/FoundationStub.h:11:1 tests/FoundationStub.h:22:2
-    ObjCMethodDecl tests/FoundationStub.h:13:1 tests/FoundationStub.h:13:22
-    ObjCMethodDecl tests/FoundationStub.h:14:1 tests/FoundationStub.h:14:20
-    ObjCMethodDecl tests/FoundationStub.h:15:1 tests/FoundationStub.h:15:28
-    ObjCMethodDecl tests/FoundationStub.h:16:1 tests/FoundationStub.h:16:21
-    ObjCMethodDecl tests/FoundationStub.h:17:1 tests/FoundationStub.h:17:15
-    ObjCMethodDecl tests/FoundationStub.h:19:1 tests/FoundationStub.h:19:34
-       ParmVarDecl tests/FoundationStub.h:19:29 tests/FoundationStub.h:19:33
-    ObjCMethodDecl tests/FoundationStub.h:20:1 tests/FoundationStub.h:20:41
-       ParmVarDecl tests/FoundationStub.h:20:29 tests/FoundationStub.h:20:40
-  ObjCInterfaceDecl tests/FoundationStub.h:25:1 tests/FoundationStub.h:27:2
-    ObjCMethodDecl tests/FoundationStub.h:26:1 tests/FoundationStub.h:26:37
-       ParmVarDecl tests/FoundationStub.h:26:32 tests/FoundationStub.h:26:36
-  ObjCInterfaceDecl tests/FoundationStub.h:29:1 tests/FoundationStub.h:31:2
-    ObjCMethodDecl tests/FoundationStub.h:30:1 tests/FoundationStub.h:30:21
-  ObjCInterfaceDecl tests/FoundationStub.h:33:1 tests/FoundationStub.h:36:2
-    ObjCMethodDecl tests/FoundationStub.h:34:1 tests/FoundationStub.h:34:109
-       ParmVarDecl tests/FoundationStub.h:34:46 tests/FoundationStub.h:34:52
-       ParmVarDecl tests/FoundationStub.h:34:75 tests/FoundationStub.h:34:81
-       ParmVarDecl tests/FoundationStub.h:34:93 tests/FoundationStub.h:34:104
-    ObjCMethodDecl tests/FoundationStub.h:35:1 tests/FoundationStub.h:35:38
-       ParmVarDecl tests/FoundationStub.h:35:32 tests/FoundationStub.h:35:35
+  TypedefDecl tests/FoundationStub.h:8:1 tests/FoundationStub.h:8:13
+  TypedefDecl tests/FoundationStub.h:9:1 tests/FoundationStub.h:9:22
+  ObjCInterfaceDecl tests/FoundationStub.h:16:1 tests/FoundationStub.h:27:2
+    ObjCMethodDecl tests/FoundationStub.h:18:1 tests/FoundationStub.h:18:22
+    ObjCMethodDecl tests/FoundationStub.h:19:1 tests/FoundationStub.h:19:20
+    ObjCMethodDecl tests/FoundationStub.h:20:1 tests/FoundationStub.h:20:28
+    ObjCMethodDecl tests/FoundationStub.h:21:1 tests/FoundationStub.h:21:21
+    ObjCMethodDecl tests/FoundationStub.h:22:1 tests/FoundationStub.h:22:15
+    ObjCMethodDecl tests/FoundationStub.h:24:1 tests/FoundationStub.h:24:34
+       ParmVarDecl tests/FoundationStub.h:24:29 tests/FoundationStub.h:24:33
+    ObjCMethodDecl tests/FoundationStub.h:25:1 tests/FoundationStub.h:25:41
+       ParmVarDecl tests/FoundationStub.h:25:29 tests/FoundationStub.h:25:40
+  ObjCInterfaceDecl tests/FoundationStub.h:30:1 tests/FoundationStub.h:32:2
+    ObjCMethodDecl tests/FoundationStub.h:31:1 tests/FoundationStub.h:31:37
+       ParmVarDecl tests/FoundationStub.h:31:32 tests/FoundationStub.h:31:36
+  ObjCInterfaceDecl tests/FoundationStub.h:34:1 tests/FoundationStub.h:36:2
+    ObjCMethodDecl tests/FoundationStub.h:35:1 tests/FoundationStub.h:35:21
   ObjCInterfaceDecl tests/FoundationStub.h:38:1 tests/FoundationStub.h:41:2
-    ObjCMethodDecl tests/FoundationStub.h:39:1 tests/FoundationStub.h:39:64
-       ParmVarDecl tests/FoundationStub.h:39:35 tests/FoundationStub.h:39:40
-       ParmVarDecl tests/FoundationStub.h:39:52 tests/FoundationStub.h:39:61
-    ObjCMethodDecl tests/FoundationStub.h:40:1 tests/FoundationStub.h:40:49
-       ParmVarDecl tests/FoundationStub.h:40:33 tests/FoundationStub.h:40:44
-  ObjCInterfaceDecl tests/FoundationStub.h:43:1 tests/FoundationStub.h:44:2
-  FunctionDecl tests/FoundationStub.h:46:13 tests/FoundationStub.h:46:13
-     ParmVarDecl tests/FoundationStub.h:46:13 tests/FoundationStub.h:46:13
-  FunctionDecl tests/FoundationStub.h:46:1 tests/FoundationStub.h:46:34
-     ParmVarDecl tests/FoundationStub.h:46:19 tests/FoundationStub.h:46:28
-  ObjCProtocolDecl tests/ObjCTest.m:5:1 tests/ObjCTest.m:7:2
-    ObjCPropertyDecl tests/ObjCTest.m:6:1 tests/ObjCTest.m:6:39
-    ObjCMethodDecl tests/ObjCTest.m:6:39 tests/ObjCTest.m:6:39
-    ObjCMethodDecl tests/ObjCTest.m:6:39 tests/ObjCTest.m:6:39
-       ParmVarDecl tests/ObjCTest.m:6:39 tests/ObjCTest.m:6:39
-  ObjCProtocolDecl tests/ObjCTest.m:9:1 tests/ObjCTest.m:9:11
-  ObjCInterfaceDecl tests/ObjCTest.m:11:1 tests/ObjCTest.m:19:2
-    ObjCPropertyDecl tests/ObjCTest.m:13:1 tests/ObjCTest.m:13:39
-    ObjCPropertyDecl tests/ObjCTest.m:15:1 tests/ObjCTest.m:15:37
-    ObjCPropertyDecl tests/ObjCTest.m:16:1 tests/ObjCTest.m:16:35
-    ObjCPropertyDecl tests/ObjCTest.m:17:1 tests/ObjCTest.m:17:55
-    ObjCMethodDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-       ImplicitParamDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-       ImplicitParamDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-    ObjCMethodDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-       ParmVarDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-       ImplicitParamDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-       ImplicitParamDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-    ObjCMethodDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-       ImplicitParamDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-       ImplicitParamDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-    ObjCMethodDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-       ParmVarDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-       ImplicitParamDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-       ImplicitParamDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-    ObjCMethodDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-       ImplicitParamDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-       ImplicitParamDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-    ObjCMethodDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-       ParmVarDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-       ImplicitParamDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-       ImplicitParamDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-    ObjCMethodDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-       ImplicitParamDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-       ImplicitParamDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-    ObjCMethodDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-       ParmVarDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-       ImplicitParamDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-       ImplicitParamDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-  ObjCCategoryDecl tests/ObjCTest.m:21:1 tests/ObjCTest.m:25:2
-    ObjCMethodDecl tests/ObjCTest.m:23:1 tests/ObjCTest.m:23:36
-       ParmVarDecl tests/ObjCTest.m:23:14 tests/ObjCTest.m:23:35
-  ObjCImplementationDecl tests/ObjCTest.m:27:1 tests/ObjCTest.m:63:1
-    ObjCMethodDecl tests/ObjCTest.m:29:1 tests/ObjCTest.m:61:1
-       ParmVarDecl tests/ObjCTest.m:29:14 tests/ObjCTest.m:29:35
-       ImplicitParamDecl tests/ObjCTest.m:29:35 tests/ObjCTest.m:29:35
-       ImplicitParamDecl tests/ObjCTest.m:29:35 tests/ObjCTest.m:29:35
+    ObjCMethodDecl tests/FoundationStub.h:39:1 tests/FoundationStub.h:39:109
+       ParmVarDecl tests/FoundationStub.h:39:46 tests/FoundationStub.h:39:52
+       ParmVarDecl tests/FoundationStub.h:39:75 tests/FoundationStub.h:39:81
+       ParmVarDecl tests/FoundationStub.h:39:93 tests/FoundationStub.h:39:104
+    ObjCMethodDecl tests/FoundationStub.h:40:1 tests/FoundationStub.h:40:38
+       ParmVarDecl tests/FoundationStub.h:40:32 tests/FoundationStub.h:40:35
+  ObjCInterfaceDecl tests/FoundationStub.h:43:1 tests/FoundationStub.h:46:2
+    ObjCMethodDecl tests/FoundationStub.h:44:1 tests/FoundationStub.h:44:64
+       ParmVarDecl tests/FoundationStub.h:44:35 tests/FoundationStub.h:44:40
+       ParmVarDecl tests/FoundationStub.h:44:52 tests/FoundationStub.h:44:61
+    ObjCMethodDecl tests/FoundationStub.h:45:1 tests/FoundationStub.h:45:49
+       ParmVarDecl tests/FoundationStub.h:45:33 tests/FoundationStub.h:45:44
+  ObjCInterfaceDecl tests/FoundationStub.h:48:1 tests/FoundationStub.h:49:2
+  FunctionDecl tests/FoundationStub.h:51:13 tests/FoundationStub.h:51:13
+     ParmVarDecl tests/FoundationStub.h:51:13 tests/FoundationStub.h:51:13
+  FunctionDecl tests/FoundationStub.h:51:1 tests/FoundationStub.h:51:34
+     ParmVarDecl tests/FoundationStub.h:51:19 tests/FoundationStub.h:51:28
+  ObjCProtocolDecl tests/ObjCTest.m:10:1 tests/ObjCTest.m:12:2
+    ObjCPropertyDecl tests/ObjCTest.m:11:1 tests/ObjCTest.m:11:39
+    ObjCMethodDecl tests/ObjCTest.m:11:39 tests/ObjCTest.m:11:39
+    ObjCMethodDecl tests/ObjCTest.m:11:39 tests/ObjCTest.m:11:39
+       ParmVarDecl tests/ObjCTest.m:11:39 tests/ObjCTest.m:11:39
+  ObjCProtocolDecl tests/ObjCTest.m:14:1 tests/ObjCTest.m:14:11
+  ObjCInterfaceDecl tests/ObjCTest.m:16:1 tests/ObjCTest.m:24:2
+    ObjCPropertyDecl tests/ObjCTest.m:18:1 tests/ObjCTest.m:18:39
+    ObjCPropertyDecl tests/ObjCTest.m:20:1 tests/ObjCTest.m:20:37
+    ObjCPropertyDecl tests/ObjCTest.m:21:1 tests/ObjCTest.m:21:35
+    ObjCPropertyDecl tests/ObjCTest.m:22:1 tests/ObjCTest.m:22:55
+    ObjCMethodDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+       ImplicitParamDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+       ImplicitParamDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+    ObjCMethodDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+       ParmVarDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+       ImplicitParamDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+       ImplicitParamDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+    ObjCMethodDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+       ImplicitParamDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+       ImplicitParamDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+    ObjCMethodDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+       ParmVarDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+       ImplicitParamDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+       ImplicitParamDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+    ObjCMethodDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+       ImplicitParamDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+       ImplicitParamDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+    ObjCMethodDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+       ParmVarDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+       ImplicitParamDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+       ImplicitParamDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+    ObjCMethodDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+       ImplicitParamDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+       ImplicitParamDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+    ObjCMethodDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+       ParmVarDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+       ImplicitParamDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+       ImplicitParamDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+  ObjCCategoryDecl tests/ObjCTest.m:26:1 tests/ObjCTest.m:30:2
+    ObjCMethodDecl tests/ObjCTest.m:28:1 tests/ObjCTest.m:28:36
+       ParmVarDecl tests/ObjCTest.m:28:14 tests/ObjCTest.m:28:35
+  ObjCImplementationDecl tests/ObjCTest.m:32:1 tests/ObjCTest.m:68:1
+    ObjCMethodDecl tests/ObjCTest.m:34:1 tests/ObjCTest.m:66:1
+       ParmVarDecl tests/ObjCTest.m:34:14 tests/ObjCTest.m:34:35
+       ImplicitParamDecl tests/ObjCTest.m:34:35 tests/ObjCTest.m:34:35
+       ImplicitParamDecl tests/ObjCTest.m:34:35 tests/ObjCTest.m:34:35
       CompoundStmt
         CallExpr
           ImplicitCastExpr
@@ -1336,8 +1336,8 @@ TranslationUnitDecl None:None:None None:None:None
         DeclStmt
           ExprWithCleanups
             BlockExpr
-             BlockDecl tests/ObjCTest.m:37:38 tests/ObjCTest.m:40:3
-                ParmVarDecl tests/ObjCTest.m:37:40 tests/ObjCTest.m:37:50
+             BlockDecl tests/ObjCTest.m:42:38 tests/ObjCTest.m:45:3
+                ParmVarDecl tests/ObjCTest.m:42:40 tests/ObjCTest.m:42:50
                CompoundStmt
                  PseudoObjectExpr
                    BinaryOperator
@@ -1368,11 +1368,11 @@ TranslationUnitDecl None:None:None None:None:None
                    ObjCMessageExpr
                      ImplicitCastExpr
                        DeclRefExpr
-          VarDecl tests/ObjCTest.m:37:3 tests/ObjCTest.m:40:3
+          VarDecl tests/ObjCTest.m:42:3 tests/ObjCTest.m:45:3
             ExprWithCleanups
               BlockExpr
-               BlockDecl tests/ObjCTest.m:37:38 tests/ObjCTest.m:40:3
-                  ParmVarDecl tests/ObjCTest.m:37:40 tests/ObjCTest.m:37:50
+               BlockDecl tests/ObjCTest.m:42:38 tests/ObjCTest.m:45:3
+                  ParmVarDecl tests/ObjCTest.m:42:40 tests/ObjCTest.m:42:50
                  CompoundStmt
                    PseudoObjectExpr
                      BinaryOperator
@@ -1410,7 +1410,7 @@ TranslationUnitDecl None:None:None None:None:None
                 ImplicitCastExpr
                   ObjCBoxedExpr
                     IntegerLiteral
-              VarDecl tests/ObjCTest.m:43:5 tests/ObjCTest.m:43:24
+              VarDecl tests/ObjCTest.m:48:5 tests/ObjCTest.m:48:24
                 ObjCArrayLiteral
                   ImplicitCastExpr
                     ObjCBoxedExpr
@@ -1448,7 +1448,7 @@ TranslationUnitDecl None:None:None None:None:None
                 ImplicitCastExpr
                   ObjCBoxedExpr
                     IntegerLiteral
-              VarDecl tests/ObjCTest.m:46:5 tests/ObjCTest.m:46:38
+              VarDecl tests/ObjCTest.m:51:5 tests/ObjCTest.m:51:38
                 ObjCDictionaryLiteral
                   ImplicitCastExpr
                     ObjCStringLiteral
@@ -1503,7 +1503,7 @@ TranslationUnitDecl None:None:None None:None:None
                     StringLiteral
                 ImplicitCastExpr
                   DeclRefExpr
-           VarDecl tests/ObjCTest.m:50:11 tests/ObjCTest.m:50:24
+           VarDecl tests/ObjCTest.m:55:11 tests/ObjCTest.m:55:24
           ObjCAtFinallyStmt
             CompoundStmt
               CallExpr
@@ -1521,22 +1521,22 @@ TranslationUnitDecl None:None:None None:None:None
             ImplicitCastExpr
               ObjCStringLiteral
                 StringLiteral
-    ObjCIvarDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-    ObjCPropertyImplDecl tests/ObjCTest.m:13:39 tests/ObjCTest.m:13:39
-    ObjCIvarDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-    ObjCPropertyImplDecl tests/ObjCTest.m:15:37 tests/ObjCTest.m:15:37
-    ObjCIvarDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-    ObjCPropertyImplDecl tests/ObjCTest.m:16:35 tests/ObjCTest.m:16:35
-    ObjCIvarDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-    ObjCPropertyImplDecl tests/ObjCTest.m:17:55 tests/ObjCTest.m:17:55
-  ObjCCategoryDecl tests/ObjCTest.m:65:1 tests/ObjCTest.m:69:2
-    ObjCMethodDecl tests/ObjCTest.m:67:1 tests/ObjCTest.m:67:26
-       ParmVarDecl tests/ObjCTest.m:67:14 tests/ObjCTest.m:67:25
-  ObjCCategoryImplDecl tests/ObjCTest.m:71:1 tests/ObjCTest.m:79:1
-    ObjCMethodDecl tests/ObjCTest.m:73:1 tests/ObjCTest.m:77:1
-       ParmVarDecl tests/ObjCTest.m:73:14 tests/ObjCTest.m:73:25
-       ImplicitParamDecl tests/ObjCTest.m:73:25 tests/ObjCTest.m:73:25
-       ImplicitParamDecl tests/ObjCTest.m:73:25 tests/ObjCTest.m:73:25
+    ObjCIvarDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+    ObjCPropertyImplDecl tests/ObjCTest.m:18:39 tests/ObjCTest.m:18:39
+    ObjCIvarDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+    ObjCPropertyImplDecl tests/ObjCTest.m:20:37 tests/ObjCTest.m:20:37
+    ObjCIvarDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+    ObjCPropertyImplDecl tests/ObjCTest.m:21:35 tests/ObjCTest.m:21:35
+    ObjCIvarDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+    ObjCPropertyImplDecl tests/ObjCTest.m:22:55 tests/ObjCTest.m:22:55
+  ObjCCategoryDecl tests/ObjCTest.m:70:1 tests/ObjCTest.m:74:2
+    ObjCMethodDecl tests/ObjCTest.m:72:1 tests/ObjCTest.m:72:26
+       ParmVarDecl tests/ObjCTest.m:72:14 tests/ObjCTest.m:72:25
+  ObjCCategoryImplDecl tests/ObjCTest.m:76:1 tests/ObjCTest.m:84:1
+    ObjCMethodDecl tests/ObjCTest.m:78:1 tests/ObjCTest.m:82:1
+       ParmVarDecl tests/ObjCTest.m:78:14 tests/ObjCTest.m:78:25
+       ImplicitParamDecl tests/ObjCTest.m:78:25 tests/ObjCTest.m:78:25
+       ImplicitParamDecl tests/ObjCTest.m:78:25 tests/ObjCTest.m:78:25
       CompoundStmt
         PseudoObjectExpr
           BinaryOperator
@@ -1615,31 +1615,31 @@ TranslationUnitDecl None:None:None None:None:None
                   ParenExpr
                     CStyleCastExpr
                       IntegerLiteral
-  ObjCInterfaceDecl tests/ObjCTest.m:81:1 tests/ObjCTest.m:83:2
-  ObjCInterfaceDecl tests/ObjCTest.m:85:1 tests/ObjCTest.m:87:2
-    ObjCMethodDecl tests/ObjCTest.m:86:1 tests/ObjCTest.m:86:58
-       ParmVarDecl tests/ObjCTest.m:86:28 tests/ObjCTest.m:86:56
-  ObjCInterfaceDecl tests/ObjCTest.m:89:1 tests/ObjCTest.m:90:2
-  ObjCImplementationDecl tests/ObjCTest.m:92:1 tests/ObjCTest.m:102:1
-    ObjCMethodDecl tests/ObjCTest.m:94:1 tests/ObjCTest.m:96:1
-       ParmVarDecl tests/ObjCTest.m:94:14 tests/ObjCTest.m:94:25
-       ImplicitParamDecl tests/ObjCTest.m:94:25 tests/ObjCTest.m:94:25
-       ImplicitParamDecl tests/ObjCTest.m:94:25 tests/ObjCTest.m:94:25
+  ObjCInterfaceDecl tests/ObjCTest.m:86:1 tests/ObjCTest.m:88:2
+  ObjCInterfaceDecl tests/ObjCTest.m:90:1 tests/ObjCTest.m:92:2
+    ObjCMethodDecl tests/ObjCTest.m:91:1 tests/ObjCTest.m:91:58
+       ParmVarDecl tests/ObjCTest.m:91:28 tests/ObjCTest.m:91:56
+  ObjCInterfaceDecl tests/ObjCTest.m:94:1 tests/ObjCTest.m:95:2
+  ObjCImplementationDecl tests/ObjCTest.m:97:1 tests/ObjCTest.m:107:1
+    ObjCMethodDecl tests/ObjCTest.m:99:1 tests/ObjCTest.m:101:1
+       ParmVarDecl tests/ObjCTest.m:99:14 tests/ObjCTest.m:99:25
+       ImplicitParamDecl tests/ObjCTest.m:99:25 tests/ObjCTest.m:99:25
+       ImplicitParamDecl tests/ObjCTest.m:99:25 tests/ObjCTest.m:99:25
       CompoundStmt
         ObjCMessageExpr
           ImplicitCastExpr
             DeclRefExpr
-    ObjCMethodDecl tests/ObjCTest.m:98:1 tests/ObjCTest.m:100:1
-       ParmVarDecl tests/ObjCTest.m:98:14 tests/ObjCTest.m:98:35
-       ImplicitParamDecl tests/ObjCTest.m:98:35 tests/ObjCTest.m:98:35
-       ImplicitParamDecl tests/ObjCTest.m:98:35 tests/ObjCTest.m:98:35
+    ObjCMethodDecl tests/ObjCTest.m:103:1 tests/ObjCTest.m:105:1
+       ParmVarDecl tests/ObjCTest.m:103:14 tests/ObjCTest.m:103:35
+       ImplicitParamDecl tests/ObjCTest.m:103:35 tests/ObjCTest.m:103:35
+       ImplicitParamDecl tests/ObjCTest.m:103:35 tests/ObjCTest.m:103:35
       CompoundStmt
         ObjCMessageExpr
           ImplicitCastExpr
             DeclRefExpr
-  FunctionDecl tests/ObjCTest.m:104:1 tests/ObjCTest.m:110:1
-     ParmVarDecl tests/ObjCTest.m:104:10 tests/ObjCTest.m:104:14
-     ParmVarDecl tests/ObjCTest.m:104:20 tests/ObjCTest.m:104:27
+  FunctionDecl tests/ObjCTest.m:109:1 tests/ObjCTest.m:115:1
+     ParmVarDecl tests/ObjCTest.m:109:10 tests/ObjCTest.m:109:14
+     ParmVarDecl tests/ObjCTest.m:109:20 tests/ObjCTest.m:109:27
     CompoundStmt
       ObjCAutoreleasePoolStmt
         CompoundStmt
@@ -1655,7 +1655,7 @@ TranslationUnitDecl None:None:None None:None:None
               StringLiteral
       ReturnStmt
         IntegerLiteral
-  TypedefDecl tests/ObjCTest.m:109:10 tests/ObjCTest.m:109:10
+  TypedefDecl tests/ObjCTest.m:114:10 tests/ObjCTest.m:114:10
 12 0 84 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
@@ -1667,5 +1667,5 @@ TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None
-  FunctionTemplateDecl tests/objcpp_template_unboxing.mm:1:1 tests/objcpp_template_unboxing.mm:4:1
-  TypedefDecl tests/objcpp_template_unboxing.mm:4:1 tests/objcpp_template_unboxing.mm:4:1
+  FunctionTemplateDecl tests/objcpp_template_unboxing.mm:7:1 tests/objcpp_template_unboxing.mm:10:1
+  TypedefDecl tests/objcpp_template_unboxing.mm:10:1 tests/objcpp_template_unboxing.mm:10:1

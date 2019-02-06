@@ -1,7 +1,7 @@
-tests/available_expression.m:10:13: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
+tests/available_expression.m:8:13: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
  @interface NSObject
             ^
-tests/available_expression.m:10:21: note: add a super class to fix this problem
+tests/available_expression.m:8:21: note: add a super class to fix this problem
  @interface NSObject
                     ^
                      : NSObject 
@@ -115,10 +115,10 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
             #21793419:
               ({
                  #c3bbce7c: "tests/available_expression.m",
-                 #c7b317f4: 10,
+                 #c7b317f4: 8,
                  #c68b4ed6: 2
                },
-               { #c7b317f4: 11, #c68b4ed6: 3 }),
+               { #c7b317f4: 9, #c68b4ed6: 3 }),
             #21ac3408: unit
           },
           { #c8ff724b: "NSObject", #2cdb06fb: [ "NSObject" ] },
@@ -135,8 +135,8 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
          ({
             #d121c0bd: 14,
             #21793419:
-              ({ #c7b317f4: 12, #c68b4ed6: 2 },
-               { #c7b317f4: 13, #c68b4ed6: 2 }),
+              ({ #c7b317f4: 10, #c68b4ed6: 2 },
+               { #c7b317f4: 11, #c68b4ed6: 2 }),
             #21ac3408: unit
           },
           { #c8ff724b: "NSObject", #2cdb06fb: [ "NSObject" ] },
@@ -153,8 +153,8 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
          ({
             #d121c0bd: 15,
             #21793419:
-              ({ #c7b317f4: 15, #c68b4ed6: 1 },
-               { #c7b317f4: 17, #c68b4ed6: 2 }),
+              ({ #c7b317f4: 13, #c68b4ed6: 1 },
+               { #c7b317f4: 15, #c68b4ed6: 2 }),
             #21ac3408: unit
           },
           {
@@ -182,8 +182,8 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
          ({
             #d121c0bd: 16,
             #21793419:
-              ({ #c7b317f4: 19, #c68b4ed6: 1 },
-               { #c7b317f4: 27, #c68b4ed6: 1 }),
+              ({ #c7b317f4: 17, #c68b4ed6: 1 },
+               { #c7b317f4: 25, #c68b4ed6: 1 }),
             #21ac3408: unit
           },
           {
@@ -196,8 +196,8 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                   #d121c0bd: 17,
                   #f9005968: 16,
                   #21793419:
-                    ({ #c7b317f4: 21, #c68b4ed6: 1 },
-                     { #c7b317f4: 25, #c68b4ed6: 1 }),
+                    ({ #c7b317f4: 19, #c68b4ed6: 1 },
+                     { #c7b317f4: 23, #c68b4ed6: 1 }),
                   #21ac3408: unit
                 },
                 {
@@ -212,7 +212,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                        ({
                           #d121c0bd: 19,
                           #21793419:
-                            ({ #c7b317f4: 21, #c68b4ed6: 22 },
+                            ({ #c7b317f4: 19, #c68b4ed6: 22 },
                              { #c68b4ed6: 26 }),
                           #21ac3408: unit
                         },
@@ -257,14 +257,14 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                           #d121c0bd: 25,
                           #21793419:
                             ({ #c68b4ed6: 60 },
-                             { #c7b317f4: 25, #c68b4ed6: 1 })
+                             { #c7b317f4: 23, #c68b4ed6: 1 })
                         },
                         [
                           <#22219ce5:
                              ({
                                 #d121c0bd: 26,
                                 #21793419:
-                                  ({ #c7b317f4: 22, #c68b4ed6: 3 },
+                                  ({ #c7b317f4: 20, #c68b4ed6: 3 },
                                    { #c68b4ed6: 46 })
                               },
                               [
@@ -298,7 +298,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                              ({
                                 #d121c0bd: 31,
                                 #21793419:
-                                  ({ #c7b317f4: 24, #c68b4ed6: 3 },
+                                  ({ #c7b317f4: 22, #c68b4ed6: 3 },
                                    { #c68b4ed6: 52 })
                               },
                               [

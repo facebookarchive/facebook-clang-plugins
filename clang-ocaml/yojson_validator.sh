@@ -1,4 +1,9 @@
 #!/bin/bash
+# Copyright (c) 2014-present, Facebook, Inc.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
 # Script to validate Yojson outputs w.r.t. ATD specifications.
 # This works by running a given 'converter' to parse and pretty-print the outputs, then observing the difference with gunzip + pretty-print.
 

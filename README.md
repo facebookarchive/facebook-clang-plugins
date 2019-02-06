@@ -39,4 +39,4 @@ Additional configuration options are available in `Makefile.config`.
 Licence
 -------
 
-The plugins are BSD-licensed. We also provide an additional patent grant.
+The plugins are MIT-licensed.

@@ -1,7 +1,7 @@
-tests/available_expression.m:10:13: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
+tests/available_expression.m:8:13: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
  @interface NSObject
             ^
-tests/available_expression.m:10:21: note: add a super class to fix this problem
+tests/available_expression.m:8:21: note: add a super class to fix this problem
  @interface NSObject
                     ^
                      : NSObject 
@@ -214,11 +214,11 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
         "source_range" : (
           {
             "file" : "tests/available_expression.m",
-            "line" : 10,
+            "line" : 8,
             "column" : 2
           },
           {
-            "line" : 11,
+            "line" : 9,
             "column" : 3
           }
         )
@@ -251,11 +251,11 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
         "pointer" : 14,
         "source_range" : (
           {
-            "line" : 12,
+            "line" : 10,
             "column" : 2
           },
           {
-            "line" : 13,
+            "line" : 11,
             "column" : 2
           }
         )
@@ -288,11 +288,11 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
         "pointer" : 15,
         "source_range" : (
           {
-            "line" : 15,
+            "line" : 13,
             "column" : 1
           },
           {
-            "line" : 17,
+            "line" : 15,
             "column" : 2
           }
         )
@@ -335,11 +335,11 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
         "pointer" : 16,
         "source_range" : (
           {
-            "line" : 19,
+            "line" : 17,
             "column" : 1
           },
           {
-            "line" : 27,
+            "line" : 25,
             "column" : 1
           }
         )
@@ -357,11 +357,11 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
             "parent_pointer" : 16,
             "source_range" : (
               {
-                "line" : 21,
+                "line" : 19,
                 "column" : 1
               },
               {
-                "line" : 25,
+                "line" : 23,
                 "column" : 1
               }
             )
@@ -384,7 +384,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                   "pointer" : 19,
                   "source_range" : (
                     {
-                      "line" : 21,
+                      "line" : 19,
                       "column" : 22
                     },
                     {
@@ -487,7 +487,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                     "column" : 60
                   },
                   {
-                    "line" : 25,
+                    "line" : 23,
                     "column" : 1
                   }
                 )
@@ -498,7 +498,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                     "pointer" : 26,
                     "source_range" : (
                       {
-                        "line" : 22,
+                        "line" : 20,
                         "column" : 3
                       },
                       {
@@ -591,7 +591,7 @@ tests/available_expression.m:10:21: note: add a super class to fix this problem
                     "pointer" : 31,
                     "source_range" : (
                       {
-                        "line" : 24,
+                        "line" : 22,
                         "column" : 3
                       },
                       {

@@ -3,11 +3,10 @@ We want to make contributing to this project as easy and transparent as
 possible.
 
 ## Code of Conduct
-The code of conduct is described in [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+The code of conduct is described in [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
 
 ## Our Development Process
 The github repository https://github.com/facebook/facebook-clang-plugins is the source of truth.
-We expect some plugins to be gradually migrated to the LLVM-Clang project.
 
 ## Pull Requests
 We actively welcome your pull requests.
@@ -39,4 +38,4 @@ while we are (slowly) updating the rest of the files.
 
 ## License
 By contributing to facebook-clang-plugins, you agree that your contributions will be licensed
-under its BSD license.
+under its MIT license.
