@@ -1,32 +1,31 @@
-= Clang 7.0 -- official release
+= LLVM+Clang 7.0.1 -- official release
 
-Downloaded from http://releases.llvm.org/download.html#7.0.0
+Downloaded from http://releases.llvm.org/download.html#7.0.1
 
 Included components:
-8bc1f844e6cbde1b652c19c1edebc1864456fd9c78b8c1bea038e51b363fe222  llvm-7.0.0.src.tar.xz
-550212711c752697d2f82c648714a7221b1207fd9441543ff4aa9e3be45bba55  cfe-7.0.0.src.tar.xz (clang)
-bdec7fe3cf2c85f55656c07dfb0bd93ae46f2b3dd8f33ff3ad6e7586f4c670d6  compiler-rt-7.0.0.src.tar.xz
-9b342625ba2f4e65b52764ab2061e116c0337db2179c6bce7f9a0d70c52134f0  libcxx-7.0.0.src.tar.xz
-9b45c759ff397512eae4d938ff82827b1bd7ccba49920777e5b5e460baeb245f  libcxxabi-7.0.0.src.tar.xz
-30662b632f5556c59ee9215c1309f61de50b3ea8e89dcc28ba9a9494bba238ff  openmp-7.0.0.src.tar.xz
-
-Result:
-13a649f0e6bb7667eeb9e39297e89586b385d37258f13b716faa363b34ffe19b  llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.tar.xz
+$ sha256sum *.tar.xz
+a38dfc4db47102ec79dcc2aa61e93722c5f6f06f0a961073bd84b78fb949419b  llvm-7.0.1.src.tar.xz
+a45b62dde5d7d5fdcdfa876b0af92f164d434b06e9e89b5d0b1cbc65dfe3f418  cfe-7.0.1.src.tar.xz
+782edfc119ee172f169c91dd79f2c964fb6b248bd9b73523149030ed505bbe18  compiler-rt-7.0.1.src.tar.xz
+020002618b319dc2a8ba1f2cba88b8cc6a209005ed8ad29f9de0c562c6ebb9f1  libcxx-7.0.1.src.tar.xz
+8168903a157ca7ab8423d3b974eaa497230b1564ceb57260be2bd14412e8ded8  libcxxabi-7.0.1.src.tar.xz
+bf16b78a678da67d68405214ec7ee59d86a15f599855806192a75dcfca9b0d0c  openmp-7.0.1.src.tar.xz
 
 Script to build the archive:
 
-tar xf llvm-7.0.0.src.tar.xz
-cd llvm-7.0.0.src/tools/
-tar xf ../../cfe-7.0.0.src.tar.xz
-mv cfe-7.0.0.src/ clang
+tar xf llvm-7.0.1.src.tar.xz
+cd llvm-7.0.1.src/tools/
+tar xf ../../cfe-7.0.1.src.tar.xz
+mv cfe-7.0.1.src/ clang
 cd ../projects/
-tar xf ../../compiler-rt-7.0.0.src.tar.xz
-mv compiler-rt-7.0.0.src/ compiler-rt
-tar xf ../../libcxx-7.0.0.src.tar.xz
-mv libcxx-7.0.0.src/ libcxx
-tar xf ../../libcxxabi-7.0.0.src.tar.xz
-mv libcxxabi-7.0.0.src/ libcxxabi
-tar xf ../../openmp-7.0.0.src.tar.xz
-mv openmp-7.0.0.src/ openmp
-mv llvm-7.0.0.src llvm
-tar cJ llvm > llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.tar.xz
+tar xf ../../compiler-rt-7.0.1.src.tar.xz
+mv compiler-rt-7.0.1.src/ compiler-rt
+tar xf ../../libcxx-7.0.1.src.tar.xz
+mv libcxx-7.0.1.src/ libcxx
+tar xf ../../libcxxabi-7.0.1.src.tar.xz
+mv libcxxabi-7.0.1.src/ libcxxabi
+tar xf ../../openmp-7.0.1.src.tar.xz
+mv openmp-7.0.1.src/ openmp
+cd ../..
+mv llvm-7.0.1.src llvm
+tar cJ llvm > llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.1.tar.xz
