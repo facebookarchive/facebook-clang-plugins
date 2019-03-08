@@ -51,6 +51,21 @@ let var_decl_info ~is_global =
   ; vdi_parm_index_in_function= None
   ; vdi_storage_class= None }
 
+let stmt_info pointer =
+  { si_pointer= pointer
+  ; si_source_range= (empty_source_location, empty_source_location) }
+
+let expr_info qual_type =
+  { ei_qual_type= qual_type
+  ; ei_value_kind= `RValue
+  ; ei_object_kind= `Ordinary }
+
+let cxx_construct_expr_info decl_ref is_copy_constructor =
+  { xcei_decl_ref= decl_ref
+  ; xcei_is_elidable= false
+  ; xcei_requires_zero_initialization= false
+  ; xcei_is_copy_constructor= is_copy_constructor }
+
 
 let () =
   let di = decl_info empty_source_location empty_source_location in
@@ -82,3 +97,26 @@ let () =
       var_decl in
   assert_equal "update_var_decl_tuple" (get_var_decl_tuple updated_var_decl)
     (Some (di, name_info "fooey-mod", qt, var_decl_info ~is_global:false)) ;
+
+  let stmt = DoStmt(stmt_info 0, []) in
+  assert_equal "get_cxx_construct_expr_tuple_from_stmt"
+    (get_cxx_construct_expr_tuple stmt) None ;
+  let ei = expr_info qt in
+  let dr = { dr_kind= `CXXConstructor
+           ; dr_decl_pointer= 0
+           ; dr_name= None
+           ; dr_is_hidden= false
+           ; dr_qual_type= None } in
+  let xcei = cxx_construct_expr_info dr true in
+  let xcei2 = cxx_construct_expr_info dr false in
+  let cxx_ctor_expr = CXXConstructExpr(stmt_info 1, [], ei, xcei) in
+  assert_equal "get_cxx_construct_expr_tuple"
+    (get_cxx_construct_expr_tuple cxx_ctor_expr)
+    (Some (stmt_info 1, [], ei, xcei)) ;
+  let updated_cxx_ctor_expr = update_cxx_construct_expr_tuple
+      (fun (si, sl, ei, xcei) ->
+         (stmt_info (si.si_pointer + 1)), sl, ei, xcei2)
+      cxx_ctor_expr in
+  assert_equal "update_cxx_construct_expr_tuple"
+    (get_cxx_construct_expr_tuple updated_cxx_ctor_expr)
+    (Some (stmt_info 2, [], ei, xcei2)) ;

@@ -154,6 +154,21 @@ let update_expr_tuple __f = function
 #include <clang/AST/StmtNodes.inc>
 | x -> x
 
+let get_cxx_construct_expr_tuple = function
+#define STMT(CLASS, PARENT)
+#define CXXCONSTRUCTEXPR(CLASS, PARENT) | CLASS (@CLASS@_tuple) -> Some (cxx_construct_expr_tuple)
+#define ABSTRACT_STMT(STMT)
+#include <clang/AST/StmtNodes.inc>
+| _ -> None
+
+let update_cxx_construct_expr_tuple __f = function
+#define STMT(CLASS, PARENT)
+#define CXXCONSTRUCTEXPR(CLASS, PARENT) | CLASS (@CLASS@_tuple) -> \
+    let (cxx_construct_expr_tuple) = __f (cxx_construct_expr_tuple) in CLASS (@CLASS@_tuple)
+#define ABSTRACT_STMT(STMT)
+#include <clang/AST/StmtNodes.inc>
+| x -> x
+
 let get_type_tuple = function
 #define TYPE(DERIVED, BASE) | DERIVED@@Type (@DERIVED@_type_tuple) -> (type_tuple)
 #define ABSTRACT_TYPE(DERIVED, BASE)

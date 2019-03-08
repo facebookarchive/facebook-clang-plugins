@@ -12,6 +12,7 @@ val get_decl_context_tuple : decl -> (decl_context_tuple) option
 val get_decl_kind_string : decl -> string
 val get_decl_tuple : decl -> (decl_tuple)
 val get_expr_tuple : stmt -> (expr_tuple) option
+val get_cxx_construct_expr_tuple : stmt -> (cxx_construct_expr_tuple) option
 val get_named_decl_tuple : decl -> (named_decl_tuple) option
 val get_stmt_kind_string : stmt -> string
 val get_stmt_tuple : stmt -> (stmt_tuple)
@@ -28,6 +29,7 @@ val string_of_binop_kind : binary_operator_kind -> string
 val string_of_cast_kind : cast_kind -> string
 val string_of_unop_kind : unary_operator_kind -> string
 
+val update_cxx_construct_expr_tuple : ((cxx_construct_expr_tuple) -> (cxx_construct_expr_tuple)) -> stmt -> stmt
 val update_decl_context_tuple : ((decl_context_tuple) -> (decl_context_tuple)) -> decl -> decl
 val update_decl_tuple : ((decl_tuple) -> (decl_tuple)) -> decl -> decl
 val update_expr_tuple : ((expr_tuple) -> (expr_tuple)) -> stmt -> stmt
