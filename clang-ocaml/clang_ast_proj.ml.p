@@ -106,6 +106,22 @@ let update_tag_decl_tuple __f = function
 | x -> x
 
 
+let get_var_decl_tuple = function
+#define DECL(DERIVED, BASE)
+#define ABSTRACT_DECL(DECL)
+#define VAR(DERIVED, BASE) | DERIVED@@Decl (@DERIVED@_decl_tuple) -> Some (var_decl_tuple)
+#include <clang/AST/DeclNodes.inc>
+| _ -> None
+
+let update_var_decl_tuple __f = function
+#define DECL(DERIVED, BASE)
+#define ABSTRACT_DECL(DECL)
+#define VAR(DERIVED, BASE) | DERIVED@@Decl (@DERIVED@_decl_tuple) -> \
+    let (var_decl_tuple) = __f (var_decl_tuple) in DERIVED@@Decl (@DERIVED@_decl_tuple)
+#include <clang/AST/DeclNodes.inc>
+| x -> x
+
+
 let get_stmt_kind_string = function
 #define STMT(CLASS, PARENT) | CLASS (@CLASS@_tuple) -> s(CLASS)
 #define ABSTRACT_STMT(STMT)

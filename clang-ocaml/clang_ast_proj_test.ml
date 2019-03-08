@@ -33,6 +33,24 @@ let name_info name = {ni_name= name; ni_qual_name= [name]}
 let append_name_info info suffix =
   {ni_name= info.ni_name ^ suffix; ni_qual_name= List.map (fun x -> x ^ suffix) info.ni_qual_name}
 
+let qual_type ptr =
+  { qt_type_ptr= ptr
+  ; qt_is_const= false
+  ; qt_is_restrict= false
+  ; qt_is_volatile= false }
+
+let var_decl_info ~is_global =
+  { vdi_is_global= is_global
+  ; vdi_is_extern= false
+  ; vdi_is_static_local= false
+  ; vdi_is_static_data_member= false
+  ; vdi_is_const_expr= false
+  ; vdi_is_init_ice= false
+  ; vdi_is_init_expr_cxx11_constant= false
+  ; vdi_init_expr= None
+  ; vdi_parm_index_in_function= None
+  ; vdi_storage_class= None }
+
 
 let () =
   let di = decl_info empty_source_location empty_source_location in
@@ -50,4 +68,17 @@ let () =
     (Some (di, name_info "foobar")) ;
   let di2 = decl_info (source_location ~file:"bla" ()) (source_location ~file:"bleh" ()) in
   let decl3 = update_decl_tuple (fun _ -> di2) decl in
-  assert_equal "update_decl_tuple" (get_decl_tuple decl3) di2
+  assert_equal "update_decl_tuple" (get_decl_tuple decl3) di2 ;
+
+  assert_equal "get_var_decl_tuple_none" (get_var_decl_tuple decl) None ;
+  let vdi = var_decl_info ~is_global:true in
+  let qt = qual_type (Clang_ast_types.TypePtr.wrap 0) in
+  let var_decl = ParmVarDecl(di, name_info "fooey", qt, vdi) in
+  assert_equal "get_var_decl_tuple" (get_var_decl_tuple var_decl)
+    (Some (di, name_info "fooey", qt, vdi)) ;
+  let updated_var_decl = update_var_decl_tuple
+      (fun (di, ni, qt, vdi) ->
+         (di, append_name_info ni "-mod", qt, var_decl_info ~is_global:false))
+      var_decl in
+  assert_equal "update_var_decl_tuple" (get_var_decl_tuple updated_var_decl)
+    (Some (di, name_info "fooey-mod", qt, var_decl_info ~is_global:false)) ;
