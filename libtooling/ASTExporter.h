@@ -254,6 +254,9 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   bool alwaysEmitParent(const Decl *D);
 
+  void emitAPInt(bool isSigned, const llvm::APInt& value);
+  void evaluateAndEmitInteger(const Expr* expr);
+
   // C++ Utilities
   void dumpAccessSpecifier(AccessSpecifier AS);
   void dumpCXXCtorInitializer(const CXXCtorInitializer &Init);
@@ -384,6 +387,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(AddrLabelExpr)
   DECLARE_VISITOR(BlockExpr)
   DECLARE_VISITOR(OpaqueValueExpr)
+  DECLARE_VISITOR(OffsetOfExpr)
 
   // C++
   DECLARE_VISITOR(CXXNamedCastExpr)
@@ -3490,6 +3494,17 @@ void ASTExporter<ATDWriter>::VisitCharacterLiteral(
 }
 
 template <class ATDWriter>
+void ASTExporter<ATDWriter>::emitAPInt(bool isSigned, const llvm::APInt& value) {
+  ObjectScope Scope(OF, 2 + isSigned);
+
+  OF.emitFlag("is_signed", isSigned);
+  OF.emitTag("bitwidth");
+  OF.emitInteger(value.getBitWidth());
+  OF.emitTag("value");
+  OF.emitString(value.toString(10, isSigned));
+}
+
+template <class ATDWriter>
 int ASTExporter<ATDWriter>::IntegerLiteralTupleSize() {
   return ExprTupleSize() + 1;
 }
@@ -3503,14 +3518,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitIntegerLiteral(const IntegerLiteral *Node) {
   VisitExpr(Node);
 
-  bool IsSigned = Node->getType()->isSignedIntegerType();
-  ObjectScope Scope(OF, 2 + IsSigned);
-
-  OF.emitFlag("is_signed", IsSigned);
-  OF.emitTag("bitwidth");
-  OF.emitInteger(Node->getValue().getBitWidth());
-  OF.emitTag("value");
-  OF.emitString(Node->getValue().toString(10, IsSigned));
+  const auto value = Node->getValue();
+  this->emitAPInt(Node->getType()->isSignedIntegerType(), value);
 }
 
 template <class ATDWriter>
@@ -3558,6 +3567,25 @@ void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
     OF.emitString(Str->getBytes().substr(i * Options.maxStringSize,
                                          Options.maxStringSize));
   }
+}
+
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::evaluateAndEmitInteger(const Expr* expr) {
+  llvm::APSInt result;
+  const bool success = expr->isIntegerConstantExpr(result, this->Context);
+  assert(success);
+  this->emitAPInt(result.isSigned(), result);
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::OffsetOfExprTupleSize() {
+  return IntegerLiteralTupleSize();
+}
+//@atd #define offset_of_expr_tuple integer_literal_tuple
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitOffsetOfExpr(const OffsetOfExpr* OOE) {
+  VisitExpr(OOE);
+  this->evaluateAndEmitInteger(OOE);
 }
 
 template <class ATDWriter>
