@@ -2541,6 +2541,7 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 //@atd   ~implicit_parameters : decl list;
 //@atd   ~is_variadic : bool;
 //@atd   ~is_overriding : bool;
+//@atd   ~is_optional : bool;
 //@atd   ?body : stmt option;
 //@atd } <ocaml field_prefix="omdi_">
 template <class ATDWriter>
@@ -2567,12 +2568,13 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   bool HasImplicitParameters = !ImplicitParams.empty();
   bool IsVariadic = D->isVariadic();
   bool IsOverriding = D->isOverriding();
+  bool IsOptional = D->isOptional();
   const Stmt *Body = D->getBody();
   ObjectScope Scope(OF,
                     1 + IsInstanceMethod + IsPropertyAccessor +
                         (bool)PropertyDecl + HasParameters +
                         HasImplicitParameters + IsVariadic + IsOverriding +
-                        (bool)Body);
+                        IsOptional + (bool)Body);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
@@ -2601,6 +2603,7 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   OF.emitFlag("is_variadic", IsVariadic);
 
   OF.emitFlag("is_overriding", IsOverriding);
+  OF.emitFlag("is_optional", IsOptional);
 
   if (Body) {
     OF.emitTag("body");

@@ -1,0 +1,1793 @@
+["TranslationUnitDecl" , [
+  {
+    "pointer" : 1,
+    "source_range" : [
+      {
+      },
+      {
+      }
+    ]
+  },
+  [
+    ["TypedefDecl" , [
+      {
+        "pointer" : 2,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "__int128_t",
+        "qual_name" : [
+          "__int128_t"
+        ]
+      },
+      0,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 3,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "__uint128_t",
+        "qual_name" : [
+          "__uint128_t"
+        ]
+      },
+      0,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 4,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "SEL",
+        "qual_name" : [
+          "SEL"
+        ]
+      },
+      5,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 6,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true,
+        "is_this_declaration_referenced" : true
+      },
+      {
+        "name" : "id",
+        "qual_name" : [
+          "id"
+        ]
+      },
+      7,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 8,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "Class",
+        "qual_name" : [
+          "Class"
+        ]
+      },
+      0,
+      {
+      }
+    ]],
+    ["ObjCInterfaceDecl" , [
+      {
+        "pointer" : 9,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "Protocol",
+        "qual_name" : [
+          "Protocol"
+        ]
+      },
+      [
+      ],
+      {
+      },
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 10,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "__NSConstantString",
+        "qual_name" : [
+          "__NSConstantString"
+        ]
+      },
+      0,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 11,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "__builtin_ms_va_list",
+        "qual_name" : [
+          "__builtin_ms_va_list"
+        ]
+      },
+      0,
+      {
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 12,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "__builtin_va_list",
+        "qual_name" : [
+          "__builtin_va_list"
+        ]
+      },
+      0,
+      {
+      }
+    ]],
+    ["ObjCInterfaceDecl" , [
+      {
+        "pointer" : 13,
+        "source_range" : [
+          {
+            "file" : "tests/optional.m",
+            "line" : 8,
+            "column" : 1
+          },
+          {
+            "line" : 9,
+            "column" : 2
+          }
+        ]
+      },
+      {
+        "name" : "NSObject",
+        "qual_name" : [
+          "NSObject"
+        ]
+      },
+      [
+      ],
+      {
+      },
+      {
+      }
+    ]],
+    ["ObjCProtocolDecl" , [
+      {
+        "pointer" : 14,
+        "source_range" : [
+          {
+            "line" : 11,
+            "column" : 1
+          },
+          {
+            "line" : 12,
+            "column" : 2
+          }
+        ]
+      },
+      {
+        "name" : "NSObject",
+        "qual_name" : [
+          "NSObject"
+        ]
+      },
+      [
+      ],
+      {
+      },
+      {
+      }
+    ]],
+    ["ObjCProtocolDecl" , [
+      {
+        "pointer" : 15,
+        "source_range" : [
+          {
+            "line" : 14,
+            "column" : 1
+          },
+          {
+            "line" : 17,
+            "column" : 2
+          }
+        ]
+      },
+      {
+        "name" : "BarDelegate",
+        "qual_name" : [
+          "BarDelegate"
+        ]
+      },
+      [
+        ["ObjCMethodDecl" , [
+          {
+            "pointer" : 16,
+            "parent_pointer" : 15,
+            "source_range" : [
+              {
+                "line" : 16,
+                "column" : 1
+              },
+              {
+                "column" : 26
+              }
+            ]
+          },
+          {
+            "name" : "optionalFunction",
+            "qual_name" : [
+              "optionalFunction",
+              "BarDelegate"
+            ]
+          },
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "type_ptr" : 17
+            },
+            "is_optional" : true
+          }
+        ]]
+      ],
+      {
+      },
+      {
+        "protocols" : [
+          {
+            "kind" : "ObjCProtocol",
+            "decl_pointer" : 14,
+            "name" : {
+              "name" : "NSObject",
+              "qual_name" : [
+                "NSObject"
+              ]
+            }
+          }
+        ]
+      }
+    ]],
+    ["ObjCInterfaceDecl" , [
+      {
+        "pointer" : 18,
+        "source_range" : [
+          {
+            "line" : 19,
+            "column" : 1
+          },
+          {
+            "line" : 21,
+            "column" : 2
+          }
+        ]
+      },
+      {
+        "name" : "Bar",
+        "qual_name" : [
+          "Bar"
+        ]
+      },
+      [
+        ["ObjCPropertyDecl" , [
+          {
+            "pointer" : 19,
+            "source_range" : [
+              {
+                "line" : 20,
+                "column" : 1
+              },
+              {
+                "column" : 47
+              }
+            ]
+          },
+          {
+            "name" : "delegate",
+            "qual_name" : [
+              "delegate",
+              "Bar"
+            ]
+          },
+          {
+            "qual_type" : {
+              "type_ptr" : 20
+            },
+            "getter_method" : {
+              "kind" : "ObjCMethod",
+              "decl_pointer" : 21,
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "Bar"
+                ]
+              }
+            },
+            "setter_method" : {
+              "kind" : "ObjCMethod",
+              "decl_pointer" : 22,
+              "name" : {
+                "name" : "setDelegate:",
+                "qual_name" : [
+                  "setDelegate:",
+                  "Bar"
+                ]
+              }
+            },
+            "ivar_decl" : {
+              "kind" : "ObjCIvar",
+              "decl_pointer" : 23,
+              "name" : {
+                "name" : "_delegate",
+                "qual_name" : [
+                  "_delegate",
+                  "Bar"
+                ]
+              },
+              "qual_type" : {
+                "type_ptr" : 20
+              }
+            },
+            "property_attributes" : [
+              "Assign",
+              "Readwrite",
+              "Nonatomic",
+              "Unsafe_unretained"
+            ]
+          }
+        ]],
+        ["ObjCMethodDecl" , [
+          {
+            "pointer" : 21,
+            "parent_pointer" : 18,
+            "source_range" : [
+              {
+                "column" : 47
+              },
+              {
+                "column" : 47
+              }
+            ],
+            "is_implicit" : true
+          },
+          {
+            "name" : "delegate",
+            "qual_name" : [
+              "delegate",
+              "Bar"
+            ]
+          },
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "type_ptr" : 20
+            },
+            "is_property_accessor" : true,
+            "property_decl" : {
+              "kind" : "ObjCProperty",
+              "decl_pointer" : 19,
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "Bar"
+                ]
+              }
+            },
+            "implicit_parameters" : [
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 24,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "self",
+                  "qual_name" : [
+                    "self"
+                  ]
+                },
+                {
+                  "type_ptr" : 25
+                },
+                {
+                }
+              ]],
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 26,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "_cmd",
+                  "qual_name" : [
+                    "_cmd"
+                  ]
+                },
+                {
+                  "type_ptr" : 5
+                },
+                {
+                }
+              ]]
+            ]
+          }
+        ]],
+        ["ObjCMethodDecl" , [
+          {
+            "pointer" : 22,
+            "parent_pointer" : 18,
+            "source_range" : [
+              {
+                "column" : 47
+              },
+              {
+                "column" : 47
+              }
+            ],
+            "is_implicit" : true
+          },
+          {
+            "name" : "setDelegate:",
+            "qual_name" : [
+              "setDelegate:",
+              "Bar"
+            ]
+          },
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "type_ptr" : 17
+            },
+            "is_property_accessor" : true,
+            "property_decl" : {
+              "kind" : "ObjCProperty",
+              "decl_pointer" : 19,
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "Bar"
+                ]
+              }
+            },
+            "parameters" : [
+              ["ParmVarDecl" , [
+                {
+                  "pointer" : 27,
+                  "source_range" : [
+                    {
+                      "column" : 47
+                    },
+                    {
+                      "column" : 47
+                    }
+                  ]
+                },
+                {
+                  "name" : "delegate",
+                  "qual_name" : [
+                    "delegate"
+                  ]
+                },
+                {
+                  "type_ptr" : 20
+                },
+                {
+                  "parm_index_in_function" : 0
+                }
+              ]]
+            ],
+            "implicit_parameters" : [
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 28,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "self",
+                  "qual_name" : [
+                    "self"
+                  ]
+                },
+                {
+                  "type_ptr" : 25
+                },
+                {
+                }
+              ]],
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 29,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "_cmd",
+                  "qual_name" : [
+                    "_cmd"
+                  ]
+                },
+                {
+                  "type_ptr" : 5
+                },
+                {
+                }
+              ]]
+            ]
+          }
+        ]]
+      ],
+      {
+      },
+      {
+        "super" : {
+          "kind" : "ObjCInterface",
+          "decl_pointer" : 13,
+          "name" : {
+            "name" : "NSObject",
+            "qual_name" : [
+              "NSObject"
+            ]
+          }
+        },
+        "implementation" : {
+          "kind" : "ObjCImplementation",
+          "decl_pointer" : 30,
+          "name" : {
+            "name" : "Bar",
+            "qual_name" : [
+              "Bar"
+            ]
+          }
+        }
+      }
+    ]],
+    ["ObjCImplementationDecl" , [
+      {
+        "pointer" : 30,
+        "source_range" : [
+          {
+            "line" : 23,
+            "column" : 1
+          },
+          {
+            "line" : 28,
+            "column" : 1
+          }
+        ]
+      },
+      {
+        "name" : "Bar",
+        "qual_name" : [
+          "Bar"
+        ]
+      },
+      [
+        ["ObjCMethodDecl" , [
+          {
+            "pointer" : 31,
+            "parent_pointer" : 30,
+            "source_range" : [
+              {
+                "line" : 24,
+                "column" : 1
+              },
+              {
+                "line" : 26,
+                "column" : 1
+              }
+            ]
+          },
+          {
+            "name" : "unsafeAction",
+            "qual_name" : [
+              "unsafeAction",
+              "Bar"
+            ]
+          },
+          {
+            "is_instance_method" : true,
+            "result_type" : {
+              "type_ptr" : 17
+            },
+            "implicit_parameters" : [
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 32,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true,
+                  "is_used" : true,
+                  "is_this_declaration_referenced" : true
+                },
+                {
+                  "name" : "self",
+                  "qual_name" : [
+                    "self"
+                  ]
+                },
+                {
+                  "type_ptr" : 25
+                },
+                {
+                }
+              ]],
+              ["ImplicitParamDecl" , [
+                {
+                  "pointer" : 33,
+                  "source_range" : [
+                    {
+                    },
+                    {
+                    }
+                  ],
+                  "is_implicit" : true
+                },
+                {
+                  "name" : "_cmd",
+                  "qual_name" : [
+                    "_cmd"
+                  ]
+                },
+                {
+                  "type_ptr" : 5
+                },
+                {
+                }
+              ]]
+            ],
+            "body" : ["CompoundStmt" , [
+              {
+                "pointer" : 34,
+                "source_range" : [
+                  {
+                    "line" : 24,
+                    "column" : 21
+                  },
+                  {
+                    "line" : 26,
+                    "column" : 1
+                  }
+                ]
+              },
+              [
+                ["ObjCMessageExpr" , [
+                  {
+                    "pointer" : 35,
+                    "source_range" : [
+                      {
+                        "line" : 25,
+                        "column" : 5
+                      },
+                      {
+                        "column" : 36
+                      }
+                    ]
+                  },
+                  [
+                    ["PseudoObjectExpr" , [
+                      {
+                        "pointer" : 36,
+                        "source_range" : [
+                          {
+                            "column" : 6
+                          },
+                          {
+                            "column" : 11
+                          }
+                        ]
+                      },
+                      [
+                        ["ObjCPropertyRefExpr" , [
+                          {
+                            "pointer" : 37,
+                            "source_range" : [
+                              {
+                                "column" : 6
+                              },
+                              {
+                                "column" : 11
+                              }
+                            ]
+                          },
+                          [
+                            ["OpaqueValueExpr" , [
+                              {
+                                "pointer" : 38,
+                                "source_range" : [
+                                  {
+                                    "column" : 6
+                                  },
+                                  {
+                                    "column" : 6
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 25
+                                }
+                              },
+                              {
+                                "source_expr" : ["ImplicitCastExpr" , [
+                                  {
+                                    "pointer" : 39,
+                                    "source_range" : [
+                                      {
+                                        "column" : 6
+                                      },
+                                      {
+                                        "column" : 6
+                                      }
+                                    ]
+                                  },
+                                  [
+                                    ["DeclRefExpr" , [
+                                      {
+                                        "pointer" : 40,
+                                        "source_range" : [
+                                          {
+                                            "column" : 6
+                                          },
+                                          {
+                                            "column" : 6
+                                          }
+                                        ]
+                                      },
+                                      [
+                                      ],
+                                      {
+                                        "qual_type" : {
+                                          "type_ptr" : 25
+                                        },
+                                        "value_kind" : "LValue"
+                                      },
+                                      {
+                                        "decl_ref" : {
+                                          "kind" : "ImplicitParam",
+                                          "decl_pointer" : 32,
+                                          "name" : {
+                                            "name" : "self",
+                                            "qual_name" : [
+                                              "self"
+                                            ]
+                                          },
+                                          "qual_type" : {
+                                            "type_ptr" : 25
+                                          }
+                                        }
+                                      }
+                                    ]]
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "type_ptr" : 25
+                                    }
+                                  },
+                                  {
+                                    "cast_kind" : "LValueToRValue",
+                                    "base_path" : [
+                                    ]
+                                  }
+                                ]]
+                              }
+                            ]]
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 41
+                            },
+                            "value_kind" : "LValue",
+                            "object_kind" : "ObjCProperty"
+                          },
+                          {
+                            "kind" : ["PropertyRef" , {
+                              "kind" : "ObjCProperty",
+                              "decl_pointer" : 19,
+                              "name" : {
+                                "name" : "delegate",
+                                "qual_name" : [
+                                  "delegate",
+                                  "Bar"
+                                ]
+                              }
+                            }],
+                            "is_messaging_getter" : true
+                          }
+                        ]],
+                        ["OpaqueValueExpr" , [
+                          {
+                            "pointer" : 38,
+                            "source_range" : [
+                              {
+                                "column" : 6
+                              },
+                              {
+                                "column" : 6
+                              }
+                            ]
+                          },
+                          [
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 25
+                            }
+                          },
+                          {
+                            "source_expr" : ["ImplicitCastExpr" , [
+                              {
+                                "pointer" : 39,
+                                "source_range" : [
+                                  {
+                                    "column" : 6
+                                  },
+                                  {
+                                    "column" : 6
+                                  }
+                                ]
+                              },
+                              [
+                                ["DeclRefExpr" , [
+                                  {
+                                    "pointer" : 40,
+                                    "source_range" : [
+                                      {
+                                        "column" : 6
+                                      },
+                                      {
+                                        "column" : 6
+                                      }
+                                    ]
+                                  },
+                                  [
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "type_ptr" : 25
+                                    },
+                                    "value_kind" : "LValue"
+                                  },
+                                  {
+                                    "decl_ref" : {
+                                      "kind" : "ImplicitParam",
+                                      "decl_pointer" : 32,
+                                      "name" : {
+                                        "name" : "self",
+                                        "qual_name" : [
+                                          "self"
+                                        ]
+                                      },
+                                      "qual_type" : {
+                                        "type_ptr" : 25
+                                      }
+                                    }
+                                  }
+                                ]]
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 25
+                                }
+                              },
+                              {
+                                "cast_kind" : "LValueToRValue",
+                                "base_path" : [
+                                ]
+                              }
+                            ]]
+                          }
+                        ]],
+                        ["ObjCMessageExpr" , [
+                          {
+                            "pointer" : 42,
+                            "source_range" : [
+                              {
+                                "column" : 11
+                              },
+                              {
+                                "column" : 11
+                              }
+                            ]
+                          },
+                          [
+                            ["OpaqueValueExpr" , [
+                              {
+                                "pointer" : 38,
+                                "source_range" : [
+                                  {
+                                    "column" : 6
+                                  },
+                                  {
+                                    "column" : 6
+                                  }
+                                ]
+                              },
+                              [
+                              ],
+                              {
+                                "qual_type" : {
+                                  "type_ptr" : 25
+                                }
+                              },
+                              {
+                                "source_expr" : ["ImplicitCastExpr" , [
+                                  {
+                                    "pointer" : 39,
+                                    "source_range" : [
+                                      {
+                                        "column" : 6
+                                      },
+                                      {
+                                        "column" : 6
+                                      }
+                                    ]
+                                  },
+                                  [
+                                    ["DeclRefExpr" , [
+                                      {
+                                        "pointer" : 40,
+                                        "source_range" : [
+                                          {
+                                            "column" : 6
+                                          },
+                                          {
+                                            "column" : 6
+                                          }
+                                        ]
+                                      },
+                                      [
+                                      ],
+                                      {
+                                        "qual_type" : {
+                                          "type_ptr" : 25
+                                        },
+                                        "value_kind" : "LValue"
+                                      },
+                                      {
+                                        "decl_ref" : {
+                                          "kind" : "ImplicitParam",
+                                          "decl_pointer" : 32,
+                                          "name" : {
+                                            "name" : "self",
+                                            "qual_name" : [
+                                              "self"
+                                            ]
+                                          },
+                                          "qual_type" : {
+                                            "type_ptr" : 25
+                                          }
+                                        }
+                                      }
+                                    ]]
+                                  ],
+                                  {
+                                    "qual_type" : {
+                                      "type_ptr" : 25
+                                    }
+                                  },
+                                  {
+                                    "cast_kind" : "LValueToRValue",
+                                    "base_path" : [
+                                    ]
+                                  }
+                                ]]
+                              }
+                            ]]
+                          ],
+                          {
+                            "qual_type" : {
+                              "type_ptr" : 20
+                            }
+                          },
+                          {
+                            "selector" : "delegate",
+                            "decl_pointer" : 21
+                          }
+                        ]]
+                      ],
+                      {
+                        "qual_type" : {
+                          "type_ptr" : 20
+                        }
+                      }
+                    ]]
+                  ],
+                  {
+                    "qual_type" : {
+                      "type_ptr" : 17
+                    }
+                  },
+                  {
+                    "selector" : "optionalFunction",
+                    "decl_pointer" : 16
+                  }
+                ]]
+              ]
+            ]]
+          }
+        ]],
+        ["ObjCIvarDecl" , [
+          {
+            "pointer" : 23,
+            "parent_pointer" : 30,
+            "source_range" : [
+              {
+                "line" : 20,
+                "column" : 47
+              },
+              {
+                "column" : 47
+              }
+            ]
+          },
+          {
+            "name" : "_delegate",
+            "qual_name" : [
+              "_delegate",
+              "Bar"
+            ]
+          },
+          {
+            "type_ptr" : 20
+          },
+          {
+          },
+          {
+            "is_synthesize" : true,
+            "access_control" : "Private"
+          }
+        ]],
+        ["ObjCPropertyImplDecl" , [
+          {
+            "pointer" : 43,
+            "source_range" : [
+              {
+              },
+              {
+                "column" : 47
+              }
+            ]
+          },
+          {
+            "implementation" : "Synthesize",
+            "property_decl" : {
+              "kind" : "ObjCProperty",
+              "decl_pointer" : 19,
+              "name" : {
+                "name" : "delegate",
+                "qual_name" : [
+                  "delegate",
+                  "Bar"
+                ]
+              }
+            },
+            "ivar_decl" : {
+              "kind" : "ObjCIvar",
+              "decl_pointer" : 23,
+              "name" : {
+                "name" : "_delegate",
+                "qual_name" : [
+                  "_delegate",
+                  "Bar"
+                ]
+              },
+              "qual_type" : {
+                "type_ptr" : 20
+              }
+            }
+          }
+        ]]
+      ],
+      {
+      },
+      {
+        "class_interface" : {
+          "kind" : "ObjCInterface",
+          "decl_pointer" : 18,
+          "name" : {
+            "name" : "Bar",
+            "qual_name" : [
+              "Bar"
+            ]
+          }
+        }
+      }
+    ]],
+    ["TypedefDecl" , [
+      {
+        "pointer" : 44,
+        "source_range" : [
+          {
+          },
+          {
+          }
+        ],
+        "is_implicit" : true
+      },
+      {
+        "name" : "instancetype",
+        "qual_name" : [
+          "instancetype"
+        ]
+      },
+      45,
+      {
+      }
+    ]]
+  ],
+  {
+  },
+  {
+    "input_path" : "tests/optional.m",
+    "input_kind" : "IK_ObjC",
+    "integer_type_widths" : {
+      "char_type" : 8,
+      "short_type" : 16,
+      "int_type" : 32,
+      "long_type" : 64,
+      "longlong_type" : 64
+    },
+    "types" : [
+      ["BuiltinType" , [
+        {
+          "pointer" : 17
+        },
+        "Void"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 46
+        },
+        "Bool"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 47
+        },
+        "Char_S"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 48
+        },
+        "SChar"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 49
+        },
+        "Short"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 50
+        },
+        "Int"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 51
+        },
+        "Long"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 52
+        },
+        "LongLong"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 53
+        },
+        "UChar"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 54
+        },
+        "UShort"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 55
+        },
+        "UInt"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 56
+        },
+        "ULong"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 57
+        },
+        "ULongLong"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 58
+        },
+        "Float"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 59
+        },
+        "Double"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 60
+        },
+        "LongDouble"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 61
+        },
+        "Float128"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 62
+        },
+        "Float16"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 63
+        },
+        "ShortAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 64
+        },
+        "Accum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 65
+        },
+        "LongAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 66
+        },
+        "UShortAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 67
+        },
+        "UAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 68
+        },
+        "ULongAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 69
+        },
+        "ShortFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 70
+        },
+        "Fract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 71
+        },
+        "LongFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 72
+        },
+        "UShortFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 73
+        },
+        "UFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 74
+        },
+        "ULongFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 75
+        },
+        "SatShortAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 76
+        },
+        "SatAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 77
+        },
+        "SatLongAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 78
+        },
+        "SatUShortAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 79
+        },
+        "SatUAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 80
+        },
+        "SatULongAccum"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 81
+        },
+        "SatShortFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 82
+        },
+        "SatFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 83
+        },
+        "SatLongFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 84
+        },
+        "SatUShortFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 85
+        },
+        "SatUFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 86
+        },
+        "SatULongFract"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 87
+        },
+        "Int128"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 88
+        },
+        "UInt128"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 89
+        },
+        "WChar_S"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 90
+        },
+        "Char8"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 91
+        },
+        "Dependent"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 92
+        },
+        "Overload"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 93
+        },
+        "BoundMember"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 41
+        },
+        "PseudoObject"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 94
+        },
+        "UnknownAny"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 95
+        },
+        "ARCUnbridgedCast"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 96
+        },
+        "BuiltinFn"
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 97
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 98
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 99
+        }
+      ]],
+      ["ComplexType" , [
+        {
+          "pointer" : 100
+        }
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 101
+        },
+        "ObjCId"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 102
+        },
+        "ObjCClass"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 103
+        },
+        "ObjCSel"
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 104
+        },
+        {
+          "type_ptr" : 17
+        }
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 105
+        },
+        "NullPtr"
+      ]],
+      ["BuiltinType" , [
+        {
+          "pointer" : 106
+        },
+        "Half"
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 107
+        },
+        {
+          "type_ptr" : 103
+        }
+      ]],
+      ["ObjCObjectType" , [
+        {
+          "pointer" : 108
+        },
+        {
+          "base_type" : 101
+        }
+      ]],
+      ["ObjCObjectPointerType" , [
+        {
+          "pointer" : 109
+        },
+        {
+          "type_ptr" : 108
+        }
+      ]],
+      ["ObjCObjectType" , [
+        {
+          "pointer" : 110
+        },
+        {
+          "base_type" : 102
+        }
+      ]],
+      ["ObjCObjectPointerType" , [
+        {
+          "pointer" : 111
+        },
+        {
+          "type_ptr" : 110
+        }
+      ]],
+      ["ObjCInterfaceType" , [
+        {
+          "pointer" : 112
+        },
+        9
+      ]],
+      ["RecordType" , [
+        {
+          "pointer" : 113
+        },
+        114
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 115
+        },
+        {
+          "type_ptr" : 50,
+          "is_const" : true
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 116
+        },
+        {
+          "type_ptr" : 47,
+          "is_const" : true
+        }
+      ]],
+      ["PointerType" , [
+        {
+          "pointer" : 117
+        },
+        {
+          "type_ptr" : 47
+        }
+      ]],
+      ["RecordType" , [
+        {
+          "pointer" : 118
+        },
+        119
+      ]],
+      ["ConstantArrayType" , [
+        {
+          "pointer" : 120
+        },
+        {
+          "element_type" : {
+            "type_ptr" : 118
+          },
+          "stride" : 24
+        },
+        1
+      ]],
+      ["ObjCInterfaceType" , [
+        {
+          "pointer" : 121
+        },
+        13
+      ]],
+      ["TypedefType" , [
+        {
+          "pointer" : 7,
+          "desugared_type" : 109
+        },
+        {
+          "child_type" : {
+            "type_ptr" : 109
+          },
+          "decl_ptr" : 6
+        }
+      ]],
+      ["TypedefType" , [
+        {
+          "pointer" : 45,
+          "desugared_type" : 109
+        },
+        {
+          "child_type" : {
+            "type_ptr" : 7
+          },
+          "decl_ptr" : 44
+        }
+      ]],
+      ["ObjCInterfaceType" , [
+        {
+          "pointer" : 122
+        },
+        18
+      ]],
+      ["ObjCObjectType" , [
+        {
+          "pointer" : 123
+        },
+        {
+          "base_type" : 101,
+          "protocol_decls_ptr" : [
+            15
+          ]
+        }
+      ]],
+      ["ObjCObjectPointerType" , [
+        {
+          "pointer" : 20
+        },
+        {
+          "type_ptr" : 123
+        }
+      ]],
+      ["ObjCObjectPointerType" , [
+        {
+          "pointer" : 25
+        },
+        {
+          "type_ptr" : 122
+        }
+      ]],
+      ["TypedefType" , [
+        {
+          "pointer" : 5,
+          "desugared_type" : 107
+        },
+        {
+          "child_type" : {
+            "type_ptr" : 107
+          },
+          "decl_ptr" : 4
+        }
+      ]],
+      ["NoneType" , [
+        {
+          "pointer" : 0
+        }
+      ]]
+    ]
+  }
+]]
