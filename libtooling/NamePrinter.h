@@ -73,7 +73,6 @@ void NamePrinter<ATDWriter>::printTemplateArgList(
   }
 }
 
-
 template <class ATDWriter>
 void NamePrinter<ATDWriter>::printDeclName(const NamedDecl &D) {
   const DeclContext *Ctx = D.getDeclContext();

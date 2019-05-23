@@ -7,9 +7,9 @@
 
 #pragma once
 
+#include <llvm/Support/VersionTuple.h>
 #include <string>
 #include <vector>
-#include <llvm/Support/VersionTuple.h>
 
 namespace ASTLib {
 

@@ -254,8 +254,8 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   bool alwaysEmitParent(const Decl *D);
 
-  void emitAPInt(bool isSigned, const llvm::APInt& value);
-  void evaluateAndEmitInteger(const Expr* expr);
+  void emitAPInt(bool isSigned, const llvm::APInt &value);
+  void evaluateAndEmitInteger(const Expr *expr);
 
   // C++ Utilities
   void dumpAccessSpecifier(AccessSpecifier AS);
@@ -1747,8 +1747,8 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool isInitExprCXX11ConstantExpr = false;
   ObjectScope Scope(OF,
                     IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
-                        IsConstExpr + IsInitICE + HasInit + HasParmIndex + HasStorageClass +
-                        isInitExprCXX11ConstantExpr);
+                        IsConstExpr + IsInitICE + HasInit + HasParmIndex +
+                        HasStorageClass + isInitExprCXX11ConstantExpr);
 
   OF.emitFlag("is_global", IsGlobal);
   OF.emitFlag("is_extern", IsExtern);
@@ -3490,7 +3490,8 @@ void ASTExporter<ATDWriter>::VisitCharacterLiteral(
 }
 
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::emitAPInt(bool isSigned, const llvm::APInt& value) {
+void ASTExporter<ATDWriter>::emitAPInt(bool isSigned,
+                                       const llvm::APInt &value) {
   ObjectScope Scope(OF, 2 + isSigned);
 
   OF.emitFlag("is_signed", isSigned);
@@ -3566,7 +3567,7 @@ void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
 }
 
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::evaluateAndEmitInteger(const Expr* expr) {
+void ASTExporter<ATDWriter>::evaluateAndEmitInteger(const Expr *expr) {
   llvm::APSInt result;
   const bool success = expr->isIntegerConstantExpr(result, this->Context);
   assert(success);
@@ -3579,7 +3580,7 @@ int ASTExporter<ATDWriter>::OffsetOfExprTupleSize() {
 }
 //@atd #define offset_of_expr_tuple integer_literal_tuple
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::VisitOffsetOfExpr(const OffsetOfExpr* OOE) {
+void ASTExporter<ATDWriter>::VisitOffsetOfExpr(const OffsetOfExpr *OOE) {
   VisitExpr(OOE);
   this->evaluateAndEmitInteger(OOE);
 }

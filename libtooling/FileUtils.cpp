@@ -92,4 +92,4 @@ std::string makeRelativePath(const std::string &repoRoot,
   return "";
 }
 
-}
+} // namespace FileUtils

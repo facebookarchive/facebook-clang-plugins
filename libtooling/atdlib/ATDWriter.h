@@ -8,10 +8,10 @@
 #pragma once
 
 #include <assert.h>
-#include <iostream>
-#include <vector>
 #include <functional>
+#include <iostream>
 #include <memory>
+#include <vector>
 
 namespace ATDWriter {
 
@@ -644,11 +644,11 @@ class BiniouEmitter {
 
   void enterArray(int size) { enterContainer(ARRAY_tag, size); }
   // unsupported:
-  //void enterArray() { enterContainer(ARRAY_tag); }
+  // void enterArray() { enterContainer(ARRAY_tag); }
   void leaveArray() { leaveContainer(); }
   void enterObject(int size) { enterContainer(RECORD_tag, size); }
   // unsupported:
-  //void enterObject() { enterContainer(RECORD_tag); }
+  // void enterObject() { enterContainer(RECORD_tag); }
   void leaveObject() {
     const ATDContainer &obj = atdContainers.back();
     // Container's size was already written -> must fill in for missing
@@ -660,7 +660,7 @@ class BiniouEmitter {
   }
   void enterTuple(int size) { enterContainer(TUPLE_tag, size); }
   // unsupported:
-  //void enterTuple() { enterContainer(TUPLE_tag); }
+  // void enterTuple() { enterContainer(TUPLE_tag); }
   void leaveTuple() { leaveContainer(); }
   void enterVariant() { enterContainer(VARIANT_tag, SIZE_NOT_NEEDED); }
   void leaveVariant() { leaveContainer(); }
@@ -687,4 +687,4 @@ class BiniouWriter : public GenWriter<BiniouEmitter<OStream>> {
   BiniouWriter(OStream &os, const ATDWriterOptions opts)
       : GenWriter<Emitter>(Emitter(os)) {}
 };
-}
+} // namespace ATDWriter

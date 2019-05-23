@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <string>
 #include <clang/AST/Decl.h>
+#include <string>
 
 namespace FileUtils {
 
@@ -31,4 +31,4 @@ std::string makeRelativePath(const std::string &repoRoot,
                              bool allowSiblingsToRoot,
                              const std::string &path);
 
-}
+} // namespace FileUtils
