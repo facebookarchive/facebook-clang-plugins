@@ -378,11 +378,12 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
 
   // Stmts.
   DECLARE_VISITOR(Stmt)
-  DECLARE_VISITOR(DeclStmt)
   DECLARE_VISITOR(AttributedStmt)
-  DECLARE_VISITOR(LabelStmt)
-  DECLARE_VISITOR(GotoStmt)
   DECLARE_VISITOR(CXXCatchStmt)
+  DECLARE_VISITOR(DeclStmt)
+  DECLARE_VISITOR(GotoStmt)
+  DECLARE_VISITOR(IfStmt)
+  DECLARE_VISITOR(LabelStmt)
 
   // Exprs
   DECLARE_VISITOR(Expr)
@@ -3087,6 +3088,45 @@ void ASTExporter<ATDWriter>::VisitDeclStmt(const DeclStmt *Node) {
   ArrayScope Scope(OF, std::distance(Node->decl_begin(), Node->decl_end()));
   for (auto I : Node->decls()) {
     dumpDecl(I);
+  }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::IfStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
+//@atd #define if_stmt_tuple stmt_tuple * if_stmt_info
+//@atd type if_stmt_info = {
+//@atd   ?init : pointer option;
+//@atd   ?cond_var : stmt option;
+//@atd   cond : pointer;
+//@atd   then : pointer;
+//@atd   ?else : (pointer * source_location) option;
+//@atd } <ocaml field_prefix="isi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitIfStmt(const IfStmt *Node) {
+  VisitStmt(Node);
+  const Stmt *Init = Node->getInit();
+  const DeclStmt *CondVar = Node->getConditionVariableDeclStmt();
+  bool hasElseStorage = Node->hasElseStorage();
+  ObjectScope Scope(OF, 2 + (bool) Init + (bool) CondVar + hasElseStorage);
+  if (Init) {
+    OF.emitTag("init");
+    dumpPointer(Init);
+  }
+  if (CondVar) {
+    OF.emitTag("cond_var");
+    dumpStmt(CondVar);
+  }
+  OF.emitTag("cond");
+  dumpPointer(Node->getCond());
+  OF.emitTag("then");
+  dumpPointer(Node->getThen());
+  if (hasElseStorage) {
+    OF.emitTag("else");
+    TupleScope Scope(OF, 2);
+    dumpPointer(Node->getElse());
+    dumpSourceLocation(Node->getElseLoc());
   }
 }
 
