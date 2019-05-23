@@ -384,6 +384,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(GotoStmt)
   DECLARE_VISITOR(IfStmt)
   DECLARE_VISITOR(LabelStmt)
+  DECLARE_VISITOR(SwitchStmt)
 
   // Exprs
   DECLARE_VISITOR(Expr)
@@ -3128,6 +3129,37 @@ void ASTExporter<ATDWriter>::VisitIfStmt(const IfStmt *Node) {
     dumpPointer(Node->getElse());
     dumpSourceLocation(Node->getElseLoc());
   }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::SwitchStmtTupleSize() {
+  return StmtTupleSize() + 1;
+}
+//@atd #define switch_stmt_tuple stmt_tuple * switch_stmt_info
+//@atd type switch_stmt_info = {
+//@atd   ?init : pointer option;
+//@atd   ?cond_var : stmt option;
+//@atd   cond : pointer;
+//@atd   body : pointer;
+//@atd } <ocaml field_prefix="ssi_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitSwitchStmt(const SwitchStmt *Node) {
+  VisitStmt(Node);
+  const Stmt *Init = Node->getInit();
+  const DeclStmt *CondVar = Node->getConditionVariableDeclStmt();
+  ObjectScope Scope(OF, 2 + (bool) Init + (bool) CondVar);
+  if (Init) {
+    OF.emitTag("init");
+    dumpPointer(Init);
+  }
+  if (CondVar) {
+    OF.emitTag("cond_var");
+    dumpStmt(CondVar);
+  }
+  OF.emitTag("cond");
+  dumpPointer(Node->getCond());
+  OF.emitTag("body");
+  dumpPointer(Node->getBody());
 }
 
 template <class ATDWriter>
