@@ -1745,13 +1745,6 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   StorageClass SC = D->getStorageClass();
   bool HasStorageClass = SC != SC_None;
   bool isInitExprCXX11ConstantExpr = false;
-    // TODO: update clang T33710741
-  //if (HasInit) {
-  //    const Expr* tmp_e = D->getInit();
-  //    ASTContext& cxt = D->getASTContext();
-  //    bool IsCpp = cxt.getLangOpts().CPlusPlus;
-  //    if (tmp_e!=nullptr && IsCpp) isInitExprCXX11ConstantExpr = tmp_e->isCXX11ConstantExpr(cxt);
-  //}
   ObjectScope Scope(OF,
                     IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
                         IsConstExpr + IsInitICE + HasInit + HasParmIndex + HasStorageClass +
