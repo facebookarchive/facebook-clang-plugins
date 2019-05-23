@@ -3569,8 +3569,7 @@ void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::evaluateAndEmitInteger(const Expr *expr) {
   llvm::APSInt result;
-  const bool success = expr->isIntegerConstantExpr(result, this->Context);
-  assert(success);
+  assert(expr->isIntegerConstantExpr(result, this->Context));
   this->emitAPInt(result.isSigned(), result);
 }
 
