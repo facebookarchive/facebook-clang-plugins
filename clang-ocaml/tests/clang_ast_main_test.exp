@@ -1168,8 +1168,6 @@ TranslationUnitDecl None:None:None None:None:None
        ImplicitParamDecl tests/Hello.m:15:18 tests/Hello.m:15:18
       CompoundStmt
         IfStmt
-          NullStmt
-          NullStmt
           BinaryOperator
             ImplicitCastExpr
               DeclRefExpr
@@ -1183,7 +1181,6 @@ TranslationUnitDecl None:None:None None:None:None
                   StringLiteral
               ImplicitCastExpr
                 DeclRefExpr
-          NullStmt
   FunctionDecl tests/Hello.m:22:1 tests/Hello.m:30:1
      ParmVarDecl tests/Hello.m:22:10 tests/Hello.m:22:14
      ParmVarDecl tests/Hello.m:22:20 tests/Hello.m:22:31

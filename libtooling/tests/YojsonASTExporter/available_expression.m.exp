@@ -507,35 +507,9 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                     )
                   },
                   [
-                    <"NullStmt" : (
-                      {
-                        "pointer" : 27,
-                        "source_range" : (
-                          {
-                          },
-                          {
-                          }
-                        )
-                      },
-                      [
-                      ]
-                    )>,
-                    <"NullStmt" : (
-                      {
-                        "pointer" : 27,
-                        "source_range" : (
-                          {
-                          },
-                          {
-                          }
-                        )
-                      },
-                      [
-                      ]
-                    )>,
                     <"ObjCAvailabilityCheckExpr" : (
                       {
-                        "pointer" : 28,
+                        "pointer" : 27,
                         "source_range" : (
                           {
                             "column" : 7
@@ -549,7 +523,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 29
+                          "type_ptr" : 28
                         }
                       },
                       {
@@ -558,7 +532,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                     )>,
                     <"CompoundStmt" : (
                       {
-                        "pointer" : 30,
+                        "pointer" : 29,
                         "source_range" : (
                           {
                             "column" : 45
@@ -570,25 +544,16 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                       },
                       [
                       ]
-                    )>,
-                    <"NullStmt" : (
-                      {
-                        "pointer" : 27,
-                        "source_range" : (
-                          {
-                          },
-                          {
-                          }
-                        )
-                      },
-                      [
-                      ]
                     )>
-                  ]
+                  ],
+                  {
+                    "cond" : 27,
+                    "then" : 29
+                  }
                 )>,
                 <"IfStmt" : (
                   {
-                    "pointer" : 31,
+                    "pointer" : 30,
                     "source_range" : (
                       {
                         "line" : 22,
@@ -600,35 +565,9 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                     )
                   },
                   [
-                    <"NullStmt" : (
-                      {
-                        "pointer" : 27,
-                        "source_range" : (
-                          {
-                          },
-                          {
-                          }
-                        )
-                      },
-                      [
-                      ]
-                    )>,
-                    <"NullStmt" : (
-                      {
-                        "pointer" : 27,
-                        "source_range" : (
-                          {
-                          },
-                          {
-                          }
-                        )
-                      },
-                      [
-                      ]
-                    )>,
                     <"ObjCAvailabilityCheckExpr" : (
                       {
-                        "pointer" : 32,
+                        "pointer" : 31,
                         "source_range" : (
                           {
                             "column" : 7
@@ -642,7 +581,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                       ],
                       {
                         "qual_type" : {
-                          "type_ptr" : 29
+                          "type_ptr" : 28
                         }
                       },
                       {
@@ -651,7 +590,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                     )>,
                     <"CompoundStmt" : (
                       {
-                        "pointer" : 33,
+                        "pointer" : 32,
                         "source_range" : (
                           {
                             "column" : 51
@@ -663,21 +602,12 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                       },
                       [
                       ]
-                    )>,
-                    <"NullStmt" : (
-                      {
-                        "pointer" : 27,
-                        "source_range" : (
-                          {
-                          },
-                          {
-                          }
-                        )
-                      },
-                      [
-                      ]
                     )>
-                  ]
+                  ],
+                  {
+                    "cond" : 31,
+                    "then" : 32
+                  }
                 )>
               ]
             )>
@@ -701,7 +631,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
     )>,
     <"TypedefDecl" : (
       {
-        "pointer" : 34,
+        "pointer" : 33,
         "source_range" : (
           {
           },
@@ -716,7 +646,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
           "instancetype"
         ]
       },
-      35,
+      34,
       {
       }
     )>
@@ -742,25 +672,25 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 29
+          "pointer" : 28
         },
         <"Bool">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 36
+          "pointer" : 35
         },
         <"Char_S">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 37
+          "pointer" : 36
         },
         <"SChar">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 38
+          "pointer" : 37
         },
         <"Short">
       )>,
@@ -772,285 +702,290 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 39
+          "pointer" : 38
         },
         <"Long">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 40
+          "pointer" : 39
         },
         <"LongLong">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 41
+          "pointer" : 40
         },
         <"UChar">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 42
+          "pointer" : 41
         },
         <"UShort">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 43
+          "pointer" : 42
         },
         <"UInt">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 44
+          "pointer" : 43
         },
         <"ULong">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 45
+          "pointer" : 44
         },
         <"ULongLong">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 46
+          "pointer" : 45
         },
         <"Float">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 47
+          "pointer" : 46
         },
         <"Double">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 48
+          "pointer" : 47
         },
         <"LongDouble">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 49
+          "pointer" : 48
         },
         <"Float128">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 50
+          "pointer" : 49
         },
         <"Float16">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 51
+          "pointer" : 50
         },
         <"ShortAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 52
+          "pointer" : 51
         },
         <"Accum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 53
+          "pointer" : 52
         },
         <"LongAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 54
+          "pointer" : 53
         },
         <"UShortAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 55
+          "pointer" : 54
         },
         <"UAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 56
+          "pointer" : 55
         },
         <"ULongAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 57
+          "pointer" : 56
         },
         <"ShortFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 58
+          "pointer" : 57
         },
         <"Fract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 59
+          "pointer" : 58
         },
         <"LongFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 60
+          "pointer" : 59
         },
         <"UShortFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 61
+          "pointer" : 60
         },
         <"UFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 62
+          "pointer" : 61
         },
         <"ULongFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 63
+          "pointer" : 62
         },
         <"SatShortAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 64
+          "pointer" : 63
         },
         <"SatAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 65
+          "pointer" : 64
         },
         <"SatLongAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 66
+          "pointer" : 65
         },
         <"SatUShortAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 67
+          "pointer" : 66
         },
         <"SatUAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 68
+          "pointer" : 67
         },
         <"SatULongAccum">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 69
+          "pointer" : 68
         },
         <"SatShortFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 70
+          "pointer" : 69
         },
         <"SatFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 71
+          "pointer" : 70
         },
         <"SatLongFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 72
+          "pointer" : 71
         },
         <"SatUShortFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 73
+          "pointer" : 72
         },
         <"SatUFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 74
+          "pointer" : 73
         },
         <"SatULongFract">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 75
+          "pointer" : 74
         },
         <"Int128">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 76
+          "pointer" : 75
         },
         <"UInt128">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 77
+          "pointer" : 76
         },
         <"WChar_S">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 78
+          "pointer" : 77
         },
         <"Char8">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 79
+          "pointer" : 78
         },
         <"Dependent">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 80
+          "pointer" : 79
         },
         <"Overload">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 81
+          "pointer" : 80
         },
         <"BoundMember">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 82
+          "pointer" : 81
         },
         <"PseudoObject">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 83
+          "pointer" : 82
         },
         <"UnknownAny">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 84
+          "pointer" : 83
         },
         <"ARCUnbridgedCast">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 85
+          "pointer" : 84
         },
         <"BuiltinFn">
+      )>,
+      <"ComplexType" : (
+        {
+          "pointer" : 85
+        }
       )>,
       <"ComplexType" : (
         {
@@ -1067,32 +1002,27 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
           "pointer" : 88
         }
       )>,
-      <"ComplexType" : (
-        {
-          "pointer" : 89
-        }
-      )>,
       <"BuiltinType" : (
         {
-          "pointer" : 90
+          "pointer" : 89
         },
         <"ObjCId">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 91
+          "pointer" : 90
         },
         <"ObjCClass">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 92
+          "pointer" : 91
         },
         <"ObjCSel">
       )>,
       <"PointerType" : (
         {
-          "pointer" : 93
+          "pointer" : 92
         },
         {
           "type_ptr" : 18
@@ -1100,27 +1030,43 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 94
+          "pointer" : 93
         },
         <"NullPtr">
       )>,
       <"BuiltinType" : (
         {
-          "pointer" : 95
+          "pointer" : 94
         },
         <"Half">
       )>,
       <"PointerType" : (
         {
-          "pointer" : 96
+          "pointer" : 95
         },
         {
-          "type_ptr" : 92
+          "type_ptr" : 91
         }
       )>,
       <"ObjCObjectType" : (
         {
+          "pointer" : 96
+        },
+        {
+          "base_type" : 89
+        }
+      )>,
+      <"ObjCObjectPointerType" : (
+        {
           "pointer" : 97
+        },
+        {
+          "type_ptr" : 96
+        }
+      )>,
+      <"ObjCObjectType" : (
+        {
+          "pointer" : 98
         },
         {
           "base_type" : 90
@@ -1128,43 +1074,27 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
       )>,
       <"ObjCObjectPointerType" : (
         {
-          "pointer" : 98
-        },
-        {
-          "type_ptr" : 97
-        }
-      )>,
-      <"ObjCObjectType" : (
-        {
           "pointer" : 99
         },
         {
-          "base_type" : 91
-        }
-      )>,
-      <"ObjCObjectPointerType" : (
-        {
-          "pointer" : 100
-        },
-        {
-          "type_ptr" : 99
+          "type_ptr" : 98
         }
       )>,
       <"ObjCInterfaceType" : (
         {
-          "pointer" : 101
+          "pointer" : 100
         },
         9
       )>,
       <"RecordType" : (
         {
-          "pointer" : 102
+          "pointer" : 101
         },
-        103
+        102
       )>,
       <"PointerType" : (
         {
-          "pointer" : 104
+          "pointer" : 103
         },
         {
           "type_ptr" : 20,
@@ -1173,34 +1103,34 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
       )>,
       <"PointerType" : (
         {
-          "pointer" : 105
+          "pointer" : 104
         },
         {
-          "type_ptr" : 36,
+          "type_ptr" : 35,
           "is_const" : true
         }
       )>,
       <"PointerType" : (
         {
-          "pointer" : 106
+          "pointer" : 105
         },
         {
-          "type_ptr" : 36
+          "type_ptr" : 35
         }
       )>,
       <"RecordType" : (
         {
-          "pointer" : 107
+          "pointer" : 106
         },
-        108
+        107
       )>,
       <"ConstantArrayType" : (
         {
-          "pointer" : 109
+          "pointer" : 108
         },
         {
           "element_type" : {
-            "type_ptr" : 107
+            "type_ptr" : 106
           },
           "stride" : 24
         },
@@ -1208,13 +1138,13 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
       )>,
       <"ObjCInterfaceType" : (
         {
-          "pointer" : 110
+          "pointer" : 109
         },
         13
       )>,
       <"ObjCInterfaceType" : (
         {
-          "pointer" : 111
+          "pointer" : 110
         },
         15
       )>,
@@ -1223,41 +1153,41 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
           "pointer" : 22
         },
         {
-          "type_ptr" : 111
+          "type_ptr" : 110
         }
       )>,
       <"TypedefType" : (
         {
           "pointer" : 7,
-          "desugared_type" : 98
+          "desugared_type" : 97
         },
         {
           "child_type" : {
-            "type_ptr" : 98
+            "type_ptr" : 97
           },
           "decl_ptr" : 6
         }
       )>,
       <"TypedefType" : (
         {
-          "pointer" : 35,
-          "desugared_type" : 98
+          "pointer" : 34,
+          "desugared_type" : 97
         },
         {
           "child_type" : {
             "type_ptr" : 7
           },
-          "decl_ptr" : 34
+          "decl_ptr" : 33
         }
       )>,
       <"TypedefType" : (
         {
           "pointer" : 5,
-          "desugared_type" : 96
+          "desugared_type" : 95
         },
         {
           "child_type" : {
-            "type_ptr" : 96
+            "type_ptr" : 95
           },
           "decl_ptr" : 4
         }

@@ -128,21 +128,23 @@
           }
         ),
         "attributes" : [
-          <"SentinelAttr" : {
-            "pointer" : 8,
-            "source_range" : (
-              {
-                "column" : 45
-              },
-              {
-                "column" : 57
-              }
-            ),
-            "parameters" : [
-              "0",
-              "1"
-            ]
-          }>
+          <"SentinelAttr" : (
+            {
+              "pointer" : 8,
+              "source_range" : (
+                {
+                  "column" : 45
+                },
+                {
+                  "column" : 57
+                }
+              )
+            },
+            {
+              "sentinel" : 0,
+              "null_pos" : 1
+            }
+          )>
         ]
       },
       {

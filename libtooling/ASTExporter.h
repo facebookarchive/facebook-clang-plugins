@@ -33,6 +33,7 @@
 #include <clang/AST/ASTConsumer.h>
 #include <clang/AST/ASTContext.h>
 #include <clang/AST/Attr.h>
+#include <clang/AST/AttrVisitor.h>
 #include <clang/AST/CommentVisitor.h>
 #include <clang/AST/DeclCXX.h>
 #include <clang/AST/DeclLookups.h>
@@ -167,6 +168,22 @@ struct TupleSizeBase {
     }
     llvm_unreachable("Type that isn't part of TypeNodes.def!");
   }
+
+  // Attributes
+
+#define ATTR(NAME) \
+  int NAME##AttrTupleSize() { return 1; }
+#include <clang/Basic/AttrList.inc>
+
+  int tupleSizeOfAttrKind(const attr::Kind attrKind) {
+    switch (attrKind) {
+#define ATTR(NAME)       \
+  case attr::Kind::NAME: \
+    return static_cast<Impl *>(this)->NAME##AttrTupleSize();
+#include <clang/Basic/AttrList.inc>
+    }
+    llvm_unreachable("Attr that isn't part of AttrList.inc!");
+  }
 };
 
 typedef ATDWriter::JsonWriter<raw_ostream> JsonWriter;
@@ -176,6 +193,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
                     public ConstStmtVisitor<ASTExporter<ATDWriter>>,
                     public ConstCommentVisitor<ASTExporter<ATDWriter>>,
                     public TypeVisitor<ASTExporter<ATDWriter>>,
+                    public ConstAttrVisitor<ASTExporter<ATDWriter>>,
                     public TupleSizeBase<ASTExporter<ATDWriter>> {
   typedef typename ATDWriter::ObjectScope ObjectScope;
   typedef typename ATDWriter::ArrayScope ArrayScope;
@@ -236,6 +254,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpPointerToType(const Type *T);
   void dumpQualTypeNoQuals(const QualType &qt);
   void dumpClassLambdaCapture(const LambdaCapture *C);
+  void dumpVersionTuple(const VersionTuple &VT);
 
   // Utilities
   void dumpPointer(const void *Ptr);
@@ -246,7 +265,6 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   void dumpDeclRef(const Decl &Node);
   bool hasNodes(const DeclContext *DC);
   void dumpLookups(const DeclContext &DC);
-  void dumpAttr(const Attr &A);
   void dumpSelector(const Selector sel);
   void dumpName(const NamedDecl &decl);
   void dumpInputKind(const InputKind kind);
@@ -473,6 +491,14 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(ReferenceType)
   DECLARE_VISITOR(TagType)
   DECLARE_VISITOR(TypedefType)
+
+  void dumpAttrKind(attr::Kind Kind);
+  void dumpAttr(const Attr *A);
+  DECLARE_VISITOR(Attr)
+  DECLARE_VISITOR(AnnotateAttr)
+  DECLARE_VISITOR(AvailabilityAttr)
+  DECLARE_VISITOR(SentinelAttr)
+  DECLARE_VISITOR(VisibilityAttr)
 
   void dumpTypeAttr(AttributedType::Kind kind);
   void dumpObjCLifetimeQual(Qualifiers::ObjCLifetime qual);
@@ -748,70 +774,6 @@ void ASTExporter<ATDWriter>::dumpLookups(const DeclContext &DC) {
 
   bool HasUndeserializedLookups = Primary->hasExternalVisibleStorage();
   OF.emitFlag("has_undeserialized_decls", HasUndeserializedLookups);
-}
-
-//@atd type attribute = [
-#define ATTR(X) //@atd   | X@@Attr of attribute_info
-#include <clang/Basic/AttrList.inc>
-//@atd ] <ocaml repr="classic">
-//@atd type attribute_info = {
-//@atd   pointer : pointer;
-//@atd   source_range : source_range;
-//@atd   parameters : string list;
-//@atd   ~is_inherited : bool;
-//@atd   ~is_implicit : bool
-//@atd } <ocaml field_prefix="ai_">
-template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpAttr(const Attr &Att) {
-  std::string tag;
-  switch (Att.getKind()) {
-#define ATTR(X)      \
-  case attr::X:      \
-    tag = #X "Attr"; \
-    break;
-#include <clang/Basic/AttrList.inc>
-  }
-  VariantScope Scope(OF, tag);
-  {
-    bool IsInherited = Att.isInherited();
-    bool IsImplicit = Att.isImplicit();
-    ObjectScope Scope(OF, 3 + IsInherited + IsImplicit);
-    OF.emitTag("pointer");
-    dumpPointer(&Att);
-    OF.emitTag("source_range");
-    dumpSourceRange(Att.getRange());
-
-    OF.emitTag("parameters");
-    {
-      AttrParameterVectorStream OS{};
-
-      // TODO: better dumping of attribute parameters.
-      // Here we skip three types of parameters (see #define's below)
-      // and output the others as strings, so clients reading the
-      // emitted AST will have to parse them.
-      const Attr *A = &Att;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-variable"
-#define dumpBareDeclRef(X) OS << "?"
-#define dumpStmt(X) OS << "?"
-#define dumpType(X) OS << "?"
-#include <clang/AST/AttrDump.inc>
-#undef dumpBareDeclRef
-#undef dumpStmt
-#undef dumpType
-#pragma clang diagnostic pop
-
-      {
-        ArrayScope Scope(OF, OS.getContent().size());
-        for (const std::string &item : OS.getContent()) {
-          OF.emitString(item);
-        }
-      }
-    }
-
-    OF.emitFlag("is_inherited", IsInherited);
-    OF.emitFlag("is_implicit", IsImplicit);
-  }
 }
 
 //===----------------------------------------------------------------------===//
@@ -1172,8 +1134,8 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     if (HasAttributes) {
       OF.emitTag("attributes");
       ArrayScope ArrayAttr(OF, D->getAttrs().size());
-      for (auto I : D->attrs()) {
-        dumpAttr(*I);
+      for (auto I : D->getAttrs()) {
+        dumpAttr(I);
       }
     }
 
@@ -3137,8 +3099,8 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitAttributedStmt(const AttributedStmt *Node) {
   VisitStmt(Node);
   ArrayScope Scope(OF, Node->getAttrs().size()); // not covered by tests
-  for (auto I : Node->getAttrs()) {
-    dumpAttr(*I);
+  for (auto A : Node->getAttrs()) {
+    dumpAttr(A);
   }
 }
 
@@ -3449,7 +3411,7 @@ int ASTExporter<ATDWriter>::PredefinedExprTupleSize() {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitPredefinedExpr(const PredefinedExpr *Node) {
   VisitExpr(Node);
-  switch (Node->getIdentType()) {
+  switch (Node->getIdentKind()) {
   case PredefinedExpr::Func:
     OF.emitSimpleVariant("Func");
     break;
@@ -3624,8 +3586,14 @@ int ASTExporter<ATDWriter>::UnaryExprOrTypeTraitExprTupleSize() {
 //@atd   kind : unary_expr_or_type_trait_kind;
 //@atd   qual_type : qual_type
 //@atd } <ocaml field_prefix="uttei_">
-//@atd type unary_expr_or_type_trait_kind = [ SizeOfWithSize of int | SizeOf | AlignOf |
-//@atd   VecStep | OpenMPRequiredSimdAlign ]
+//@atd type unary_expr_or_type_trait_kind = [
+//@atd | AlignOf
+//@atd | OpenMPRequiredSimdAlign
+//@atd | PreferredAlignOf
+//@atd | SizeOf
+//@atd | SizeOfWithSize of int
+//@atd | VecStep
+//@atd ]
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     const UnaryExprOrTypeTraitExpr *Node) {
@@ -3635,6 +3603,15 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
 
   OF.emitTag("kind");
   switch (Node->getKind()) {
+  case UETT_AlignOf:
+    OF.emitSimpleVariant("AlignOf");
+    break;
+  case UETT_OpenMPRequiredSimdAlign:
+    OF.emitSimpleVariant("OpenMPRequiredSimdAlign");
+    break;
+  case UETT_PreferredAlignOf:
+    OF.emitSimpleVariant("PreferredAlignOf");
+    break;
   case UETT_SizeOf: {
     const Type *ArgType = Node->getTypeOfArgument().getTypePtr();
     if (hasMeaningfulTypeInfo(ArgType)) {
@@ -3645,14 +3622,8 @@ void ASTExporter<ATDWriter>::VisitUnaryExprOrTypeTraitExpr(
     }
     break;
   }
-  case UETT_AlignOf:
-    OF.emitSimpleVariant("AlignOf");
-    break;
   case UETT_VecStep:
     OF.emitSimpleVariant("VecStep");
-    break;
-  case UETT_OpenMPRequiredSimdAlign:
-    OF.emitSimpleVariant("OpenMPRequiredSimdAlign");
     break;
   }
 
@@ -4785,153 +4756,21 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
   dumpQualType(T->getValueType());
 }
 
-//@atd type type_attribute_kind = [
-//@atd   | AddressSpace
-//@atd   | Regparm
-//@atd   | VectorSize
-//@atd   | NeonVectorSize
-//@atd   | NeonPolyVectorSize
-//@atd   | ObjcGc
-//@atd   | ObjcOwnership
-//@atd   | Pcs
-//@atd   | PcsVfp
-//@atd   | Noreturn
-//@atd   | Cdecl
-//@atd   | Fastcall
-//@atd   | Stdcall
-//@atd   | Thiscall
-//@atd   | Pascal
-//@atd   | Vectorcall
-//@atd   | Inteloclbicc
-//@atd   | MsAbi
-//@atd   | SysvAbi
-//@atd   | Ptr32
-//@atd   | Ptr64
-//@atd   | Sptr
-//@atd   | Uptr
-//@atd   | Nonnull
-//@atd   | Nullable
-//@atd   | NullUnspecified
-//@atd   | ObjcKindof
-//@atd   | ObjcInertUnsafeUnretained
-//@atd   | Swiftcall
-//@atd   | PreserveMost
-//@atd   | PreserveAll
-//@atd   | Regcall
-//@atd   | NSReturnsRetained
-//@atd   | NocfCheck
-//@atd   | Lifetimebound
-//@atd ]
+//@atd type attribute_kind = [
+#define ATTR(NAME) //@atd | NAME@@AttrKind
+#include <clang/Basic/AttrList.inc>
+//@atd ] <ocaml repr="classic">
 
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::dumpTypeAttr(AttributedType::Kind kind) {
-  switch (kind) {
-  case AttributedType::attr_address_space:
-    OF.emitSimpleVariant("AddressSpace");
-    break;
-  case AttributedType::attr_regparm:
-    OF.emitSimpleVariant("Regparm");
-    break;
-  case AttributedType::attr_vector_size:
-    OF.emitSimpleVariant("VectorSize");
-    break;
-  case AttributedType::attr_neon_vector_type:
-    OF.emitSimpleVariant("NeonVectorSize");
-    break;
-  case AttributedType::attr_neon_polyvector_type:
-    OF.emitSimpleVariant("NeonPolyVectorSize");
-    break;
-  case AttributedType::attr_objc_gc:
-    OF.emitSimpleVariant("ObjcGc");
-    break;
-  case AttributedType::attr_objc_ownership:
-    OF.emitSimpleVariant("ObjcOwnership");
-    break;
-  case AttributedType::attr_pcs:
-    OF.emitSimpleVariant("Pcs");
-    break;
-  case AttributedType::attr_pcs_vfp:
-    OF.emitSimpleVariant("PcsVfp");
-    break;
-  case AttributedType::attr_noreturn:
-    OF.emitSimpleVariant("Noreturn");
-    break;
-  case AttributedType::attr_cdecl:
-    OF.emitSimpleVariant("Cdecl");
-    break;
-  case AttributedType::attr_fastcall:
-    OF.emitSimpleVariant("Fastcall");
-    break;
-  case AttributedType::attr_stdcall:
-    OF.emitSimpleVariant("Stdcall");
-    break;
-  case AttributedType::attr_thiscall:
-    OF.emitSimpleVariant("Thiscall");
-    break;
-  case AttributedType::attr_pascal:
-    OF.emitSimpleVariant("Pascal");
-    break;
-  case AttributedType::attr_vectorcall:
-    OF.emitSimpleVariant("Vectorcall");
-    break;
-  case AttributedType::attr_inteloclbicc:
-    OF.emitSimpleVariant("Inteloclbicc");
-    break;
-  case AttributedType::attr_ms_abi:
-    OF.emitSimpleVariant("MsAbi");
-    break;
-  case AttributedType::attr_sysv_abi:
-    OF.emitSimpleVariant("SysvAbi");
-    break;
-  case AttributedType::attr_ptr32:
-    OF.emitSimpleVariant("Ptr32");
-    break;
-  case AttributedType::attr_ptr64:
-    OF.emitSimpleVariant("Ptr64");
-    break;
-  case AttributedType::attr_sptr:
-    OF.emitSimpleVariant("Sptr");
-    break;
-  case AttributedType::attr_uptr:
-    OF.emitSimpleVariant("Uptr");
-    break;
-  case AttributedType::attr_nonnull:
-    OF.emitSimpleVariant("Nonnull");
-    break;
-  case AttributedType::attr_nullable:
-    OF.emitSimpleVariant("Nullable");
-    break;
-  case AttributedType::attr_null_unspecified:
-    OF.emitSimpleVariant("NullUnspecified");
-    break;
-  case AttributedType::attr_objc_kindof:
-    OF.emitSimpleVariant("ObjcKindof");
-    break;
-  case AttributedType::attr_objc_inert_unsafe_unretained:
-    OF.emitSimpleVariant("ObjcInertUnsafeUnretained");
-    break;
-  case AttributedType::attr_swiftcall:
-    OF.emitSimpleVariant("Swiftcall");
-    break;
-  case AttributedType::attr_preserve_most:
-    OF.emitSimpleVariant("PreserveMost");
-    break;
-  case AttributedType::attr_preserve_all:
-    OF.emitSimpleVariant("PreserveAll");
-    break;
-  case AttributedType::attr_regcall:
-    OF.emitSimpleVariant("Regcall");
-    break;
-  case AttributedType::attr_ns_returns_retained:
-    OF.emitSimpleVariant("NSReturnsRetained");
-    break;
-  case AttributedType::attr_nocf_check:
-    OF.emitSimpleVariant("NocfCheck");
-    break;
-  case AttributedType::attr_lifetimebound:
-    OF.emitSimpleVariant("Lifetimebound");
-    break;
+void ASTExporter<ATDWriter>::dumpAttrKind(attr::Kind Kind) {
+  switch (Kind) {
+#define ATTR(NAME)                 \
+  case AttributedType::Kind::NAME: \
+    OF.emitSimpleVariant(#NAME "AttrKind");  \
+    return;
+#include <clang/Basic/AttrList.inc>
   }
+  llvm_unreachable("Attribute kind that is not part of AttrList.inc!");
 }
 
 //@atd type objc_lifetime_attr = [
@@ -4970,7 +4809,7 @@ int ASTExporter<ATDWriter>::AttributedTypeTupleSize() {
 
 //@atd #define attributed_type_tuple type_tuple * attr_type_info
 //@atd type attr_type_info = {
-//@atd   attr_kind : type_attribute_kind;
+//@atd   attr_kind : attribute_kind;
 //@atd   ~lifetime <ocaml default="`OCL_None"> : objc_lifetime_attr
 //@atd } <ocaml field_prefix="ati_">
 template <class ATDWriter>
@@ -4983,7 +4822,7 @@ void ASTExporter<ATDWriter>::VisitAttributedType(const AttributedType *T) {
       quals.getObjCLifetime() != Qualifiers::ObjCLifetime::OCL_None;
   ObjectScope Scope(OF, 1 + hasLifetimeQual);
   OF.emitTag("attr_kind");
-  dumpTypeAttr(T->getAttrKind());
+  dumpAttrKind(T->getAttrKind());
   if (hasLifetimeQual) {
     OF.emitTag("lifetime");
     dumpObjCLifetimeQual(quals.getObjCLifetime());
@@ -5024,6 +4863,8 @@ void ASTExporter<ATDWriter>::VisitBuiltinType(const BuiltinType *T) {
 #define IMAGE_TYPE(ImgType, ID, SingletonId, Access, Suffix) \
   case BuiltinType::ID:
 #include <clang/Basic/OpenCLImageTypes.def>
+#define EXT_OPAQUE_TYPE(Name, Id, Ext) case BuiltinType::Id:
+#include <clang/Basic/OpenCLExtensionTypes.def>
     llvm_unreachable("OCL builtin types are unsupported");
     break;
   }
@@ -5223,6 +5064,165 @@ void ASTExporter<ATDWriter>::VisitTypedefType(const TypedefType *T) {
   OF.emitTag("decl_ptr");
   dumpPointer(T->getDecl());
 }
+
+//===----------------------------------------------------------------------===//
+//  Attr dumping methods.
+//===----------------------------------------------------------------------===//
+
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpAttr(const Attr *A) {
+  std::string tag;
+  switch (A->getKind()) {
+#define ATTR(NAME)       \
+  case attr::Kind::NAME: \
+    tag = #NAME "Attr";  \
+    break;
+#include <clang/Basic/AttrList.inc>
+  }
+  VariantScope Scope(OF, tag);
+  {
+    TupleScope Scope(OF, ASTExporter::tupleSizeOfAttrKind(A->getKind()));
+    ConstAttrVisitor<ASTExporter<ATDWriter>>::Visit(A);
+  }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AttrTupleSize() {
+  return 1;
+}
+
+//@atd type attribute_info = {
+//@atd   pointer : pointer;
+//@atd   source_range : source_range;
+//@atd } <ocaml field_prefix="ai_">
+//@atd type attr_tuple = attribute_info
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitAttr(const Attr *A) {
+  ObjectScope Scope(OF, 2);
+  OF.emitTag("pointer");
+  dumpPointer(A);
+  OF.emitTag("source_range");
+  dumpSourceRange(A->getRange());
+}
+
+// Default aliases for generating variant components
+// The main variant is defined at the end of section.
+#define ATTR(NAME) //@atd #define @NAME@_attr_tuple attribute_info
+#include <clang/Basic/AttrList.inc>
+
+//@atd type version_tuple = {
+//@atd   major: int;
+//@atd   ?minor: int option;
+//@atd   ?subminor: int option;
+//@atd   ?build: int option;
+//@atd } <ocaml field_prefix="vt_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::dumpVersionTuple(const VersionTuple &VT) {
+  Optional<unsigned> minor = VT.getMinor();
+  Optional<unsigned> subminor = VT.getSubminor();
+  Optional<unsigned> build = VT.getBuild();
+  ObjectScope Scope(
+      OF, 1 + minor.hasValue() + subminor.hasValue() + build.hasValue());
+  OF.emitTag("major");
+  OF.emitInteger(VT.getMajor());
+  if (minor.hasValue()) {
+    OF.emitTag("minor");
+    OF.emitInteger(minor.getValue());
+  }
+  if (subminor.hasValue()) {
+    OF.emitTag("subminor");
+    OF.emitInteger(subminor.getValue());
+  }
+  if (build.hasValue()) {
+    OF.emitTag("build");
+    OF.emitInteger(build.getValue());
+  }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AnnotateAttrTupleSize() {
+  return AttrTupleSize() + 1;
+}
+//@atd #define annotate_attr_tuple attr_tuple * string
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitAnnotateAttr(const AnnotateAttr *A) {
+  VisitAttr(A);
+  OF.emitString(A->getAnnotation().str());
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::AvailabilityAttrTupleSize() {
+  return AttrTupleSize() + 1;
+}
+//@atd #define availability_attr_tuple attr_tuple * availability_attr_info
+//@atd type availability_attr_info = {
+//@atd   ?platform: string option;
+//@atd   introduced: version_tuple;
+//@atd } <ocaml field_prefix="aai_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitAvailabilityAttr(const AvailabilityAttr *A) {
+  VisitAttr(A);
+  {
+    IdentifierInfo *platform = A->getPlatform();
+    ObjectScope Scope(OF, 2 + (bool)platform);
+    if (platform != nullptr) {
+      OF.emitTag("platform");
+      OF.emitString(platform->getNameStart());
+    }
+    OF.emitTag("introduced");
+    dumpVersionTuple(A->getIntroduced());
+  }
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::SentinelAttrTupleSize() {
+  return AttrTupleSize() + 1;
+}
+//@atd #define sentinel_attr_tuple attr_tuple * sentinel_attr_info
+//@atd type sentinel_attr_info = {
+//@atd   sentinel: int;
+//@atd   null_pos: int;
+//@atd } <ocaml field_prefix="sai_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitSentinelAttr(const SentinelAttr *A) {
+  VisitAttr(A);
+  ObjectScope Scope(OF, 2);
+  OF.emitTag("sentinel");
+  OF.emitInteger(A->getSentinel());
+  OF.emitTag("null_pos");
+  OF.emitInteger(A->getNullPos());
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::VisibilityAttrTupleSize() {
+  return AttrTupleSize() + 1;
+}
+//@atd #define visibility_attr_tuple attr_tuple * visibility_attr
+//@atd type visibility_attr = [
+//@atd | DefaultVisibility
+//@atd | HiddenVisibility
+//@atd | ProtectedVisibility
+//@atd ] <ocaml repr="classic">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitVisibilityAttr(const VisibilityAttr *A) {
+  VisitAttr(A);
+  switch (A->getVisibility()) {
+  case VisibilityAttr::Default:
+    OF.emitSimpleVariant("DefaultVisibility");
+    break;
+  case VisibilityAttr::Hidden:
+    OF.emitSimpleVariant("HiddenVisibility");
+    break;
+  case VisibilityAttr::Protected:
+    OF.emitSimpleVariant("ProtectedVisibility");
+    break;
+  }
+}
+
+//@atd type attribute = [
+#define ATTR(X) //@atd   | X@@Attr of (@X@_attr_tuple)
+#include <clang/Basic/AttrList.inc>
+//@atd ]
 
 //@atd type c_type = [
 #define TYPE(CLASS, PARENT) //@atd   | CLASS@@Type of (@CLASS@_type_tuple)

@@ -11,13 +11,12 @@ set -o pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_RELATIVE_PATH="$(basename "${BASH_SOURCE[0]}")"
-CLANG_RELATIVE_SRC="src/llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-7.0.1.tar.xz"
+CLANG_RELATIVE_SRC="src/llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-8.0.0.tar.xz"
 CLANG_SRC="$SCRIPT_DIR/$CLANG_RELATIVE_SRC"
 CLANG_PREBUILD_PATCHES=(
     "$SCRIPT_DIR/src/err_ret_local_block.patch"
     "$SCRIPT_DIR/src/mangle_suppress_errors.patch"
 )
-CLANG_PATCH="$SCRIPT_DIR/src/attr_dump_cpu_cases_compilation_fix.patch"
 CLANG_PREFIX="$SCRIPT_DIR/install"
 CLANG_INSTALLED_VERSION_FILE="$SCRIPT_DIR/installed.version"
 PATCH=${PATCH:-patch}
@@ -171,10 +170,6 @@ popd # $TMP
 set +e
 find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \+
 set -e
-
-pushd "$CLANG_PREFIX"
-"$PATCH" --batch -p 1 < "$CLANG_PATCH"
-popd
 
 echo "testing installed clang"
 "$CLANG_PREFIX"/bin/clang --version
