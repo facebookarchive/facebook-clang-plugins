@@ -3602,9 +3602,12 @@ void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
 
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::evaluateAndEmitInteger(const Expr *expr) {
-  llvm::APSInt result;
-  assert(expr->isIntegerConstantExpr(result, this->Context));
-  this->emitAPInt(result.isSigned(), result);
+  Expr::EvalResult result;
+  if (!expr->EvaluateAsInt(result, this->Context)) {
+    llvm_unreachable("Cannot evaluate expression down to an integer.");
+  }
+  llvm::APSInt IV = result.Val.getInt();
+  this->emitAPInt(IV.isSigned(), IV);
 }
 
 template <class ATDWriter>
