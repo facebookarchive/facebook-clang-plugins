@@ -9,6 +9,21 @@
 set -e
 set -o pipefail
 
+if [[ x"$MAKEFLAGS" != x ]]; then
+    echo "WARNING: MAKEFLAGS var was set to: $MAKEFLAGS"
+    echo "         which may (and will!) interfere with the setup"
+    echo "         ... ignoring MAKEFLAGS."
+    unset MAKEFLAGS
+fi
+
+if [[ x"$DESTDIR" != x ]]; then
+    echo "WARNING: DESTDIR var was set to: $DESTDIR"
+    echo "         but the setup script is not designed to handle"
+    echo "         relocation of the installation."
+    echo "         ... ignoring DESTDIR."
+    unset DESTDIR
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_RELATIVE_PATH="$(basename "${BASH_SOURCE[0]}")"
 CLANG_RELATIVE_SRC="src/llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-8.0.0.tar.xz"
@@ -109,7 +124,7 @@ CMAKE_ARGS=(
   -DLLVM_ENABLE_EH=On
   -DLLVM_ENABLE_RTTI=On
   -DLLVM_INCLUDE_DOCS=Off
-  -DLLVM_TARGETS_TO_BUILD=all
+  -DLLVM_TARGETS_TO_BUILD="X86;AArch64;ARM"
   -DLLVM_BUILD_EXTERNAL_COMPILER_RT=On
 )
 
@@ -145,7 +160,7 @@ for PATCH_FILE in ${CLANG_PREBUILD_PATCHES[*]}; do
     "$PATCH" --batch -p 1 < "$PATCH_FILE"
 done
 
-mkdir build
+mkdir -p build
 pushd build
 
 # workaround install issue with ocaml llvm bindings and ocamldoc
