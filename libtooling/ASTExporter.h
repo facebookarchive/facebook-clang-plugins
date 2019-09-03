@@ -1508,7 +1508,6 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd #define function_decl_tuple declarator_decl_tuple * function_decl_info
 //@atd type function_decl_info = {
 //@atd   ?mangled_name : string option;
-//@atd   ?storage_class : string option;
 //@atd   ~is_cpp : bool;
 //@atd   ~is_inline : bool;
 //@atd   ~is_module_private : bool;
@@ -1516,6 +1515,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~is_delete_as_written : bool;
 //@atd   ~is_no_throw : bool;
 //@atd   ~is_variadic : bool;
+//@atd   ~is_static : bool;
 //@atd   ~parameters : decl list;
 //@atd   ?decl_ptr_with_body : pointer option;
 //@atd   ?body : stmt option;
@@ -1527,15 +1527,16 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // We purposedly do not call VisitDeclContext(D).
 
   bool ShouldMangleName = Mangler->shouldMangleDeclName(D);
-  StorageClass SC = D->getStorageClass();
-  bool HasStorageClass = SC != SC_None;
   bool IsInlineSpecified = D->isInlineSpecified();
   bool IsModulePrivate = D->isModulePrivate();
   bool IsPure = D->isPure();
   bool IsDeletedAsWritten = D->isDeletedAsWritten();
   bool IsCpp = Mangler->getASTContext().getLangOpts().CPlusPlus;
   bool IsVariadic = D->isVariadic();
-
+  bool IsStatic = false; // static functions
+  if (D->getStorageClass() == SC_Static) {
+    IsStatic = true;
+  }
   const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
   // FunctionProtoType::canThrow is more informative, consider using
   // CanThrowResult type instead
@@ -1552,9 +1553,9 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   FunctionTemplateDecl *TemplateDecl = D->getPrimaryTemplate();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
-  int size = 2 + ShouldMangleName + HasStorageClass + IsInlineSpecified +
+  int size = 2 + ShouldMangleName + IsInlineSpecified +
              IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow +
-             IsVariadic + IsCpp + HasDeclarationBody + (bool)DeclWithBody +
+             IsVariadic + IsStatic + IsCpp + HasDeclarationBody + (bool)DeclWithBody +
              (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
@@ -1573,11 +1574,6 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     OF.emitString(std::to_string(fnv64Hash(StrOS)));
   }
 
-  if (HasStorageClass) {
-    OF.emitTag("storage_class");
-    OF.emitString(VarDecl::getStorageClassSpecifierString(SC));
-  }
-
   OF.emitFlag("is_cpp", IsCpp);
   OF.emitFlag("is_inline", IsInlineSpecified);
   OF.emitFlag("is_module_private", IsModulePrivate);
@@ -1585,6 +1581,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   OF.emitFlag("is_delete_as_written", IsDeletedAsWritten);
   OF.emitFlag("is_no_throw", IsNoThrow);
   OF.emitFlag("is_variadic", IsVariadic);
+  OF.emitFlag("is_static", IsStatic);
 
   //  if (const FunctionProtoType *FPT =
   //  D->getType()->getAs<FunctionProtoType>()) {
@@ -1684,6 +1681,7 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 //@atd type var_decl_info = {
 //@atd   ~is_global : bool;
 //@atd   ~is_extern : bool;
+//@atd   ~is_static : bool;
 //@atd   ~is_static_local : bool;
 //@atd   ~is_static_data_member : bool;
 //@atd   ~is_const_expr : bool;
@@ -1691,7 +1689,6 @@ int ASTExporter<ATDWriter>::VarDeclTupleSize() {
 //@atd   ?init_expr : stmt option;
 //@atd   ~is_init_expr_cxx11_constant: bool;
 //@atd   ?parm_index_in_function : int option;
-//@atd   ?storage_class : string option;
 //@atd } <ocaml field_prefix="vdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
@@ -1699,6 +1696,10 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
 
   bool IsGlobal = D->hasGlobalStorage(); // including static function variables
   bool IsExtern = D->hasExternalStorage();
+  bool IsStatic = false; // static variables
+  if (D->getStorageClass() == SC_Static) {
+    IsStatic = true;
+  }
   bool IsStaticLocal = D->isStaticLocal(); // static function variables
   bool IsStaticDataMember = D->isStaticDataMember();
   bool IsConstExpr = D->isConstexpr();
@@ -1706,16 +1707,15 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool HasInit = D->hasInit();
   const ParmVarDecl *ParmDecl = dyn_cast<ParmVarDecl>(D);
   bool HasParmIndex = (bool)ParmDecl;
-  StorageClass SC = D->getStorageClass();
-  bool HasStorageClass = SC != SC_None;
   bool isInitExprCXX11ConstantExpr = false;
   ObjectScope Scope(OF,
-                    IsGlobal + IsExtern + IsStaticLocal + IsStaticDataMember +
+                    IsGlobal + IsExtern + IsStatic + IsStaticLocal + IsStaticDataMember +
                         IsConstExpr + IsInitICE + HasInit + HasParmIndex +
-                        HasStorageClass + isInitExprCXX11ConstantExpr);
+                        isInitExprCXX11ConstantExpr);
 
   OF.emitFlag("is_global", IsGlobal);
   OF.emitFlag("is_extern", IsExtern);
+  OF.emitFlag("is_static", IsStatic);
   OF.emitFlag("is_static_local", IsStaticLocal);
   OF.emitFlag("is_static_data_member", IsStaticDataMember);
   OF.emitFlag("is_const_expr", IsConstExpr);
@@ -1728,10 +1728,6 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   if (HasParmIndex) {
     OF.emitTag("parm_index_in_function");
     OF.emitInteger(ParmDecl->getFunctionScopeIndex());
-  }
-  if (HasStorageClass) {
-    OF.emitTag("storage_class");
-    OF.emitString(VarDecl::getStorageClassSpecifierString(SC));
   }
 }
 
