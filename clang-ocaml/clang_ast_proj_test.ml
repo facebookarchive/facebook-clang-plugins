@@ -49,7 +49,7 @@ let var_decl_info ~is_global =
   ; vdi_is_init_expr_cxx11_constant= false
   ; vdi_init_expr= None
   ; vdi_parm_index_in_function= None
-  ; vdi_storage_class= None }
+  ; vdi_is_static = false}
 
 let stmt_info pointer =
   { si_pointer= pointer
