@@ -153,7 +153,7 @@ if tar --version | grep -q 'GNU'; then
     QUIET_TAR="--warning=no-unknown-keyword"
 fi
 echo "unpacking '$CLANG_SRC'..."
-tar --extract $QUIET_TAR --file "$CLANG_SRC"
+tar --exclude='*bad_symlink' --extract $QUIET_TAR --file "$CLANG_SRC"
 
 # apply prebuild patch
 for PATCH_FILE in ${CLANG_PREBUILD_PATCHES[*]}; do
