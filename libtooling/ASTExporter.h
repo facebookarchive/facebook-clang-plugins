@@ -2948,6 +2948,7 @@ int ASTExporter<ATDWriter>::BlockDeclTupleSize() {
 //@atd   ~captures_cxx_this : bool;
 //@atd   ~captured_variables : block_captured_variable list;
 //@atd   ?body : stmt option;
+//@atd   ~mangled_name : string;
 //@atd } <ocaml field_prefix="bdi_">
 //@atd type block_captured_variable = {
 //@atd    ~is_by_ref : bool;
@@ -2969,8 +2970,14 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
                                     CIE = D->capture_end();
   bool HasCapturedVariables = CII != CIE;
   const Stmt *Body = D->getBody();
+  
+  SmallString<64> Buf;
+  llvm::raw_svector_ostream StrOS(Buf);
+  Mangler->mangleBlock(D->getDeclContext(), D, StrOS);
+  std::string MangledName = StrOS.str();
+
   int size = 0 + HasParameters + IsVariadic + CapturesCXXThis +
-             HasCapturedVariables + (bool)Body;
+             HasCapturedVariables + (bool)Body + 1 /* MangledName*/ ;
   ObjectScope Scope(OF, size); // not covered by tests
 
   if (HasParameters) {
@@ -3010,11 +3017,13 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
       }
     }
   }
-
   if (Body) {
     OF.emitTag("body");
     dumpStmt(Body);
   }
+
+  OF.emitTag("mangled_name");
+  OF.emitString(MangledName);
 }
 
 // main variant for declarations
