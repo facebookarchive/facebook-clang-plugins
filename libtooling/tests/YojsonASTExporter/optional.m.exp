@@ -304,7 +304,8 @@
             "result_type" : {
               "type_ptr" : 17
             },
-            "is_optional" : true
+            "is_optional" : true,
+            "mangled_name" : "-[BarDelegate optionalFunction]"
           }
         )>
       ],
@@ -499,7 +500,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[Bar delegate]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -614,7 +616,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[Bar setDelegate:]"
           }
         )>
       ],
@@ -1111,7 +1114,8 @@
                   }
                 )>
               ]
-            )>
+            )>,
+            "mangled_name" : "-[Bar unsafeAction]"
           }
         )>,
         <"ObjCIvarDecl" : (

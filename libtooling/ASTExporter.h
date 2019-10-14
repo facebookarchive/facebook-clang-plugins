@@ -2496,6 +2496,7 @@ int ASTExporter<ATDWriter>::ObjCMethodDeclTupleSize() {
 //@atd   ~is_overriding : bool;
 //@atd   ~is_optional : bool;
 //@atd   ?body : stmt option;
+//@atd   ~mangled_name : string;
 //@atd } <ocaml field_prefix="omdi_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
@@ -2523,11 +2524,17 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   bool IsOverriding = D->isOverriding();
   bool IsOptional = D->isOptional();
   const Stmt *Body = D->getBody();
+
+    SmallString<64> Buf;
+    llvm::raw_svector_ostream StrOS(Buf);
+    Mangler->mangleObjCMethodNameWithoutSize(D, StrOS);
+    std::string MangledName = StrOS.str();
+
   ObjectScope Scope(OF,
                     1 + IsInstanceMethod + IsPropertyAccessor +
                         (bool)PropertyDecl + HasParameters +
                         HasImplicitParameters + IsVariadic + IsOverriding +
-                        IsOptional + (bool)Body);
+                        IsOptional + (bool)Body + 1 /*MangledName */);
 
   OF.emitFlag("is_instance_method", IsInstanceMethod);
   OF.emitTag("result_type");
@@ -2562,6 +2569,9 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
     OF.emitTag("body");
     dumpStmt(Body);
   }
+  
+  OF.emitTag("mangled_name");
+  OF.emitString(MangledName);
 }
 
 template <class ATDWriter>

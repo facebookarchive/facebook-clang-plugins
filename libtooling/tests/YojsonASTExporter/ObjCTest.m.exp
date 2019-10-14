@@ -298,7 +298,8 @@
           {
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "+[NSObject alloc]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -325,7 +326,8 @@
           {
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "+[NSObject new]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -353,7 +355,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "-[NSObject autorelease]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -381,7 +384,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "-[NSObject init]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -409,7 +413,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 9
-            }
+            },
+            "mangled_name" : "-[NSObject class]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -464,7 +469,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSObject respondsToSelector:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -519,7 +525,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSObject conformsToProtocol:]"
           }
         )>
       ],
@@ -600,7 +607,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[NSNumber numberWithInt:]"
           }
         )>
       ],
@@ -665,7 +673,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 17
-            }
+            },
+            "mangled_name" : "-[NSString length]"
           }
         )>
       ],
@@ -806,7 +815,8 @@
                   "parm_index_in_function" : 2
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[NSDictionary dictionaryWithObjects:forKeys:count:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -861,7 +871,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSDictionary objectForKeyedSubscript:]"
           }
         )>
       ],
@@ -977,7 +988,8 @@
                   "parm_index_in_function" : 1
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[NSArray arrayWithObjects:count:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -1032,7 +1044,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSArray objectAtIndexedSubscript:]"
           }
         )>
       ],
@@ -1337,7 +1350,8 @@
                   "MyProtocol"
                 ]
               }
-            }
+            },
+            "mangled_name" : "-[MyProtocol str]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -1404,7 +1418,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyProtocol setStr:]"
           }
         )>
       ],
@@ -1818,7 +1833,8 @@
                 }
               )>
             ],
-            "is_overriding" : true
+            "is_overriding" : true,
+            "mangled_name" : "-[MyClass str]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -1934,7 +1950,8 @@
                 }
               )>
             ],
-            "is_overriding" : true
+            "is_overriding" : true,
+            "mangled_name" : "-[MyClass setStr:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -2023,7 +2040,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyClass x]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -2138,7 +2156,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyClass setX:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -2227,7 +2246,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyClass y]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -2342,7 +2362,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyClass setY:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -2431,7 +2452,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyClass delegate]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -2546,7 +2568,8 @@
                 {
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyClass setDelegate:]"
           }
         )>
       ],
@@ -2682,7 +2705,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[ foo:]"
           }
         )>
       ],
@@ -8347,7 +8371,8 @@
                   "theend"
                 )>
               ]
-            )>
+            )>,
+            "mangled_name" : "-[MyClass foo:]"
           }
         )>,
         <"ObjCIvarDecl" : (
@@ -8723,7 +8748,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[MyCategory bar:]"
           }
         )>
       ],
@@ -10852,7 +10878,8 @@
                   }
                 )>
               ]
-            )>
+            )>,
+            "mangled_name" : "-[MyClass(MyCategory) bar:]"
           }
         )>
       ],
@@ -10990,7 +11017,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[BarGenerics newWithCs:]"
           }
         )>
       ],
@@ -11286,7 +11314,8 @@
                   }
                 )>
               ]
-            )>
+            )>,
+            "mangled_name" : "-[MySubclass bar:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -11498,7 +11527,8 @@
                   }
                 )>
               ]
-            )>
+            )>,
+            "mangled_name" : "-[MySubclass foo:]"
           }
         )>
       ],

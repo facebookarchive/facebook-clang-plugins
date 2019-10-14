@@ -149,7 +149,10 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "alloc", #2cdb06fb: [ "alloc", "NSObject" ] },
-                { #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "+[NSObject alloc]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 21,
@@ -159,7 +162,10 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "new", #2cdb06fb: [ "new", "NSObject" ] },
-                { #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "+[NSObject new]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 22,
@@ -172,7 +178,11 @@
                   #c8ff724b: "autorelease",
                   #2cdb06fb: [ "autorelease", "NSObject" ]
                 },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "-[NSObject autorelease]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 23,
@@ -182,7 +192,11 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "init", #2cdb06fb: [ "init", "NSObject" ] },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "-[NSObject init]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 24,
@@ -192,7 +206,11 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "class", #2cdb06fb: [ "class", "NSObject" ] },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 9 } })>,
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 9 },
+                  #d2e9b40c: "-[NSObject class]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 25,
@@ -218,7 +236,8 @@
                         { #c8ff724b: "s", #2cdb06fb: [ "s" ] },
                         { #c1127ea9: 5 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSObject respondsToSelector:]"
                 })>,
             <#3ccd3797:
                ({
@@ -245,7 +264,8 @@
                         { #c8ff724b: "p", #2cdb06fb: [ "p" ] },
                         { #c1127ea9: 29 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSObject conformsToProtocol:]"
                 })>
           ],
           { },
@@ -284,7 +304,8 @@
                         { #c8ff724b: "x", #2cdb06fb: [ "x" ] },
                         { #c1127ea9: 33 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "+[NSNumber numberWithInt:]"
                 })>
           ],
           { },
@@ -314,7 +335,11 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "length", #2cdb06fb: [ "length", "NSString" ] },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 17 } })>
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 17 },
+                  #d2e9b40c: "-[NSString length]"
+                })>
           ],
           { },
           {
@@ -378,7 +403,9 @@
                         { #c8ff724b: "count", #2cdb06fb: [ "count" ] },
                         { #c1127ea9: 17 },
                         { #0370b1b2: 2 })>
-                  ]
+                  ],
+                  #d2e9b40c:
+                    "+[NSDictionary dictionaryWithObjects:forKeys:count:]"
                 })>,
             <#3ccd3797:
                ({
@@ -405,7 +432,8 @@
                         { #c8ff724b: "key", #2cdb06fb: [ "key" ] },
                         { #c1127ea9: 7 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSDictionary objectForKeyedSubscript:]"
                 })>
           ],
           { },
@@ -459,7 +487,8 @@
                         { #c8ff724b: "cnt", #2cdb06fb: [ "cnt" ] },
                         { #c1127ea9: 49 },
                         { #0370b1b2: 1 })>
-                  ]
+                  ],
+                  #d2e9b40c: "+[NSArray arrayWithObjects:count:]"
                 })>,
             <#3ccd3797:
                ({
@@ -486,7 +515,8 @@
                         { #c8ff724b: "index", #2cdb06fb: [ "index" ] },
                         { #c1127ea9: 17 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSArray objectAtIndexedSubscript:]"
                 })>
           ],
           { },
@@ -633,7 +663,8 @@
                       #c8ff724b: "str",
                       #2cdb06fb: [ "str", "MyProtocol" ]
                     }
-                  }
+                  },
+                  #d2e9b40c: "-[MyProtocol str]"
                 })>,
             <#3ccd3797:
                ({
@@ -669,7 +700,8 @@
                         { #c8ff724b: "str", #2cdb06fb: [ "str" ] },
                         { #c1127ea9: 60 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyProtocol setStr:]"
                 })>
           ],
           { },
@@ -895,7 +927,8 @@
                         { #c1127ea9: 5 },
                         { })>
                   ],
-                  #f4ad3bfe: true
+                  #f4ad3bfe: true,
+                  #d2e9b40c: "-[MyClass str]"
                 })>,
             <#3ccd3797:
                ({
@@ -951,7 +984,8 @@
                         { #c1127ea9: 5 },
                         { })>
                   ],
-                  #f4ad3bfe: true
+                  #f4ad3bfe: true,
+                  #d2e9b40c: "-[MyClass setStr:]"
                 })>,
             <#3ccd3797:
                ({
@@ -996,7 +1030,8 @@
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
                         { })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyClass x]"
                 })>,
             <#3ccd3797:
                ({
@@ -1051,7 +1086,8 @@
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
                         { })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyClass setX:]"
                 })>,
             <#3ccd3797:
                ({
@@ -1096,7 +1132,8 @@
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
                         { })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyClass y]"
                 })>,
             <#3ccd3797:
                ({
@@ -1151,7 +1188,8 @@
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
                         { })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyClass setY:]"
                 })>,
             <#3ccd3797:
                ({
@@ -1199,7 +1237,8 @@
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
                         { })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyClass delegate]"
                 })>,
             <#3ccd3797:
                ({
@@ -1257,7 +1296,8 @@
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
                         { })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyClass setDelegate:]"
                 })>
           ],
           { },
@@ -1330,7 +1370,8 @@
                         { #c8ff724b: "s", #2cdb06fb: [ "s" ] },
                         { #c1127ea9: 113 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[ foo:]"
                 })>
           ],
           { },
@@ -6623,7 +6664,8 @@
                                     { #30e4876a: { #c1127ea9: 65 } })>
                               ],
                               "theend")>
-                        ])>
+                        ])>,
+                  #d2e9b40c: "-[MyClass foo:]"
                 })>,
             <#070ee654:
                ({
@@ -6821,7 +6863,8 @@
                         { #c8ff724b: "s", #2cdb06fb: [ "s" ] },
                         { #c1127ea9: 60 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[MyCategory bar:]"
                 })>
           ],
           { },
@@ -8364,7 +8407,8 @@
                                     })>
                               ],
                               { #30e4876a: { #c1127ea9: 83 } })>
-                        ])>
+                        ])>,
+                  #d2e9b40c: "-[MyClass(MyCategory) bar:]"
                 })>
           ],
           { },
@@ -8435,7 +8479,8 @@
                         { #c8ff724b: "Cs", #2cdb06fb: [ "Cs" ] },
                         { #c1127ea9: 320 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "+[BarGenerics newWithCs:]"
                 })>
           ],
           { },
@@ -8591,7 +8636,8 @@
                                 #ec05e4a8: 278,
                                 #0ca98da4: <#0ba9a010>
                               })>
-                        ])>
+                        ])>,
+                  #d2e9b40c: "-[MySubclass bar:]"
                 })>,
             <#3ccd3797:
                ({
@@ -8702,7 +8748,8 @@
                                 #ec05e4a8: 114,
                                 #0ca98da4: <#0ba9a010>
                               })>
-                        ])>
+                        ])>,
+                  #d2e9b40c: "-[MySubclass foo:]"
                 })>
           ],
           { },

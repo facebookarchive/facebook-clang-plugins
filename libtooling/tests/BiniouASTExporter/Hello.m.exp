@@ -149,7 +149,10 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "alloc", #2cdb06fb: [ "alloc", "NSObject" ] },
-                { #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "+[NSObject alloc]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 21,
@@ -159,7 +162,10 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "new", #2cdb06fb: [ "new", "NSObject" ] },
-                { #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "+[NSObject new]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 22,
@@ -172,7 +178,11 @@
                   #c8ff724b: "autorelease",
                   #2cdb06fb: [ "autorelease", "NSObject" ]
                 },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "-[NSObject autorelease]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 23,
@@ -182,7 +192,11 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "init", #2cdb06fb: [ "init", "NSObject" ] },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 20 } })>,
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 20 },
+                  #d2e9b40c: "-[NSObject init]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 24,
@@ -192,7 +206,11 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "class", #2cdb06fb: [ "class", "NSObject" ] },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 9 } })>,
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 9 },
+                  #d2e9b40c: "-[NSObject class]"
+                })>,
             <#3ccd3797:
                ({
                   #d121c0bd: 25,
@@ -218,7 +236,8 @@
                         { #c8ff724b: "s", #2cdb06fb: [ "s" ] },
                         { #c1127ea9: 5 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSObject respondsToSelector:]"
                 })>,
             <#3ccd3797:
                ({
@@ -245,7 +264,8 @@
                         { #c8ff724b: "p", #2cdb06fb: [ "p" ] },
                         { #c1127ea9: 29 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSObject conformsToProtocol:]"
                 })>
           ],
           { },
@@ -284,7 +304,8 @@
                         { #c8ff724b: "x", #2cdb06fb: [ "x" ] },
                         { #c1127ea9: 33 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "+[NSNumber numberWithInt:]"
                 })>
           ],
           { },
@@ -314,7 +335,11 @@
                   #21ac3408: unit
                 },
                 { #c8ff724b: "length", #2cdb06fb: [ "length", "NSString" ] },
-                { #3ba2c7f6: true, #137b649c: { #c1127ea9: 17 } })>
+                {
+                  #3ba2c7f6: true,
+                  #137b649c: { #c1127ea9: 17 },
+                  #d2e9b40c: "-[NSString length]"
+                })>
           ],
           { },
           {
@@ -378,7 +403,9 @@
                         { #c8ff724b: "count", #2cdb06fb: [ "count" ] },
                         { #c1127ea9: 17 },
                         { #0370b1b2: 2 })>
-                  ]
+                  ],
+                  #d2e9b40c:
+                    "+[NSDictionary dictionaryWithObjects:forKeys:count:]"
                 })>,
             <#3ccd3797:
                ({
@@ -405,7 +432,8 @@
                         { #c8ff724b: "key", #2cdb06fb: [ "key" ] },
                         { #c1127ea9: 7 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSDictionary objectForKeyedSubscript:]"
                 })>
           ],
           { },
@@ -459,7 +487,8 @@
                         { #c8ff724b: "cnt", #2cdb06fb: [ "cnt" ] },
                         { #c1127ea9: 49 },
                         { #0370b1b2: 1 })>
-                  ]
+                  ],
+                  #d2e9b40c: "+[NSArray arrayWithObjects:count:]"
                 })>,
             <#3ccd3797:
                ({
@@ -486,7 +515,8 @@
                         { #c8ff724b: "index", #2cdb06fb: [ "index" ] },
                         { #c1127ea9: 17 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[NSArray objectAtIndexedSubscript:]"
                 })>
           ],
           { },
@@ -607,7 +637,8 @@
                         { #c8ff724b: "i", #2cdb06fb: [ "i" ] },
                         { #c1127ea9: 33 },
                         { #0370b1b2: 0 })>
-                  ]
+                  ],
+                  #d2e9b40c: "-[Hello say:]"
                 })>
           ],
           { },
@@ -941,7 +972,8 @@
                                     ])>
                               ],
                               { #c1c4b9e2: 73, #ccfc02dd: 77 })>
-                        ])>
+                        ])>,
+                  #d2e9b40c: "-[Hello say:]"
                 })>
           ],
           { },

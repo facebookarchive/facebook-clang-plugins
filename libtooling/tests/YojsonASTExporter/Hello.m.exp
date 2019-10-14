@@ -298,7 +298,8 @@
           {
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "+[NSObject alloc]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -325,7 +326,8 @@
           {
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "+[NSObject new]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -353,7 +355,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "-[NSObject autorelease]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -381,7 +384,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 20
-            }
+            },
+            "mangled_name" : "-[NSObject init]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -409,7 +413,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 9
-            }
+            },
+            "mangled_name" : "-[NSObject class]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -464,7 +469,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSObject respondsToSelector:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -519,7 +525,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSObject conformsToProtocol:]"
           }
         )>
       ],
@@ -600,7 +607,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[NSNumber numberWithInt:]"
           }
         )>
       ],
@@ -665,7 +673,8 @@
             "is_instance_method" : true,
             "result_type" : {
               "type_ptr" : 17
-            }
+            },
+            "mangled_name" : "-[NSString length]"
           }
         )>
       ],
@@ -806,7 +815,8 @@
                   "parm_index_in_function" : 2
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[NSDictionary dictionaryWithObjects:forKeys:count:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -861,7 +871,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSDictionary objectForKeyedSubscript:]"
           }
         )>
       ],
@@ -977,7 +988,8 @@
                   "parm_index_in_function" : 1
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "+[NSArray arrayWithObjects:count:]"
           }
         )>,
         <"ObjCMethodDecl" : (
@@ -1032,7 +1044,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[NSArray objectAtIndexedSubscript:]"
           }
         )>
       ],
@@ -1299,7 +1312,8 @@
                   "parm_index_in_function" : 0
                 }
               )>
-            ]
+            ],
+            "mangled_name" : "-[Hello say:]"
           }
         )>
       ],
@@ -1827,7 +1841,8 @@
                   }
                 )>
               ]
-            )>
+            )>,
+            "mangled_name" : "-[Hello say:]"
           }
         )>
       ],
