@@ -9,8 +9,7 @@
 //@atd }
 //@atd
 // main
-int main() {
-}
+int main() {}
 
 //@atd type x = {
 //@atd}

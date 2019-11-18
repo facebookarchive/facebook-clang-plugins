@@ -21,6 +21,12 @@ clean:
 	$(MAKE) -C libtooling/atdlib clean
 	$(MAKE) -C libtooling clean
 
+.PHONY: fmt_all
+fmt_all:
+	find libtooling \
+	  \( -name '*'.cpp -or -name '*'.h -or -name '*'.c -or -name '*'.m -or -name '*'.mm \) \
+	  -exec	./clang/install/bin/clang-format -verbose -i \{\} \+
+
 CHECKCOPYRIGHT=../scripts/checkCopyright
 
 .PHONY: copyright

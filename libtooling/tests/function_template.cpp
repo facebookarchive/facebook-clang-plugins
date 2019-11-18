@@ -6,11 +6,15 @@
  */
 
 template <class T>
-T get(T x) { return x; }
+T get(T x) {
+  return x;
+}
 
 // specialization
 template <>
-int get(int x) { return 2 * x; }
+int get(int x) {
+  return 2 * x;
+}
 
 // explicit instantiacion
 template double get(double x);

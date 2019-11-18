@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 int i = 10;
-long l = (long) i;
-long m = long (i);
+long l = (long)i;
+long m = long(i);

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 class T {
-    int age;
-    void foo() {
-      this->age = 1;
-    }
+  int age;
+  void foo() { this->age = 1; }
 };

@@ -1553,9 +1553,9 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   FunctionTemplateDecl *TemplateDecl = D->getPrimaryTemplate();
   // suboptimal: decls_in_prototype_scope and parameters not taken into account
   // accurately
-  int size = 2 + ShouldMangleName + IsInlineSpecified +
-             IsModulePrivate + IsPure + IsDeletedAsWritten + IsNoThrow +
-             IsVariadic + IsStatic + IsCpp + HasDeclarationBody + (bool)DeclWithBody +
+  int size = 2 + ShouldMangleName + IsInlineSpecified + IsModulePrivate +
+             IsPure + IsDeletedAsWritten + IsNoThrow + IsVariadic + IsStatic +
+             IsCpp + HasDeclarationBody + (bool)DeclWithBody +
              (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
@@ -1709,9 +1709,9 @@ void ASTExporter<ATDWriter>::VisitVarDecl(const VarDecl *D) {
   bool HasParmIndex = (bool)ParmDecl;
   bool isInitExprCXX11ConstantExpr = false;
   ObjectScope Scope(OF,
-                    IsGlobal + IsExtern + IsStatic + IsStaticLocal + IsStaticDataMember +
-                        IsConstExpr + IsInitICE + HasInit + HasParmIndex +
-                        isInitExprCXX11ConstantExpr);
+                    IsGlobal + IsExtern + IsStatic + IsStaticLocal +
+                        IsStaticDataMember + IsConstExpr + IsInitICE + HasInit +
+                        HasParmIndex + isInitExprCXX11ConstantExpr);
 
   OF.emitFlag("is_global", IsGlobal);
   OF.emitFlag("is_extern", IsExtern);
@@ -2525,10 +2525,10 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
   bool IsOptional = D->isOptional();
   const Stmt *Body = D->getBody();
 
-    SmallString<64> Buf;
-    llvm::raw_svector_ostream StrOS(Buf);
-    Mangler->mangleObjCMethodNameWithoutSize(D, StrOS);
-    std::string MangledName = StrOS.str();
+  SmallString<64> Buf;
+  llvm::raw_svector_ostream StrOS(Buf);
+  Mangler->mangleObjCMethodNameWithoutSize(D, StrOS);
+  std::string MangledName = StrOS.str();
 
   ObjectScope Scope(OF,
                     1 + IsInstanceMethod + IsPropertyAccessor +
@@ -2569,7 +2569,7 @@ void ASTExporter<ATDWriter>::VisitObjCMethodDecl(const ObjCMethodDecl *D) {
     OF.emitTag("body");
     dumpStmt(Body);
   }
-  
+
   OF.emitTag("mangled_name");
   OF.emitString(MangledName);
 }
@@ -2980,14 +2980,14 @@ void ASTExporter<ATDWriter>::VisitBlockDecl(const BlockDecl *D) {
                                     CIE = D->capture_end();
   bool HasCapturedVariables = CII != CIE;
   const Stmt *Body = D->getBody();
-  
+
   SmallString<64> Buf;
   llvm::raw_svector_ostream StrOS(Buf);
   Mangler->mangleBlock(D->getDeclContext(), D, StrOS);
   std::string MangledName = StrOS.str();
 
   int size = 0 + HasParameters + IsVariadic + CapturesCXXThis +
-             HasCapturedVariables + (bool)Body + 1 /* MangledName*/ ;
+             HasCapturedVariables + (bool)Body + 1 /* MangledName*/;
   ObjectScope Scope(OF, size); // not covered by tests
 
   if (HasParameters) {
@@ -3125,7 +3125,7 @@ void ASTExporter<ATDWriter>::VisitIfStmt(const IfStmt *Node) {
   const Stmt *Init = Node->getInit();
   const DeclStmt *CondVar = Node->getConditionVariableDeclStmt();
   bool hasElseStorage = Node->hasElseStorage();
-  ObjectScope Scope(OF, 2 + (bool) Init + (bool) CondVar + hasElseStorage);
+  ObjectScope Scope(OF, 2 + (bool)Init + (bool)CondVar + hasElseStorage);
   if (Init) {
     OF.emitTag("init");
     dumpPointer(Init);
@@ -3162,7 +3162,7 @@ void ASTExporter<ATDWriter>::VisitSwitchStmt(const SwitchStmt *Node) {
   VisitStmt(Node);
   const Stmt *Init = Node->getInit();
   const DeclStmt *CondVar = Node->getConditionVariableDeclStmt();
-  ObjectScope Scope(OF, 2 + (bool) Init + (bool) CondVar);
+  ObjectScope Scope(OF, 2 + (bool)Init + (bool)CondVar);
   if (Init) {
     OF.emitTag("init");
     dumpPointer(Init);
@@ -4854,9 +4854,9 @@ void ASTExporter<ATDWriter>::VisitAtomicType(const AtomicType *T) {
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::dumpAttrKind(attr::Kind Kind) {
   switch (Kind) {
-#define ATTR(NAME)                 \
-  case AttributedType::Kind::NAME: \
-    OF.emitSimpleVariant(#NAME "AttrKind");  \
+#define ATTR(NAME)                          \
+  case AttributedType::Kind::NAME:          \
+    OF.emitSimpleVariant(#NAME "AttrKind"); \
     return;
 #include <clang/Basic/AttrList.inc>
   }

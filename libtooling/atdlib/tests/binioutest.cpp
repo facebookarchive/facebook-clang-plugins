@@ -58,18 +58,14 @@ int main(int argc, char **argv) {
     }
     {
       ArrayScope Scope(OF, 2);
-      {
-        ArrayScope Scope(OF, 0);
-      }
+      { ArrayScope Scope(OF, 0); }
       {
         ArrayScope Scope(OF, 2);
         OF.emitInteger(2);
         OF.emitInteger(3);
       }
     }
-    {
-      ArrayScope Scope(OF, 0);
-    }
+    { ArrayScope Scope(OF, 0); }
   }
   {
     BiniouWriter OF(std::cout);
@@ -134,13 +130,13 @@ int main(int argc, char **argv) {
       {
         VariantScope Scope(OF, "pred");
         {
-	  VariantScope Scope(OF, "eval");
-	  {
-	    TupleScope Scope(OF, 2);
-	    OF.emitString("f");
-	    OF.emitString("\"3\t4\n\"");
-	  }
-	}
+          VariantScope Scope(OF, "eval");
+          {
+            TupleScope Scope(OF, 2);
+            OF.emitString("f");
+            OF.emitString("\"3\t4\n\"");
+          }
+        }
       }
     }
   }

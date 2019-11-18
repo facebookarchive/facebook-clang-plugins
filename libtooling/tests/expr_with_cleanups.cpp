@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 class X {
-public:
+ public:
   X(int);
-  X(const X&);
-  X& operator=(const X&);
+  X(const X &);
+  X &operator=(const X &);
   ~X();
 };
 class Y {
-public:
+ public:
   Y(int);
   ~Y();
 };

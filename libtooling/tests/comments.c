@@ -9,4 +9,3 @@ void foo() {
   /*  I'm a short comment */
   // I'm a c++ comment
 }
-

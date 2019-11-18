@@ -14,12 +14,12 @@ typedef JsonWriter::TupleScope TupleScope;
 
 int main(int argc, char **argv) {
   const struct ATDWriter::ATDWriterOptions jsonWriterOptions = {
-    .useYojson = false,
-    .prettifyJson = true,
+      .useYojson = false,
+      .prettifyJson = true,
   };
   const struct ATDWriter::ATDWriterOptions yojsonWriterOptions = {
-    .useYojson = true,
-    .prettifyJson = true,
+      .useYojson = true,
+      .prettifyJson = true,
   };
 
   {
@@ -88,13 +88,13 @@ int main(int argc, char **argv) {
       {
         VariantScope Scope(OF, "pred");
         {
-	  VariantScope Scope(OF, "eval");
-	  {
-	    TupleScope Scope(OF, 2);
-	    OF.emitString("f");
-	    OF.emitString("\"3\t4\n\"");
-	  }
-	}
+          VariantScope Scope(OF, "eval");
+          {
+            TupleScope Scope(OF, 2);
+            OF.emitString("f");
+            OF.emitString("\"3\t4\n\"");
+          }
+        }
       }
     }
   }

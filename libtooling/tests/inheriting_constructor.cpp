@@ -5,15 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 struct A {
-    A( int ) {}
-  void foo() {};
+  A(int) {}
+  void foo(){};
 };
 
-struct B : A 
-{
-     using A::A;
+struct B : A {
+  using A::A;
 };
 
-int main() {
-    B b(5);
-}
+int main() { B b(5); }

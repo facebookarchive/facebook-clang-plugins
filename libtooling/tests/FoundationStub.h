@@ -26,7 +26,6 @@ typedef unsigned int NSUInteger;
 
 @end
 
-
 @interface NSNumber : NSObject
 + (instancetype)numberWithInt:(int)x;
 @end
@@ -36,7 +35,9 @@ typedef unsigned int NSUInteger;
 @end
 
 @interface NSDictionary : NSObject
-+ (instancetype)dictionaryWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)count;
++ (instancetype)dictionaryWithObjects:(const id[])objects
+                              forKeys:(const id[])keys
+                                count:(NSUInteger)count;
 - (id)objectForKeyedSubscript:(id)key;
 @end
 

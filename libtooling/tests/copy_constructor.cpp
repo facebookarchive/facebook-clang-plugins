@@ -6,15 +6,15 @@
  */
 
 struct A {
-    int a, b, c, d;
+  int a, b, c, d;
 };
 
-const A& f() {
-    static A a;
-    return a;
+const A &f() {
+  static A a;
+  return a;
 }
 
 int g() {
-    auto x = f();
-    return x.a + x.b;
+  auto x = f();
+  return x.a + x.b;
 }

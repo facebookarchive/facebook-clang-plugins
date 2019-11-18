@@ -11,18 +11,18 @@
 @protocol NSObject
 @end
 
-@protocol BarDelegate <NSObject>
+@protocol BarDelegate<NSObject>
 @optional
-- (void) optionalFunction;
+- (void)optionalFunction;
 @end
 
 @interface Bar : NSObject
-@property (nonatomic, assign) id<BarDelegate> delegate;
+@property(nonatomic, assign) id<BarDelegate> delegate;
 @end
 
 @implementation Bar
--(void)unsafeAction {
-    [self.delegate optionalFunction];
+- (void)unsafeAction {
+  [self.delegate optionalFunction];
 }
 
 @end

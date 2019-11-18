@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 namespace nsa {
-  namespace nsb {
-    int a;
-  }
+namespace nsb {
+int a;
 }
+} // namespace nsa
 using namespace nsa::nsb;
 namespace B = nsa::nsb;
 int b = a;

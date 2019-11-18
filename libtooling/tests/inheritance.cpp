@@ -8,25 +8,20 @@ extern double sqrt(double);
 extern double pow(double, double);
 
 class Form {
-private:
+ private:
   double area;
 
-public:
+ public:
   int color;
   virtual void vmethod() {}
 
-  double getArea(){
-    return this->area;
-  }
+  double getArea() { return this->area; }
 
-  void setArea(double area){
-    this->area = area;
-  }
-
+  void setArea(double area) { this->area = area; }
 };
 
 class Circle : public Form {
-public:
+ public:
   void vmethod() override {}
   double getRatio() {
     double a;
@@ -34,12 +29,7 @@ public:
     return sqrt(a / 2 * 3.14);
   }
 
-  void setRatio(double diameter) {
-    setArea( pow(diameter * 0.5, 2) * 3.14 );
-  }
+  void setRatio(double diameter) { setArea(pow(diameter * 0.5, 2) * 3.14); }
 
-  bool isDark() {
-    return (color > 10);
-  }
-
+  bool isDark() { return (color > 10); }
 };

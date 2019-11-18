@@ -8,30 +8,30 @@
 #include "FoundationStub.h"
 
 @protocol MyProtocol
-@property (nonatomic, copy) NSString *str;
+@property(nonatomic, copy) NSString *str;
 @end
 
 @protocol SomeProtocol;
 
-@interface MyClass : NSObject <MyProtocol>
+@interface MyClass : NSObject<MyProtocol>
 
-@property (nonatomic, copy) NSString *str;
+@property(nonatomic, copy) NSString *str;
 
-@property (nonatomic, assign) void *x;
-@property (nonatomic, assign) int y;
-@property (nonatomic, assign) NSObject<SomeProtocol> *delegate;
+@property(nonatomic, assign) void *x;
+@property(nonatomic, assign) int y;
+@property(nonatomic, assign) NSObject<SomeProtocol> *delegate;
 
 @end
 
 @interface MyClass ()
 
-- (void)foo:(NSString * __nonnull)s;
+- (void)foo:(NSString *__nonnull)s;
 
 @end
 
 @implementation MyClass
 
-- (void)foo:(NSString * __nonnull)s {
+- (void)foo:(NSString *__nonnull)s {
 
   NSLog(@"%s\n", @encode(int **));
 
@@ -45,23 +45,21 @@
   };
 
   @try {
-    NSArray *a = @[@YES];
+    NSArray *a = @[ @YES ];
     NSLog(@"%@\n", a[0]);
 
-    NSDictionary *d = @{ @"key" : @1 };
+    NSDictionary *d = @{@"key" : @1};
     NSLog(@"%@\n", d[@"wrong key"]);
     NSLog(@"%p\n", (void *)block);
-  }
-  @catch (NSException *e) {
+  } @catch (NSException *e) {
     NSLog(@"Exception: %@", e);
-  }
-  @finally {
+  } @finally {
     NSLog(@"finally");
   }
 
   goto theend;
   return;
- theend:
+theend:
   NSLog(@"jumped");
 }
 
@@ -88,7 +86,7 @@
 @end
 
 @interface BarGenerics : NSObject
-+ (instancetype)newWithCs:(MyClassGenerics<NSObject*>*)Cs;
++ (instancetype)newWithCs:(MyClassGenerics<NSObject *> *)Cs;
 @end
 
 @interface MySubclass : MyClass
@@ -100,17 +98,16 @@
   [super bar:s];
 }
 
-- (void)foo:(NSString * __nonnull)s {
+- (void)foo:(NSString *__nonnull)s {
   [super foo:s];
 }
 
 @end
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   @autoreleasepool {
     [[[[MyClass alloc] init] autorelease] foo:@"hello"];
     [[MyClass new] bar:@"hello"];
   }
   return 0;
 }
-
