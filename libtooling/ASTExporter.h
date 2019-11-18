@@ -1106,13 +1106,15 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
     bool IsDInvalid = D->isInvalidDecl();
     bool HasAttributes = D->hasAttrs();
     const FullComment *Comment =
-        D->getASTContext().getLocalCommentForDeclUncached(D);
+        Options.dumpComments
+            ? D->getASTContext().getLocalCommentForDeclUncached(D)
+            : nullptr;
     AccessSpecifier Access = D->getAccess();
     bool HasAccess = Access != AccessSpecifier::AS_none;
-    int maxSize = 3 + ShouldEmitParentPointer + (bool)M + IsNDHidden +
-                  IsDImplicit + IsDUsed + IsDReferenced + IsDInvalid +
-                  HasAttributes + (bool)Comment + HasAccess;
-    ObjectScope Scope(OF, maxSize);
+    int size = 2 + ShouldEmitParentPointer + (bool)M + IsNDHidden +
+               IsDImplicit + IsDUsed + IsDReferenced + IsDInvalid +
+               HasAttributes + (bool)Comment + HasAccess;
+    ObjectScope Scope(OF, size);
 
     OF.emitTag("pointer");
     dumpPointer(D);
@@ -1141,7 +1143,7 @@ void ASTExporter<ATDWriter>::VisitDecl(const Decl *D) {
       }
     }
 
-    if (Comment && Options.dumpComments) {
+    if (Comment) {
       OF.emitTag("full_comment");
       dumpFullComment(Comment);
     }
@@ -1542,6 +1544,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   // CanThrowResult type instead
   // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
   auto IsNoThrow = FPT ? FPT->isNothrow() : false;
+  bool HasParameters = !D->param_empty();
   const FunctionDecl *DeclWithBody = D;
   // FunctionDecl::hasBody() will set DeclWithBody pointer to decl that
   // has body. If there is no body in all decls of that function,
@@ -1551,11 +1554,9 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   }
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
   FunctionTemplateDecl *TemplateDecl = D->getPrimaryTemplate();
-  // suboptimal: decls_in_prototype_scope and parameters not taken into account
-  // accurately
-  int size = 2 + ShouldMangleName + IsInlineSpecified + IsModulePrivate +
+  int size = ShouldMangleName + IsCpp + IsInlineSpecified + IsModulePrivate +
              IsPure + IsDeletedAsWritten + IsNoThrow + IsVariadic + IsStatic +
-             IsCpp + HasDeclarationBody + (bool)DeclWithBody +
+             HasParameters + (bool)DeclWithBody + HasDeclarationBody +
              (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
@@ -1606,7 +1607,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   //    dumpTemplateArgumentList(*FTSI->TemplateArguments);
   //  }
 
-  {
+  if (HasParameters) {
     FunctionDecl::param_const_iterator I = D->param_begin(), E = D->param_end();
     if (I != E) {
       OF.emitTag("parameters");
@@ -2452,13 +2453,12 @@ void ASTExporter<ATDWriter>::VisitObjCIvarDecl(const ObjCIvarDecl *D) {
   VisitFieldDecl(D);
 
   bool IsSynthesize = D->getSynthesize();
-  // suboptimal: access_control not taken into account accurately
-  ObjectScope Scope(OF, 1 + IsSynthesize); // not covered by tests
+  ObjCIvarDecl::AccessControl AC = D->getAccessControl();
+  bool ShouldEmitAC = AC != ObjCIvarDecl::None;
+  ObjectScope Scope(OF, IsSynthesize + ShouldEmitAC); // not covered by tests
 
   OF.emitFlag("is_synthesize", IsSynthesize);
-
-  ObjCIvarDecl::AccessControl AC = D->getAccessControl();
-  if (AC != ObjCIvarDecl::None) {
+  if (ShouldEmitAC) {
     OF.emitTag("access_control");
     switch (AC) {
     case ObjCIvarDecl::Private:
@@ -3408,18 +3408,16 @@ template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitOverloadExpr(const OverloadExpr *Node) {
   VisitExpr(Node);
 
-  // suboptimal
-  ObjectScope Scope(OF, 2); // not covered by tests
+  bool HasDecls = Node->getNumDecls() > 0;
+  ObjectScope Scope(OF, 1 + HasDecls); // not covered by tests
 
-  {
-    if (Node->getNumDecls() > 0) {
-      OF.emitTag("decls");
-      ArrayScope Scope( // not covered by tests
-          OF,
-          std::distance(Node->decls_begin(), Node->decls_end()));
-      for (auto I : Node->decls()) {
-        dumpDeclRef(*I);
-      }
+  if (HasDecls) {
+    OF.emitTag("decls");
+    ArrayScope Scope( // not covered by tests
+        OF,
+        std::distance(Node->decls_begin(), Node->decls_end()));
+    for (auto I : Node->decls()) {
+      dumpDeclRef(*I);
     }
   }
   OF.emitTag("name");
