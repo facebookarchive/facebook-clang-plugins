@@ -1515,6 +1515,7 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~is_module_private : bool;
 //@atd   ~is_pure : bool;
 //@atd   ~is_delete_as_written : bool;
+//@atd   ~is_no_return : bool;
 //@atd   ~is_no_throw : bool;
 //@atd   ~is_variadic : bool;
 //@atd   ~is_static : bool;
@@ -1540,6 +1541,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     IsStatic = true;
   }
   const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
+  auto IsNoReturn = D->isNoReturn();
   // FunctionProtoType::canThrow is more informative, consider using
   // CanThrowResult type instead
   // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
@@ -1555,9 +1557,9 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
   FunctionTemplateDecl *TemplateDecl = D->getPrimaryTemplate();
   int size = ShouldMangleName + IsCpp + IsInlineSpecified + IsModulePrivate +
-             IsPure + IsDeletedAsWritten + IsNoThrow + IsVariadic + IsStatic +
-             HasParameters + (bool)DeclWithBody + HasDeclarationBody +
-             (bool)TemplateDecl;
+             IsPure + IsDeletedAsWritten + IsNoReturn + IsNoThrow + IsVariadic +
+             IsStatic + HasParameters + (bool)DeclWithBody +
+             HasDeclarationBody + (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
 
   if (ShouldMangleName) {
@@ -1580,6 +1582,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   OF.emitFlag("is_module_private", IsModulePrivate);
   OF.emitFlag("is_pure", IsPure);
   OF.emitFlag("is_delete_as_written", IsDeletedAsWritten);
+  OF.emitFlag("is_no_return", IsNoReturn);
   OF.emitFlag("is_no_throw", IsNoThrow);
   OF.emitFlag("is_variadic", IsVariadic);
   OF.emitFlag("is_static", IsStatic);
