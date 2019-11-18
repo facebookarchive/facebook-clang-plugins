@@ -58,6 +58,13 @@ let update_decl_context_tuple __f = function
 | x -> x
 
 
+let get_function_decl_tuple = function
+#define DECL(DERIVED, BASE)
+#define ABSTRACT_DECL(DECL)
+#define FUNCTION(DERIVED, BASE) | DERIVED@@Decl (@DERIVED@_decl_tuple) -> Some (function_decl_tuple)
+#include <clang/AST/DeclNodes.inc>
+| _ -> None
+
 let get_named_decl_tuple = function
 #define DECL(DERIVED, BASE)
 #define ABSTRACT_DECL(DECL)
