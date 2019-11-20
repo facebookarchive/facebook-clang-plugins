@@ -1,10 +1,10 @@
-tests/available_expression.m:8:13: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
- @interface NSObject
-            ^
-tests/available_expression.m:8:21: note: add a super class to fix this problem
- @interface NSObject
-                    ^
-                     : NSObject 
+tests/available_expression.m:8:12: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
+@interface NSObject
+           ^
+tests/available_expression.m:8:20: note: add a super class to fix this problem
+@interface NSObject
+                   ^
+                    : NSObject 
 <"TranslationUnitDecl" : (
   {
     "pointer" : 1,
@@ -215,11 +215,11 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
           {
             "file" : "tests/available_expression.m",
             "line" : 8,
-            "column" : 2
+            "column" : 1
           },
           {
             "line" : 9,
-            "column" : 3
+            "column" : 2
           }
         )
       },
@@ -252,11 +252,11 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
         "source_range" : (
           {
             "line" : 10,
-            "column" : 2
+            "column" : 1
           },
           {
             "line" : 11,
-            "column" : 2
+            "column" : 1
           }
         )
       },
@@ -339,7 +339,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
             "column" : 1
           },
           {
-            "line" : 25,
+            "line" : 27,
             "column" : 1
           }
         )
@@ -361,7 +361,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                 "column" : 1
               },
               {
-                "line" : 23,
+                "line" : 25,
                 "column" : 1
               }
             )
@@ -413,7 +413,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                       "column" : 33
                     },
                     {
-                      "column" : 55
+                      "column" : 56
                     }
                   )
                 },
@@ -484,10 +484,10 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                 "pointer" : 25,
                 "source_range" : (
                   {
-                    "column" : 60
+                    "column" : 61
                   },
                   {
-                    "line" : 23,
+                    "line" : 25,
                     "column" : 1
                   }
                 )
@@ -502,7 +502,8 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                         "column" : 3
                       },
                       {
-                        "column" : 46
+                        "line" : 21,
+                        "column" : 3
                       }
                     )
                   },
@@ -512,6 +513,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                         "pointer" : 27,
                         "source_range" : (
                           {
+                            "line" : 20,
                             "column" : 7
                           },
                           {
@@ -527,7 +529,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                         }
                       },
                       {
-                        "version" : "10.13"
+                        "version" : "11.0"
                       }
                     )>,
                     <"CompoundStmt" : (
@@ -538,7 +540,8 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                             "column" : 45
                           },
                           {
-                            "column" : 46
+                            "line" : 21,
+                            "column" : 3
                           }
                         )
                       },
@@ -556,11 +559,12 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                     "pointer" : 30,
                     "source_range" : (
                       {
-                        "line" : 22,
+                        "line" : 23,
                         "column" : 3
                       },
                       {
-                        "column" : 52
+                        "line" : 24,
+                        "column" : 3
                       }
                     )
                   },
@@ -570,6 +574,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                         "pointer" : 31,
                         "source_range" : (
                           {
+                            "line" : 23,
                             "column" : 7
                           },
                           {
@@ -585,7 +590,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                         }
                       },
                       {
-                        "version" : "10.10"
+                        "version" : "8"
                       }
                     )>,
                     <"CompoundStmt" : (
@@ -596,7 +601,8 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                             "column" : 51
                           },
                           {
-                            "column" : 52
+                            "line" : 24,
+                            "column" : 3
                           }
                         )
                       },

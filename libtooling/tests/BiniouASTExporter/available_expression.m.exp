@@ -1,82 +1,47 @@
-tests/available_expression.m:8:13: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
- @interface NSObject
-            ^
-tests/available_expression.m:8:21: note: add a super class to fix this problem
- @interface NSObject
-                    ^
-                     : NSObject 
+tests/available_expression.m:8:12: warning: class 'NSObject' defined without specifying a base class [-Wobjc-root-class]
+@interface NSObject
+           ^
+tests/available_expression.m:8:20: note: add a super class to fix this problem
+@interface NSObject
+                   ^
+                    : NSObject 
 1 warning generated.
 <#032016ff:
-   ({ #d121c0bd: 1, #21793419: ({ }, { }), #21ac3408: unit },
+   ({ #d121c0bd: 1, #21793419: ({ }, { }) },
     [
       <#0f3f4d35:
-         ({
-            #d121c0bd: 2,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 2, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "__int128_t", #2cdb06fb: [ "__int128_t" ] },
           0,
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 3,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 3, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "__uint128_t", #2cdb06fb: [ "__uint128_t" ] },
           0,
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 4,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 4, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "SEL", #2cdb06fb: [ "SEL" ] },
           5,
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 6,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 6, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "id", #2cdb06fb: [ "id" ] },
           7,
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 8,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 8, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "Class", #2cdb06fb: [ "Class" ] },
           0,
           { })>,
       <#18d25297:
-         ({
-            #d121c0bd: 9,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 9, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "Protocol", #2cdb06fb: [ "Protocol" ] },
           [],
           { },
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 10,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 10, #21793419: ({ }, { }), #eb8a1f5a: true },
           {
             #c8ff724b: "__NSConstantString",
             #2cdb06fb: [ "__NSConstantString" ]
@@ -84,12 +49,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
           0,
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 11,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 11, #21793419: ({ }, { }), #eb8a1f5a: true },
           {
             #c8ff724b: "__builtin_ms_va_list",
             #2cdb06fb: [ "__builtin_ms_va_list" ]
@@ -97,12 +57,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
           0,
           { })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 12,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 12, #21793419: ({ }, { }), #eb8a1f5a: true },
           {
             #c8ff724b: "__builtin_va_list",
             #2cdb06fb: [ "__builtin_va_list" ]
@@ -116,10 +71,9 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
               ({
                  #c3bbce7c: "tests/available_expression.m",
                  #c7b317f4: 8,
-                 #c68b4ed6: 2
+                 #c68b4ed6: 1
                },
-               { #c7b317f4: 9, #c68b4ed6: 3 }),
-            #21ac3408: unit
+               { #c7b317f4: 9, #c68b4ed6: 2 })
           },
           { #c8ff724b: "NSObject", #2cdb06fb: [ "NSObject" ] },
           [],
@@ -135,9 +89,8 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
          ({
             #d121c0bd: 14,
             #21793419:
-              ({ #c7b317f4: 10, #c68b4ed6: 2 },
-               { #c7b317f4: 11, #c68b4ed6: 2 }),
-            #21ac3408: unit
+              ({ #c7b317f4: 10, #c68b4ed6: 1 },
+               { #c7b317f4: 11, #c68b4ed6: 1 })
           },
           { #c8ff724b: "NSObject", #2cdb06fb: [ "NSObject" ] },
           [],
@@ -154,8 +107,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
             #d121c0bd: 15,
             #21793419:
               ({ #c7b317f4: 13, #c68b4ed6: 1 },
-               { #c7b317f4: 15, #c68b4ed6: 2 }),
-            #21ac3408: unit
+               { #c7b317f4: 15, #c68b4ed6: 2 })
           },
           {
             #c8ff724b: "available_expression",
@@ -183,8 +135,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
             #d121c0bd: 16,
             #21793419:
               ({ #c7b317f4: 17, #c68b4ed6: 1 },
-               { #c7b317f4: 25, #c68b4ed6: 1 }),
-            #21ac3408: unit
+               { #c7b317f4: 27, #c68b4ed6: 1 })
           },
           {
             #c8ff724b: "available_expression",
@@ -197,8 +148,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                   #f9005968: 16,
                   #21793419:
                     ({ #c7b317f4: 19, #c68b4ed6: 1 },
-                     { #c7b317f4: 23, #c68b4ed6: 1 }),
-                  #21ac3408: unit
+                     { #c7b317f4: 25, #c68b4ed6: 1 })
                 },
                 {
                   #c8ff724b: "test_no_bug:and:",
@@ -213,8 +163,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                           #d121c0bd: 19,
                           #21793419:
                             ({ #c7b317f4: 19, #c68b4ed6: 22 },
-                             { #c68b4ed6: 26 }),
-                          #21ac3408: unit
+                             { #c68b4ed6: 26 })
                         },
                         { #c8ff724b: "n", #2cdb06fb: [ "n" ] },
                         { #c1127ea9: 20 },
@@ -222,8 +171,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                     <#fd75cc45:
                        ({
                           #d121c0bd: 21,
-                          #21793419: ({ #c68b4ed6: 33 }, { #c68b4ed6: 55 }),
-                          #21ac3408: unit
+                          #21793419: ({ #c68b4ed6: 33 }, { #c68b4ed6: 56 })
                         },
                         { #c8ff724b: "data", #2cdb06fb: [ "data" ] },
                         { #c1127ea9: 22 },
@@ -234,8 +182,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                        ({
                           #d121c0bd: 23,
                           #21793419: ({ }, { }),
-                          #eb8a1f5a: true,
-                          #21ac3408: unit
+                          #eb8a1f5a: true
                         },
                         { #c8ff724b: "self", #2cdb06fb: [ "self" ] },
                         { #c1127ea9: 22 },
@@ -244,8 +191,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                        ({
                           #d121c0bd: 24,
                           #21793419: ({ }, { }),
-                          #eb8a1f5a: true,
-                          #21ac3408: unit
+                          #eb8a1f5a: true
                         },
                         { #c8ff724b: "_cmd", #2cdb06fb: [ "_cmd" ] },
                         { #c1127ea9: 5 },
@@ -256,8 +202,8 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                        ({
                           #d121c0bd: 25,
                           #21793419:
-                            ({ #c68b4ed6: 60 },
-                             { #c7b317f4: 23, #c68b4ed6: 1 })
+                            ({ #c68b4ed6: 61 },
+                             { #c7b317f4: 25, #c68b4ed6: 1 })
                         },
                         [
                           <#22219ce5:
@@ -265,23 +211,25 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                                 #d121c0bd: 26,
                                 #21793419:
                                   ({ #c7b317f4: 20, #c68b4ed6: 3 },
-                                   { #c68b4ed6: 46 })
+                                   { #c7b317f4: 21, #c68b4ed6: 3 })
                               },
                               [
                                 <#f0f37d96:
                                    ({
                                       #d121c0bd: 27,
                                       #21793419:
-                                        ({ #c68b4ed6: 7 }, { #c68b4ed6: 42 })
+                                        ({ #c7b317f4: 20, #c68b4ed6: 7 },
+                                         { #c68b4ed6: 42 })
                                     },
                                     [],
                                     { #30e4876a: { #c1127ea9: 28 } },
-                                    { #fcf1e718: "10.13" })>,
+                                    { #fcf1e718: "11.0" })>,
                                 <#d394bb73:
                                    ({
                                       #d121c0bd: 29,
                                       #21793419:
-                                        ({ #c68b4ed6: 45 }, { #c68b4ed6: 46 })
+                                        ({ #c68b4ed6: 45 },
+                                         { #c7b317f4: 21, #c68b4ed6: 3 })
                                     },
                                     [])>
                               ],
@@ -290,24 +238,26 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
                              ({
                                 #d121c0bd: 30,
                                 #21793419:
-                                  ({ #c7b317f4: 22, #c68b4ed6: 3 },
-                                   { #c68b4ed6: 52 })
+                                  ({ #c7b317f4: 23, #c68b4ed6: 3 },
+                                   { #c7b317f4: 24, #c68b4ed6: 3 })
                               },
                               [
                                 <#f0f37d96:
                                    ({
                                       #d121c0bd: 31,
                                       #21793419:
-                                        ({ #c68b4ed6: 7 }, { #c68b4ed6: 48 })
+                                        ({ #c7b317f4: 23, #c68b4ed6: 7 },
+                                         { #c68b4ed6: 48 })
                                     },
                                     [],
                                     { #30e4876a: { #c1127ea9: 28 } },
-                                    { #fcf1e718: "10.10" })>,
+                                    { #fcf1e718: "8" })>,
                                 <#d394bb73:
                                    ({
                                       #d121c0bd: 32,
                                       #21793419:
-                                        ({ #c68b4ed6: 51 }, { #c68b4ed6: 52 })
+                                        ({ #c68b4ed6: 51 },
+                                         { #c7b317f4: 24, #c68b4ed6: 3 })
                                     },
                                     [])>
                               ],
@@ -328,12 +278,7 @@ tests/available_expression.m:8:21: note: add a super class to fix this problem
             }
           })>,
       <#0f3f4d35:
-         ({
-            #d121c0bd: 33,
-            #21793419: ({ }, { }),
-            #eb8a1f5a: true,
-            #21ac3408: unit
-          },
+         ({ #d121c0bd: 33, #21793419: ({ }, { }), #eb8a1f5a: true },
           { #c8ff724b: "instancetype", #2cdb06fb: [ "instancetype" ] },
           34,
           { })>
