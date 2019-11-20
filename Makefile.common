@@ -6,8 +6,10 @@
 include $(LEVEL)/Makefile.config
 
 # Typical compilation flags for Objective C examples
-ifneq "$(SDKPATH)" ""
-IOSFLAGS=-arch i386 -fmessage-length=0 -fpascal-strings -isysroot $(SDKPATH) -fexceptions -fasm-blocks -fstrict-aliasing -g -fobjc-abi-version=2 -mios-simulator-version-min=5.0 -Wno-objc-property-synthesis -Werror
+ifeq ($(HAS_OBJC),yes)
+IOSFLAGS=-isysroot $(SDKPATH) -mios-simulator-version-min=8.2 -target x86_64-apple-darwin14 \
+  -Wno-unused-command-line-argument \
+  -Wno-objc-property-implementation
 endif
 
 # we assume that the targeted clang was configured with --enable-libcpp --enable-cxx14

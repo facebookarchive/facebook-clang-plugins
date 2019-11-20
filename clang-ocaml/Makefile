@@ -85,7 +85,7 @@ type_trait.cpp no_except_expr.cpp friend.cpp
 TEST_FILES=$(TEST_FILES_COMMON)
 
 # only add Objective-C(++) files on mac
-ifeq ($(shell uname),Darwin)
+ifeq ($(HAS_OBJC),yes)
 TEST_FILES+=Hello.m ObjCTest.m objcpp_template_unboxing.mm
 endif
 
@@ -129,17 +129,17 @@ test: $(patsubst %,build/%,process_test utils_test yojson_utils_test clang_ast_p
 	 $(RUNTEST) tests/utils_test build/utils_test; \
 	 $(RUNTEST) tests/yojson_utils_test build/yojson_utils_test; \
 	 $(RUNTEST) tests/clang_ast_proj_test build/clang_ast_proj_test; \
-	 if [ "$$(uname)" != "Darwin" ]; then \
-	   printf "[~] %s skipped (non-Darwin architecture detected)\n" clang_ast_named_decl_printer; \
-	 else \
+	 if [ "$(HAS_OBJC)" = "yes" ]; then \
 	   $(RUNTEST) tests/clang_ast_named_decl_printer build/clang_ast_named_decl_printer $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 else \
+	   printf "[~] %s skipped (no Objective-C support)\n" clang_ast_named_decl_printer; \
 	 fi; \
 	 $(RUNTEST) tests/clang_ast_converter build/clang_ast_converter --pretty $(CONVERTER_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
 	 $(RUNTEST) tests/clang_ast_yojson_validation ./yojson_validator.sh build/clang_ast_converter $(YOJSON_VALIDATOR_TEST_FILE:%=$(LIBTOOLING)/build/ast_samples/%.yjson.gz); \
-	 if [ "$$(uname)" != "Darwin" ]; then \
-	   printf "[~] %s skipped (non-Darwin architecture detected)\n" clang_ast_main_test; \
-	 else \
+	 if [ "$(HAS_OBJC)" = "yes" ]; then \
 	   $(RUNTEST) tests/clang_ast_main_test build/clang_ast_main_test $(PRINTER_TEST_FILES:%=$(LIBTOOLING)/build/ast_samples/%.yjson); \
+	 else \
+	   printf "[~] %s skipped (no Objective-C support)\n" clang_ast_main_test; \
 	 fi
 	@if [ ! $$KEEP_TEST_OUTPUTS ]; then rm -f tests/*.out; fi
 

@@ -69,18 +69,18 @@ test: build/FacebookClangPlugin.dylib
 	     EXTRA_FLAGS="";                                                            \
 	     case "$(SRCFILE_FORMULA)" in                                               \
 	     *.m )                                                                      \
-	       if [ "$$(uname)" != "Darwin" ]; then                                     \
-	         printf "[~] %s skipped (non-Darwin architecture detected)\n"           \
+	       if [ "$(HAS_OBJC)" = "no" ]; then                                        \
+	         printf "[~] %s skipped (no Objective-C support)\n"                     \
 	           "$$(basename $(SRCFILE_FORMULA))";                                   \
 	         continue;                                                              \
 	       fi;                                                                      \
-	       EXTRA_FLAGS="-ObjC -fblocks";                                            \
+	       EXTRA_FLAGS="-ObjC -fblocks $(IOSFLAGS)";                                \
 	       ;;                                                                       \
 	     *.cpp )                                                                    \
 	       EXTRA_FLAGS="--std=c++14";                                               \
 	       ;;                                                                       \
 	     *.mm )                                                                     \
-	       EXTRA_FLAGS="--std=c++14 -ObjC++ -fblocks";                              \
+	       EXTRA_FLAGS="--std=c++14 -ObjC++ -fblocks $(IOSFLAGS)";                  \
 	       ;;                                                                       \
 	     esac;                                                                      \
 	     $(RUNTEST) "$$TEST" $(FILTERFILE_FORMULA)                                  \
@@ -111,42 +111,42 @@ YJ_DUMPER_ARGS=-Xclang -plugin -Xclang YojsonASTExporter -Xclang -plugin-arg-Yoj
 
 build/ast_samples/%.cpp.yjson: %.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(CFLAGS) -Wno-ignored-qualifiers -I. $(YJ_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) $(CFLAGS) -Wno-ignored-qualifiers -I. $(YJ_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.cpp.yjson: tests/%.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) --std=c++14 $(YJ_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) --std=c++14 $(YJ_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.c.yjson: tests/%.c build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(YJ_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) $(YJ_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.m.yjson: tests/%.m build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(YJ_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) $(IOSFLAGS) $(YJ_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.mm.yjson: tests/%.mm build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) --std=c++14 $(YJ_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) --std=c++14 $(IOSFLAGS) $(YJ_DUMPER_ARGS) $@ -c $<
 
 # dump sample files in Yojson using ASTExporter.cpp
 J_DUMPER_ARGS=-Xclang -plugin -Xclang JsonASTExporter -Xclang -plugin-arg-JsonASTExporter -Xclang
 
 build/ast_samples/%.cpp.json: %.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(CFLAGS) -Wno-ignored-qualifiers -I. $(J_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) $(CFLAGS) -Wno-ignored-qualifiers -I. $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.cpp.json: tests/%.cpp build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) --std=c++14 $(J_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) --std=c++14 $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.c.json: tests/%.c build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(J_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.m.json: tests/%.m build/FacebookClangPlugin.dylib
 	@mkdir -p build/ast_samples
-	@$(CLANG_FRONTEND) $(J_DUMPER_ARGS) $@ -c $<
+	$(CLANG_FRONTEND) $(IOSFLAGS) $(J_DUMPER_ARGS) $@ -c $<
 
 build/ast_samples/%.gz: build/ast_samples/%
 	@gzip -f < $< > $@
