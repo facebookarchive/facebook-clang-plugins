@@ -35,7 +35,12 @@ tests/available_expression.m:8:20: note: add a super class to fix this problem
           0,
           { })>,
       <#18d25297:
-         ({ #d121c0bd: 9, #21793419: ({ }, { }), #eb8a1f5a: true },
+         ({
+            #d121c0bd: 9,
+            #f9005968: 1,
+            #21793419: ({ }, { }),
+            #eb8a1f5a: true
+          },
           { #c8ff724b: "Protocol", #2cdb06fb: [ "Protocol" ] },
           [],
           { },
@@ -67,6 +72,7 @@ tests/available_expression.m:8:20: note: add a super class to fix this problem
       <#18d25297:
          ({
             #d121c0bd: 13,
+            #f9005968: 1,
             #21793419:
               ({
                  #c3bbce7c: "tests/available_expression.m",
@@ -88,6 +94,7 @@ tests/available_expression.m:8:20: note: add a super class to fix this problem
       <#0e281b68:
          ({
             #d121c0bd: 14,
+            #f9005968: 1,
             #21793419:
               ({ #c7b317f4: 10, #c68b4ed6: 1 },
                { #c7b317f4: 11, #c68b4ed6: 1 })
@@ -105,6 +112,7 @@ tests/available_expression.m:8:20: note: add a super class to fix this problem
       <#18d25297:
          ({
             #d121c0bd: 15,
+            #f9005968: 1,
             #21793419:
               ({ #c7b317f4: 13, #c68b4ed6: 1 },
                { #c7b317f4: 15, #c68b4ed6: 2 })
@@ -133,6 +141,7 @@ tests/available_expression.m:8:20: note: add a super class to fix this problem
       <#0e281b68:
          ({
             #d121c0bd: 16,
+            #f9005968: 1,
             #21793419:
               ({ #c7b317f4: 17, #c68b4ed6: 1 },
                { #c7b317f4: 27, #c68b4ed6: 1 })

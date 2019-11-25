@@ -117,6 +117,7 @@
     ["CXXRecordDecl" , [
       {
         "pointer" : 7,
+        "parent_pointer" : 1,
         "source_range" : [
           {
             "file" : "tests/dynamic_cast.cpp",
@@ -141,6 +142,7 @@
         ["CXXRecordDecl" , [
           {
             "pointer" : 9,
+            "parent_pointer" : 7,
             "source_range" : [
               {
                 "line" : 7,
@@ -587,6 +589,7 @@
     ["CXXRecordDecl" , [
       {
         "pointer" : 32,
+        "parent_pointer" : 1,
         "source_range" : [
           {
             "line" : 10,
@@ -609,6 +612,7 @@
         ["CXXRecordDecl" , [
           {
             "pointer" : 34,
+            "parent_pointer" : 32,
             "source_range" : [
               {
                 "column" : 1
@@ -1055,6 +1059,7 @@
     ["CXXRecordDecl" , [
       {
         "pointer" : 54,
+        "parent_pointer" : 1,
         "source_range" : [
           {
             "line" : 11,
@@ -1077,6 +1082,7 @@
         ["CXXRecordDecl" , [
           {
             "pointer" : 56,
+            "parent_pointer" : 54,
             "source_range" : [
               {
                 "column" : 1
