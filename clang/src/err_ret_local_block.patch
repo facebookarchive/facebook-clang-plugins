@@ -1,6 +1,6 @@
---- a/llvm/tools/clang/lib/Sema/SemaInit.cpp    2018-08-17 15:18:56.000000000 -0700
-+++ b/llvm/tools/clang/lib/Sema/SemaInit.cpp    2019-01-30 06:37:36.000000000 -0700
-@@ -6940,7 +6940,9 @@
+--- a/llvm/tools/clang/lib/Sema/SemaInit.cpp
++++ b/llvm/tools/clang/lib/Sema/SemaInit.cpp
+@@ -7147,7 +7147,9 @@ void Sema::checkInitializerLifetime(const InitializedEntity &Entity,
              << Entity.getType()->isReferenceType() << DRE->getDecl()
              << isa<ParmVarDecl>(DRE->getDecl()) << DiagRange;
        } else if (isa<BlockExpr>(L)) {

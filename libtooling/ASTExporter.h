@@ -4044,7 +4044,7 @@ void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   VisitExpr(Node);
 
   bool IsArray = Node->isArray();
-  bool HasArraySize = Node->getArraySize();
+  bool HasArraySize = Node->getArraySize().hasValue();
   bool HasInitializer = Node->hasInitializer();
   unsigned PlacementArgs = Node->getNumPlacementArgs();
   bool HasPlacementArgs = PlacementArgs > 0;
@@ -4056,7 +4056,7 @@ void ASTExporter<ATDWriter>::VisitCXXNewExpr(const CXXNewExpr *Node) {
   OF.emitFlag("is_array", IsArray);
   if (HasArraySize) {
     OF.emitTag("array_size_expr");
-    dumpPointer(Node->getArraySize());
+    dumpPointer(Node->getArraySize().getValue());
   }
   if (HasInitializer) {
     OF.emitTag("initializer_expr");
