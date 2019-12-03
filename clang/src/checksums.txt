@@ -13,19 +13,19 @@ d6a0565cf21f22e9b4353b2eb92622e8365000a9e90a16b09b56f8157eabfe84  llvm-9.0.0.src
 
 Script to build the archive:
 
-tar xf llvm-8.0.0.src.tar.xz
-cd llvm-8.0.0.src/tools/
-tar xf ../../cfe-8.0.0.src.tar.xz
-mv cfe-8.0.0.src/ clang
+tar xf llvm-9.0.0.src.tar.xz
+cd llvm-9.0.0.src/tools/
+tar xf ../../cfe-9.0.0.src.tar.xz
+mv cfe-9.0.0.src/ clang
 cd ../projects/
-tar xf ../../compiler-rt-8.0.0.src.tar.xz
-mv compiler-rt-8.0.0.src/ compiler-rt
-tar xf ../../libcxx-8.0.0.src.tar.xz
-mv libcxx-8.0.0.src/ libcxx
-tar xf ../../libcxxabi-8.0.0.src.tar.xz
-mv libcxxabi-8.0.0.src/ libcxxabi
-tar xf ../../openmp-8.0.0.src.tar.xz
-mv openmp-8.0.0.src/ openmp
+tar xf ../../compiler-rt-9.0.0.src.tar.xz
+mv compiler-rt-9.0.0.src/ compiler-rt
+tar xf ../../libcxx-9.0.0.src.tar.xz
+mv libcxx-9.0.0.src/ libcxx
+tar xf ../../libcxxabi-9.0.0.src.tar.xz
+mv libcxxabi-9.0.0.src/ libcxxabi
+tar xf ../../openmp-9.0.0.src.tar.xz
+mv openmp-9.0.0.src/ openmp
 cd ../..
-mv llvm-8.0.0.src llvm
-tar cJ llvm > llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-8.0.0.tar.xz
+mv llvm-9.0.0.src llvm
+tar cJ llvm > llvm_clang_compiler-rt_libcxx_libcxxabi_openmp-9.0.0.tar.xz

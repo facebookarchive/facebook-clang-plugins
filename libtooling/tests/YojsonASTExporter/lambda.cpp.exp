@@ -495,7 +495,8 @@
                                       {
                                         "mangled_name" : "13435645424728763319",
                                         "is_cpp" : true,
-                                        "is_inline" : true
+                                        "is_inline" : true,
+                                        "is_no_throw" : true
                                       },
                                       {
                                       }
@@ -1082,7 +1083,8 @@
                                           {
                                             "mangled_name" : "13435645424728763319",
                                             "is_cpp" : true,
-                                            "is_inline" : true
+                                            "is_inline" : true,
+                                            "is_no_throw" : true
                                           },
                                           {
                                           }
@@ -1678,69 +1680,9 @@
                                   },
                                   55,
                                   [
-                                    <"FieldDecl" : (
-                                      {
-                                        "pointer" : 57,
-                                        "parent_pointer" : 56,
-                                        "source_range" : (
-                                          {
-                                            "column" : 16
-                                          },
-                                          {
-                                            "column" : 16
-                                          }
-                                        ),
-                                        "is_implicit" : true,
-                                        "is_this_declaration_referenced" : true,
-                                        "access" : <"Private">
-                                      },
-                                      {
-                                        "name" : "__anon_field_0",
-                                        "qual_name" : [
-                                          "",
-                                          "lambda_tests/lambda.cpp:12:14",
-                                          "main"
-                                        ]
-                                      },
-                                      {
-                                        "type_ptr" : 58
-                                      },
-                                      {
-                                      }
-                                    )>,
-                                    <"FieldDecl" : (
-                                      {
-                                        "pointer" : 59,
-                                        "parent_pointer" : 56,
-                                        "source_range" : (
-                                          {
-                                            "column" : 19
-                                          },
-                                          {
-                                            "column" : 19
-                                          }
-                                        ),
-                                        "is_implicit" : true,
-                                        "is_this_declaration_referenced" : true,
-                                        "access" : <"Private">
-                                      },
-                                      {
-                                        "name" : "__anon_field_1",
-                                        "qual_name" : [
-                                          "",
-                                          "lambda_tests/lambda.cpp:12:14",
-                                          "main"
-                                        ]
-                                      },
-                                      {
-                                        "type_ptr" : 12
-                                      },
-                                      {
-                                      }
-                                    )>,
                                     <"CXXMethodDecl" : (
                                       {
-                                        "pointer" : 60,
+                                        "pointer" : 57,
                                         "parent_pointer" : 56,
                                         "source_range" : (
                                           {
@@ -1761,7 +1703,7 @@
                                         ]
                                       },
                                       {
-                                        "type_ptr" : 61
+                                        "type_ptr" : 58
                                       },
                                       {
                                         "mangled_name" : "19264279795607331",
@@ -1770,7 +1712,7 @@
                                         "parameters" : [
                                           <"ParmVarDecl" : (
                                             {
-                                              "pointer" : 62,
+                                              "pointer" : 59,
                                               "source_range" : (
                                                 {
                                                   "column" : 22
@@ -1794,7 +1736,7 @@
                                             }
                                           )>
                                         ],
-                                        "decl_ptr_with_body" : 60,
+                                        "decl_ptr_with_body" : 57,
                                         "body" : <"CompoundStmt" : (
                                           {
                                             "pointer" : 51,
@@ -1886,6 +1828,66 @@
                                             )>
                                           ]
                                         )>
+                                      },
+                                      {
+                                      }
+                                    )>,
+                                    <"FieldDecl" : (
+                                      {
+                                        "pointer" : 60,
+                                        "parent_pointer" : 56,
+                                        "source_range" : (
+                                          {
+                                            "column" : 16
+                                          },
+                                          {
+                                            "column" : 16
+                                          }
+                                        ),
+                                        "is_implicit" : true,
+                                        "is_this_declaration_referenced" : true,
+                                        "access" : <"Private">
+                                      },
+                                      {
+                                        "name" : "__anon_field_0",
+                                        "qual_name" : [
+                                          "",
+                                          "lambda_tests/lambda.cpp:12:14",
+                                          "main"
+                                        ]
+                                      },
+                                      {
+                                        "type_ptr" : 61
+                                      },
+                                      {
+                                      }
+                                    )>,
+                                    <"FieldDecl" : (
+                                      {
+                                        "pointer" : 62,
+                                        "parent_pointer" : 56,
+                                        "source_range" : (
+                                          {
+                                            "column" : 19
+                                          },
+                                          {
+                                            "column" : 19
+                                          }
+                                        ),
+                                        "is_implicit" : true,
+                                        "is_this_declaration_referenced" : true,
+                                        "access" : <"Private">
+                                      },
+                                      {
+                                        "name" : "__anon_field_1",
+                                        "qual_name" : [
+                                          "",
+                                          "lambda_tests/lambda.cpp:12:14",
+                                          "main"
+                                        ]
+                                      },
+                                      {
+                                        "type_ptr" : 12
                                       },
                                       {
                                       }
@@ -2074,7 +2076,7 @@
                                           {
                                             "subject" : <"Member" : {
                                               "kind" : <"Field">,
-                                              "decl_pointer" : 57,
+                                              "decl_pointer" : 60,
                                               "name" : {
                                                 "name" : "__anon_field_0",
                                                 "qual_name" : [
@@ -2084,7 +2086,7 @@
                                                 ]
                                               },
                                               "qual_type" : {
-                                                "type_ptr" : 58
+                                                "type_ptr" : 61
                                               }
                                             }>,
                                             "source_range" : (
@@ -2193,7 +2195,7 @@
                                                 },
                                                 "decl_ref" : {
                                                   "kind" : <"Field">,
-                                                  "decl_pointer" : 57,
+                                                  "decl_pointer" : 60,
                                                   "name" : {
                                                     "name" : "__anon_field_0",
                                                     "qual_name" : [
@@ -2203,7 +2205,7 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "type_ptr" : 58
+                                                    "type_ptr" : 61
                                                   }
                                                 }
                                               }
@@ -2212,7 +2214,7 @@
                                           {
                                             "subject" : <"Member" : {
                                               "kind" : <"Field">,
-                                              "decl_pointer" : 59,
+                                              "decl_pointer" : 62,
                                               "name" : {
                                                 "name" : "__anon_field_1",
                                                 "qual_name" : [
@@ -2344,7 +2346,7 @@
                                                     },
                                                     "decl_ref" : {
                                                       "kind" : <"Field">,
-                                                      "decl_pointer" : 59,
+                                                      "decl_pointer" : 62,
                                                       "name" : {
                                                         "name" : "__anon_field_1",
                                                         "qual_name" : [
@@ -2401,7 +2403,7 @@
                                     },
                                     "lambda_call_operator" : {
                                       "kind" : <"CXXMethod">,
-                                      "decl_pointer" : 60,
+                                      "decl_pointer" : 57,
                                       "name" : {
                                         "name" : "operator()",
                                         "qual_name" : [
@@ -2411,7 +2413,7 @@
                                         ]
                                       },
                                       "qual_type" : {
-                                        "type_ptr" : 61
+                                        "type_ptr" : 58
                                       }
                                     },
                                     "lambda_captures" : [
@@ -2808,69 +2810,9 @@
                                       },
                                       55,
                                       [
-                                        <"FieldDecl" : (
-                                          {
-                                            "pointer" : 57,
-                                            "parent_pointer" : 56,
-                                            "source_range" : (
-                                              {
-                                                "column" : 16
-                                              },
-                                              {
-                                                "column" : 16
-                                              }
-                                            ),
-                                            "is_implicit" : true,
-                                            "is_this_declaration_referenced" : true,
-                                            "access" : <"Private">
-                                          },
-                                          {
-                                            "name" : "__anon_field_0",
-                                            "qual_name" : [
-                                              "",
-                                              "lambda_tests/lambda.cpp:12:14",
-                                              "main"
-                                            ]
-                                          },
-                                          {
-                                            "type_ptr" : 58
-                                          },
-                                          {
-                                          }
-                                        )>,
-                                        <"FieldDecl" : (
-                                          {
-                                            "pointer" : 59,
-                                            "parent_pointer" : 56,
-                                            "source_range" : (
-                                              {
-                                                "column" : 19
-                                              },
-                                              {
-                                                "column" : 19
-                                              }
-                                            ),
-                                            "is_implicit" : true,
-                                            "is_this_declaration_referenced" : true,
-                                            "access" : <"Private">
-                                          },
-                                          {
-                                            "name" : "__anon_field_1",
-                                            "qual_name" : [
-                                              "",
-                                              "lambda_tests/lambda.cpp:12:14",
-                                              "main"
-                                            ]
-                                          },
-                                          {
-                                            "type_ptr" : 12
-                                          },
-                                          {
-                                          }
-                                        )>,
                                         <"CXXMethodDecl" : (
                                           {
-                                            "pointer" : 60,
+                                            "pointer" : 57,
                                             "parent_pointer" : 56,
                                             "source_range" : (
                                               {
@@ -2891,7 +2833,7 @@
                                             ]
                                           },
                                           {
-                                            "type_ptr" : 61
+                                            "type_ptr" : 58
                                           },
                                           {
                                             "mangled_name" : "19264279795607331",
@@ -2900,7 +2842,7 @@
                                             "parameters" : [
                                               <"ParmVarDecl" : (
                                                 {
-                                                  "pointer" : 62,
+                                                  "pointer" : 59,
                                                   "source_range" : (
                                                     {
                                                       "column" : 22
@@ -2924,7 +2866,7 @@
                                                 }
                                               )>
                                             ],
-                                            "decl_ptr_with_body" : 60,
+                                            "decl_ptr_with_body" : 57,
                                             "body" : <"CompoundStmt" : (
                                               {
                                                 "pointer" : 51,
@@ -3016,6 +2958,66 @@
                                                 )>
                                               ]
                                             )>
+                                          },
+                                          {
+                                          }
+                                        )>,
+                                        <"FieldDecl" : (
+                                          {
+                                            "pointer" : 60,
+                                            "parent_pointer" : 56,
+                                            "source_range" : (
+                                              {
+                                                "column" : 16
+                                              },
+                                              {
+                                                "column" : 16
+                                              }
+                                            ),
+                                            "is_implicit" : true,
+                                            "is_this_declaration_referenced" : true,
+                                            "access" : <"Private">
+                                          },
+                                          {
+                                            "name" : "__anon_field_0",
+                                            "qual_name" : [
+                                              "",
+                                              "lambda_tests/lambda.cpp:12:14",
+                                              "main"
+                                            ]
+                                          },
+                                          {
+                                            "type_ptr" : 61
+                                          },
+                                          {
+                                          }
+                                        )>,
+                                        <"FieldDecl" : (
+                                          {
+                                            "pointer" : 62,
+                                            "parent_pointer" : 56,
+                                            "source_range" : (
+                                              {
+                                                "column" : 19
+                                              },
+                                              {
+                                                "column" : 19
+                                              }
+                                            ),
+                                            "is_implicit" : true,
+                                            "is_this_declaration_referenced" : true,
+                                            "access" : <"Private">
+                                          },
+                                          {
+                                            "name" : "__anon_field_1",
+                                            "qual_name" : [
+                                              "",
+                                              "lambda_tests/lambda.cpp:12:14",
+                                              "main"
+                                            ]
+                                          },
+                                          {
+                                            "type_ptr" : 12
                                           },
                                           {
                                           }
@@ -3204,7 +3206,7 @@
                                               {
                                                 "subject" : <"Member" : {
                                                   "kind" : <"Field">,
-                                                  "decl_pointer" : 57,
+                                                  "decl_pointer" : 60,
                                                   "name" : {
                                                     "name" : "__anon_field_0",
                                                     "qual_name" : [
@@ -3214,7 +3216,7 @@
                                                     ]
                                                   },
                                                   "qual_type" : {
-                                                    "type_ptr" : 58
+                                                    "type_ptr" : 61
                                                   }
                                                 }>,
                                                 "source_range" : (
@@ -3323,7 +3325,7 @@
                                                     },
                                                     "decl_ref" : {
                                                       "kind" : <"Field">,
-                                                      "decl_pointer" : 57,
+                                                      "decl_pointer" : 60,
                                                       "name" : {
                                                         "name" : "__anon_field_0",
                                                         "qual_name" : [
@@ -3333,7 +3335,7 @@
                                                         ]
                                                       },
                                                       "qual_type" : {
-                                                        "type_ptr" : 58
+                                                        "type_ptr" : 61
                                                       }
                                                     }
                                                   }
@@ -3342,7 +3344,7 @@
                                               {
                                                 "subject" : <"Member" : {
                                                   "kind" : <"Field">,
-                                                  "decl_pointer" : 59,
+                                                  "decl_pointer" : 62,
                                                   "name" : {
                                                     "name" : "__anon_field_1",
                                                     "qual_name" : [
@@ -3474,7 +3476,7 @@
                                                         },
                                                         "decl_ref" : {
                                                           "kind" : <"Field">,
-                                                          "decl_pointer" : 59,
+                                                          "decl_pointer" : 62,
                                                           "name" : {
                                                             "name" : "__anon_field_1",
                                                             "qual_name" : [
@@ -3531,7 +3533,7 @@
                                         },
                                         "lambda_call_operator" : {
                                           "kind" : <"CXXMethod">,
-                                          "decl_pointer" : 60,
+                                          "decl_pointer" : 57,
                                           "name" : {
                                             "name" : "operator()",
                                             "qual_name" : [
@@ -3541,7 +3543,7 @@
                                             ]
                                           },
                                           "qual_type" : {
-                                            "type_ptr" : 61
+                                            "type_ptr" : 58
                                           }
                                         },
                                         "lambda_captures" : [
@@ -3861,39 +3863,9 @@
                                   },
                                   94,
                                   [
-                                    <"FieldDecl" : (
-                                      {
-                                        "pointer" : 96,
-                                        "parent_pointer" : 95,
-                                        "source_range" : (
-                                          {
-                                            "column" : 24
-                                          },
-                                          {
-                                            "column" : 24
-                                          }
-                                        ),
-                                        "is_implicit" : true,
-                                        "is_this_declaration_referenced" : true,
-                                        "access" : <"Private">
-                                      },
-                                      {
-                                        "name" : "__anon_field_0",
-                                        "qual_name" : [
-                                          "",
-                                          "lambda_tests/lambda.cpp:14:23",
-                                          "main"
-                                        ]
-                                      },
-                                      {
-                                        "type_ptr" : 92
-                                      },
-                                      {
-                                      }
-                                    )>,
                                     <"CXXMethodDecl" : (
                                       {
-                                        "pointer" : 97,
+                                        "pointer" : 96,
                                         "parent_pointer" : 95,
                                         "source_range" : (
                                           {
@@ -3920,7 +3892,7 @@
                                         "mangled_name" : "8151698240653651715",
                                         "is_cpp" : true,
                                         "is_inline" : true,
-                                        "decl_ptr_with_body" : 97,
+                                        "decl_ptr_with_body" : 96,
                                         "body" : <"CompoundStmt" : (
                                           {
                                             "pointer" : 88,
@@ -4013,6 +3985,36 @@
                                             )>
                                           ]
                                         )>
+                                      },
+                                      {
+                                      }
+                                    )>,
+                                    <"FieldDecl" : (
+                                      {
+                                        "pointer" : 97,
+                                        "parent_pointer" : 95,
+                                        "source_range" : (
+                                          {
+                                            "column" : 24
+                                          },
+                                          {
+                                            "column" : 24
+                                          }
+                                        ),
+                                        "is_implicit" : true,
+                                        "is_this_declaration_referenced" : true,
+                                        "access" : <"Private">
+                                      },
+                                      {
+                                        "name" : "__anon_field_0",
+                                        "qual_name" : [
+                                          "",
+                                          "lambda_tests/lambda.cpp:14:23",
+                                          "main"
+                                        ]
+                                      },
+                                      {
+                                        "type_ptr" : 92
                                       },
                                       {
                                       }
@@ -4201,7 +4203,7 @@
                                           {
                                             "subject" : <"Member" : {
                                               "kind" : <"Field">,
-                                              "decl_pointer" : 96,
+                                              "decl_pointer" : 97,
                                               "name" : {
                                                 "name" : "__anon_field_0",
                                                 "qual_name" : [
@@ -4333,7 +4335,7 @@
                                                     },
                                                     "decl_ref" : {
                                                       "kind" : <"Field">,
-                                                      "decl_pointer" : 96,
+                                                      "decl_pointer" : 97,
                                                       "name" : {
                                                         "name" : "__anon_field_0",
                                                         "qual_name" : [
@@ -4390,7 +4392,7 @@
                                     },
                                     "lambda_call_operator" : {
                                       "kind" : <"CXXMethod">,
-                                      "decl_pointer" : 97,
+                                      "decl_pointer" : 96,
                                       "name" : {
                                         "name" : "operator()",
                                         "qual_name" : [
@@ -4752,39 +4754,9 @@
                                       },
                                       94,
                                       [
-                                        <"FieldDecl" : (
-                                          {
-                                            "pointer" : 96,
-                                            "parent_pointer" : 95,
-                                            "source_range" : (
-                                              {
-                                                "column" : 24
-                                              },
-                                              {
-                                                "column" : 24
-                                              }
-                                            ),
-                                            "is_implicit" : true,
-                                            "is_this_declaration_referenced" : true,
-                                            "access" : <"Private">
-                                          },
-                                          {
-                                            "name" : "__anon_field_0",
-                                            "qual_name" : [
-                                              "",
-                                              "lambda_tests/lambda.cpp:14:23",
-                                              "main"
-                                            ]
-                                          },
-                                          {
-                                            "type_ptr" : 92
-                                          },
-                                          {
-                                          }
-                                        )>,
                                         <"CXXMethodDecl" : (
                                           {
-                                            "pointer" : 97,
+                                            "pointer" : 96,
                                             "parent_pointer" : 95,
                                             "source_range" : (
                                               {
@@ -4811,7 +4783,7 @@
                                             "mangled_name" : "8151698240653651715",
                                             "is_cpp" : true,
                                             "is_inline" : true,
-                                            "decl_ptr_with_body" : 97,
+                                            "decl_ptr_with_body" : 96,
                                             "body" : <"CompoundStmt" : (
                                               {
                                                 "pointer" : 88,
@@ -4904,6 +4876,36 @@
                                                 )>
                                               ]
                                             )>
+                                          },
+                                          {
+                                          }
+                                        )>,
+                                        <"FieldDecl" : (
+                                          {
+                                            "pointer" : 97,
+                                            "parent_pointer" : 95,
+                                            "source_range" : (
+                                              {
+                                                "column" : 24
+                                              },
+                                              {
+                                                "column" : 24
+                                              }
+                                            ),
+                                            "is_implicit" : true,
+                                            "is_this_declaration_referenced" : true,
+                                            "access" : <"Private">
+                                          },
+                                          {
+                                            "name" : "__anon_field_0",
+                                            "qual_name" : [
+                                              "",
+                                              "lambda_tests/lambda.cpp:14:23",
+                                              "main"
+                                            ]
+                                          },
+                                          {
+                                            "type_ptr" : 92
                                           },
                                           {
                                           }
@@ -5092,7 +5094,7 @@
                                               {
                                                 "subject" : <"Member" : {
                                                   "kind" : <"Field">,
-                                                  "decl_pointer" : 96,
+                                                  "decl_pointer" : 97,
                                                   "name" : {
                                                     "name" : "__anon_field_0",
                                                     "qual_name" : [
@@ -5224,7 +5226,7 @@
                                                         },
                                                         "decl_ref" : {
                                                           "kind" : <"Field">,
-                                                          "decl_pointer" : 96,
+                                                          "decl_pointer" : 97,
                                                           "name" : {
                                                             "name" : "__anon_field_0",
                                                             "qual_name" : [
@@ -5281,7 +5283,7 @@
                                         },
                                         "lambda_call_operator" : {
                                           "kind" : <"CXXMethod">,
-                                          "decl_pointer" : 97,
+                                          "decl_pointer" : 96,
                                           "name" : {
                                             "name" : "operator()",
                                             "qual_name" : [
@@ -6246,7 +6248,7 @@
       )>,
       <"LValueReferenceType" : (
         {
-          "pointer" : 58
+          "pointer" : 61
         },
         {
           "type_ptr" : 12
@@ -6276,7 +6278,7 @@
       )>,
       <"FunctionProtoType" : (
         {
-          "pointer" : 61
+          "pointer" : 58
         },
         {
           "return_type" : {
