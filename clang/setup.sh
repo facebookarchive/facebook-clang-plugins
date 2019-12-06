@@ -183,7 +183,7 @@ popd # $TMP
 
 # brutally strip everything, ignore errors
 set +e
-find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \+
+find "$CLANG_PREFIX"/{bin,lib} -type f -exec "$STRIP" -x \{\} \;
 set -e
 
 echo "testing installed clang"
