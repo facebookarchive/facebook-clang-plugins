@@ -1544,12 +1544,18 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   if (D->getStorageClass() == SC_Static) {
     IsStatic = true;
   }
-  const FunctionProtoType *FPT = D->getType()->getAs<FunctionProtoType>();
   auto IsNoReturn = D->isNoReturn();
-  // FunctionProtoType::canThrow is more informative, consider using
-  // CanThrowResult type instead
-  // https://github.com/llvm-mirror/clang/commit/ce58cd720b070c4481f32911d5d9c66411963ca6
-  auto IsNoThrow = FPT ? FPT->isNothrow() : false;
+  bool IsNoThrow;
+  switch (D->getExceptionSpecType()) {
+  case EST_NoThrow:
+  case EST_BasicNoexcept:
+  case EST_NoexceptTrue:
+    IsNoThrow = true;
+    break;
+  default:
+    IsNoThrow = false;
+    break;
+  }
   bool HasParameters = !D->param_empty();
   const FunctionDecl *DeclWithBody = D;
   // FunctionDecl::hasBody() will set DeclWithBody pointer to decl that
