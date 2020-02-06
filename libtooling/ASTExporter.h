@@ -1520,7 +1520,6 @@ int ASTExporter<ATDWriter>::FunctionDeclTupleSize() {
 //@atd   ~is_pure : bool;
 //@atd   ~is_delete_as_written : bool;
 //@atd   ~is_no_return : bool;
-//@atd   ~is_no_throw : bool;
 //@atd   ~is_variadic : bool;
 //@atd   ~is_static : bool;
 //@atd   ~parameters : decl list;
@@ -1545,17 +1544,6 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
     IsStatic = true;
   }
   auto IsNoReturn = D->isNoReturn();
-  bool IsNoThrow;
-  switch (D->getExceptionSpecType()) {
-  case EST_NoThrow:
-  case EST_BasicNoexcept:
-  case EST_NoexceptTrue:
-    IsNoThrow = true;
-    break;
-  default:
-    IsNoThrow = false;
-    break;
-  }
   bool HasParameters = !D->param_empty();
   const FunctionDecl *DeclWithBody = D;
   // FunctionDecl::hasBody() will set DeclWithBody pointer to decl that
@@ -1567,7 +1555,7 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   bool HasDeclarationBody = D->doesThisDeclarationHaveABody();
   FunctionTemplateDecl *TemplateDecl = D->getPrimaryTemplate();
   int size = ShouldMangleName + IsCpp + IsInlineSpecified + IsModulePrivate +
-             IsPure + IsDeletedAsWritten + IsNoReturn + IsNoThrow + IsVariadic +
+             IsPure + IsDeletedAsWritten + IsNoReturn + IsVariadic +
              IsStatic + HasParameters + (bool)DeclWithBody +
              HasDeclarationBody + (bool)TemplateDecl;
   ObjectScope Scope(OF, size);
@@ -1593,7 +1581,6 @@ void ASTExporter<ATDWriter>::VisitFunctionDecl(const FunctionDecl *D) {
   OF.emitFlag("is_pure", IsPure);
   OF.emitFlag("is_delete_as_written", IsDeletedAsWritten);
   OF.emitFlag("is_no_return", IsNoReturn);
-  OF.emitFlag("is_no_throw", IsNoThrow);
   OF.emitFlag("is_variadic", IsVariadic);
   OF.emitFlag("is_static", IsStatic);
 
