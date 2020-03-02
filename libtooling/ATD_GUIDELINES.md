@@ -5,7 +5,7 @@ The ATD specifications inlined in ASTExporter.cpp are used to generate Ocaml par
 closely the Yojson/Json/Biniou emitted by the C++ plugin.
 
 The ATD language and the parser generating tool `atdgen` are documented here:
-  https://mjambon.github.io/atdgen-doc/
+  https://atd.readthedocs.io/en/latest/atdgen.html
 
 ATD basics
 ----------

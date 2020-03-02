@@ -273,7 +273,6 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   bool alwaysEmitParent(const Decl *D);
 
   void emitAPInt(bool isSigned, const llvm::APInt &value);
-  void evaluateAndEmitInteger(const Expr *expr);
 
   // C++ Utilities
   void dumpAccessSpecifier(AccessSpecifier AS);
@@ -3614,24 +3613,26 @@ void ASTExporter<ATDWriter>::VisitStringLiteral(const StringLiteral *Str) {
 }
 
 template <class ATDWriter>
-void ASTExporter<ATDWriter>::evaluateAndEmitInteger(const Expr *expr) {
-  Expr::EvalResult result;
-  if (!expr->EvaluateAsInt(result, this->Context)) {
-    llvm_unreachable("Cannot evaluate expression down to an integer.");
-  }
-  llvm::APSInt IV = result.Val.getInt();
-  this->emitAPInt(IV.isSigned(), IV);
-}
-
-template <class ATDWriter>
 int ASTExporter<ATDWriter>::OffsetOfExprTupleSize() {
-  return IntegerLiteralTupleSize();
+  return ExprTupleSize() + 1;
 }
-//@atd #define offset_of_expr_tuple integer_literal_tuple
+//@atd #define offset_of_expr_tuple expr_tuple * offset_of_expr_info
+//@atd type offset_of_expr_info = {
+//@atd   ?literal : integer_literal_info option;
+//@atd } <ocaml field_prefix="ooe_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitOffsetOfExpr(const OffsetOfExpr *OOE) {
   VisitExpr(OOE);
-  this->evaluateAndEmitInteger(OOE);
+
+  Expr::EvalResult result;
+  bool isLiteral = OOE->EvaluateAsInt(result, this->Context);
+  ObjectScope Scope(OF, 0 + isLiteral);
+
+  if (isLiteral) {
+    OF.emitTag("literal");
+    llvm::APSInt IV = result.Val.getInt();
+    this->emitAPInt(IV.isSigned(), IV);
+  }
 }
 
 template <class ATDWriter>
