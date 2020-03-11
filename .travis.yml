@@ -1,0 +1,32 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+env:
+  - OCAML_VERSION=4.08.1
+  - OPAMYES=1
+  - OPAMJOBS=2
+  - OPAMVERBOSE=1
+
+cache:
+  directories:
+    - ${HOME}/.opam
+
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ARCH="darwin"; else ARCH="linux"; fi
+  - wget -O ${HOME}/opam https://github.com/ocaml/opam/releases/download/2.0.3/opam-2.0.3-x86_64-${ARCH}
+  - chmod +x ${HOME}/opam
+  - export PATH=${HOME}:${PATH}
+  - opam init --compiler=${OCAML_VERSION} --bare --no-setup --disable-sandboxing
+  - eval $(opam env)
+
+install:
+  - opam install ctypes ounit  # install these so clang compiles with ocaml bindings
+
+script:
+  - ./clang/setup.sh
+
+after_script:
+  - tar -xvzf clang-plugins.tgz clang/install
