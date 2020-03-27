@@ -52,7 +52,7 @@ build/%.cmi:build/%.mli
 build/ast_inline.atd.p: $(LIBTOOLING)/ASTExporter.h
 	@mkdir -p build
 	@$(MAKE) -C $(LIBTOOLING) build/ASTExporter.h.p
-	python $(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.h.p | python $(ATDLIB)/normalize_names_in_atd.py > $@
+	$(ATDLIB)/extract_atd_from_cpp.py $(LIBTOOLING)/build/ASTExporter.h.p | $(ATDLIB)/normalize_names_in_atd.py > $@
 
 build/ast_inline.atd: build/ast_inline.atd.p
 	$(ATD_CPP) $< > $@
@@ -73,7 +73,7 @@ build/clang_ast_proj.mli: clang_ast_proj.mli.p build/ast_inline.atd.inc
 	cat $< | $(ATD_CPP) -include build/ast_inline.atd.inc > $@
 
 build/clang_ast_proj.ml: clang_ast_proj.ml.p build/ast_inline.pat.inc
-	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o - | python $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
+	$(OCAML_CPP) -I$(CLANG_PREFIX)/include $< -o - | $(ATDLIB)/normalize_names_in_atd.py | $(ATD_CPP) -include build/ast_inline.pat.inc > $@
 
 # test files except for Objective-C
 TEST_FILES_COMMON=c_attributes.c bind_temporary.cpp \
