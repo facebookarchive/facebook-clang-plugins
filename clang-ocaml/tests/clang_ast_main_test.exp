@@ -1653,6 +1653,73 @@ TranslationUnitDecl None:None:None None:None:None
       ReturnStmt
         IntegerLiteral
   TypedefDecl tests/ObjCTest.m:112:10 tests/ObjCTest.m:112:10
+56 6 113 
+TranslationUnitDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  ObjCInterfaceDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl None:None:None None:None:None
+  TypedefDecl tests/FoundationStub.h:8:1 tests/FoundationStub.h:8:13
+  TypedefDecl tests/FoundationStub.h:9:1 tests/FoundationStub.h:9:22
+  ObjCInterfaceDecl tests/FoundationStub.h:16:1 tests/FoundationStub.h:27:2
+    ObjCMethodDecl tests/FoundationStub.h:18:1 tests/FoundationStub.h:18:22
+    ObjCMethodDecl tests/FoundationStub.h:19:1 tests/FoundationStub.h:19:20
+    ObjCMethodDecl tests/FoundationStub.h:20:1 tests/FoundationStub.h:20:28
+    ObjCMethodDecl tests/FoundationStub.h:21:1 tests/FoundationStub.h:21:21
+    ObjCMethodDecl tests/FoundationStub.h:22:1 tests/FoundationStub.h:22:15
+    ObjCMethodDecl tests/FoundationStub.h:24:1 tests/FoundationStub.h:24:34
+       ParmVarDecl tests/FoundationStub.h:24:29 tests/FoundationStub.h:24:33
+    ObjCMethodDecl tests/FoundationStub.h:25:1 tests/FoundationStub.h:25:41
+       ParmVarDecl tests/FoundationStub.h:25:29 tests/FoundationStub.h:25:40
+  ObjCInterfaceDecl tests/FoundationStub.h:29:1 tests/FoundationStub.h:31:2
+    ObjCMethodDecl tests/FoundationStub.h:30:1 tests/FoundationStub.h:30:37
+       ParmVarDecl tests/FoundationStub.h:30:32 tests/FoundationStub.h:30:36
+  ObjCInterfaceDecl tests/FoundationStub.h:33:1 tests/FoundationStub.h:35:2
+    ObjCMethodDecl tests/FoundationStub.h:34:1 tests/FoundationStub.h:34:21
+  ObjCInterfaceDecl tests/FoundationStub.h:37:1 tests/FoundationStub.h:42:2
+    ObjCMethodDecl tests/FoundationStub.h:38:1 tests/FoundationStub.h:40:56
+       ParmVarDecl tests/FoundationStub.h:38:46 tests/FoundationStub.h:38:51
+       ParmVarDecl tests/FoundationStub.h:39:46 tests/FoundationStub.h:39:51
+       ParmVarDecl tests/FoundationStub.h:40:40 tests/FoundationStub.h:40:51
+    ObjCMethodDecl tests/FoundationStub.h:41:1 tests/FoundationStub.h:41:38
+       ParmVarDecl tests/FoundationStub.h:41:32 tests/FoundationStub.h:41:35
+  ObjCInterfaceDecl tests/FoundationStub.h:44:1 tests/FoundationStub.h:47:2
+    ObjCMethodDecl tests/FoundationStub.h:45:1 tests/FoundationStub.h:45:64
+       ParmVarDecl tests/FoundationStub.h:45:35 tests/FoundationStub.h:45:40
+       ParmVarDecl tests/FoundationStub.h:45:52 tests/FoundationStub.h:45:61
+    ObjCMethodDecl tests/FoundationStub.h:46:1 tests/FoundationStub.h:46:49
+       ParmVarDecl tests/FoundationStub.h:46:33 tests/FoundationStub.h:46:44
+  ObjCInterfaceDecl tests/FoundationStub.h:49:1 tests/FoundationStub.h:50:2
+  FunctionDecl tests/FoundationStub.h:52:13 tests/FoundationStub.h:52:13
+     ParmVarDecl tests/FoundationStub.h:52:13 tests/FoundationStub.h:52:13
+  FunctionDecl tests/FoundationStub.h:52:1 tests/FoundationStub.h:52:34
+     ParmVarDecl tests/FoundationStub.h:52:19 tests/FoundationStub.h:52:28
+  RecordDecl tests/ObjCBridgeTransferTest.m:3:9 tests/ObjCBridgeTransferTest.m:4:1
+  TypedefDecl tests/ObjCBridgeTransferTest.m:3:1 tests/ObjCBridgeTransferTest.m:4:3
+  ObjCInterfaceDecl tests/ObjCBridgeTransferTest.m:6:1 tests/ObjCBridgeTransferTest.m:7:2
+  FunctionDecl tests/ObjCBridgeTransferTest.m:9:1 tests/ObjCBridgeTransferTest.m:9:27
+  ObjCInterfaceDecl tests/ObjCBridgeTransferTest.m:11:1 tests/ObjCBridgeTransferTest.m:12:2
+  ObjCImplementationDecl tests/ObjCBridgeTransferTest.m:14:1 tests/ObjCBridgeTransferTest.m:20:1
+    ObjCMethodDecl tests/ObjCBridgeTransferTest.m:16:1 tests/ObjCBridgeTransferTest.m:18:1
+       ImplicitParamDecl tests/ObjCBridgeTransferTest.m:18:1 tests/ObjCBridgeTransferTest.m:18:1
+       ImplicitParamDecl tests/ObjCBridgeTransferTest.m:18:1 tests/ObjCBridgeTransferTest.m:18:1
+      CompoundStmt
+        DeclStmt
+          CStyleCastExpr
+            CallExpr
+              ImplicitCastExpr
+                DeclRefExpr
+          VarDecl tests/ObjCBridgeTransferTest.m:17:3 tests/ObjCBridgeTransferTest.m:17:65
+            CStyleCastExpr
+              CallExpr
+                ImplicitCastExpr
+                  DeclRefExpr
+  TypedefDecl tests/ObjCBridgeTransferTest.m:17:51 tests/ObjCBridgeTransferTest.m:17:51
 12 0 84 
 TranslationUnitDecl None:None:None None:None:None
   TypedefDecl None:None:None None:None:None

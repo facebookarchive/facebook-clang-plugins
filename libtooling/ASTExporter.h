@@ -442,6 +442,7 @@ class ASTExporter : public ConstDeclVisitor<ASTExporter<ATDWriter>>,
   DECLARE_VISITOR(ObjCAvailabilityCheckExpr)
   DECLARE_VISITOR(ObjCArrayLiteral)
   DECLARE_VISITOR(ObjCDictionaryLiteral)
+  DECLARE_VISITOR(ObjCBridgedCastExpr)
 
   // Comments.
   const char *getCommandName(unsigned CommandID);
@@ -3364,6 +3365,36 @@ void ASTExporter<ATDWriter>::VisitExplicitCastExpr(
     const ExplicitCastExpr *Node) {
   VisitCastExpr(Node);
   dumpQualType(Node->getTypeAsWritten());
+}
+
+template <class ATDWriter>
+int ASTExporter<ATDWriter>::ObjCBridgedCastExprTupleSize() {
+  return ExplicitCastExprTupleSize() + 1;
+}
+
+//@atd type objc_bridge_cast_kind = [
+//@atd   OBC_BridgeRetained
+//@atd | OBC_Bridge
+//@atd | OBC_BridgeTransfer
+//@atd ]
+//@atd #define obj_c_bridged_cast_expr_tuple explicit_cast_expr_tuple * objc_bridge_cast_kind
+//@atd <ocaml field_prefix="obck_">
+template <class ATDWriter>
+void ASTExporter<ATDWriter>::VisitObjCBridgedCastExpr(
+    const ObjCBridgedCastExpr *Node) {
+  VisitExplicitCastExpr(Node);
+  ObjectScope Scope(OF, 1);
+  switch (Node->getBridgeKind()) {
+  case OBC_BridgeRetained:
+    OF.emitSimpleVariant("OBC_BridgeRetained");
+    break;
+  case OBC_Bridge:
+    OF.emitSimpleVariant("OBC_Bridge");
+    break;
+  case OBC_BridgeTransfer:
+    OF.emitSimpleVariant("OBC_BridgeTransfer");
+    break;
+  }
 }
 
 template <class ATDWriter>

@@ -86,7 +86,7 @@ TEST_FILES=$(TEST_FILES_COMMON)
 
 # only add Objective-C(++) files on mac
 ifeq ($(HAS_OBJC),yes)
-TEST_FILES+=Hello.m ObjCTest.m objcpp_template_unboxing.mm
+TEST_FILES+=Hello.m ObjCTest.m ObjCBridgeTransferTest.m objcpp_template_unboxing.mm
 endif
 
 PRINTER_TEST_FILES=$(TEST_FILES)

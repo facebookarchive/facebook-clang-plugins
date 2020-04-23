@@ -7,7 +7,7 @@ include $(LEVEL)/Makefile.config
 
 # Typical compilation flags for Objective C examples
 ifeq ($(HAS_OBJC),yes)
-IOSFLAGS=-isysroot $(SDKPATH) -mios-simulator-version-min=8.2 -target x86_64-apple-darwin14 \
+IOSFLAGS=-isysroot $(SDKPATH) -mios-simulator-version-min=8.2 -target x86_64-apple-darwin14 -fobjc-arc \
   -Wno-unused-command-line-argument \
   -Wno-objc-property-implementation
 endif

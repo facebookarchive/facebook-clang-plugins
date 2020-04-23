@@ -219,6 +219,7 @@ let get_cast_kind = function
 #define CASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info)
 #define EXPLICITCASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info, _)
 #define CXXNAMEDCASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info, _, _)
+#define OBJCBRIDGEDCASTEXPR(Type, Base) | Type (_, _, _, cast_expr_info, _, _)
 #include<clang/AST/StmtNodes.inc>
 -> Some cast_expr_info.cei_cast_kind
 | _ -> None
