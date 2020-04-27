@@ -50,7 +50,6 @@
 
     NSDictionary *d = @{@"key" : @1};
     NSLog(@"%@\n", d[@"wrong key"]);
-    NSLog(@"%p\n", (void *)block);
   } @catch (NSException *e) {
     NSLog(@"Exception: %@", e);
   } @finally {
@@ -106,7 +105,7 @@ theend:
 
 int main(int argc, char **argv) {
   @autoreleasepool {
-    [[[[MyClass alloc] init] autorelease] foo:@"hello"];
+    [[[MyClass alloc] init] foo:@"hello"];
     [[MyClass new] bar:@"hello"];
   }
   return 0;

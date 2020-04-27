@@ -3372,18 +3372,22 @@ int ASTExporter<ATDWriter>::ObjCBridgedCastExprTupleSize() {
   return ExplicitCastExprTupleSize() + 1;
 }
 
-//@atd type objc_bridge_cast_kind = [
+
+//@atd type obj_c_bridge_cast_kind = [
 //@atd   OBC_BridgeRetained
 //@atd | OBC_Bridge
 //@atd | OBC_BridgeTransfer
 //@atd ]
-//@atd #define obj_c_bridged_cast_expr_tuple explicit_cast_expr_tuple * objc_bridge_cast_kind
-//@atd <ocaml field_prefix="obck_">
+//@atd #define obj_c_bridged_cast_expr_tuple explicit_cast_expr_tuple * obj_c_bridged_cast_expr_info
+//@atd type obj_c_bridged_cast_expr_info = {
+//@atd   cast_kind : obj_c_bridge_cast_kind;
+//@atd } <ocaml field_prefix="obcei_">
 template <class ATDWriter>
 void ASTExporter<ATDWriter>::VisitObjCBridgedCastExpr(
     const ObjCBridgedCastExpr *Node) {
   VisitExplicitCastExpr(Node);
   ObjectScope Scope(OF, 1);
+  OF.emitTag("cast_kind");
   switch (Node->getBridgeKind()) {
   case OBC_BridgeRetained:
     OF.emitSimpleVariant("OBC_BridgeRetained");
