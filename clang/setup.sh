@@ -34,7 +34,9 @@ usage () {
     echo " options:"
     echo "    -c,--only-check-install    check if recompiling clang is needed"
     echo "    -h,--help                  show this message"
+    echo "    -n,--ninja                 use ninja for building"
     echo "    -r,--only-record-install   do not install clang but pretend we did"
+    echo "    -s,--sequential-link       only use one process for linking (ninja only)"
 }
 
 check_installed () {
@@ -53,6 +55,8 @@ record_installed () {
 
 ONLY_CHECK=
 ONLY_RECORD=
+USE_NINJA=
+SEQUENTIAL_LINK=
 
 while [[ $# -gt 0 ]]; do
     opt_key="$1"
@@ -64,6 +68,16 @@ while [[ $# -gt 0 ]]; do
             ;;
         -r|--only-record-install)
             ONLY_RECORD=yes
+            shift
+            continue
+            ;;
+        -n|--ninja)
+            USE_NINJA=yes
+            shift
+            continue
+            ;;
+        -s|--sequential-link)
+            SEQUENTIAL_LINK=yes
             shift
             continue
             ;;
@@ -141,6 +155,31 @@ else
     )
 fi
 
+if [ "$USE_NINJA" = "yes" ]; then
+    CMAKE_GENERATOR="Ninja"
+    BUILD_BIN="ninja"
+    # Do not set a 'j' build default for Ninja (let Ninja decide)
+    BUILD_ARGS=""
+else
+    CMAKE_GENERATOR="Unix Makefiles"
+    BUILD_BIN="make"
+    BUILD_ARGS="-j $JOBS"
+fi
+
+if [ "$SEQUENTIAL_LINK" = "yes" ]; then
+    if [[ x"$USE_NINJA" = x ]]; then
+        echo "Linking with a single process is only supported with the Ninja generator."
+        echo "Unable to proceed, exiting."
+        exit 1
+    fi
+    # For Ninja, the compile jobs is the number of CPUs *not* $JOBS
+    CMAKE_ARGS+=(
+	-DCMAKE_JOB_POOLS:STRING="compile=$NCPUS;link=1"
+	-DCMAKE_JOB_POOL_COMPILE:STRING="compile"
+	-DCMAKE_JOB_POOL_LINK:STRING="link"
+    )
+fi
+
 # start the installation
 if [ -n "$CLANG_TMP_DIR" ]; then
     TMP=$CLANG_TMP_DIR
@@ -167,9 +206,9 @@ pushd build
 # workaround install issue with ocaml llvm bindings and ocamldoc
 mkdir -p docs/ocamldoc/html
 
-cmake -G "Unix Makefiles" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
+cmake -G "$CMAKE_GENERATOR" ../llvm "${CMAKE_ARGS[@]}" $CLANG_CMAKE_ARGS
 
-make -j $JOBS
+$BUILD_BIN $BUILD_ARGS
 
 echo "testing clang build"
 ./bin/clang --version
@@ -177,7 +216,7 @@ echo "testing clang build"
 # "uninstall" previous clang
 rm -fr "$CLANG_PREFIX"
 
-make -j $JOBS install
+$BUILD_BIN $BUILD_ARGS install
 
 popd # build
 popd # $TMP
