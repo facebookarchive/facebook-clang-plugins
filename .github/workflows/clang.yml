@@ -1,0 +1,89 @@
+name: Build clang
+on: push
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Changed Files
+        id: files-changed
+        # don't run this if a commit is appropriately tagged, we'll build clang anyway
+        if: ${{ !(startsWith(github.ref, 'refs/tags/v.')) }}
+        uses: trilom/file-changes-action@v1.2.4
+        with:
+          output: ' '
+
+      - name: Check clang/ Changed
+        id: clang-changed
+        # don't run this if a commit is appropriately tagged, we'll build clang anyway
+        if: ${{ !(startsWith(github.ref, 'refs/tags/v.')) }}
+        run: |
+          MODIFIED=0
+
+          echo "added:    ${{ steps.files-changed.outputs.files_added }}"
+          echo "modified: ${{ steps.files-changed.outputs.files_modified }}"
+          echo "removed:  ${{ steps.files-changed.outputs.files_removed }}"
+
+          for f in $(echo '${{ steps.files-changed.outputs.files_added }}'); do
+            if [[ "$f" == "clang/"* ]]; then
+              echo "added to clang/: $f"
+              MODIFIED=1
+            fi
+          done
+
+          for f in $(echo '${{ steps.files-changed.outputs.files_modified }}'); do
+            if [[ "$f" == "clang/"* ]]; then
+              echo "clang/ modified: $f"
+              MODIFIED=1
+            fi
+          done
+
+          for f in $(echo '${{ steps.files-changed.outputs.files_removed }}'); do
+            if [[ "$f" == "clang/"* ]]; then
+              echo "removed from clang/: $f"
+              MODIFIED=1
+            fi
+          done
+
+          if [ $MODIFIED -eq 1 ]; then
+            echo "clang/ directory changed: rebuilding clang."
+            echo "::set-output name=clang-changed::1"
+          else
+            echo "No clang/ files touched: skipping build."
+            echo "::set-output name=clang-changed::0"
+          fi
+
+      - name: Build Clang
+        id: build-clang
+        # allow clang to be manually built by pushing a tag named "v.*"
+        if: ${{ steps.clang-changed.outputs.clang-changed == 1 || startsWith(github.ref, 'refs/tags/v.') }}
+        run: |
+          ./clang/setup.sh
+          tar -cvzf "clang-install-${{ matrix.os }}.tar.gz" -C clang install/
+
+      - name: Create Tag
+        id: create-tag
+        # create a new tag: v.{sha}
+        # only run on pushes when clang has changed and the ref is NOT already tagged "v.*"
+        if: ${{ github.event_name == 'push' && steps.clang-changed.outputs.clang-changed == 1 && !(startsWith(github.ref, 'refs/tags/v.')) }}
+        run: |
+          # note: this creates a "lightweight tag" (not an annotated tag)
+          curl -s -X POST https://api.github.com/repos/${{ github.repository }}/git/refs \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"ref": "refs/tags/v.${{ github.sha }}", "sha": "${{ github.sha }}" }'
+
+      - name: Create Clang Release
+        id: create-release
+        # create a new release only on push events, if clang has changed or the tag is named 'v.*'
+        if: ${{ github.event_name == 'push' && ( steps.clang-changed.outputs.clang-changed == 1 || startsWith(github.ref, 'refs/tags/v.') ) }}
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Release ${{ github.sha }}
+          tag_name: v.${{ github.sha }}
+          files: clang-install-${{ matrix.os }}.tar.gz
