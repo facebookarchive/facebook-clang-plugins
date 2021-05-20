@@ -1,5 +1,9 @@
+Deprecation Warning
+===================
+This repo is deprecated. Development has moved to the [Infer repo](https://github.com/facebook/infer).
+
 Facebook Clang Plugins
-======================
+----------------------
 
 This [repository](https://github.com/facebook/facebook-clang-plugins) aims to share some useful clang plugins developed at Facebook. They are mostly used by [infer](https://github.com/facebook/infer).
 
